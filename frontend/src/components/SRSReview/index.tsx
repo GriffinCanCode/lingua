@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { srsService, ReviewItem, ReviewResult } from '../../services/srs';
 import { Check, X, HelpCircle, ThumbsUp } from 'lucide-react';
+import { useComponentLogger, useActionLogger, useTracedAsync } from '../../lib/logger';
 
 export const SRSReview: React.FC = () => {
+  const { logger, logAction } = useComponentLogger('SRSReview');
+  const trackAction = useActionLogger('srs');
+  const traceAsync = useTracedAsync('srs');
+
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -17,10 +22,11 @@ export const SRSReview: React.FC = () => {
   const loadReviews = async () => {
     setLoading(true);
     try {
-      const data = await srsService.getDueReviews();
+      const data = await traceAsync('loadDueReviews', () => srsService.getDueReviews());
       setReviews(data);
+      logger.info('Reviews loaded', { count: data.length });
     } catch (err) {
-      console.error(err);
+      logger.error('Failed to load reviews', err instanceof Error ? err : undefined);
     } finally {
       setLoading(false);
     }
@@ -29,10 +35,11 @@ export const SRSReview: React.FC = () => {
   const handleRating = (quality: number) => {
     const currentItem = reviews[currentIndex];
     
-    // Record result for each pattern in the sentence
+    logAction('review_rated', { quality, sentenceId: currentItem.sentence.id });
+    
     const newResults = currentItem.patterns.map(p => ({
       pattern_id: p.id,
-      quality: quality
+      quality,
     }));
     
     setResults(prev => [...prev, ...newResults]);
@@ -48,10 +55,24 @@ export const SRSReview: React.FC = () => {
 
   const submitResults = async (finalResults: ReviewResult[]) => {
     try {
-      await srsService.submitReview(finalResults);
+      await traceAsync('submitReviews', () => srsService.submitReview(finalResults));
+      trackAction('session_completed', { reviewCount: reviews.length, patterns: finalResults.length });
     } catch (err) {
-      console.error("Failed to submit reviews", err);
+      logger.error('Failed to submit reviews', err instanceof Error ? err : undefined);
     }
+  };
+
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
+    logAction('answer_revealed', { sentenceId: reviews[currentIndex].sentence.id });
+  };
+
+  const handleNewSession = () => {
+    trackAction('new_session_started');
+    setCompleted(false);
+    setCurrentIndex(0);
+    setResults([]);
+    loadReviews();
   };
 
   if (loading) {
@@ -68,12 +89,7 @@ export const SRSReview: React.FC = () => {
         <h2 className="text-2xl font-bold mb-4 text-green-600">Session Complete!</h2>
         <p className="text-gray-600 mb-6">You've reviewed {reviews.length} sentences.</p>
         <button
-          onClick={() => {
-            setCompleted(false);
-            setCurrentIndex(0);
-            setResults([]);
-            loadReviews();
-          }}
+          onClick={handleNewSession}
           className="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700"
         >
           Start New Session
@@ -103,7 +119,6 @@ export const SRSReview: React.FC = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow-lg overflow-hidden min-h-[400px] flex flex-col">
-        {/* Progress bar */}
         <div className="w-full bg-gray-200 h-2">
           <div 
             className="bg-primary-600 h-2 transition-all duration-300" 
@@ -118,7 +133,7 @@ export const SRSReview: React.FC = () => {
 
           {!showAnswer ? (
             <button
-              onClick={() => setShowAnswer(true)}
+              onClick={handleShowAnswer}
               className="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition shadow-md"
             >
               Show Translation
@@ -184,4 +199,3 @@ export const SRSReview: React.FC = () => {
     </div>
   );
 };
-

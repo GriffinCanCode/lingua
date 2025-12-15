@@ -1,20 +1,22 @@
 import axios from 'axios';
+import { setupHttpLogging, loggers } from './logger';
 
 const api = axios.create({
-  baseURL: '/api', // Proxied by Vite to http://localhost:8000
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: '/api',
+  headers: { 'Content-Type': 'application/json' },
 });
 
-// Add auth token interceptor
+// Auth token interceptor
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+    loggers.auth.debug('Auth token attached to request');
   }
   return config;
 });
 
-export default api;
+// Setup HTTP logging interceptors
+setupHttpLogging(api, loggers.api);
 
+export default api;

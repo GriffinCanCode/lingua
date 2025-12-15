@@ -19,6 +19,15 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
+    # Logging
+    LOG_LEVEL: str = "INFO"
+    LOG_JSON: bool = False  # True for production (structured JSON), False for dev (colored)
+    LOG_SQL: bool = False   # Enable SQLAlchemy query logging
+    
+    @property
+    def is_production(self) -> bool:
+        return not self.APP_DEBUG
+    
     class Config:
         env_file = ".env"
         extra = "ignore"

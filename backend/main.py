@@ -1,25 +1,43 @@
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api import morphology, etymology, phonetics, srs, glossing, production, auth
 from core.config import settings
 from core.database import engine, Base
+from core.logging import configure_logging, get_logger
+from core.middleware import RequestLoggingMiddleware, SlowRequestMiddleware
+
+# Initialize logging before anything else
+configure_logging(
+    level=settings.LOG_LEVEL,
+    json_logs=settings.LOG_JSON,
+    log_sql=settings.LOG_SQL,
+)
+
+log = get_logger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: create tables if needed
+    log.info("startup", message="Lingua API starting up")
+    
+    # Database initialization
     try:
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
+        log.info("database_connected", message="Database tables initialized")
     except Exception as e:
-        print(f"Warning: Could not connect to database: {e}")
-        print("App will start but database features won't work")
+        log.warning("database_unavailable", error=str(e), message="App starting without database")
+    
     yield
-    # Shutdown: cleanup
+    
+    # Shutdown
+    log.info("shutdown", message="Lingua API shutting down")
     try:
         await engine.dispose()
+        log.debug("database_disposed", message="Database connections closed")
     except Exception:
         pass
 
@@ -31,7 +49,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS middleware
+# Middleware (order matters: last added = first executed)
+app.add_middleware(SlowRequestMiddleware, slow_threshold_ms=1000)
+app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -57,10 +77,13 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
+    
+    log.info("server_config", host=settings.BACKEND_HOST, port=settings.BACKEND_PORT, debug=settings.APP_DEBUG)
     uvicorn.run(
         "main:app",
         host=settings.BACKEND_HOST,
         port=settings.BACKEND_PORT,
         reload=settings.APP_DEBUG,
+        log_config=None,  # Disable uvicorn's default logging, we handle it
     )
 

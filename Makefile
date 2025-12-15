@@ -1,7 +1,21 @@
-.PHONY: install-all backend frontend kill-all dev build
+.PHONY: install-all backend frontend kill-all dev build db db-up db-down db-logs migrate
 
 build:
 	bldr build
+
+db-up:
+	docker-compose up -d
+
+db-down:
+	docker-compose down
+
+db-logs:
+	docker-compose logs -f
+
+db: db-up
+
+migrate:
+	cd backend && $(MAKE) migrate
 
 install-all:
 	cd backend && $(MAKE) install

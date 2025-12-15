@@ -1,4 +1,7 @@
-.PHONY: install-all backend frontend kill-all dev
+.PHONY: install-all backend frontend kill-all dev build
+
+build:
+	bldr build
 
 install-all:
 	cd backend && $(MAKE) install

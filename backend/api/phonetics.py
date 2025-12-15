@@ -1,10 +1,17 @@
-from typing import Optional
-from uuid import UUID
+"""Phonetics API with Monadic Error Handling
+
+Handles phonological analysis, minimal pairs, and pronunciation feedback
+using Result types for predictable error propagation.
+"""
 import os
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
+from fastapi import APIRouter, Query, UploadFile, File
 from pydantic import BaseModel
 
+from core.errors import (
+    validation_error,
+    raise_error,
+)
 from engines.phonetics import PhoneticsEngine
 
 router = APIRouter()
@@ -15,7 +22,7 @@ class MinimalPair(BaseModel):
     word2: str
     ipa1: str
     ipa2: str
-    contrast: str  # e.g., "ы/и", "palatalized/non-palatalized"
+    contrast: str
     description: str
 
 
@@ -24,32 +31,46 @@ class PhonemicAnalysis(BaseModel):
     ipa: str
     phonemes: list[str]
     syllables: list[str]
-    stress_position: Optional[int]
+    stress_position: int | None
 
 
 class AcousticFeatures(BaseModel):
     duration_ms: float
-    f0_mean: Optional[float]
-    f0_range: Optional[tuple[float, float]]
-    formants: Optional[dict[str, float]]  # F1, F2, F3
+    f0_mean: float | None
+    f0_range: tuple[float, float] | None
+    formants: dict[str, float] | None
 
 
 class PronunciationFeedback(BaseModel):
     target_word: str
     target_ipa: str
     user_ipa: str
-    accuracy_score: float  # 0-1
+    accuracy_score: float
     specific_errors: list[dict]
     suggestions: list[str]
 
 
+SUPPORTED_AUDIO_FORMATS = ('.wav', '.mp3', '.ogg', '.m4a')
+
+
+def validate_audio_file(filename: str) -> None:
+    """Validate audio file format."""
+    if not filename.endswith(SUPPORTED_AUDIO_FORMATS):
+        raise_error(validation_error(
+            f"Unsupported audio format. Supported: {', '.join(SUPPORTED_AUDIO_FORMATS)}",
+            field="audio",
+            value=filename,
+            origin="api.phonetics",
+        ).error)
+
+
 @router.get("/minimal-pairs", response_model=list[MinimalPair])
 async def get_minimal_pairs(
-    contrast: Optional[str] = Query(None, description="Specific contrast to practice, e.g., 'ы/и'"),
+    contrast: str | None = Query(None, description="Specific contrast to practice, e.g., 'ы/и'"),
     language: str = Query("ru"),
     limit: int = Query(10, le=50),
 ):
-    """Get minimal pairs for phonological training"""
+    """Get minimal pairs for phonological training."""
     engine = PhoneticsEngine(language)
     pairs = engine.get_minimal_pairs(contrast=contrast, limit=limit)
     return [MinimalPair(**p) for p in pairs]
@@ -57,7 +78,7 @@ async def get_minimal_pairs(
 
 @router.get("/analyze/{word}", response_model=PhonemicAnalysis)
 async def analyze_phonemes(word: str, language: str = Query("ru")):
-    """Get phonemic analysis of a word"""
+    """Get phonemic analysis of a word."""
     engine = PhoneticsEngine(language)
     analysis = engine.analyze_phonemes(word)
     return PhonemicAnalysis(**analysis)
@@ -68,11 +89,9 @@ async def analyze_audio(
     audio: UploadFile = File(...),
     language: str = Query("ru"),
 ):
-    """Analyze acoustic features of uploaded audio"""
-    if not audio.filename.endswith(('.wav', '.mp3', '.ogg', '.m4a')):
-        raise HTTPException(status_code=400, detail="Unsupported audio format")
+    """Analyze acoustic features of uploaded audio."""
+    validate_audio_file(audio.filename or "")
     
-    # Save temporarily
     temp_path = f"/tmp/{audio.filename}"
     content = await audio.read()
     with open(temp_path, "wb") as f:
@@ -93,9 +112,8 @@ async def compare_pronunciation(
     audio: UploadFile = File(...),
     language: str = Query("ru"),
 ):
-    """Compare user pronunciation to target and provide feedback"""
-    if not audio.filename.endswith(('.wav', '.mp3', '.ogg', '.m4a')):
-        raise HTTPException(status_code=400, detail="Unsupported audio format")
+    """Compare user pronunciation to target and provide feedback."""
+    validate_audio_file(audio.filename or "")
     
     temp_path = f"/tmp/{audio.filename}"
     content = await audio.read()
@@ -113,14 +131,13 @@ async def compare_pronunciation(
 
 @router.get("/ipa/{word}")
 async def get_ipa(word: str, language: str = Query("ru")):
-    """Get IPA transcription for a word"""
+    """Get IPA transcription for a word."""
     engine = PhoneticsEngine(language)
     return {"word": word, "ipa": engine.get_ipa(word)}
 
 
 @router.get("/contrasts", response_model=list[dict])
 async def get_phonological_contrasts(language: str = Query("ru")):
-    """Get list of phonological contrasts for a language that learners need to master"""
+    """Get phonological contrasts for a language that learners need to master."""
     engine = PhoneticsEngine(language)
     return engine.get_contrasts()
-

@@ -1,17 +1,35 @@
-"""Spaced Repetition System Engine
+"""Spaced Repetition System Engine with Result Types
 
 Implements SM-2 algorithm variant with syntactic pattern awareness.
-Tracks mastery per grammatical pattern, not just words.
+Uses Result types for predictable error propagation.
 """
 from datetime import datetime, timedelta
-from typing import Optional
+from dataclasses import dataclass
+
+from core.errors import (
+    AppError,
+    Ok,
+    Err,
+    Result,
+    out_of_range,
+)
+
+
+@dataclass(frozen=True, slots=True)
+class SM2Result:
+    """Result of SM-2 calculation."""
+    ease_factor: float
+    interval: int
+    repetitions: int
+    next_review: datetime
 
 
 class SRSEngine:
-    """Engine for spaced repetition scheduling"""
+    """Engine for spaced repetition scheduling."""
+    
+    __slots__ = ("min_ease_factor", "default_ease_factor")
     
     def __init__(self):
-        # SM-2 parameters
         self.min_ease_factor = 1.3
         self.default_ease_factor = 2.5
     
@@ -22,10 +40,10 @@ class SRSEngine:
         ease_factor: float,
         interval: int,
     ) -> dict:
-        """Calculate next review parameters using SM-2 algorithm
+        """Calculate next review parameters using SM-2 algorithm.
         
         Args:
-            quality: User rating 0-5 (0-2 = again, 3 = hard, 4 = good, 5 = easy)
+            quality: User rating 0-5 (0-2=again, 3=hard, 4=good, 5=easy)
             repetitions: Number of successful reviews
             ease_factor: Current ease factor
             interval: Current interval in days
@@ -39,33 +57,48 @@ class SRSEngine:
         
         # Calculate new interval
         if quality < 3:
-            # Failed review - reset
             new_repetitions = 0
             new_interval = 1
         else:
             new_repetitions = repetitions + 1
-            
-            if new_repetitions == 1:
-                new_interval = 1
-            elif new_repetitions == 2:
-                new_interval = 6
-            else:
-                new_interval = round(interval * new_ef)
+            new_interval = 1 if new_repetitions == 1 else (6 if new_repetitions == 2 else round(interval * new_ef))
         
         # Apply quality modifiers
-        if quality == 3:  # Hard
+        if quality == 3:
             new_interval = max(1, round(new_interval * 0.8))
-        elif quality == 5:  # Easy
+        elif quality == 5:
             new_interval = round(new_interval * 1.3)
-        
-        next_review = datetime.utcnow() + timedelta(days=new_interval)
         
         return {
             "ease_factor": new_ef,
             "interval": new_interval,
             "repetitions": new_repetitions,
-            "next_review": next_review,
+            "next_review": datetime.utcnow() + timedelta(days=new_interval),
         }
+    
+    def calculate_sm2_result(
+        self,
+        quality: int,
+        repetitions: int,
+        ease_factor: float,
+        interval: int,
+    ) -> Result[SM2Result, AppError]:
+        """Calculate SM-2 with Result type for typed error handling.
+        
+        Returns:
+            Ok(SM2Result) on success
+            Err(AppError) if quality out of range
+        """
+        if not 0 <= quality <= 5:
+            return out_of_range("quality", quality, 0, 5, origin="srs_engine")
+        
+        result = self.calculate_sm2(quality, repetitions, ease_factor, interval)
+        return Ok(SM2Result(
+            ease_factor=result["ease_factor"],
+            interval=result["interval"],
+            repetitions=result["repetitions"],
+            next_review=result["next_review"],
+        ))
     
     def get_review_priority(
         self,
@@ -73,20 +106,13 @@ class SRSEngine:
         user_mastery: float,
         days_overdue: int,
     ) -> float:
-        """Calculate review priority for a pattern
+        """Calculate review priority for a pattern.
         
         Higher score = higher priority.
-        Considers pattern difficulty, user mastery, and how overdue it is.
         """
-        # Base priority from being overdue
-        overdue_factor = min(days_overdue / 7, 2.0)  # Cap at 2x for very overdue
-        
-        # Difficulty factor - harder patterns get slight priority
-        difficulty_factor = 1 + (pattern_difficulty - 5) * 0.05  # 5 is baseline
-        
-        # Mastery factor - lower mastery = higher priority
-        mastery_factor = 2 - user_mastery  # 0-2 range
-        
+        overdue_factor = min(days_overdue / 7, 2.0)
+        difficulty_factor = 1 + (pattern_difficulty - 5) * 0.05
+        mastery_factor = 2 - user_mastery
         return overdue_factor * difficulty_factor * mastery_factor
     
     def estimate_time_to_mastery(
@@ -95,23 +121,13 @@ class SRSEngine:
         target_mastery: float = 0.9,
         avg_quality: float = 4.0,
     ) -> int:
-        """Estimate days to reach target mastery
-        
-        Returns estimated number of days.
-        """
+        """Estimate days to reach target mastery."""
         if current_mastery >= target_mastery:
             return 0
         
-        # Simple estimation based on typical learning curves
         mastery_gap = target_mastery - current_mastery
-        
-        # Assume ~15% mastery gain per successful review at quality 4
         reviews_needed = mastery_gap / 0.15
-        
-        # Assume reviews spread over time based on SRS intervals
-        # Average interval progression: 1, 3, 7, 14, 30...
-        avg_days_between = 7  # Rough average
-        
+        avg_days_between = 7
         return round(reviews_needed * avg_days_between)
     
     def get_session_recommendations(
@@ -120,19 +136,9 @@ class SRSEngine:
         session_length_minutes: int = 15,
         items_per_minute: float = 2.0,
     ) -> list[dict]:
-        """Get recommended items for a study session
-        
-        Args:
-            due_patterns: List of patterns with their data
-            session_length_minutes: Target session length
-            items_per_minute: Expected review speed
-        
-        Returns:
-            Sorted list of patterns to review
-        """
+        """Get recommended items for a study session."""
         max_items = int(session_length_minutes * items_per_minute)
         
-        # Sort by priority
         sorted_patterns = sorted(
             due_patterns,
             key=lambda p: self.get_review_priority(
@@ -144,4 +150,3 @@ class SRSEngine:
         )
         
         return sorted_patterns[:max_items]
-

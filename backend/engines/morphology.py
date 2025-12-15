@@ -1,11 +1,19 @@
-"""Morphological Pattern Recognition Engine
+"""Morphological Pattern Recognition Engine with Result Types
 
 Uses pymorphy3 for Russian morphological analysis and generation.
-Provides rule-based explanations for learners.
+Provides rule-based explanations with monadic error handling.
 """
-from typing import Optional
+from dataclasses import dataclass
 
 from core.logging import engine_logger
+from core.errors import (
+    AppError,
+    ErrorCode,
+    Ok,
+    Err,
+    Result,
+    internal_error,
+)
 
 log = engine_logger()
 
@@ -18,26 +26,18 @@ except ImportError:
     log.warning("pymorphy3_unavailable", message="Morphological analysis will be limited")
 
 
-# Russian case mapping
 CASE_MAP = {
     "nomn": "nominative",
-    "gent": "genitive", 
+    "gent": "genitive",
     "datv": "dative",
     "accs": "accusative",
     "ablt": "instrumental",
     "loct": "prepositional",
 }
 
-NUMBER_MAP = {
-    "sing": "singular",
-    "plur": "plural",
-}
+NUMBER_MAP = {"sing": "singular", "plur": "plural"}
 
-GENDER_MAP = {
-    "masc": "masculine",
-    "femn": "feminine",
-    "neut": "neuter",
-}
+GENDER_MAP = {"masc": "masculine", "femn": "feminine", "neut": "neuter"}
 
 POS_MAP = {
     "NOUN": "noun",
@@ -53,47 +53,54 @@ POS_MAP = {
 }
 
 
+@dataclass(frozen=True, slots=True)
+class MorphAnalysis:
+    """Result of morphological analysis."""
+    lemma: str
+    pos: str
+    features: dict
+    score: float = 1.0
+
+
 class MorphologyEngine:
-    """Engine for morphological analysis and generation"""
+    """Engine for morphological analysis and generation."""
+    
+    __slots__ = ("language", "_morph")
     
     def __init__(self, language: str = "ru"):
         self.language = language
-        self._morph = None
-        
-        if language == "ru" and PYMORPHY_AVAILABLE:
-            self._morph = pymorphy3.MorphAnalyzer()
+        self._morph = pymorphy3.MorphAnalyzer() if language == "ru" and PYMORPHY_AVAILABLE else None
     
     def analyze(self, word: str) -> list[dict]:
-        """Analyze a word and return possible interpretations"""
+        """Analyze a word and return possible interpretations."""
         if not self._morph:
             log.debug("analyze_fallback", word=word, reason="no_analyzer")
             return [{"lemma": word, "pos": "unknown", "features": {}}]
         
         parses = self._morph.parse(word)
         log.debug("word_analyzed", word=word, parse_count=len(parses))
-        results = []
         
-        for p in parses[:5]:  # Limit to top 5 interpretations
+        results = []
+        for p in parses[:5]:
             features = {}
             
-            # Extract grammatical features
-            if "nomn" in p.tag or "gent" in p.tag or "datv" in p.tag or "accs" in p.tag or "ablt" in p.tag or "loct" in p.tag:
-                for case_tag, case_name in CASE_MAP.items():
-                    if case_tag in p.tag:
-                        features["case"] = case_name
-                        break
+            # Extract case
+            for case_tag, case_name in CASE_MAP.items():
+                if case_tag in p.tag:
+                    features["case"] = case_name
+                    break
             
+            # Extract number
             if "sing" in p.tag:
                 features["number"] = "singular"
             elif "plur" in p.tag:
                 features["number"] = "plural"
             
-            if "masc" in p.tag:
-                features["gender"] = "masculine"
-            elif "femn" in p.tag:
-                features["gender"] = "feminine"
-            elif "neut" in p.tag:
-                features["gender"] = "neuter"
+            # Extract gender
+            for gender_tag, gender_name in GENDER_MAP.items():
+                if gender_tag in p.tag:
+                    features["gender"] = gender_name
+                    break
             
             # Verb features
             if "perf" in p.tag:
@@ -108,12 +115,10 @@ class MorphologyEngine:
             elif "futr" in p.tag:
                 features["tense"] = "future"
             
-            if "1per" in p.tag:
-                features["person"] = "1st"
-            elif "2per" in p.tag:
-                features["person"] = "2nd"
-            elif "3per" in p.tag:
-                features["person"] = "3rd"
+            for person_tag, person_name in [("1per", "1st"), ("2per", "2nd"), ("3per", "3rd")]:
+                if person_tag in p.tag:
+                    features["person"] = person_name
+                    break
             
             pos = str(p.tag.POS) if p.tag.POS else "unknown"
             
@@ -126,16 +131,36 @@ class MorphologyEngine:
         
         return results
     
+    def analyze_result(self, word: str) -> Result[list[MorphAnalysis], AppError]:
+        """Analyze with Result type for typed error handling."""
+        try:
+            analyses = self.analyze(word)
+            return Ok([
+                MorphAnalysis(
+                    lemma=a["lemma"],
+                    pos=a["pos"],
+                    features=a["features"],
+                    score=a.get("score", 1.0),
+                )
+                for a in analyses
+            ])
+        except Exception as e:
+            return internal_error(
+                f"Morphological analysis failed: {e}",
+                origin="morphology_engine",
+                cause=e,
+            )
+    
     def generate(
         self,
         lemma: str,
-        case: Optional[str] = None,
-        number: Optional[str] = None,
-        gender: Optional[str] = None,
-        person: Optional[str] = None,
-        tense: Optional[str] = None,
+        case: str | None = None,
+        number: str | None = None,
+        gender: str | None = None,
+        person: str | None = None,
+        tense: str | None = None,
     ) -> list[dict]:
-        """Generate inflected forms from a lemma"""
+        """Generate inflected forms from a lemma."""
         if not self._morph:
             return [{"form": lemma}]
         
@@ -143,12 +168,8 @@ class MorphologyEngine:
         if not parses:
             return []
         
-        # Use highest-scored parse
         p = parses[0]
-        results = []
-        
-        # Build target tag
-        target_grammemes = set()
+        target_grammemes: set[str] = set()
         
         if case:
             for tag, name in CASE_MAP.items():
@@ -175,7 +196,7 @@ class MorphologyEngine:
             if tense in tense_map:
                 target_grammemes.add(tense_map[tense])
         
-        # Try to inflect
+        results = []
         if target_grammemes:
             inflected = p.inflect(target_grammemes)
             if inflected:
@@ -191,7 +212,7 @@ class MorphologyEngine:
         return results
     
     def get_paradigm(self, lemma: str) -> list[dict]:
-        """Get complete paradigm for a lemma"""
+        """Get complete paradigm for a lemma."""
         if not self._morph:
             return [{"form": lemma, "pos": "unknown"}]
         
@@ -204,7 +225,6 @@ class MorphologyEngine:
         results = []
         
         if pos == "NOUN":
-            # Generate all noun forms
             for case_tag, case_name in CASE_MAP.items():
                 for num_tag, num_name in NUMBER_MAP.items():
                     inflected = p.inflect({case_tag, num_tag})
@@ -214,20 +234,18 @@ class MorphologyEngine:
                             "case": case_name,
                             "number": num_name,
                             "pos": "noun",
-                            "gender": GENDER_MAP.get(str(p.tag.gender), None),
+                            "gender": GENDER_MAP.get(str(p.tag.gender)),
                         })
         
         elif pos == "VERB":
-            # Generate verb forms
-            # Present/future tense
+            # Present/future
             for person in ["1per", "2per", "3per"]:
                 for number in ["sing", "plur"]:
                     inflected = p.inflect({person, number, "pres"})
                     if inflected:
-                        person_name = {"1per": "1st", "2per": "2nd", "3per": "3rd"}[person]
                         results.append({
                             "form": inflected.word,
-                            "person": person_name,
+                            "person": {"1per": "1st", "2per": "2nd", "3per": "3rd"}[person],
                             "number": NUMBER_MAP[number],
                             "tense": "present",
                             "pos": "verb",
@@ -245,7 +263,6 @@ class MorphologyEngine:
                         "pos": "verb",
                     })
             
-            # Plural past
             inflected = p.inflect({"past", "plur"})
             if inflected:
                 results.append({
@@ -256,7 +273,6 @@ class MorphologyEngine:
                 })
         
         elif pos in ["ADJF", "ADJS"]:
-            # Adjective forms
             for case_tag, case_name in CASE_MAP.items():
                 for num_tag, num_name in NUMBER_MAP.items():
                     if num_tag == "sing":
@@ -283,35 +299,22 @@ class MorphologyEngine:
         return results
     
     def explain_rule(self, word: str, form: str) -> dict:
-        """Explain the morphological rule applied to get a form"""
+        """Explain the morphological rule applied to get a form."""
         if not self._morph:
             return {"explanation": "Rule explanation not available"}
         
-        # Analyze the form
         analyses = self.analyze(form)
         if not analyses:
             return {"explanation": "Could not analyze form"}
         
         a = analyses[0]
-        
-        # Build explanation based on features
         parts = []
-        if a["features"].get("case"):
-            parts.append(f"Case: {a['features']['case']}")
-        if a["features"].get("number"):
-            parts.append(f"Number: {a['features']['number']}")
-        if a["features"].get("gender"):
-            parts.append(f"Gender: {a['features']['gender']}")
-        if a["features"].get("tense"):
-            parts.append(f"Tense: {a['features']['tense']}")
-        if a["features"].get("person"):
-            parts.append(f"Person: {a['features']['person']}")
         
-        # Determine ending
-        if len(form) > len(a["lemma"]):
-            ending = form[len(a["lemma"]):]
-        else:
-            ending = form[-2:] if len(form) >= 2 else form
+        for key in ["case", "number", "gender", "tense", "person"]:
+            if a["features"].get(key):
+                parts.append(f"{key.capitalize()}: {a['features'][key]}")
+        
+        ending = form[len(a["lemma"]):] if len(form) > len(a["lemma"]) else form[-2:]
         
         return {
             "lemma": a["lemma"],
@@ -321,4 +324,3 @@ class MorphologyEngine:
             "ending": ending,
             "explanation": "; ".join(parts) if parts else "Base form",
         }
-

@@ -1,20 +1,34 @@
+"""Authentication API with Monadic Error Handling
+
+Handles user registration, login, and token management
+using Result types for predictable error propagation.
+"""
 from datetime import timedelta
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one
+from core.config import settings
 from core.security import (
     get_password_hash,
     verify_password,
     create_access_token,
     get_current_user_id,
 )
-from core.config import settings
+from core.errors import (
+    Ok,
+    Err,
+    invalid_credentials,
+    duplicate_key,
+    not_found,
+    raise_error,
+    raise_result,
+)
 from models.user import User
 
 router = APIRouter()
@@ -44,10 +58,11 @@ class Token(BaseModel):
 
 @router.post("/register", response_model=UserResponse)
 async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
-    # Check if user exists
+    """Register a new user account."""
+    # Check if email already exists
     result = await db.execute(select(User).where(User.email == user_data.email))
     if result.scalar_one_or_none():
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise_error(duplicate_key("User", "email", user_data.email, origin="api.auth.register").error)
     
     user = User(
         email=user_data.email,
@@ -62,16 +77,16 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/token", response_model=Token)
-async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
+async def login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: AsyncSession = Depends(get_db),
+):
+    """Authenticate user and return access token."""
     result = await db.execute(select(User).where(User.email == form_data.username))
     user = result.scalar_one_or_none()
     
     if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise_error(invalid_credentials(origin="api.auth.login").error)
     
     access_token = create_access_token(
         data={"sub": str(user.id)},
@@ -85,9 +100,7 @@ async def get_current_user(
     user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
-    result = await db.execute(select(User).where(User.id == UUID(user_id)))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
-
+    """Get current authenticated user."""
+    result = await fetch_one(db, User, UUID(user_id), "User")
+    raise_result(result)
+    return result.unwrap()

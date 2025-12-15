@@ -1,9 +1,20 @@
-"""Production Engine
+"""Production Engine with Result Types
 
 Analyzes learner output and provides targeted correction.
-Multi-layered analysis: morphological, syntactic, semantic, phonetic.
+Multi-layered analysis with monadic error handling.
 """
-from typing import Optional
+from dataclasses import dataclass
+
+from core.logging import engine_logger
+from core.errors import (
+    AppError,
+    Ok,
+    Err,
+    Result,
+    internal_error,
+)
+
+log = engine_logger()
 
 try:
     import pymorphy2
@@ -12,15 +23,33 @@ except ImportError:
     PYMORPHY_AVAILABLE = False
 
 
+@dataclass(frozen=True, slots=True)
+class ProductionError:
+    """Structured production error."""
+    error_type: str
+    description: str
+    correction: str
+    explanation: str
+    severity: int
+
+
+@dataclass(frozen=True, slots=True)
+class ProductionAnalysis:
+    """Result of production analysis."""
+    score: float
+    errors: list[ProductionError]
+    corrected_text: str
+    suggestions: list[str]
+
+
 class ProductionEngine:
-    """Engine for production analysis and feedback"""
+    """Engine for production analysis and feedback."""
+    
+    __slots__ = ("language", "_morph")
     
     def __init__(self, language: str = "ru"):
         self.language = language
-        self._morph = None
-        
-        if language == "ru" and PYMORPHY_AVAILABLE:
-            self._morph = pymorphy2.MorphAnalyzer()
+        self._morph = pymorphy2.MorphAnalyzer() if language == "ru" and PYMORPHY_AVAILABLE else None
     
     def analyze_response(
         self,
@@ -29,191 +58,137 @@ class ProductionEngine:
         target_structures: list[dict],
         acceptable_answers: list[str],
     ) -> dict:
-        """Analyze a production response
-        
-        Returns:
-            Dict with score, errors, corrected_text, suggestions
-        """
-        errors = []
-        suggestions = []
-        score = 0.0
+        """Analyze a production response."""
+        errors: list[dict] = []
+        suggestions: list[str] = []
         corrected_text = user_response
         
-        # Normalize for comparison
         normalized_response = user_response.lower().strip()
         normalized_acceptable = [a.lower().strip() for a in acceptable_answers]
         
-        # Check exact match first
+        # Exact match
         if normalized_response in normalized_acceptable:
-            return {
-                "score": 1.0,
-                "errors": [],
-                "corrected_text": user_response,
-                "suggestions": ["Perfect!"],
-            }
+            return {"score": 1.0, "errors": [], "corrected_text": user_response, "suggestions": ["Perfect!"]}
         
-        # Analyze word by word
+        # Word-by-word analysis
         if self._morph:
-            response_words = user_response.split()
-            
-            for i, word in enumerate(response_words):
-                clean_word = word.strip(".,!?;:\"'()-").lower()
-                if not clean_word:
+            for word in user_response.split():
+                clean = word.strip(".,!?;:\"'()-").lower()
+                if not clean:
                     continue
                 
-                # Check morphological validity
-                parses = self._morph.parse(clean_word)
-                
+                parses = self._morph.parse(clean)
                 if not parses or parses[0].score < 0.1:
-                    # Unknown or unlikely word
                     errors.append({
                         "error_type": "morphological",
                         "description": f"Unfamiliar word form: '{word}'",
-                        "correction": self._suggest_correction(clean_word),
+                        "correction": self._suggest_correction(clean),
                         "explanation": "This word form may be incorrect or misspelled.",
                         "severity": 3,
                     })
-                else:
-                    # Check if the form makes sense in context
-                    # (simplified - real impl would use dependency parsing)
-                    pass
         
-        # Check for common errors
-        common_error_patterns = [
+        # Check common errors
+        for wrong, correct, desc in [
             ("его", "её", "gender agreement"),
             ("мой", "моя", "gender agreement"),
             ("был", "была", "past tense gender"),
-            ("красный", "красная", "adjective gender"),
-        ]
-        
-        for wrong, correct, error_desc in common_error_patterns:
+        ]:
             if wrong in normalized_response and any(correct in a for a in normalized_acceptable):
                 errors.append({
                     "error_type": "morphological",
-                    "description": f"Possible {error_desc} error",
-                    "correction": f"Consider using '{correct}' instead of '{wrong}'",
-                    "explanation": f"Check the {error_desc} of nearby words.",
+                    "description": f"Possible {desc} error",
+                    "correction": f"Consider '{correct}' instead of '{wrong}'",
+                    "explanation": f"Check {desc} of nearby words.",
                     "severity": 2,
                 })
         
-        # Calculate score based on similarity to acceptable answers
+        # Calculate score
         if acceptable_answers:
-            best_similarity = max(
-                self._calculate_similarity(normalized_response, a.lower())
-                for a in acceptable_answers
-            )
-            score = best_similarity
-            
-            # Find the closest acceptable answer for correction
-            closest = min(acceptable_answers, key=lambda a: -self._calculate_similarity(normalized_response, a.lower()))
-            corrected_text = closest
+            score = max(self._similarity(normalized_response, a.lower()) for a in acceptable_answers)
+            corrected_text = min(acceptable_answers, key=lambda a: -self._similarity(normalized_response, a.lower()))
         else:
-            # No acceptable answers to compare - base score on error count
             score = max(0, 1 - len(errors) * 0.2)
         
-        # Generate suggestions
+        # Suggestions
         if errors:
             suggestions.append("Review the grammatical patterns in your response.")
         if score < 0.5:
             suggestions.append("Try breaking down the sentence structure step by step.")
-        if score >= 0.7:
+        elif score >= 0.7:
             suggestions.append("Good effort! Minor corrections needed.")
         
-        return {
-            "score": score,
-            "errors": errors,
-            "corrected_text": corrected_text,
-            "suggestions": suggestions,
-        }
+        return {"score": score, "errors": errors, "corrected_text": corrected_text, "suggestions": suggestions}
+    
+    def analyze_response_result(
+        self,
+        user_response: str,
+        expected_patterns: list[str],
+        target_structures: list[dict],
+        acceptable_answers: list[str],
+    ) -> Result[ProductionAnalysis, AppError]:
+        """Analyze with Result type."""
+        try:
+            result = self.analyze_response(user_response, expected_patterns, target_structures, acceptable_answers)
+            return Ok(ProductionAnalysis(
+                score=result["score"],
+                errors=[ProductionError(**e) for e in result["errors"]],
+                corrected_text=result["corrected_text"],
+                suggestions=result["suggestions"],
+            ))
+        except Exception as e:
+            return internal_error(f"Production analysis failed: {e}", origin="production_engine", cause=e)
     
     def _suggest_correction(self, word: str) -> str:
-        """Suggest a correction for a misspelled/malformed word"""
         if not self._morph:
             return word
-        
-        # Try to find similar valid words
-        # Simple approach: try common letter substitutions
-        # Real implementation would use edit distance and dictionary
-        
         parses = self._morph.parse(word)
-        if parses and parses[0].score > 0.5:
-            return parses[0].normal_form
-        
-        return word  # No suggestion available
+        return parses[0].normal_form if parses and parses[0].score > 0.5 else word
     
-    def _calculate_similarity(self, s1: str, s2: str) -> float:
-        """Calculate similarity between two strings (0-1)"""
-        # Simple word overlap similarity
-        words1 = set(s1.split())
-        words2 = set(s2.split())
-        
+    def _similarity(self, s1: str, s2: str) -> float:
+        words1, words2 = set(s1.split()), set(s2.split())
         if not words1 or not words2:
             return 0.0
-        
-        intersection = len(words1 & words2)
-        union = len(words1 | words2)
-        
-        return intersection / union if union > 0 else 0.0
+        return len(words1 & words2) / len(words1 | words2)
     
     def detect_error_type(self, user_word: str, expected_word: str) -> dict:
-        """Detect the type of error between user word and expected word"""
+        """Detect error type between user and expected word."""
         if not self._morph:
             return {"error_type": "unknown", "description": "Cannot analyze"}
         
-        user_parses = self._morph.parse(user_word)
-        expected_parses = self._morph.parse(expected_word)
+        user_p = self._morph.parse(user_word)
+        expected_p = self._morph.parse(expected_word)
         
-        if not user_parses or not expected_parses:
+        if not user_p or not expected_p:
             return {"error_type": "lexical", "description": "Word not recognized"}
         
-        user_p = user_parses[0]
-        expected_p = expected_parses[0]
-        
-        # Check if same lemma
-        if user_p.normal_form == expected_p.normal_form:
-            # Morphological error - wrong form of the right word
-            user_tags = set(user_p.tag.grammemes)
-            expected_tags = set(expected_p.tag.grammemes)
+        if user_p[0].normal_form == expected_p[0].normal_form:
+            diff = set(expected_p[0].tag.grammemes) - set(user_p[0].tag.grammemes)
             
-            diff = expected_tags - user_tags
-            
-            if "nomn" in diff or "gent" in diff or "datv" in diff or "accs" in diff or "ablt" in diff or "loct" in diff:
+            if any(c in diff for c in ("nomn", "gent", "datv", "accs", "ablt", "loct")):
                 return {"error_type": "morphological", "description": "Wrong case"}
             if "sing" in diff or "plur" in diff:
                 return {"error_type": "morphological", "description": "Wrong number"}
-            if "masc" in diff or "femn" in diff or "neut" in diff:
+            if any(g in diff for g in ("masc", "femn", "neut")):
                 return {"error_type": "morphological", "description": "Wrong gender"}
-            if "pres" in diff or "past" in diff or "futr" in diff:
+            if any(t in diff for t in ("pres", "past", "futr")):
                 return {"error_type": "morphological", "description": "Wrong tense"}
-            
             return {"error_type": "morphological", "description": "Wrong inflection"}
-        else:
-            # Different word entirely
-            return {"error_type": "lexical", "description": "Wrong word choice"}
+        
+        return {"error_type": "lexical", "description": "Wrong word choice"}
     
     def generate_hint(self, prompt: dict, hint_level: int) -> str:
-        """Generate a progressive hint for a production prompt
-        
-        hint_level: 1 = vague, 2 = medium, 3 = almost answer
-        """
+        """Generate progressive hint for production prompt."""
         hints = prompt.get("hints", [])
-        
         if hints and hint_level <= len(hints):
             return hints[hint_level - 1]
         
-        # Generate generic hint based on level
         if hint_level == 1:
             return "Think about the grammatical structures needed."
-        elif hint_level == 2:
-            expected = prompt.get("target_structures", [])
-            if expected:
-                return f"Consider using: {', '.join(str(s) for s in expected[:2])}"
-            return "Focus on the verb form and case agreement."
-        else:
-            answers = prompt.get("acceptable_answers", [])
-            if answers:
-                # Give first few letters
-                first_word = answers[0].split()[0]
-                return f"The answer starts with: {first_word[:3]}..."
-            return "Check your conjugation and declension."
-
+        if hint_level == 2:
+            structures = prompt.get("target_structures", [])
+            return f"Consider using: {', '.join(str(s) for s in structures[:2])}" if structures else "Focus on verb form and case."
+        
+        answers = prompt.get("acceptable_answers", [])
+        if answers:
+            return f"Starts with: {answers[0].split()[0][:3]}..."
+        return "Check your conjugation and declension."

@@ -8,6 +8,7 @@ from core.config import settings
 from core.database import engine, Base
 from core.logging import configure_logging, get_logger
 from core.middleware import RequestLoggingMiddleware, SlowRequestMiddleware
+from core.errors import register_error_handlers
 
 # Initialize logging before anything else
 configure_logging(
@@ -48,6 +49,9 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
+
+# Register structured error handlers
+register_error_handlers(app)
 
 # Middleware (order matters: last added = first executed)
 app.add_middleware(SlowRequestMiddleware, slow_threshold_ms=1000)

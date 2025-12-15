@@ -1,14 +1,19 @@
+"""SRS (Spaced Repetition System) API with Monadic Error Handling
+
+Handles sentence management, review scheduling, and mastery tracking
+using Result types for predictable error propagation.
+"""
 from datetime import datetime
-from typing import Optional
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
-from sqlalchemy import select, and_
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one, create_entity
 from core.security import get_current_user_id
+from core.errors import raise_result
 from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
 from engines.srs import SRSEngine
 
@@ -18,16 +23,16 @@ router = APIRouter()
 class SentenceCreate(BaseModel):
     text: str
     language: str = "ru"
-    translation: Optional[str] = None
+    translation: str | None = None
     complexity_score: int = 1
-    source: Optional[str] = None
+    source: str | None = None
 
 
 class SentenceResponse(BaseModel):
     id: UUID
     text: str
     language: str
-    translation: Optional[str]
+    translation: str | None
     complexity_score: int
 
     class Config:
@@ -37,7 +42,7 @@ class SentenceResponse(BaseModel):
 class PatternResponse(BaseModel):
     id: UUID
     pattern_type: str
-    description: Optional[str]
+    description: str | None
     difficulty: int
     features: dict
 
@@ -60,37 +65,37 @@ class MasteryStats(BaseModel):
     pattern_id: UUID
     pattern_type: str
     mastery_level: float  # 0-1
-    next_review: Optional[datetime]
+    next_review: datetime | None
     total_reviews: int
 
 
 @router.post("/sentences", response_model=SentenceResponse)
 async def create_sentence(sentence_data: SentenceCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new sentence for SRS."""
     sentence = Sentence(**sentence_data.model_dump())
-    db.add(sentence)
-    await db.commit()
-    await db.refresh(sentence)
-    return sentence
+    result = await create_entity(db, sentence)
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/sentences/{sentence_id}", response_model=SentenceResponse)
 async def get_sentence(sentence_id: UUID, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Sentence).where(Sentence.id == sentence_id))
-    sentence = result.scalar_one_or_none()
-    if not sentence:
-        raise HTTPException(status_code=404, detail="Sentence not found")
-    return sentence
+    """Get a sentence by ID."""
+    result = await fetch_one(db, Sentence, sentence_id, "Sentence")
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/sentences", response_model=list[SentenceResponse])
 async def search_sentences(
     language: str = Query("ru"),
-    pattern_type: Optional[str] = Query(None),
+    pattern_type: str | None = Query(None),
     complexity_min: int = Query(1),
     complexity_max: int = Query(10),
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db),
 ):
+    """Search sentences with filters."""
     query = select(Sentence).where(
         Sentence.language == language,
         Sentence.complexity_score >= complexity_min,
@@ -102,16 +107,13 @@ async def search_sentences(
             SyntacticPattern.pattern_type == pattern_type
         )
     
-    query = query.limit(limit)
-    result = await db.execute(query)
+    result = await db.execute(query.limit(limit))
     return result.scalars().all()
 
 
 @router.get("/patterns", response_model=list[PatternResponse])
-async def get_patterns(
-    language: str = Query("ru"),
-    db: AsyncSession = Depends(get_db),
-):
+async def get_patterns(language: str = Query("ru"), db: AsyncSession = Depends(get_db)):
+    """Get all syntactic patterns for a language."""
     result = await db.execute(
         select(SyntacticPattern).where(SyntacticPattern.language == language)
     )
@@ -125,10 +127,8 @@ async def get_due_reviews(
     limit: int = Query(10, le=50),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get sentences due for review based on user's pattern mastery"""
-    engine = SRSEngine()
-    
-    # Get user's pattern mastery
+    """Get sentences due for review based on user's pattern mastery."""
+    # Get user's due pattern mastery records
     result = await db.execute(
         select(UserPatternMastery).where(
             UserPatternMastery.user_id == UUID(user_id),
@@ -138,7 +138,7 @@ async def get_due_reviews(
     due_mastery = result.scalars().all()
     due_pattern_ids = {m.pattern_id for m in due_mastery}
     
-    # Find sentences containing these patterns
+    # Find sentences containing due patterns
     if due_pattern_ids:
         result = await db.execute(
             select(Sentence)
@@ -151,7 +151,7 @@ async def get_due_reviews(
         )
         sentences = result.scalars().unique().all()
     else:
-        # No due patterns, get new sentences to introduce
+        # No due patterns - get new sentences to introduce
         result = await db.execute(
             select(Sentence)
             .where(Sentence.language == language)
@@ -160,9 +160,9 @@ async def get_due_reviews(
         )
         sentences = result.scalars().all()
     
+    # Build review items with patterns
     items = []
     for s in sentences:
-        # Get patterns for this sentence
         result = await db.execute(
             select(SyntacticPattern)
             .join(SentencePattern)
@@ -185,7 +185,7 @@ async def submit_review(
     user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
-    """Submit review results and update SRS scheduling"""
+    """Submit review results and update SRS scheduling."""
     engine = SRSEngine()
     
     for result in results:
@@ -204,7 +204,7 @@ async def submit_review(
             )
             db.add(mastery)
         
-        # Calculate new SRS values using SM-2
+        # Calculate new SRS values
         new_values = engine.calculate_sm2(
             quality=result.quality,
             repetitions=mastery.repetitions,
@@ -231,7 +231,7 @@ async def get_mastery_stats(
     language: str = Query("ru"),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get user's mastery statistics for all patterns"""
+    """Get user's mastery statistics for all patterns."""
     result = await db.execute(
         select(UserPatternMastery, SyntacticPattern)
         .join(SyntacticPattern)
@@ -241,16 +241,13 @@ async def get_mastery_stats(
         )
     )
     
-    stats = []
-    for mastery, pattern in result.all():
-        mastery_level = mastery.correct_reviews / max(mastery.total_reviews, 1)
-        stats.append(MasteryStats(
+    return [
+        MasteryStats(
             pattern_id=pattern.id,
             pattern_type=pattern.pattern_type,
-            mastery_level=mastery_level,
+            mastery_level=mastery.correct_reviews / max(mastery.total_reviews, 1),
             next_review=mastery.next_review,
             total_reviews=mastery.total_reviews,
-        ))
-    
-    return stats
-
+        )
+        for mastery, pattern in result.all()
+    ]

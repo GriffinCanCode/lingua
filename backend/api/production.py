@@ -1,13 +1,18 @@
-from typing import Optional
+"""Production Practice API with Monadic Error Handling
+
+Handles language production prompts, attempts, and feedback
+using Result types for predictable error propagation.
+"""
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
+from fastapi import APIRouter, Depends, Query, UploadFile, File
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one, create_entity
 from core.security import get_current_user_id
+from core.errors import not_implemented, raise_result, raise_error
 from models.production import ProductionPrompt, ProductionAttempt, ProductionFeedback
 from engines.production import ProductionEngine
 
@@ -39,19 +44,19 @@ class PromptResponse(BaseModel):
 class AttemptCreate(BaseModel):
     prompt_id: UUID
     user_response: str
-    time_taken_seconds: Optional[int] = None
+    time_taken_seconds: int | None = None
 
 
 class ErrorDetail(BaseModel):
-    error_type: str  # morphological, syntactic, semantic, phonetic
+    error_type: str
     description: str
     correction: str
     explanation: str
-    severity: int  # 1-5
+    severity: int
 
 
 class AttemptFeedback(BaseModel):
-    is_correct: str  # Y/N/P
+    is_correct: str
     score: float
     errors: list[ErrorDetail]
     corrected_text: str
@@ -72,31 +77,31 @@ class AttemptResponse(BaseModel):
 
 @router.post("/prompts", response_model=PromptResponse)
 async def create_prompt(prompt_data: PromptCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new production prompt."""
     prompt = ProductionPrompt(**prompt_data.model_dump())
-    db.add(prompt)
-    await db.commit()
-    await db.refresh(prompt)
-    return prompt
+    result = await create_entity(db, prompt)
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/prompts/{prompt_id}", response_model=PromptResponse)
 async def get_prompt(prompt_id: UUID, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(ProductionPrompt).where(ProductionPrompt.id == prompt_id))
-    prompt = result.scalar_one_or_none()
-    if not prompt:
-        raise HTTPException(status_code=404, detail="Prompt not found")
-    return prompt
+    """Get a prompt by ID."""
+    result = await fetch_one(db, ProductionPrompt, prompt_id, "Prompt")
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/prompts", response_model=list[PromptResponse])
 async def get_prompts(
     language: str = Query("ru"),
-    prompt_type: Optional[str] = Query(None),
+    prompt_type: str | None = Query(None),
     difficulty_min: int = Query(1),
     difficulty_max: int = Query(10),
     limit: int = Query(10, le=50),
     db: AsyncSession = Depends(get_db),
 ):
+    """List production prompts with filters."""
     query = select(ProductionPrompt).where(
         ProductionPrompt.language == language,
         ProductionPrompt.difficulty >= difficulty_min,
@@ -104,9 +109,8 @@ async def get_prompts(
     )
     if prompt_type:
         query = query.where(ProductionPrompt.prompt_type == prompt_type)
-    query = query.limit(limit)
     
-    result = await db.execute(query)
+    result = await db.execute(query.limit(limit))
     return result.scalars().all()
 
 
@@ -116,14 +120,11 @@ async def submit_attempt(
     user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
-    """Submit a production attempt and get feedback"""
+    """Submit a production attempt and get feedback."""
     # Get the prompt
-    result = await db.execute(
-        select(ProductionPrompt).where(ProductionPrompt.id == attempt_data.prompt_id)
-    )
-    prompt = result.scalar_one_or_none()
-    if not prompt:
-        raise HTTPException(status_code=404, detail="Prompt not found")
+    result = await fetch_one(db, ProductionPrompt, attempt_data.prompt_id, "Prompt")
+    raise_result(result)
+    prompt = result.unwrap()
     
     # Analyze the response
     engine = ProductionEngine(prompt.language)
@@ -186,10 +187,8 @@ async def submit_audio_attempt(
     user_id: str = Depends(get_current_user_id),
     db: AsyncSession = Depends(get_db),
 ):
-    """Submit an audio production attempt"""
-    # This would integrate with speech-to-text and phonetic analysis
-    # For now, return a placeholder
-    raise HTTPException(status_code=501, detail="Audio production not yet implemented")
+    """Submit an audio production attempt."""
+    raise_error(not_implemented("audio_production", origin="api.production").error)
 
 
 @router.get("/history", response_model=list[dict])
@@ -199,7 +198,7 @@ async def get_attempt_history(
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get user's production attempt history"""
+    """Get user's production attempt history."""
     result = await db.execute(
         select(ProductionAttempt, ProductionPrompt)
         .join(ProductionPrompt)
@@ -211,18 +210,17 @@ async def get_attempt_history(
         .limit(limit)
     )
     
-    history = []
-    for attempt, prompt in result.all():
-        history.append({
+    return [
+        {
             "attempt_id": str(attempt.id),
             "prompt_text": prompt.prompt_text,
             "user_response": attempt.user_response,
             "is_correct": attempt.is_correct,
             "score": attempt.score,
             "created_at": attempt.created_at.isoformat(),
-        })
-    
-    return history
+        }
+        for attempt, prompt in result.all()
+    ]
 
 
 @router.get("/stats")
@@ -231,7 +229,7 @@ async def get_production_stats(
     language: str = Query("ru"),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get user's production statistics"""
+    """Get user's production statistics."""
     result = await db.execute(
         select(ProductionAttempt, ProductionPrompt)
         .join(ProductionPrompt)
@@ -255,7 +253,7 @@ async def get_production_stats(
     partial = sum(1 for a, _ in attempts if a.is_correct == "P")
     avg_score = sum(a.score for a, _ in attempts) / total
     
-    by_type = {}
+    by_type: dict[str, dict] = {}
     for attempt, prompt in attempts:
         if prompt.prompt_type not in by_type:
             by_type[prompt.prompt_type] = {"total": 0, "correct": 0}
@@ -271,4 +269,3 @@ async def get_production_stats(
         "average_score": avg_score,
         "by_type": by_type,
     }
-

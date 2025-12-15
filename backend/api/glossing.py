@@ -1,12 +1,17 @@
-from typing import Optional
+"""Glossing API with Monadic Error Handling
+
+Handles interlinear glossing and morpheme annotation
+using Result types for predictable error propagation.
+"""
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one, create_entity
+from core.errors import raise_result
 from models.glossing import GlossedText, Morpheme
 from engines.glossing import GlossingEngine
 
@@ -18,8 +23,8 @@ class MorphemeResponse(BaseModel):
     morpheme_index: int
     surface_form: str
     gloss: str
-    morpheme_type: Optional[str]
-    lemma: Optional[str]
+    morpheme_type: str | None
+    lemma: str | None
 
     class Config:
         from_attributes = True
@@ -28,31 +33,31 @@ class MorphemeResponse(BaseModel):
 class WordGloss(BaseModel):
     word: str
     morphemes: list[MorphemeResponse]
-    full_gloss: str  # Combined gloss for the word
+    full_gloss: str
 
 
 class InterlinearLine(BaseModel):
     original: list[str]
     morphemes: list[str]
     glosses: list[str]
-    translation: Optional[str]
+    translation: str | None
 
 
 class GlossedTextCreate(BaseModel):
-    title: Optional[str] = None
+    title: str | None = None
     original_text: str
     language: str = "ru"
-    translation: Optional[str] = None
-    source: Optional[str] = None
+    translation: str | None = None
+    source: str | None = None
     difficulty: int = 1
 
 
 class GlossedTextResponse(BaseModel):
     id: UUID
-    title: Optional[str]
+    title: str | None
     original_text: str
     language: str
-    translation: Optional[str]
+    translation: str | None
     difficulty: int
 
     class Config:
@@ -65,11 +70,8 @@ class FullGlossedText(BaseModel):
 
 
 @router.post("/gloss", response_model=list[WordGloss])
-async def gloss_text(
-    text: str,
-    language: str = Query("ru"),
-):
-    """Generate Leipzig-style glosses for text"""
+async def gloss_text(text: str, language: str = Query("ru")):
+    """Generate Leipzig-style glosses for text."""
     engine = GlossingEngine(language)
     glossed = engine.gloss_text(text)
     
@@ -89,7 +91,7 @@ async def get_interlinear(
     language: str = Query("ru"),
     include_translation: bool = Query(True),
 ):
-    """Get interlinear gloss format for a sentence"""
+    """Get interlinear gloss format for a sentence."""
     engine = GlossingEngine(language)
     interlinear = engine.get_interlinear(text, include_translation=include_translation)
     return InterlinearLine(**interlinear)
@@ -100,11 +102,11 @@ async def create_glossed_text(
     text_data: GlossedTextCreate,
     db: AsyncSession = Depends(get_db),
 ):
-    """Create a new glossed text entry"""
+    """Create a new glossed text entry with auto-generated morphemes."""
     text = GlossedText(**text_data.model_dump())
-    db.add(text)
-    await db.commit()
-    await db.refresh(text)
+    result = await create_entity(db, text)
+    raise_result(result)
+    created_text = result.unwrap()
     
     # Auto-generate morpheme annotations
     engine = GlossingEngine(text_data.language)
@@ -113,7 +115,7 @@ async def create_glossed_text(
     for word_data in glossed:
         for m in word_data["morphemes"]:
             morpheme = Morpheme(
-                text_id=text.id,
+                text_id=created_text.id,
                 word_index=m["word_index"],
                 morpheme_index=m["morpheme_index"],
                 surface_form=m["surface_form"],
@@ -124,26 +126,25 @@ async def create_glossed_text(
             db.add(morpheme)
     
     await db.commit()
-    return text
+    return created_text
 
 
 @router.get("/texts/{text_id}", response_model=FullGlossedText)
 async def get_glossed_text(text_id: UUID, db: AsyncSession = Depends(get_db)):
-    """Get a glossed text with all annotations"""
-    result = await db.execute(select(GlossedText).where(GlossedText.id == text_id))
-    text = result.scalar_one_or_none()
-    if not text:
-        raise HTTPException(status_code=404, detail="Text not found")
+    """Get a glossed text with all annotations."""
+    result = await fetch_one(db, GlossedText, text_id, "Glossed text")
+    raise_result(result)
+    text = result.unwrap()
     
     # Get morphemes
-    result = await db.execute(
+    morph_result = await db.execute(
         select(Morpheme)
         .where(Morpheme.text_id == text_id)
         .order_by(Morpheme.word_index, Morpheme.morpheme_index)
     )
-    morphemes = result.scalars().all()
+    morphemes = morph_result.scalars().all()
     
-    # Group by sentence/line
+    # Format as interlinear
     engine = GlossingEngine(text.language)
     lines = engine.format_as_interlinear(text.original_text, morphemes, text.translation)
     
@@ -161,7 +162,7 @@ async def list_glossed_texts(
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db),
 ):
-    """List available glossed texts"""
+    """List available glossed texts."""
     result = await db.execute(
         select(GlossedText)
         .where(
@@ -176,8 +177,7 @@ async def list_glossed_texts(
 
 @router.get("/morpheme/{word}", response_model=list[MorphemeResponse])
 async def analyze_morphemes(word: str, language: str = Query("ru")):
-    """Get morpheme breakdown for a single word"""
+    """Get morpheme breakdown for a single word."""
     engine = GlossingEngine(language)
     morphemes = engine.segment_word(word)
     return [MorphemeResponse(**m) for m in morphemes]
-

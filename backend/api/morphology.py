@@ -1,12 +1,17 @@
-from typing import Optional
+"""Morphology API with Monadic Error Handling
+
+Handles morphological analysis, inflection generation, and paradigm lookup
+using Result types for predictable error propagation.
+"""
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one, create_entity
+from core.errors import raise_result
 from models.morphology import Lemma, MorphologicalRule, Inflection
 from engines.morphology import MorphologyEngine
 
@@ -17,11 +22,11 @@ class LemmaCreate(BaseModel):
     word: str
     language: str = "ru"
     part_of_speech: str
-    gender: Optional[str] = None
-    aspect: Optional[str] = None
-    declension_class: Optional[str] = None
-    conjugation_class: Optional[str] = None
-    definition: Optional[str] = None
+    gender: str | None = None
+    aspect: str | None = None
+    declension_class: str | None = None
+    conjugation_class: str | None = None
+    definition: str | None = None
 
 
 class LemmaResponse(BaseModel):
@@ -29,8 +34,8 @@ class LemmaResponse(BaseModel):
     word: str
     language: str
     part_of_speech: str
-    gender: Optional[str]
-    definition: Optional[str]
+    gender: str | None
+    definition: str | None
 
     class Config:
         from_attributes = True
@@ -38,11 +43,11 @@ class LemmaResponse(BaseModel):
 
 class InflectionResponse(BaseModel):
     form: str
-    case: Optional[str]
-    number: Optional[str]
-    person: Optional[str]
-    tense: Optional[str]
-    gender: Optional[str]
+    case: str | None = None
+    number: str | None = None
+    person: str | None = None
+    tense: str | None = None
+    gender: str | None = None
 
 
 class ParadigmResponse(BaseModel):
@@ -59,40 +64,39 @@ class AnalysisResponse(BaseModel):
 
 @router.post("/lemmas", response_model=LemmaResponse)
 async def create_lemma(lemma_data: LemmaCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new lemma entry."""
     lemma = Lemma(**lemma_data.model_dump())
-    db.add(lemma)
-    await db.commit()
-    await db.refresh(lemma)
-    return lemma
+    result = await create_entity(db, lemma)
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/lemmas/{lemma_id}", response_model=LemmaResponse)
 async def get_lemma(lemma_id: UUID, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Lemma).where(Lemma.id == lemma_id))
-    lemma = result.scalar_one_or_none()
-    if not lemma:
-        raise HTTPException(status_code=404, detail="Lemma not found")
-    return lemma
+    """Get a lemma by ID."""
+    result = await fetch_one(db, Lemma, lemma_id, "Lemma")
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/lemmas", response_model=list[LemmaResponse])
 async def search_lemmas(
-    word: Optional[str] = Query(None),
+    word: str | None = Query(None),
     language: str = Query("ru"),
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db),
 ):
+    """Search lemmas with filters."""
     query = select(Lemma).where(Lemma.language == language)
     if word:
         query = query.where(Lemma.word.ilike(f"%{word}%"))
-    query = query.limit(limit)
-    result = await db.execute(query)
+    result = await db.execute(query.limit(limit))
     return result.scalars().all()
 
 
 @router.get("/analyze/{word}", response_model=list[AnalysisResponse])
 async def analyze_word(word: str, language: str = Query("ru")):
-    """Analyze a word and return its morphological features"""
+    """Analyze a word and return morphological features."""
     engine = MorphologyEngine(language)
     analyses = engine.analyze(word)
     return [
@@ -110,10 +114,10 @@ async def analyze_word(word: str, language: str = Query("ru")):
 async def generate_forms(
     lemma: str,
     language: str = Query("ru"),
-    case: Optional[str] = Query(None),
-    number: Optional[str] = Query(None),
+    case: str | None = Query(None),
+    number: str | None = Query(None),
 ):
-    """Generate inflected forms from a lemma"""
+    """Generate inflected forms from a lemma."""
     engine = MorphologyEngine(language)
     forms = engine.generate(lemma, case=case, number=number)
     return [InflectionResponse(**f) for f in forms]
@@ -121,7 +125,7 @@ async def generate_forms(
 
 @router.get("/paradigm/{lemma}", response_model=ParadigmResponse)
 async def get_paradigm(lemma: str, language: str = Query("ru"), db: AsyncSession = Depends(get_db)):
-    """Get complete paradigm (all forms) for a lemma"""
+    """Get complete paradigm (all forms) for a lemma."""
     engine = MorphologyEngine(language)
     
     # Check if lemma exists in DB
@@ -151,11 +155,11 @@ async def get_paradigm(lemma: str, language: str = Query("ru"), db: AsyncSession
 @router.get("/rules", response_model=list[dict])
 async def get_rules(
     language: str = Query("ru"),
-    rule_type: Optional[str] = Query(None),
-    pattern_class: Optional[str] = Query(None),
+    rule_type: str | None = Query(None),
+    pattern_class: str | None = Query(None),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get morphological rules for teaching"""
+    """Get morphological rules for teaching."""
     query = select(MorphologicalRule).where(MorphologicalRule.language == language)
     if rule_type:
         query = query.where(MorphologicalRule.rule_type == rule_type)
@@ -178,4 +182,3 @@ async def get_rules(
         }
         for r in rules
     ]
-

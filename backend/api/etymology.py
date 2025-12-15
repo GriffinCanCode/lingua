@@ -1,12 +1,17 @@
-from typing import Optional
+"""Etymology API with Monadic Error Handling
+
+Handles etymology graph queries, cognate detection, and word family traversal
+using Result types for predictable error propagation.
+"""
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel
 from sqlalchemy import select, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db
+from core.database import get_db, fetch_one, create_entity
+from core.errors import raise_result
 from models.etymology import EtymologyNode, EtymologyRelation
 
 router = APIRouter()
@@ -15,22 +20,22 @@ router = APIRouter()
 class EtymologyNodeCreate(BaseModel):
     word: str
     language: str
-    language_period: Optional[str] = None
-    part_of_speech: Optional[str] = None
-    meaning: Optional[str] = None
-    pronunciation: Optional[str] = None
+    language_period: str | None = None
+    part_of_speech: str | None = None
+    meaning: str | None = None
+    pronunciation: str | None = None
     is_reconstructed: str = "N"
-    notes: Optional[str] = None
-    source: Optional[str] = None
+    notes: str | None = None
+    source: str | None = None
 
 
 class EtymologyNodeResponse(BaseModel):
     id: UUID
     word: str
     language: str
-    language_period: Optional[str]
-    meaning: Optional[str]
-    pronunciation: Optional[str]
+    language_period: str | None
+    meaning: str | None
+    pronunciation: str | None
     is_reconstructed: str
 
     class Config:
@@ -42,8 +47,8 @@ class EtymologyRelationCreate(BaseModel):
     target_id: UUID
     relation_type: str  # cognate, derived_from, borrowed_from, semantic_shift
     confidence: int = 100
-    notes: Optional[str] = None
-    source: Optional[str] = None
+    notes: str | None = None
+    source: str | None = None
 
 
 class EtymologyRelationResponse(BaseModel):
@@ -61,7 +66,7 @@ class WordFamilyNode(BaseModel):
     id: UUID
     word: str
     language: str
-    meaning: Optional[str]
+    meaning: str | None
     is_reconstructed: str
 
 
@@ -79,47 +84,46 @@ class WordFamilyResponse(BaseModel):
 
 @router.post("/nodes", response_model=EtymologyNodeResponse)
 async def create_node(node_data: EtymologyNodeCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new etymology node."""
     node = EtymologyNode(**node_data.model_dump())
-    db.add(node)
-    await db.commit()
-    await db.refresh(node)
-    return node
+    result = await create_entity(db, node)
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/nodes/{node_id}", response_model=EtymologyNodeResponse)
 async def get_node(node_id: UUID, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(EtymologyNode).where(EtymologyNode.id == node_id))
-    node = result.scalar_one_or_none()
-    if not node:
-        raise HTTPException(status_code=404, detail="Etymology node not found")
-    return node
+    """Get an etymology node by ID."""
+    result = await fetch_one(db, EtymologyNode, node_id, "Etymology node")
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/search", response_model=list[EtymologyNodeResponse])
 async def search_nodes(
-    word: Optional[str] = Query(None),
-    language: Optional[str] = Query(None),
+    word: str | None = Query(None),
+    language: str | None = Query(None),
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db),
 ):
+    """Search etymology nodes."""
     query = select(EtymologyNode)
     if word:
         query = query.where(EtymologyNode.word.ilike(f"%{word}%"))
     if language:
         query = query.where(EtymologyNode.language == language)
-    query = query.limit(limit)
     
-    result = await db.execute(query)
+    result = await db.execute(query.limit(limit))
     return result.scalars().all()
 
 
 @router.post("/relations", response_model=EtymologyRelationResponse)
 async def create_relation(rel_data: EtymologyRelationCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new etymology relation."""
     relation = EtymologyRelation(**rel_data.model_dump())
-    db.add(relation)
-    await db.commit()
-    await db.refresh(relation)
-    return relation
+    result = await create_entity(db, relation)
+    raise_result(result)
+    return result.unwrap()
 
 
 @router.get("/word-family/{node_id}", response_model=WordFamilyResponse)
@@ -128,17 +132,13 @@ async def get_word_family(
     depth: int = Query(2, ge=1, le=5),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get the word family graph for a node (cognates, derivations, etc.)
+    """Get word family graph via breadth-first traversal."""
+    # Get root node
+    result = await fetch_one(db, EtymologyNode, node_id, "Etymology node")
+    raise_result(result)
+    root = result.unwrap()
     
-    Uses recursive CTE to traverse the etymology graph.
-    """
-    # Start with the root node
-    result = await db.execute(select(EtymologyNode).where(EtymologyNode.id == node_id))
-    root = result.scalar_one_or_none()
-    if not root:
-        raise HTTPException(status_code=404, detail="Node not found")
-    
-    # Collect nodes and edges via breadth-first traversal
+    # Initialize with root node
     visited_ids = {node_id}
     nodes = [WordFamilyNode(
         id=root.id,
@@ -149,6 +149,7 @@ async def get_word_family(
     )]
     edges = []
     
+    # BFS traversal
     current_ids = {node_id}
     for _ in range(depth):
         if not current_ids:
@@ -174,13 +175,12 @@ async def get_word_family(
                 confidence=rel.confidence,
             ))
             
-            # Add newly discovered nodes
             for nid in [rel.source_id, rel.target_id]:
                 if nid not in visited_ids:
                     next_ids.add(nid)
                     visited_ids.add(nid)
         
-        # Fetch the new nodes
+        # Fetch new nodes
         if next_ids:
             result = await db.execute(
                 select(EtymologyNode).where(EtymologyNode.id.in_(next_ids))
@@ -205,8 +205,8 @@ async def find_cognates(
     source_language: str = Query("ru"),
     db: AsyncSession = Depends(get_db),
 ):
-    """Find cognates of a word across languages"""
-    # First find the node for this word
+    """Find cognates of a word across languages."""
+    # Find source node
     result = await db.execute(
         select(EtymologyNode).where(
             EtymologyNode.word == word,
@@ -229,13 +229,11 @@ async def find_cognates(
     )
     relations = result.scalars().all()
     
-    # Get the cognate nodes
-    cognate_ids = set()
-    for rel in relations:
-        if rel.source_id != source_node.id:
-            cognate_ids.add(rel.source_id)
-        if rel.target_id != source_node.id:
-            cognate_ids.add(rel.target_id)
+    # Get cognate node IDs
+    cognate_ids = {
+        rel.source_id if rel.source_id != source_node.id else rel.target_id
+        for rel in relations
+    }
     
     if not cognate_ids:
         return []
@@ -244,4 +242,3 @@ async def find_cognates(
         select(EtymologyNode).where(EtymologyNode.id.in_(cognate_ids))
     )
     return result.scalars().all()
-

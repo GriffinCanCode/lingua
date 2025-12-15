@@ -1,22 +1,19 @@
 """FastAPI Exception Handlers
 
-Integrates the monadic error handling system with FastAPI's exception
-handling. Converts AppErrors and standard exceptions to proper HTTP responses.
+Integrates the monadic error handling system and validation system
+with FastAPI's exception handling. Converts AppErrors, ValidationErrors,
+and standard exceptions to proper HTTP responses.
 """
 from __future__ import annotations
-
-from typing import Callable
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from pydantic import ValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from core.logging import get_logger, bind_context
+from core.logging import get_logger
 
 from .types import AppError, ErrorCode, ErrorContext
-from .boundaries import ValidationErrorMapper
 
 log = get_logger("errors.handlers")
 
@@ -72,24 +69,19 @@ async def http_exception_handler(
     """Handle standard HTTP exceptions with structured error response."""
     # Map HTTP status to appropriate error code
     status_code = exc.status_code
-    if status_code == 400:
-        code = ErrorCode.E2000_VALIDATION_GENERIC
-    elif status_code == 401:
-        code = ErrorCode.E3004_TOKEN_MISSING
-    elif status_code == 403:
-        code = ErrorCode.E3011_RESOURCE_FORBIDDEN
-    elif status_code == 404:
-        code = ErrorCode.E4010_NOT_FOUND
-    elif status_code == 409:
-        code = ErrorCode.E5002_STATE_CONFLICT
-    elif status_code == 422:
-        code = ErrorCode.E2000_VALIDATION_GENERIC
-    elif status_code == 429:
-        code = ErrorCode.E1013_RATE_LIMITED
-    elif status_code >= 500:
-        code = ErrorCode.E9001_UNEXPECTED_ERROR
-    else:
-        code = ErrorCode.E9000_INTERNAL_GENERIC
+    code_map = {
+        400: ErrorCode.E2000_VALIDATION_GENERIC,
+        401: ErrorCode.E3004_TOKEN_MISSING,
+        403: ErrorCode.E3011_RESOURCE_FORBIDDEN,
+        404: ErrorCode.E4010_NOT_FOUND,
+        409: ErrorCode.E5002_STATE_CONFLICT,
+        422: ErrorCode.E2000_VALIDATION_GENERIC,
+        429: ErrorCode.E1013_RATE_LIMITED,
+    }
+    
+    code = code_map.get(status_code)
+    if code is None:
+        code = ErrorCode.E9001_UNEXPECTED_ERROR if status_code >= 500 else ErrorCode.E9000_INTERNAL_GENERIC
     
     error = AppError(
         code=code,
@@ -107,31 +99,46 @@ async def validation_exception_handler(
     request: Request, exc: RequestValidationError
 ) -> JSONResponse:
     """Handle Pydantic validation errors with detailed field information."""
-    mapper = ValidationErrorMapper("request_validation")
-    errors = mapper.map_pydantic_errors(exc.errors())
+    from core.validation.errors import ValidationError, ValidationErrorDetail
+    from core.validation.schema import ValidationMode
     
-    # Create aggregated error
-    if len(errors) == 1:
-        error = errors[0]
-    else:
-        error = AppError(
-            code=ErrorCode.E2000_VALIDATION_GENERIC,
-            message=f"Validation failed: {len(errors)} errors",
-            context=ErrorContext(
-                correlation_id=request.headers.get("X-Correlation-ID", ""),
-                origin="request_validation",
-            ),
-            metadata={
-                "errors": [
-                    {
-                        "code": e.code.name,
-                        "message": e.message,
-                        "field": e.metadata.get("field"),
-                    }
-                    for e in errors
-                ],
-            },
-        )
+    # Convert Pydantic errors to ValidationError
+    details = [
+        ValidationErrorDetail.from_pydantic_error(err)
+        for err in exc.errors()
+    ]
+    
+    validation_error = ValidationError(
+        message="Request validation failed",
+        details=details,
+        mode=ValidationMode.FAIL_FAST,
+    )
+    
+    # Convert to AppError with request context
+    error = validation_error.to_app_error().with_context(
+        correlation_id=request.headers.get("X-Correlation-ID", ""),
+        request_id=request.headers.get("X-Request-ID", ""),
+        origin="request_validation",
+    )
+    
+    return result_to_response(error)
+
+
+async def validation_error_handler(
+    request: Request, exc: Exception
+) -> JSONResponse:
+    """Handle our custom ValidationError from the validation system."""
+    from core.validation.errors import ValidationError
+    
+    if not isinstance(exc, ValidationError):
+        raise exc
+    
+    # Convert to AppError with request context
+    error = exc.to_app_error().with_context(
+        correlation_id=request.headers.get("X-Correlation-ID", ""),
+        request_id=request.headers.get("X-Request-ID", ""),
+        origin="validation",
+    )
     
     return result_to_response(error)
 
@@ -143,6 +150,11 @@ async def unhandled_exception_handler(
     
     Converts to internal error and logs full traceback.
     """
+    # Check if it's a ValidationError that slipped through
+    from core.validation.errors import ValidationError
+    if isinstance(exc, ValidationError):
+        return await validation_error_handler(request, exc)
+    
     error = AppError(
         code=ErrorCode.E9001_UNEXPECTED_ERROR,
         message="An unexpected error occurred",
@@ -173,13 +185,16 @@ def register_error_handlers(app: FastAPI) -> None:
         app = FastAPI(...)
         register_error_handlers(app)
     """
+    # Import ValidationError for registration
+    from core.validation.errors import ValidationError
+    
     app.add_exception_handler(AppErrorException, app_error_handler)
     app.add_exception_handler(StarletteHTTPException, http_exception_handler)
     app.add_exception_handler(RequestValidationError, validation_exception_handler)
+    app.add_exception_handler(ValidationError, validation_error_handler)
     app.add_exception_handler(Exception, unhandled_exception_handler)
 
 
-# Utility function to raise AppError in non-Result contexts
 def raise_error(error: AppError) -> None:
     """Raise AppError as exception.
     
@@ -205,4 +220,3 @@ def raise_result(result) -> None:
     """
     if result.is_err():
         raise AppErrorException(result.unwrap_err())
-

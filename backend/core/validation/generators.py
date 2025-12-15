@@ -184,11 +184,7 @@ class OpenAPIGenerator(SchemaGenerator):
     def generate(self, schema: type[BaseModel]) -> str:
         """Generate OpenAPI schema JSON."""
         openapi_schema = schema.model_json_schema(mode="serialization")
-        
-        # Add additional OpenAPI-specific metadata
-        if schema.__doc__:
-            openapi_schema["description"] = schema.__doc__.strip()
-        
+        if schema.__doc__: openapi_schema["description"] = schema.__doc__.strip()
         return json.dumps(openapi_schema, indent=2)
     
     def generate_components(self, *schemas: type[BaseModel]) -> dict[str, Any]:
@@ -213,16 +209,12 @@ class OpenAPIGenerator(SchemaGenerator):
 class JSONSchemaGenerator(SchemaGenerator):
     """Generate JSON Schema (draft 2020-12)."""
     
-    def __init__(self, mode: str = "validation"):
-        self.mode = mode  # "validation" or "serialization"
+    def __init__(self, mode: str = "validation"): self.mode = mode
     
     def generate(self, schema: type[BaseModel]) -> str:
         """Generate JSON Schema."""
         json_schema = schema.model_json_schema(mode=self.mode)
-        
-        # Add schema version
         json_schema["$schema"] = "https://json-schema.org/draft/2020-12/schema"
-        
         return json.dumps(json_schema, indent=2)
 
 
@@ -348,42 +340,19 @@ class DatabaseHintGenerator(SchemaGenerator):
     
     def _python_to_db_type(self, python_type: Any) -> str:
         """Convert Python type to database type."""
-        origin = get_origin(python_type)
-        args = get_args(python_type)
+        origin, args = get_origin(python_type), get_args(python_type)
         
-        # Handle Optional/Union
-        if origin is Union:
-            non_none = [a for a in args if a is not type(None)]
-            if non_none:
-                return self._python_to_db_type(non_none[0])
-        
-        # Handle list -> JSONB
-        if origin is list:
-            return "JSONB"
-        
-        # Handle dict -> JSONB
-        if origin is dict:
-            return "JSONB"
-        
-        # Handle Enum
-        if isinstance(python_type, type) and issubclass(python_type, Enum):
-            return "VARCHAR(50)"
-        
-        # Primitive types
-        if python_type in self.TYPE_MAP:
-            return self.TYPE_MAP[python_type]
-        
-        # Check if it's a Pydantic model -> JSONB
-        if isinstance(python_type, type) and issubclass(python_type, BaseModel):
-            return "JSONB"
-        
-        # Default to TEXT
+        if origin is Union and (non_none := [a for a in args if a is not type(None)]):
+            return self._python_to_db_type(non_none[0])
+        if origin in (list, dict): return "JSONB"
+        if isinstance(python_type, type) and issubclass(python_type, Enum): return "VARCHAR(50)"
+        if python_type in self.TYPE_MAP: return self.TYPE_MAP[python_type]
+        if isinstance(python_type, type) and issubclass(python_type, BaseModel): return "JSONB"
         return "TEXT"
     
     def _to_snake_case(self, name: str) -> str:
         """Convert CamelCase to snake_case."""
-        s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
+        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)).lower()
     
     def _table_to_dict(self, table: DatabaseTable) -> dict[str, Any]:
         """Serialize table to dictionary."""

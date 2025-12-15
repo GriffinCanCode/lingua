@@ -41,43 +41,19 @@ class ValidationResult:
     metadata: dict[str, Any] | None = None
     
     @classmethod
-    def valid(cls) -> ValidationResult:
-        return cls(is_valid=True)
+    def valid(cls) -> ValidationResult: return cls(is_valid=True)
     
     @classmethod
-    def invalid(
-        cls,
-        message: str,
-        code: ErrorCode = ErrorCode.E2000_VALIDATION_GENERIC,
-        *,
-        constraint: str | None = None,
-        expected: Any = None,
-        actual: Any = None,
-        **metadata,
-    ) -> ValidationResult:
-        return cls(
-            is_valid=False,
-            error_message=message,
-            error_code=code,
-            constraint=constraint,
-            expected=expected,
-            actual=actual,
-            metadata=metadata or None,
-        )
+    def invalid(cls, message: str, code: ErrorCode = ErrorCode.E2000_VALIDATION_GENERIC, *,
+                constraint: str | None = None, expected: Any = None, actual: Any = None, **metadata) -> ValidationResult:
+        return cls(is_valid=False, error_message=message, error_code=code, constraint=constraint,
+            expected=expected, actual=actual, metadata=metadata or None)
     
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API responses."""
-        if self.is_valid:
-            return {"valid": True}
-        return {
-            "valid": False,
-            "message": self.error_message,
-            "code": self.error_code.name if self.error_code else None,
-            "constraint": self.constraint,
-            "expected": self.expected,
-            "actual": self.actual,
-            **(self.metadata or {}),
-        }
+        if self.is_valid: return {"valid": True}
+        return {"valid": False, "message": self.error_message, "code": self.error_code.name if self.error_code else None,
+            "constraint": self.constraint, "expected": self.expected, "actual": self.actual, **(self.metadata or {})}
 
 
 class AtomicValidator(ABC):
@@ -98,24 +74,15 @@ class AtomicValidator(ABC):
     def constraint_name(self) -> str:
         """Human-readable constraint name for error messages."""
     
-    def __call__(self, value: Any) -> ValidationResult:
-        return self.validate(value)
+    def __call__(self, value: Any) -> ValidationResult: return self.validate(value)
     
-    def __and__(self, other: AtomicValidator) -> And:
-        """Combine with AND combinator."""
-        return And(self, other)
+    def __and__(self, other: AtomicValidator) -> And: return And(self, other)
     
-    def __or__(self, other: AtomicValidator) -> Or:
-        """Combine with OR combinator."""
-        return Or(self, other)
+    def __or__(self, other: AtomicValidator) -> Or: return Or(self, other)
     
-    def __invert__(self) -> Not:
-        """Negate validator with NOT combinator."""
-        return Not(self)
+    def __invert__(self) -> Not: return Not(self)
     
-    def with_message(self, message: str) -> WithMessage:
-        """Override the error message."""
-        return WithMessage(self, message)
+    def with_message(self, message: str) -> WithMessage: return WithMessage(self, message)
 
 
 # ============================================================================
@@ -243,8 +210,7 @@ class OneOf(AtomicValidator):
     case_sensitive: bool = True
     
     def __init__(self, *options: str, case_sensitive: bool = True):
-        object.__setattr__(self, "options", frozenset(options))
-        object.__setattr__(self, "case_sensitive", case_sensitive)
+        object.__setattr__(self, "options", frozenset(options)); object.__setattr__(self, "case_sensitive", case_sensitive)
     
     @property
     def constraint_name(self) -> str:
@@ -254,24 +220,16 @@ class OneOf(AtomicValidator):
     
     def validate(self, value: Any) -> ValidationResult:
         if not isinstance(value, str):
-            return ValidationResult.invalid(
-                f"Expected string, got {type(value).__name__}",
-                ErrorCode.E2004_INVALID_TYPE,
-                constraint="string",
-            )
+            return ValidationResult.invalid(f"Expected string, got {type(value).__name__}",
+                ErrorCode.E2004_INVALID_TYPE, constraint="string")
         
         check_value = value if self.case_sensitive else value.lower()
         check_options = self.options if self.case_sensitive else frozenset(o.lower() for o in self.options)
         
         if check_value not in check_options:
-            return ValidationResult.invalid(
-                f"Value '{value}' is not one of: {', '.join(sorted(self.options))}",
-                ErrorCode.E2005_CONSTRAINT_VIOLATION,
-                constraint=self.constraint_name,
-                expected=list(sorted(self.options)),
-                actual=value,
-            )
-        
+            return ValidationResult.invalid(f"Value '{value}' is not one of: {', '.join(sorted(self.options))}",
+                ErrorCode.E2005_CONSTRAINT_VIOLATION, constraint=self.constraint_name,
+                expected=list(sorted(self.options)), actual=value)
         return ValidationResult.valid()
 
 
@@ -575,13 +533,8 @@ class URLValidator(AtomicValidator):
     allowed_schemes: frozenset[str] = frozenset({"http", "https"})
     require_tld: bool = True
     
-    def __init__(
-        self,
-        allowed_schemes: Sequence[str] = ("http", "https"),
-        require_tld: bool = True,
-    ):
-        object.__setattr__(self, "allowed_schemes", frozenset(allowed_schemes))
-        object.__setattr__(self, "require_tld", require_tld)
+    def __init__(self, allowed_schemes: Sequence[str] = ("http", "https"), require_tld: bool = True):
+        object.__setattr__(self, "allowed_schemes", frozenset(allowed_schemes)); object.__setattr__(self, "require_tld", require_tld)
     
     @property
     def constraint_name(self) -> str:
@@ -790,13 +743,10 @@ class And(AtomicValidator):
         return f"({self.left.constraint_name} AND {self.right.constraint_name})"
     
     def validate(self, value: Any) -> ValidationResult:
-        left_result = self.left.validate(value)
-        if not left_result.is_valid:
-            return left_result
+        if not (left_result := self.left.validate(value)).is_valid: return left_result
         return self.right.validate(value)
     
-    def __and__(self, other: AtomicValidator) -> And:
-        return And(self, other)
+    def __and__(self, other: AtomicValidator) -> And: return And(self, other)
 
 
 @dataclass(frozen=True, slots=True)
@@ -810,24 +760,13 @@ class Or(AtomicValidator):
         return f"({self.left.constraint_name} OR {self.right.constraint_name})"
     
     def validate(self, value: Any) -> ValidationResult:
-        left_result = self.left.validate(value)
-        if left_result.is_valid:
-            return ValidationResult.valid()
-        
-        right_result = self.right.validate(value)
-        if right_result.is_valid:
-            return ValidationResult.valid()
-        
-        return ValidationResult.invalid(
-            f"Neither constraint satisfied: {left_result.error_message} OR {right_result.error_message}",
-            ErrorCode.E2000_VALIDATION_GENERIC,
-            constraint=self.constraint_name,
-            left_error=left_result.error_message,
-            right_error=right_result.error_message,
-        )
+        if (left_result := self.left.validate(value)).is_valid: return ValidationResult.valid()
+        if (right_result := self.right.validate(value)).is_valid: return ValidationResult.valid()
+        return ValidationResult.invalid(f"Neither constraint satisfied: {left_result.error_message} OR {right_result.error_message}",
+            ErrorCode.E2000_VALIDATION_GENERIC, constraint=self.constraint_name,
+            left_error=left_result.error_message, right_error=right_result.error_message)
     
-    def __or__(self, other: AtomicValidator) -> Or:
-        return Or(self, other)
+    def __or__(self, other: AtomicValidator) -> Or: return Or(self, other)
 
 
 @dataclass(frozen=True, slots=True)
@@ -841,13 +780,9 @@ class Not(AtomicValidator):
         return f"NOT({self.validator.constraint_name})"
     
     def validate(self, value: Any) -> ValidationResult:
-        result = self.validator.validate(value)
-        if result.is_valid:
-            return ValidationResult.invalid(
-                self.message or f"Value should not satisfy: {self.validator.constraint_name}",
-                ErrorCode.E2005_CONSTRAINT_VIOLATION,
-                constraint=self.constraint_name,
-            )
+        if (result := self.validator.validate(value)).is_valid:
+            return ValidationResult.invalid(self.message or f"Value should not satisfy: {self.validator.constraint_name}",
+                ErrorCode.E2005_CONSTRAINT_VIOLATION, constraint=self.constraint_name)
         return ValidationResult.valid()
 
 
@@ -862,16 +797,9 @@ class WithMessage(AtomicValidator):
         return self.validator.constraint_name
     
     def validate(self, value: Any) -> ValidationResult:
-        result = self.validator.validate(value)
-        if result.is_valid:
-            return result
-        return ValidationResult.invalid(
-            self.message,
-            result.error_code or ErrorCode.E2000_VALIDATION_GENERIC,
-            constraint=result.constraint,
-            expected=result.expected,
-            actual=result.actual,
-        )
+        if (result := self.validator.validate(value)).is_valid: return result
+        return ValidationResult.invalid(self.message, result.error_code or ErrorCode.E2000_VALIDATION_GENERIC,
+            constraint=result.constraint, expected=result.expected, actual=result.actual)
 
 
 @dataclass(frozen=True, slots=True)
@@ -888,9 +816,7 @@ class AllOf(AtomicValidator):
     
     def validate(self, value: Any) -> ValidationResult:
         for v in self.validators:
-            result = v.validate(value)
-            if not result.is_valid:
-                return result
+            if not (result := v.validate(value)).is_valid: return result
         return ValidationResult.valid()
 
 
@@ -909,16 +835,10 @@ class AnyOf(AtomicValidator):
     def validate(self, value: Any) -> ValidationResult:
         errors = []
         for v in self.validators:
-            result = v.validate(value)
-            if result.is_valid:
-                return ValidationResult.valid()
+            if (result := v.validate(value)).is_valid: return ValidationResult.valid()
             errors.append(result.error_message)
-        
-        return ValidationResult.invalid(
-            f"No constraint satisfied: {'; '.join(e or '' for e in errors)}",
-            ErrorCode.E2000_VALIDATION_GENERIC,
-            constraint=self.constraint_name,
-        )
+        return ValidationResult.invalid(f"No constraint satisfied: {'; '.join(e or '' for e in errors)}",
+            ErrorCode.E2000_VALIDATION_GENERIC, constraint=self.constraint_name)
 
 
 # ============================================================================
@@ -945,15 +865,10 @@ class CustomValidator(AtomicValidator):
         return self.name
     
     def validate(self, value: Any) -> ValidationResult:
-        try:
-            return self.validator_fn(value)
+        try: return self.validator_fn(value)
         except Exception as e:
-            return ValidationResult.invalid(
-                f"Validation error: {e}",
-                ErrorCode.E2000_VALIDATION_GENERIC,
-                constraint=self.name,
-                exception=str(e),
-            )
+            return ValidationResult.invalid(f"Validation error: {e}", ErrorCode.E2000_VALIDATION_GENERIC,
+                constraint=self.name, exception=str(e))
 
 
 def custom(name: str) -> Callable[[Callable[[Any], ValidationResult]], CustomValidator]:
@@ -966,6 +881,4 @@ def custom(name: str) -> Callable[[Callable[[Any], ValidationResult]], CustomVal
                 return ValidationResult.invalid("Must be even")
             return ValidationResult.valid()
     """
-    def decorator(fn: Callable[[Any], ValidationResult]) -> CustomValidator:
-        return CustomValidator(fn, name=name)
-    return decorator
+    return lambda fn: CustomValidator(fn, name=name)

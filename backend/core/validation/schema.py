@@ -103,9 +103,7 @@ class NonEmptyStr(str):
     
     @classmethod
     def _validate(cls, v: str) -> NonEmptyStr:
-        stripped = v.strip()
-        if not stripped:
-            raise ValueError("String cannot be empty or whitespace-only")
+        if not (stripped := v.strip()): raise ValueError("String cannot be empty or whitespace-only")
         return cls(stripped)
 
 
@@ -124,11 +122,8 @@ class SlugStr(str):
     
     @classmethod
     def _validate(cls, v: str) -> SlugStr:
-        normalized = v.lower().strip()
-        if not cls.PATTERN.match(normalized):
-            raise ValueError(
-                f"Invalid slug format: must be lowercase alphanumeric with hyphens, got '{v}'"
-            )
+        if not cls.PATTERN.match(normalized := v.lower().strip()):
+            raise ValueError(f"Invalid slug format: must be lowercase alphanumeric with hyphens, got '{v}'")
         return cls(normalized)
     
     @classmethod
@@ -286,16 +281,11 @@ class BaseSchema(PydanticBaseModel):
     def __init_subclass__(cls, **kwargs):
         """Collect sensitive fields from annotations."""
         super().__init_subclass__(**kwargs)
-        sensitive = set()
-        for name, field_info in cls.model_fields.items():
-            # Check if field has sensitive marker
-            if field_info.json_schema_extra and isinstance(field_info.json_schema_extra, dict):
-                if field_info.json_schema_extra.get("x-sensitive"):
-                    sensitive.add(name)
-            # Check for SensitiveStr type
-            annotation = field_info.annotation
-            if annotation is SensitiveStr or (get_origin(annotation) and SensitiveStr in get_args(annotation)):
-                sensitive.add(name)
+        sensitive = {name for name, field_info in cls.model_fields.items() if (
+            field_info.json_schema_extra and isinstance(field_info.json_schema_extra, dict) and
+            field_info.json_schema_extra.get("x-sensitive")) or
+            field_info.annotation is SensitiveStr or
+            (get_origin(field_info.annotation) and SensitiveStr in get_args(field_info.annotation))}
         cls._sensitive_fields = frozenset(sensitive)
     
     @classmethod
@@ -343,7 +333,6 @@ class BaseSchema(PydanticBaseModel):
     
     @classmethod
     def parse_lax(cls, data: dict[str, Any] | Any) -> Self:
-        """Parse with type coercion enabled (non-strict mode)."""
         return cls.parse(data, strict=False)
     
     @classmethod
@@ -351,19 +340,14 @@ class BaseSchema(PydanticBaseModel):
         """Parse data returning Result type for monadic error handling."""
         from core.errors import Ok, Err
         from .errors import ValidationError
-        
-        try:
-            return Ok(cls.parse(data, strict=strict))
-        except ValidationError as e:
-            return Err(e)
+        try: return Ok(cls.parse(data, strict=strict))
+        except ValidationError as e: return Err(e)
     
     @classmethod
     def _maybe_redact(cls, field_path: str, value: Any) -> Any:
         """Redact sensitive field values."""
         field_name = field_path.split(".")[-1] if "." in field_path else field_path
-        if field_name in cls._sensitive_fields:
-            return "[REDACTED]"
-        return value
+        return "[REDACTED]" if field_name in cls._sensitive_fields else value
     
     @classmethod
     def _suggest_fix(cls, error: dict[str, Any]) -> str | None:
@@ -391,66 +375,30 @@ class BaseSchema(PydanticBaseModel):
             "email_parsing": lambda: "Provide a valid email (e.g., 'user@example.com')",
         }
         
-        if err_type in suggestions:
-            return suggestions[err_type]()
-        
-        # Check field-level suggested fix template
-        loc = error.get("loc", [])
-        if loc:
-            field_name = str(loc[-1])
-            field_info = cls.model_fields.get(field_name)
-            if field_info and field_info.json_schema_extra:
-                extra = field_info.json_schema_extra
-                if isinstance(extra, dict) and "x-suggested-fix" in extra:
-                    return extra["x-suggested-fix"]
-        
+        if err_type in suggestions: return suggestions[err_type]()
+        if (loc := error.get("loc", [])) and (field_info := cls.model_fields.get(str(loc[-1]))):
+            if field_info.json_schema_extra and isinstance(extra := field_info.json_schema_extra, dict):
+                return extra.get("x-suggested-fix")
         return None
     
-    def to_dict(
-        self,
-        *,
-        exclude_none: bool = False,
-        exclude_unset: bool = False,
-        by_alias: bool = False,
-    ) -> dict[str, Any]:
+    def to_dict(self, *, exclude_none: bool = False, exclude_unset: bool = False, by_alias: bool = False) -> dict[str, Any]:
         """Serialize to dictionary."""
-        return self.model_dump(
-            exclude_none=exclude_none,
-            exclude_unset=exclude_unset,
-            by_alias=by_alias,
-        )
+        return self.model_dump(exclude_none=exclude_none, exclude_unset=exclude_unset, by_alias=by_alias)
     
-    def to_json(
-        self,
-        *,
-        exclude_none: bool = False,
-        exclude_unset: bool = False,
-        by_alias: bool = False,
-        indent: int | None = None,
-    ) -> str:
+    def to_json(self, *, exclude_none: bool = False, exclude_unset: bool = False,
+                by_alias: bool = False, indent: int | None = None) -> str:
         """Serialize to JSON string."""
-        return self.model_dump_json(
-            exclude_none=exclude_none,
-            exclude_unset=exclude_unset,
-            by_alias=by_alias,
-            indent=indent,
-        )
+        return self.model_dump_json(exclude_none=exclude_none, exclude_unset=exclude_unset, by_alias=by_alias, indent=indent)
     
     @classmethod
-    def json_schema(cls) -> dict[str, Any]:
-        """Get JSON Schema for this model."""
-        return cls.model_json_schema(mode="validation")
+    def json_schema(cls) -> dict[str, Any]: return cls.model_json_schema(mode="validation")
     
     @classmethod
-    def openapi_schema(cls) -> dict[str, Any]:
-        """Get OpenAPI-compatible schema."""
-        return cls.model_json_schema(mode="serialization")
+    def openapi_schema(cls) -> dict[str, Any]: return cls.model_json_schema(mode="serialization")
     
     @computed_field
     @property
-    def _schema_name(self) -> str:
-        """Schema class name for introspection."""
-        return self.__class__.__name__
+    def _schema_name(self) -> str: return self.__class__.__name__
 
 
 class RequestSchema(BaseSchema):

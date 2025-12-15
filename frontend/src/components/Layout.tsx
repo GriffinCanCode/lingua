@@ -1,10 +1,11 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { Home, BookOpen, Dumbbell, Wrench, Settings } from 'lucide-react';
+import { Home, BookOpen, Dumbbell, Wrench, Settings, Brain } from 'lucide-react';
 import clsx from 'clsx';
 
 export const Layout = () => {
   const navItems = [
     { to: '/', icon: Home, label: 'Learn' },
+    { to: '/review', icon: Brain, label: 'Review' },
     { to: '/practice', icon: Dumbbell, label: 'Practice' },
     { to: '/reader', icon: BookOpen, label: 'Reader' },
     { to: '/tools', icon: Wrench, label: 'Tools' },

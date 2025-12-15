@@ -5,6 +5,7 @@ import { PhoneticsTrainer } from './components/Spectrogram';
 import { SRSReview } from './components/SRSReview';
 import { GlossReader } from './components/GlossReader';
 import { ProductionPractice } from './components/ProductionPractice';
+import { LearnPath } from './components/LearnPath';
 import { useNavigationLogger, useGlobalErrorLogger } from './lib/logger';
 import { Layout } from './components/Layout';
 import { ToolsDashboard } from './components/ToolsDashboard';
@@ -17,7 +18,8 @@ const AppContent = () => {
     <Routes>
       <Route element={<Layout />}>
         {/* Main Learning Flow */}
-        <Route path="/" element={<SRSReview />} />
+        <Route path="/" element={<LearnPath />} />
+        <Route path="/review" element={<SRSReview />} />
         
         {/* Core Activities */}
         <Route path="/practice" element={<ProductionPractice />} />

@@ -167,7 +167,7 @@ async def delete_entity(
         Err(AppError) on failure
     """
     try:
-        await session.delete(entity)
+        session.delete(entity)
         await session.commit()
         return Ok(None)
     except SQLAlchemyError as e:

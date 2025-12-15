@@ -1,16 +1,21 @@
 """Morphological Pattern Recognition Engine
 
-Uses pymorphy2 for Russian morphological analysis and generation.
+Uses pymorphy3 for Russian morphological analysis and generation.
 Provides rule-based explanations for learners.
 """
 from typing import Optional
-from functools import lru_cache
+
+from core.logging import engine_logger
+
+log = engine_logger()
 
 try:
-    import pymorphy2
+    import pymorphy3
     PYMORPHY_AVAILABLE = True
+    log.debug("pymorphy3_loaded", available=True)
 except ImportError:
     PYMORPHY_AVAILABLE = False
+    log.warning("pymorphy3_unavailable", message="Morphological analysis will be limited")
 
 
 # Russian case mapping
@@ -56,14 +61,16 @@ class MorphologyEngine:
         self._morph = None
         
         if language == "ru" and PYMORPHY_AVAILABLE:
-            self._morph = pymorphy2.MorphAnalyzer()
+            self._morph = pymorphy3.MorphAnalyzer()
     
     def analyze(self, word: str) -> list[dict]:
         """Analyze a word and return possible interpretations"""
         if not self._morph:
+            log.debug("analyze_fallback", word=word, reason="no_analyzer")
             return [{"lemma": word, "pos": "unknown", "features": {}}]
         
         parses = self._morph.parse(word)
+        log.debug("word_analyzed", word=word, parse_count=len(parses))
         results = []
         
         for p in parses[:5]:  # Limit to top 5 interpretations

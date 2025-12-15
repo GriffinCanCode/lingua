@@ -51,10 +51,10 @@ export const setupHttpLogging = (axios: AxiosInstance, logger: Logger): void => 
       // Add trace headers for distributed tracing
       const ctx = contextStore.get();
       if (ctx.traceId) {
-        config.headers.set('X-Trace-ID', ctx.traceId);
+        config.headers['X-Trace-ID'] = ctx.traceId;
       }
       if (ctx.spanId) {
-        config.headers.set('X-Span-ID', ctx.spanId);
+        config.headers['X-Span-ID'] = ctx.spanId;
       }
 
       httpLogger.debug(`→ ${config.method?.toUpperCase()} ${config.url}`, {

@@ -167,7 +167,8 @@ export const LearnPath: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, [logger]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => { loadData(); }, [loadData]);
 

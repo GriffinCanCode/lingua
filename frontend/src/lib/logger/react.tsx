@@ -19,14 +19,23 @@ export const useLogger = (namespace?: string): Logger => {
 
 /** Hook for component lifecycle logging */
 export const useComponentLogger = (componentName: string) => {
-  const logger = useLogger(componentName);
+  const baseLogger = useContext(LoggerContext);
+  if (!baseLogger) throw new Error('useComponentLogger must be used within LoggerProvider');
+  
+  const loggerRef = useRef<Logger>();
+  if (!loggerRef.current) {
+    loggerRef.current = baseLogger.scope(componentName);
+  }
+  const logger = loggerRef.current;
+  
   const mountTime = useRef(performance.now());
   const renderCount = useRef(0);
 
   useEffect(() => {
     logger.debug('Component mounted', { mountDuration: performance.now() - mountTime.current });
     return () => logger.debug('Component unmounted');
-  }, [logger]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   renderCount.current += 1;
 

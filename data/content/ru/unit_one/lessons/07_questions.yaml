@@ -278,6 +278,37 @@ templates:
       NOUN2: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 2
 
+error_corrections:
+  - incorrect: "Такси́ э́то?"
+    correct: "Э́то такси́?"
+    error_type: "word_order"
+    explanation: "Russian questions use same word order as statements - just raise intonation"
+
+  - incorrect: "Кот э́то?"
+    correct: "Э́то кот?"
+    error_type: "word_order"
+    explanation: "Keep Э́то at the start, raise pitch on the stressed syllable"
+
+  - incorrect: "Э́то не нет кот."
+    correct: "Э́то не кот."
+    error_type: "double_negative"
+    explanation: "Use не for negation in statements, нет for 'no' as an answer"
+
+  - incorrect: "Нет, э́то кот не."
+    correct: "Нет, э́то не кот."
+    error_type: "negation_placement"
+    explanation: "не goes directly BEFORE what you're negating"
+
+  - incorrect: "Да, не э́то кот."
+    correct: "Да, э́то не кот."
+    error_type: "negation_placement"
+    explanation: "не goes before the word being negated (кот), not before э́то"
+
+  - incorrect: "Ма́ма там есть?"
+    correct: "Ма́ма там?"
+    error_type: "unnecessary_word"
+    explanation: "Russian doesn't need 'is' - just use intonation for questions"
+
 # Dialogue exercises for conversational practice
 dialogues:
   - id: "whats_this"

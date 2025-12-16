@@ -290,6 +290,47 @@ templates:
       LANGUAGE: { pos: [adverb], semantic: [language] }
     weight: 3
 
+error_corrections:
+  - incorrect: "Я говори́шь по-ру́сски."
+    correct: "Я говорю́ по-ру́сски."
+    error_type: "conjugation"
+    explanation: "я takes -ю ending, not -ишь (that's for ты)"
+
+  - incorrect: "Ты говорю́?"
+    correct: "Ты говори́шь?"
+    error_type: "conjugation"
+    explanation: "ты takes -ишь ending in Type 2, not -ю"
+
+  - incorrect: "Он говоря́т."
+    correct: "Он говори́т."
+    error_type: "conjugation"
+    explanation: "он/она́ takes -ит ending, not -ят (that's for они́)"
+
+  - incorrect: "Я ви́ду."
+    correct: "Я ви́жу."
+    error_type: "consonant_mutation"
+    explanation: "д changes to ж in the я form: ви́деть → я ви́жу"
+
+  - incorrect: "Я видю."
+    correct: "Я ви́жу."
+    error_type: "consonant_mutation"
+    explanation: "д changes to ж in the я form: ви́деть → я ви́жу"
+
+  - incorrect: "Ты ви́жешь."
+    correct: "Ты ви́дишь."
+    error_type: "conjugation"
+    explanation: "The д→ж change only happens in я form; ты uses -ишь with original д"
+
+  - incorrect: "Они́ говори́т."
+    correct: "Они́ говоря́т."
+    error_type: "conjugation"
+    explanation: "они́ takes -ят ending (plural), not -ит (singular)"
+
+  - incorrect: "Мы ви́дят."
+    correct: "Мы ви́дим."
+    error_type: "conjugation"
+    explanation: "мы takes -им ending, not -ят (that's for они́)"
+
 dialogues:
   - id: "do_you_speak_russian"
     context: "Language abilities"

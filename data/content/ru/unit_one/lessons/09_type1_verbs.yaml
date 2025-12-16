@@ -297,6 +297,37 @@ templates:
       VERB_3PL: { pos: [verb], form: "3pl" }
     weight: 2
 
+error_corrections:
+  - incorrect: "Я знаешь."
+    correct: "Я зна́ю."
+    error_type: "conjugation"
+    explanation: "я takes -ю ending, not -ешь (that's for ты)"
+
+  - incorrect: "Ты зна́ю?"
+    correct: "Ты зна́ешь?"
+    error_type: "conjugation"
+    explanation: "ты takes -ешь ending, not -ю (that's for я)"
+
+  - incorrect: "Он понима́ю."
+    correct: "Он понима́ет."
+    error_type: "conjugation"
+    explanation: "он/она́ takes -ет ending, not -ю"
+
+  - incorrect: "Мы де́лает."
+    correct: "Мы де́лаем."
+    error_type: "conjugation"
+    explanation: "мы takes -ем ending, not -ет (that's for он/она́)"
+
+  - incorrect: "Они́ чита́ет."
+    correct: "Они́ чита́ют."
+    error_type: "conjugation"
+    explanation: "они́ takes -ют ending (plural), not -ет (singular)"
+
+  - incorrect: "Я не понима́ть."
+    correct: "Я не понима́ю."
+    error_type: "infinitive_vs_conjugated"
+    explanation: "Use conjugated form понима́ю with я, not infinitive понима́ть"
+
 dialogues:
   - id: "do_you_know"
     context: "Asking if someone knows"

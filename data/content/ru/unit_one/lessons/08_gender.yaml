@@ -308,6 +308,37 @@ templates:
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 2
 
+error_corrections:
+  - incorrect: "Где кни́га? Он там."
+    correct: "Где кни́га? Она́ там."
+    error_type: "gender_agreement"
+    explanation: "кни́га ends in -а, so it's feminine → use она́"
+
+  - incorrect: "Где дом? Она́ там."
+    correct: "Где дом? Он там."
+    error_type: "gender_agreement"
+    explanation: "дом ends in a consonant, so it's masculine → use он"
+
+  - incorrect: "Где окно́? Она́ там."
+    correct: "Где окно́? Оно́ там."
+    error_type: "gender_agreement"
+    explanation: "окно́ ends in -о, so it's neuter → use оно́"
+
+  - incorrect: "Где па́па? Она́ там."
+    correct: "Где па́па? Он там."
+    error_type: "gender_exception"
+    explanation: "па́па refers to a male person → use он despite -а ending"
+
+  - incorrect: "Где ко́фе? Оно́ там."
+    correct: "Где ко́фе? Он там."
+    error_type: "gender_exception"
+    explanation: "ко́фе is masculine (borrowed word exception) → use он"
+
+  - incorrect: "Соба́ка тут. Он большо́й."
+    correct: "Соба́ка тут. Она́ больша́я."
+    error_type: "gender_agreement"
+    explanation: "соба́ка is feminine → use она́ (adjective must also match!)"
+
 dialogues:
   - id: "wheres_book"
     context: "Looking for things"

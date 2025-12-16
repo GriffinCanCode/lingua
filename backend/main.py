@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import morphology, etymology, phonetics, srs, glossing, production, auth
+from api import morphology, etymology, phonetics, srs, glossing, production, auth, curriculum, ingest
 from core.config import settings
 from core.database import engine, Base
 from core.logging import configure_logging, get_logger
@@ -72,6 +72,8 @@ app.include_router(phonetics.router, prefix="/api/phonetics", tags=["phonetics"]
 app.include_router(srs.router, prefix="/api/srs", tags=["srs"])
 app.include_router(glossing.router, prefix="/api/glossing", tags=["glossing"])
 app.include_router(production.router, prefix="/api/production", tags=["production"])
+app.include_router(curriculum.router, prefix="/api/curriculum", tags=["curriculum"])
+app.include_router(ingest.router, prefix="/api/ingest", tags=["ingest"])
 
 
 @app.get("/health")

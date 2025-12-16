@@ -104,6 +104,9 @@ modules:
           - word: "пожа́луйста"
             translation: "please / you're welcome"
             note: "Stress on second syllable. Used both to ask AND to respond to thanks!"
+          - word: "извини́те"
+            translation: "excuse me / sorry"
+            note: "Stress on third syllable. Critical for streets/metro - use to get attention!"
       
       - type: "etymology"
         title: "Hidden Meaning"
@@ -117,17 +120,75 @@ modules:
           Пожа́луйста is a Swiss Army knife:
           - "Please" when asking: Ко́фе, пожа́луйста. (Coffee, please.)
           - "You're welcome" when thanked: Спаси́бо! — Пожа́луйста!
+          
+          Извини́те is your key to:
+          - Getting attention: Извини́те, где метро́? (Excuse me, where's the metro?)
+          - Apologizing: Извини́те! (Sorry!)
     
     vocab_pool:
-      introduce: [spasibo, pozhaluysta]
+      introduce: [spasibo, pozhaluysta, izvinite]
       practice: [privet, poka, zdravstvuyte]
       review: []
     exercises:
-      count: 6
+      count: 8
       types:
-        - { type: "audio_recognition", count: 2 }   # Спасибо/пожалуйста sounds
+        - { type: "audio_recognition", count: 2 }   # Спасибо/пожалуйста/извините sounds
         - { type: "translation_ru_en", count: 2 }   # Understand magic words
+        - { type: "translation_en_ru", count: 2 }   # Produce magic words
         - { type: "multiple_choice", count: 2 }     # When to use each
+
+  - id: "mod_2c"
+    title: "Getting Help"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Useful Phrases"
+        content: |
+          These phrases help when you need assistance or clarification.
+          Very common in everyday situations!
+      
+      - type: "word_intro"
+        words:
+          - word: "помоги́те"
+            translation: "help!"
+            note: "Emergency! Stress on third syllable. Use in urgent situations."
+          - word: "я не понима́ю по-ру́сски"
+            translation: "I don't understand Russian"
+            note: "Essential! Say this when you're lost or confused."
+          - word: "повтори́те, пожа́луйста"
+            translation: "repeat, please"
+            note: "Ask someone to slow down and repeat. Learner's best friend!"
+      
+      - type: "morphology_pattern"
+        title: "Survival Combos"
+        formula: "Извини́те + {phrase}"
+        examples:
+          - { ru: "Извини́те, я не понима́ю по-ру́сски.", en: "Sorry, I don't understand Russian." }
+          - { ru: "Извини́те, повтори́те, пожа́луйста.", en: "Sorry, could you repeat please?" }
+          - { ru: "Извини́те, где метро́?", en: "Excuse me, where's the metro?" }
+          - { ru: "Извини́те, вы говори́те по-англи́йски?", en: "Excuse me, do you speak English?" }
+        rule: "Start with извини́те to politely get attention, then ask your question!"
+      
+      - type: "tip"
+        content: |
+          **Pro tip for the metro/streets:**
+          "Извини́те, где...?" works for anything:
+          - Где метро́? (Where's the metro?)
+          - Где туале́т? (Where's the toilet?)
+          - Где выход? (Where's the exit?)
+    
+    vocab_pool:
+      introduce: [pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta]
+      practice: [izvinite, pozhaluysta]
+      review: [gde, metro]
+    exercises:
+      count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear survival phrases
+        - { type: "translation_ru_en", count: 2 }   # Understand survival phrases
+        - { type: "translation_en_ru", count: 2 }   # Produce survival phrases
+        - { type: "multiple_choice", count: 2 }     # Context: when to use each
 
   - id: "mod_3"
     title: "Zero Copula"
@@ -216,18 +277,18 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Practice switching between formal and informal. Context is everything!"
+        content: "Practice greetings AND survival phrases. You'll need both on your first day in Russia!"
     vocab_pool:
       introduce: []
-      practice: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+      practice: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta]
       review: [mama, kot, taksi, metro]
     exercises:
-      count: 10
+      count: 12
       types:
         - { type: "translation_ru_en", count: 3 }   # Mixed comprehension
-        - { type: "translation_en_ru", count: 3 }   # Active production
-        - { type: "multiple_choice", count: 2 }     # Formal/informal choices
-        - { type: "audio_recognition", count: 2 }   # Listening practice
+        - { type: "translation_en_ru", count: 4 }   # Active production (survival focus)
+        - { type: "multiple_choice", count: 2 }     # Formal/informal + survival context
+        - { type: "audio_recognition", count: 3 }   # Listening practice
 
   - id: "mod_5"
     title: "Master"
@@ -238,24 +299,25 @@ modules:
         points:
           - "Informal: приве́т (hi), пока́ (bye)"
           - "Formal: здра́вствуйте (hello), до свида́ния (goodbye)"
-          - "Magic words: спаси́бо (thank you), пожа́луйста (please/you're welcome)"
+          - "Magic words: спаси́бо (thank you), пожа́луйста (please), извини́те (excuse me)"
+          - "Useful: помоги́те (help), повтори́те (repeat), я не понима́ю (I don't understand)"
           - "Russian drops 'is/am/are' - simpler sentences!"
           - "Use formal with strangers and elders"
     vocab_pool:
       introduce: []
       practice: []
-      review: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, student, doktor]
+      review: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, ya, student, doktor]
     exercises:
-      count: 12
+      count: 14
       difficulty: "hard"
       types:
-        - { type: "translation_en_ru", count: 4 }   # Production mastery
-        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "translation_en_ru", count: 5 }   # Production mastery (survival focus)
+        - { type: "translation_ru_en", count: 4 }   # Comprehension check
         - { type: "audio_recognition", count: 3 }   # Pronunciation mastery
         - { type: "multiple_choice", count: 2 }     # Context mastery
 
 vocab_filter:
-  primary: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, ty, vy, student, doktor]
+  primary: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, ya, ty, vy, student, doktor]
   review_from: [03_cognates]
 
 templates:
@@ -269,6 +331,27 @@ templates:
     translation: "{GREETING.translation}!"
     slots:
       GREETING: { pos: [interjection] }
+    weight: 2
+
+  - pattern: "Извини́те, где {NOUN}?"
+    translation: "Excuse me, where is {NOUN.the}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+
+  - pattern: "Извини́те, я не понима́ю."
+    translation: "Sorry, I don't understand."
+    slots: {}
+    weight: 3
+
+  - pattern: "Повтори́те, пожа́луйста."
+    translation: "Repeat, please."
+    slots: {}
+    weight: 3
+
+  - pattern: "Извини́те, повтори́те?"
+    translation: "Sorry, could you repeat?"
+    slots: {}
     weight: 2
 
 # Dialogue exercises for conversational practice
@@ -302,3 +385,30 @@ dialogues:
       - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
       - { speaker: "B", ru: "До свида́ния!", en: "Goodbye!" }
       - { speaker: "A", ru: "Пока́!", en: "Bye!" }
+
+  - id: "lost_tourist"
+    context: "Tourist needs help on the street"
+    lines:
+      - { speaker: "A", ru: "Извини́те!", en: "Excuse me!" }
+      - { speaker: "B", ru: "Да?", en: "Yes?" }
+      - { speaker: "A", ru: "Я не понима́ю по-ру́сски. Где метро́?", en: "I don't understand Russian. Where's the metro?" }
+      - { speaker: "B", ru: "Там.", en: "There." }
+      - { speaker: "A", ru: "Спаси́бо!", en: "Thank you!" }
+
+  - id: "repeat_please"
+    context: "Asking someone to repeat"
+    lines:
+      - { speaker: "A", ru: "Вы говори́те по-англи́йски?", en: "Do you speak English?" }
+      - { speaker: "B", ru: "Нет, то́лько по-ру́сски.", en: "No, only Russian." }
+      - { speaker: "A", ru: "Извини́те, повтори́те, пожа́луйста?", en: "Sorry, could you repeat please?" }
+      - { speaker: "B", ru: "То́лько... по-ру́сски.", en: "Only... Russian." }
+      - { speaker: "A", ru: "А, поня́тно. Спаси́бо!", en: "Ah, I understand. Thanks!" }
+
+  - id: "emergency"
+    context: "Emergency situation"
+    lines:
+      - { speaker: "A", ru: "Помоги́те!", en: "Help!" }
+      - { speaker: "B", ru: "Что слу́чилось?", en: "What happened?" }
+      - { speaker: "A", ru: "Я не понима́ю по-ру́сски!", en: "I don't understand Russian!" }
+      - { speaker: "B", ru: "ОК, OK. Вы говори́те по-англи́йски?", en: "OK, OK. Do you speak English?" }
+      - { speaker: "A", ru: "Да! Спаси́бо!", en: "Yes! Thank you!" }

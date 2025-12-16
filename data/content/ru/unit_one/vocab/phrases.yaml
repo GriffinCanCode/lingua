@@ -17,3 +17,48 @@ possession:
     examples:
       - { ru: "У меня́ есть кот.", en: "I have a cat." }
       - { ru: "У меня́ вопро́с.", en: "I have a question." }
+
+common:
+  - id: "pomogite"
+    word: "помогите"
+    stressed: "помоги́те"
+    transliteration: "pomogite"
+    translation: "help"
+    pos: "phrase"
+    frequency: 1
+    difficulty: 2
+    audio: "pomogite.mp3"
+    notes: "Imperative of помога́ть. Stress on third syllable."
+    examples:
+      - { ru: "Помоги́те!", en: "Help!" }
+      - { ru: "Помоги́те, пожа́луйста!", en: "Help, please!" }
+      - { ru: "Помоги́те мне!", en: "Help me!" }
+
+  - id: "ya_ne_ponimayu_po_russki"
+    word: "я не понимаю по-русски"
+    stressed: "я не понима́ю по-ру́сски"
+    transliteration: "ya ne ponimayu po-russki"
+    translation: "I don't understand Russian"
+    pos: "phrase"
+    frequency: 1
+    difficulty: 2
+    audio: "ya_ne_ponimayu_po_russki.mp3"
+    notes: "Combines понима́ть + по-ру́сски."
+    examples:
+      - { ru: "Извини́те, я не понима́ю по-ру́сски.", en: "Sorry, I don't understand Russian." }
+      - { ru: "Я не понима́ю по-ру́сски, вы говори́те по-англи́йски?", en: "I don't understand Russian, do you speak English?" }
+
+  - id: "povtorite_pozhaluysta"
+    word: "повторите, пожалуйста"
+    stressed: "повтори́те, пожа́луйста"
+    transliteration: "povtorite, pozhaluysta"
+    translation: "repeat, please"
+    pos: "phrase"
+    frequency: 1
+    difficulty: 2
+    audio: "povtorite_pozhaluysta.mp3"
+    notes: "Imperative of повторя́ть."
+    examples:
+      - { ru: "Повтори́те, пожа́луйста.", en: "Repeat, please." }
+      - { ru: "Извини́те, повтори́те?", en: "Sorry, could you repeat that?" }
+      - { ru: "Повтори́те ме́дленно, пожа́луйста.", en: "Repeat slowly, please." }

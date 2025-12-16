@@ -139,7 +139,7 @@ modules:
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, kogda, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda, seychas, segodnya, zavtra, vchera]
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, kogda, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda, seychas, segodnya, zavtra, vchera]
     exercises:
       count: 15
       difficulty: "hard"
@@ -163,6 +163,7 @@ modules:
           - Read Russian using Cyrillic letters
           - Introduce yourself and greet people (спаси́бо, пожа́луйста!)
           - Ask and answer basic questions (где, кто, что, как, когда́)
+          - Ask for help (извини́те, помоги́те, повтори́те, я не понима́ю по-ру́сски)
           - Talk about time (сейча́с, сего́дня, за́втра, вчера́)
           - Talk about what you have
           - Describe things using adjectives
@@ -177,13 +178,14 @@ modules:
           - "11 verbs conjugated (знать, понима́ть, чита́ть, де́лать, говори́ть, ви́деть, хоте́ть, жить, рабо́тать, есть, пить)"
           - "5 question words (где, кто, что, как, когда́)"
           - "4 time words (сейча́с, сего́дня, за́втра, вчера́)"
+          - "Help phrases (извини́те, помоги́те, повтори́те, я не понима́ю)"
           - "6 core grammar patterns mastered"
           - "Culture: patronymics, ты vs вы"
           - "Ready for Unit 2: Everyday Life!"
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, kogda, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit, seychas, segodnya, zavtra, vchera]
+      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, kogda, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit, seychas, segodnya, zavtra, vchera]
     exercises:
       count: 15
       difficulty: "hard"
@@ -268,3 +270,14 @@ dialogues:
       - { speaker: "B", ru: "Ла́дно. До свида́ния!", en: "Alright. Goodbye!" }
       - { speaker: "A", ru: "Пока́! Спаси́бо за всё!", en: "Bye! Thanks for everything!" }
       - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }
+
+  - id: "tourist_survival"
+    context: "Tourist asking for directions"
+    lines:
+      - { speaker: "A", ru: "Извини́те!", en: "Excuse me!" }
+      - { speaker: "B", ru: "Да, слу́шаю.", en: "Yes, I'm listening." }
+      - { speaker: "A", ru: "Я не понима́ю по-ру́сски. Вы говори́те по-англи́йски?", en: "I don't understand Russian. Do you speak English?" }
+      - { speaker: "B", ru: "Нет, извини́те.", en: "No, sorry." }
+      - { speaker: "A", ru: "Ла́дно. Где метро́?", en: "OK. Where's the metro?" }
+      - { speaker: "B", ru: "Там!", en: "There!" }
+      - { speaker: "A", ru: "Спаси́бо большо́е!", en: "Thank you very much!" }

@@ -22,7 +22,7 @@ lessons:
 
   lesson_02_hello:
     title: "Hello & Goodbye"
-    focus: "Greetings, formal/informal register"
+    focus: "Greetings, formal/informal register, survival phrases"
     primary_vocab:
       - privet
       - poka
@@ -30,8 +30,13 @@ lessons:
       - do_svidaniya
       - spasibo
       - pozhaluysta
+      - izvinite
       - ya
       - student
+    secondary_vocab:
+      - pomogite
+      - ya_ne_ponimayu_po_russki
+      - povtorite_pozhaluysta
     review_vocab:
       - eto
       - mama

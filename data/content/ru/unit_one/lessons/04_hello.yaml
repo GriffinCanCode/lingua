@@ -1,8 +1,8 @@
-# Unit 1, Lesson 2: Hello & Goodbye
+# Unit 1, Lesson 4: Hello & Goodbye
 # 5 modules with teaching content
 
 lesson:
-  id: "02_hello"
+  id: "04_hello"
   title: "Hello & Goodbye"
   subtitle: "Greet people and make a good impression"
   icon: "wave"
@@ -256,7 +256,7 @@ modules:
 
 vocab_filter:
   primary: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, ty, vy, student, doktor]
-  review_from: [01_cognates]
+  review_from: [03_cognates]
 
 templates:
   - pattern: "Приве́т! Я {PROFESSION}."

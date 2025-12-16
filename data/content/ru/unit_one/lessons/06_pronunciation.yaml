@@ -1,8 +1,8 @@
-# Unit 1, Lesson 4: Hard Sounds & Pronunciation Quirks
+# Unit 1, Lesson 6: Hard Sounds & Pronunciation Quirks
 # Critical pronunciation rules that differ from spelling
 
 lesson:
-  id: "04_pronunciation"
+  id: "06_pronunciation"
   title: "Hard Sounds & Quirks"
   subtitle: "Master the sounds that trip up learners"
   icon: "volume-2"
@@ -201,9 +201,9 @@ modules:
 # Pronunciation-focused lesson - teaching only, exercises come from vocab practice
 vocab_filter:
   primary: []
-  review_from: [01_cognates, 02_hello, 03_false_friends]
+  review_from: [03_cognates, 04_hello, 05_false_friends]
 
 metadata:
-  prerequisite: "03_false_friends"
-  unlocks: ["05_questions"]
+  prerequisite: "05_false_friends"
+  unlocks: ["07_questions"]
   skills: ["hard_consonants", "pronunciation_quirks", "devoicing", "y_sound"]

@@ -1,8 +1,8 @@
-# Unit 1, Lesson 7: I have...
+# Unit 1, Lesson 10: I have...
 # 5 modules - The possession construction
 
 lesson:
-  id: "08_possession"
+  id: "10_possession"
   title: "I have..."
   subtitle: "Express what you have with У меня́ есть"
   icon: "package"
@@ -172,7 +172,7 @@ modules:
 
 vocab_filter:
   primary: [u_menya, yest, mashina, sobaka, zdorovo]
-  review_from: [03_false_friends, 06_gender, 07_type1_verbs]
+  review_from: [05_false_friends, 08_gender, 09_type1_verbs]
 
 templates:
   - pattern: "У меня́ есть {NOUN}."

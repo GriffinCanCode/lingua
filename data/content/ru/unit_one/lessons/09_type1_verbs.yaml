@@ -1,8 +1,8 @@
-# Unit 1, Lesson 6: I Know, I Understand
+# Unit 1, Lesson 9: I Know, I Understand
 # 5 modules - Type 1 (First Conjugation) Verbs
 
 lesson:
-  id: "07_type1_verbs"
+  id: "09_type1_verbs"
   title: "I Know, I Understand"
   subtitle: "Your first Russian verbs - Type 1 conjugation"
   icon: "brain"
@@ -227,7 +227,7 @@ modules:
 
 vocab_filter:
   primary: [znat, ponimat, delat, otlichno]
-  review_from: [01_cognates, 02_hello, 06_gender]
+  review_from: [03_cognates, 04_hello, 08_gender]
 
 templates:
   - pattern: "Я {VERB_1SG}."

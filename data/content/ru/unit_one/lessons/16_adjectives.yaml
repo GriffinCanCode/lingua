@@ -1,8 +1,8 @@
-# Unit 1, Lesson 13: Adjectives
+# Unit 1, Lesson 16: Adjectives
 # 5 modules - Describing things
 
 lesson:
-  id: "14_adjectives"
+  id: "16_adjectives"
   title: "Adjectives"
   subtitle: "Describe people, places, and things"
   icon: "palette"
@@ -175,7 +175,7 @@ modules:
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review_from: [06_gender, 08_possession, 12_possessives]
+  review_from: [08_gender, 10_possession, 14_possessives]
 
 templates:
   - pattern: "Э́то {ADJ} {NOUN}."

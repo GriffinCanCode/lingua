@@ -1,9 +1,9 @@
-# Unit 1, Lesson 0: Russian Stress
+# Unit 1, Lesson 2: Russian Stress
 # A critical mini-lesson on stress marks - comes before or alongside cognates
 # Understanding stress is ESSENTIAL for Russian pronunciation
 
 lesson:
-  id: "00_stress"
+  id: "02_stress"
   title: "Russian Stress"
   subtitle: "The key to sounding Russian, not robotic"
   icon: "sound"
@@ -156,14 +156,51 @@ modules:
           - "Stress can change meaning (за́мок ≠ замо́к)"
           - "We mark stress with ◌́ - use it to learn correctly"
           - "In verb conjugations, stress can move - check each form"
+    
+    exercises:
+      count: 10
+      types:
+        - { type: "audio_recognition", count: 4 }     # Hear word, identify stressed syllable
+        - { type: "multiple_choice", count: 3 }       # Pick correctly stressed word
+        - { type: "stress_tap", count: 3 }            # Tap the stressed syllable
 
-# No exercises for this foundational lesson - just teaching
+# Mini-drills for stress awareness
+exercises:
+  - id: "stress_hearing"
+    title: "Where's the Stress?"
+    instructions: "Listen and pick which syllable is stressed"
+    items:
+      - { word: "молоко́", syllables: ["мо", "ло", "ко́"], stressed: 3 }
+      - { word: "хорошо́", syllables: ["хо", "ро", "шо́"], stressed: 3 }
+      - { word: "понима́ть", syllables: ["по", "ни", "ма́ть"], stressed: 3 }
+      - { word: "спаси́бо", syllables: ["спа", "си́", "бо"], stressed: 2 }
+      - { word: "рабо́тать", syllables: ["ра", "бо́", "тать"], stressed: 2 }
+  
+  - id: "minimal_pairs"
+    title: "Same Spelling, Different Meaning"
+    instructions: "Pick the word that matches the meaning"
+    items:
+      - { meaning: "castle", correct: "за́мок", wrong: "замо́к" }
+      - { meaning: "lock", correct: "замо́к", wrong: "за́мок" }
+      - { meaning: "flour", correct: "мука́", wrong: "му́ка" }
+      - { meaning: "torment", correct: "му́ка", wrong: "мука́" }
+      - { meaning: "already", correct: "уже́", wrong: "у́же" }
+      - { meaning: "narrower", correct: "у́же", wrong: "уже́" }
+  
+  - id: "vowel_reduction"
+    title: "How Does It Sound?"
+    instructions: "Unstressed О sounds like А. Pick the pronunciation"
+    items:
+      - { word: "молоко́", correct: "ma-la-KO", wrong: ["mo-lo-KO", "MO-lo-ko"] }
+      - { word: "хорошо́", correct: "kha-ra-SHO", wrong: ["kho-ro-SHO", "KHO-ro-sho"] }
+      - { word: "Москва́", correct: "mask-VA", wrong: ["mosk-VA", "MOSK-va"] }
+      - { word: "вода́", correct: "va-DA", wrong: ["vo-DA", "VO-da"] }
+
 vocab_filter:
   primary: []
   review_from: []
 
-# Teaching-only lesson - awareness before vocabulary
 metadata:
-  prerequisite: null
-  unlocks: ["01_cognates"]
+  prerequisite: "01_alphabet"
+  unlocks: ["03_cognates"]
   skills: ["stress_awareness", "vowel_reduction", "pronunciation"]

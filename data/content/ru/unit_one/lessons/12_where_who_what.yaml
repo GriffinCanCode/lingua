@@ -1,8 +1,8 @@
-# Unit 1, Lesson 9: Where, Who, What, When
+# Unit 1, Lesson 12: Where, Who, What, When
 # 7 modules - Question words & time expressions
 
 lesson:
-  id: "10_where_who_what"
+  id: "12_where_who_what"
   title: "Where, Who, What, When"
   subtitle: "Ask questions and talk about time"
   icon: "search"
@@ -314,7 +314,7 @@ modules:
 
 vocab_filter:
   primary: [gde, kto, chto, kak, kogda, vot, doktor, drug, segodnya, zavtra, vchera]
-  review_from: [01_cognates, 05_questions, 09_type2_verbs]
+  review_from: [03_cognates, 07_questions, 11_type2_verbs]
 
 templates:
   - pattern: "Где {NOUN}?"

@@ -1,0 +1,344 @@
+# Unit 1, Lesson 1: The Russian Alphabet
+# Complete introduction to all 33 Cyrillic letters
+# Foundation lesson - must come before everything else
+
+lesson:
+  id: "01_alphabet"
+  title: "The Russian Alphabet"
+  subtitle: "Master all 33 Cyrillic letters"
+  icon: "alphabet"
+  duration: "15 min"
+  type: "foundational"
+
+modules:
+  - id: "mod_1"
+    title: "Letters You Already Know"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Good News First"
+        content: |
+          The Cyrillic alphabet has **33 letters** - but don't panic!
+          Many look AND sound exactly like English letters.
+          
+          Let's start with the easy wins.
+      
+      - type: "pattern_table"
+        title: "Identical Letters (Look & Sound the Same)"
+        columns: ["Letter", "Sound", "Example", "Like English"]
+        rows:
+          - ["А а", "ah", "а́втор (author)", "A in 'father'"]
+          - ["Е е", "ye", "е́вро (euro)", "YE in 'yes'"]
+          - ["К к", "k", "кот (cat)", "K in 'kite'"]
+          - ["М м", "m", "ма́ма (mom)", "M in 'mom'"]
+          - ["О о", "o", "о́пера (opera)", "O in 'or'"]
+          - ["Т т", "t", "текст (text)", "T in 'top'"]
+      
+      - type: "tip"
+        content: |
+          **6 letters down, 27 to go!**
+          These work exactly like English - no tricks.
+
+  - id: "mod_2"
+    title: "False Friends"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Letters That Look Familiar But Sound Different"
+        content: |
+          These are the **trickiest** letters - they LOOK like English but sound completely different!
+          Pay close attention to avoid confusion.
+      
+      - type: "pattern_table"
+        title: "False Friend Letters"
+        columns: ["Letter", "Sound", "NOT Like", "Example"]
+        rows:
+          - ["В в", "v", "NOT 'B'!", "вода́ (water) = va-DA"]
+          - ["Н н", "n", "NOT 'H'!", "нет (no) = nyet"]
+          - ["Р р", "r (rolled)", "NOT 'P'!", "рука́ (hand) = ru-KA"]
+          - ["С с", "s", "NOT 'C'!", "суп (soup) = soop"]
+          - ["У у", "oo", "NOT 'Y'!", "у́тро (morning) = OO-tra"]
+          - ["Х х", "kh (guttural)", "NOT 'X'!", "хлеб (bread) = khlyep"]
+      
+      - type: "warning"
+        content: |
+          **Common mistake**: Reading В as 'B' instead of 'V'
+          - WRONG: Вода = "boda"
+          - RIGHT: Вода = "voda"
+          
+          Your brain will try to read these as English. Fight it!
+      
+      - type: "tip"
+        content: |
+          **Memory trick for Р**: It looks like P but sounds like R.
+          Think: "P is Russian R" - both have that curve!
+
+  - id: "mod_3"
+    title: "New Shapes, Familiar Sounds"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Different Letters, Sounds You Know"
+        content: |
+          These letters look unfamiliar but make sounds you already use in English.
+      
+      - type: "pattern_table"
+        title: "New Shapes with English Sounds"
+        columns: ["Letter", "Sound", "Example", "Memory Tip"]
+        rows:
+          - ["Б б", "b", "банк (bank)", "Б has a 'belly' like B"]
+          - ["Г г", "g (hard)", "год (year)", "Looks like upside-down L, sounds like G"]
+          - ["Д д", "d", "да (yes)", "Д looks like a tent/house"]
+          - ["З з", "z", "зима́ (winter)", "З = Z (looks like a 3)"]
+          - ["И и", "ee", "и́мя (name)", "Backwards N = 'ee' sound"]
+          - ["Й й", "y (short)", "мой (my)", "И with a hat = quick Y"]
+          - ["Л л", "l", "лу́на (moon)", "Looks like a tent/Lambda"]
+          - ["П п", "p", "папа (papa)", "П = Pi symbol = P sound"]
+          - ["Ф ф", "f", "факт (fact)", "Ф looks like Ф = 'f'ilter"]
+      
+      - type: "tip"
+        content: |
+          **Й vs И**: Both sound like 'ee' but Й is shorter, like the Y in "boy"
+          - И = "ee" (машина = ma-SHEE-na)
+          - Й = short "y" (мой = moy)
+
+  - id: "mod_4"
+    title: "Uniquely Russian Sounds"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Sounds That Don't Exist in English"
+        content: |
+          These letters make sounds that don't have exact English equivalents.
+          Don't worry - you'll pick them up with practice!
+      
+      - type: "pattern_table"
+        title: "Unique Russian Consonants"
+        columns: ["Letter", "Sound", "Example", "Pronunciation Guide"]
+        rows:
+          - ["Ж ж", "zh", "жизнь (life)", "Like 'S' in 'pleasure'"]
+          - ["Ц ц", "ts", "центр (center)", "Like 'ts' in 'cats'"]
+          - ["Ч ч", "ch", "чай (tea)", "Like 'CH' in 'cheese'"]
+          - ["Ш ш", "sh (hard)", "школа (school)", "Like 'SH' in 'ship'"]
+          - ["Щ щ", "shch (soft)", "ещё (still/more)", "Like 'sh' + 'ch' combined"]
+      
+      - type: "pattern_table"
+        title: "Unique Russian Vowels"
+        columns: ["Letter", "Sound", "Example", "Pronunciation Guide"]
+        rows:
+          - ["Ы ы", "i (hard)", "ты (you)", "Like 'i' in 'bit' but throatier"]
+          - ["Э э", "e (pure)", "э́то (this)", "Like 'E' in 'met'"]
+          - ["Ю ю", "yu", "юг (south)", "Like 'YOU'"]
+          - ["Я я", "ya", "я (I)", "Like 'YA' in 'yard'"]
+      
+      - type: "tip"
+        content: |
+          **Ы is the hardest Russian sound for English speakers.**
+          Try saying "ee" but pull your tongue back and down.
+          Don't stress - Russians will understand you even if it's not perfect!
+
+  - id: "mod_5"
+    title: "Special Letters"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Signs & Ё"
+        content: |
+          Two letters don't make sounds on their own - they modify other letters.
+          Plus one special vowel that's always stressed!
+      
+      - type: "pattern_table"
+        title: "The Hard & Soft Signs"
+        columns: ["Letter", "Function", "Example", "Effect"]
+        rows:
+          - ["Ъ ъ", "Hard sign", "объе́кт (object)", "Brief pause, keeps consonant hard"]
+          - ["Ь ь", "Soft sign", "мать (mother)", "Softens the preceding consonant"]
+      
+      - type: "explanation"
+        title: "The Special Ё"
+        content: |
+          **Ё ё** = "yo" (like "yolk")
+          
+          Ё is ALWAYS stressed - no accent mark needed!
+          - ещё = ye-SHCHO (still/more)
+          - её = ye-YO (her)
+          - живёт = zhi-VYOT (lives)
+          
+          **Problem**: Russians often write Е instead of Ё in casual text.
+          We always write Ё to help you learn correct pronunciation.
+      
+      - type: "warning"
+        content: |
+          **The soft sign Ь doesn't make a sound!**
+          It tells you to "soften" the consonant before it.
+          - мат = "mat" (checkmate, also a swear word!)
+          - мать = "mat'" (mother) - the Т is softened
+
+  - id: "mod_6"
+    title: "The Complete Alphabet"
+    type: "reference"
+    
+    teaching:
+      - type: "explanation"
+        title: "All 33 Letters in Order"
+        content: |
+          Here's the complete Russian alphabet in standard order.
+          This is the order used in dictionaries!
+      
+      - type: "pattern_table"
+        title: "Complete Cyrillic Alphabet"
+        columns: ["#", "Upper", "Lower", "Name", "Sound"]
+        rows:
+          - ["1", "А", "а", "а", "ah"]
+          - ["2", "Б", "б", "бэ", "b"]
+          - ["3", "В", "в", "вэ", "v"]
+          - ["4", "Г", "г", "гэ", "g"]
+          - ["5", "Д", "д", "дэ", "d"]
+          - ["6", "Е", "е", "е", "ye"]
+          - ["7", "Ё", "ё", "ё", "yo"]
+          - ["8", "Ж", "ж", "жэ", "zh"]
+          - ["9", "З", "з", "зэ", "z"]
+          - ["10", "И", "и", "и", "ee"]
+          - ["11", "Й", "й", "и краткое", "y (short)"]
+          - ["12", "К", "к", "ка", "k"]
+          - ["13", "Л", "л", "эль", "l"]
+          - ["14", "М", "м", "эм", "m"]
+          - ["15", "Н", "н", "эн", "n"]
+          - ["16", "О", "о", "о", "o"]
+          - ["17", "П", "п", "пэ", "p"]
+          - ["18", "Р", "р", "эр", "r"]
+          - ["19", "С", "с", "эс", "s"]
+          - ["20", "Т", "т", "тэ", "t"]
+          - ["21", "У", "у", "у", "oo"]
+          - ["22", "Ф", "ф", "эф", "f"]
+          - ["23", "Х", "х", "ха", "kh"]
+          - ["24", "Ц", "ц", "цэ", "ts"]
+          - ["25", "Ч", "ч", "че", "ch"]
+          - ["26", "Ш", "ш", "ша", "sh"]
+          - ["27", "Щ", "щ", "ща", "shch"]
+          - ["28", "Ъ", "ъ", "твёрдый знак", "(hard sign)"]
+          - ["29", "Ы", "ы", "ы", "i (hard)"]
+          - ["30", "Ь", "ь", "мягкий знак", "(soft sign)"]
+          - ["31", "Э", "э", "э", "e"]
+          - ["32", "Ю", "ю", "ю", "yu"]
+          - ["33", "Я", "я", "я", "ya"]
+
+  - id: "mod_7"
+    title: "Handwriting Tips"
+    type: "practice"
+    
+    teaching:
+      - type: "explanation"
+        title: "Russian Cursive Differs from Print"
+        content: |
+          Russian handwriting (cursive) looks VERY different from printed letters!
+          Here are the most confusing ones:
+      
+      - type: "pattern_table"
+        title: "Print vs Cursive Differences"
+        columns: ["Print", "Cursive looks like", "Watch out!"]
+        rows:
+          - ["Т т", "m (lowercase)", "Cursive т = English m!"]
+          - ["Д д", "g (lowercase)", "Cursive д = English g!"]
+          - ["И и", "u (lowercase)", "Cursive и = English u!"]
+          - ["П п", "n (lowercase)", "Cursive п = English n!"]
+          - ["Л л", "looks like А", "Has a hook at the start"]
+          - ["Г г", "looks like ⌐", "Just an angle/hook"]
+      
+      - type: "tip"
+        content: |
+          **Don't panic about cursive yet!**
+          Most Russian text you'll encounter is printed/typed.
+          Learn to READ cursive eventually, but focus on print first.
+          
+          When writing by hand, print is perfectly acceptable!
+
+  - id: "mod_8"
+    title: "Quick Reference"
+    type: "master"
+    
+    teaching:
+      - type: "summary"
+        title: "Letter Groups to Remember"
+        points:
+          - "**Identical (6)**: А Е К М О Т - same as English"
+          - "**False friends (6)**: В=v, Н=n, Р=r, С=s, У=oo, Х=kh"
+          - "**New shapes (9)**: Б Г Д З И Й Л П Ф - familiar sounds"
+          - "**Unique sounds (9)**: Ж Ц Ч Ш Щ Ы Э Ю Я"
+          - "**Special (3)**: Ё (always stressed), Ъ (hard sign), Ь (soft sign)"
+      
+      - type: "tip"
+        content: |
+          **Learning strategy:**
+          1. Master the 6 identical letters first (you already know them!)
+          2. Drill the 6 false friends until automatic
+          3. Learn new shapes - sounds are familiar
+          4. Practice unique sounds with audio
+          5. Signs come naturally with vocabulary
+          
+          **Next lesson**: We'll use stress marks (◌́) to show pronunciation!
+    
+    exercises:
+      count: 15
+      types:
+        - { type: "matching", count: 4 }              # Match letter to sound
+        - { type: "multiple_choice", count: 4 }       # "What sound does В make?"
+        - { type: "audio_recognition", count: 4 }     # Hear letter, pick correct one
+        - { type: "letter_tap", count: 3 }            # Tap all Б's in a word
+
+# Practice drills for letter recognition
+exercises:
+  - id: "false_friend_drill"
+    title: "False Friend Quiz"
+    instructions: "What sound does this letter make?"
+    items:
+      - { prompt: "В", correct: "v", wrong: ["b", "w", "f"] }
+      - { prompt: "Н", correct: "n", wrong: ["h", "m", "и"] }
+      - { prompt: "Р", correct: "r", wrong: ["p", "b", "д"] }
+      - { prompt: "С", correct: "s", wrong: ["c", "k", "з"] }
+      - { prompt: "У", correct: "oo", wrong: ["y", "u", "ю"] }
+      - { prompt: "Х", correct: "kh", wrong: ["x", "h", "к"] }
+  
+  - id: "letter_sound_match"
+    title: "Match Letter to Sound"
+    type: "matching"
+    pairs:
+      - { left: "Б", right: "b" }
+      - { left: "В", right: "v" }
+      - { left: "Г", right: "g" }
+      - { left: "Д", right: "d" }
+      - { left: "Ж", right: "zh" }
+      - { left: "З", right: "z" }
+      - { left: "Й", right: "y (short)" }
+      - { left: "Л", right: "l" }
+      - { left: "П", right: "p" }
+      - { left: "Ф", right: "f" }
+      - { left: "Ц", right: "ts" }
+      - { left: "Ч", right: "ch" }
+      - { left: "Ш", right: "sh" }
+      - { left: "Щ", right: "shch" }
+  
+  - id: "word_decode"
+    title: "Decode These Words"
+    instructions: "Read the Russian word and pick the transliteration"
+    items:
+      - { ru: "КОТ", correct: "kot", wrong: ["cot", "kov", "kop"] }
+      - { ru: "ДОМ", correct: "dom", wrong: ["gom", "hom", "dop"] }
+      - { ru: "НЕТ", correct: "nyet", wrong: ["het", "net", "пет"] }
+      - { ru: "ДА", correct: "da", wrong: ["ga", "ha", "ba"] }
+      - { ru: "ВОДА", correct: "voda", wrong: ["boda", "woda", "foda"] }
+      - { ru: "РЕКА", correct: "reka", wrong: ["peka", "beka", "дека"] }
+
+vocab_filter:
+  primary: []
+  review_from: []
+
+metadata:
+  prerequisite: null
+  unlocks: ["02_stress"]
+  skills: ["cyrillic_reading", "letter_recognition", "alphabet_order"]

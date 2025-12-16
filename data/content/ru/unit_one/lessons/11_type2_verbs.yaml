@@ -1,8 +1,8 @@
-# Unit 1, Lesson 8: I Speak Russian
+# Unit 1, Lesson 11: I Speak Russian
 # 5 modules - Type 2 (Second Conjugation) Verbs
 
 lesson:
-  id: "09_type2_verbs"
+  id: "11_type2_verbs"
   title: "I Speak Russian"
   subtitle: "Type 2 conjugation and language skills"
   icon: "message-circle"
@@ -205,7 +205,7 @@ modules:
 
 vocab_filter:
   primary: [govorit, videt, po_russki, po_angliyski, ladno]
-  review_from: [07_type1_verbs]
+  review_from: [09_type1_verbs]
 
 templates:
   - pattern: "Я говорю́ {LANGUAGE}."

@@ -1,8 +1,8 @@
-# Unit 1, Lesson 3: False Friends
+# Unit 1, Lesson 5: False Friends
 # 5 modules - Letters that look familiar but sound different
 
 lesson:
-  id: "03_false_friends"
+  id: "05_false_friends"
   title: "False Friends"
   subtitle: "Letters Р, С, Н, В - they're not what they seem!"
   icon: "alert-triangle"
@@ -165,7 +165,7 @@ modules:
 
 vocab_filter:
   primary: [restoran, voda, sestra, brat, internet, telefon]
-  review_from: [01_cognates, 02_hello]
+  review_from: [03_cognates, 04_hello]
 
 templates:
   - pattern: "Где {PLACE}?"

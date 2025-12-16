@@ -1,8 +1,8 @@
-# Unit 1, Lesson 17: Review & Checkpoint
+# Unit 1, Lesson 18: Review & Checkpoint
 # 5 modules - Comprehensive review of Unit 1
 
 lesson:
-  id: "17_review"
+  id: "18_review"
   title: "Review & Checkpoint"
   subtitle: "Master everything from Unit 1"
   icon: "trophy"
@@ -196,7 +196,7 @@ modules:
 
 vocab_filter:
   primary: []
-  review_from: [03_cognates, 04_hello, 05_false_friends, 06_pronunciation, 07_questions, 08_gender, 09_type1_verbs, 10_possession, 11_type2_verbs, 12_where_who_what, 13_irregular_verbs, 14_possessives, 15_numbers, 16_adjectives]
+  review_from: [03_cognates, 04_hello, 05_false_friends, 06_pronunciation, 07_questions, 08_gender, 09_type1_verbs, 10_possession, 11_type2_verbs, 12_question_words, 13_time_words, 14_irregular_verbs, 15_possessives, 16_numbers, 17_adjectives]
 
 templates:
   - pattern: "Э́то {NOUN}."

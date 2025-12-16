@@ -1,8 +1,8 @@
-# Unit 1, Lesson 13: I Want, I Live, I Eat
+# Unit 1, Lesson 14: I Want, I Live, I Eat
 # 6 modules - Irregular and mixed verbs
 
 lesson:
-  id: "13_irregular_verbs"
+  id: "14_irregular_verbs"
   title: "I Want, I Live, I Eat"
   subtitle: "Essential irregular verbs for daily life"
   icon: "star"
@@ -271,7 +271,7 @@ modules:
 
 vocab_filter:
   primary: [khotet, zhit, rabotat, yest_eat, pit]
-  review_from: [09_type1_verbs, 11_type2_verbs]
+  review_from: [09_type1_verbs, 11_type2_verbs, 12_question_words, 13_time_words]
 
 templates:
   - pattern: "Я хочу́ {NOUN}."

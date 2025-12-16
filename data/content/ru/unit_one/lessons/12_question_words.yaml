@@ -1,0 +1,293 @@
+# Unit 1, Lesson 12: Question Words
+# 6 modules - Где, Кто, Что, Как
+
+lesson:
+  id: "12_question_words"
+  title: "Где, Кто, Что, Как"
+  subtitle: "Essential question words"
+  icon: "search"
+
+modules:
+  - id: "mod_1"
+    title: "Где - Where"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Finding Things"
+        content: |
+          Где (gde) = Where
+          
+          This is one of the most useful words for travelers!
+          Just point and ask: Где метро́? Где туале́т? Где банк?
+      
+      - type: "word_intro"
+        words:
+          - word: "где"
+            translation: "where"
+            note: "Г sounds like 'g' in 'go'"
+      
+      - type: "morphology_pattern"
+        title: "Where Questions"
+        formula: "Где + {NOUN}?"
+        examples:
+          - { ru: "Где метро́?", en: "Where is the metro?" }
+          - { ru: "Где ты?", en: "Where are you?" }
+          - { ru: "Где кот?", en: "Where is the cat?" }
+        rule: "Super simple - just Где + what you're looking for!"
+    
+    vocab_pool:
+      introduce: [gde]
+      practice: []
+      review: [metro, kot]
+    exercises:
+      count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_2"
+    title: "Кто & Что"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Who vs What"
+        content: |
+          Кто (kto) = Who (for people)
+          Что (shto) = What (for things)
+      
+      - type: "warning"
+        title: "⚠️ Pronunciation Alert: ЧТО → ШТО"
+        content: |
+          **Что is spelled ЧТО but pronounced 'ШТО'!**
+          
+          This is one of Russian's most important pronunciation rules.
+          It applies to ALL words with ЧТО:
+          - что → што (what)
+          - чтобы → штобы (in order to)  
+          - ничто́ → ништо́ (nothing)
+          - что-то → што-та (something)
+          
+          Exception: почта́ (mail) keeps normal Ч.
+      
+      - type: "word_intro"
+        words:
+          - word: "кто"
+            translation: "who"
+            note: "Say both consonants: k-to"
+          - word: "что"
+            translation: "what"
+            note: "⚠️ Pronounced 'ШТО' not 'ЧТО'! Remember lesson 4!"
+      
+      - type: "etymology"
+        title: "Ancient Question Words"
+        word: "кто/что"
+        connections:
+          - { word: "who/what", lang: "English", relation: "cousin" }
+          - { word: "quis/quod", lang: "Latin", relation: "cousin" }
+          - { word: "wer/was", lang: "German", relation: "cousin" }
+        insight: "These question words come from Proto-Indo-European - 5000+ years old!"
+    
+    vocab_pool:
+      introduce: [kto, chto]
+      practice: [gde]
+      review: [metro, kot]
+    exercises:
+      count: 7
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "multiple_choice", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 1 }
+
+  - id: "mod_3"
+    title: "Как - How"
+    type: "pattern"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "как"
+            translation: "how"
+            note: "One of the most useful question words!"
+      
+      - type: "morphology_pattern"
+        title: "How Questions"
+        formula: "Как + {verb/phrase}?"
+        examples:
+          - { ru: "Как дела́?", en: "How are things? / How are you?" }
+          - { ru: "Как тебя́ зову́т?", en: "What's your name? (lit: How do they call you?)" }
+          - { ru: "Как э́то по-ру́сски?", en: "How is this in Russian?" }
+        rule: "Как is incredibly versatile - used for 'how', 'what' (in set phrases), and comparisons!"
+      
+      - type: "tip"
+        content: |
+          **Essential phrase**: Как дела́? (How are things?)
+          
+          Responses:
+          - Хорошо́! (Good!)
+          - Норма́льно. (Fine/Normal.)
+          - Так себе́. (So-so.)
+    
+    vocab_pool:
+      introduce: [kak]
+      practice: [gde, kto, chto]
+      review: [khorosho, da]
+    exercises:
+      count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_4"
+    title: "Animate vs Inanimate"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "People vs Things"
+        content: |
+          Russian strictly separates living beings (animate) from things (inanimate).
+          
+          Кто э́то? → For people and animals
+          Что э́то? → For objects and ideas
+      
+      - type: "pattern_table"
+        title: "Which to Use"
+        columns: ["Use Кто for", "Use Что for"]
+        rows:
+          - ["people (ма́ма, брат)", "objects (кни́га, дом)"]
+          - ["animals (кот, соба́ка)", "abstract things (э́то)"]
+          - ["Кто там? (Who's there?)", "Что там? (What's there?)"]
+      
+      - type: "morphology_pattern"
+        title: "Кто/Что Patterns"
+        formula: "{Кто/Что} + э́то?"
+        examples:
+          - { ru: "Кто э́то?", en: "Who is this?" }
+          - { ru: "Что э́то?", en: "What is this?" }
+          - { ru: "Кто там?", en: "Who's there?" }
+        rule: "Animals count as 'who' in Russian - they're considered animate!"
+      
+      - type: "tip"
+        title: "⚠️ друг = ДРУК"
+        content: |
+          Remember from lesson 4: final Г sounds like К!
+          
+          друг → pronounced "друк" (friend)
+    
+    vocab_pool:
+      introduce: [doktor, drug]
+      practice: [gde, kto, chto, kak, eto]
+      review: [mama, kot, sobaka]
+    exercises:
+      count: 6
+      types:
+        - { type: "multiple_choice", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_5"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice asking questions! Что э́то? Кто э́то? Где...? Как дела́?"
+    vocab_pool:
+      introduce: []
+      practice: [gde, kto, chto, kak, vot, doktor, drug]
+      review: [eto, mama, kot, restoran, student, govorit]
+    exercises:
+      count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }
+        - { type: "translation_en_ru", count: 3 }
+        - { type: "fill_in_blank", count: 2 }
+        - { type: "audio_recognition", count: 2 }
+
+  - id: "mod_6"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Где = where (Где метро́?)"
+          - "Кто = who (for people AND animals)"
+          - "Что = what (pronounced 'ШТО'!)"
+          - "Как = how (Как дела́?)"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [gde, kto, chto, kak, vot, doktor, student, drug, restoran]
+    exercises:
+      count: 10
+      difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }
+        - { type: "translation_ru_en", count: 3 }
+        - { type: "audio_recognition", count: 3 }
+
+vocab_filter:
+  primary: [gde, kto, chto, kak, vot, doktor, drug]
+  review_from: [03_cognates, 07_questions, 11_type2_verbs]
+
+templates:
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.the}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+  
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.translation}?"
+    slots:
+      NOUN: { ids: [mama, papa] }
+    weight: 4
+
+  - pattern: "Кто э́то?"
+    translation: "Who is this?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Что э́то?"
+    translation: "What is this?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Как дела́?"
+    translation: "How are things?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Как э́то по-ру́сски?"
+    translation: "How is this in Russian?"
+    slots: {}
+    weight: 2
+
+dialogues:
+  - id: "who_is_this"
+    context: "Asking about people"
+    lines:
+      - { speaker: "A", ru: "Кто э́то?", en: "Who is this?" }
+      - { speaker: "B", ru: "Э́то мой друг.", en: "This is my friend." }
+      - { speaker: "A", ru: "Приве́т!", en: "Hi!" }
+
+  - id: "what_is_this"
+    context: "Asking about objects"
+    lines:
+      - { speaker: "A", ru: "Что э́то?", en: "What is this?" }
+      - { speaker: "B", ru: "Э́то кни́га.", en: "This is a book." }
+      - { speaker: "A", ru: "А что там?", en: "And what is there?" }
+      - { speaker: "B", ru: "Там телефо́н.", en: "There is a phone." }
+
+  - id: "how_are_you"
+    context: "Greetings"
+    lines:
+      - { speaker: "A", ru: "Приве́т! Как дела́?", en: "Hi! How are you?" }
+      - { speaker: "B", ru: "Хорошо́, спаси́бо!", en: "Good, thanks!" }
+      - { speaker: "A", ru: "Как тебя́ зову́т?", en: "What's your name?" }
+      - { speaker: "B", ru: "Меня́ зову́т Ма́ша.", en: "My name is Masha." }

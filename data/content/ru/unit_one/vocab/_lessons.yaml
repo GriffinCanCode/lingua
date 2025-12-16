@@ -153,20 +153,17 @@ lessons:
       - on
       - ona
 
-  lesson_10_where_who_what:
-    title: "Where, Who, What, When"
-    focus: "Question words & time expressions (что→ШТО, сего́дня→сево́дня)"
+  lesson_12_question_words:
+    title: "Где, Кто, Что, Как"
+    focus: "Essential question words (что→ШТО)"
     primary_vocab:
       - gde
       - kto
       - chto
-      - kogda
+      - kak
       - vot
       - doktor
       - drug
-      - segodnya
-      - zavtra
-      - vchera
     review_vocab:
       - tam
       - tut
@@ -174,9 +171,25 @@ lessons:
       - on
       - ona
       - govorit
-      - seychas
 
-  lesson_11_irregular_verbs:
+  lesson_13_time_words:
+    title: "Когда́ + Time Words"
+    focus: "When + time expressions (сего́дня→сево́дня)"
+    primary_vocab:
+      - kogda
+      - segodnya
+      - zavtra
+      - vchera
+    review_vocab:
+      - seychas
+      - gde
+      - kto
+      - chto
+      - kak
+      - rabotat
+      - delat
+
+  lesson_14_irregular_verbs:
     title: "I Want, I Live, I Work"
     focus: "Irregular verbs, eating & drinking (жить has ЖИ→ЖЫ)"
     primary_vocab:
@@ -199,7 +212,7 @@ lessons:
       - segodnya
       - zavtra
 
-  lesson_12_possessives:
+  lesson_15_possessives:
     title: "My, Your, Our"
     focus: "Possessive pronouns with gender agreement"
     primary_vocab:
@@ -213,7 +226,7 @@ lessons:
       - mashina
       - telefon
 
-  lesson_13_numbers:
+  lesson_16_numbers:
     title: "Numbers 1-10"
     focus: "Counting in Russian"
     primary_vocab:
@@ -234,7 +247,7 @@ lessons:
       - okno
       - dom
 
-  lesson_14_adjectives:
+  lesson_17_adjectives:
     title: "Adjectives"
     focus: "Describing things with gender agreement"
     primary_vocab:
@@ -251,7 +264,7 @@ lessons:
       - kot
       - mashina
 
-  lesson_15_review:
+  lesson_18_review:
     title: "Review & Checkpoint"
     focus: "Comprehensive Unit 1 review"
     review_vocab:

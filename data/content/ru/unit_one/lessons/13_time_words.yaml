@@ -1,0 +1,233 @@
+# Unit 1, Lesson 13: When & Time Words
+# 5 modules - Когда́ + сейча́с, сего́дня, за́втра, вчера́
+
+lesson:
+  id: "13_time_words"
+  title: "Когда́ + Time Words"
+  subtitle: "Ask about time and talk about when"
+  icon: "clock"
+
+modules:
+  - id: "mod_1"
+    title: "Когда́ - When"
+    type: "intro"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "когда́"
+            translation: "when"
+            note: "Stress on last syllable"
+      
+      - type: "morphology_pattern"
+        title: "When Questions"
+        formula: "Когда́ + subject + verb?"
+        examples:
+          - { ru: "Когда́ ты рабо́таешь?", en: "When do you work?" }
+          - { ru: "Когда́ ты до́ма?", en: "When are you home?" }
+          - { ru: "Когда́?", en: "When?" }
+        rule: "Когда́ works like где, кто, что - just put it at the start!"
+    
+    vocab_pool:
+      introduce: [kogda]
+      practice: [gde, kto, chto, kak]
+      review: [rabotat, delat]
+    exercises:
+      count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_2"
+    title: "Time Words"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "сейча́с"
+            translation: "now"
+            note: "Also means 'right away' or 'just a moment'"
+          - word: "сего́дня"
+            translation: "today"
+            note: "⚠️ Pronounced 'сево́дня'! The Г sounds like В."
+          - word: "за́втра"
+            translation: "tomorrow"
+            note: "Stress on first syllable. До за́втра! = See you tomorrow!"
+          - word: "вчера́"
+            translation: "yesterday"
+            note: "Stress on last syllable. Full sentences need past tense (later!)"
+      
+      - type: "warning"
+        title: "⚠️ Pronunciation: СЕГО́ДНЯ → СЕВО́ДНЯ"
+        content: |
+          Remember from lesson 4: -ЕГО/-ОГО endings have Г→В!
+          
+          сего́дня → sounds like "сево́дня"
+          
+          This comes from "сего дня" (of this day) - the Г is a genitive ending.
+          Same rule as его́ (him) → pronounced "ево́"
+      
+      - type: "pattern_table"
+        title: "Answering 'When'"
+        columns: ["Question", "Answer"]
+        rows:
+          - ["Когда́?", "Сейча́с! (Now!)"]
+          - ["Когда́?", "Сего́дня. (Today.)"]
+          - ["Когда́?", "За́втра. (Tomorrow.)"]
+          - ["Когда́?", "Вчера́. (Yesterday.)"]
+    
+    vocab_pool:
+      introduce: [segodnya, zavtra, vchera]
+      practice: [kogda, seychas]
+      review: [rabotat, delat, dom]
+    exercises:
+      count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_3"
+    title: "Useful Phrases"
+    type: "pattern"
+    
+    teaching:
+      - type: "tip"
+        content: |
+          **Useful phrases**:
+          - Не сейча́с. = Not now.
+          - Сего́дня и́ли за́втра? = Today or tomorrow?
+          - До за́втра! = See you tomorrow! (lit: Until tomorrow!)
+      
+      - type: "morphology_pattern"
+        title: "Time in Sentences"
+        formula: "{TIME} + я + verb"
+        examples:
+          - { ru: "Сего́дня я рабо́таю.", en: "Today I work." }
+          - { ru: "За́втра я до́ма.", en: "Tomorrow I'm at home." }
+          - { ru: "Сейча́с я де́лаю.", en: "Now I'm doing (it)." }
+        rule: "Time words usually go at the start or end of the sentence."
+    
+    vocab_pool:
+      introduce: []
+      practice: [kogda, seychas, segodnya, zavtra, vchera]
+      review: [rabotat, delat, dom, nye]
+    exercises:
+      count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice asking Когда́? and answering with time words: сейча́с, сего́дня, за́втра!"
+    vocab_pool:
+      introduce: []
+      practice: [kogda, seychas, segodnya, zavtra, vchera]
+      review: [gde, kto, chto, kak, rabotat, delat, dom]
+    exercises:
+      count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }
+        - { type: "translation_en_ru", count: 3 }
+        - { type: "fill_in_blank", count: 2 }
+        - { type: "audio_recognition", count: 2 }
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Когда́ = when (Когда́ ты рабо́таешь?)"
+          - "сейча́с = now"
+          - "сего́дня = today (pronounced 'сево́дня'!)"
+          - "за́втра = tomorrow (До за́втра!)"
+          - "вчера́ = yesterday"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kogda, seychas, segodnya, zavtra, vchera, rabotat, delat, dom]
+    exercises:
+      count: 10
+      difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }
+        - { type: "translation_ru_en", count: 3 }
+        - { type: "audio_recognition", count: 3 }
+
+vocab_filter:
+  primary: [kogda, segodnya, zavtra, vchera]
+  review_from: [07_questions, 11_type2_verbs, 12_question_words]
+
+templates:
+  - pattern: "Когда́?"
+    translation: "When?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Когда́ ты рабо́таешь?"
+    translation: "When do you work?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Что ты де́лаешь {TIME}?"
+    translation: "What are you doing {TIME.translation}?"
+    slots:
+      TIME: { ids: [seychas, segodnya, zavtra] }
+    weight: 4
+
+  - pattern: "{TIME} я рабо́таю."
+    translation: "{TIME.translation} I work."
+    slots:
+      TIME: { ids: [seychas, segodnya, zavtra] }
+    weight: 3
+
+  - pattern: "До за́втра!"
+    translation: "See you tomorrow!"
+    slots: {}
+    weight: 3
+
+  - pattern: "Не сейча́с."
+    translation: "Not now."
+    slots: {}
+    weight: 2
+
+  - pattern: "{TIME} и́ли {TIME2}?"
+    translation: "{TIME.translation} or {TIME2.translation}?"
+    slots:
+      TIME: { ids: [segodnya] }
+      TIME2: { ids: [zavtra] }
+    weight: 3
+
+dialogues:
+  - id: "making_plans"
+    context: "Talking about plans"
+    lines:
+      - { speaker: "A", ru: "Что ты де́лаешь сего́дня?", en: "What are you doing today?" }
+      - { speaker: "B", ru: "Сего́дня я рабо́таю.", en: "Today I work." }
+      - { speaker: "A", ru: "А за́втра?", en: "And tomorrow?" }
+      - { speaker: "B", ru: "За́втра я до́ма.", en: "Tomorrow I'm at home." }
+
+  - id: "when_question"
+    context: "Asking about time"
+    lines:
+      - { speaker: "A", ru: "Когда́ ты рабо́таешь?", en: "When do you work?" }
+      - { speaker: "B", ru: "Сего́дня и за́втра.", en: "Today and tomorrow." }
+      - { speaker: "A", ru: "А сейча́с?", en: "And now?" }
+      - { speaker: "B", ru: "Нет, не сейча́с.", en: "No, not now." }
+
+  - id: "see_you_tomorrow"
+    context: "Saying goodbye"
+    lines:
+      - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
+      - { speaker: "B", ru: "Ла́дно. До за́втра!", en: "Alright. See you tomorrow!" }
+      - { speaker: "A", ru: "До за́втра!", en: "See you tomorrow!" }

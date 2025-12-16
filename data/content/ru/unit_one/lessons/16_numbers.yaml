@@ -1,8 +1,8 @@
-# Unit 1, Lesson 15: Numbers 1-10
+# Unit 1, Lesson 16: Numbers 1-10
 # 5 modules - Counting in Russian
 
 lesson:
-  id: "15_numbers"
+  id: "16_numbers"
   title: "Numbers 1-10"
   subtitle: "Count in Russian and talk about quantities"
   icon: "hash"
@@ -167,7 +167,7 @@ modules:
 
 vocab_filter:
   primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, molodets]
-  review_from: [08_gender, 14_possessives]
+  review_from: [08_gender, 15_possessives]
 
 templates:
   - pattern: "{NUMBER} {NOUN}"

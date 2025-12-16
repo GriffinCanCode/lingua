@@ -110,3 +110,33 @@ interjections:
       - { ru: "Извини́те, где метро́?", en: "Excuse me, where is the metro?" }
       - { ru: "Извини́те!", en: "I'm sorry!" }
       - { ru: "Извини́те, я не понима́ю.", en: "Sorry, I don't understand." }
+
+  - id: "molodets"
+    word: "молодец"
+    stressed: "молоде́ц"
+    transliteration: "molodets"
+    translation: "well done / good job"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "molodets.mp3"
+    notes: "Praise for someone who did well. Stress on last syllable."
+    examples:
+      - { ru: "Молоде́ц!", en: "Well done!" }
+      - { ru: "Ты молоде́ц!", en: "Good job!" }
+      - { ru: "Молоде́ц, всё пра́вильно!", en: "Well done, everything's correct!" }
+
+  - id: "konechno"
+    word: "конечно"
+    stressed: "коне́чно"
+    transliteration: "konechno"
+    translation: "of course"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "konechno.mp3"
+    notes: "⚠️ The Ч is pronounced as Ш! Say 'kanYEshna'. Stress on second syllable."
+    examples:
+      - { ru: "Да, коне́чно!", en: "Yes, of course!" }
+      - { ru: "Коне́чно!", en: "Of course!" }
+      - { ru: "Коне́чно, пожа́луйста.", en: "Of course, please." }

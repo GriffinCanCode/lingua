@@ -147,7 +147,7 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [u_menya, yest, mashina, sobaka]
+  primary: [u_menya, yest, mashina, sobaka, zdorovo]
   review_from: [03_false_friends, 06_gender, 07_type1_verbs]
 
 templates:
@@ -169,7 +169,7 @@ dialogues:
     lines:
       - { speaker: "A", ru: "У тебя́ есть маши́на?", en: "Do you have a car?" }
       - { speaker: "B", ru: "Да, у меня́ есть маши́на.", en: "Yes, I have a car." }
-      - { speaker: "A", ru: "Хорошо́!", en: "Great!" }
+      - { speaker: "A", ru: "Здо́рово!", en: "Cool!" }
 
   - id: "pets"
     context: "Talking about pets"

@@ -63,3 +63,47 @@ particles:
     examples:
       - { ru: "Вот такси́.", en: "Here's the taxi." }
       - { ru: "Вот и всё.", en: "That's all." }
+
+  - id: "ponyatno"
+    word: "понятно"
+    stressed: "поня́тно"
+    transliteration: "ponyatno"
+    translation: "understood / I see"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "ponyatno.mp3"
+    notes: "Very common acknowledgment. From понима́ть (to understand). Stress on second syllable."
+    examples:
+      - { ru: "Поня́тно!", en: "I see! / Got it!" }
+      - { ru: "А, поня́тно.", en: "Ah, I understand." }
+      - { ru: "Всё поня́тно?", en: "Is everything clear?" }
+
+  - id: "ladno"
+    word: "ладно"
+    stressed: "ла́дно"
+    transliteration: "ladno"
+    translation: "alright / OK"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "ladno.mp3"
+    notes: "Casual agreement. Can also mean 'fine' (reluctantly). Stress on first syllable."
+    examples:
+      - { ru: "Ла́дно!", en: "Alright!" }
+      - { ru: "Ну ла́дно.", en: "Well, alright." }
+      - { ru: "Ла́дно, пока́!", en: "Alright, bye!" }
+
+  - id: "yasno"
+    word: "ясно"
+    stressed: "я́сно"
+    transliteration: "yasno"
+    translation: "clear / I see"
+    pos: "particle"
+    frequency: 2
+    difficulty: 1
+    audio: "yasno.mp3"
+    notes: "Acknowledgment meaning 'clear' or 'understood'. Stress on first syllable."
+    examples:
+      - { ru: "Я́сно.", en: "I see. / Clear." }
+      - { ru: "Всё я́сно.", en: "Everything's clear." }

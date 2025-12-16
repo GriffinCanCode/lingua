@@ -180,7 +180,7 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [govorit, videt, po_russki, po_angliyski]
+  primary: [govorit, videt, po_russki, po_angliyski, ladno]
   review_from: [07_type1_verbs]
 
 templates:
@@ -238,7 +238,7 @@ dialogues:
     lines:
       - { speaker: "A", ru: "Ты говори́шь по-англи́йски?", en: "Do you speak English?" }
       - { speaker: "B", ru: "Нет, я не говорю́ по-англи́йски.", en: "No, I don't speak English." }
-      - { speaker: "A", ru: "Хорошо́, по-ру́сски.", en: "Okay, in Russian." }
+      - { speaker: "A", ru: "Ла́дно, по-ру́сски.", en: "Alright, in Russian." }
 
   - id: "do_you_see"
     context: "Pointing things out"

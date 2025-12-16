@@ -142,7 +142,7 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
+  primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, molodets]
   review_from: [06_gender, 12_possessives]
 
 templates:
@@ -173,4 +173,4 @@ dialogues:
     lines:
       - { speaker: "A", ru: "Оди́н, два, три...", en: "One, two, three..." }
       - { speaker: "B", ru: "Четы́ре, пять!", en: "Four, five!" }
-      - { speaker: "A", ru: "Хорошо́!", en: "Good!" }
+      - { speaker: "A", ru: "Молоде́ц!", en: "Well done!" }

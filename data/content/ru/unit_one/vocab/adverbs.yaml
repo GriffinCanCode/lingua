@@ -157,6 +157,48 @@ manner:
       - { ru: "Он говори́т пло́хо.", en: "He speaks badly." }
       - { ru: "Не пло́хо!", en: "Not bad!" }
 
+  - id: "otlichno"
+    word: "отлично"
+    stressed: "отли́чно"
+    transliteration: "otlichno"
+    translation: "excellent / great"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "otlichno.mp3"
+    notes: "Enthusiastic approval. Stronger than хорошо́. Stress on second syllable."
+    examples:
+      - { ru: "Отли́чно!", en: "Excellent!" }
+      - { ru: "Ты говори́шь отли́чно!", en: "You speak excellently!" }
+
+  - id: "zdorovo"
+    word: "здорово"
+    stressed: "здо́рово"
+    transliteration: "zdorovo"
+    translation: "great / cool"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "zdorovo.mp3"
+    notes: "Casual enthusiasm. ⚠️ Stress on first syllable (здо́рово = cool). Compare: здоро́во = healthily."
+    examples:
+      - { ru: "Здо́рово!", en: "Cool! / Great!" }
+      - { ru: "Э́то здо́рово!", en: "That's great!" }
+
+  - id: "normalno"
+    word: "нормально"
+    stressed: "норма́льно"
+    transliteration: "normalno"
+    translation: "fine / normal / OK"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "normalno.mp3"
+    notes: "Neutral response - neither good nor bad. Very common. Stress on second syllable."
+    examples:
+      - { ru: "Как дела́? — Норма́льно.", en: "How are you? — Fine." }
+      - { ru: "Всё норма́льно.", en: "Everything's fine." }
+
   - id: "ochen"
     word: "очень"
     stressed: "о́чень"
@@ -201,3 +243,20 @@ language:
     examples:
       - { ru: "Вы говори́те по-англи́йски?", en: "Do you speak English?" }
       - { ru: "Я не говорю́ по-англи́йски.", en: "I don't speak English." }
+
+time:
+  - id: "seychas"
+    word: "сейчас"
+    stressed: "сейча́с"
+    transliteration: "seychas"
+    translation: "now / right away"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    audio: "seychas.mp3"
+    notes: "Very common. Also used as 'just a moment'. Stress on last syllable."
+    examples:
+      - { ru: "Сейча́с!", en: "Right away! / Just a moment!" }
+      - { ru: "Я сейча́с до́ма.", en: "I'm at home now." }
+      - { ru: "Что ты де́лаешь сейча́с?", en: "What are you doing now?" }

@@ -309,7 +309,7 @@ dialogues:
     lines:
       - { speaker: "A", ru: "Ты хо́чешь ко́фе?", en: "Do you want coffee?" }
       - { speaker: "B", ru: "Да, я хочу́ ко́фе.", en: "Yes, I want coffee." }
-      - { speaker: "A", ru: "Хорошо́!", en: "Okay!" }
+      - { speaker: "A", ru: "Сейча́с!", en: "Right away!" }
 
   - id: "hungry"
     context: "Asking about food"

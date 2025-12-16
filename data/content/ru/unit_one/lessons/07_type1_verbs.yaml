@@ -202,7 +202,7 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [znat, ponimat, delat]
+  primary: [znat, ponimat, delat, otlichno]
   review_from: [01_cognates, 02_hello, 06_gender]
 
 templates:
@@ -247,7 +247,7 @@ dialogues:
     lines:
       - { speaker: "A", ru: "Ты зна́ешь?", en: "Do you know?" }
       - { speaker: "B", ru: "Да, я зна́ю.", en: "Yes, I know." }
-      - { speaker: "A", ru: "Хорошо́!", en: "Good!" }
+      - { speaker: "A", ru: "Отли́чно!", en: "Excellent!" }
 
   - id: "dont_understand"
     context: "Not understanding"

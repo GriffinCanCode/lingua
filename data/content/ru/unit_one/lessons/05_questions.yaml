@@ -180,7 +180,7 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [da, nyet, nye, i, ili, no, eto, kot, taksi, student, kofe]
+  primary: [da, nyet, nye, i, ili, no, eto, kot, taksi, student, kofe, seychas]
   review_from: [01_cognates, 02_hello, 03_false_friends]
 
 templates:
@@ -234,7 +234,7 @@ dialogues:
     lines:
       - { speaker: "A", ru: "Ко́фе и́ли чай?", en: "Coffee or tea?" }
       - { speaker: "B", ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
-      - { speaker: "A", ru: "Хорошо́!", en: "Okay!" }
+      - { speaker: "A", ru: "Сейча́с!", en: "Right away!" }
 
   - id: "not_a_cat"
     context: "Correcting mistakes"

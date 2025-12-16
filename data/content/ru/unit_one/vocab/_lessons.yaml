@@ -72,6 +72,7 @@ lessons:
       - radio
       - kofe
       - bank
+      - seychas
     review_vocab:
       - eto
       - tam
@@ -105,6 +106,7 @@ lessons:
       - znat
       - ponimat
       - delat
+      - otlichno
     review_vocab:
       - ya
       - ty
@@ -123,6 +125,7 @@ lessons:
       - yest
       - sobaka
       - mashina
+      - zdorovo
     review_vocab:
       - ya
       - kot
@@ -140,6 +143,7 @@ lessons:
       - videt
       - po_russki
       - po_angliyski
+      - ladno
     review_vocab:
       - znat
       - ponimat
@@ -186,6 +190,7 @@ lessons:
       - dom
       - kofe
       - voda
+      - seychas
 
   lesson_12_possessives:
     title: "My, Your, Our"
@@ -215,6 +220,7 @@ lessons:
       - vosem
       - devyat
       - desyat
+      - molodets
     review_vocab:
       - kot
       - kniga
@@ -268,3 +274,10 @@ lessons:
       - yest_eat
       - pit
       - bolshoy
+      - zdorovo
+      - ladno
+      - ponyatno
+      - otlichno
+      - seychas
+      - molodets
+      - konechno

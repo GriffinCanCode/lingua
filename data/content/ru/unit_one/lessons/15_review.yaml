@@ -219,13 +219,13 @@ dialogues:
       - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
       - { speaker: "B", ru: "Я живу́ в Москве́. А ты?", en: "I live in Moscow. And you?" }
       - { speaker: "A", ru: "Я то́же живу́ в Москве́!", en: "I live in Moscow too!" }
-      - { speaker: "B", ru: "Хорошо́! Где ты рабо́таешь?", en: "Great! Where do you work?" }
+      - { speaker: "B", ru: "Здо́рово! Где ты рабо́таешь?", en: "Cool! Where do you work?" }
       - { speaker: "A", ru: "Я рабо́таю в рестора́не.", en: "I work at a restaurant." }
 
   - id: "final_goodbye"
     context: "Saying goodbye"
     lines:
       - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
-      - { speaker: "B", ru: "Хорошо́. До свида́ния!", en: "Okay. Goodbye!" }
+      - { speaker: "B", ru: "Ла́дно. До свида́ния!", en: "Alright. Goodbye!" }
       - { speaker: "A", ru: "Пока́! Спаси́бо за всё!", en: "Bye! Thanks for everything!" }
       - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }

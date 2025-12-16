@@ -2,7 +2,7 @@
  * Celebration Components - Duolingo-style visual feedback
  * Particles, confetti, XP animations - no emojis
  */
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -23,7 +23,6 @@ interface Particle {
 // Color palettes
 const CELEBRATION_COLORS = ['#58cc02', '#ffc800', '#ff4b4b', '#1cb0f6', '#ce82ff'];
 const SUCCESS_COLORS = ['#58cc02', '#89e219', '#a5ed3d', '#c8f76f'];
-const XP_COLORS = ['#ffc800', '#ffdf00', '#ffe44d'];
 
 const createParticle = (index: number, colors: string[], originX = 50, originY = 50): Particle => ({
   id: index,
@@ -286,19 +285,14 @@ export const ModuleComplete: React.FC<{
   </AnimatePresence>
 );
 
-// Mascot character (simple illustrated owl-like figure, not emoji)
+// Mascot character (Playful Fox - distinct from the green owl)
 export const Mascot: React.FC<{ 
   mood?: 'happy' | 'thinking' | 'celebrating' | 'encouraging';
   size?: number;
 }> = ({ mood = 'happy', size = 80 }) => {
-  const expressions = {
-    happy: { eyeY: 12, beakOpen: false },
-    thinking: { eyeY: 10, beakOpen: false },
-    celebrating: { eyeY: 14, beakOpen: true },
-    encouraging: { eyeY: 12, beakOpen: true },
-  };
-  
-  const { eyeY, beakOpen } = expressions[mood];
+  const isExcited = mood === 'celebrating' || mood === 'encouraging';
+  const isThinking = mood === 'thinking';
+  const eyeY = isExcited ? 24 : isThinking ? 20 : 22;
 
   return (
     <motion.svg
@@ -308,47 +302,36 @@ export const Mascot: React.FC<{
       animate={mood === 'celebrating' ? { y: [0, -5, 0] } : {}}
       transition={{ duration: 0.5, repeat: mood === 'celebrating' ? Infinity : 0 }}
     >
-      {/* Body */}
-      <ellipse cx="24" cy="28" rx="16" ry="18" fill="#58cc02" />
-      <ellipse cx="24" cy="30" rx="12" ry="14" fill="#89e219" />
+      {/* Ears */}
+      <path d="M10 8L18 18L6 20Z" fill="#e65100" />
+      <path d="M38 8L30 18L42 20Z" fill="#e65100" />
       
-      {/* Eyes */}
-      <circle cx="18" cy={eyeY} r="6" fill="white" />
-      <circle cx="30" cy={eyeY} r="6" fill="white" />
-      <motion.circle 
-        cx="18" 
-        cy={eyeY} 
-        r="3" 
-        fill="#1a1a1a"
-        animate={{ scale: mood === 'celebrating' ? [1, 1.2, 1] : 1 }}
-        transition={{ duration: 0.3, repeat: mood === 'celebrating' ? Infinity : 0 }}
-      />
-      <motion.circle 
-        cx="30" 
-        cy={eyeY} 
-        r="3" 
-        fill="#1a1a1a"
-        animate={{ scale: mood === 'celebrating' ? [1, 1.2, 1] : 1 }}
-        transition={{ duration: 0.3, repeat: mood === 'celebrating' ? Infinity : 0 }}
-      />
-      <circle cx="19" cy={eyeY - 1} r="1" fill="white" />
-      <circle cx="31" cy={eyeY - 1} r="1" fill="white" />
+      {/* Head & Face Mask */}
+      <path d="M24 44C36 44 44 36 44 26C44 14 36 8 24 8C12 8 4 14 4 26C4 36 12 44 24 44Z" fill="#ff9800" />
+      <path d="M24 44C32 44 38 38 38 30C38 24 32 24 24 30C16 24 10 24 10 30C10 38 16 44 24 44Z" fill="#fff" />
       
-      {/* Beak */}
-      <path
-        d={beakOpen 
-          ? "M21 18 L24 22 L27 18 L24 20 Z" 
-          : "M21 17 L24 21 L27 17 Z"
-        }
-        fill="#ffc800"
-      />
+      {/* Eyes & Nose */}
+      <g fill="#1a1a1a">
+        <circle cx="17" cy={eyeY} r="3" />
+        <circle cx="31" cy={eyeY} r="3" />
+        <ellipse cx="24" cy="34" rx="3" ry="2" />
+      </g>
       
-      {/* Cheeks when happy/celebrating */}
-      {(mood === 'happy' || mood === 'celebrating') && (
-        <>
-          <ellipse cx="12" cy="16" rx="3" ry="2" fill="#ff9999" opacity="0.5" />
-          <ellipse cx="36" cy="16" rx="3" ry="2" fill="#ff9999" opacity="0.5" />
-        </>
+      {/* Eye Shine */}
+      <g fill="#fff">
+        <circle cx="18" cy={eyeY - 1} r="1" />
+        <circle cx="32" cy={eyeY - 1} r="1" />
+      </g>
+
+      {/* Mouth/Expression */}
+      {isExcited && <path d="M22 38Q24 41 26 38" stroke="#1a1a1a" strokeWidth="1.5" fill="none" />}
+      
+      {/* Blush */}
+      {!isThinking && (
+        <g fill="#ff9999" opacity="0.5">
+          <ellipse cx="12" cy="32" rx="3" ry="1.5" />
+          <ellipse cx="36" cy="32" rx="3" ry="1.5" />
+        </g>
       )}
     </motion.svg>
   );

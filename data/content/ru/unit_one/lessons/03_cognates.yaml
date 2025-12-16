@@ -232,6 +232,32 @@ templates:
       NOUN: { ids: [mama, papa] }
     weight: 2
 
+  # Questions
+  - pattern: "Э́то {NOUN}?"
+    translation: "Is this {NOUN.a}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.the}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  # Negation
+  - pattern: "Э́то не {NOUN}."
+    translation: "This is not {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
+
+  # Combined patterns
+  - pattern: "Кот тут, а ма́ма там."
+    translation: "The cat is here, but mom is there."
+    slots: {}
+    weight: 2
+
 dialogues:
   - id: "pointing_things"
     context: "Pointing at things"

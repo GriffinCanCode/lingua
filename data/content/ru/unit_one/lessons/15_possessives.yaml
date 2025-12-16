@@ -195,6 +195,51 @@ templates:
       NOUN: { pos: [noun] }
     weight: 3
 
+  - pattern: "Э́то мой дом."
+    translation: "This is my house."
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то моя́ кни́га."
+    translation: "This is my book."
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то твой {NOUN}?"
+    translation: "Is this your {NOUN.translation}?"
+    slots:
+      NOUN: { pos: [noun], gender: [masculine] }
+    weight: 3
+
+  - pattern: "Э́то твоя́ {NOUN}?"
+    translation: "Is this your {NOUN.translation}?"
+    slots:
+      NOUN: { pos: [noun], gender: [feminine] }
+    weight: 3
+
+  - pattern: "Нет, э́то не моя́ кни́га."
+    translation: "No, this is not my book."
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то наш дом."
+    translation: "This is our house."
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то на́ша маши́на."
+    translation: "This is our car."
+    slots: {}
+    weight: 3
+
+  - pattern: "{POSS} {NOUN} {LOCATION}."
+    translation: "{POSS.translation} {NOUN.translation} is {LOCATION.translation}."
+    slots:
+      POSS: { pos: [pronoun] }
+      NOUN: { pos: [noun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 2
+
 dialogues:
   - id: "whose_book"
     context: "Finding the owner"

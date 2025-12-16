@@ -269,6 +269,45 @@ templates:
     weight: 5
     notes: "Drills gender exceptions - папа and кофе use он!"
 
+  # Additional gender drills
+  - pattern: "Э́то {NOUN}. {PRONOUN} {LOCATION}."
+    translation: "This is {NOUN.a}. {PRONOUN.translation} is {LOCATION.translation}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa, kofe] }
+      PRONOUN: { pos: [pronoun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Где кни́га? Она́ {LOCATION}."
+    translation: "Where is the book? It is {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Где дом? Он {LOCATION}."
+    translation: "Where is the house? It is {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Где окно́? Оно́ {LOCATION}."
+    translation: "Where is the window? It is {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Кот {LOCATION}? — Да, он {LOCATION}."
+    translation: "Is the cat {LOCATION.translation}? — Yes, it is {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 2
+
+  - pattern: "Соба́ка {LOCATION}? — Да, она́ {LOCATION}."
+    translation: "Is the dog {LOCATION.translation}? — Yes, it is {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 2
+
 dialogues:
   - id: "wheres_book"
     context: "Looking for things"

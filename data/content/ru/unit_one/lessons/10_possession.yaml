@@ -187,6 +187,52 @@ templates:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 3
 
+  - pattern: "У тебя́ есть {NOUN}?"
+    translation: "Do you have {NOUN.a}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+
+  - pattern: "У него́ есть {NOUN}."
+    translation: "He has {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "У неё есть {NOUN}."
+    translation: "She has {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "У меня́ есть брат."
+    translation: "I have a brother."
+    slots: {}
+    weight: 3
+
+  - pattern: "У меня́ есть сестра́."
+    translation: "I have a sister."
+    slots: {}
+    weight: 3
+
+  - pattern: "У тебя́ есть {NOUN}? — Да, есть."
+    translation: "Do you have {NOUN.a}? — Yes, I do."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "У тебя́ есть {NOUN}? — Нет."
+    translation: "Do you have {NOUN.a}? — No."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "У меня́ то́же есть {NOUN}!"
+    translation: "I also have {NOUN.a}!"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
+
 dialogues:
   - id: "do_you_have_car"
     context: "Asking about possessions"

@@ -184,6 +184,50 @@ templates:
       NOUN: { pos: [noun] }
     weight: 3
 
+  - pattern: "Оди́н, два, три."
+    translation: "One, two, three."
+    slots: {}
+    weight: 3
+
+  - pattern: "Четы́ре, пять, шесть."
+    translation: "Four, five, six."
+    slots: {}
+    weight: 3
+
+  - pattern: "Семь, во́семь, де́вять, де́сять."
+    translation: "Seven, eight, nine, ten."
+    slots: {}
+    weight: 3
+
+  - pattern: "Ско́лько? — {NUMBER}."
+    translation: "How many? — {NUMBER.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+    weight: 3
+
+  - pattern: "У тебя́ есть {NUMBER} {NOUN}?"
+    translation: "Do you have {NUMBER.translation} {NOUN.translation}?"
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { pos: [noun] }
+    weight: 3
+
+  - pattern: "Э́то {NUMBER}."
+    translation: "This is {NUMBER.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+    weight: 2
+
+  - pattern: "Два и́ли три?"
+    translation: "Two or three?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Пять плюс пять — де́сять."
+    translation: "Five plus five is ten."
+    slots: {}
+    weight: 2
+
 dialogues:
   - id: "how_many_cats"
     context: "Counting things"

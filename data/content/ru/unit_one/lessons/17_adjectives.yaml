@@ -192,6 +192,46 @@ templates:
       ADJ: { pos: [adjective] }
     weight: 3
 
+  - pattern: "Большо́й дом."
+    translation: "A big house."
+    slots: {}
+    weight: 3
+
+  - pattern: "Ма́ленькая соба́ка."
+    translation: "A small dog."
+    slots: {}
+    weight: 3
+
+  - pattern: "Но́вая маши́на."
+    translation: "A new car."
+    slots: {}
+    weight: 3
+
+  - pattern: "Ста́рая кни́га."
+    translation: "An old book."
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то но́вый и́ли ста́рый?"
+    translation: "Is this new or old?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Дом большо́й и́ли ма́ленький?"
+    translation: "Is the house big or small?"
+    slots: {}
+    weight: 2
+
+  - pattern: "О́чень хорошо́!"
+    translation: "Very good!"
+    slots: {}
+    weight: 3
+
+  - pattern: "Э́то пло́хо."
+    translation: "This is bad."
+    slots: {}
+    weight: 2
+
 dialogues:
   - id: "big_or_small"
     context: "Describing size"

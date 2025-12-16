@@ -31,11 +31,17 @@ modules:
           - ["О", "o", "O in 'for'"]
           - ["Т", "t", "T in 'top'"]
       
+      - type: "word_intro"
+        words:
+          - word: "э́то"
+            translation: "this is"
+            note: "The Swiss Army knife of Russian. Use it to point at anything!"
+      
       - type: "tip"
-        content: "These 5 letters are identical in Russian and English! You already know them."
+        content: "э́то + noun = 'This is...' - the most useful pattern in Russian!"
     
     vocab_pool:
-      introduce: [mama, kot]
+      introduce: [eto, mama, kot]
       practice: []
       review: []
     exercises:
@@ -78,7 +84,7 @@ modules:
     
     vocab_pool:
       introduce: [taksi, metro]
-      practice: [mama, kot]
+      practice: [eto, mama, kot]
       review: []
     exercises:
       count: 7
@@ -113,9 +119,18 @@ modules:
       
       - type: "word_intro"
         words:
+          - word: "тут"
+            translation: "here"
+            note: "Casual, everyday 'here'"
+          - word: "там"
+            translation: "there"
+            note: "Points to something farther away"
           - word: "здесь"
             translation: "here"
             note: "Synonym for тут - slightly more formal. Ь makes the С soft."
+          - word: "вот"
+            translation: "here is / there is"
+            note: "Use when pointing at or presenting something"
       
       - type: "tip"
         content: |
@@ -127,7 +142,7 @@ modules:
     
     vocab_pool:
       introduce: [tut, tam, zdes, vot]
-      practice: [mama, kot, taksi, metro]
+      practice: [eto, mama, kot, taksi, metro]
       review: []
     exercises:
       count: 8
@@ -148,7 +163,7 @@ modules:
         content: "Mix everything you've learned. Speed builds fluency! Don't overthink - trust your instincts."
     vocab_pool:
       introduce: []
-      practice: [mama, kot, taksi, metro, tut, tam, vot]
+      practice: [eto, mama, kot, taksi, metro, tut, tam, zdes, vot]
       review: []
     exercises:
       count: 10
@@ -166,7 +181,8 @@ modules:
         title: "You learned:"
         points:
           - "5 cognate letters: А, К, М, О, Т"
-          - "7 words: ма́ма, кот, такси́, метро́, тут, там, здесь"
+          - "9 words: э́то, ма́ма, кот, такси́, метро́, тут, там, здесь, вот"
+          - "The 'this is' pattern: Э́то + noun"
           - "The location pattern: Noun + тут/там/здесь"
           - "Russian drops 'is' - simpler than English!"
     vocab_pool:

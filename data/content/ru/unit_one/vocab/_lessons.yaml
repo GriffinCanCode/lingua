@@ -24,13 +24,13 @@ lessons:
   lesson_04_hello:
     title: "Hello & Goodbye"
     focus: "Greetings, formal/informal register, survival phrases"
-    primary_vocab: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, ya, ty, vy, student, doktor]
+    primary_vocab: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, ya, ty, vy, student, doktor, normalno]
     review_vocab: [mama, kot, taksi, metro]
 
   lesson_05_false_friends:
     title: "False Friends"
     focus: "Letters Р, С, Н, В - they look familiar but sound different"
-    primary_vocab: [restoran, voda, sestra, brat, internet, telefon]
+    primary_vocab: [restoran, voda, sestra, brat, internet, telefon, bank]
     review_vocab: [mama, kot, dom]
 
   lesson_06_pronunciation:
@@ -42,25 +42,25 @@ lessons:
   lesson_07_questions:
     title: "Is this a...?"
     focus: "Questions, yes/no, negation"
-    primary_vocab: [da, nyet, nye, i, ili, no, kofe, seychas]
+    primary_vocab: [da, nyet, nye, i, ili, "no", kofe, seychas, konechno, yasno]
     review_vocab: [eto, kot, taksi, student]
 
   lesson_08_gender:
     title: "He, She, It"
     focus: "Grammatical gender, pronouns, gender exceptions"
-    primary_vocab: [on, ona, ono, dom, kniga, okno, park, sobaka, radio, papa]
+    primary_vocab: ["on", ona, ono, dom, kniga, okno, park, sobaka, radio, papa, doma]
     review_vocab: [eto, gde, tam, tut, kofe]
 
   lesson_09_type1_verbs:
     title: "I Know, I Understand"
     focus: "Type 1 conjugation - first verbs!"
-    primary_vocab: [znat, ponimat, delat, otlichno]
-    review_vocab: [ya, ty, on, ona, my, vy, oni, nye]
+    primary_vocab: [znat, ponimat, chitat, delat, my, oni, otlichno, ponyatno]
+    review_vocab: [ya, ty, "on", ona, vy, nye]
 
   lesson_10_alphabet_consonants:
     title: "More Russian Letters"
     focus: "Consonants with new shapes and unique sounds"
-    primary_vocab: [chay, shkola, tsentr, zhurnal, god, zima]
+    primary_vocab: [chay, shkola, tsentr, zhurnal, god, zima, ulitsa]
     skills: [cyrillic_reading, consonant_recognition, unique_sounds]
 
   lesson_11_possession:
@@ -76,10 +76,10 @@ lessons:
     review_vocab: [znat, ponimat, delat]
 
   lesson_13_question_words:
-    title: "Где, Кто, Что, Как"
+    title: "Где, Кто, Что, Как, Почему́"
     focus: "Essential question words (что→ШТО)"
-    primary_vocab: [gde, kto, chto, kak, vot, doktor, drug]
-    review_vocab: [tam, tut, eto, on, ona, govorit]
+    primary_vocab: [gde, kto, chto, kak, pochemu, vot, doktor, drug]
+    review_vocab: [tam, tut, eto, "on", ona, govorit]
 
   lesson_14_time_words:
     title: "Когда́ + Time Words"
@@ -97,7 +97,7 @@ lessons:
   lesson_16_irregular_verbs:
     title: "I Want, I Live, I Eat"
     focus: "Irregular verbs, eating & drinking"
-    primary_vocab: [khotet, zhit, rabotat, yest_eat, pit]
+    primary_vocab: [khotet, zhit, rabotat, yest_eat, pit, yeda]
     review_vocab: [znat, ponimat, govorit, videt, delat, kofe, voda]
 
   lesson_17_possessives:
@@ -115,7 +115,7 @@ lessons:
   lesson_19_adjectives:
     title: "Adjectives"
     focus: "Describing things with gender agreement"
-    primary_vocab: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho, khoroshiy, krasivyy]
+    primary_vocab: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho, khoroshiy, krasivyy, ochen]
     review_vocab: [dom, kniga, okno, kot, mashina]
 
   lesson_20_review:

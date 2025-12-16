@@ -1,8 +1,8 @@
-# Unit 1, Lesson 13: When & Time Words
+# Unit 1, Lesson 14: When & Time Words
 # 5 modules - Когда́ + сейча́с, сего́дня, за́втра, вчера́
 
 lesson:
-  id: "13_time_words"
+  id: "14_time_words"
   title: "Когда́ + Time Words"
   subtitle: "Ask about time and talk about when"
   icon: "clock"
@@ -166,7 +166,7 @@ modules:
 
 vocab_filter:
   primary: [kogda, segodnya, zavtra, vchera]
-  review_from: [07_questions, 11_type2_verbs, 12_question_words]
+  review_from: [07_questions, 12_type2_verbs, 13_question_words]
 
 templates:
   - pattern: "Когда́?"

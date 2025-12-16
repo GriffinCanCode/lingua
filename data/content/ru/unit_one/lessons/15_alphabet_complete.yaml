@@ -1,0 +1,275 @@
+# Unit 1, Lesson 14: The Russian Alphabet - Complete
+# Unique vowels + special letters + full alphabet reference
+# Final alphabet lesson - completes all 33 letters
+
+lesson:
+  id: "14_alphabet_complete"
+  title: "Completing the Alphabet"
+  subtitle: "Unique vowels, special letters & the full 33"
+  icon: "alphabet"
+  duration: "12 min"
+  type: "foundational"
+
+modules:
+  - id: "mod_1"
+    title: "Unique Russian Vowels"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Four Special Vowel Sounds"
+        content: |
+          You've learned 26 letters! These final vowels have sounds 
+          that don't have exact English equivalents - but you'll pick them up fast.
+      
+      - type: "pattern_table"
+        title: "Unique Russian Vowels"
+        columns: ["Letter", "Sound", "Like In English", "Example"]
+        rows:
+          - ["Ы ы", "i (hard)", "bit (throatier)", "ты (you)"]
+          - ["Э э", "e (pure)", "met", "э́то (this)"]
+          - ["Ю ю", "yu", "YOU", "юг (south)"]
+          - ["Я я", "ya", "YArd", "я (I)"]
+      
+      - type: "warning"
+        content: |
+          **Ы is the hardest Russian sound for English speakers!**
+          Try saying "ee" but pull your tongue back and down.
+          
+          Don't stress - Russians will understand you even if it's not perfect!
+    
+    exercises:
+      count: 6
+      types:
+        - { type: "matching", count: 2 }           # Match vowel to sound
+        - { type: "audio_recognition", count: 3 }  # Critical for these sounds
+        - { type: "multiple_choice", count: 1 }    # Vowel recognition
+
+  - id: "mod_2"
+    title: "Words with Unique Vowels"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "ты"
+            translation: "you (informal)"
+            note: "Ы is hard 'i'. Very common word!"
+          - word: "э́то"
+            translation: "this/that"
+            note: "Э = pure 'e'. You already know this word!"
+          - word: "юг"
+            translation: "south"
+            note: "Ю = 'yu'. One syllable."
+          - word: "я"
+            translation: "I"
+            note: "Я = 'ya'. The Russian word for 'I'!"
+      
+      - type: "pattern_table"
+        title: "More Practice Words"
+        columns: ["Word", "Sounds Like", "Meaning"]
+        rows:
+          - ["мы", "mwi", "we"]
+          - ["вы", "vwi", "you (formal/plural)"]
+          - ["э́хо", "E-kha", "echo"]
+          - ["юмор", "YU-mor", "humor"]
+          - ["язы́к", "ya-ZIK", "language/tongue"]
+      
+      - type: "tip"
+        content: |
+          **Pronouns with Ы**: ты, мы, вы all end with this unique vowel!
+          Practice these words to master the Ы sound.
+    
+    exercises:
+      count: 7
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Decode words
+        - { type: "audio_recognition", count: 2 }   # Sound practice
+        - { type: "multiple_choice", count: 2 }     # Word meaning
+
+  - id: "mod_3"
+    title: "Special Letters"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Signs & Ё"
+        content: |
+          These final 3 characters are special - two don't make sounds on their own!
+      
+      - type: "pattern_table"
+        title: "The Hard & Soft Signs"
+        columns: ["Letter", "Function", "Example", "Effect"]
+        rows:
+          - ["Ъ ъ", "Hard sign", "объе́кт (object)", "Brief pause, keeps consonant hard"]
+          - ["Ь ь", "Soft sign", "мать (mother)", "Softens preceding consonant"]
+      
+      - type: "explanation"
+        title: "The Special Ё"
+        content: |
+          **Ё ё** = "yo" (like "yolk")
+          
+          Ё is **ALWAYS** stressed - no accent mark needed!
+          - ещё = ye-SHCHO (still/more)
+          - её = ye-YO (her)
+          - моё = ma-YO (my, neuter)
+      
+      - type: "warning"
+        content: |
+          **Soft sign Ь doesn't make a sound!**
+          It tells you to "soften" the consonant before it.
+          
+          - мат = "mat" (checkmate)
+          - мать = "mat'" (mother) - the Т is softened
+    
+    exercises:
+      count: 6
+      types:
+        - { type: "multiple_choice", count: 2 }     # Sign function
+        - { type: "audio_recognition", count: 2 }   # Hear Ё words
+        - { type: "matching", count: 2 }            # Match sign to function
+
+  - id: "mod_4"
+    title: "The Complete Alphabet"
+    type: "reference"
+    
+    teaching:
+      - type: "explanation"
+        title: "All 33 Letters in Order"
+        content: |
+          Congratulations! You now know all 33 Russian letters!
+          Here's the complete alphabet in dictionary order.
+      
+      - type: "pattern_table"
+        title: "Complete Cyrillic Alphabet"
+        columns: ["#", "Letter", "Name", "Sound"]
+        rows:
+          - ["1-5", "А Б В Г Д", "а бэ вэ гэ дэ", "a b v g d"]
+          - ["6-10", "Е Ё Ж З И", "е ё жэ зэ и", "ye yo zh z ee"]
+          - ["11-15", "Й К Л М Н", "и краткое ка эль эм эн", "y k l m n"]
+          - ["16-20", "О П Р С Т", "о пэ эр эс тэ", "o p r s t"]
+          - ["21-25", "У Ф Х Ц Ч", "у эф ха цэ че", "oo f kh ts ch"]
+          - ["26-30", "Ш Щ Ъ Ы Ь", "ша ща твёрдый знак ы мягкий знак", "sh shch - ɨ -"]
+          - ["31-33", "Э Ю Я", "э ю я", "e yu ya"]
+      
+      - type: "tip"
+        content: |
+          **Memorizing alphabet order** helps for dictionaries!
+          
+          Song pattern (like English ABC):
+          А-Б-В-Г-Д-Е-Ё / Ж-З-И-Й-К-Л-М
+          Н-О-П-Р-С-Т-У / Ф-Х-Ц-Ч-Ш-Щ
+          Ъ-Ы-Ь-Э-Ю-Я
+    
+    exercises:
+      count: 6
+      types:
+        - { type: "matching", count: 2 }           # Letter order
+        - { type: "multiple_choice", count: 2 }    # Which comes first?
+        - { type: "letter_tap", count: 2 }         # Find letters
+
+  - id: "mod_5"
+    title: "Handwriting Preview"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Russian Cursive Differs from Print"
+        content: |
+          Russian handwriting looks VERY different from print!
+          Here are the most confusing letters:
+      
+      - type: "pattern_table"
+        title: "Print vs Cursive Differences"
+        columns: ["Print", "Cursive looks like", "Watch out!"]
+        rows:
+          - ["Т т", "m (lowercase)", "Cursive т = English m!"]
+          - ["Д д", "g (lowercase)", "Cursive д = English g!"]
+          - ["И и", "u (lowercase)", "Cursive и = English u!"]
+          - ["П п", "n (lowercase)", "Cursive п = English n!"]
+          - ["Л л", "looks like А", "Has a hook at the start"]
+      
+      - type: "tip"
+        content: |
+          **Don't panic about cursive yet!**
+          Most text you'll see is printed/typed.
+          
+          When writing by hand, printing is perfectly acceptable!
+          Focus on reading first, cursive later.
+    
+    exercises:
+      count: 4
+      types:
+        - { type: "multiple_choice", count: 2 }    # Print vs cursive
+        - { type: "matching", count: 2 }           # Print-cursive pairs
+
+  - id: "mod_6"
+    title: "Master the Alphabet"
+    type: "master"
+    
+    teaching:
+      - type: "summary"
+        title: "The Complete Alphabet - Mastered!"
+        points:
+          - "**Unique vowels (4)**: Ы Э Ю Я"
+          - "**Special letters (3)**: Ъ (hard sign), Ь (soft sign), Ё (always stressed)"
+          - "**Total: All 33 letters!** 🎉"
+          - "**Hardest sound**: Ы - keep practicing!"
+      
+      - type: "tip"
+        content: |
+          **Alphabet Groups to Remember:**
+          - Identical (6): А Е К М О Т
+          - False friends (6): В=v Н=n Р=r С=s У=oo Х=kh
+          - New shapes (9): Б Г Д З И Й Л П Ф
+          - Unique consonants (5): Ж Ц Ч Ш Щ
+          - Unique vowels (4): Ы Э Ю Я
+          - Special (3): Ё Ъ Ь
+          
+          **You can now decode ANY Russian word!**
+    
+    exercises:
+      count: 12
+      difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 4 }   # Full sound mastery
+        - { type: "translation_ru_en", count: 3 }   # Reading any word
+        - { type: "translation_en_ru", count: 3 }   # Writing practice
+        - { type: "matching", count: 2 }            # Comprehensive review
+
+exercises:
+  - id: "vowel_match"
+    title: "Match Vowel to Sound"
+    type: "matching"
+    pairs:
+      - { left: "Ы", right: "hard i" }
+      - { left: "Э", right: "e (pure)" }
+      - { left: "Ю", right: "yu" }
+      - { left: "Я", right: "ya" }
+      - { left: "Ё", right: "yo (stressed)" }
+  
+  - id: "special_letters"
+    title: "Special Letter Functions"
+    type: "matching"
+    pairs:
+      - { left: "Ъ", right: "hard sign - keeps consonant hard" }
+      - { left: "Ь", right: "soft sign - softens consonant" }
+      - { left: "Ё", right: "always stressed yo" }
+  
+  - id: "pronoun_decode"
+    title: "Pronouns with Ы"
+    instructions: "Read and translate these pronouns"
+    items:
+      - { ru: "Я", correct: "I", wrong: ["you", "we", "he"] }
+      - { ru: "ТЫ", correct: "you (informal)", wrong: ["I", "we", "you (formal)"] }
+      - { ru: "МЫ", correct: "we", wrong: ["I", "you", "they"] }
+      - { ru: "ВЫ", correct: "you (formal)", wrong: ["we", "you (informal)", "they"] }
+
+vocab_filter:
+  primary: [ya, ty, my, vy, yazyk, yumor]
+  review_from: ["10_alphabet_consonants", "14_time_words"]
+
+metadata:
+  prerequisite: "14_time_words"
+  unlocks: ["16_irregular_verbs"]
+  skills: ["cyrillic_complete", "vowel_recognition", "special_letters", "alphabet_order"]

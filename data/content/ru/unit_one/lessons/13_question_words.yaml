@@ -1,8 +1,8 @@
-# Unit 1, Lesson 12: Question Words
+# Unit 1, Lesson 13: Question Words
 # 6 modules - Где, Кто, Что, Как
 
 lesson:
-  id: "12_question_words"
+  id: "13_question_words"
   title: "Где, Кто, Что, Как"
   subtitle: "Essential question words"
   icon: "search"
@@ -233,7 +233,7 @@ modules:
 
 vocab_filter:
   primary: [gde, kto, chto, kak, vot, doktor, drug]
-  review_from: [03_cognates, 07_questions, 11_type2_verbs]
+  review_from: [03_cognates, 07_questions, 12_type2_verbs]
 
 templates:
   - pattern: "Где {NOUN}?"

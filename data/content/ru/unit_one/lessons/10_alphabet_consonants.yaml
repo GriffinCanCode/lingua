@@ -1,0 +1,264 @@
+# Unit 1, Lesson 10: The Russian Alphabet - Part 2
+# Remaining consonants: new shapes + unique Russian sounds
+# Builds on letters from lessons 1 and 5
+
+lesson:
+  id: "10_alphabet_consonants"
+  title: "More Russian Letters"
+  subtitle: "Consonants with new shapes and unique sounds"
+  icon: "alphabet"
+  duration: "12 min"
+  type: "foundational"
+
+modules:
+  - id: "mod_1"
+    title: "Remaining New Shapes"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Four More Letters with Familiar Sounds"
+        content: |
+          You've learned 17 letters so far! Let's add 4 more with sounds you know.
+          These just have unfamiliar shapes.
+      
+      - type: "pattern_table"
+        title: "New Shapes, Familiar Sounds"
+        columns: ["Letter", "Sound", "Example", "Memory Tip"]
+        rows:
+          - ["Г г", "g (hard)", "год (year)", "Looks like upside-down L = G"]
+          - ["З з", "z", "зима́ (winter)", "З looks like a 3 = Z sound"]
+          - ["Й й", "y (short)", "мой (my)", "И with a hat = quick Y"]
+          - ["Ф ф", "f", "факт (fact)", "Ф looks like a person = F"]
+      
+      - type: "tip"
+        content: |
+          **Й vs И**: Both related to 'ee' but different!
+          - И = "ee" (машина = ma-SHEE-na)  
+          - Й = short "y" sound at end of syllables (мой = moy)
+    
+    exercises:
+      count: 6
+      types:
+        - { type: "matching", count: 2 }           # Match letter to sound
+        - { type: "multiple_choice", count: 2 }    # Letter recognition
+        - { type: "audio_recognition", count: 2 }  # Hear and identify
+
+  - id: "mod_2"
+    title: "Words with New Letters"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "год"
+            translation: "year"
+            note: "Г = G. One syllable."
+          - word: "зима́"
+            translation: "winter"
+            note: "З = Z. Stress on last syllable."
+          - word: "мой"
+            translation: "my (masc)"
+            note: "Й makes the 'y' at the end."
+          - word: "факт"
+            translation: "fact"
+            note: "Ф = F. Cognate!"
+      
+      - type: "pattern_table"
+        title: "Practice Reading"
+        columns: ["Word", "Sounds Like", "Meaning"]
+        rows:
+          - ["газе́та", "ga-ZYE-ta", "newspaper"]
+          - ["зо́нтик", "ZON-tik", "umbrella"]
+          - ["твой", "tvoy", "your (masc)"]
+          - ["фото́", "fa-TO", "photo"]
+    
+    exercises:
+      count: 7
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Decode words
+        - { type: "audio_recognition", count: 2 }   # Listen and identify
+        - { type: "multiple_choice", count: 2 }     # Word meaning
+
+  - id: "mod_3"
+    title: "Unique Russian Consonants"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Single Letters for English Digraphs"
+        content: |
+          English needs **two letters** to write sounds like "ch", "sh", "ts".
+          Russian has a **single letter** for each! This makes spelling simpler.
+          
+          You already make these sounds - Russian just writes them more efficiently.
+      
+      - type: "pattern_table"
+        title: "Russian Letters for English Digraphs"
+        columns: ["Letter", "Sound", "English Writes As", "Example"]
+        rows:
+          - ["Ж ж", "zh", "zh (mea**s**ure)", "жизнь (life)"]
+          - ["Ц ц", "ts", "ts (ca**ts**)", "центр (center)"]
+          - ["Ч ч", "ch", "ch (**ch**eese)", "чай (tea)"]
+          - ["Ш ш", "sh", "sh (**sh**ip)", "школа (school)"]
+          - ["Щ щ", "shch", "shch (fre**sh ch**eese)", "ещё (still/more)"]
+      
+      - type: "tip"
+        content: |
+          **Why this matters**: Russian spelling is more phonetic!
+          - English: "cheese" = 6 letters for 3 sounds
+          - Russian: "чиз" = 3 letters for 3 sounds
+          
+          One letter = one sound. Much easier to spell!
+      
+      - type: "warning"
+        content: |
+          **Ш vs Щ** - the trickiest pair!
+          - Ш = hard "sh" (tongue back, like English)
+          - Щ = soft "sh" + "ch" blend (tongue forward, longer)
+          
+          Don't stress - context usually makes it clear!
+    
+    exercises:
+      count: 8
+      types:
+        - { type: "matching", count: 2 }           # Match to English sounds
+        - { type: "multiple_choice", count: 2 }    # Letter recognition
+        - { type: "audio_recognition", count: 3 }  # Critical for these sounds
+        - { type: "letter_tap", count: 1 }         # Find in words
+
+  - id: "mod_4"
+    title: "Words with Unique Sounds"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "чай"
+            translation: "tea"
+            note: "Ч = ch. Universal word in Russia!"
+          - word: "шко́ла"
+            translation: "school"
+            note: "Ш = sh. Cognate!"
+          - word: "центр"
+            translation: "center"
+            note: "Ц = ts. The Ц makes 'ts' not 'c'!"
+          - word: "пицца"
+            translation: "pizza"
+            note: "Two Ц's = ts-tsa. Italian loan word."
+      
+      - type: "pattern_table"
+        title: "More Practice Words"
+        columns: ["Word", "Sounds Like", "Meaning"]
+        rows:
+          - ["журна́л", "zhur-NAL", "magazine"]
+          - ["ужи́н", "u-ZHEEN", "dinner"]
+          - ["борщ", "borshch", "borscht (soup)"]
+          - ["ещё", "ye-SHCHO", "still/more/yet"]
+      
+      - type: "tip"
+        content: "**Борщ** contains both Ш and Щ - great practice word!"
+    
+    exercises:
+      count: 8
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Decode words
+        - { type: "audio_recognition", count: 3 }   # Sound mastery critical
+        - { type: "multiple_choice", count: 2 }     # Meaning recognition
+
+  - id: "mod_5"
+    title: "Practice"
+    type: "practice"
+    
+    teaching:
+      - type: "explanation"
+        title: "Reading Drill"
+        content: |
+          Mix all the new consonants with letters you already know.
+          Focus on the sounds - read aloud when possible!
+      
+      - type: "pattern_table"
+        title: "Mixed Reading Practice"
+        columns: ["Word", "Focus Letter", "Meaning"]
+        rows:
+          - ["футбо́л", "Ф", "football/soccer"]
+          - ["за́втра", "З", "tomorrow"]
+          - ["жена́", "Ж", "wife"]
+          - ["цвет", "Ц", "color/flower"]
+          - ["час", "Ч", "hour"]
+          - ["маши́на", "Ш", "car"]
+          - ["вещь", "Щ", "thing"]
+    
+    exercises:
+      count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Reading fluency
+        - { type: "audio_recognition", count: 3 }   # Listening practice
+        - { type: "translation_en_ru", count: 2 }   # Writing practice
+        - { type: "fill_in_blank", count: 2 }       # Letter completion
+
+  - id: "mod_6"
+    title: "Master"
+    type: "master"
+    
+    teaching:
+      - type: "summary"
+        title: "Letters You've Learned"
+        points:
+          - "**New shapes (4)**: Г З Й Ф - familiar sounds"
+          - "**Unique consonants (5)**: Ж Ц Ч Ш Щ - Russian-specific sounds"
+          - "**Total now: 26 letters** - only 7 more to go!"
+          - "**Hardest pair**: Ш (hard sh) vs Щ (soft shch)"
+      
+      - type: "tip"
+        content: |
+          **Progress check:**
+          - Lesson 1: А Б Д Е И К Л М О П Т (11 letters)
+          - Lesson 5: В Н Р С У Х (6 false friends)
+          - This lesson: Г З Й Ф Ж Ц Ч Ш Щ (9 more)
+          
+          **Coming up**: Unique vowels and special letters!
+    
+    exercises:
+      count: 12
+      difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 4 }   # Sound mastery
+        - { type: "translation_ru_en", count: 3 }   # Reading fluency
+        - { type: "translation_en_ru", count: 3 }   # Production
+        - { type: "matching", count: 2 }            # Letter-sound pairs
+
+exercises:
+  - id: "consonant_match"
+    title: "Match Consonant to Sound"
+    type: "matching"
+    pairs:
+      - { left: "Г", right: "g" }
+      - { left: "З", right: "z" }
+      - { left: "Й", right: "y (short)" }
+      - { left: "Ф", right: "f" }
+      - { left: "Ж", right: "zh" }
+      - { left: "Ц", right: "ts" }
+      - { left: "Ч", right: "ch" }
+      - { left: "Ш", right: "sh" }
+      - { left: "Щ", right: "shch" }
+  
+  - id: "word_decode"
+    title: "Decode These Words"
+    instructions: "Read the Russian word and pick the transliteration"
+    items:
+      - { ru: "ЧАЙ", correct: "chay", wrong: ["tsay", "shay", "hay"] }
+      - { ru: "ШКОЛА", correct: "shkola", wrong: ["shchola", "skola", "shkala"] }
+      - { ru: "ЦЕНТР", correct: "tsentr", wrong: ["centr", "sentr", "chentr"] }
+      - { ru: "ЖУРНАЛ", correct: "zhurnal", wrong: ["jurnal", "shurnal", "churnal"] }
+      - { ru: "ФАКТ", correct: "fakt", wrong: ["vakt", "pakt", "hakt"] }
+      - { ru: "ЗИМА", correct: "zima", wrong: ["sima", "zema", "tsima"] }
+
+vocab_filter:
+  primary: [chay, shkola, tsentr, zhurnal, god, zima]
+  review_from: ["05_false_friends", "09_type1_verbs"]
+
+metadata:
+  prerequisite: "09_type1_verbs"
+  unlocks: ["11_possession"]
+  skills: ["cyrillic_reading", "consonant_recognition", "unique_sounds"]

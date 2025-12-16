@@ -26,6 +26,9 @@ librosa>=0.10.1
 soundfile>=0.12.1
 numpy>=1.26.0
 
+# AI/LLM
+openai>=2.13.0
+
 
 
 # Development

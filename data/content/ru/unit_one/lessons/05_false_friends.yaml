@@ -136,7 +136,7 @@ vocab_filter:
 
 templates:
   - pattern: "Где {PLACE}?"
-    translation: "Where is the {PLACE.translation}?"
+    translation: "Where is {PLACE.the}?"
     slots:
       PLACE: { pos: [noun], semantic: [place] }
     weight: 3

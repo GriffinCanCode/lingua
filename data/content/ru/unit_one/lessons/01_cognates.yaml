@@ -136,21 +136,45 @@ vocab_filter:
 
 # Templates for exercise generation
 templates:
+  # General nouns (with articles)
+  - pattern: "Это {NOUN}."
+    translation: "This is {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+
+  # Family (without articles)
   - pattern: "Это {NOUN}."
     translation: "This is {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 4
 
+  # General nouns (definite)
+  - pattern: "{NOUN} {LOCATION}."
+    translation: "{NOUN.the} is {LOCATION.translation}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  # Family (definite - proper noun style)
   - pattern: "{NOUN} {LOCATION}."
     translation: "{NOUN.translation} is {LOCATION.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 3
+
+  # Presentation
+  - pattern: "Вот {NOUN}."
+    translation: "Here is {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
 
   - pattern: "Вот {NOUN}."
     translation: "Here is {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 2

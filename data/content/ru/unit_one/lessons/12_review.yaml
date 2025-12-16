@@ -138,21 +138,39 @@ vocab_filter:
 
 templates:
   - pattern: "Это {NOUN}."
+    translation: "This is {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
+
+  - pattern: "Это {NOUN}."
     translation: "This is {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
+    weight: 2
+
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.the}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 2
 
   - pattern: "Где {NOUN}?"
     translation: "Where is {NOUN.translation}?"
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 2
 
   - pattern: "У меня есть {NOUN}."
-    translation: "I have a {NOUN.translation}."
+    translation: "I have {NOUN.a}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
+    
+  - pattern: "У меня есть {NOUN}."
+    translation: "I have {NOUN.translation}."
+    slots:
+      NOUN: { ids: [mama, papa] }
     weight: 2
 
   - pattern: "Это мой {NOUN_M}."

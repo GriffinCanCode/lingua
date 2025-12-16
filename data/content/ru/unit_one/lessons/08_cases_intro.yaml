@@ -134,14 +134,27 @@ vocab_filter:
 
 templates:
   - pattern: "{SUBJECT} {LOCATION}."
+    translation: "{SUBJECT.the} is {LOCATION.translation}."
+    slots:
+      SUBJECT: { pos: [noun], exclude_ids: [mama, papa] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "{SUBJECT} {LOCATION}."
     translation: "{SUBJECT.translation} is {LOCATION.translation}."
     slots:
-      SUBJECT: { pos: [noun] }
+      SUBJECT: { ids: [mama, papa] }
       LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Это {NOUN}."
+    translation: "This is {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 3
 
   - pattern: "Это {NOUN}."
     translation: "This is {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 3

@@ -143,9 +143,15 @@ vocab_filter:
 
 templates:
   - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.the}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+  
+  - pattern: "Где {NOUN}?"
     translation: "Where is {NOUN.translation}?"
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 4
 
   - pattern: "Кто это?"

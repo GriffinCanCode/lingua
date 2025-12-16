@@ -124,7 +124,7 @@ vocab_filter:
 
 templates:
   - pattern: "Привет! Я {PROFESSION}."
-    translation: "Hi! I am a {PROFESSION.translation}."
+    translation: "Hi! I am {PROFESSION.a}."
     slots:
       PROFESSION: { pos: [noun], semantic: [person] }
     weight: 3

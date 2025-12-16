@@ -228,10 +228,21 @@ class TemplateFiller:
     def _apply_modifier(self, vocab: VocabItem, modifier: str | None, lang: str) -> str:
         """Apply modifier (case, translation) to get the right form."""
         if lang == 'en':
+            base_word = re.sub(r'\s*\(.*?\)', '', vocab.translation).strip()
+            
+            if modifier == 'a':
+                vowels = 'aeiou'
+                article = 'an' if base_word.lower()[0] in vowels else 'a'
+                return f"{article} {base_word}"
+                
+            if modifier == 'the':
+                return f"the {base_word}"
+                
             if modifier == 'translation' or not modifier:
-                return vocab.translation
+                return base_word
+            
             # For English, we mostly just use translation
-            return vocab.translation
+            return base_word
 
         # Russian forms
         if not modifier:
@@ -260,16 +271,13 @@ class TemplateFiller:
         ru_words = text.replace('.', '').replace('?', '').replace('!', '').replace(',', '').split()
         en_words = translation.replace('.', '').replace('?', '').replace('!', '').replace(',', '').split()
 
-        # Create basic alignment
+        # Create basic alignment - handle different sentence lengths
         words = []
-        used_vocab = {v.word.lower(): v for v in slot_values.values()}
-        used_vocab.update({self._morph.generate_form(v.word, c, 'singular').lower(): v 
-                          for v in slot_values.values() 
-                          for c in ['nominative', 'genitive', 'dative', 'accusative'] 
-                          if self._morph and self._morph.generate_form(v.word, c, 'singular')})
-
-        for i, ru_word in enumerate(ru_words):
-            en_word = en_words[i] if i < len(en_words) else ''
+        max_len = max(len(ru_words), len(en_words))
+        
+        for i in range(max_len):
+            ru_word = ru_words[i] if i < len(ru_words) else None
+            en_word = en_words[i] if i < len(en_words) else None
             words.append({'ru': ru_word, 'en': en_word})
 
         return words

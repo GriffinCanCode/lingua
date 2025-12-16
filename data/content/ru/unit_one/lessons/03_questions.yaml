@@ -127,19 +127,37 @@ vocab_filter:
 
 templates:
   - pattern: "Это {NOUN}?"
+    translation: "Is this {NOUN.a}?"
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 4
+
+  - pattern: "Это {NOUN}?"
     translation: "Is this {NOUN.translation}?"
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 4
+
+  - pattern: "Это не {NOUN}."
+    translation: "This is not {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
 
   - pattern: "Это не {NOUN}."
     translation: "This is not {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 3
+
+  - pattern: "Да, это {NOUN}."
+    translation: "Yes, this is {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
 
   - pattern: "Да, это {NOUN}."
     translation: "Yes, this is {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
     weight: 2

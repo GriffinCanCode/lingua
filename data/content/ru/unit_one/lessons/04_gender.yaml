@@ -144,9 +144,17 @@ vocab_filter:
 
 templates:
   - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."
+    translation: "Where is {NOUN.the}? {PRONOUN.translation} is {LOCATION.translation}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      PRONOUN: { pos: [pronoun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 4
+
+  - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."
     translation: "Where is {NOUN.translation}? {PRONOUN.translation} is {LOCATION.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { ids: [mama, papa] }
       PRONOUN: { pos: [pronoun] }
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 4

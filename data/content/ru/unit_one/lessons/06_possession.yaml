@@ -126,13 +126,13 @@ vocab_filter:
 
 templates:
   - pattern: "У меня есть {NOUN}."
-    translation: "I have a {NOUN.translation}."
+    translation: "I have {NOUN.a}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 4
 
   - pattern: "У меня {NOUN}."
-    translation: "I have a {NOUN.translation}."
+    translation: "I have {NOUN.a}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 3

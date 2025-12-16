@@ -129,14 +129,14 @@ vocab_filter:
 
 templates:
   - pattern: "Это {ADJ} {NOUN}."
-    translation: "This is a {ADJ.translation} {NOUN.translation}."
+    translation: "This is {ADJ.a} {NOUN.translation}."
     slots:
       ADJ: { pos: [adjective] }
       NOUN: { pos: [noun] }
     weight: 4
 
   - pattern: "{NOUN} {ADJ}."
-    translation: "The {NOUN.translation} is {ADJ.translation}."
+    translation: "{NOUN.the} is {ADJ.translation}."
     slots:
       NOUN: { pos: [noun] }
       ADJ: { pos: [adjective] }

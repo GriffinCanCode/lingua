@@ -1,49 +1,19 @@
 """Curriculum Engine
 
-Smart lesson generation and sentence selection based on:
-- User's current mastery levels
-- Target patterns for the lesson
-- Complexity progression
-- Pattern diversity
+Handles learning path navigation and progress tracking for Duolingo-style curriculum.
 """
 from datetime import datetime, timedelta
 from uuid import UUID
-from dataclasses import dataclass, field
-from collections import defaultdict
+from dataclasses import dataclass
 
 from sqlalchemy import select, func, and_, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
 from models.curriculum import (
     CurriculumSection, CurriculumUnit, CurriculumNode,
     UserNodeProgress, UserUnitProgress,
 )
-
-
-@dataclass(slots=True)
-class LessonSentence:
-    """Sentence selected for a lesson with metadata."""
-    sentence_id: UUID
-    text: str
-    translation: str | None
-    complexity: int
-    patterns: list[UUID]
-    teaching_value: float  # Higher = better for learning
-
-
-@dataclass(slots=True)
-class Lesson:
-    """Generated lesson content."""
-    node_id: UUID
-    node_title: str
-    node_type: str
-    target_patterns: list[UUID]
-    sentences: list[LessonSentence]
-    estimated_duration_min: int
-    new_patterns: list[UUID]  # Patterns user hasn't seen
-    review_patterns: list[UUID]  # Patterns due for review
 
 
 @dataclass(slots=True)
@@ -145,9 +115,9 @@ class CurriculumEngine:
                     nodes_data.append({
                         "id": str(node.id),
                         "title": node.title,
-                        "node_type": node.node_type,
+                        "level": node.level,
+                        "level_type": node.level_type,
                         "status": status,
-                        "level": n_progress.level if n_progress else 0,
                         "total_reviews": n_progress.total_reviews if n_progress else 0,
                         "estimated_duration_min": node.estimated_duration_min,
                     })
@@ -222,184 +192,6 @@ class CurriculumEngine:
             .limit(1)
         )
         return result.scalar_one_or_none()
-
-    async def generate_lesson(
-        self,
-        session: AsyncSession,
-        user_id: UUID,
-        node_id: UUID,
-        max_sentences: int = 10,
-    ) -> Lesson:
-        """Generate a lesson for a specific node."""
-        # Get node details
-        result = await session.execute(
-            select(CurriculumNode).where(CurriculumNode.id == node_id)
-        )
-        node = result.scalar_one()
-
-        # Get user's pattern mastery
-        mastery_result = await session.execute(
-            select(UserPatternMastery).where(UserPatternMastery.user_id == user_id)
-        )
-        mastery_map = {m.pattern_id: m for m in mastery_result.scalars().all()}
-
-        # Identify new vs review patterns
-        target_patterns = node.target_patterns or []
-        new_patterns = [p for p in target_patterns if p not in mastery_map]
-        review_patterns = [
-            p for p in target_patterns
-            if p in mastery_map and mastery_map[p].next_review and mastery_map[p].next_review <= datetime.utcnow()
-        ]
-
-        # Get candidate sentences (returns list of (Sentence, patterns) tuples)
-        sentences_with_patterns = await self._get_candidate_sentences(
-            session, target_patterns, node.complexity_min, node.complexity_max
-        )
-
-        # Score and select sentences
-        scored_sentences = []
-        for sent, patterns in sentences_with_patterns:
-            score = self._calculate_teaching_value(patterns, mastery_map, new_patterns, review_patterns)
-            scored_sentences.append((score, sent, patterns))
-
-        # Sort by teaching value and diversify
-        scored_sentences.sort(key=lambda x: -x[0])
-        selected = self._diversify_selection(scored_sentences, max_sentences)
-
-        lesson_sentences = [
-            LessonSentence(
-                sentence_id=sent.id,
-                text=sent.text,
-                translation=sent.translation,
-                complexity=sent.complexity_score,
-                patterns=[sp.pattern_id for sp in patterns],
-                teaching_value=score,
-            )
-            for score, sent, patterns in selected
-        ]
-
-        return Lesson(
-            node_id=node.id,
-            node_title=node.title,
-            node_type=node.node_type,
-            target_patterns=target_patterns,
-            sentences=lesson_sentences,
-            estimated_duration_min=node.estimated_duration_min,
-            new_patterns=new_patterns,
-            review_patterns=review_patterns,
-        )
-
-    async def _get_candidate_sentences(
-        self,
-        session: AsyncSession,
-        pattern_ids: list[UUID],
-        complexity_min: int,
-        complexity_max: int,
-        limit: int = 100,
-    ) -> list[tuple[Sentence, list[SentencePattern]]]:
-        """Get candidate sentences for lesson generation."""
-        sentences: list[Sentence] = []
-        
-        # Try pattern-matched sentences first
-        if pattern_ids:
-            result = await session.execute(
-                select(Sentence)
-                .join(SentencePattern)
-                .where(
-                    SentencePattern.pattern_id.in_(pattern_ids),
-                    Sentence.complexity_score >= complexity_min,
-                    Sentence.complexity_score <= complexity_max,
-                    Sentence.language == self.language,
-                )
-                .distinct()
-                .limit(limit)
-            )
-            sentences = list(result.scalars().all())
-
-        # Fallback: get any sentences in complexity range if no pattern matches
-        if not sentences:
-            result = await session.execute(
-                select(Sentence)
-                .where(
-                    Sentence.complexity_score >= complexity_min,
-                    Sentence.complexity_score <= complexity_max,
-                    Sentence.language == self.language,
-                )
-                .limit(limit)
-            )
-            sentences = list(result.scalars().all())
-
-        # Load patterns separately for each sentence (avoid lazy loading)
-        sentences_with_patterns: list[tuple[Sentence, list[SentencePattern]]] = []
-        for sent in sentences:
-            pattern_result = await session.execute(
-                select(SentencePattern).where(SentencePattern.sentence_id == sent.id)
-            )
-            patterns = list(pattern_result.scalars().all())
-            sentences_with_patterns.append((sent, patterns))
-
-        return sentences_with_patterns
-
-    def _calculate_teaching_value(
-        self,
-        patterns: list[SentencePattern],
-        mastery_map: dict[UUID, UserPatternMastery],
-        new_patterns: list[UUID],
-        review_patterns: list[UUID],
-    ) -> float:
-        """Calculate how valuable a sentence is for teaching."""
-        score = 1.0  # Base score
-        pattern_ids = [sp.pattern_id for sp in patterns]
-
-        # Bonus for containing new patterns
-        new_count = sum(1 for p in pattern_ids if p in new_patterns)
-        score += new_count * 3.0
-
-        # Bonus for containing due review patterns
-        review_count = sum(1 for p in pattern_ids if p in review_patterns)
-        score += review_count * 2.0
-
-        # Bonus for weak patterns (low ease factor)
-        for p in pattern_ids:
-            if p in mastery_map:
-                mastery = mastery_map[p]
-                if mastery.ease_factor < 2.0:
-                    score += (2.5 - mastery.ease_factor) * 1.5
-
-        # Penalty for too many patterns (cognitive load)
-        if len(pattern_ids) > 3:
-            score -= (len(pattern_ids) - 3) * 0.5
-
-        # Slight randomization for variety
-        import random
-        score += random.uniform(0, 0.3)
-
-        return score
-
-    def _diversify_selection(
-        self,
-        scored_sentences: list[tuple[float, Sentence, list[SentencePattern]]],
-        max_count: int,
-    ) -> list[tuple[float, Sentence, list[SentencePattern]]]:
-        """Select diverse sentences (avoid same patterns/vocabulary)."""
-        selected: list[tuple[float, Sentence, list[SentencePattern]]] = []
-        seen_patterns: set[UUID] = set()
-
-        for score, sent, patterns in scored_sentences:
-            if len(selected) >= max_count:
-                break
-
-            sentence_patterns = {sp.pattern_id for sp in patterns}
-
-            # Check for too much overlap
-            pattern_overlap = len(sentence_patterns & seen_patterns) / max(len(sentence_patterns), 1)
-            if pattern_overlap > 0.8 and len(selected) >= 3:
-                continue  # Too similar
-
-            selected.append((score, sent, patterns))
-            seen_patterns.update(sentence_patterns)
-
-        return selected
 
     async def update_node_progress(
         self,

@@ -1,0 +1,1049 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 1: FOUNDATIONS - Master Vocabulary Sheet
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - Start with cognates (instant wins, builds confidence)
+# - Introduce Cyrillic progressively (familiar letters first)
+# - Focus on HIGH FREQUENCY words (top 100 in Russian)
+# - Every word should be immediately useful in real life
+# - Grammar emerges naturally from vocabulary patterns
+#
+# Letter Introduction Order:
+# Phase 1: Identical to Latin (А, Е, К, М, О, Т)
+# Phase 2: False friends (Р=R, С=S, Н=N, В=V, У=U, Х=H)
+# Phase 3: Unique Cyrillic (Д, Б, Г, Л, П, Ф, Ж, Ш, Щ, Ч, Ц, Й, Ы, Ь, Ъ, Э, Ю, Я)
+# ══════════════════════════════════════════════════════════════════════════════
+
+unit:
+  id: "unit1"
+  title: "Foundations"
+  description: "Essential vocabulary for survival Russian"
+  total_words: 65
+  target_lessons: 5
+  
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 1: PRONOUNS & DEMONSTRATIVES
+# These are THE most frequent words in any language
+# ══════════════════════════════════════════════════════════════════════════════
+
+pronouns:
+  - id: "ya"
+    word: "я"
+    transliteration: "ya"
+    translation: "I"
+    pos: "pronoun"
+    frequency: 1  # Top 10 word in Russian
+    difficulty: 1
+    audio: "ya.mp3"
+    notes: "Just one letter! The most common word in Russian."
+    examples:
+      - { ru: "Я тут.", en: "I am here." }
+      - { ru: "Я студент.", en: "I am a student." }
+
+  - id: "ty"
+    word: "ты"
+    transliteration: "ty"
+    translation: "you (informal)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "ty.mp3"
+    notes: "Use with friends, family, children, animals. Ы sounds like 'i' in 'bit' but deeper."
+    examples:
+      - { ru: "Ты где?", en: "Where are you?" }
+      - { ru: "Ты дома?", en: "Are you home?" }
+
+  - id: "vy"
+    word: "вы"
+    transliteration: "vy"
+    translation: "you (formal/plural)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "vy.mp3"
+    notes: "Use with strangers, elders, in professional settings, OR when addressing multiple people."
+    examples:
+      - { ru: "Вы доктор?", en: "Are you a doctor?" }
+
+  - id: "on"
+    word: "он"
+    transliteration: "on"
+    translation: "he / it (masc)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "on.mp3"
+    notes: "For masculine nouns (ending in consonant) AND male people."
+    examples:
+      - { ru: "Он там.", en: "He is there." }
+      - { ru: "Где кот? Он тут.", en: "Where is the cat? It's here." }
+
+  - id: "ona"
+    word: "она"
+    transliteration: "ona"
+    translation: "she / it (fem)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "ona.mp3"
+    notes: "For feminine nouns (ending in -а/-я) AND female people."
+    examples:
+      - { ru: "Она тут.", en: "She is here." }
+      - { ru: "Где книга? Она там.", en: "Where is the book? It's there." }
+
+  - id: "ono"
+    word: "оно"
+    transliteration: "ono"
+    translation: "it (neuter)"
+    pos: "pronoun"
+    frequency: 2
+    difficulty: 1
+    audio: "ono.mp3"
+    notes: "For neuter nouns (ending in -о/-е). Less common than он/она."
+    examples:
+      - { ru: "Где окно? Оно там.", en: "Where is the window? It's there." }
+
+  - id: "my"
+    word: "мы"
+    transliteration: "my"
+    translation: "we"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "my.mp3"
+    examples:
+      - { ru: "Мы тут.", en: "We are here." }
+
+  - id: "oni"
+    word: "они"
+    transliteration: "oni"
+    translation: "they"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "oni.mp3"
+    examples:
+      - { ru: "Они там.", en: "They are there." }
+
+  - id: "eto"
+    word: "это"
+    transliteration: "eto"
+    translation: "this / this is / it is"
+    pos: "demonstrative"
+    frequency: 1  # Extremely common
+    difficulty: 1
+    audio: "eto.mp3"
+    notes: "The Swiss Army knife of Russian. Use it constantly."
+    examples:
+      - { ru: "Это кот.", en: "This is a cat." }
+      - { ru: "Что это?", en: "What is this?" }
+      - { ru: "Это хорошо.", en: "That's good." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 2: QUESTION WORDS
+# Essential for any conversation
+# ══════════════════════════════════════════════════════════════════════════════
+
+questions:
+  - id: "gde"
+    word: "где"
+    transliteration: "gde"
+    translation: "where"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "gde.mp3"
+    notes: "Г sounds like 'g' in 'go'. Used for location (not direction)."
+    examples:
+      - { ru: "Где метро?", en: "Where is the metro?" }
+      - { ru: "Где ты?", en: "Where are you?" }
+
+  - id: "kto"
+    word: "кто"
+    transliteration: "kto"
+    translation: "who"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "kto.mp3"
+    notes: "For people only. Say both consonants: k-to."
+    examples:
+      - { ru: "Кто это?", en: "Who is this?" }
+      - { ru: "Кто там?", en: "Who's there?" }
+
+  - id: "chto"
+    word: "что"
+    transliteration: "shto"
+    translation: "what"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 2
+    audio: "shto.mp3"
+    notes: "IMPORTANT: Spelled ЧТО but pronounced 'shto'! One of Russian's quirks."
+    examples:
+      - { ru: "Что это?", en: "What is this?" }
+      - { ru: "Что там?", en: "What's there?" }
+
+  - id: "kak"
+    word: "как"
+    transliteration: "kak"
+    translation: "how"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "kak.mp3"
+    notes: "Also means 'like/as'. Very versatile."
+    examples:
+      - { ru: "Как дела?", en: "How are things?" }
+      - { ru: "Как тебя зовут?", en: "What's your name?" }
+
+  - id: "pochemu"
+    word: "почему"
+    transliteration: "pochemu"
+    translation: "why"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 2
+    audio: "pochemu.mp3"
+    examples:
+      - { ru: "Почему?", en: "Why?" }
+
+  - id: "kogda"
+    word: "когда"
+    transliteration: "kogda"
+    translation: "when"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 2
+    audio: "kogda.mp3"
+    examples:
+      - { ru: "Когда?", en: "When?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 3: BASIC RESPONSES & PARTICLES
+# The glue words of conversation
+# ══════════════════════════════════════════════════════════════════════════════
+
+particles:
+  - id: "da"
+    word: "да"
+    transliteration: "da"
+    translation: "yes"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "da.mp3"
+    notes: "Also used as 'yeah', 'right', 'uh-huh' in conversation."
+    examples:
+      - { ru: "Да, это кот.", en: "Yes, this is a cat." }
+
+  - id: "nyet"
+    word: "нет"
+    transliteration: "nyet"
+    translation: "no"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "nyet.mp3"
+    notes: "Н sounds like 'n'. Also means 'there isn't any'."
+    examples:
+      - { ru: "Нет, это не кот.", en: "No, this is not a cat." }
+
+  - id: "nye"
+    word: "не"
+    transliteration: "nye"
+    translation: "not"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "nye.mp3"
+    notes: "Goes directly before the word you're negating."
+    examples:
+      - { ru: "Это не дом.", en: "This is not a house." }
+
+  - id: "i"
+    word: "и"
+    transliteration: "i"
+    translation: "and"
+    pos: "conjunction"
+    frequency: 1
+    difficulty: 1
+    audio: "i.mp3"
+    notes: "Just one letter! И sounds like 'ee'."
+    examples:
+      - { ru: "Мама и папа.", en: "Mom and dad." }
+
+  - id: "ili"
+    word: "или"
+    transliteration: "ili"
+    translation: "or"
+    pos: "conjunction"
+    frequency: 2
+    difficulty: 1
+    audio: "ili.mp3"
+    examples:
+      - { ru: "Да или нет?", en: "Yes or no?" }
+
+  - id: "no"
+    word: "но"
+    transliteration: "no"
+    translation: "but"
+    pos: "conjunction"
+    frequency: 1
+    difficulty: 1
+    audio: "no.mp3"
+    notes: "Looks like English 'no' but means 'but'!"
+    examples:
+      - { ru: "Да, но...", en: "Yes, but..." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 4: LOCATION WORDS
+# Where things are
+# ══════════════════════════════════════════════════════════════════════════════
+
+location:
+  - id: "tut"
+    word: "тут"
+    transliteration: "tut"
+    translation: "here"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "tut.mp3"
+    notes: "У sounds like 'oo' in 'boot'."
+    examples:
+      - { ru: "Я тут.", en: "I'm here." }
+
+  - id: "tam"
+    word: "там"
+    transliteration: "tam"
+    translation: "there"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "tam.mp3"
+    examples:
+      - { ru: "Он там.", en: "He's there." }
+
+  - id: "zdes"
+    word: "здесь"
+    transliteration: "zdes'"
+    translation: "here (formal)"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 2
+    audio: "zdes.mp3"
+    notes: "More formal/written than тут. Ь makes the С soft."
+    examples:
+      - { ru: "Метро здесь.", en: "The metro is here." }
+
+  - id: "vot"
+    word: "вот"
+    transliteration: "vot"
+    translation: "here is / there is"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "vot.mp3"
+    notes: "Use when pointing at something or presenting it."
+    examples:
+      - { ru: "Вот такси.", en: "Here's the taxi." }
+      - { ru: "Вот и всё.", en: "That's all." }
+
+  - id: "doma"
+    word: "дома"
+    transliteration: "doma"
+    translation: "at home"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "doma.mp3"
+    notes: "This is the locative form. Дом = house, дома = at home."
+    examples:
+      - { ru: "Я дома.", en: "I'm at home." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 5: GREETINGS & SOCIAL
+# What you say when you meet people
+# ══════════════════════════════════════════════════════════════════════════════
+
+greetings:
+  - id: "privet"
+    word: "привет"
+    transliteration: "privet"
+    translation: "hi"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "privet.mp3"
+    notes: "Informal. Use with friends, family. Р sounds like rolled 'r'."
+    register: "informal"
+    examples:
+      - { ru: "Привет!", en: "Hi!" }
+      - { ru: "Привет, как дела?", en: "Hi, how are you?" }
+
+  - id: "poka"
+    word: "пока"
+    transliteration: "poka"
+    translation: "bye"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "poka.mp3"
+    notes: "Informal. Also means 'for now', 'while'."
+    register: "informal"
+    examples:
+      - { ru: "Пока!", en: "Bye!" }
+
+  - id: "zdravstvuyte"
+    word: "здравствуйте"
+    transliteration: "zdravstvuyte"
+    translation: "hello (formal)"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 3
+    audio: "zdravstvuyte.mp3"
+    notes: "Formal. The first В is SILENT! Say: zdra-STVUY-te. Literally means 'be healthy'."
+    register: "formal"
+    examples:
+      - { ru: "Здравствуйте!", en: "Hello!" }
+
+  - id: "do_svidaniya"
+    word: "до свидания"
+    transliteration: "do svidaniya"
+    translation: "goodbye (formal)"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "do_svidaniya.mp3"
+    notes: "Formal. Literally 'until meeting'. Two words but learned as one."
+    register: "formal"
+    examples:
+      - { ru: "До свидания!", en: "Goodbye!" }
+
+  - id: "spasibo"
+    word: "спасибо"
+    transliteration: "spasibo"
+    translation: "thank you"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "spasibo.mp3"
+    notes: "Works in all situations. Stress on SI."
+    examples:
+      - { ru: "Спасибо!", en: "Thank you!" }
+      - { ru: "Спасибо большое!", en: "Thank you very much!" }
+
+  - id: "pozhaluysta"
+    word: "пожалуйста"
+    transliteration: "pozhaluysta"
+    translation: "please / you're welcome"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "pozhaluysta.mp3"
+    notes: "Dual purpose: 'please' when asking, 'you're welcome' as response to спасибо."
+    examples:
+      - { ru: "Кофе, пожалуйста.", en: "Coffee, please." }
+      - { ru: "— Спасибо! — Пожалуйста.", en: "— Thanks! — You're welcome." }
+
+  - id: "izvinite"
+    word: "извините"
+    transliteration: "izvinite"
+    translation: "excuse me / sorry"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "izvinite.mp3"
+    notes: "Use to get attention, apologize, or say 'pardon?'"
+    register: "formal"
+    examples:
+      - { ru: "Извините, где метро?", en: "Excuse me, where is the metro?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 6: COGNATES & INTERNATIONAL WORDS
+# Instant vocabulary - words you already know!
+# ══════════════════════════════════════════════════════════════════════════════
+
+cognates:
+  - id: "mama"
+    word: "мама"
+    transliteration: "mama"
+    translation: "mom"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    audio: "mama.mp3"
+    notes: "Identical to English! Uses only familiar letters."
+    examples:
+      - { ru: "Это мама.", en: "This is mom." }
+
+  - id: "papa"
+    word: "папа"
+    transliteration: "papa"
+    translation: "dad"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "papa.mp3"
+    notes: "Ends in -а but refers to a male, so uses он."
+    examples:
+      - { ru: "Папа дома.", en: "Dad is at home." }
+
+  - id: "kot"
+    word: "кот"
+    transliteration: "kot"
+    translation: "cat (male)"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "kot.mp3"
+    notes: "Male cat. Female cat is кошка."
+    examples:
+      - { ru: "Это кот.", en: "This is a cat." }
+
+  - id: "taksi"
+    word: "такси"
+    transliteration: "taksi"
+    translation: "taxi"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    audio: "taksi.mp3"
+    notes: "Indeclinable (doesn't change). Neuter gender."
+    examples:
+      - { ru: "Где такси?", en: "Where is the taxi?" }
+
+  - id: "metro"
+    word: "метро"
+    transliteration: "metro"
+    translation: "metro / subway"
+    pos: "noun"
+    gender: "n"
+    frequency: 1
+    difficulty: 1
+    audio: "metro.mp3"
+    notes: "Indeclinable. Essential for any Russian city!"
+    examples:
+      - { ru: "Где метро?", en: "Where is the metro?" }
+
+  - id: "radio"
+    word: "радио"
+    transliteration: "radio"
+    translation: "radio"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    audio: "radio.mp3"
+    notes: "Р sounds like rolled 'r', not English 'r'."
+    examples:
+      - { ru: "Это радио.", en: "This is a radio." }
+
+  - id: "kofe"
+    word: "кофе"
+    transliteration: "kofe"
+    translation: "coffee"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "kofe.mp3"
+    notes: "Exception: ends in -е but masculine! Indeclinable."
+    examples:
+      - { ru: "Кофе, пожалуйста.", en: "Coffee, please." }
+
+  - id: "telefon"
+    word: "телефон"
+    transliteration: "telefon"
+    translation: "phone / telephone"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "telefon.mp3"
+    examples:
+      - { ru: "Где телефон?", en: "Where is the phone?" }
+
+  - id: "doktor"
+    word: "доктор"
+    transliteration: "doktor"
+    translation: "doctor"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "doktor.mp3"
+    examples:
+      - { ru: "Он доктор.", en: "He is a doctor." }
+
+  - id: "student"
+    word: "студент"
+    transliteration: "student"
+    translation: "student (male)"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "student.mp3"
+    notes: "Female student is студентка."
+    examples:
+      - { ru: "Я студент.", en: "I am a student." }
+
+  - id: "restoran"
+    word: "ресторан"
+    transliteration: "restoran"
+    translation: "restaurant"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "restoran.mp3"
+    examples:
+      - { ru: "Где ресторан?", en: "Where is the restaurant?" }
+
+  - id: "bank"
+    word: "банк"
+    transliteration: "bank"
+    translation: "bank"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "bank.mp3"
+    examples:
+      - { ru: "Банк там.", en: "The bank is there." }
+
+  - id: "park"
+    word: "парк"
+    transliteration: "park"
+    translation: "park"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "park.mp3"
+    examples:
+      - { ru: "Парк тут.", en: "The park is here." }
+
+  - id: "internet"
+    word: "интернет"
+    transliteration: "internet"
+    translation: "internet"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "internet.mp3"
+    examples:
+      - { ru: "Где интернет?", en: "Where is the internet? / Is there wifi?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 7: ESSENTIAL NOUNS
+# The most useful everyday nouns
+# ══════════════════════════════════════════════════════════════════════════════
+
+nouns:
+  - id: "dom"
+    word: "дом"
+    transliteration: "dom"
+    translation: "house / home"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "dom.mp3"
+    notes: "Д sounds like 'd'. One of the most useful words."
+    examples:
+      - { ru: "Это мой дом.", en: "This is my house." }
+
+  - id: "kniga"
+    word: "книга"
+    transliteration: "kniga"
+    translation: "book"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    audio: "kniga.mp3"
+    notes: "Say both consonants at start: k-niga."
+    examples:
+      - { ru: "Это книга.", en: "This is a book." }
+
+  - id: "okno"
+    word: "окно"
+    transliteration: "okno"
+    translation: "window"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    audio: "okno.mp3"
+    notes: "Classic neuter noun (ends in -о)."
+    examples:
+      - { ru: "Окно там.", en: "The window is there." }
+
+  - id: "voda"
+    word: "вода"
+    transliteration: "voda"
+    translation: "water"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    audio: "voda.mp3"
+    notes: "В sounds like 'v'. Essential survival word!"
+    examples:
+      - { ru: "Вода, пожалуйста.", en: "Water, please." }
+
+  - id: "yeda"
+    word: "еда"
+    transliteration: "yeda"
+    translation: "food"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    audio: "yeda.mp3"
+    notes: "Е at start of word = 'ye'."
+    examples:
+      - { ru: "Где еда?", en: "Where is food?" }
+
+  - id: "drug"
+    word: "друг"
+    transliteration: "druk"
+    translation: "friend (male)"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "drug.mp3"
+    notes: "Г at end of word sounds like 'k'. Female friend is подруга."
+    examples:
+      - { ru: "Это мой друг.", en: "This is my friend." }
+
+  - id: "brat"
+    word: "брат"
+    transliteration: "brat"
+    translation: "brother"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    audio: "brat.mp3"
+    notes: "Б sounds like 'b'."
+    examples:
+      - { ru: "Это мой брат.", en: "This is my brother." }
+
+  - id: "sestra"
+    word: "сестра"
+    transliteration: "sestra"
+    translation: "sister"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    audio: "sestra.mp3"
+    examples:
+      - { ru: "Это моя сестра.", en: "This is my sister." }
+
+  - id: "sobaka"
+    word: "собака"
+    transliteration: "sobaka"
+    translation: "dog"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    audio: "sobaka.mp3"
+    examples:
+      - { ru: "Это собака.", en: "This is a dog." }
+
+  - id: "mashina"
+    word: "машина"
+    transliteration: "mashina"
+    translation: "car"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    audio: "mashina.mp3"
+    notes: "Ш sounds like 'sh'. Also means 'machine'."
+    examples:
+      - { ru: "Это моя машина.", en: "This is my car." }
+
+  - id: "ulitsa"
+    word: "улица"
+    transliteration: "ulitsa"
+    translation: "street"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 2
+    audio: "ulitsa.mp3"
+    notes: "Ц sounds like 'ts'."
+    examples:
+      - { ru: "Где улица Пушкина?", en: "Where is Pushkin Street?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 8: POSSESSION CONSTRUCTION
+# The "I have" pattern
+# ══════════════════════════════════════════════════════════════════════════════
+
+possession:
+  - id: "u_menya"
+    word: "у меня"
+    transliteration: "u menya"
+    translation: "I have / at me"
+    pos: "phrase"
+    frequency: 1
+    difficulty: 2
+    audio: "u_menya.mp3"
+    notes: "Literally 'by me'. У + genitive case. The standard 'I have' construction."
+    examples:
+      - { ru: "У меня есть кот.", en: "I have a cat." }
+      - { ru: "У меня вопрос.", en: "I have a question." }
+
+  - id: "yest"
+    word: "есть"
+    transliteration: "yest'"
+    translation: "there is / to have"
+    pos: "verb"
+    frequency: 1
+    difficulty: 1
+    audio: "yest.mp3"
+    notes: "Often omitted in present tense, but used for emphasis or 'I have'."
+    examples:
+      - { ru: "У меня есть брат.", en: "I have a brother." }
+      - { ru: "Тут есть кофе?", en: "Is there coffee here?" }
+
+  - id: "moy"
+    word: "мой"
+    transliteration: "moy"
+    translation: "my (masc)"
+    pos: "pronoun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "moy.mp3"
+    notes: "For masculine nouns. Й sounds like 'y' in 'boy'."
+    examples:
+      - { ru: "Это мой дом.", en: "This is my house." }
+
+  - id: "moya"
+    word: "моя"
+    transliteration: "moya"
+    translation: "my (fem)"
+    pos: "pronoun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    audio: "moya.mp3"
+    notes: "For feminine nouns."
+    examples:
+      - { ru: "Это моя книга.", en: "This is my book." }
+
+  - id: "moyo"
+    word: "моё"
+    transliteration: "moyo"
+    translation: "my (neuter)"
+    pos: "pronoun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    audio: "moyo.mp3"
+    notes: "For neuter nouns. Ё always stressed, sounds like 'yo'."
+    examples:
+      - { ru: "Это моё окно.", en: "This is my window." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 9: USEFUL ADJECTIVES & ADVERBS
+# Describing things
+# ══════════════════════════════════════════════════════════════════════════════
+
+descriptors:
+  - id: "khorosho"
+    word: "хорошо"
+    transliteration: "khorosho"
+    translation: "good / well / OK"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "khorosho.mp3"
+    notes: "Х sounds like German 'ch' or Scottish 'loch'. Very useful!"
+    examples:
+      - { ru: "Хорошо!", en: "Good! / OK!" }
+      - { ru: "Всё хорошо.", en: "Everything is fine." }
+
+  - id: "plokho"
+    word: "плохо"
+    transliteration: "plokho"
+    translation: "bad / badly"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 1
+    audio: "plokho.mp3"
+    examples:
+      - { ru: "Это плохо.", en: "That's bad." }
+
+  - id: "ochen"
+    word: "очень"
+    transliteration: "ochen'"
+    translation: "very"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "ochen.mp3"
+    notes: "Ч sounds like 'ch'. Ь makes the Н soft."
+    examples:
+      - { ru: "Очень хорошо!", en: "Very good!" }
+      - { ru: "Очень приятно.", en: "Nice to meet you. (lit. Very pleasant)" }
+
+  - id: "bolshoy"
+    word: "большой"
+    transliteration: "bol'shoy"
+    translation: "big"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "bolshoy.mp3"
+    notes: "Masculine form. Changes for gender: большая (f), большое (n)."
+    examples:
+      - { ru: "Это большой дом.", en: "This is a big house." }
+
+  - id: "malenkiy"
+    word: "маленький"
+    transliteration: "malen'kiy"
+    translation: "small / little"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 2
+    audio: "malenkiy.mp3"
+    notes: "Masculine form. маленькая (f), маленькое (n)."
+    examples:
+      - { ru: "Это маленький кот.", en: "This is a small cat." }
+
+  - id: "noviy"
+    word: "новый"
+    transliteration: "novyy"
+    translation: "new"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "noviy.mp3"
+    examples:
+      - { ru: "Это новый телефон.", en: "This is a new phone." }
+
+  - id: "stariy"
+    word: "старый"
+    transliteration: "staryy"
+    translation: "old"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "stariy.mp3"
+    examples:
+      - { ru: "Это старый дом.", en: "This is an old house." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  lesson_1_cognates:
+    title: "Cognates & Cyrillic"
+    focus: "Letters identical to Latin, instant vocabulary"
+    primary_vocab:
+      - mama
+      - kot
+      - taksi
+      - metro
+      - eto
+      - tam
+      - tut
+    secondary_vocab:
+      - da
+      - nyet
+
+  lesson_2_identification:
+    title: "Is this a...?"
+    focus: "Questions, yes/no, negation"
+    primary_vocab:
+      - da
+      - nyet
+      - nye
+      - dom
+      - radio
+      - kofe
+      - bank
+    review_vocab:
+      - eto
+      - tam
+      - tut
+      - kot
+      - taksi
+
+  lesson_3_gender:
+    title: "He, She, It"
+    focus: "Grammatical gender, pronouns"
+    primary_vocab:
+      - on
+      - ona
+      - ono
+      - park
+      - okno
+      - papa
+      - kniga
+    review_vocab:
+      - eto
+      - gde
+      - tam
+      - tut
+      - dom
+
+  lesson_4_possession:
+    title: "I have..."
+    focus: "У меня есть construction"
+    primary_vocab:
+      - u_menya
+      - yest
+      - brat
+      - sestra
+      - sobaka
+      - mashina
+      - telefon
+    review_vocab:
+      - ya
+      - kot
+      - dom
+      - da
+      - nyet
+
+  lesson_5_questions:
+    title: "Where, Who, What"
+    focus: "Question words, basic information"
+    primary_vocab:
+      - gde
+      - kto
+      - chto
+      - vot
+      - doktor
+      - student
+      - drug
+      - restoran
+    review_vocab:
+      - tam
+      - tut
+      - eto
+      - on
+      - ona

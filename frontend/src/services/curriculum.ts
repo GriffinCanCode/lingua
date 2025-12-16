@@ -10,12 +10,14 @@ import { api, handleApiError } from '../lib/api';
 
 // === Types ===
 
+export type LevelType = 'intro' | 'easy' | 'medium' | 'hard' | 'review';
+
 export interface CurriculumNode {
   id: string;
   title: string;
-  node_type: 'introduction' | 'practice' | 'mixed' | 'checkpoint';
-  status: 'locked' | 'available' | 'in_progress' | 'completed' | 'needs_practice';
-  level: number;  // 0-5 (crowns)
+  level: number;  // 1-7 within unit
+  level_type: LevelType;
+  status: 'locked' | 'available' | 'in_progress' | 'completed';
   total_reviews: number;
   estimated_duration_min: number;
 }
@@ -86,6 +88,30 @@ export interface LessonProgress {
   accuracy: number;
 }
 
+// === Exercise Types ===
+import type { Exercise } from '../types/exercises';
+
+export interface VocabItem {
+  word: string;
+  translation: string;
+  audio?: string;
+  hints?: string[];
+  gender?: string;
+}
+
+export interface LessonExercises {
+  node_id: string;
+  node_title: string;
+  level: number;
+  level_type: LevelType;
+  exercises: Exercise[];
+  total_exercises: number;
+  vocabulary: VocabItem[];
+  content?: {
+    introduction?: string;
+  };
+}
+
 // === API Functions ===
 
 /**
@@ -116,17 +142,14 @@ export async function getCurrentNode(language = 'ru'): Promise<CurrentNode> {
   }
 }
 
+
 /**
- * Generate a lesson for a specific node
+ * Get Duolingo-style exercises for a lesson node. Exercise distribution is based on the node's level_type.
  */
-export async function getLesson(
-  nodeId: string,
-  maxSentences = 10,
-  language = 'ru'
-): Promise<Lesson> {
+export async function getLessonExercises(nodeId: string, numExercises = 15, language = 'ru'): Promise<LessonExercises> {
   try {
-    const response = await api.get<Lesson>(`/curriculum/nodes/${nodeId}/lesson`, {
-      params: { max_sentences: maxSentences, language },
+    const response = await api.get<LessonExercises>(`/curriculum/nodes/${nodeId}/exercises`, {
+      params: { num_exercises: numExercises, language },
     });
     return response.data;
   } catch (error) {

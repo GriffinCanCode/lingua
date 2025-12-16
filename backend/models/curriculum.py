@@ -59,7 +59,7 @@ class CurriculumUnit(Base):
 
 
 class CurriculumNode(Base):
-    """Individual lesson node within a unit"""
+    """Individual lesson level within a unit (intro, easy, medium, hard, review)"""
     __tablename__ = "curriculum_nodes"
     __table_args__ = (
         Index("ix_curriculum_nodes_unit_order", "unit_id", "order_index"),
@@ -70,14 +70,10 @@ class CurriculumNode(Base):
     title = Column(String(255), nullable=False)
     description = Column(Text)
     order_index = Column(Integer, nullable=False, default=0)
-    node_type = Column(String(50), nullable=False, default="practice")  # introduction, practice, mixed, checkpoint
-    target_patterns = Column(JSON, default=list)  # Specific patterns for this node
-    complexity_min = Column(Integer, default=1)
-    complexity_max = Column(Integer, default=10)
-    min_reviews_to_complete = Column(Integer, default=5)
-    sentence_pool_size = Column(Integer, default=0)  # Computed: how many sentences available
+    level = Column(Integer, nullable=False, default=1)  # 1-7 within unit
+    level_type = Column(String(20), nullable=False, default="medium")  # intro, easy, medium, hard, review
     estimated_duration_min = Column(Integer, default=5)
-    extra_data = Column(JSON, default=dict)  # Additional config (e.g., exercise types)
+    extra_data = Column(JSON, default=dict)  # vocab_unit, vocab_lesson, icons, etc.
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

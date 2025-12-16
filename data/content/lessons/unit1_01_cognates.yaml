@@ -1,50 +1,133 @@
-section:
-  title: "Foundations"
-  description: "Core concepts and basic vocabulary."
-  order: 1
+# Unit 1, Lesson 1: Cognates & Cyrillic
+# Focus: Letters that look/sound the same as English (М, А, К, О, Т)
 
-unit:
-  title: "The Alphabet"
-  description: "Learn to read Russian by recognizing words you already know."
-  order: 1
+lesson:
+  id: "unit1_01_cognates"
+  title: "Cognates & Cyrillic"
+  parts: 5
+  description: "Read your first Russian words instantly using letters you already know."
 
-lessons:
-  - title: "Cognates & Cyrillic"
-    type: "introduction"
-    order: 1
-    description: "Read your first Russian words instantly."
-    content:
-      introduction: |
-        # The Secret to Reading Russian
-        Russian looks scary, but many letters are the same as English!
-        
-        - **A** is "A"
-        - **K** is "K"
-        - **M** is "M"
-        - **O** is "O"
-        - **T** is "T"
-        
-        Let's read some words that are exactly the same in both languages.
-    vocabulary:
-      - word: "Мама"
-        translation: "Mom"
-        audio: "mama.mp3"
-      - word: "Атом"
-        translation: "Atom"
-        audio: "atom.mp3"
-      - word: "Кот"
-        translation: "Cat"
-        audio: "kot.mp3"
-      - word: "Такси"
-        translation: "Taxi"
-        audio: "taxi.mp3"
-    sentences:
-      - text: "Это мама."
-        translation: "This is mom."
-        complexity: 1
-      - text: "Это кот."
-        translation: "This is a cat."
-        complexity: 1
-      - text: "Где такси?"
-        translation: "Where is the taxi?"
-        complexity: 1
+content:
+  introduction: |
+    # The Secret to Reading Russian
+    
+    Russian looks scary, but many letters are the same as English!
+    
+    - **А** sounds like "A" in "father"
+    - **К** sounds like "K" in "kite"
+    - **М** sounds like "M" in "mom"
+    - **О** sounds like "O" in "for"
+    - **Т** sounds like "T" in "top"
+    
+    Let's read some words that are **exactly** the same in both languages!
+
+vocabulary:
+  - word: "Мама"
+    translation: "Mom"
+    audio: "mama.mp3"
+    hints: ["Same as English 'mama'"]
+    gender: "f"
+
+  - word: "Кот"
+    translation: "Cat"
+    audio: "kot.mp3"
+    hints: ["Sounds like 'coat' without the 'a'"]
+    gender: "m"
+
+  - word: "Атом"
+    translation: "Atom"
+    audio: "atom.mp3"
+    hints: ["Identical to English!"]
+    gender: "m"
+
+  - word: "Такси"
+    translation: "Taxi"
+    audio: "taxi.mp3"
+    hints: ["Same word, Russian spelling"]
+    gender: "n"
+
+  - word: "Это"
+    translation: "This is"
+    audio: "eto.mp3"
+    hints: ["Э sounds like 'e' in 'pet'"]
+
+  - word: "Там"
+    translation: "There"
+    audio: "tam.mp3"
+    hints: ["Easy: Т + А + М"]
+    
+  - word: "Тут"
+    translation: "Here"
+    audio: "tut.mp3"
+    hints: ["У sounds like 'oo' in 'boot'"]
+
+  - word: "Том"
+    translation: "Tom (name)"
+    audio: "tom.mp3"
+    hints: ["The name, like Tom Sawyer"]
+    gender: "m"
+
+sentences:
+  - text: "Это мама."
+    translation: "This is mom."
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "мама", en: "mom" }
+    distractors: ["папа", "кот", "дом"]
+    complexity: 1
+
+  - text: "Это кот."
+    translation: "This is a cat."
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "кот", en: "a cat" }
+    distractors: ["там", "тут", "мама"]
+    complexity: 1
+
+  - text: "Кот там."
+    translation: "The cat is there."
+    words:
+      - { ru: "Кот", en: "The cat" }
+      - { ru: "там", en: "is there" }
+    distractors: ["это", "тут", "мама"]
+    complexity: 1
+
+  - text: "Мама тут."
+    translation: "Mom is here."
+    words:
+      - { ru: "Мама", en: "Mom" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["там", "кот", "атом"]
+    complexity: 1
+
+  - text: "Это такси."
+    translation: "This is a taxi."
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "такси", en: "a taxi" }
+    distractors: ["мама", "кот", "атом"]
+    complexity: 1
+
+  - text: "Такси там."
+    translation: "The taxi is there."
+    words:
+      - { ru: "Такси", en: "The taxi" }
+      - { ru: "там", en: "is there" }
+    distractors: ["тут", "это", "мама"]
+    complexity: 1
+
+  - text: "Это атом."
+    translation: "This is an atom."
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "атом", en: "an atom" }
+    distractors: ["такси", "кот", "мама"]
+    complexity: 1
+
+  - text: "Том тут."
+    translation: "Tom is here."
+    words:
+      - { ru: "Том", en: "Tom" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["там", "это", "мама"]
+    complexity: 1

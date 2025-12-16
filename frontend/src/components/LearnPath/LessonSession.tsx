@@ -1,75 +1,207 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, Trophy } from 'lucide-react';
-import { getLesson, completeLesson, Lesson } from '../../services/curriculum';
+import { X, Heart, Trophy, Check, XCircle } from 'lucide-react';
+import clsx from 'clsx';
+
+import { getLessonExercises, completeLesson, LessonExercises, VocabItem } from '../../services/curriculum';
 import { LessonIntro } from './LessonIntro';
 import { useComponentLogger } from '../../lib/logger';
-import clsx from 'clsx';
+import { WordBank, Typing, Matching, MultipleChoice, FillBlank, WordIntro } from '../Exercises';
+import type { VocabWord } from '../Exercises';
+import type { Exercise, ExerciseResult, ValidationResult } from '../../types/exercises';
+
+// Maximum hearts (lives) per lesson
+const MAX_HEARTS = 3;
 
 export const LessonSession: React.FC = () => {
   const { nodeId } = useParams<{ nodeId: string }>();
   const navigate = useNavigate();
   const { logger } = useComponentLogger('LessonSession');
 
-  const [lesson, setLesson] = useState<Lesson | null>(null);
+  // State
+  const [lesson, setLesson] = useState<LessonExercises | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [completed, setCompleted] = useState(false);
+  const [hearts, setHearts] = useState(MAX_HEARTS);
+  const [results, setResults] = useState<ExerciseResult[]>([]);
+  const [showFeedback, setShowFeedback] = useState<ValidationResult | null>(null);
   const [showIntro, setShowIntro] = useState(true);
+  const [completed, setCompleted] = useState(false);
 
+  // Load lesson exercises
   useEffect(() => {
-    if (nodeId) {
-      loadLesson(nodeId);
+    if (!nodeId) return;
+
+    const loadExercises = async () => {
+      setLoading(true);
+      try {
+        const data = await getLessonExercises(nodeId);
+        setLesson(data);
+        logger.info('Exercises loaded', { nodeId, count: data.exercises.length });
+      } catch (err) {
+        logger.error('Failed to load exercises', err instanceof Error ? err : undefined);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadExercises();
+  }, [nodeId, logger]);
+
+  // Current exercise
+  const currentExercise = useMemo(() =>
+    lesson?.exercises[currentIndex] ?? null,
+    [lesson, currentIndex]
+  );
+
+  // Progress percentage
+  const progress = useMemo(() =>
+    lesson ? (currentIndex / lesson.exercises.length) * 100 : 0,
+    [lesson, currentIndex]
+  );
+
+  // Correct count
+  const correctCount = useMemo(() =>
+    results.filter(r => r.correct).length,
+    [results]
+  );
+
+  // Validate answer
+  const validateAnswer = useCallback((answer: string | string[], exercise: Exercise): ValidationResult => {
+    const normalize = (s: string) => s.toLowerCase().trim().replace(/[.,!?;:]/g, '');
+
+    switch (exercise.type) {
+      case 'word_bank':
+        return {
+          correct: normalize(answer as string) === normalize(exercise.targetText),
+          correctAnswer: exercise.targetText,
+        };
+
+      case 'typing': {
+        const normalizedAnswer = normalize(answer as string);
+        const isCorrect = exercise.acceptableAnswers.some(
+          acc => normalize(acc) === normalizedAnswer
+        ) || normalize(exercise.targetText) === normalizedAnswer;
+
+        // Check for close typo
+        const typoDetected = !isCorrect && levenshtein(normalizedAnswer, normalize(exercise.targetText)) <= 2;
+
+        return {
+          correct: isCorrect || typoDetected,
+          correctAnswer: exercise.targetText,
+          typoDetected,
+          feedback: typoDetected ? 'Almost! Watch your spelling.' : undefined,
+        };
+      }
+
+      case 'multiple_choice':
+        return {
+          correct: answer === exercise.correctAnswer,
+          correctAnswer: exercise.correctAnswer,
+        };
+
+      case 'fill_blank':
+        return {
+          correct: answer === exercise.correctAnswer,
+          correctAnswer: exercise.correctAnswer,
+        };
+
+      case 'matching':
+        // Matching auto-submits when all pairs matched
+        return { correct: true, correctAnswer: '' };
+
+      default:
+        return { correct: false, correctAnswer: '' };
     }
-  }, [nodeId]);
+  }, []);
 
-  const loadLesson = async (id: string) => {
-    setLoading(true);
-    try {
-      const data = await getLesson(id);
-      setLesson(data);
-      logger.info('Lesson loaded', { nodeId: id, sentenceCount: data.sentences.length });
-    } catch (err) {
-      logger.error('Failed to load lesson', err instanceof Error ? err : undefined);
-    } finally {
-      setLoading(false);
+  // Handle answer submission
+  const handleSubmit = useCallback((answer: string | string[]) => {
+    if (!currentExercise) return;
+
+    const validation = validateAnswer(answer, currentExercise);
+    setShowFeedback(validation);
+
+    // Record result
+    const result: ExerciseResult = {
+      exerciseId: currentExercise.id,
+      correct: validation.correct,
+      userAnswer: answer,
+      timeSpentMs: 0, // TODO: track time
+      attempts: 1,
+    };
+    setResults(prev => [...prev, result]);
+
+    // Update hearts if incorrect
+    if (!validation.correct) {
+      setHearts(prev => prev - 1);
     }
-  };
 
-  const handleResult = (isCorrect: boolean) => {
-    if (isCorrect) setCorrectCount(prev => prev + 1);
+    // Advance after feedback delay
+    setTimeout(() => {
+      setShowFeedback(null);
 
-    if (lesson && currentIndex < lesson.sentences.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-      setShowAnswer(false);
-    } else {
-      finishLesson(isCorrect ? correctCount + 1 : correctCount);
-    }
-  };
+      if (hearts <= 1 && !validation.correct) {
+        // Out of hearts - lesson failed
+        setCompleted(true);
+      } else if (lesson && currentIndex < lesson.exercises.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else {
+        finishLesson();
+      }
+    }, validation.correct ? 800 : 1500);
+  }, [currentExercise, validateAnswer, hearts, lesson, currentIndex]);
 
-  const finishLesson = async (finalCorrect: number) => {
+  // Finish lesson
+  const finishLesson = useCallback(async () => {
     if (!lesson || !nodeId) return;
 
     setCompleted(true);
-    try {
-      await completeLesson(nodeId, finalCorrect, lesson.sentences.length);
-      logger.info('Lesson completed', { correct: finalCorrect, total: lesson.sentences.length });
-    } catch (err) {
-      logger.error('Failed to submit lesson results', err instanceof Error ? err : undefined);
-    }
-  };
+    const correct = results.filter(r => r.correct).length + (showFeedback?.correct ? 1 : 0);
 
+    try {
+      await completeLesson(nodeId, correct, lesson.exercises.length);
+      logger.info('Lesson completed', { correct, total: lesson.exercises.length });
+    } catch (err) {
+      logger.error('Failed to submit results', err instanceof Error ? err : undefined);
+    }
+  }, [lesson, nodeId, results, showFeedback, logger]);
+
+  // Render exercise component
+  const renderExercise = useCallback((exercise: Exercise) => {
+    const props = {
+      exercise,
+      onSubmit: handleSubmit,
+      disabled: !!showFeedback,
+    };
+
+    switch (exercise.type) {
+      case 'word_bank':
+        return <WordBank {...props} exercise={exercise} />;
+      case 'typing':
+        return <Typing {...props} exercise={exercise} />;
+      case 'matching':
+        return <Matching {...props} exercise={exercise} />;
+      case 'multiple_choice':
+        return <MultipleChoice {...props} exercise={exercise} />;
+      case 'fill_blank':
+        return <FillBlank {...props} exercise={exercise} />;
+      default:
+        return <div>Unknown exercise type</div>;
+    }
+  }, [handleSubmit, showFeedback]);
+
+  // Loading state
   if (loading) {
     return (
       <div className="flex justify-center items-center h-full min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600" />
       </div>
     );
   }
 
+  // Not found
   if (!lesson) {
     return (
       <div className="text-center mt-12">
@@ -81,8 +213,83 @@ export const LessonSession: React.FC = () => {
     );
   }
 
-  // Handle empty lessons (no sentences yet)
-  if (lesson.sentences.length === 0) {
+  // Convert VocabItem to VocabWord for WordIntro
+  const vocabWords: VocabWord[] = lesson.vocabulary.map(v => ({
+    word: v.word,
+    translation: v.translation,
+    transliteration: undefined,
+    audio: v.audio,
+    hints: v.hints,
+    gender: v.gender,
+  }));
+
+  // Handle intro level completion
+  const handleIntroComplete = async () => {
+    if (!nodeId) return;
+    try {
+      await completeLesson(nodeId, vocabWords.length, vocabWords.length);
+      logger.info('Intro lesson completed', { words: vocabWords.length });
+      setCompleted(true);
+    } catch (err) {
+      logger.error('Failed to complete intro', err instanceof Error ? err : undefined);
+      setCompleted(true);
+    }
+  };
+
+  // Intro level type - show WordIntro component
+  if (lesson.level_type === 'intro') {
+    if (completed) {
+      return (
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="max-w-md mx-auto mt-12 text-center">
+          <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
+            <div className="w-24 h-24 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mx-auto mb-6">
+              <Trophy size={48} />
+            </div>
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Words Learned!</h2>
+            <p className="text-xl text-primary-600 font-bold mb-2">+{vocabWords.length * 10} XP</p>
+            <p className="text-gray-500 mb-8">You learned {vocabWords.length} new words!</p>
+            <button onClick={() => navigate('/')} className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800">
+              Continue
+            </button>
+          </div>
+        </motion.div>
+      );
+    }
+
+    if (vocabWords.length === 0) {
+      return (
+        <div className="text-center mt-12 max-w-md mx-auto">
+          <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
+            <div className="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <span className="text-4xl">📚</span>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">{lesson.node_title}</h2>
+            <p className="text-gray-500 mb-6">No vocabulary available yet.</p>
+            <button onClick={() => navigate('/')} className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800">
+              Return to Path
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="max-w-4xl mx-auto h-full flex flex-col px-4 py-6">
+        <div className="flex items-center mb-6">
+          <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 rounded-lg text-gray-500">
+            <X size={24} />
+          </button>
+          <h2 className="ml-4 text-xl font-bold text-gray-900">{lesson.node_title}</h2>
+        </div>
+        <div className="flex-1 bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+          <WordIntro words={vocabWords} onComplete={handleIntroComplete} />
+        </div>
+      </div>
+    );
+  }
+
+  // Empty lesson (for non-intro types)
+  if (lesson.exercises.length === 0) {
     return (
       <div className="text-center mt-12 max-w-md mx-auto">
         <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
@@ -90,13 +297,8 @@ export const LessonSession: React.FC = () => {
             <span className="text-4xl">📚</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">{lesson.node_title}</h2>
-          <p className="text-gray-500 mb-6">
-            This lesson is being prepared. Check back soon for exercises!
-          </p>
-          <button 
-            onClick={() => navigate('/')} 
-            className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800 transition-colors"
-          >
+          <p className="text-gray-500 mb-6">This lesson is being prepared. Check back soon!</p>
+          <button onClick={() => navigate('/')} className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800">
             Return to Path
           </button>
         </div>
@@ -104,22 +306,23 @@ export const LessonSession: React.FC = () => {
     );
   }
 
-  // Introduction Screen
+  // Brief intro screen before exercises
   if (showIntro) {
     return (
       <LessonIntro
         title={lesson.node_title}
-        description={`Ready to master new concepts? This lesson contains ${lesson.sentences.length} exercises.`}
-        content={lesson.extra_data?.content || {}}
-        vocabulary={lesson.extra_data?.vocabulary || []}
+        description={`${lesson.total_exercises} exercises to complete`}
+        content={lesson.content || {}}
+        vocabulary={lesson.vocabulary}
         onStart={() => setShowIntro(false)}
       />
     );
   }
 
-  // Completion Screen
+  // Completion screen
   if (completed) {
-    const percentage = Math.round((correctCount / lesson.sentences.length) * 100);
+    const percentage = Math.round((correctCount / lesson.exercises.length) * 100);
+    const passed = hearts > 0;
 
     return (
       <motion.div
@@ -128,41 +331,44 @@ export const LessonSession: React.FC = () => {
         className="max-w-md mx-auto mt-12 text-center"
       >
         <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-          <div className="w-24 h-24 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6 relative">
-            <Trophy size={48} />
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5 }}
-              className="absolute -right-2 -bottom-2 w-10 h-10 bg-green-500 rounded-full border-4 border-white flex items-center justify-center text-white font-bold text-sm"
-            >
-              +{correctCount * 10}
-            </motion.div>
+          <div className={clsx(
+            "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6",
+            passed ? "bg-yellow-100 text-yellow-600" : "bg-red-100 text-red-600"
+          )}>
+            {passed ? <Trophy size={48} /> : <XCircle size={48} />}
           </div>
 
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Lesson Complete!</h2>
-          <div className="text-5xl font-black text-primary-600 mb-2">{percentage}%</div>
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">
+            {passed ? 'Lesson Complete!' : 'Out of Hearts'}
+          </h2>
+          <div className={clsx(
+            "text-5xl font-black mb-2",
+            passed ? "text-primary-600" : "text-red-500"
+          )}>
+            {percentage}%
+          </div>
           <p className="text-gray-500 mb-8">
-            You got {correctCount} out of {lesson.sentences.length} correct.
+            {correctCount} of {lesson.exercises.length} correct
           </p>
 
           <div className="space-y-3">
             <button
               onClick={() => navigate('/')}
-              className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800 transition-transform transform hover:scale-[1.02]"
+              className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800"
             >
-              Continue Path
+              Continue
             </button>
             <button
               onClick={() => {
                 setCompleted(false);
                 setCurrentIndex(0);
-                setCorrectCount(0);
+                setHearts(MAX_HEARTS);
+                setResults([]);
                 setShowIntro(true);
               }}
-              className="w-full bg-white text-gray-700 font-bold py-4 px-6 rounded-xl hover:bg-gray-50 border-2 border-gray-200 transition-colors"
+              className="w-full bg-white text-gray-700 font-bold py-4 px-6 rounded-xl hover:bg-gray-50 border-2 border-gray-200"
             >
-              Review Again
+              Try Again
             </button>
           </div>
         </div>
@@ -170,95 +376,124 @@ export const LessonSession: React.FC = () => {
     );
   }
 
-  const currentSentence = lesson.sentences[currentIndex];
-  const progress = ((currentIndex) / lesson.sentences.length) * 100;
-
+  // Active lesson
   return (
-    <div className="max-w-4xl mx-auto h-full flex flex-col">
+    <div className="max-w-4xl mx-auto h-full flex flex-col px-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 rounded-lg text-gray-500 transition-colors">
+      <div className="flex items-center justify-between mb-6 pt-4">
+        <button
+          onClick={() => navigate('/')}
+          className="p-2 hover:bg-gray-100 rounded-lg text-gray-500"
+        >
           <X size={24} />
         </button>
-        <div className="flex-1 mx-8 h-4 bg-gray-200 rounded-full overflow-hidden">
+
+        {/* Progress bar */}
+        <div className="flex-1 mx-4 h-4 bg-gray-200 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-primary-500 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
           />
         </div>
-        <div className="font-mono text-gray-400 font-bold">
-          {currentIndex + 1} / {lesson.sentences.length}
+
+        {/* Hearts */}
+        <div className="flex items-center gap-1">
+          {Array.from({ length: MAX_HEARTS }).map((_, i) => (
+            <Heart
+              key={i}
+              size={20}
+              className={clsx(
+                "transition-colors",
+                i < hearts ? "fill-red-500 text-red-500" : "text-gray-300"
+              )}
+            />
+          ))}
+        </div>
+
+        {/* Counter */}
+        <div className="ml-4 font-mono text-gray-400 font-bold">
+          {currentIndex + 1}/{lesson.exercises.length}
         </div>
       </div>
 
-      {/* Card Area */}
-      <div className="flex-1 flex flex-col justify-center max-w-2xl mx-auto w-full">
+      {/* Exercise Area */}
+      <div className="flex-1 flex flex-col min-h-0">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentSentence.sentence_id}
+            key={currentExercise?.id}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="bg-white rounded-3xl shadow-xl border-b-4 border-gray-200 overflow-hidden min-h-[400px] flex flex-col"
+            className="flex-1 bg-white rounded-3xl shadow-xl border border-gray-100 p-8 flex flex-col"
           >
-            {/* Question Side */}
-            <div className="flex-1 p-10 flex flex-col items-center justify-center text-center">
-              <h3 className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-6">Translate this sentence</h3>
-              <p className="text-3xl md:text-4xl font-medium text-gray-800 leading-relaxed">
-                {currentSentence.text}
-              </p>
-            </div>
-
-            {/* Answer Interaction Area */}
-            <div className={clsx(
-              "p-6 transition-colors duration-300",
-              showAnswer ? "bg-gray-50" : "bg-white"
-            )}>
-              {!showAnswer ? (
-                <button
-                  onClick={() => setShowAnswer(true)}
-                  className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-primary-200 transition-all transform hover:translate-y-[-2px]"
-                >
-                  Show Answer
-                </button>
-              ) : (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                  <div className="mb-8 text-center">
-                    <p className="text-xl text-gray-700 font-medium mb-2">{currentSentence.translation}</p>
-                    <div className="flex justify-center gap-2 mt-4">
-                      {currentSentence.patterns.map((p, i) => (
-                        <span key={i} className="text-xs font-bold px-2 py-1 bg-blue-100 text-blue-700 rounded-md">
-                          {p}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <button
-                      onClick={() => handleResult(false)}
-                      className="flex flex-col items-center justify-center p-4 rounded-xl border-b-4 border-red-200 bg-red-50 text-red-600 hover:bg-red-100 active:border-b-0 active:translate-y-1 transition-all"
-                    >
-                      <X size={24} className="mb-1" />
-                      <span className="font-bold">Incorrect</span>
-                    </button>
-                    <button
-                      onClick={() => handleResult(true)}
-                      className="flex flex-col items-center justify-center p-4 rounded-xl border-b-4 border-green-200 bg-green-50 text-green-600 hover:bg-green-100 active:border-b-0 active:translate-y-1 transition-all"
-                    >
-                      <Check size={24} className="mb-1" />
-                      <span className="font-bold">Correct</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+            {currentExercise && renderExercise(currentExercise)}
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Feedback overlay */}
+      <AnimatePresence>
+        {showFeedback && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className={clsx(
+              "fixed bottom-0 left-0 right-0 p-6 flex items-center gap-4",
+              showFeedback.correct ? "bg-green-100" : "bg-red-100"
+            )}
+          >
+            <div className={clsx(
+              "w-12 h-12 rounded-full flex items-center justify-center",
+              showFeedback.correct ? "bg-green-500" : "bg-red-500"
+            )}>
+              {showFeedback.correct
+                ? <Check className="text-white" size={24} />
+                : <X className="text-white" size={24} />
+              }
+            </div>
+            <div className="flex-1">
+              <p className={clsx(
+                "font-bold text-lg",
+                showFeedback.correct ? "text-green-700" : "text-red-700"
+              )}>
+                {showFeedback.correct
+                  ? (showFeedback.typoDetected ? 'Almost correct!' : 'Correct!')
+                  : 'Incorrect'}
+              </p>
+              {!showFeedback.correct && (
+                <p className="text-red-600">
+                  Correct answer: <strong>{showFeedback.correctAnswer}</strong>
+                </p>
+              )}
+              {showFeedback.feedback && (
+                <p className="text-gray-600 text-sm">{showFeedback.feedback}</p>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
+
+// Levenshtein distance helper
+function levenshtein(a: string, b: string): number {
+  const matrix: number[][] = [];
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      matrix[i][j] = b[i - 1] === a[j - 1]
+        ? matrix[i - 1][j - 1]
+        : Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+export default LessonSession;

@@ -1,229 +1,249 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, HelpCircle, ThumbsUp, RefreshCw, Info } from 'lucide-react';
-import { srsService, ReviewItem, ReviewResult } from '../../services/srs';
-import { useComponentLogger, useActionLogger, useTracedAsync } from '../../lib/logger';
+import { Check, X, HelpCircle, ThumbsUp, Volume2, Eye, Zap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
-export const SRSReview: React.FC = () => {
-  const { logger, logAction } = useComponentLogger('SRSReview');
-  const trackAction = useActionLogger('srs');
-  const traceAsync = useTracedAsync('srs');
+interface VocabCard {
+  id: string;
+  word: string;
+  translation: string;
+  transliteration?: string;
+  gender?: string;
+  audio?: string;
+  example?: { ru: string; en: string };
+  lastReview?: string;
+  dueDate?: string;
+}
 
-  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+// Mock data - in production this would come from the API
+const MOCK_VOCAB: VocabCard[] = [
+  { id: '1', word: 'привет', translation: 'hello', transliteration: 'privyet', example: { ru: 'Привет! Как дела?', en: 'Hello! How are you?' } },
+  { id: '2', word: 'спасибо', translation: 'thank you', transliteration: 'spasiba', example: { ru: 'Спасибо большое!', en: 'Thank you very much!' } },
+  { id: '3', word: 'пожалуйста', translation: 'please / you\'re welcome', transliteration: 'pazhalusta' },
+  { id: '4', word: 'да', translation: 'yes', transliteration: 'da' },
+  { id: '5', word: 'нет', translation: 'no', transliteration: 'nyet' },
+  { id: '6', word: 'хорошо', translation: 'good / okay', transliteration: 'kharasho', example: { ru: 'Всё хорошо.', en: 'Everything is good.' } },
+  { id: '7', word: 'большой', translation: 'big', transliteration: "bol'shoy", gender: 'm' },
+  { id: '8', word: 'маленький', translation: 'small', transliteration: "malen'kiy", gender: 'm' },
+];
+
+export const SRSReview: React.FC = () => {
+  const navigate = useNavigate();
+  const [cards, setCards] = useState<VocabCard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [loading, setLoading] = useState(true);
   const [completed, setCompleted] = useState(false);
-  const [results, setResults] = useState<ReviewResult[]>([]);
+  const [results, setResults] = useState<{ id: string; quality: number }[]>([]);
+  const [sessionXp, setSessionXp] = useState(0);
 
   useEffect(() => {
-    loadReviews();
+    loadReviewCards();
   }, []);
 
-  const loadReviews = async () => {
+  const loadReviewCards = async () => {
     setLoading(true);
-    try {
-      const data = await traceAsync('loadDueReviews', () => srsService.getDueReviews());
-      setReviews(data);
-      logger.info('Reviews loaded', { count: data.length });
-    } catch (err) {
-      logger.error('Failed to load reviews', err instanceof Error ? err : undefined);
-      // Mock data for UI development if backend is down
-      // setReviews([{ sentence: { id: 1, text: 'Hello World', translation: 'Hola Mundo' }, patterns: [] }]);
-    } finally {
-      setLoading(false);
-    }
+    // TODO: Replace with actual API call
+    // const data = await srsService.getDueVocab();
+    await new Promise(r => setTimeout(r, 500)); // Simulate loading
+    setCards(MOCK_VOCAB.slice(0, 5)); // Take 5 cards for review
+    setLoading(false);
   };
 
-  const handleRating = (quality: number) => {
-    const currentItem = reviews[currentIndex];
-    logAction('review_rated', { quality, sentenceId: currentItem.sentence.id });
+  const handleRating = useCallback((quality: number) => {
+    const currentCard = cards[currentIndex];
+    const xpEarned = quality >= 4 ? 10 : quality >= 3 ? 5 : 2;
+    setSessionXp(prev => prev + xpEarned);
+    setResults(prev => [...prev, { id: currentCard.id, quality }]);
 
-    const newResults = currentItem.patterns.map(p => ({
-      pattern_id: p.id,
-      quality,
-    }));
-
-    setResults(prev => [...prev, ...newResults]);
-
-    if (currentIndex < reviews.length - 1) {
+    if (currentIndex < cards.length - 1) {
       setCurrentIndex(prev => prev + 1);
       setShowAnswer(false);
     } else {
       setCompleted(true);
-      submitResults([...results, ...newResults]);
     }
-  };
-
-  const submitResults = async (finalResults: ReviewResult[]) => {
-    try {
-      await traceAsync('submitReviews', () => srsService.submitReview(finalResults));
-      trackAction('session_completed', { reviewCount: reviews.length, patterns: finalResults.length });
-    } catch (err) {
-      logger.error('Failed to submit reviews', err instanceof Error ? err : undefined);
-    }
-  };
+  }, [cards, currentIndex]);
 
   const handleNewSession = () => {
-    trackAction('new_session_started');
     setCompleted(false);
     setCurrentIndex(0);
     setResults([]);
-    loadReviews();
+    setSessionXp(0);
+    setShowAnswer(false);
+    loadReviewCards();
+  };
+
+  const playAudio = (audio?: string) => {
+    if (audio) {
+      const audioEl = new Audio(`/audio/${audio}`);
+      audioEl.play().catch(() => {});
+    }
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-full min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600" />
       </div>
     );
   }
 
   if (completed) {
+    const correctCount = results.filter(r => r.quality >= 4).length;
+    const accuracy = Math.round((correctCount / results.length) * 100);
+
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md mx-auto mt-12 text-center"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md mx-auto mt-12 text-center">
         <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Check size={40} strokeWidth={3} />
+          <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Check size={48} strokeWidth={3} />
           </div>
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Session Complete!</h2>
-          <p className="text-gray-500 mb-8 text-lg">You've reviewed {reviews.length} sentences today.</p>
-          <button
-            onClick={handleNewSession}
-            className="w-full bg-primary-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-primary-700 transition-transform transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-primary-200"
-          >
-            Start New Session
-          </button>
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Review Complete!</h2>
+          <div className="flex justify-center gap-6 my-6">
+            <div className="text-center">
+              <p className="text-3xl font-black text-primary-600">{cards.length}</p>
+              <p className="text-sm text-gray-500">Words</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-black text-green-600">{accuracy}%</p>
+              <p className="text-sm text-gray-500">Accuracy</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-black text-yellow-600">+{sessionXp}</p>
+              <p className="text-sm text-gray-500">XP</p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            <button
+              onClick={handleNewSession}
+              className="w-full bg-primary-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-200"
+            >
+              Review More Words
+            </button>
+            <button
+              onClick={() => navigate('/')}
+              className="w-full bg-gray-100 text-gray-700 font-bold py-4 px-6 rounded-xl hover:bg-gray-200 transition-colors"
+            >
+              Back to Learning
+            </button>
+          </div>
         </div>
       </motion.div>
     );
   }
 
-  if (reviews.length === 0) {
+  if (cards.length === 0) {
     return (
       <div className="max-w-md mx-auto mt-12 text-center">
         <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-          <div className="w-20 h-20 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-6">
-            <RefreshCw size={40} />
+          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Check size={40} />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">No Reviews Due</h2>
-          <p className="text-gray-500 mb-8">You're all caught up! Check back later.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">All Caught Up!</h2>
+          <p className="text-gray-500 mb-8">No words due for review. Keep learning to add more!</p>
           <button
-            onClick={handleNewSession}
-            className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800 transition-colors"
+            onClick={() => navigate('/')}
+            className="w-full bg-primary-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-primary-700 transition-colors"
           >
-            Review Anyway
+            Continue Learning
           </button>
         </div>
       </div>
     );
   }
 
-  const currentItem = reviews[currentIndex];
-  const progress = ((currentIndex) / reviews.length) * 100;
+  const currentCard = cards[currentIndex];
+  const progress = (currentIndex / cards.length) * 100;
 
   return (
-    <div className="max-w-4xl mx-auto h-full flex flex-col">
-      {/* Progress Header */}
-      <div className="flex items-center gap-4 mb-8">
-        <div className="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-green-500 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.5 }}
-          />
+    <div className="max-w-2xl mx-auto h-full flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-bold text-gray-900">Vocabulary Review</h2>
+          <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-bold flex items-center gap-1">
+            <Zap size={14} /> +{sessionXp} XP
+          </span>
         </div>
-        <span className="font-bold text-gray-400 font-mono">
-          {currentIndex + 1} / {reviews.length}
-        </span>
+        <span className="font-mono text-gray-400">{currentIndex + 1} / {cards.length}</span>
       </div>
 
-      {/* Card Area */}
-      <div className="flex-1 flex flex-col justify-center max-w-2xl mx-auto w-full">
+      {/* Progress Bar */}
+      <div className="h-3 bg-gray-200 rounded-full overflow-hidden mb-8">
+        <motion.div
+          className="h-full bg-green-500 rounded-full"
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
+
+      {/* Flashcard */}
+      <div className="flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentItem.sentence.id}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="bg-white rounded-3xl shadow-xl border-b-4 border-gray-200 overflow-hidden min-h-[400px] flex flex-col"
+            key={currentCard.id}
+            initial={{ opacity: 0, rotateY: -90 }}
+            animate={{ opacity: 1, rotateY: 0 }}
+            exit={{ opacity: 0, rotateY: 90 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
           >
             {/* Question Side */}
-            <div className="flex-1 p-10 flex flex-col items-center justify-center text-center">
-              <h3 className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-6">Translate this sentence</h3>
-              <p className="text-3xl md:text-4xl font-medium text-gray-800 leading-relaxed">
-                {currentItem.sentence.text}
-              </p>
+            <div className="p-10 text-center min-h-[250px] flex flex-col items-center justify-center">
+              <p className="text-5xl font-bold text-gray-900 mb-3">{currentCard.word}</p>
+              {currentCard.transliteration && (
+                <p className="text-lg text-gray-400 italic">({currentCard.transliteration})</p>
+              )}
+              {currentCard.gender && (
+                <span className={clsx(
+                  "mt-3 px-3 py-1 rounded-full text-xs font-bold",
+                  currentCard.gender === 'm' && "bg-blue-100 text-blue-700",
+                  currentCard.gender === 'f' && "bg-pink-100 text-pink-700",
+                  currentCard.gender === 'n' && "bg-gray-100 text-gray-700",
+                )}>
+                  {currentCard.gender === 'm' ? 'Masculine' : currentCard.gender === 'f' ? 'Feminine' : 'Neuter'}
+                </span>
+              )}
+              {currentCard.audio && (
+                <button
+                  onClick={() => playAudio(currentCard.audio)}
+                  className="mt-4 p-3 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 transition-colors"
+                >
+                  <Volume2 size={20} />
+                </button>
+              )}
             </div>
 
-            {/* Answer Interaction Area */}
-            <div className={clsx(
-              "p-6 transition-colors duration-300",
-              showAnswer ? "bg-gray-50" : "bg-white"
-            )}>
+            {/* Answer Section */}
+            <div className={clsx("p-6 transition-colors", showAnswer ? "bg-gray-50" : "bg-white")}>
               {!showAnswer ? (
                 <button
                   onClick={() => setShowAnswer(true)}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-green-200 transition-all transform hover:translate-y-[-2px]"
+                  className="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg shadow-primary-200 transition-all flex items-center justify-center gap-2"
                 >
-                  Show Answer
+                  <Eye size={20} /> Show Answer
                 </button>
               ) : (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                  <div className="mb-8 text-center">
-                    <p className="text-xl text-gray-700 font-medium mb-4">{currentItem.sentence.translation}</p>
-
-                    {currentItem.patterns.length > 0 && (
-                      <div className="inline-flex flex-wrap justify-center gap-2">
-                        {currentItem.patterns.map(p => (
-                          <span key={p.id} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
-                            <Info size={12} className="mr-1" />
-                            {p.description || p.pattern_type}
-                          </span>
-                        ))}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                  <div className="text-center py-4 border-b border-gray-200">
+                    <p className="text-2xl font-bold text-primary-600">{currentCard.translation}</p>
+                    {currentCard.example && (
+                      <div className="mt-4 text-left bg-white p-4 rounded-xl border border-gray-100">
+                        <p className="text-gray-800 font-medium">{currentCard.example.ru}</p>
+                        <p className="text-gray-500 text-sm mt-1">{currentCard.example.en}</p>
                       </div>
                     )}
                   </div>
 
                   <div className="grid grid-cols-4 gap-3">
-                    <RatingButton
-                      label="Again"
-                      subLabel="< 1m"
-                      color="red"
-                      icon={X}
-                      onClick={() => handleRating(0)}
-                    />
-                    <RatingButton
-                      label="Hard"
-                      subLabel="2d"
-                      color="orange"
-                      icon={HelpCircle}
-                      onClick={() => handleRating(3)}
-                    />
-                    <RatingButton
-                      label="Good"
-                      subLabel="5d"
-                      color="blue"
-                      icon={ThumbsUp}
-                      onClick={() => handleRating(4)}
-                    />
-                    <RatingButton
-                      label="Easy"
-                      subLabel="10d"
-                      color="green"
-                      icon={Check}
-                      onClick={() => handleRating(5)}
-                    />
+                    <RatingButton label="Again" subLabel="< 1m" color="red" icon={X} onClick={() => handleRating(1)} />
+                    <RatingButton label="Hard" subLabel="2d" color="orange" icon={HelpCircle} onClick={() => handleRating(3)} />
+                    <RatingButton label="Good" subLabel="5d" color="blue" icon={ThumbsUp} onClick={() => handleRating(4)} />
+                    <RatingButton label="Easy" subLabel="10d" color="green" icon={Check} onClick={() => handleRating(5)} />
                   </div>
-                </div>
+                </motion.div>
               )}
             </div>
           </motion.div>
@@ -251,13 +271,13 @@ const RatingButton: React.FC<{
     <button
       onClick={onClick}
       className={clsx(
-        "flex flex-col items-center justify-center p-3 rounded-xl border-b-4 active:border-b-0 active:translate-y-1 transition-all h-24",
+        "flex flex-col items-center justify-center p-3 rounded-xl border-b-4 active:border-b-0 active:translate-y-1 transition-all h-20",
         colorStyles[color]
       )}
     >
-      <Icon size={24} className="mb-1" />
-      <span className="font-bold text-sm">{label}</span>
-      <span className="text-xs opacity-75">{subLabel}</span>
+      <Icon size={20} className="mb-1" />
+      <span className="font-bold text-xs">{label}</span>
+      <span className="text-[10px] opacity-75">{subLabel}</span>
     </button>
   );
 };

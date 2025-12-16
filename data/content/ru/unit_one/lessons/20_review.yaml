@@ -1,5 +1,5 @@
 # Unit 1, Lesson 20: Review & Checkpoint
-# 5 modules - Comprehensive review of Unit 1
+# 6 modules - Comprehensive review with stories, scenarios, and conversations
 
 lesson:
   id: "20_review"
@@ -9,163 +9,295 @@ lesson:
 
 modules:
   - id: "mod_1"
-    title: "Review: Letters & Words"
+    title: "A Day in Moscow"
     type: "intro"
     
     teaching:
-      - type: "summary"
-        title: "Cyrillic Letters"
-        points:
-          - "Cognate letters: А, К, М, О, Т (same as English)"
-          - "False friends: Р=R, С=S, Н=N, В=V"
-          - "New letters: Д, Б, Г, Л, П, Ш, Ж..."
-          - "Soft sign Ь - makes consonants soft"
+      - type: "explanation"
+        title: "📖 Your First Russian Story"
+        content: |
+          Let's follow Анна through her day in Moscow!
+          This story uses vocabulary and grammar from Unit 1.
+          Read carefully — you know all these words!
       
-      - type: "pattern_table"
-        title: "Quick Reference"
-        columns: ["Looks like", "Actually"]
-        rows:
-          - ["Р", "R"]
-          - ["С", "S"]
-          - ["Н", "N"]
-          - ["В", "V"]
-          - ["У", "OO"]
+      - type: "story"
+        title: "Утро Анны (Anna's Morning)"
+        paragraphs:
+          - ru: "Приве́т! Меня́ зову́т А́нна. Я живу́ в Москве́."
+            en: "Hello! My name is Anna. I live in Moscow."
+          - ru: "Сего́дня у́тро. Я до́ма. У меня́ есть ко́шка. Её зову́т Му́рка."
+            en: "Today is morning. I'm at home. I have a cat. Her name is Murka."
+          - ru: "Я хочу́ ко́фе. Му́рка хо́чет молоко́. Я пью ко́фе, она́ пьёт молоко́."
+            en: "I want coffee. Murka wants milk. I drink coffee, she drinks milk."
+          - ru: "Что я де́лаю сего́дня? Я рабо́таю. Я чита́ю кни́ги — я рабо́таю в библиоте́ке."
+            en: "What am I doing today? I'm working. I read books — I work at a library."
+          - ru: "Мой брат И́ван то́же рабо́тает сего́дня. Он не чита́ет, он говори́т! Он рабо́тает в рестора́не."
+            en: "My brother Ivan also works today. He doesn't read, he talks! He works at a restaurant."
+          - ru: "Ну, мне пора́. До свида́ния, Му́рка! До за́втра!"
+            en: "Well, I have to go. Goodbye, Murka! See you tomorrow!"
+      
+      - type: "summary"
+        title: "Story Vocabulary Check"
+        points:
+          - "People: Анна, Иван, Мурка (the cat!)"
+          - "Verbs: живу́, хочу́, пью, де́лаю, рабо́таю, чита́ю, говори́т"
+          - "Places: Москва́, дом, библиоте́ка, рестора́н"
+          - "Time: сего́дня, у́тро, за́втра"
+          - "Possession: у меня́ есть, мой брат"
     
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, taksi, metro, restoran, voda]
+      review: [privet, zhit, khotet, pit, kofe, delat, rabotat, chitat, govorit, dom, restoran, segodnya, zavtra, u_menya, moy]
     exercises:
       count: 8
       types:
-        - { type: "translation_ru_en", count: 2 }   # Reading review
-        - { type: "audio_recognition", count: 2 }   # Sound review (false friends)
-        - { type: "multiple_choice", count: 2 }     # Letter sound quiz
-        - { type: "matching", count: 2 }            # Cyrillic to sound
+        - { type: "translation_ru_en", count: 3 }   # Story comprehension
+        - { type: "multiple_choice", count: 3 }     # Story details quiz
+        - { type: "fill_in_blank", count: 2 }       # Complete story sentences
 
   - id: "mod_2"
-    title: "Review: Verbs"
+    title: "Mini-Scenarios"
     type: "learn"
     
     teaching:
-      - type: "summary"
-        title: "Verb Conjugation"
-        points:
-          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, чита́ть, де́лать, рабо́тать)"
-          - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говори́ть, ви́деть)"
-          - "Irregular: хоте́ть (mixed), жить (в- stem), есть (eat), пить (soft stem)"
+      - type: "explanation"
+        title: "🎭 Real-Life Situations"
+        content: |
+          Practice Russian in these everyday scenarios!
+          Each one combines vocabulary and grammar you've learned.
       
-      - type: "pattern_table"
-        title: "Key Verbs"
-        columns: ["Verb", "Я", "Ты", "Он/Она́"]
-        rows:
-          - ["знать", "зна́ю", "зна́ешь", "зна́ет"]
-          - ["де́лать", "де́лаю", "де́лаешь", "де́лает"]
-          - ["чита́ть", "чита́ю", "чита́ешь", "чита́ет"]
-          - ["говори́ть", "говорю́", "говори́шь", "говори́т"]
-          - ["ви́деть", "ви́жу", "ви́дишь", "ви́дит"]
-          - ["хоте́ть", "хочу́", "хо́чешь", "хо́чет"]
-          - ["жить", "живу́", "живёшь", "живёт"]
-          - ["есть (eat)", "ем", "ешь", "ест"]
-          - ["пить", "пью", "пьёшь", "пьёт"]
+      - type: "scenario"
+        title: "☕ В кафе́ (At the Café)"
+        context: "You're ordering at a café"
+        exchange:
+          - { role: "waiter", ru: "Здра́вствуйте! Что вы хоти́те?", en: "Hello! What would you like?" }
+          - { role: "you", ru: "Здра́вствуйте! Я хочу́ ко́фе, пожа́луйста.", en: "Hello! I want coffee, please." }
+          - { role: "waiter", ru: "Большо́й и́ли ма́ленький?", en: "Large or small?" }
+          - { role: "you", ru: "Большо́й, пожа́луйста.", en: "Large, please." }
+          - { role: "waiter", ru: "Вы хоти́те есть?", en: "Do you want to eat?" }
+          - { role: "you", ru: "Нет, спаси́бо. Я не хочу́ есть.", en: "No, thank you. I don't want to eat." }
+          - { role: "waiter", ru: "Хорошо́. Оди́н ко́фе.", en: "OK. One coffee." }
+          - { role: "you", ru: "Спаси́бо!", en: "Thank you!" }
+        key_phrases:
+          - "Я хочу́... пожа́луйста — I want... please"
+          - "Большо́й и́ли ма́ленький? — Large or small?"
+          - "Я не хочу́ есть — I don't want to eat"
       
-      - type: "morphology_pattern"
-        title: "Verb Negation: не + verb"
-        formula: "Subject + не + conjugated verb"
-        examples:
-          - { ru: "Я не зна́ю.", en: "I don't know." }
-          - { ru: "Он не понима́ет.", en: "He doesn't understand." }
-          - { ru: "Она́ не говори́т по-ру́сски.", en: "She doesn't speak Russian." }
-          - { ru: "Мы не рабо́таем сего́дня.", en: "We don't work today." }
-          - { ru: "Я не хочу́.", en: "I don't want to." }
-          - { ru: "Он не ест мя́со.", en: "He doesn't eat meat." }
-        rule: "Place не directly before the verb. Works the same for all verb types!"
+      - type: "scenario"
+        title: "🚇 На у́лице (On the Street)"
+        context: "You're lost and asking for directions"
+        exchange:
+          - { role: "you", ru: "Извини́те!", en: "Excuse me!" }
+          - { role: "stranger", ru: "Да?", en: "Yes?" }
+          - { role: "you", ru: "Где метро́?", en: "Where is the metro?" }
+          - { role: "stranger", ru: "Метро́? Там, пря́мо.", en: "Metro? There, straight ahead." }
+          - { role: "you", ru: "Спаси́бо! А где рестора́н?", en: "Thanks! And where's a restaurant?" }
+          - { role: "stranger", ru: "Рестора́н здесь, ря́дом.", en: "A restaurant is here, nearby." }
+          - { role: "you", ru: "Спаси́бо большо́е!", en: "Thank you very much!" }
+          - { role: "stranger", ru: "Пожа́луйста!", en: "You're welcome!" }
+        key_phrases:
+          - "Извини́те! — Excuse me!"
+          - "Где...? — Where is...?"
+          - "Там, пря́мо — There, straight ahead"
+          - "Здесь, ря́дом — Here, nearby"
       
-      - type: "pattern_table"
-        title: "Negative Verb Forms"
-        columns: ["Positive", "Negative", "Translation"]
-        rows:
-          - ["Я зна́ю", "Я не зна́ю", "I don't know"]
-          - ["Ты понима́ешь", "Ты не понима́ешь", "You don't understand"]
-          - ["Он говори́т", "Он не говори́т", "He doesn't speak"]
-          - ["Она́ ви́дит", "Она́ не ви́дит", "She doesn't see"]
-          - ["Я хочу́", "Я не хочу́", "I don't want"]
-          - ["Он живёт", "Он не живёт", "He doesn't live"]
-          - ["Я рабо́таю", "Я не рабо́таю", "I don't work"]
-          - ["Он ест", "Он не ест", "He doesn't eat"]
-          - ["Я пью", "Я не пью", "I don't drink"]
+      - type: "scenario"
+        title: "👋 Знако́мство (Meeting Someone)"
+        context: "Making a new acquaintance at a party"
+        exchange:
+          - { role: "them", ru: "Приве́т! Как тебя́ зову́т?", en: "Hi! What's your name?" }
+          - { role: "you", ru: "Приве́т! Меня́ зову́т... А тебя́?", en: "Hi! My name is... And yours?" }
+          - { role: "them", ru: "Меня́ зову́т Саша. О́чень прия́тно!", en: "My name is Sasha. Nice to meet you!" }
+          - { role: "you", ru: "О́чень прия́тно! Ты живёшь в Москве́?", en: "Nice to meet you! Do you live in Moscow?" }
+          - { role: "them", ru: "Да, я живу́ здесь. А ты?", en: "Yes, I live here. And you?" }
+          - { role: "you", ru: "Нет, я не живу́ здесь. Я тури́ст.", en: "No, I don't live here. I'm a tourist." }
+          - { role: "them", ru: "А! Ты говори́шь по-ру́сски хорошо́!", en: "Ah! You speak Russian well!" }
+          - { role: "you", ru: "Спаси́бо! Немно́го.", en: "Thanks! A little." }
+        key_phrases:
+          - "Как тебя́ зову́т? — What's your name? (informal)"
+          - "О́чень прия́тно! — Nice to meet you!"
+          - "Ты живёшь...? — Do you live...?"
+          - "Я не живу́ здесь — I don't live here"
     
     vocab_pool:
       introduce: []
       practice: []
-      review: [znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit]
+      review: [privet, zdravstvuyte, khotet, kofe, bolshoy, malenkiy, yest_eat, spasibo, pozhaluysta, izvinite, gde, metro, restoran, zdes, zhit, govorit, nyet, da]
     exercises:
       count: 10
       types:
-        - { type: "fill_in_blank", count: 4 }       # All verb conjugations
-        - { type: "translation_en_ru", count: 3 }   # Produce verb sentences
-        - { type: "translation_ru_en", count: 2 }   # Comprehension
-        - { type: "multiple_choice", count: 1 }     # Type recognition
+        - { type: "translation_en_ru", count: 4 }   # Produce scenario phrases
+        - { type: "translation_ru_en", count: 3 }   # Comprehend scenarios
+        - { type: "fill_in_blank", count: 2 }       # Complete exchanges
+        - { type: "multiple_choice", count: 1 }     # Scenario comprehension
 
   - id: "mod_3"
-    title: "Review: Grammar"
+    title: "Combined Conversation"
     type: "pattern"
     
     teaching:
-      - type: "summary"
-        title: "Key Grammar Points"
-        points:
-          - "No 'is/am/are' in present tense"
-          - "Gender: masculine (-consonant), feminine (-а), neuter (-о)"
-          - "Pronouns match gender: он, она́, оно́"
-          - "У меня́ есть = I have"
-          - "Questions = rising intonation"
+      - type: "explanation"
+        title: "🗣️ Full Conversation Practice"
+        content: |
+          This extended conversation combines ALL the patterns you've learned:
+          verbs, questions, negation, time words, and more!
       
-      - type: "morphology_pattern"
-        title: "The Big Patterns"
-        formula: "Subject + predicate (no 'is')"
-        examples:
-          - { ru: "Я студе́нт.", en: "I am a student." }
-          - { ru: "Э́то мой дом.", en: "This is my house." }
-          - { ru: "У меня́ есть кот.", en: "I have a cat." }
-          - { ru: "Я говорю́ по-ру́сски.", en: "I speak Russian." }
-        rule: "Russian grammar is logical - trust the patterns!"
+      - type: "extended_dialogue"
+        title: "Но́вый друг (A New Friend)"
+        context: "Two people meet at a café and have a full conversation"
+        lines:
+          - { speaker: "A", ru: "Приве́т! Э́то ме́сто свобо́дно?", en: "Hi! Is this seat free?", note: "Э́то + noun (no 'is')" }
+          - { speaker: "B", ru: "Да, пожа́луйста! Сади́сь.", en: "Yes, please! Sit down." }
+          - { speaker: "A", ru: "Спаси́бо. Меня́ зову́т Ма́ша. А тебя́?", en: "Thanks. My name is Masha. And yours?", note: "Introduction pattern" }
+          - { speaker: "B", ru: "О́чень прия́тно! Я Дми́трий.", en: "Nice to meet you! I'm Dmitry." }
+          - { speaker: "A", ru: "Ты живёшь здесь, в Москве́?", en: "Do you live here, in Moscow?", note: "жить conjugation" }
+          - { speaker: "B", ru: "Да, живу́. А ты?", en: "Yes, I do. And you?" }
+          - { speaker: "A", ru: "Нет, я не живу́ здесь. Я из Петербу́рга.", en: "No, I don't live here. I'm from Petersburg.", note: "Negation: не + verb" }
+          - { speaker: "B", ru: "О, Петербу́рг! Краси́вый го́род. Что ты де́лаешь в Москве́?", en: "Oh, Petersburg! Beautiful city. What are you doing in Moscow?", note: "Question word + verb" }
+          - { speaker: "A", ru: "Я рабо́таю. Сего́дня и за́втра рабо́таю, а вчера́ отдыха́ла.", en: "I'm working. Today and tomorrow I work, but yesterday I rested.", note: "Time words!" }
+          - { speaker: "B", ru: "Где ты рабо́таешь?", en: "Where do you work?", note: "где + verb" }
+          - { speaker: "A", ru: "В большо́й компа́нии. А ты?", en: "At a big company. And you?", note: "Adjective agreement" }
+          - { speaker: "B", ru: "Я не рабо́таю сейча́с. Я студе́нт.", en: "I don't work now. I'm a student.", note: "Negation + time" }
+          - { speaker: "A", ru: "Что ты чита́ешь? Кни́гу?", en: "What are you reading? A book?" }
+          - { speaker: "B", ru: "Да, интере́сная кни́га. Ты хо́чешь ко́фе?", en: "Yes, an interesting book. Do you want coffee?" }
+          - { speaker: "A", ru: "Да, хочу́! Но я не пью молоко́.", en: "Yes, I do! But I don't drink milk.", note: "хоте́ть + пить negation" }
+          - { speaker: "B", ru: "Хорошо́. Два ко́фе без молока́!", en: "OK. Two coffees without milk!" }
+          - { speaker: "A", ru: "Спаси́бо! Ты о́чень до́брый.", en: "Thanks! You're very kind." }
+          - { speaker: "B", ru: "Пожа́луйста! Когда́ ты уезжа́ешь?", en: "You're welcome! When are you leaving?", note: "когда́ question" }
+          - { speaker: "A", ru: "За́втра. Но сейча́с мне хорошо́ здесь!", en: "Tomorrow. But now I'm happy here!" }
+      
+      - type: "summary"
+        title: "Patterns in This Conversation"
+        points:
+          - "✓ Introductions: Меня́ зову́т... / А тебя́?"
+          - "✓ Verbs: живу́, рабо́таю, чита́ю, хочу́, пью"
+          - "✓ Negation: не живу́, не рабо́таю, не пью"
+          - "✓ Questions: где, что, когда́"
+          - "✓ Time: сего́дня, за́втра, вчера́, сейча́с"
+          - "✓ Adjectives: большо́й, краси́вый, интере́сный, до́брый"
+          - "✓ Conjunctions: и, а, но"
     
     vocab_pool:
       introduce: []
       practice: []
-      review: [ya, student, dom, moy, u_menya, yest, kot, on, ona, ono, govorit, po_russki]
+      review: [privet, spasibo, pozhaluysta, zhit, rabotat, chitat, khotet, pit, kofe, gde, chto, kogda, segodnya, zavtra, vchera, seychas, bolshoy, i, no, nyet, da]
     exercises:
       count: 12
       difficulty: "medium"
       types:
-        - { type: "fill_in_blank", count: 4 }       # Grammar patterns
-        - { type: "translation_en_ru", count: 3 }   # Production
+        - { type: "translation_en_ru", count: 4 }   # Produce conversation phrases
         - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "fill_in_blank", count: 3 }       # Complete dialogue
         - { type: "multiple_choice", count: 2 }     # Pattern recognition
 
   - id: "mod_4"
-    title: "Test"
+    title: "More Scenarios"
     type: "practice"
+    
     teaching:
       - type: "explanation"
-        title: "Final Test"
+        title: "🎭 Advanced Scenarios"
         content: |
-          This is your checkpoint test!
-          
-          You'll be tested on:
-          - Reading Cyrillic
-          - Basic vocabulary
-          - Gender agreement
-          - Verb conjugation (11 verbs!)
-          - Question/answer patterns (где, кто, что, как, когда́)
-          - Time words (сейча́с, сего́дня, за́втра, вчера́)
-          - Possessives
-          - Conjunctions (и, и́ли, но)
+          More real-life situations to practice!
+          These are slightly more challenging.
+      
+      - type: "scenario"
+        title: "📞 По телефо́ну (On the Phone)"
+        context: "Making plans with a friend"
+        exchange:
+          - { role: "friend", ru: "Алло́! Приве́т!", en: "Hello! Hi!" }
+          - { role: "you", ru: "Приве́т! Что ты де́лаешь сего́дня?", en: "Hi! What are you doing today?" }
+          - { role: "friend", ru: "Сейча́с ничего́. Почему́?", en: "Nothing right now. Why?" }
+          - { role: "you", ru: "Ты хо́чешь есть? Я зна́ю хоро́ший рестора́н.", en: "Do you want to eat? I know a good restaurant." }
+          - { role: "friend", ru: "Да, хочу́! Где он?", en: "Yes, I do! Where is it?" }
+          - { role: "you", ru: "Ря́дом с метро́. Ты зна́ешь где?", en: "Near the metro. Do you know where?" }
+          - { role: "friend", ru: "Да, зна́ю. Когда́?", en: "Yes, I do. When?" }
+          - { role: "you", ru: "Сего́дня в семь. Хорошо́?", en: "Today at seven. OK?" }
+          - { role: "friend", ru: "Хорошо́! До встре́чи!", en: "OK! See you!" }
+          - { role: "you", ru: "Пока́!", en: "Bye!" }
+        key_phrases:
+          - "Что ты де́лаешь? — What are you doing?"
+          - "Я зна́ю хоро́ший рестора́н — I know a good restaurant"
+          - "Ря́дом с метро́ — Near the metro"
+          - "До встре́чи! — See you!"
+      
+      - type: "scenario"
+        title: "🏠 В гостя́х (Visiting Someone)"
+        context: "You're visiting a Russian friend at their home"
+        exchange:
+          - { role: "host", ru: "Приве́т! Заходи́!", en: "Hi! Come in!" }
+          - { role: "you", ru: "Спаси́бо! О, како́й краси́вый дом!", en: "Thanks! Oh, what a beautiful house!" }
+          - { role: "host", ru: "Спаси́бо! Э́то мой дом. Сади́сь, пожа́луйста.", en: "Thanks! This is my house. Sit down, please." }
+          - { role: "you", ru: "У тебя́ есть кот?", en: "Do you have a cat?" }
+          - { role: "host", ru: "Да, вот он! Его́ зову́т Ба́рсик.", en: "Yes, here he is! His name is Barsik." }
+          - { role: "you", ru: "Како́й большо́й кот!", en: "What a big cat!" }
+          - { role: "host", ru: "Ты хо́чешь чай и́ли ко́фе?", en: "Do you want tea or coffee?" }
+          - { role: "you", ru: "Чай, пожа́луйста. Я не пью ко́фе ве́чером.", en: "Tea, please. I don't drink coffee in the evening." }
+          - { role: "host", ru: "Хорошо́. Ты хо́чешь есть?", en: "OK. Do you want to eat?" }
+          - { role: "you", ru: "Нет, спаси́бо, я не голо́дный.", en: "No, thanks, I'm not hungry." }
+        key_phrases:
+          - "Како́й краси́вый! — How beautiful!"
+          - "У тебя́ есть...? — Do you have...?"
+          - "Его́ зову́т... — His name is..."
+          - "Чай и́ли ко́фе? — Tea or coffee?"
+      
+      - type: "scenario"
+        title: "❓ Когда́ не понима́ешь (When You Don't Understand)"
+        context: "Survival phrases when communication breaks down"
+        exchange:
+          - { role: "stranger", ru: "[говори́т бы́стро по-ру́сски...]", en: "[speaks fast Russian...]" }
+          - { role: "you", ru: "Извини́те, я не понима́ю.", en: "Sorry, I don't understand." }
+          - { role: "stranger", ru: "[говори́т сно́ва...]", en: "[speaks again...]" }
+          - { role: "you", ru: "Повтори́те, пожа́луйста. Ме́дленно.", en: "Please repeat. Slowly." }
+          - { role: "stranger", ru: "[говори́т ме́дленно]", en: "[speaks slowly]" }
+          - { role: "you", ru: "А, тепе́рь понима́ю! Спаси́бо!", en: "Ah, now I understand! Thanks!" }
+          - { role: "stranger", ru: "Вы хорошо́ говори́те по-ру́сски!", en: "You speak Russian well!" }
+          - { role: "you", ru: "Спаси́бо, но я то́лько немно́го говорю́.", en: "Thanks, but I only speak a little." }
+        key_phrases:
+          - "Я не понима́ю — I don't understand"
+          - "Повтори́те, пожа́луйста — Please repeat"
+          - "Ме́дленно — Slowly"
+          - "Тепе́рь понима́ю — Now I understand"
+    
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, kogda, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda, seychas, segodnya, zavtra, vchera]
+      review: [privet, spasibo, pozhaluysta, delat, segodnya, seychas, khotet, yest_eat, znat, restoran, metro, gde, kogda, dom, kot, bolshoy, krasivyy, kofe, chay, ponimat, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, govorit]
+    exercises:
+      count: 12
+      difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Produce scenario phrases
+        - { type: "translation_ru_en", count: 4 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Complete exchanges
+        - { type: "multiple_choice", count: 2 }     # Choose correct response
+
+  - id: "mod_5"
+    title: "Final Test"
+    type: "practice"
+    
+    teaching:
+      - type: "explanation"
+        title: "🎯 Checkpoint Test"
+        content: |
+          This is your final checkpoint!
+          
+          You'll be tested on EVERYTHING from Unit 1:
+          • Reading & writing Cyrillic
+          • All vocabulary (~100 words)
+          • All 11 verbs (including negation!)
+          • Question words (где, кто, что, как, когда́)
+          • Time words (сейча́с, сего́дня, за́втра, вчера́)
+          • Possessives and "I have"
+          • Adjectives and gender
+          
+          Good luck! Уда́чи!
+    
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, kogda, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda, seychas, segodnya, zavtra, vchera, bolshoy, malenkiy, khoroshiy, zhit, rabotat]
     exercises:
       count: 15
       difficulty: "hard"
@@ -176,42 +308,65 @@ modules:
         - { type: "audio_recognition", count: 2 }   # Listening test
         - { type: "multiple_choice", count: 1 }     # Quick quiz
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Crown"
     type: "master"
+    
     teaching:
+      - type: "story"
+        title: "📖 Epilogue: Твой пе́рвый день (Your First Day)"
+        paragraphs:
+          - ru: "Поздравля́ю! Ты говори́шь по-ру́сски!"
+            en: "Congratulations! You speak Russian!"
+          - ru: "Тепе́рь ты зна́ешь: как здоро́ваться, как спра́шивать, как отвеча́ть."
+            en: "Now you know: how to greet, how to ask, how to answer."
+          - ru: "Ты понима́ешь, когда́ ру́сские говоря́т ме́дленно."
+            en: "You understand when Russians speak slowly."
+          - ru: "Ты мо́жешь сказа́ть, что ты хо́чешь, где ты живёшь, что ты де́лаешь."
+            en: "You can say what you want, where you live, what you do."
+          - ru: "Э́то то́лько нача́ло. Но како́е хоро́шее нача́ло!"
+            en: "This is just the beginning. But what a good beginning!"
+          - ru: "До встре́чи в Unit 2! Пока́!"
+            en: "See you in Unit 2! Bye!"
+      
       - type: "explanation"
-        title: "Unit 1 Complete!"
+        title: "🏆 Unit 1 Complete!"
         content: |
-          Congratulations! You've completed Unit 1: Foundations!
+          Молоде́ц! (Well done!)
           
-          You can now:
-          - Read Russian using Cyrillic letters
-          - Introduce yourself and greet people (спаси́бо, пожа́луйста!)
-          - Ask and answer basic questions (где, кто, что, как, когда́)
-          - Ask for help (извини́те, помоги́те, повтори́те, я не понима́ю по-ру́сски)
-          - Talk about time (сейча́с, сего́дня, за́втра, вчера́)
-          - Talk about what you have
-          - Describe things using adjectives
-          - Count to 10
-          - Conjugate 11 verbs in present tense!
-          - Talk about eating and drinking!
+          You've completed Unit 1: Foundations!
       
       - type: "summary"
         title: "Your Achievements"
         points:
-          - "~100 vocabulary words learned"
-          - "11 verbs conjugated (знать, понима́ть, чита́ть, де́лать, говори́ть, ви́деть, хоте́ть, жить, рабо́тать, есть, пить)"
-          - "5 question words (где, кто, что, как, когда́)"
-          - "4 time words (сейча́с, сего́дня, за́втра, вчера́)"
-          - "Help phrases (извини́те, помоги́те, повтори́те, я не понима́ю)"
-          - "6 core grammar patterns mastered"
-          - "Culture: patronymics, ты vs вы"
-          - "Ready for Unit 2: Everyday Life!"
+          - "🔤 Full Cyrillic alphabet mastered"
+          - "📚 ~100 vocabulary words learned"
+          - "🔧 11 verbs conjugated (знать, понима́ть, чита́ть, де́лать, говори́ть, ви́деть, хоте́ть, жить, рабо́тать, есть, пить)"
+          - "❓ 5 question words (где, кто, что, как, когда́)"
+          - "⏰ 4 time words (сейча́с, сего́дня, за́втра, вчера́)"
+          - "🆘 Survival phrases (извини́те, помоги́те, повтори́те, я не понима́ю)"
+          - "✖️ Negation pattern (не + verb)"
+          - "🏠 Possession (у меня́ есть, мой/моя́/моё)"
+          - "🎨 Adjectives and gender agreement"
+          - "🔢 Numbers 1-10"
+          - "🎭 Real conversation skills!"
+      
+      - type: "explanation"
+        title: "Ready for Unit 2: Everyday Life!"
+        content: |
+          In Unit 2, you'll learn:
+          • More verbs (past tense!)
+          • Shopping and ordering food
+          • Describing your day
+          • Making plans
+          • And much more!
+          
+          До встре́чи! See you there!
+    
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, izvinite, pomogite, ya_ne_ponimayu_po_russki, povtorite_pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, kogda, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit, seychas, segodnya, zavtra, vchera]
+      review: [privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, gde, kto, chto, kak, kogda, znat, ponimat, govorit, zhit, rabotat, khotet, yest_eat, pit]
     exercises:
       count: 15
       difficulty: "hard"
@@ -230,7 +385,7 @@ templates:
   - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   - pattern: "Э́то {NOUN}."
@@ -242,13 +397,13 @@ templates:
   - pattern: "Где {NOUN}?"
     translation: "Where is {NOUN.the}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   - pattern: "У меня́ есть {NOUN}."
     translation: "I have {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   - pattern: "Я {VERB_1SG}."
@@ -382,3 +537,55 @@ dialogues:
       - { speaker: "A", ru: "Ла́дно. Где метро́?", en: "OK. Where's the metro?" }
       - { speaker: "B", ru: "Там!", en: "There!" }
       - { speaker: "A", ru: "Спаси́бо большо́е!", en: "Thank you very much!" }
+
+  - id: "at_the_cafe"
+    context: "Ordering at a café"
+    lines:
+      - { speaker: "waiter", ru: "Добро́ пожа́ловать! Что вы хоти́те?", en: "Welcome! What would you like?" }
+      - { speaker: "customer", ru: "Здра́вствуйте! Я хочу́ ко́фе.", en: "Hello! I want coffee." }
+      - { speaker: "waiter", ru: "Большо́й и́ли ма́ленький?", en: "Large or small?" }
+      - { speaker: "customer", ru: "Большо́й, пожа́луйста. И во́ду.", en: "Large, please. And water." }
+      - { speaker: "waiter", ru: "Вы хоти́те есть?", en: "Do you want to eat?" }
+      - { speaker: "customer", ru: "Нет, спаси́бо. Я не голо́дный.", en: "No, thank you. I'm not hungry." }
+      - { speaker: "waiter", ru: "Хорошо́. Оди́н большо́й ко́фе и вода́.", en: "OK. One large coffee and water." }
+      - { speaker: "customer", ru: "Спаси́бо!", en: "Thank you!" }
+
+  - id: "making_friends"
+    context: "Getting to know someone at a party"
+    lines:
+      - { speaker: "A", ru: "Приве́т! Ты друг Ма́ши?", en: "Hi! Are you Masha's friend?" }
+      - { speaker: "B", ru: "Да! А ты?", en: "Yes! And you?" }
+      - { speaker: "A", ru: "Да, мы рабо́таем вме́сте. Как тебя́ зову́т?", en: "Yes, we work together. What's your name?" }
+      - { speaker: "B", ru: "Меня́ зову́т Ди́ма. А тебя́?", en: "My name is Dima. And yours?" }
+      - { speaker: "A", ru: "Ка́тя. О́чень прия́тно!", en: "Katya. Nice to meet you!" }
+      - { speaker: "B", ru: "О́чень прия́тно! Ты живёшь в Москве́?", en: "Nice to meet you! Do you live in Moscow?" }
+      - { speaker: "A", ru: "Да, живу́. Я здесь рабо́таю и живу́.", en: "Yes, I do. I work and live here." }
+      - { speaker: "B", ru: "Я то́же! Где ты рабо́таешь?", en: "Me too! Where do you work?" }
+      - { speaker: "A", ru: "В большо́й компа́нии. А ты?", en: "At a big company. And you?" }
+      - { speaker: "B", ru: "Я студе́нт. Ещё не рабо́таю.", en: "I'm a student. I don't work yet." }
+
+  - id: "daily_routine"
+    context: "Describing your day"
+    lines:
+      - { speaker: "A", ru: "Что ты де́лаешь сего́дня?", en: "What are you doing today?" }
+      - { speaker: "B", ru: "У́тром я рабо́таю. А ве́чером — до́ма.", en: "In the morning I work. And in the evening — at home." }
+      - { speaker: "A", ru: "Что ты де́лаешь до́ма?", en: "What do you do at home?" }
+      - { speaker: "B", ru: "Чита́ю кни́ги. Пью чай. Отдыха́ю.", en: "I read books. Drink tea. Rest." }
+      - { speaker: "A", ru: "Ты смо́тришь телеви́зор?", en: "Do you watch TV?" }
+      - { speaker: "B", ru: "Нет, я не смотрю́. Я лю́блю чита́ть.", en: "No, I don't. I love to read." }
+      - { speaker: "A", ru: "Я то́же! Что ты чита́ешь сейча́с?", en: "Me too! What are you reading now?" }
+      - { speaker: "B", ru: "Интере́сную кни́гу о Росси́и.", en: "An interesting book about Russia." }
+
+  - id: "visiting_home"
+    context: "Being a guest at someone's home"
+    lines:
+      - { speaker: "host", ru: "Заходи́! Э́то мой дом.", en: "Come in! This is my house." }
+      - { speaker: "guest", ru: "Спаси́бо! О, како́й краси́вый дом!", en: "Thanks! Oh, what a beautiful house!" }
+      - { speaker: "host", ru: "Спаси́бо! Сади́сь, пожа́луйста.", en: "Thanks! Sit down, please." }
+      - { speaker: "guest", ru: "У тебя́ есть кот?", en: "Do you have a cat?" }
+      - { speaker: "host", ru: "Да! Вот она́. Её зову́т Му́рка.", en: "Yes! Here she is. Her name is Murka." }
+      - { speaker: "guest", ru: "Кака́я краси́вая ко́шка!", en: "What a beautiful cat!" }
+      - { speaker: "host", ru: "Ты хо́чешь чай и́ли ко́фе?", en: "Do you want tea or coffee?" }
+      - { speaker: "guest", ru: "Чай, пожа́луйста. Я не пью ко́фе.", en: "Tea, please. I don't drink coffee." }
+      - { speaker: "host", ru: "А есть? У меня́ есть торт!", en: "And to eat? I have cake!" }
+      - { speaker: "guest", ru: "Да, пожа́луйста! Я хочу́ торт!", en: "Yes, please! I want cake!" }

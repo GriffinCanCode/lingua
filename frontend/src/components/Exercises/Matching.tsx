@@ -123,7 +123,7 @@ export const Matching: React.FC<ExerciseComponentProps<MatchingExercise>> = ({
                     ? "bg-red-100 border-red-300 text-red-700 animate-shake"
                     : state.leftSelected === pair.id
                     ? "bg-primary-100 border-primary-400 text-primary-700"
-                    : "bg-white border-gray-200 hover:border-primary-300"
+                    : "bg-white border-gray-200 text-gray-800 hover:border-primary-300"
                 )}
               >
                 {pair.left}
@@ -154,7 +154,7 @@ export const Matching: React.FC<ExerciseComponentProps<MatchingExercise>> = ({
                     ? "bg-red-100 border-red-300 text-red-700"
                     : state.rightSelected === pair.id
                     ? "bg-primary-100 border-primary-400 text-primary-700"
-                    : "bg-white border-gray-200 hover:border-primary-300"
+                    : "bg-white border-gray-200 text-gray-800 hover:border-primary-300"
                 )}
               >
                 {pair.right}

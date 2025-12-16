@@ -67,67 +67,68 @@ vocabulary:
     hints: ["The name, like Tom Sawyer"]
     gender: "m"
 
+# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "Это мама."
-    translation: "This is mom."
+    translation: "This is mom"
     words:
       - { ru: "Это", en: "This is" }
       - { ru: "мама", en: "mom" }
-    distractors: ["папа", "кот", "дом"]
+    distractors: ["dad", "a cat", "the", "here"]
     complexity: 1
 
   - text: "Это кот."
-    translation: "This is a cat."
+    translation: "This is a cat"
     words:
       - { ru: "Это", en: "This is" }
       - { ru: "кот", en: "a cat" }
-    distractors: ["там", "тут", "мама"]
+    distractors: ["there", "here", "mom", "a taxi"]
     complexity: 1
 
   - text: "Кот там."
-    translation: "The cat is there."
+    translation: "The cat is there"
     words:
       - { ru: "Кот", en: "The cat" }
       - { ru: "там", en: "is there" }
-    distractors: ["это", "тут", "мама"]
+    distractors: ["This is", "is here", "mom", "a taxi"]
     complexity: 1
 
   - text: "Мама тут."
-    translation: "Mom is here."
+    translation: "Mom is here"
     words:
       - { ru: "Мама", en: "Mom" }
       - { ru: "тут", en: "is here" }
-    distractors: ["там", "кот", "атом"]
+    distractors: ["is there", "a cat", "an atom", "This is"]
     complexity: 1
 
   - text: "Это такси."
-    translation: "This is a taxi."
+    translation: "This is a taxi"
     words:
       - { ru: "Это", en: "This is" }
       - { ru: "такси", en: "a taxi" }
-    distractors: ["мама", "кот", "атом"]
+    distractors: ["mom", "a cat", "an atom", "here"]
     complexity: 1
 
   - text: "Такси там."
-    translation: "The taxi is there."
+    translation: "The taxi is there"
     words:
       - { ru: "Такси", en: "The taxi" }
       - { ru: "там", en: "is there" }
-    distractors: ["тут", "это", "мама"]
+    distractors: ["is here", "This is", "mom", "a cat"]
     complexity: 1
 
   - text: "Это атом."
-    translation: "This is an atom."
+    translation: "This is an atom"
     words:
       - { ru: "Это", en: "This is" }
       - { ru: "атом", en: "an atom" }
-    distractors: ["такси", "кот", "мама"]
+    distractors: ["a taxi", "a cat", "mom", "here"]
     complexity: 1
 
   - text: "Том тут."
-    translation: "Tom is here."
+    translation: "Tom is here"
     words:
       - { ru: "Том", en: "Tom" }
       - { ru: "тут", en: "is here" }
-    distractors: ["там", "это", "мама"]
+    distractors: ["is there", "This is", "mom", "a cat"]
     complexity: 1

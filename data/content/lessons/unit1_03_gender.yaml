@@ -1,39 +1,151 @@
-section:
-  title: "Foundations"
+# Unit 1, Lesson 3: He, She, It
+# Focus: Grammatical gender and pronouns Он/Она/Оно
 
-unit:
-  title: "Gender Basics"
-  description: "Understanding He, She, and It."
-  order: 2
+lesson:
+  id: "unit1_03_gender"
+  title: "He & She"
+  parts: 5
+  description: "Russian words have gender. Let's learn the basics."
 
-lessons:
-  - title: "He & She"
-    type: "introduction"
-    order: 1
-    description: "Russian words have gender. Let's learn the basics."
-    content:
-      introduction: |
-        # He, She, or It?
-        In Russian, every noun has a gender. You can usually tell by the last letter!
-        
-        - **Consonant** (d, k, t...) → **He** (Masculine)
-        - **-A / -Я** → **She** (Feminine)
-        - **-O / -Е** → **It** (Neuter)
-    vocabulary:
-      - word: "Он"
-        translation: "He"
-      - word: "Она"
-        translation: "She"
-      - word: "Оно"
-        translation: "It"
-      - word: "Парк"
-        translation: "Park (masc)"
-      - word: "Пицца"
-        translation: "Pizza (fem)"
-    sentences:
-      - text: "Где парк? Он там."
-        translation: "Where is the park? It (he) is there."
-        complexity: 2
-      - text: "Где пицца? Она тут."
-        translation: "Where is the pizza? It (she) is here."
-        complexity: 2
+content:
+  introduction: |
+    # He, She, or It?
+    
+    In Russian, every noun has a **gender**. You can usually tell by the last letter!
+    
+    - **Consonant** (like к, т, м) → **Он** (He/Masculine)
+    - **-А / -Я** → **Она** (She/Feminine)
+    - **-О / -Е** → **Оно** (It/Neuter)
+    
+    Examples:
+    - **Кот** (cat) → ends in Т → Он (he)
+    - **Мама** → ends in А → Она (she)
+    - **Радио** → ends in О → Оно (it)
+
+vocabulary:
+  - word: "Он"
+    translation: "He/It (masc)"
+    audio: "on.mp3"
+    hints: ["For masculine nouns"]
+
+  - word: "Она"
+    translation: "She/It (fem)"
+    audio: "ona.mp3"
+    hints: ["For feminine nouns"]
+
+  - word: "Оно"
+    translation: "It (neuter)"
+    audio: "ono.mp3"
+    hints: ["For neuter nouns"]
+
+  - word: "Парк"
+    translation: "Park"
+    audio: "park.mp3"
+    hints: ["Same as English!"]
+    gender: "m"
+
+  - word: "Пицца"
+    translation: "Pizza"
+    audio: "pizza.mp3"
+    hints: ["Italian loan word"]
+    gender: "f"
+
+  - word: "Окно"
+    translation: "Window"
+    audio: "okno.mp3"
+    hints: ["Ends in -О = neuter"]
+    gender: "n"
+
+  - word: "Папа"
+    translation: "Dad"
+    audio: "papa.mp3"
+    hints: ["Ends in -А but means dad → still uses 'он'!"]
+    gender: "m"
+
+  - word: "Банк"
+    translation: "Bank"
+    audio: "bank.mp3"
+    hints: ["Same as English"]
+    gender: "m"
+
+# Sentences with ENGLISH distractors (user builds English from word bank)
+sentences:
+  - text: "Где парк?"
+    translation: "Where is the park"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "парк", en: "the park" }
+    distractors: ["He", "She", "It", "here"]
+    complexity: 1
+
+  - text: "Он там."
+    translation: "He is there"
+    words:
+      - { ru: "Он", en: "He" }
+      - { ru: "там", en: "is there" }
+    distractors: ["She", "It", "is here", "Where is"]
+    complexity: 1
+
+  - text: "Где пицца?"
+    translation: "Where is the pizza"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "пицца", en: "the pizza" }
+    distractors: ["She", "He", "It", "here"]
+    complexity: 1
+
+  - text: "Она тут."
+    translation: "She is here"
+    words:
+      - { ru: "Она", en: "She" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["He", "It", "is there", "Where is"]
+    complexity: 1
+
+  - text: "Где окно?"
+    translation: "Where is the window"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "окно", en: "the window" }
+    distractors: ["It", "He", "She", "here"]
+    complexity: 1
+
+  - text: "Оно там."
+    translation: "It is there"
+    words:
+      - { ru: "Оно", en: "It" }
+      - { ru: "там", en: "is there" }
+    distractors: ["He", "She", "is here", "Where is"]
+    complexity: 1
+
+  - text: "Папа тут."
+    translation: "Dad is here"
+    words:
+      - { ru: "Папа", en: "Dad" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["is there", "He", "She", "Where is"]
+    complexity: 1
+
+  - text: "Он там?"
+    translation: "Is he there"
+    words:
+      - { ru: "Он", en: "Is he" }
+      - { ru: "там", en: "there" }
+    distractors: ["She", "It", "here", "Where"]
+    complexity: 1
+
+  - text: "Где банк?"
+    translation: "Where is the bank"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "банк", en: "the bank" }
+    distractors: ["He", "She", "here", "there"]
+    complexity: 1
+
+  - text: "Банк там."
+    translation: "The bank is there"
+    words:
+      - { ru: "Банк", en: "The bank" }
+      - { ru: "там", en: "is there" }
+    distractors: ["She", "It", "is here", "Where is"]
+    complexity: 1

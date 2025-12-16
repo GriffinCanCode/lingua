@@ -1,43 +1,187 @@
-section:
-  title: "Foundations"
+# Unit 1, Lesson 5: Where, Who, What
+# Focus: Question words Где, Кто, Что
 
-unit:
-  title: "Basic Questions"
-  description: "Where, Who, and What."
-  order: 4
+lesson:
+  id: "unit1_05_questions"
+  title: "Where is it?"
+  parts: 5
+  description: "Master the essential question words: Where, Who, and What."
 
-lessons:
-  - title: "Where is it?"
-    type: "practice"
-    order: 1
-    description: "Navigating the world."
-    content:
-      introduction: |
-        # Question Words
-        - **Где** (Gde) = Where
-        - **Кто** (Kto) = Who
-        - **Что** (Chto) = What
-    vocabulary:
-      - word: "Где"
-        translation: "Where"
-      - word: "Кто"
-        translation: "Who"
-      - word: "Что"
-        translation: "What"
-      - word: "Там"
-        translation: "There"
-      - word: "Тут"
-        translation: "Here"
-    sentences:
-      - text: "Где метро?"
-        translation: "Where is the metro?"
-        complexity: 1
-      - text: "Кто это?"
-        translation: "Who is this?"
-        complexity: 1
-      - text: "Что это?"
-        translation: "What is this?"
-        complexity: 1
-      - text: "Метро там."
-        translation: "The metro is there."
-        complexity: 1
+content:
+  introduction: |
+    # Question Words
+    
+    Three essential questions to navigate the world:
+    
+    - **Где?** (Gde?) = Where?
+    - **Кто?** (Kto?) = Who?
+    - **Что?** (Shto?) = What?
+    
+    Note: **Что** is spelled with Ч but pronounced "shto"!
+    
+    Use **Где** with places and things.
+    Use **Кто** for people.
+    Use **Что** for things.
+
+vocabulary:
+  - word: "Где"
+    translation: "Where"
+    audio: "gde.mp3"
+    hints: ["Г sounds like 'g' in 'go'"]
+
+  - word: "Кто"
+    translation: "Who"
+    audio: "kto.mp3"
+    hints: ["For people only"]
+
+  - word: "Что"
+    translation: "What"
+    audio: "shto.mp3"
+    hints: ["Spelled Ч-Т-О but say 'shto'!"]
+
+  - word: "Там"
+    translation: "There"
+    audio: "tam.mp3"
+    hints: ["Answer to 'Где?'"]
+
+  - word: "Тут"
+    translation: "Here"
+    audio: "tut.mp3"
+    hints: ["Answer to 'Где?'"]
+
+  - word: "Вот"
+    translation: "Here is / There is"
+    audio: "vot.mp3"
+    hints: ["Used when pointing at something"]
+
+  - word: "Доктор"
+    translation: "Doctor"
+    audio: "doktor.mp3"
+    hints: ["Same as English"]
+    gender: "m"
+
+  - word: "Студент"
+    translation: "Student"
+    audio: "student.mp3"
+    hints: ["Same as English"]
+    gender: "m"
+
+  - word: "Друг"
+    translation: "Friend"
+    audio: "drug.mp3"
+    hints: ["Г at end sounds like 'k'"]
+    gender: "m"
+
+# Sentences with ENGLISH distractors (user builds English from word bank)
+sentences:
+  - text: "Где метро?"
+    translation: "Where is the metro"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "метро", en: "the metro" }
+    distractors: ["Who", "What", "there", "here"]
+    complexity: 1
+
+  - text: "Метро там."
+    translation: "The metro is there"
+    words:
+      - { ru: "Метро", en: "The metro" }
+      - { ru: "там", en: "is there" }
+    distractors: ["is here", "Where is", "Who", "What"]
+    complexity: 1
+
+  - text: "Где такси?"
+    translation: "Where is the taxi"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "такси", en: "the taxi" }
+    distractors: ["Who", "What", "there", "here"]
+    complexity: 1
+
+  - text: "Вот такси."
+    translation: "Here is the taxi"
+    words:
+      - { ru: "Вот", en: "Here is" }
+      - { ru: "такси", en: "the taxi" }
+    distractors: ["Where is", "there", "Who", "What"]
+    complexity: 1
+
+  - text: "Кто это?"
+    translation: "Who is this"
+    words:
+      - { ru: "Кто", en: "Who" }
+      - { ru: "это", en: "is this" }
+    distractors: ["What", "Where", "there", "here"]
+    complexity: 1
+
+  - text: "Это доктор."
+    translation: "This is a doctor"
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "доктор", en: "a doctor" }
+    distractors: ["Who", "a student", "a friend", "the"]
+    complexity: 1
+
+  - text: "Что это?"
+    translation: "What is this"
+    words:
+      - { ru: "Что", en: "What" }
+      - { ru: "это", en: "is this" }
+    distractors: ["Who", "Where", "there", "Here is"]
+    complexity: 1
+
+  - text: "Это книга."
+    translation: "This is a book"
+    words:
+      - { ru: "Это", en: "This is" }
+      - { ru: "книга", en: "a book" }
+    distractors: ["What", "a map", "a radio", "the"]
+    complexity: 1
+
+  - text: "Кто там?"
+    translation: "Who is there"
+    words:
+      - { ru: "Кто", en: "Who" }
+      - { ru: "там", en: "is there" }
+    distractors: ["What", "is here", "Here is", "Where"]
+    complexity: 1
+
+  - text: "Друг там."
+    translation: "A friend is there"
+    words:
+      - { ru: "Друг", en: "A friend" }
+      - { ru: "там", en: "is there" }
+    distractors: ["is here", "Here is", "Who", "What"]
+    complexity: 1
+
+  - text: "Где студент?"
+    translation: "Where is the student"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "студент", en: "the student" }
+    distractors: ["Who", "He", "there", "here"]
+    complexity: 1
+
+  - text: "Студент тут."
+    translation: "The student is here"
+    words:
+      - { ru: "Студент", en: "The student" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["is there", "Here is", "Where is", "Who"]
+    complexity: 1
+
+  - text: "Кто доктор?"
+    translation: "Who is the doctor"
+    words:
+      - { ru: "Кто", en: "Who is" }
+      - { ru: "доктор", en: "the doctor" }
+    distractors: ["What", "This is", "He", "a"]
+    complexity: 1
+
+  - text: "Что там?"
+    translation: "What is there"
+    words:
+      - { ru: "Что", en: "What" }
+      - { ru: "там", en: "is there" }
+    distractors: ["Who", "is here", "Here is", "Where"]
+    complexity: 1

@@ -41,7 +41,7 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
     if (!submitted) {
       return selected === option
         ? "bg-primary-100 border-primary-400 text-primary-700"
-        : "bg-white border-gray-200 hover:border-primary-300 hover:bg-primary-50";
+        : "bg-white border-gray-200 text-gray-800 hover:border-primary-300 hover:bg-primary-50";
     }
 
     // After submission, show correct/incorrect

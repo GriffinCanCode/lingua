@@ -1,38 +1,156 @@
-section:
-  title: "Foundations"
+# Unit 1, Lesson 2: Is this a...?
+# Focus: Questions with intonation, Да/Нет answers
 
-unit:
-  title: "The Alphabet"
+lesson:
+  id: "unit1_02_identification"
+  title: "Is this a...?"
+  parts: 5
+  description: "Ask and answer simple yes/no questions."
 
-lessons:
-  - title: "Is this a...?"
-    type: "practice"
-    order: 2
-    description: "Asking and answering simple questions."
-    content:
-      introduction: |
-        # Asking Questions
-        In Russian, you don't need special words like "is" or "are" to ask a question.
-        You just change your intonation!
-        
-        - **Это кот.** (Statement: This is a cat.)
-        - **Это кот?** (Question: Is this a cat?)
-    vocabulary:
-      - word: "Дом"
-        translation: "House"
-      - word: "Радио"
-        translation: "Radio"
-      - word: "Да"
-        translation: "Yes"
-      - word: "Нет"
-        translation: "No"
-    sentences:
-      - text: "Это дом?"
-        translation: "Is this a house?"
-        complexity: 1
-      - text: "Да, это дом."
-        translation: "Yes, this is a house."
-        complexity: 1
-      - text: "Нет, это не радио."
-        translation: "No, this is not a radio."
-        complexity: 2
+content:
+  introduction: |
+    # Asking Questions in Russian
+    
+    In Russian, you don't need special words like "is" or "are" to ask a question.
+    You just **change your intonation**!
+    
+    - **Это кот.** (Statement: This is a cat.)
+    - **Это кот?** (Question: Is this a cat?) ↗️
+    
+    To answer:
+    - **Да** = Yes
+    - **Нет** = No
+
+vocabulary:
+  - word: "Да"
+    translation: "Yes"
+    audio: "da.mp3"
+    hints: ["Like 'duh' but shorter"]
+
+  - word: "Нет"
+    translation: "No"
+    audio: "nyet.mp3"
+    hints: ["Н sounds like 'n', Е like 'ye'"]
+
+  - word: "Дом"
+    translation: "House"
+    audio: "dom.mp3"
+    hints: ["Д sounds like 'd'"]
+    gender: "m"
+
+  - word: "Радио"
+    translation: "Radio"
+    audio: "radio.mp3"
+    hints: ["Same as English!"]
+    gender: "n"
+
+  - word: "Не"
+    translation: "Not"
+    audio: "nye.mp3"
+    hints: ["Used for negation"]
+
+  - word: "Карта"
+    translation: "Map/Card"
+    audio: "karta.mp3"
+    hints: ["Like 'carta' in Spanish"]
+    gender: "f"
+
+  - word: "Метро"
+    translation: "Metro/Subway"
+    audio: "metro.mp3"
+    hints: ["Same as English 'metro'"]
+    gender: "n"
+
+  - word: "Кофе"
+    translation: "Coffee"
+    audio: "kofe.mp3"
+    hints: ["Sounds like 'coffee' in Italian"]
+    gender: "m"
+
+# Sentences with ENGLISH distractors (user builds English from word bank)
+sentences:
+  - text: "Это дом?"
+    translation: "Is this a house?"
+    words:
+      - { ru: "Это", en: "Is this" }
+      - { ru: "дом", en: "a house" }
+    distractors: ["the radio", "a cat", "Yes", "No"]
+    complexity: 1
+
+  - text: "Да, это дом."
+    translation: "Yes this is a house"
+    words:
+      - { ru: "Да", en: "Yes" }
+      - { ru: "это", en: "this is" }
+      - { ru: "дом", en: "a house" }
+    distractors: ["No", "not", "a cat", "the metro"]
+    complexity: 1
+
+  - text: "Это радио?"
+    translation: "Is this a radio"
+    words:
+      - { ru: "Это", en: "Is this" }
+      - { ru: "радио", en: "a radio" }
+    distractors: ["a house", "coffee", "Yes", "No"]
+    complexity: 1
+
+  - text: "Нет, это не радио."
+    translation: "No this is not a radio"
+    words:
+      - { ru: "Нет", en: "No" }
+      - { ru: "это", en: "this is" }
+      - { ru: "не", en: "not" }
+      - { ru: "радио", en: "a radio" }
+    distractors: ["Yes", "a house", "here", "there"]
+    complexity: 2
+
+  - text: "Это кофе?"
+    translation: "Is this coffee"
+    words:
+      - { ru: "Это", en: "Is this" }
+      - { ru: "кофе", en: "coffee" }
+    distractors: ["the metro", "a radio", "a map", "Yes"]
+    complexity: 1
+
+  - text: "Да, это кофе."
+    translation: "Yes this is coffee"
+    words:
+      - { ru: "Да", en: "Yes" }
+      - { ru: "это", en: "this is" }
+      - { ru: "кофе", en: "coffee" }
+    distractors: ["No", "not", "the metro", "a house"]
+    complexity: 1
+
+  - text: "Это метро?"
+    translation: "Is this the metro"
+    words:
+      - { ru: "Это", en: "Is this" }
+      - { ru: "метро", en: "the metro" }
+    distractors: ["a taxi", "a house", "coffee", "Yes"]
+    complexity: 1
+
+  - text: "Нет, это не метро."
+    translation: "No this is not the metro"
+    words:
+      - { ru: "Нет", en: "No" }
+      - { ru: "это", en: "this is" }
+      - { ru: "не", en: "not" }
+      - { ru: "метро", en: "the metro" }
+    distractors: ["Yes", "here", "there", "coffee"]
+    complexity: 2
+
+  - text: "Карта тут."
+    translation: "The map is here"
+    words:
+      - { ru: "Карта", en: "The map" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["is there", "Is this", "Yes", "No"]
+    complexity: 1
+
+  - text: "Это карта?"
+    translation: "Is this a map"
+    words:
+      - { ru: "Это", en: "Is this" }
+      - { ru: "карта", en: "a map" }
+    distractors: ["the metro", "a radio", "coffee", "Yes"]
+    complexity: 1

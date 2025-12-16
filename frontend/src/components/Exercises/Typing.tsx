@@ -108,9 +108,9 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
           disabled={disabled}
           placeholder={exercise.targetLanguage === 'ru' ? 'Введите ответ...' : 'Type your answer...'}
           className={clsx(
-            "w-full h-32 p-4 text-xl rounded-xl border-2 resize-none transition-colors",
+            "w-full h-32 p-4 text-xl text-gray-800 rounded-xl border-2 resize-none transition-colors",
             "focus:outline-none focus:ring-2 focus:ring-primary-200",
-            input ? "border-primary-300 bg-primary-50" : "border-gray-200",
+            input ? "border-primary-300 bg-primary-50" : "border-gray-200 bg-white",
             disabled && "opacity-50 cursor-not-allowed bg-gray-100"
           )}
         />

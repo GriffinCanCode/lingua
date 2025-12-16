@@ -31,7 +31,7 @@ export const FillBlank: React.FC<ExerciseComponentProps<FillBlankExercise>> = ({
     if (!submitted) {
       return selected === option
         ? "bg-primary-500 text-white border-primary-600"
-        : "bg-white border-gray-200 hover:border-primary-300";
+        : "bg-white border-gray-200 text-gray-800 hover:border-primary-300";
     }
 
     if (option === exercise.correctAnswer) {

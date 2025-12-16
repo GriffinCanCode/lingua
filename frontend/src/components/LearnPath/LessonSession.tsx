@@ -4,11 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Heart, Trophy, Check, XCircle } from 'lucide-react';
 import clsx from 'clsx';
 
-import { getLessonExercises, completeLesson, LessonExercises, VocabItem } from '../../services/curriculum';
+import { getLessonExercises, completeLesson, LessonExercises } from '../../services/curriculum';
 import { LessonIntro } from './LessonIntro';
 import { useComponentLogger } from '../../lib/logger';
-import { WordBank, Typing, Matching, MultipleChoice, FillBlank, WordIntro } from '../Exercises';
-import type { VocabWord } from '../Exercises';
+import { WordBank, Typing, Matching, MultipleChoice, FillBlank } from '../Exercises';
 import type { Exercise, ExerciseResult, ValidationResult } from '../../types/exercises';
 
 // Maximum hearts (lives) per lesson
@@ -116,50 +115,11 @@ export const LessonSession: React.FC = () => {
     }
   }, []);
 
-  // Handle answer submission
-  const handleSubmit = useCallback((answer: string | string[]) => {
-    if (!currentExercise) return;
-
-    const validation = validateAnswer(answer, currentExercise);
-    setShowFeedback(validation);
-
-    // Record result
-    const result: ExerciseResult = {
-      exerciseId: currentExercise.id,
-      correct: validation.correct,
-      userAnswer: answer,
-      timeSpentMs: 0, // TODO: track time
-      attempts: 1,
-    };
-    setResults(prev => [...prev, result]);
-
-    // Update hearts if incorrect
-    if (!validation.correct) {
-      setHearts(prev => prev - 1);
-    }
-
-    // Advance after feedback delay
-    setTimeout(() => {
-      setShowFeedback(null);
-
-      if (hearts <= 1 && !validation.correct) {
-        // Out of hearts - lesson failed
-        setCompleted(true);
-      } else if (lesson && currentIndex < lesson.exercises.length - 1) {
-        setCurrentIndex(prev => prev + 1);
-      } else {
-        finishLesson();
-      }
-    }, validation.correct ? 800 : 1500);
-  }, [currentExercise, validateAnswer, hearts, lesson, currentIndex]);
-
   // Finish lesson
   const finishLesson = useCallback(async () => {
     if (!lesson || !nodeId) return;
-
     setCompleted(true);
     const correct = results.filter(r => r.correct).length + (showFeedback?.correct ? 1 : 0);
-
     try {
       await completeLesson(nodeId, correct, lesson.exercises.length);
       logger.info('Lesson completed', { correct, total: lesson.exercises.length });
@@ -167,6 +127,36 @@ export const LessonSession: React.FC = () => {
       logger.error('Failed to submit results', err instanceof Error ? err : undefined);
     }
   }, [lesson, nodeId, results, showFeedback, logger]);
+
+  // Handle answer submission
+  const handleSubmit = useCallback((answer: string | string[]) => {
+    if (!currentExercise) return;
+
+    const validation = validateAnswer(answer, currentExercise);
+    setShowFeedback(validation);
+
+    const result: ExerciseResult = {
+      exerciseId: currentExercise.id,
+      correct: validation.correct,
+      userAnswer: answer,
+      timeSpentMs: 0,
+      attempts: 1,
+    };
+    setResults(prev => [...prev, result]);
+
+    if (!validation.correct) setHearts(prev => prev - 1);
+
+    setTimeout(() => {
+      setShowFeedback(null);
+      if (hearts <= 1 && !validation.correct) {
+        setCompleted(true);
+      } else if (lesson && currentIndex < lesson.exercises.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else {
+        finishLesson();
+      }
+    }, validation.correct ? 800 : 1500);
+  }, [currentExercise, validateAnswer, hearts, lesson, currentIndex, finishLesson]);
 
   // Render exercise component
   const renderExercise = useCallback((exercise: Exercise) => {
@@ -213,82 +203,7 @@ export const LessonSession: React.FC = () => {
     );
   }
 
-  // Convert VocabItem to VocabWord for WordIntro
-  const vocabWords: VocabWord[] = lesson.vocabulary.map(v => ({
-    word: v.word,
-    translation: v.translation,
-    transliteration: undefined,
-    audio: v.audio,
-    hints: v.hints,
-    gender: v.gender,
-  }));
-
-  // Handle intro level completion
-  const handleIntroComplete = async () => {
-    if (!nodeId) return;
-    try {
-      await completeLesson(nodeId, vocabWords.length, vocabWords.length);
-      logger.info('Intro lesson completed', { words: vocabWords.length });
-      setCompleted(true);
-    } catch (err) {
-      logger.error('Failed to complete intro', err instanceof Error ? err : undefined);
-      setCompleted(true);
-    }
-  };
-
-  // Intro level type - show WordIntro component
-  if (lesson.level_type === 'intro') {
-    if (completed) {
-      return (
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="max-w-md mx-auto mt-12 text-center">
-          <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-            <div className="w-24 h-24 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mx-auto mb-6">
-              <Trophy size={48} />
-            </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Words Learned!</h2>
-            <p className="text-xl text-primary-600 font-bold mb-2">+{vocabWords.length * 10} XP</p>
-            <p className="text-gray-500 mb-8">You learned {vocabWords.length} new words!</p>
-            <button onClick={() => navigate('/')} className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800">
-              Continue
-            </button>
-          </div>
-        </motion.div>
-      );
-    }
-
-    if (vocabWords.length === 0) {
-      return (
-        <div className="text-center mt-12 max-w-md mx-auto">
-          <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
-            <div className="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <span className="text-4xl">📚</span>
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">{lesson.node_title}</h2>
-            <p className="text-gray-500 mb-6">No vocabulary available yet.</p>
-            <button onClick={() => navigate('/')} className="w-full bg-gray-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-gray-800">
-              Return to Path
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="max-w-4xl mx-auto h-full flex flex-col px-4 py-6">
-        <div className="flex items-center mb-6">
-          <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 rounded-lg text-gray-500">
-            <X size={24} />
-          </button>
-          <h2 className="ml-4 text-xl font-bold text-gray-900">{lesson.node_title}</h2>
-        </div>
-        <div className="flex-1 bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
-          <WordIntro words={vocabWords} onComplete={handleIntroComplete} />
-        </div>
-      </div>
-    );
-  }
-
-  // Empty lesson (for non-intro types)
+  // Empty lesson
   if (lesson.exercises.length === 0) {
     return (
       <div className="text-center mt-12 max-w-md mx-auto">

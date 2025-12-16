@@ -1,37 +1,145 @@
-section:
-  title: "Foundations"
+# Unit 1, Lesson 4: I have...
+# Focus: У меня есть construction for possession
 
-unit:
-  title: "Possession"
-  description: "Saying 'I have' using the Genitive case."
-  order: 3
+lesson:
+  id: "unit1_04_possession"
+  title: "I have..."
+  parts: 5
+  description: "The most useful phrase in Russian: saying what you have."
 
-lessons:
-  - title: "I have..."
-    type: "introduction"
-    order: 1
-    description: "The most useful phrase in Russian."
-    content:
-      introduction: |
-        # I Have...
-        Russian doesn't say "I have a cat".
-        It says: **"By me is a cat"**.
-        
-        **У меня есть...** (Oo men-ya yest...)
-    vocabulary:
-      - word: "У меня есть"
-        translation: "I have"
-      - word: "Брат"
-        translation: "Brother"
-      - word: "Сестра"
-        translation: "Sister"
-    sentences:
-      - text: "У меня есть кот."
-        translation: "I have a cat."
-        complexity: 2
-      - text: "У меня есть сестра."
-        translation: "I have a sister."
-        complexity: 2
-      - text: "У меня есть брат?"
-        translation: "Do I have a brother?"
-        complexity: 2
+content:
+  introduction: |
+    # I Have... (У меня есть)
+    
+    Russian doesn't say "I have a cat" directly.
+    Instead, it says: **"By me there is a cat"**.
+    
+    **У меня есть...** (Oo men-YA yest...)
+    
+    - **У** = "by/at"
+    - **меня** = "me"
+    - **есть** = "there is"
+    
+    So: **У меня есть кот** = "I have a cat" (literally: "By me there-is cat")
+
+vocabulary:
+  - word: "У меня"
+    translation: "I have / At me"
+    audio: "u_menya.mp3"
+    hints: ["У = at/by, меня = me"]
+
+  - word: "Есть"
+    translation: "There is / To have"
+    audio: "yest.mp3"
+    hints: ["Е sounds like 'ye'"]
+
+  - word: "Брат"
+    translation: "Brother"
+    audio: "brat.mp3"
+    hints: ["Б sounds like 'b'"]
+    gender: "m"
+
+  - word: "Сестра"
+    translation: "Sister"
+    audio: "sestra.mp3"
+    hints: ["С = 's', Р = 'r'"]
+    gender: "f"
+
+  - word: "Собака"
+    translation: "Dog"
+    audio: "sobaka.mp3"
+    hints: ["Three syllables: so-BA-ka"]
+    gender: "f"
+
+  - word: "Машина"
+    translation: "Car"
+    audio: "mashina.mp3"
+    hints: ["Ш sounds like 'sh'"]
+    gender: "f"
+
+  - word: "Книга"
+    translation: "Book"
+    audio: "kniga.mp3"
+    hints: ["К is silent before Н? No! Say both."]
+    gender: "f"
+
+  - word: "Телефон"
+    translation: "Phone"
+    audio: "telefon.mp3"
+    hints: ["Same as English!"]
+    gender: "m"
+
+# Sentences with ENGLISH distractors (user builds English from word bank)
+sentences:
+  - text: "У меня есть кот."
+    translation: "I have a cat"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "кот", en: "a cat" }
+    distractors: ["a dog", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть брат."
+    translation: "I have a brother"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "брат", en: "a brother" }
+    distractors: ["a sister", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть сестра."
+    translation: "I have a sister"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "сестра", en: "a sister" }
+    distractors: ["a brother", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть собака."
+    translation: "I have a dog"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "собака", en: "a dog" }
+    distractors: ["a cat", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть машина."
+    translation: "I have a car"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "машина", en: "a car" }
+    distractors: ["a taxi", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть книга."
+    translation: "I have a book"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "книга", en: "a book" }
+    distractors: ["a map", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть телефон."
+    translation: "I have a phone"
+    words:
+      - { ru: "У меня есть", en: "I have" }
+      - { ru: "телефон", en: "a phone" }
+    distractors: ["a radio", "you", "is", "the"]
+    complexity: 2
+
+  - text: "У меня есть брат?"
+    translation: "Do I have a brother"
+    words:
+      - { ru: "У меня есть", en: "Do I have" }
+      - { ru: "брат", en: "a brother" }
+    distractors: ["a sister", "Yes", "No", "you"]
+    complexity: 2
+
+  - text: "Да, у меня есть брат."
+    translation: "Yes I have a brother"
+    words:
+      - { ru: "Да", en: "Yes" }
+      - { ru: "у меня есть", en: "I have" }
+      - { ru: "брат", en: "a brother" }
+    distractors: ["No", "a sister", "you", "is"]
+    complexity: 2

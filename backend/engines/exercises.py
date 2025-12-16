@@ -92,10 +92,10 @@ class ExerciseGenerator:
             'en': self._build_distractor_pool([v.translation for v in all_vocab], 'en'),
         }
 
-        # Distribution by level type
+        # Distribution by level type (Duolingo-style: use words in sentences immediately)
         distributions: dict[str, dict[str, int]] = {
-            'intro': {},  # No exercises for intro - handled by WordIntro
-            'easy': {'multiple_choice': 6, 'matching': 3, 'word_bank': 1},
+            'intro': {'word_bank': 8, 'multiple_choice': 2},  # Heavy word_bank for immediate sentence use
+            'easy': {'word_bank': 5, 'multiple_choice': 4, 'matching': 1},
             'medium': {'word_bank': 5, 'multiple_choice': 3, 'typing': 1, 'fill_blank': 1},
             'hard': {'typing': 5, 'word_bank': 3, 'fill_blank': 2},
             'review': {'word_bank': 3, 'typing': 3, 'multiple_choice': 2, 'matching': 1, 'fill_blank': 1},
@@ -146,21 +146,55 @@ class ExerciseGenerator:
         review_vocab: list[VocabItem],
         difficulty: int,
     ) -> list[Exercise]:
-        """Generate word bank exercises from sentences."""
+        """Generate Duolingo-style word bank exercises - alternates directions."""
         exercises = []
         usable = [s for s in sentences if s.text and s.translation]
+        if not usable:
+            return []
 
-        for i in range(min(count, len(usable))):
+        for i in range(count):
             sent = usable[i % len(usable)]
-            # Higher difficulty = more target language production
-            to_russian = difficulty >= 2 or i % 2 == 0
+            
+            # Strictly alternate: even=English target, odd=Russian target
+            to_russian = (i % 2 == 1)
 
-            target, prompt, lang = (sent.text, sent.translation, 'ru') if to_russian else (sent.translation, sent.text, 'en')
+            if to_russian:
+                # User sees English, builds Russian (tap Russian words)
+                source = sent.translation
+                target_lang: TargetLanguage = 'ru'
+                
+                # Get Russian words from mapping, fallback to splitting sentence
+                correct_words = []
+                if sent.words:
+                    correct_words = [w.get('ru', '') for w in sent.words if w.get('ru')]
+                if not correct_words:
+                    correct_words = sent.text.replace('?', '').replace('!', '').replace('.', '').replace(',', '').split()
+                
+                distractors = self._get_distractors(correct_words, 'ru', max(3, len(correct_words)))
+            else:
+                # User sees Russian, builds English (tap English words)
+                source = sent.text
+                target_lang = 'en'
+                
+                # Get English words from mapping, fallback to splitting translation
+                correct_words = []
+                if sent.words:
+                    correct_words = [w.get('en', '') for w in sent.words if w.get('en')]
+                if not correct_words:
+                    correct_words = sent.translation.replace('?', '').replace('!', '').replace('.', '').replace(',', '').split()
+                
+                # Prefer sentence-specific distractors for English
+                if sent.distractors:
+                    distractors = sent.distractors[:max(3, len(correct_words))]
+                else:
+                    distractors = self._get_distractors(correct_words, 'en', max(3, len(correct_words)))
 
-            # Build word bank with target words + distractors
-            words = target.replace('?', ' ?').replace('!', ' !').replace('.', ' .').split()
-            distractors = self._get_distractors(words, lang, max(2, len(words) // 2))
-            word_bank = words + distractors
+            # Filter empty strings and build word bank
+            correct_words = [w for w in correct_words if w and w.strip()]
+            if not correct_words:
+                continue  # Skip if no valid words
+                
+            word_bank = correct_words + distractors
             random.shuffle(word_bank)
 
             exercises.append(Exercise(
@@ -168,7 +202,12 @@ class ExerciseGenerator:
                 type='word_bank',
                 prompt='Translate this sentence',
                 difficulty=min(3, sent.complexity),
-                data={'targetText': target, 'targetLanguage': lang, 'wordBank': word_bank, 'translation': prompt},
+                data={
+                    'targetText': ' '.join(correct_words),
+                    'targetLanguage': target_lang,
+                    'wordBank': word_bank,
+                    'translation': source,
+                },
             ))
 
         return exercises

@@ -14,6 +14,18 @@ from pathlib import Path
 from typing import Iterator
 import csv
 
+# ISO 639-1 (2-letter) to ISO 639-3 (3-letter) mapping for common languages
+_LANG_MAP = {
+    "ru": "rus", "en": "eng", "de": "deu", "fr": "fra", "es": "spa",
+    "it": "ita", "pt": "por", "zh": "cmn", "ja": "jpn", "ko": "kor",
+    "ar": "ara", "hi": "hin", "tr": "tur", "pl": "pol", "uk": "ukr",
+    "nl": "nld", "sv": "swe", "no": "nor", "da": "dan", "fi": "fin",
+}
+
+def _normalize_lang(code: str) -> str:
+    """Convert ISO 639-1 codes to ISO 639-3 (Tatoeba format)."""
+    return _LANG_MAP.get(code, code)
+
 
 @dataclass(slots=True)
 class TatoebaSentence:
@@ -141,7 +153,10 @@ class TatoebaParser:
         1. Build index of relevant sentences
         2. Stream links and yield matching pairs
         """
-        languages = {source_lang, target_lang}
+        # Normalize to ISO 639-3 (Tatoeba format)
+        src_code = _normalize_lang(source_lang)
+        tgt_code = _normalize_lang(target_lang)
+        languages = {src_code, tgt_code}
         sentences: dict[int, TatoebaSentence] = {}
 
         with open(sentences_path, encoding="utf-8") as f:
@@ -164,10 +179,10 @@ class TatoebaParser:
                 if not (src and tgt):
                     continue
 
-                if src.language == source_lang and tgt.language == target_lang:
+                if src.language == src_code and tgt.language == tgt_code:
                     yield SentencePair(source=src, target=tgt)
                     count += 1
-                elif src.language == target_lang and tgt.language == source_lang:
+                elif src.language == tgt_code and tgt.language == src_code:
                     yield SentencePair(source=tgt, target=src)
                     count += 1
 

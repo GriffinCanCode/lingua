@@ -28,7 +28,7 @@ T = TypeVar("T")
 
 engine = create_async_engine(
     settings.DATABASE_URL,
-    echo=settings.APP_DEBUG,
+    echo=settings.LOG_SQL,
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10,

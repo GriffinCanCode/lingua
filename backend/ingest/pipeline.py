@@ -1,19 +1,19 @@
-"""Ingestion Pipeline
+"""Ingestion Pipeline - High Performance
 
-Orchestrates the full data ingestion process:
-1. Parse source files (UD, Wiktionary, Tatoeba)
-2. Extract and deduplicate patterns
-3. Calculate complexity scores
-4. Create sentences and link to patterns
-5. Track ingestion records
+Optimized for maximum throughput:
+1. Pre-loaded caches eliminate N+1 queries
+2. Bulk inserts with add_all for minimal round-trips
+3. Streaming parsing with incremental complexity scoring
+4. Efficient batch processing with configurable size
 """
 from datetime import datetime
 from pathlib import Path
-from uuid import UUID
+from uuid import UUID, uuid4
 from dataclasses import dataclass, field
 from typing import Callable, Awaitable
+from collections import defaultdict
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import get_db_session
@@ -26,10 +26,14 @@ from ingest.parsers.wiktionary import WiktionaryParser, WiktionaryEntry
 from ingest.parsers.tatoeba import TatoebaParser, SentencePair
 from ingest.complexity import ComplexityScorer
 
-# Difficulty lookup by grammatical feature
+# Feature parsing constants (use full names from curriculum)
 _CASE_DIFF = {"nominative": 1, "accusative": 2, "genitive": 4, "dative": 5, "instrumental": 6, "prepositional": 4}
-_FEATURE_PARSE = {"nominative", "genitive", "dative", "accusative", "instrumental", "prepositional",
-                  "singular", "plural", "masculine", "feminine", "neuter", "present", "past", "future"}
+_CASES = {"nominative", "genitive", "dative", "accusative", "instrumental", "prepositional", "vocative", "partitive"}
+_NUMBERS = {"singular", "plural", "dual"}
+_GENDERS = {"masculine", "feminine", "neuter"}
+_TENSES = {"present", "past", "future"}
+_ASPECTS = {"imperfective", "perfective"}
+_MOODS = {"indicative", "imperative", "subjunctive", "conditional"}
 
 
 @dataclass
@@ -58,47 +62,45 @@ class IngestionStats:
 
 
 class IngestionPipeline:
-    """Main ingestion orchestrator."""
+    """High-performance ingestion orchestrator with bulk operations."""
 
-    __slots__ = ("language", "batch_size", "_pattern_cache", "_lemma_cache", "_scorer")
+    __slots__ = ("language", "batch_size", "_pattern_cache", "_mapping_cache", "_scorer",
+                 "_pattern_freq", "_lemma_freq")
 
-    def __init__(self, language: str = "ru", batch_size: int = 100):
+    def __init__(self, language: str = "ru", batch_size: int = 500):
         self.language = language
         self.batch_size = batch_size
-        self._pattern_cache: dict[tuple, UUID] = {}
-        self._lemma_cache: dict[str, UUID] = {}
+        self._pattern_cache: dict[str, UUID] = {}
+        self._mapping_cache: set[str] = set()
         self._scorer: ComplexityScorer | None = None
+        self._pattern_freq: dict[str, int] = defaultdict(int)
+        self._lemma_freq: dict[str, int] = defaultdict(int)
 
-    async def _get_or_create_pattern(self, session: AsyncSession, pattern_type: str, features: dict) -> UUID:
-        """Get existing pattern or create new one."""
-        cache_key = (pattern_type, tuple(sorted(features.items())))
-        if pid := self._pattern_cache.get(cache_key):
-            return pid
-
+    async def _preload_caches(self, session: AsyncSession, source_name: str) -> None:
+        """Pre-load all existing patterns and mappings to avoid N+1 queries."""
+        # Load all patterns for language
         result = await session.execute(
-            select(SyntacticPattern).where(
-                SyntacticPattern.pattern_type == pattern_type,
-                SyntacticPattern.language == self.language,
-            )
+            select(SyntacticPattern.pattern_type, SyntacticPattern.id)
+            .where(SyntacticPattern.language == self.language)
         )
-        if pattern := result.scalar_one_or_none():
-            self._pattern_cache[cache_key] = pattern.id
-            return pattern.id
+        self._pattern_cache = {row[0]: row[1] for row in result.fetchall()}
 
-        pattern = SyntacticPattern(
-            pattern_type=pattern_type,
-            language=self.language,
-            features=features,
-            difficulty=self._estimate_difficulty(pattern_type),
+        # Load all external mappings for source
+        result = await session.execute(
+            select(ExternalIdMapping.external_id, ExternalIdMapping.entity_type)
+            .where(ExternalIdMapping.source_name == source_name)
         )
-        session.add(pattern)
-        await session.flush()
-        self._pattern_cache[cache_key] = pattern.id
-        return pattern.id
+        self._mapping_cache = {f"{row[0]}:{row[1]}" for row in result.fetchall()}
+
+    def _mapping_exists(self, external_id: str, entity_type: str) -> bool:
+        return f"{external_id}:{entity_type}" in self._mapping_cache
+
+    def _cache_mapping(self, external_id: str, entity_type: str) -> None:
+        self._mapping_cache.add(f"{external_id}:{entity_type}")
 
     @staticmethod
     def _estimate_difficulty(pattern_type: str) -> int:
-        """Estimate difficulty for a new pattern (1-10)."""
+        """Estimate difficulty for a pattern (1-10)."""
         parts = pattern_type.lower().split("_")
         diff = 3
         for case, d in _CASE_DIFF.items():
@@ -117,36 +119,59 @@ class IngestionPipeline:
             diff = min(diff + 1, 10)
         return diff
 
-    async def _create_mapping(
-        self, session: AsyncSession, source: str, ext_id: str, entity: str, internal_id: UUID, checksum: str | None = None
-    ) -> None:
-        """Create mapping from external ID to internal ID."""
-        session.add(ExternalIdMapping(
-            source_name=source, external_id=ext_id, entity_type=entity, internal_id=internal_id, checksum=checksum
-        ))
+    @staticmethod
+    def _parse_features(pattern_key: str) -> dict[str, str]:
+        """Parse features from pattern key."""
+        parts = pattern_key.split("_")
+        feats: dict[str, str] = {"raw_key": pattern_key}
+        if parts:
+            feats["upos"] = parts[0]
+        for p in parts[1:]:
+            if p in _CASES:
+                feats["case"] = p
+            elif p in _NUMBERS:
+                feats["number"] = p
+            elif p in _GENDERS:
+                feats["gender"] = p
+            elif p in _TENSES:
+                feats["tense"] = p
+            elif p in _ASPECTS:
+                feats["aspect"] = p
+            elif p in _MOODS:
+                feats["mood"] = p
+            elif p in ("1st", "2nd", "3rd"):
+                feats["person"] = p
+        return feats
 
-    async def _get_mapping(self, session: AsyncSession, source: str, ext_id: str, entity: str) -> UUID | None:
-        """Get existing internal ID for an external ID."""
-        result = await session.execute(
-            select(ExternalIdMapping.internal_id).where(
-                ExternalIdMapping.source_name == source,
-                ExternalIdMapping.external_id == ext_id,
-                ExternalIdMapping.entity_type == entity,
-            )
-        )
-        return result.scalar_one_or_none()
+    def _build_scorer(self, sentences: list[UDSentence]) -> ComplexityScorer:
+        """Build scorer from corpus, collecting frequencies."""
+        total = len(sentences)
+        for s in sentences:
+            for p in s.get_patterns():
+                self._pattern_freq[p] += 1
+            for l in s.lemmas:
+                self._lemma_freq[l] += 1
+
+        pattern_frequencies = {p: c / total for p, c in self._pattern_freq.items()}
+        sorted_lemmas = sorted(self._lemma_freq.items(), key=lambda x: -x[1])
+        lemma_frequencies = {l: r + 1 for r, (l, _) in enumerate(sorted_lemmas)}
+        return ComplexityScorer(pattern_frequencies=pattern_frequencies, lemma_frequencies=lemma_frequencies)
 
     async def ingest_ud_corpus(
         self, conllu_path: Path | str, progress_callback: Callable[[int, int], Awaitable[None]] | None = None
     ) -> IngestionStats:
-        """Ingest sentences and patterns from Universal Dependencies corpus."""
+        """Ingest UD corpus with bulk operations."""
         stats = IngestionStats()
         source = "universal_dependencies"
+
+        # Parse all sentences first for complexity calibration
         sentences = list(CoNLLUParser().parse_file(conllu_path))
         total = len(sentences)
-        self._scorer = ComplexityScorer.from_corpus(sentences)
+        self._scorer = self._build_scorer(sentences)
 
         async with get_db_session() as session:
+            await self._preload_caches(session, source)
+
             record = IngestionRecord(
                 source_name=source, language=self.language, file_path=str(conllu_path),
                 status="running", started_at=datetime.utcnow()
@@ -155,16 +180,11 @@ class IngestionPipeline:
             await session.flush()
 
             try:
-                batch: list[UDSentence] = []
-                for ud in sentences:
-                    batch.append(ud)
-                    if len(batch) >= self.batch_size:
-                        await self._process_ud_batch(session, batch, source, stats)
-                        batch = []
-                        if progress_callback:
-                            await progress_callback(stats.records_processed, total)
-                if batch:
+                for i in range(0, total, self.batch_size):
+                    batch = sentences[i:i + self.batch_size]
                     await self._process_ud_batch(session, batch, source, stats)
+                    if progress_callback:
+                        await progress_callback(stats.records_processed, total)
 
                 await session.commit()
                 record.status = "completed"
@@ -186,58 +206,208 @@ class IngestionPipeline:
         stats.completed_at = datetime.utcnow()
         return stats
 
-    async def _process_ud_batch(self, session: AsyncSession, batch: list[UDSentence], source: str, stats: IngestionStats) -> None:
-        """Process a batch of UD sentences."""
+    async def _process_ud_batch(
+        self, session: AsyncSession, batch: list[UDSentence], source: str, stats: IngestionStats
+    ) -> None:
+        """Process batch with ORM bulk operations."""
+        new_patterns: list[SyntacticPattern] = []
+        new_sentences: list[Sentence] = []
+        new_mappings: list[ExternalIdMapping] = []
+        new_links: list[SentencePattern] = []
+
         for ud in batch:
             stats.records_processed += 1
-            try:
-                if await self._get_mapping(session, source, ud.sent_id, "sentence"):
-                    stats.records_skipped += 1
-                    continue
 
-                sent = Sentence(
-                    text=ud.text,
-                    language=self.language,
-                    complexity_score=self._scorer.score(ud) if self._scorer else 5,
-                    source=source,
-                    extra_data={"sent_id": ud.sent_id, "metadata": ud.metadata},
-                )
-                session.add(sent)
-                await session.flush()
-                await self._create_mapping(session, source, ud.sent_id, "sentence", sent.id)
+            if self._mapping_exists(ud.sent_id, "sentence"):
+                stats.records_skipped += 1
+                continue
+
+            try:
+                sent_id = uuid4()
+                complexity = self._scorer.score(ud) if self._scorer else 5
+
+                new_sentences.append(Sentence(
+                    id=sent_id, text=ud.text, language=self.language,
+                    complexity_score=complexity, source=source,
+                    extra_data={"sent_id": ud.sent_id, "metadata": ud.metadata}
+                ))
+
+                new_mappings.append(ExternalIdMapping(
+                    source_name=source, external_id=ud.sent_id,
+                    entity_type="sentence", internal_id=sent_id
+                ))
+                self._cache_mapping(ud.sent_id, "sentence")
 
                 for key, pos in ud.get_pattern_positions():
-                    parts = key.split("_")
-                    feats: dict[str, str] = {"raw_key": key}
-                    if len(parts) >= 2:
-                        feats["upos"] = parts[0]
-                    for p in parts[1:]:
-                        if p in _FEATURE_PARSE:
-                            if p in {"nominative", "genitive", "dative", "accusative", "instrumental", "prepositional"}:
-                                feats["case"] = p
-                            elif p in {"singular", "plural"}:
-                                feats["number"] = p
-                            elif p in {"masculine", "feminine", "neuter"}:
-                                feats["gender"] = p
-                            elif p in {"present", "past", "future"}:
-                                feats["tense"] = p
+                    if not key:  # Skip empty patterns
+                        continue
+                    if key not in self._pattern_cache:
+                        pattern_id = uuid4()
+                        pattern = SyntacticPattern(
+                            id=pattern_id,
+                            pattern_type=key, language=self.language,
+                            features=self._parse_features(key),
+                            difficulty=self._estimate_difficulty(key)
+                        )
+                        new_patterns.append(pattern)
+                        self._pattern_cache[key] = pattern_id
 
-                    pid = await self._get_or_create_pattern(session, key, feats)
-                    session.add(SentencePattern(sentence_id=sent.id, pattern_id=pid, position=pos))
+                    new_links.append(SentencePattern(
+                        sentence_id=sent_id,
+                        pattern_id=self._pattern_cache[key],
+                        position=pos
+                    ))
 
                 stats.records_created += 1
             except Exception as e:
                 stats.records_failed += 1
                 stats.errors.append(f"Sentence {ud.sent_id}: {e}")
 
+        # Bulk add all objects
+        if new_patterns:
+            session.add_all(new_patterns)
+            await session.flush()  # Get IDs assigned
+        if new_sentences:
+            session.add_all(new_sentences)
+        if new_mappings:
+            session.add_all(new_mappings)
+        if new_links:
+            session.add_all(new_links)
+        
+        await session.flush()
+
+    async def ingest_tatoeba(
+        self,
+        sentences_path: Path | str,
+        links_path: Path | str,
+        target_lang: str = "en",
+        limit: int | None = None,
+        progress_callback: Callable[[int, int], Awaitable[None]] | None = None,
+    ) -> IngestionStats:
+        """Ingest Tatoeba with bulk operations."""
+        stats = IngestionStats()
+        source = "tatoeba"
+
+        async with get_db_session() as session:
+            await self._preload_caches(session, source)
+
+            # Pre-load existing sentences by text for matching
+            result = await session.execute(
+                select(Sentence.id, Sentence.text, Sentence.translation)
+                .where(Sentence.language == self.language)
+            )
+            existing_sentences = {row[1]: (row[0], row[2]) for row in result.fetchall()}
+
+            record = IngestionRecord(
+                source_name=source, language=self.language, file_path=str(sentences_path),
+                status="running", started_at=datetime.utcnow()
+            )
+            session.add(record)
+            await session.flush()
+
+            try:
+                batch: list[SentencePair] = []
+                pairs = TatoebaParser.parse_pairs_file(sentences_path, links_path, self.language, target_lang, limit)
+
+                for pair in pairs:
+                    batch.append(pair)
+                    if len(batch) >= self.batch_size:
+                        await self._process_tatoeba_batch(session, batch, source, stats, existing_sentences)
+                        batch = []
+                        if progress_callback:
+                            await progress_callback(stats.records_processed, limit or -1)
+
+                if batch:
+                    await self._process_tatoeba_batch(session, batch, source, stats, existing_sentences)
+
+                await session.commit()
+                record.status = "completed"
+                record.completed_at = datetime.utcnow()
+                record.records_processed = stats.records_processed
+                record.records_created = stats.records_created
+                record.records_updated = stats.records_updated
+            except Exception as e:
+                await session.rollback()
+                record.status = "failed"
+                record.error_log = [str(e)]
+                stats.errors.append(str(e))
+                raise
+            finally:
+                await session.commit()
+
+        stats.completed_at = datetime.utcnow()
+        return stats
+
+    async def _process_tatoeba_batch(
+        self, session: AsyncSession, batch: list[SentencePair], source: str,
+        stats: IngestionStats, existing_sentences: dict[str, tuple[UUID, str | None]]
+    ) -> None:
+        """Process Tatoeba batch with ORM bulk operations."""
+        new_sentences: list[Sentence] = []
+        new_mappings: list[ExternalIdMapping] = []
+        updates: list[tuple[UUID, str]] = []
+
+        for pair in batch:
+            stats.records_processed += 1
+            ext_id = str(pair.source.id)
+
+            try:
+                if self._mapping_exists(ext_id, "sentence"):
+                    stats.records_skipped += 1
+                    continue
+
+                if pair.source.text in existing_sentences:
+                    sent_id, existing_trans = existing_sentences[pair.source.text]
+                    if not existing_trans:
+                        updates.append((sent_id, pair.target.text))
+                        stats.records_updated += 1
+                    else:
+                        stats.records_skipped += 1
+                    continue
+
+                sent_id = uuid4()
+                new_sentences.append(Sentence(
+                    id=sent_id, text=pair.source.text, language=self.language,
+                    translation=pair.target.text, complexity_score=5, source=source,
+                    extra_data={"tatoeba_id": pair.source.id, "translation_id": pair.target.id}
+                ))
+
+                new_mappings.append(ExternalIdMapping(
+                    source_name=source, external_id=ext_id,
+                    entity_type="sentence", internal_id=sent_id
+                ))
+                self._cache_mapping(ext_id, "sentence")
+                existing_sentences[pair.source.text] = (sent_id, pair.target.text)
+                stats.records_created += 1
+
+            except Exception as e:
+                stats.records_failed += 1
+                stats.errors.append(f"Pair {pair.source.id}: {e}")
+
+        # Bulk add
+        if new_sentences:
+            session.add_all(new_sentences)
+        if new_mappings:
+            session.add_all(new_mappings)
+
+        # Bulk update translations using ORM
+        for sent_id, translation in updates:
+            await session.execute(
+                update(Sentence).where(Sentence.id == sent_id).values(translation=translation)
+            )
+
+        await session.flush()
+
     async def ingest_wiktionary(
         self, dump_path: Path | str, progress_callback: Callable[[int, int], Awaitable[None]] | None = None
     ) -> IngestionStats:
-        """Ingest lemmas and inflections from Wiktionary dump."""
+        """Ingest Wiktionary with bulk operations."""
         stats = IngestionStats()
         source = "wiktionary"
 
         async with get_db_session() as session:
+            await self._preload_caches(session, source)
+
             record = IngestionRecord(
                 source_name=source, language=self.language, file_path=str(dump_path),
                 status="running", started_at=datetime.utcnow()
@@ -256,6 +426,7 @@ class IngestionPipeline:
                         batch = []
                         if progress_callback:
                             await progress_callback(stats.records_processed, -1)
+
                 if batch:
                     await self._process_wikt_batch(session, batch, source, stats)
 
@@ -276,150 +447,57 @@ class IngestionPipeline:
         stats.completed_at = datetime.utcnow()
         return stats
 
-    async def _process_wikt_batch(self, session: AsyncSession, batch: list[WiktionaryEntry], source: str, stats: IngestionStats) -> None:
-        """Process a batch of Wiktionary entries."""
+    async def _process_wikt_batch(
+        self, session: AsyncSession, batch: list[WiktionaryEntry], source: str, stats: IngestionStats
+    ) -> None:
+        """Process Wiktionary batch with ORM bulk operations."""
+        new_lemmas: list[Lemma] = []
+        new_inflections: list[Inflection] = []
+        new_mappings: list[ExternalIdMapping] = []
+
         for entry in batch:
             stats.records_processed += 1
-            try:
-                ext_id = f"{entry.title}:{entry.pos}"
-                if await self._get_mapping(session, source, ext_id, "lemma"):
-                    stats.records_skipped += 1
-                    continue
+            ext_id = f"{entry.title}:{entry.pos}"
 
+            if self._mapping_exists(ext_id, "lemma"):
+                stats.records_skipped += 1
+                continue
+
+            try:
                 lemma = Lemma(
-                    word=entry.title,
-                    language=self.language,
-                    part_of_speech=entry.pos,
-                    gender=entry.gender,
-                    aspect=entry.aspect,
-                    declension_class=entry.declension_class,
-                    conjugation_class=entry.conjugation_class,
+                    word=entry.title, language=self.language,
+                    part_of_speech=entry.pos, gender=entry.gender, aspect=entry.aspect,
+                    declension_class=entry.declension_class, conjugation_class=entry.conjugation_class,
                     definition="; ".join(entry.definitions) if entry.definitions else None,
-                    features={"synonyms": entry.synonyms, "antonyms": entry.antonyms, "pronunciation": entry.pronunciation},
+                    features={"synonyms": entry.synonyms, "antonyms": entry.antonyms, "pronunciation": entry.pronunciation}
                 )
-                session.add(lemma)
-                await session.flush()
-                await self._create_mapping(session, source, ext_id, "lemma", lemma.id)
+                new_lemmas.append(lemma)
+
+                new_mappings.append(ExternalIdMapping(
+                    source_name=source, external_id=ext_id,
+                    entity_type="lemma", internal_id=lemma.id
+                ))
+                self._cache_mapping(ext_id, "lemma")
 
                 for inf in entry.inflections:
-                    session.add(Inflection(
-                        lemma_id=lemma.id, form=inf.form, case=inf.case, number=inf.number,
-                        person=inf.person, tense=inf.tense, gender=inf.gender,
-                        features={"mood": inf.mood, "aspect": inf.aspect},
+                    new_inflections.append(Inflection(
+                        lemma_id=lemma.id, form=inf.form,
+                        case=inf.case, number=inf.number, person=inf.person,
+                        tense=inf.tense, gender=inf.gender,
+                        features={"mood": inf.mood, "aspect": inf.aspect}
                     ))
-
-                if (et := entry.etymology) and et.origin_word:
-                    origin = EtymologyNode(
-                        word=et.origin_word,
-                        language=et.origin_language or "unknown",
-                        is_reconstructed="Y" if et.origin_word.startswith("*") else "N",
-                    )
-                    session.add(origin)
-                    await session.flush()
-
-                    current = EtymologyNode(
-                        word=entry.title,
-                        language=self.language,
-                        part_of_speech=entry.pos,
-                        meaning=entry.definitions[0] if entry.definitions else None,
-                    )
-                    session.add(current)
-                    await session.flush()
-                    session.add(EtymologyRelation(source_id=origin.id, target_id=current.id, relation_type=et.relation_type))
 
                 stats.records_created += 1
             except Exception as e:
                 stats.records_failed += 1
                 stats.errors.append(f"Entry {entry.title}: {e}")
 
-    async def ingest_tatoeba(
-        self,
-        sentences_path: Path | str,
-        links_path: Path | str,
-        target_lang: str = "en",
-        limit: int | None = None,
-        progress_callback: Callable[[int, int], Awaitable[None]] | None = None,
-    ) -> IngestionStats:
-        """Ingest sentence translations from Tatoeba."""
-        stats = IngestionStats()
-        source = "tatoeba"
+        # Bulk add
+        if new_lemmas:
+            session.add_all(new_lemmas)
+        if new_mappings:
+            session.add_all(new_mappings)
+        if new_inflections:
+            session.add_all(new_inflections)
 
-        async with get_db_session() as session:
-            record = IngestionRecord(
-                source_name=source, language=self.language, file_path=str(sentences_path),
-                status="running", started_at=datetime.utcnow()
-            )
-            session.add(record)
-            await session.flush()
-
-            try:
-                batch: list[SentencePair] = []
-                pairs = TatoebaParser.parse_pairs_file(sentences_path, links_path, self.language, target_lang, limit)
-                for pair in pairs:
-                    batch.append(pair)
-                    if len(batch) >= self.batch_size:
-                        await self._process_tatoeba_batch(session, batch, source, stats)
-                        batch = []
-                        if progress_callback:
-                            await progress_callback(stats.records_processed, limit or -1)
-                if batch:
-                    await self._process_tatoeba_batch(session, batch, source, stats)
-
-                await session.commit()
-                record.status = "completed"
-                record.completed_at = datetime.utcnow()
-                record.records_processed = stats.records_processed
-                record.records_created = stats.records_created
-                record.records_updated = stats.records_updated
-            except Exception as e:
-                await session.rollback()
-                record.status = "failed"
-                record.error_log = [str(e)]
-                stats.errors.append(str(e))
-                raise
-            finally:
-                await session.commit()
-
-        stats.completed_at = datetime.utcnow()
-        return stats
-
-    async def _process_tatoeba_batch(self, session: AsyncSession, batch: list[SentencePair], source: str, stats: IngestionStats) -> None:
-        """Process a batch of Tatoeba sentence pairs."""
-        for pair in batch:
-            stats.records_processed += 1
-            try:
-                ext_id = str(pair.source.id)
-                if existing := await self._get_mapping(session, source, ext_id, "sentence"):
-                    result = await session.execute(select(Sentence).where(Sentence.id == existing))
-                    if (sent := result.scalar_one_or_none()) and not sent.translation:
-                        sent.translation = pair.target.text
-                        stats.records_updated += 1
-                    else:
-                        stats.records_skipped += 1
-                    continue
-
-                result = await session.execute(
-                    select(Sentence).where(Sentence.text == pair.source.text, Sentence.language == self.language)
-                )
-                if sent := result.scalar_one_or_none():
-                    if not sent.translation:
-                        sent.translation = pair.target.text
-                        stats.records_updated += 1
-                    else:
-                        stats.records_skipped += 1
-                else:
-                    sent = Sentence(
-                        text=pair.source.text,
-                        language=self.language,
-                        translation=pair.target.text,
-                        complexity_score=5,
-                        source=source,
-                        extra_data={"tatoeba_id": pair.source.id, "translation_id": pair.target.id},
-                    )
-                    session.add(sent)
-                    await session.flush()
-                    await self._create_mapping(session, source, ext_id, "sentence", sent.id)
-                    stats.records_created += 1
-            except Exception as e:
-                stats.records_failed += 1
-                stats.errors.append(f"Pair {pair.source.id}: {e}")
+        await session.flush()

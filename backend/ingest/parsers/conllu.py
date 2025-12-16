@@ -9,6 +9,15 @@ from typing import Iterator, TextIO
 import mmap
 import os
 
+# UD feature value to full name mappings (for curriculum compatibility)
+_CASE_MAP = {"Nom": "nominative", "Gen": "genitive", "Dat": "dative", "Acc": "accusative",
+             "Ins": "instrumental", "Loc": "prepositional", "Voc": "vocative", "Par": "partitive"}
+_NUMBER_MAP = {"Sing": "singular", "Plur": "plural", "Dual": "dual"}
+_GENDER_MAP = {"Masc": "masculine", "Fem": "feminine", "Neut": "neuter"}
+_TENSE_MAP = {"Past": "past", "Pres": "present", "Fut": "future"}
+_ASPECT_MAP = {"Imp": "imperfective", "Perf": "perfective"}
+_MOOD_MAP = {"Ind": "indicative", "Imp": "imperative", "Sub": "subjunctive", "Cnd": "conditional"}
+
 
 @dataclass(slots=True)
 class UDToken:
@@ -61,21 +70,38 @@ class UDToken:
         return self.feats.get("Voice")
 
     def get_pattern_key(self) -> str | None:
-        """Generate pattern key from morphological features."""
+        """Generate pattern key from morphological features.
+        
+        Uses full case/number/gender names to match curriculum pattern definitions.
+        """
         upos = self.upos
-        if upos in ("NOUN", "PROPN", "ADJ", "DET", "PRON", "NUM"):
-            parts = [upos.lower()]
-            if (c := self.case): parts.append(c.lower())
-            if (n := self.number): parts.append(n.lower())
-            if (g := self.gender): parts.append(g.lower())
+        if upos in ("NOUN", "PROPN"):
+            parts = ["noun"]
+            if (c := self.case): parts.append(_CASE_MAP.get(c, c.lower()))
+            if (n := self.number): parts.append(_NUMBER_MAP.get(n, n.lower()))
+            if (g := self.gender): parts.append(_GENDER_MAP.get(g, g.lower()))
+            return "_".join(parts)
+        elif upos == "ADJ":
+            parts = ["adjective"]
+            if (c := self.case): parts.append(_CASE_MAP.get(c, c.lower()))
+            if (g := self.gender): parts.append(_GENDER_MAP.get(g, g.lower()))
+            return "_".join(parts)
+        elif upos == "PRON":
+            parts = ["pronoun"]
+            pron_type = self.feats.get("PronType", "Prs")
+            parts.append({"Prs": "personal", "Dem": "demonstrative", "Int": "interrogative",
+                         "Rel": "relative", "Ind": "indefinite", "Neg": "negative",
+                         "Tot": "total", "Rcp": "reciprocal", "Ref": "reflexive"}.get(pron_type, pron_type.lower()))
+            if (c := self.case): parts.append(_CASE_MAP.get(c, c.lower()))
             return "_".join(parts)
         elif upos == "VERB":
             parts = ["verb"]
-            if (t := self.tense): parts.append(t.lower())
-            if (a := self.aspect): parts.append(a.lower())
-            if (m := self.mood): parts.append(m.lower())
-            if (p := self.person): parts.append(f"p{p}")
-            if (n := self.number): parts.append(n.lower())
+            if (t := self.tense): parts.append(_TENSE_MAP.get(t, t.lower()))
+            if (a := self.aspect): parts.append(_ASPECT_MAP.get(a, a.lower()))
+            if (m := self.mood): parts.append(_MOOD_MAP.get(m, m.lower()))
+            if (p := self.person): parts.append({"1": "1st", "2": "2nd", "3": "3rd"}.get(p, p))
+            if (n := self.number): parts.append(_NUMBER_MAP.get(n, n.lower()))
+            if (g := self.gender): parts.append(_GENDER_MAP.get(g, g.lower()))
             return "_".join(parts)
         return None
 

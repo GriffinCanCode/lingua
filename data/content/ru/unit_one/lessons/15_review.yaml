@@ -46,26 +46,30 @@ modules:
       - type: "summary"
         title: "Verb Conjugation"
         points:
-          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, чита́ть, рабо́тать)"
-          - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говори́ть)"
-          - "Irregular: хоте́ть (mixed pattern), жить (consonant change)"
+          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, чита́ть, де́лать, рабо́тать)"
+          - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говори́ть, ви́деть)"
+          - "Irregular: хоте́ть (mixed), жить (в- stem), есть (eat), пить (soft stem)"
       
       - type: "pattern_table"
         title: "Key Verbs"
         columns: ["Verb", "Я", "Ты", "Он/Она́"]
         rows:
           - ["знать", "зна́ю", "зна́ешь", "зна́ет"]
+          - ["де́лать", "де́лаю", "де́лаешь", "де́лает"]
           - ["чита́ть", "чита́ю", "чита́ешь", "чита́ет"]
           - ["говори́ть", "говорю́", "говори́шь", "говори́т"]
+          - ["ви́деть", "ви́жу", "ви́дишь", "ви́дит"]
           - ["хоте́ть", "хочу́", "хо́чешь", "хо́чет"]
           - ["жить", "живу́", "живёшь", "живёт"]
+          - ["есть (eat)", "ем", "ешь", "ест"]
+          - ["пить", "пью", "пьёшь", "пьёт"]
     
     vocab_pool:
       introduce: []
       practice: []
-      review: [znat, ponimat, chitat, govorit, khotet, zhit, rabotat]
+      review: [znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit]
     exercises:
-      count: 8
+      count: 10
 
   - id: "mod_3"
     title: "Review: Grammar"
@@ -112,14 +116,14 @@ modules:
           - Reading Cyrillic
           - Basic vocabulary
           - Gender agreement
-          - Verb conjugation
+          - Verb conjugation (11 verbs!)
           - Question/answer patterns (где, кто, что, как)
           - Possessives
           - Conjunctions (и, и́ли, но)
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, govorit, khotet]
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda]
     exercises:
       count: 15
       difficulty: "hard"
@@ -140,20 +144,21 @@ modules:
           - Talk about what you have
           - Describe things using adjectives
           - Count to 10
-          - Conjugate 7 verbs in present tense!
+          - Conjugate 11 verbs in present tense!
+          - Talk about eating and drinking!
       
       - type: "summary"
         title: "Your Achievements"
         points:
           - "~100 vocabulary words learned"
-          - "7 verbs conjugated (знать, понима́ть, чита́ть, говори́ть, хоте́ть, жить, рабо́тать)"
+          - "11 verbs conjugated (знать, понима́ть, чита́ть, де́лать, говори́ть, ви́деть, хоте́ть, жить, рабо́тать, есть, пить)"
           - "6 core grammar patterns mastered"
           - "Culture: patronymics, ты vs вы"
           - "Ready for Unit 2: Everyday Life!"
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, govorit, khotet, zhit, rabotat]
+      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit]
     exercises:
       count: 15
       difficulty: "hard"

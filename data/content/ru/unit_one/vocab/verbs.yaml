@@ -100,6 +100,31 @@ type1:
       - { ru: "Я чита́ю кни́гу.", en: "I am reading a book." }
       - { ru: "Ты чита́ешь?", en: "Are you reading?" }
 
+  - id: "delat"
+    word: "делать"
+    stressed: "де́лать"
+    transliteration: "delat'"
+    translation: "to do / to make"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "сде́лать"
+    frequency: 1
+    difficulty: 1
+    audio: "delat.mp3"
+    notes: "Regular Type 1. Extremely common! Stress on first syllable."
+    conjugation:
+      ya: { word: "делаю", stressed: "де́лаю" }
+      ty: { word: "делаешь", stressed: "де́лаешь" }
+      on_ona: { word: "делает", stressed: "де́лает" }
+      my: { word: "делаем", stressed: "де́лаем" }
+      vy: { word: "делаете", stressed: "де́лаете" }
+      oni: { word: "делают", stressed: "де́лают" }
+    examples:
+      - { ru: "Что ты де́лаешь?", en: "What are you doing?" }
+      - { ru: "Я де́лаю уро́ки.", en: "I'm doing homework." }
+      - { ru: "Он ничего́ не де́лает.", en: "He does nothing." }
+
   - id: "zhit"
     word: "жить"
     stressed: "жить"
@@ -151,6 +176,31 @@ type2:
       - { ru: "Ты говори́шь по-англи́йски?", en: "Do you speak English?" }
       - { ru: "Он говори́т бы́стро.", en: "He speaks fast." }
 
+  - id: "videt"
+    word: "видеть"
+    stressed: "ви́деть"
+    transliteration: "videt'"
+    translation: "to see"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "уви́деть"
+    frequency: 1
+    difficulty: 2
+    audio: "videt.mp3"
+    notes: "Type 2 with consonant change: д → ж in 1st person singular. Stress on first syllable."
+    conjugation:
+      ya: { word: "вижу", stressed: "ви́жу" }
+      ty: { word: "видишь", stressed: "ви́дишь" }
+      on_ona: { word: "видит", stressed: "ви́дит" }
+      my: { word: "видим", stressed: "ви́дим" }
+      vy: { word: "видите", stressed: "ви́дите" }
+      oni: { word: "видят", stressed: "ви́дят" }
+    examples:
+      - { ru: "Я ви́жу дом.", en: "I see a house." }
+      - { ru: "Ты ви́дишь?", en: "Do you see?" }
+      - { ru: "Что ты ви́дишь?", en: "What do you see?" }
+
 irregular:
   # IRREGULAR VERBS
   - id: "khotet"
@@ -190,3 +240,55 @@ irregular:
     examples:
       - { ru: "У меня́ есть брат.", en: "I have a brother." }
       - { ru: "Тут есть ко́фе?", en: "Is there coffee here?" }
+
+  - id: "yest_eat"
+    word: "есть"
+    stressed: "есть"
+    transliteration: "yest'"
+    translation: "to eat"
+    pos: "verb"
+    irregular: true
+    aspect: "imperfective"
+    perfective_pair: "съесть"
+    frequency: 1
+    difficulty: 2
+    audio: "yest_eat.mp3"
+    notes: "⚠️ Same spelling as 'there is' but DIFFERENT verb! Completely irregular conjugation."
+    conjugation:
+      ya: { word: "ем", stressed: "ем" }
+      ty: { word: "ешь", stressed: "ешь" }
+      on_ona: { word: "ест", stressed: "ест" }
+      my: { word: "едим", stressed: "еди́м" }
+      vy: { word: "едите", stressed: "еди́те" }
+      oni: { word: "едят", stressed: "едя́т" }
+    examples:
+      - { ru: "Ты хо́чешь есть?", en: "Do you want to eat? / Are you hungry?" }
+      - { ru: "Я ем.", en: "I'm eating." }
+      - { ru: "Что ты ешь?", en: "What are you eating?" }
+      - { ru: "Он ест суп.", en: "He's eating soup." }
+
+  - id: "pit"
+    word: "пить"
+    stressed: "пить"
+    transliteration: "pit'"
+    translation: "to drink"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "вы́пить"
+    frequency: 1
+    difficulty: 2
+    audio: "pit.mp3"
+    notes: "Type 1 with consonant softening. Short verb - stem changes to пь- in conjugation."
+    conjugation:
+      ya: { word: "пью", stressed: "пью" }
+      ty: { word: "пьёшь", stressed: "пьёшь" }
+      on_ona: { word: "пьёт", stressed: "пьёт" }
+      my: { word: "пьём", stressed: "пьём" }
+      vy: { word: "пьёте", stressed: "пьёте" }
+      oni: { word: "пьют", stressed: "пьют" }
+    examples:
+      - { ru: "Я пью ко́фе.", en: "I'm drinking coffee." }
+      - { ru: "Что ты пьёшь?", en: "What are you drinking?" }
+      - { ru: "Она́ пьёт чай.", en: "She's drinking tea." }
+      - { ru: "Они́ пьют во́ду.", en: "They're drinking water." }

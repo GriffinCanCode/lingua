@@ -104,6 +104,7 @@ lessons:
     primary_vocab:
       - znat
       - ponimat
+      - delat
     review_vocab:
       - ya
       - ty
@@ -136,11 +137,13 @@ lessons:
     focus: "Type 2 conjugation, language skills"
     primary_vocab:
       - govorit
+      - videt
       - po_russki
       - po_angliyski
     review_vocab:
       - znat
       - ponimat
+      - delat
       - ya
       - ty
       - on
@@ -166,17 +169,23 @@ lessons:
 
   lesson_11_irregular_verbs:
     title: "I Want, I Live, I Work"
-    focus: "Irregular verbs and daily life (жить has ЖИ→ЖЫ)"
+    focus: "Irregular verbs, eating & drinking (жить has ЖИ→ЖЫ)"
     primary_vocab:
       - khotet
       - zhit
       - rabotat
+      - yest_eat
+      - pit
     review_vocab:
       - znat
       - ponimat
       - govorit
+      - videt
+      - delat
       - gde
       - dom
+      - kofe
+      - voda
 
   lesson_12_possessives:
     title: "My, Your, Our"
@@ -249,8 +258,13 @@ lessons:
       - moy
       - znat
       - ponimat
+      - chitat
+      - delat
       - govorit
+      - videt
       - khotet
       - zhit
       - rabotat
+      - yest_eat
+      - pit
       - bolshoy

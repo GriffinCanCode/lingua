@@ -1,9 +1,9 @@
-# Unit 1, Lesson 10: I Want, I Live, I Work
-# 5 modules - Irregular and mixed verbs
+# Unit 1, Lesson 10: I Want, I Live, I Eat
+# 6 modules - Irregular and mixed verbs
 
 lesson:
   id: "11_irregular_verbs"
-  title: "I Want, I Live, I Work"
+  title: "I Want, I Live, I Eat"
   subtitle: "Essential irregular verbs for daily life"
   icon: "star"
 
@@ -111,6 +111,62 @@ modules:
     exercises:
       count: 8
 
+  - id: "mod_2b"
+    title: "Есть & Пить - Eating & Drinking"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "есть"
+            translation: "to eat"
+            note: "⚠️ Same spelling as 'there is' but COMPLETELY different verb! Totally irregular."
+          - word: "пить"
+            translation: "to drink"
+            note: "Type 1 with soft stem: пь-. Ё in conjugation (пьёшь, пьёт...)."
+      
+      - type: "warning"
+        title: "⚠️ Two Different ЕСТЬ!"
+        content: |
+          Russian has TWO words spelled есть:
+          
+          1. есть = "there is / to have" (У меня́ есть кот)
+          2. есть = "to eat" (Я ем суп)
+          
+          Context makes it clear which is which!
+      
+      - type: "pattern_table"
+        title: "есть - to eat (IRREGULAR!)"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "ем", "I eat"]
+          - ["ты", "ешь", "you eat"]
+          - ["он/она́", "ест", "he/she eats"]
+          - ["мы", "еди́м", "we eat"]
+          - ["вы", "еди́те", "you eat (formal)"]
+          - ["они́", "едя́т", "they eat"]
+      
+      - type: "pattern_table"
+        title: "пить - to drink"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "пью", "I drink"]
+          - ["ты", "пьёшь", "you drink"]
+          - ["он/она́", "пьёт", "he/she drinks"]
+          - ["мы", "пьём", "we drink"]
+          - ["вы", "пьёте", "you drink (formal)"]
+          - ["они́", "пьют", "they drink"]
+      
+      - type: "tip"
+        content: "Ты хо́чешь есть? = Are you hungry? (lit: Do you want to eat?) This is the standard way to ask!"
+    
+    vocab_pool:
+      introduce: [yest_eat, pit]
+      practice: [khotet, zhit, rabotat]
+      review: [kofe, voda, chto]
+    exercises:
+      count: 10
+
   - id: "mod_3"
     title: "Talking About Life"
     type: "pattern"
@@ -154,13 +210,13 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Use all your verbs together: Я живу́ в Москве́. Я рабо́таю в ба́нке. Я хочу́ ко́фе!"
+        content: "Use all your verbs together: Я живу́ в Москве́. Я рабо́таю в ба́нке. Я хочу́ ко́фе! Я пью чай."
     vocab_pool:
       introduce: []
-      practice: [khotet, zhit, rabotat, znat, ponimat, govorit]
-      review: [ya, ty, on, ona, gde, tut, tam, kofe, dom]
+      practice: [khotet, zhit, rabotat, yest_eat, pit, znat, ponimat, govorit, videt, delat]
+      review: [ya, ty, on, ona, gde, tut, tam, kofe, voda, dom, chto]
     exercises:
-      count: 10
+      count: 12
 
   - id: "mod_5"
     title: "Master"
@@ -172,18 +228,20 @@ modules:
           - "хоте́ть (want) - irregular: хочу́, хо́чешь, хо́чет, хоти́м, хоти́те, хотя́т"
           - "жить (live) - consonant change: живу́, живёшь, живёт..."
           - "рабо́тать (work) - regular Type 1: рабо́таю, рабо́таешь..."
+          - "есть (eat) - completely irregular: ем, ешь, ест, еди́м, еди́те, едя́т"
+          - "пить (drink) - soft stem: пью, пьёшь, пьёт..."
           - "Asking where: Где ты живёшь? Где ты рабо́таешь?"
           - "⚠️ Pronunciation: Х = raspy 'kh', ЖИ = ЖЫ sound"
     vocab_pool:
       introduce: []
       practice: []
-      review: [khotet, zhit, rabotat, znat, ponimat, govorit]
+      review: [khotet, zhit, rabotat, yest_eat, pit, znat, ponimat, govorit, videt, delat]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [khotet, zhit, rabotat]
+  primary: [khotet, zhit, rabotat, yest_eat, pit]
   review_from: [07_type1_verbs, 09_type2_verbs]
 
 templates:
@@ -209,6 +267,27 @@ templates:
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 3
 
+  - pattern: "Ты хо́чешь есть?"
+    translation: "Are you hungry?"
+    slots: {}
+    weight: 4
+
+  - pattern: "Что ты ешь?"
+    translation: "What are you eating?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Я пью {NOUN}."
+    translation: "I'm drinking {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun], ids: [kofe, voda] }
+    weight: 4
+
+  - pattern: "Что ты пьёшь?"
+    translation: "What are you drinking?"
+    slots: {}
+    weight: 3
+
   - pattern: "{PRONOUN} {VERB}."
     translation: "{PRONOUN.translation} {VERB.translation}."
     slots:
@@ -231,3 +310,18 @@ dialogues:
       - { speaker: "A", ru: "Ты хо́чешь ко́фе?", en: "Do you want coffee?" }
       - { speaker: "B", ru: "Да, я хочу́ ко́фе.", en: "Yes, I want coffee." }
       - { speaker: "A", ru: "Хорошо́!", en: "Okay!" }
+
+  - id: "hungry"
+    context: "Asking about food"
+    lines:
+      - { speaker: "A", ru: "Ты хо́чешь есть?", en: "Are you hungry?" }
+      - { speaker: "B", ru: "Да, я хочу́ есть.", en: "Yes, I'm hungry." }
+      - { speaker: "A", ru: "Что ты хо́чешь?", en: "What do you want?" }
+      - { speaker: "B", ru: "Я не зна́ю...", en: "I don't know..." }
+
+  - id: "drinking"
+    context: "At a cafe"
+    lines:
+      - { speaker: "A", ru: "Что ты пьёшь?", en: "What are you drinking?" }
+      - { speaker: "B", ru: "Я пью ко́фе. А ты?", en: "I'm drinking coffee. And you?" }
+      - { speaker: "A", ru: "Я пью во́ду.", en: "I'm drinking water." }

@@ -5,27 +5,28 @@
 
 lessons:
   lesson_01_daily_verbs:
-    title: "Daily Actions"
-    focus: "де́лать, слу́шать, чита́ть - Type 1 verbs"
+    title: "Listening & Writing"
+    focus: "слу́шать, писа́ть - New Type 1 verbs"
     primary_vocab:
-      - delat
       - slushat
-      - chitat
+      - pisat
     review_vocab:
       - znat
       - ponimat
       - rabotat
+      - delat
+      - chitat
 
   lesson_02_watching_seeing:
-    title: "Watching & Seeing"
-    focus: "смотре́ть, ви́деть - Type 2 verbs with consonant changes"
+    title: "Watching & Looking"
+    focus: "смотре́ть - Type 2 verbs with consonant changes"
     primary_vocab:
       - smotret
-      - videt
       - televizor
       - film
     review_vocab:
       - govorit
+      - videt
 
   lesson_03_accusative_intro:
     title: "Direct Objects"
@@ -101,11 +102,9 @@ lessons:
     title: "Review & Checkpoint"
     focus: "Comprehensive Unit 2 review"
     review_vocab:
-      - delat
       - slushat
-      - chitat
+      - pisat
       - smotret
-      - videt
       - lyubit
       - segodnya
       - zavtra

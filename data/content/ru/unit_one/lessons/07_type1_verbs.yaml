@@ -29,12 +29,15 @@ modules:
           - word: "понима́ть"
             translation: "to understand"
             note: "Type 1 verb - essential survival word! Stress on third syllable."
+          - word: "де́лать"
+            translation: "to do / to make"
+            note: "Type 1 verb - extremely common! Stress on first syllable."
       
       - type: "tip"
-        content: "These two verbs will get you out of many situations: Я не зна́ю (I don't know), Я не понима́ю (I don't understand)."
+        content: "These verbs will get you out of many situations: Я не зна́ю (I don't know), Я не понима́ю (I don't understand), Что ты де́лаешь? (What are you doing?)."
     
     vocab_pool:
-      introduce: [znat, ponimat]
+      introduce: [znat, ponimat, delat]
       practice: []
       review: [ya, ty, on, ona]
     exercises:
@@ -96,7 +99,7 @@ modules:
       count: 8
 
   - id: "mod_3"
-    title: "Понима́ть & Чита́ть"
+    title: "Понима́ть, Чита́ть & Де́лать"
     type: "pattern"
     
     teaching:
@@ -128,13 +131,26 @@ modules:
           - ["вы", "чита́ете", "you read (formal)"]
           - ["они́", "чита́ют", "they read"]
       
+      - type: "pattern_table"
+        title: "де́лать - to do/make"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "де́лаю", "I do"]
+          - ["ты", "де́лаешь", "you do"]
+          - ["он/она́", "де́лает", "he/she does"]
+          - ["мы", "де́лаем", "we do"]
+          - ["вы", "де́лаете", "you do (formal)"]
+          - ["они́", "де́лают", "they do"]
+      
       - type: "morphology_pattern"
-        title: "Survival Phrases"
-        formula: "Я (не) понима́ю = I (don't) understand"
+        title: "Essential Phrases"
+        formula: "Что ты де́лаешь? = What are you doing?"
         examples:
           - { ru: "Я понима́ю.", en: "I understand." }
           - { ru: "Я не понима́ю.", en: "I don't understand." }
           - { ru: "Я чита́ю кни́гу.", en: "I read a book." }
+          - { ru: "Что ты де́лаешь?", en: "What are you doing?" }
+          - { ru: "Я ничего́ не де́лаю.", en: "I'm not doing anything." }
         rule: "Add не before the verb to negate it."
       
       - type: "etymology"
@@ -147,10 +163,10 @@ modules:
     
     vocab_pool:
       introduce: [chitat]
-      practice: [znat, ponimat]
-      review: [ya, ty, nye, kniga]
+      practice: [znat, ponimat, delat]
+      review: [ya, ty, nye, kniga, chto]
     exercises:
-      count: 8
+      count: 10
 
   - id: "mod_4"
     title: "Practice"
@@ -160,10 +176,10 @@ modules:
         content: "Focus on я, ты, and он/она́ forms first - these are the most common. The pattern will become natural!"
     vocab_pool:
       introduce: []
-      practice: [znat, ponimat]
-      review: [ya, ty, on, ona, vy, da, nyet, nye]
+      practice: [znat, ponimat, delat, chitat]
+      review: [ya, ty, on, ona, vy, da, nyet, nye, chto]
     exercises:
-      count: 10
+      count: 12
 
   - id: "mod_5"
     title: "Master"
@@ -175,17 +191,18 @@ modules:
           - "Type 1 conjugation pattern: -ю, -ешь, -ет, -ем, -ете, -ют"
           - "знать (to know) - Я зна́ю, Ты зна́ешь..."
           - "понима́ть (to understand) - Я понима́ю, Ты понима́ешь..."
+          - "де́лать (to do/make) - Я де́лаю, Ты де́лаешь..."
           - "Negation: Я не зна́ю, Я не понима́ю"
     vocab_pool:
       introduce: []
       practice: []
-      review: [znat, ponimat, ya, ty, on, ona, my, vy, oni]
+      review: [znat, ponimat, delat, chitat, ya, ty, on, ona, my, vy, oni]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [znat, ponimat]
+  primary: [znat, ponimat, delat]
   review_from: [01_cognates, 02_hello, 06_gender]
 
 templates:
@@ -214,6 +231,16 @@ templates:
       VERB: { pos: [verb] }
     weight: 2
 
+  - pattern: "Что ты де́лаешь?"
+    translation: "What are you doing?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Что он де́лает?"
+    translation: "What is he doing?"
+    slots: {}
+    weight: 2
+
 dialogues:
   - id: "do_you_know"
     context: "Asking if someone knows"
@@ -228,3 +255,10 @@ dialogues:
       - { speaker: "A", ru: "Ты понима́ешь?", en: "Do you understand?" }
       - { speaker: "B", ru: "Нет, я не понима́ю.", en: "No, I don't understand." }
       - { speaker: "A", ru: "Я то́же не понима́ю!", en: "I don't understand either!" }
+
+  - id: "what_doing"
+    context: "Asking what someone is doing"
+    lines:
+      - { speaker: "A", ru: "Что ты де́лаешь?", en: "What are you doing?" }
+      - { speaker: "B", ru: "Я чита́ю кни́гу.", en: "I'm reading a book." }
+      - { speaker: "A", ru: "Интере́сно!", en: "Interesting!" }

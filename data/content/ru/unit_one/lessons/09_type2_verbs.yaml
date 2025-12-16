@@ -28,15 +28,18 @@ modules:
           - word: "говори́ть"
             translation: "to speak/say"
             note: "Type 2 verb - different endings. Stress on third syllable."
+          - word: "ви́деть"
+            translation: "to see"
+            note: "Type 2 with twist: д → ж in я form! Я ви́жу (not видю)."
           - word: "по-ру́сски"
             translation: "in Russian"
             note: "Adverb - how you speak. Stress on second syllable."
       
       - type: "tip"
-        content: "Say 'Я не говорю́ по-ру́сски' when you need help in English!"
+        content: "Say 'Я не говорю́ по-ру́сски' when you need help in English! And 'Я ви́жу!' means 'I see!'"
     
     vocab_pool:
-      introduce: [govorit, po_russki]
+      introduce: [govorit, videt, po_russki]
       practice: []
       review: [ya, ty, on, ona]
     exercises:
@@ -70,21 +73,42 @@ modules:
           - ["вы", "говори́те", "you speak (formal)"]
           - ["они́", "говоря́т", "they speak"]
       
+      - type: "pattern_table"
+        title: "ви́деть - to see"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "ви́жу", "I see (д→ж!)"]
+          - ["ты", "ви́дишь", "you see"]
+          - ["он/она́", "ви́дит", "he/she sees"]
+          - ["мы", "ви́дим", "we see"]
+          - ["вы", "ви́дите", "you see (formal)"]
+          - ["они́", "ви́дят", "they see"]
+      
+      - type: "warning"
+        title: "⚠️ Consonant Change: д → ж"
+        content: |
+          In Type 2 verbs, some consonants change in the "я" form!
+          
+          ви́деть: я ви́ЖУ (not видю!)
+          
+          This is a common pattern - watch for it!
+      
       - type: "morphology_pattern"
         title: "Type 2 Endings"
         formula: "Stem + {-ю/-у, -ишь, -ит, -им, -ите, -ят/-ат}"
         examples:
           - { ru: "Я говорю́ по-ру́сски.", en: "I speak Russian." }
           - { ru: "Ты говори́шь по-англи́йски?", en: "Do you speak English?" }
-          - { ru: "Она́ говори́т бы́стро.", en: "She speaks fast." }
+          - { ru: "Я ви́жу дом.", en: "I see a house." }
+          - { ru: "Ты ви́дишь?", en: "Do you see?" }
         rule: "Type 2 uses -и- in most forms (ишь, ит, им, ите) vs Type 1's -е-."
     
     vocab_pool:
       introduce: [po_angliyski]
-      practice: [govorit, po_russki]
-      review: [ya, ty, on, ona, my, vy, oni]
+      practice: [govorit, videt, po_russki]
+      review: [ya, ty, on, ona, my, vy, oni, dom]
     exercises:
-      count: 8
+      count: 10
 
   - id: "mod_3"
     title: "Type 1 vs Type 2"
@@ -93,46 +117,47 @@ modules:
     teaching:
       - type: "pattern_table"
         title: "Compare the Patterns"
-        columns: ["Person", "Type 1 (знать)", "Type 2 (говори́ть)"]
+        columns: ["Person", "Type 1 (знать)", "Type 2 (говори́ть)", "Type 2 (ви́деть)"]
         rows:
-          - ["я", "зна́ю", "говорю́"]
-          - ["ты", "зна́ешь", "говори́шь"]
-          - ["он/она́", "зна́ет", "говори́т"]
-          - ["мы", "зна́ем", "говори́м"]
-          - ["вы", "зна́ете", "говори́те"]
-          - ["они́", "зна́ют", "говоря́т"]
+          - ["я", "зна́ю", "говорю́", "ви́жу"]
+          - ["ты", "зна́ешь", "говори́шь", "ви́дишь"]
+          - ["он/она́", "зна́ет", "говори́т", "ви́дит"]
+          - ["мы", "зна́ем", "говори́м", "ви́дим"]
+          - ["вы", "зна́ете", "говори́те", "ви́дите"]
+          - ["они́", "зна́ют", "говоря́т", "ви́дят"]
       
       - type: "explanation"
         title: "Spotting the Difference"
         content: |
           Type 1: uses -Е- vowel (знаЕшь, знаЕт, знаЕм)
-          Type 2: uses -И- vowel (говорИшь, говорИт, говорИм)
+          Type 2: uses -И- vowel (говорИшь, говорИт, вИдИшь)
           
           Most verbs ending in -ить are Type 2.
           Most other verbs are Type 1.
+          Exception: ви́деть ends in -еть but is Type 2!
       
       - type: "tip"
-        content: "говорИ́ТЬ ends in -ить → Type 2. знаТЬ ends in -ать → Type 1."
+        content: "говорИ́ТЬ ends in -ить → Type 2. знаТЬ ends in -ать → Type 1. ви́деть is one of the few -еть verbs that's Type 2!"
     
     vocab_pool:
       introduce: []
-      practice: [govorit, znat, ponimat]
-      review: [ya, ty]
+      practice: [govorit, videt, znat, ponimat, delat]
+      review: [ya, ty, chto]
     exercises:
-      count: 8
+      count: 10
 
   - id: "mod_4"
     title: "Practice"
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Mix Type 1 and Type 2 verbs. Feel the pattern difference: зна́Ешь vs говори́Шь."
+        content: "Mix Type 1 and Type 2 verbs. Feel the pattern difference: зна́Ешь vs говори́Шь vs ви́дИшь."
     vocab_pool:
       introduce: []
-      practice: [govorit, znat, ponimat, po_russki, po_angliyski]
-      review: [ya, ty, on, ona, vy, da, nyet]
+      practice: [govorit, videt, znat, ponimat, delat, po_russki, po_angliyski]
+      review: [ya, ty, on, ona, vy, da, nyet, chto, dom]
     exercises:
-      count: 10
+      count: 12
 
   - id: "mod_5"
     title: "Master"
@@ -141,20 +166,21 @@ modules:
       - type: "summary"
         title: "You learned:"
         points:
-          - "Type 2 conjugation: -ю, -ишь, -ит, -им, -ите, -ят"
+          - "Type 2 conjugation: -ю/-у, -ишь, -ит, -им, -ите, -ят"
           - "говори́ть (to speak) - Я говорю́, Ты говори́шь..."
+          - "ви́деть (to see) - Я ви́жу, Ты ви́дишь... (note: д→ж in я form!)"
           - "по-ру́сски (in Russian), по-англи́йски (in English)"
           - "Type 1 uses -е-, Type 2 uses -и-"
     vocab_pool:
       introduce: []
       practice: []
-      review: [govorit, znat, ponimat, po_russki, po_angliyski]
+      review: [govorit, videt, znat, ponimat, delat, po_russki, po_angliyski]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [govorit, po_russki, po_angliyski]
+  primary: [govorit, videt, po_russki, po_angliyski]
   review_from: [07_type1_verbs]
 
 templates:
@@ -174,6 +200,22 @@ templates:
     translation: "I don't speak {LANGUAGE.translation}."
     slots:
       LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
+  - pattern: "Я ви́жу {NOUN}."
+    translation: "I see {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Ты ви́дишь?"
+    translation: "Do you see?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Что ты ви́дишь?"
+    translation: "What do you see?"
+    slots: {}
     weight: 3
 
   - pattern: "{PRONOUN} {VERB}."
@@ -197,3 +239,11 @@ dialogues:
       - { speaker: "A", ru: "Ты говори́шь по-англи́йски?", en: "Do you speak English?" }
       - { speaker: "B", ru: "Нет, я не говорю́ по-англи́йски.", en: "No, I don't speak English." }
       - { speaker: "A", ru: "Хорошо́, по-ру́сски.", en: "Okay, in Russian." }
+
+  - id: "do_you_see"
+    context: "Pointing things out"
+    lines:
+      - { speaker: "A", ru: "Ты ви́дишь дом?", en: "Do you see the house?" }
+      - { speaker: "B", ru: "Да, я ви́жу.", en: "Yes, I see." }
+      - { speaker: "A", ru: "Там рестора́н.", en: "There's a restaurant there." }
+      - { speaker: "B", ru: "Я ви́жу!", en: "I see it!" }

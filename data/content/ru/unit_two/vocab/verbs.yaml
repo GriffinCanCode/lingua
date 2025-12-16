@@ -5,29 +5,6 @@
 
 type1:
   # TYPE 1 VERBS
-  - id: "delat"
-    word: "делать"
-    stressed: "де́лать"
-    transliteration: "delat'"
-    translation: "to do / to make"
-    pos: "verb"
-    conjugation_type: 1
-    aspect: "imperfective"
-    perfective_pair: "сде́лать"
-    frequency: 1
-    difficulty: 1
-    notes: "Stress on first syllable throughout conjugation."
-    conjugation:
-      ya: { word: "делаю", stressed: "де́лаю" }
-      ty: { word: "делаешь", stressed: "де́лаешь" }
-      on_ona: { word: "делает", stressed: "де́лает" }
-      my: { word: "делаем", stressed: "де́лаем" }
-      vy: { word: "делаете", stressed: "де́лаете" }
-      oni: { word: "делают", stressed: "де́лают" }
-    examples:
-      - { ru: "Что ты де́лаешь?", en: "What are you doing?" }
-      - { ru: "Я де́лаю дома́шнее зада́ние.", en: "I'm doing homework." }
-
   - id: "slushat"
     word: "слушать"
     stressed: "слу́шать"
@@ -49,29 +26,6 @@ type1:
     examples:
       - { ru: "Я слу́шаю му́зыку.", en: "I'm listening to music." }
       - { ru: "Слу́шай!", en: "Listen!" }
-
-  - id: "chitat"
-    word: "читать"
-    stressed: "чита́ть"
-    transliteration: "chitat'"
-    translation: "to read"
-    pos: "verb"
-    conjugation_type: 1
-    aspect: "imperfective"
-    perfective_pair: "прочита́ть"
-    frequency: 1
-    difficulty: 1
-    notes: "Stress on second syllable."
-    conjugation:
-      ya: { word: "читаю", stressed: "чита́ю" }
-      ty: { word: "читаешь", stressed: "чита́ешь" }
-      on_ona: { word: "читает", stressed: "чита́ет" }
-      my: { word: "читаем", stressed: "чита́ем" }
-      vy: { word: "читаете", stressed: "чита́ете" }
-      oni: { word: "читают", stressed: "чита́ют" }
-    examples:
-      - { ru: "Я чита́ю кни́гу.", en: "I'm reading a book." }
-      - { ru: "Что ты чита́ешь?", en: "What are you reading?" }
 
   - id: "pisat"
     word: "писать"
@@ -119,29 +73,6 @@ type2:
     examples:
       - { ru: "Я смотрю́ телеви́зор.", en: "I'm watching TV." }
       - { ru: "Смотри́!", en: "Look!" }
-
-  - id: "videt"
-    word: "видеть"
-    stressed: "ви́деть"
-    transliteration: "videt'"
-    translation: "to see"
-    pos: "verb"
-    conjugation_type: 2
-    aspect: "imperfective"
-    perfective_pair: "уви́деть"
-    frequency: 1
-    difficulty: 2
-    notes: "Consonant change: д → ж in 1st person singular. Stress on first syllable."
-    conjugation:
-      ya: { word: "вижу", stressed: "ви́жу" }
-      ty: { word: "видишь", stressed: "ви́дишь" }
-      on_ona: { word: "видит", stressed: "ви́дит" }
-      my: { word: "видим", stressed: "ви́дим" }
-      vy: { word: "видите", stressed: "ви́дите" }
-      oni: { word: "видят", stressed: "ви́дят" }
-    examples:
-      - { ru: "Я ви́жу дом.", en: "I see a house." }
-      - { ru: "Ты ви́дишь?", en: "Do you see?" }
 
   - id: "lyubit"
     word: "любить"

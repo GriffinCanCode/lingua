@@ -2,15 +2,14 @@
 
 Uses pymorphy3 for Russian morphological analysis and generation.
 Provides rule-based explanations with monadic error handling.
+Includes pattern extraction for teaching inflections as generative rules.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from core.logging import engine_logger
 from core.errors import (
     AppError,
-    ErrorCode,
     Ok,
-    Err,
     Result,
     internal_error,
 )
@@ -34,10 +33,13 @@ CASE_MAP = {
     "ablt": "instrumental",
     "loct": "prepositional",
 }
+CASE_MAP_REV = {v: k for k, v in CASE_MAP.items()}
 
 NUMBER_MAP = {"sing": "singular", "plur": "plural"}
+NUMBER_MAP_REV = {v: k for k, v in NUMBER_MAP.items()}
 
 GENDER_MAP = {"masc": "masculine", "femn": "feminine", "neut": "neuter"}
+GENDER_MAP_REV = {v: k for k, v in GENDER_MAP.items()}
 
 POS_MAP = {
     "NOUN": "noun",
@@ -52,6 +54,70 @@ POS_MAP = {
     "NPRO": "pronoun",
 }
 
+# Declension pattern definitions for teaching
+DECLENSION_PATTERNS = {
+    "fem_a": {
+        "id": "fem_a_declension",
+        "name": "Feminine -а/-я",
+        "description": "Feminine nouns ending in -а or -я",
+        "type": "noun_declension",
+        "endings": {
+            "nominative": {"singular": "а", "plural": "ы"},
+            "genitive": {"singular": "ы", "plural": ""},
+            "dative": {"singular": "е", "plural": "ам"},
+            "accusative": {"singular": "у", "plural": ""},
+            "instrumental": {"singular": "ой", "plural": "ами"},
+            "prepositional": {"singular": "е", "plural": "ах"},
+        },
+        "soft_endings": {
+            "nominative": {"singular": "я", "plural": "и"},
+            "genitive": {"singular": "и", "plural": "ь"},
+            "dative": {"singular": "е", "plural": "ям"},
+            "accusative": {"singular": "ю", "plural": "ь"},
+            "instrumental": {"singular": "ей", "plural": "ями"},
+            "prepositional": {"singular": "е", "plural": "ях"},
+        },
+    },
+    "masc_hard": {
+        "id": "masc_hard_declension",
+        "name": "Masculine Hard",
+        "description": "Masculine nouns ending in a consonant",
+        "type": "noun_declension",
+        "endings": {
+            "nominative": {"singular": "", "plural": "ы"},
+            "genitive": {"singular": "а", "plural": "ов"},
+            "dative": {"singular": "у", "plural": "ам"},
+            "accusative": {"singular": "", "plural": "ов"},
+            "instrumental": {"singular": "ом", "plural": "ами"},
+            "prepositional": {"singular": "е", "plural": "ах"},
+        },
+    },
+    "neut_o": {
+        "id": "neut_o_declension",
+        "name": "Neuter -о/-е",
+        "description": "Neuter nouns ending in -о or -е",
+        "type": "noun_declension",
+        "endings": {
+            "nominative": {"singular": "о", "plural": "а"},
+            "genitive": {"singular": "а", "plural": ""},
+            "dative": {"singular": "у", "plural": "ам"},
+            "accusative": {"singular": "о", "plural": "а"},
+            "instrumental": {"singular": "ом", "plural": "ами"},
+            "prepositional": {"singular": "е", "plural": "ах"},
+        },
+    },
+}
+
+# Common ending distractors by case
+ENDING_DISTRACTORS = {
+    "nominative": ["а", "о", "е", "ы", "и", ""],
+    "genitive": ["а", "ы", "и", "ов", "ей", ""],
+    "dative": ["у", "е", "ам", "ям", ""],
+    "accusative": ["а", "у", "о", "ы", ""],
+    "instrumental": ["ом", "ой", "ем", "ей", "ами", "ями"],
+    "prepositional": ["е", "и", "у", "ах", "ях"],
+}
+
 
 @dataclass(frozen=True, slots=True)
 class MorphAnalysis:
@@ -60,6 +126,31 @@ class MorphAnalysis:
     pos: str
     features: dict
     score: float = 1.0
+
+
+@dataclass(slots=True)
+class StemEnding:
+    """Word decomposed into stem and ending."""
+    word: str
+    stem: str
+    ending: str
+    lemma: str
+    gender: str | None = None
+    case: str | None = None
+    number: str | None = None
+    pattern_id: str | None = None
+
+
+@dataclass(slots=True)
+class PatternParadigm:
+    """Complete paradigm for pattern-based teaching."""
+    lemma: str
+    translation: str
+    gender: str
+    pattern_id: str
+    pattern_name: str
+    stem: str
+    cells: list[dict] = field(default_factory=list)
 
 
 class MorphologyEngine:
@@ -324,3 +415,157 @@ class MorphologyEngine:
             "ending": ending,
             "explanation": "; ".join(parts) if parts else "Base form",
         }
+    
+    # === Pattern Extraction Methods for Teaching ===
+    
+    def extract_stem_ending(self, word: str) -> StemEnding:
+        """Extract stem and ending from a word for pattern visualization."""
+        if not self._morph:
+            return StemEnding(word=word, stem=word, ending="", lemma=word)
+        
+        parses = self._morph.parse(word)
+        if not parses:
+            return StemEnding(word=word, stem=word, ending="", lemma=word)
+        
+        p = parses[0]
+        lemma = p.normal_form
+        
+        # Get grammatical features
+        gender = case = number = None
+        for g_tag, g_name in GENDER_MAP.items():
+            if g_tag in p.tag:
+                gender = g_name
+                break
+        for c_tag, c_name in CASE_MAP.items():
+            if c_tag in p.tag:
+                case = c_name
+                break
+        number = "singular" if "sing" in p.tag else "plural" if "plur" in p.tag else None
+        
+        # Extract stem by comparing with lemma
+        stem, ending = self._compute_stem_ending(word, lemma, gender)
+        pattern_id = self._identify_pattern(lemma, gender)
+        
+        return StemEnding(
+            word=word, stem=stem, ending=ending, lemma=lemma,
+            gender=gender, case=case, number=number, pattern_id=pattern_id
+        )
+    
+    def _compute_stem_ending(self, word: str, lemma: str, gender: str | None) -> tuple[str, str]:
+        """Compute stem and ending using lemma comparison."""
+        word_lower = word.lower()
+        lemma_lower = lemma.lower()
+        
+        # Find common prefix (stem)
+        min_len = min(len(word_lower), len(lemma_lower))
+        stem_len = 0
+        for i in range(min_len):
+            if word_lower[i] == lemma_lower[i]:
+                stem_len = i + 1
+            else:
+                break
+        
+        # For feminine -а nouns, stem excludes the ending vowel
+        if gender == "feminine" and lemma_lower.endswith(("а", "я")):
+            stem_len = min(stem_len, len(lemma_lower) - 1)
+        # For neuter -о/-е nouns
+        elif gender == "neuter" and lemma_lower.endswith(("о", "е")):
+            stem_len = min(stem_len, len(lemma_lower) - 1)
+        # For masculine hard consonant, stem is the whole lemma
+        elif gender == "masculine" and not lemma_lower.endswith(("ь", "й")):
+            stem_len = len(lemma_lower)
+        
+        stem = word[:stem_len] if stem_len > 0 else word[:-1] if len(word) > 1 else word
+        ending = word[stem_len:] if stem_len < len(word) else ""
+        
+        return stem, ending
+    
+    def _identify_pattern(self, lemma: str, gender: str | None) -> str | None:
+        """Identify which declension pattern a noun follows."""
+        lemma_lower = lemma.lower()
+        
+        if gender == "feminine" and lemma_lower.endswith(("а", "я")):
+            return "fem_a_declension"
+        elif gender == "masculine" and not lemma_lower.endswith(("а", "я", "ь")):
+            return "masc_hard_declension"
+        elif gender == "neuter" and lemma_lower.endswith(("о", "е")):
+            return "neut_o_declension"
+        return None
+    
+    def get_pattern_paradigm(self, lemma: str, translation: str = "") -> PatternParadigm:
+        """Get paradigm with pattern info for teaching."""
+        if not self._morph:
+            return PatternParadigm(
+                lemma=lemma, translation=translation, gender="unknown",
+                pattern_id="unknown", pattern_name="Unknown", stem=lemma, cells=[]
+            )
+        
+        parses = self._morph.parse(lemma)
+        if not parses:
+            return PatternParadigm(
+                lemma=lemma, translation=translation, gender="unknown",
+                pattern_id="unknown", pattern_name="Unknown", stem=lemma, cells=[]
+            )
+        
+        p = parses[0]
+        gender = None
+        for g_tag, g_name in GENDER_MAP.items():
+            if g_tag in p.tag:
+                gender = g_name
+                break
+        
+        pattern_id = self._identify_pattern(lemma, gender) or "unknown"
+        pattern_name = DECLENSION_PATTERNS.get(pattern_id.replace("_declension", ""), {}).get("name", "Unknown")
+        
+        stem, _ = self._compute_stem_ending(lemma, lemma, gender)
+        
+        cells = []
+        for case_tag, case_name in CASE_MAP.items():
+            for num_tag, num_name in NUMBER_MAP.items():
+                inflected = p.inflect({case_tag, num_tag})
+                if inflected:
+                    form = inflected.word
+                    _, ending = self._compute_stem_ending(form, lemma, gender)
+                    cells.append({
+                        "case": case_name,
+                        "number": num_name,
+                        "form": form,
+                        "stem": stem,
+                        "ending": ending,
+                    })
+        
+        return PatternParadigm(
+            lemma=lemma, translation=translation, gender=gender or "unknown",
+            pattern_id=pattern_id, pattern_name=pattern_name, stem=stem, cells=cells
+        )
+    
+    def get_ending_options(self, case: str, correct_ending: str, count: int = 4) -> list[str]:
+        """Get distractor endings for pattern exercises."""
+        distractors = ENDING_DISTRACTORS.get(case, ["а", "о", "е", "ы"])
+        options = [correct_ending]
+        
+        for d in distractors:
+            if d != correct_ending and len(options) < count:
+                options.append(d)
+        
+        import random
+        random.shuffle(options)
+        return options
+    
+    def generate_form(self, lemma: str, case: str, number: str = "singular") -> str | None:
+        """Generate a specific inflected form."""
+        if not self._morph:
+            return None
+        
+        parses = self._morph.parse(lemma)
+        if not parses:
+            return None
+        
+        case_tag = CASE_MAP_REV.get(case)
+        num_tag = NUMBER_MAP_REV.get(number)
+        
+        if not case_tag or not num_tag:
+            return None
+        
+        inflected = parses[0].inflect({case_tag, num_tag})
+        return inflected.word if inflected else None

@@ -1,5 +1,6 @@
 # Unit 1, Lesson 4: I have...
 # Focus: У меня есть construction for possession
+# Pattern Focus: Introduction to genitive case with pronouns
 
 lesson:
   id: "unit1_04_possession"
@@ -14,62 +15,114 @@ content:
     Russian doesn't say "I have a cat" directly.
     Instead, it says: **"By me there is a cat"**.
     
-    **У меня есть...** (Oo men-YA yest...)
+    ## The Pattern
     
-    - **У** = "by/at"
-    - **меня** = "me"
+    **У** + **genitive** + **есть** + noun
+    
+    | Person | Nominative | → Genitive (after У) |
+    |--------|------------|---------------------|
+    | I | я | **меня** |
+    | you | ты | **тебя** |
+    | he | он | **него** |
+    | she | она | **неё** |
+    
+    ## How It Works
+    
+    - **У** = "by/at"  
+    - **меня** = "me" (genitive form of я)
     - **есть** = "there is"
     
-    So: **У меня есть кот** = "I have a cat" (literally: "By me there-is cat")
+    So: **У меня есть кот** = "I have a cat"  
+    (Literally: "By me there-is cat")
+
+# Morphological patterns taught in this lesson
+patterns:
+  - id: "genitive_pronouns"
+    name: "Genitive Pronouns"
+    description: "Personal pronouns change form after У to show possession"
+    type: "pronoun_declension"
+    paradigm:
+      nominative: { singular: "я/ты/он/она" }
+      genitive: { singular: "меня/тебя/его/её" }
+    examples: ["у меня", "у тебя", "у него"]
+
+  - id: "fem_a_declension"
+    name: "Feminine -а Declension"
+    description: "Feminine nouns ending in -а change to -ы/-и in genitive"
+    type: "noun_declension"
+    paradigm:
+      nominative: { singular: "-а", plural: "-ы" }
+      genitive: { singular: "-ы", plural: "-∅" }
+      dative: { singular: "-е", plural: "-ам" }
+      accusative: { singular: "-у", plural: "-∅" }
+      instrumental: { singular: "-ой", plural: "-ами" }
+      prepositional: { singular: "-е", plural: "-ах" }
+    examples: ["сестра", "собака", "книга"]
 
 vocabulary:
   - word: "У меня"
     translation: "I have / At me"
     audio: "u_menya.mp3"
-    hints: ["У = at/by, меня = me"]
+    hints: ["У + меня (genitive of 'я')"]
+
+  - word: "У тебя"
+    translation: "You have / At you"
+    audio: "u_tebya.mp3"
+    hints: ["У + тебя (genitive of 'ты')"]
 
   - word: "Есть"
     translation: "There is / To have"
     audio: "yest.mp3"
-    hints: ["Е sounds like 'ye'"]
+    hints: ["Completes the possession pattern"]
 
   - word: "Брат"
     translation: "Brother"
     audio: "brat.mp3"
-    hints: ["Б sounds like 'b'"]
+    hints: ["Masculine: ends in consonant"]
     gender: "m"
+    stem: "брат"
+    pattern: "masc_hard_declension"
 
   - word: "Сестра"
     translation: "Sister"
     audio: "sestra.mp3"
-    hints: ["С = 's', Р = 'r'"]
+    hints: ["Feminine: сестр|а → сестр|ы (genitive)"]
     gender: "f"
+    stem: "сестр"
+    pattern: "fem_a_declension"
 
   - word: "Собака"
     translation: "Dog"
     audio: "sobaka.mp3"
-    hints: ["Three syllables: so-BA-ka"]
+    hints: ["Feminine: собак|а → собак|и (genitive)"]
     gender: "f"
+    stem: "собак"
+    pattern: "fem_a_declension"
 
   - word: "Машина"
     translation: "Car"
     audio: "mashina.mp3"
-    hints: ["Ш sounds like 'sh'"]
+    hints: ["Feminine: машин|а → машин|ы (genitive)"]
     gender: "f"
+    stem: "машин"
+    pattern: "fem_a_declension"
 
   - word: "Книга"
     translation: "Book"
     audio: "kniga.mp3"
-    hints: ["К is silent before Н? No! Say both."]
+    hints: ["Feminine: книг|а → книг|и (genitive, spelling rule)"]
     gender: "f"
+    stem: "книг"
+    pattern: "fem_a_declension"
 
   - word: "Телефон"
     translation: "Phone"
     audio: "telefon.mp3"
-    hints: ["Same as English!"]
+    hints: ["Masculine: телефон → телефона (genitive)"]
     gender: "m"
+    stem: "телефон"
+    pattern: "masc_hard_declension"
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "У меня есть кот."
     translation: "I have a cat"
@@ -78,6 +131,7 @@ sentences:
       - { ru: "кот", en: "a cat" }
     distractors: ["a dog", "you", "is", "the"]
     complexity: 2
+    pattern_note: "У + меня (genitive) + есть + nominative noun"
 
   - text: "У меня есть брат."
     translation: "I have a brother"
@@ -127,13 +181,14 @@ sentences:
     distractors: ["a radio", "you", "is", "the"]
     complexity: 2
 
-  - text: "У меня есть брат?"
-    translation: "Do I have a brother"
+  - text: "У тебя есть брат?"
+    translation: "Do you have a brother"
     words:
-      - { ru: "У меня есть", en: "Do I have" }
+      - { ru: "У тебя есть", en: "Do you have" }
       - { ru: "брат", en: "a brother" }
-    distractors: ["a sister", "Yes", "No", "you"]
+    distractors: ["a sister", "I", "Yes", "No"]
     complexity: 2
+    pattern_note: "тебя is genitive of ты"
 
   - text: "Да, у меня есть брат."
     translation: "Yes I have a brother"
@@ -142,4 +197,12 @@ sentences:
       - { ru: "у меня есть", en: "I have" }
       - { ru: "брат", en: "a brother" }
     distractors: ["No", "a sister", "you", "is"]
+    complexity: 2
+
+  - text: "У тебя есть сестра?"
+    translation: "Do you have a sister"
+    words:
+      - { ru: "У тебя есть", en: "Do you have" }
+      - { ru: "сестра", en: "a sister" }
+    distractors: ["a brother", "I", "Yes", "No"]
     complexity: 2

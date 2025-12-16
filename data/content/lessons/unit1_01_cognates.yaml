@@ -1,5 +1,6 @@
 # Unit 1, Lesson 1: Cognates & Cyrillic
 # Focus: Letters that look/sound the same as English (М, А, К, О, Т)
+# Pattern Focus: Letter-sound correspondence as a predictable system
 
 lesson:
   id: "unit1_01_cognates"
@@ -13,37 +14,70 @@ content:
     
     Russian looks scary, but many letters are the same as English!
     
-    - **А** sounds like "A" in "father"
-    - **К** sounds like "K" in "kite"
-    - **М** sounds like "M" in "mom"
-    - **О** sounds like "O" in "for"
-    - **Т** sounds like "T" in "top"
+    ## The Pattern: Same Letters
     
-    Let's read some words that are **exactly** the same in both languages!
+    | Russian | English | Sound |
+    |---------|---------|-------|
+    | **А** | A | "ah" in "father" |
+    | **К** | K | "k" in "kite" |
+    | **М** | M | "m" in "mom" |
+    | **О** | O | "o" in "for" |
+    | **Т** | T | "t" in "top" |
+    
+    With just these 5 letters, you can read real Russian words!
+
+# Pattern: Cyrillic cognate letters
+patterns:
+  - id: "cyrillic_cognates"
+    name: "Cognate Letters"
+    description: "Letters that look and sound the same in Russian and English"
+    type: "phonetic"
+    rules:
+      - letter: "А"
+        sound: "ah"
+        english_equivalent: "A"
+      - letter: "К"
+        sound: "k"
+        english_equivalent: "K"
+      - letter: "М"
+        sound: "m"
+        english_equivalent: "M"
+      - letter: "О"
+        sound: "o"
+        english_equivalent: "O"
+      - letter: "Т"
+        sound: "t"
+        english_equivalent: "T"
 
 vocabulary:
   - word: "Мама"
     translation: "Mom"
     audio: "mama.mp3"
-    hints: ["Same as English 'mama'"]
+    hints: ["Same as English 'mama': М-А-М-А"]
     gender: "f"
+    stem: "мам"
+    pattern: "fem_a_declension"
 
   - word: "Кот"
     translation: "Cat"
     audio: "kot.mp3"
-    hints: ["Sounds like 'coat' without the 'a'"]
+    hints: ["К-О-Т: All cognate letters!"]
     gender: "m"
+    stem: "кот"
+    pattern: "masc_hard_declension"
 
   - word: "Атом"
     translation: "Atom"
     audio: "atom.mp3"
-    hints: ["Identical to English!"]
+    hints: ["А-Т-О-М: Identical to English!"]
     gender: "m"
+    stem: "атом"
+    pattern: "masc_hard_declension"
 
   - word: "Такси"
     translation: "Taxi"
     audio: "taxi.mp3"
-    hints: ["Same word, Russian spelling"]
+    hints: ["Т-А-К-С-И: Same word, Russian spelling"]
     gender: "n"
 
   - word: "Это"
@@ -54,7 +88,7 @@ vocabulary:
   - word: "Там"
     translation: "There"
     audio: "tam.mp3"
-    hints: ["Easy: Т + А + М"]
+    hints: ["Т-А-М: Easy cognate letters!"]
     
   - word: "Тут"
     translation: "Here"
@@ -64,10 +98,10 @@ vocabulary:
   - word: "Том"
     translation: "Tom (name)"
     audio: "tom.mp3"
-    hints: ["The name, like Tom Sawyer"]
+    hints: ["The name Tom: Т-О-М"]
     gender: "m"
+    stem: "том"
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "Это мама."
     translation: "This is mom"

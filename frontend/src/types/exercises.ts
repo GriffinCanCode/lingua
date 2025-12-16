@@ -1,5 +1,6 @@
 /**
  * Exercise Type Definitions for Duolingo-style Lessons
+ * Includes morphological pattern recognition exercises
  */
 
 export type ExerciseType =
@@ -8,10 +9,43 @@ export type ExerciseType =
   | 'matching'
   | 'multiple_choice'
   | 'listen_select'
-  | 'fill_blank';
+  | 'fill_blank'
+  | 'pattern_fill'
+  | 'paradigm_complete'
+  | 'pattern_apply';
 
 export type TargetLanguage = 'ru' | 'en';
 export type Difficulty = 1 | 2 | 3;
+export type GrammaticalCase = 'nominative' | 'genitive' | 'dative' | 'accusative' | 'instrumental' | 'prepositional';
+export type GrammaticalNumber = 'singular' | 'plural';
+export type Gender = 'masculine' | 'feminine' | 'neuter';
+
+// Morphological pattern definitions
+export interface PatternEnding {
+  singular: string;
+  plural: string;
+}
+
+export interface MorphPattern {
+  id: string;
+  name: string;
+  description: string;
+  type: 'noun_declension' | 'verb_conjugation' | 'adjective_declension';
+  paradigm: Record<GrammaticalCase, PatternEnding>;
+  examples: string[];
+}
+
+// Word with morphological breakdown
+export interface MorphWord {
+  word: string;
+  translation: string;
+  stem: string;
+  ending: string;
+  gender?: Gender;
+  pattern?: string;
+  case?: GrammaticalCase;
+  number?: GrammaticalNumber;
+}
 
 // Base exercise interface
 export interface BaseExercise {
@@ -80,6 +114,53 @@ export interface FillBlankExercise extends BaseExercise {
   fullSentence: string;
 }
 
+// Pattern Fill: Select correct ending for stem + case
+export interface PatternFillExercise extends BaseExercise {
+  type: 'pattern_fill';
+  stem: string;
+  targetCase: GrammaticalCase;
+  targetNumber: GrammaticalNumber;
+  correctEnding: string;
+  options: string[];
+  baseWord: string;
+  translation: string;
+  patternName: string;
+  fullForm: string;
+}
+
+// Paradigm Complete: Fill missing cells in declension table
+export interface ParadigmCell {
+  case: GrammaticalCase;
+  number: GrammaticalNumber;
+  form: string;
+  isBlank: boolean;
+}
+
+export interface ParadigmCompleteExercise extends BaseExercise {
+  type: 'paradigm_complete';
+  lemma: string;
+  translation: string;
+  gender: Gender;
+  patternName: string;
+  cells: ParadigmCell[];
+  blankIndices: number[];
+  options: string[];
+}
+
+// Pattern Apply: Apply learned pattern to new word
+export interface PatternApplyExercise extends BaseExercise {
+  type: 'pattern_apply';
+  newWord: string;
+  newWordTranslation: string;
+  targetCase: GrammaticalCase;
+  targetNumber: GrammaticalNumber;
+  patternName: string;
+  exampleWord: string;
+  exampleForm: string;
+  correctAnswer: string;
+  options: string[];
+}
+
 // Union type for all exercises
 export type Exercise =
   | WordBankExercise
@@ -87,7 +168,10 @@ export type Exercise =
   | MatchingExercise
   | MultipleChoiceExercise
   | ListenSelectExercise
-  | FillBlankExercise;
+  | FillBlankExercise
+  | PatternFillExercise
+  | ParadigmCompleteExercise
+  | PatternApplyExercise;
 
 // Exercise result tracking
 export interface ExerciseResult {

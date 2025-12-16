@@ -1,5 +1,6 @@
 # Unit 1, Lesson 5: Where, Who, What
 # Focus: Question words Где, Кто, Что
+# Pattern Focus: Question word usage patterns (animate vs inanimate)
 
 lesson:
   id: "unit1_05_questions"
@@ -9,70 +10,109 @@ lesson:
 
 content:
   introduction: |
-    # Question Words
+    # Question Words — The Pattern
     
     Three essential questions to navigate the world:
     
-    - **Где?** (Gde?) = Where?
-    - **Кто?** (Kto?) = Who?
-    - **Что?** (Shto?) = What?
+    ## The Pattern
     
-    Note: **Что** is spelled with Ч but pronounced "shto"!
+    | Question | Meaning | Use For |
+    |----------|---------|---------|
+    | **Где?** | Where? | Places & things |
+    | **Кто?** | Who? | People (animate) |
+    | **Что?** | What? | Things (inanimate) |
     
-    Use **Где** with places and things.
-    Use **Кто** for people.
-    Use **Что** for things.
+    ## Animate vs Inanimate
+    
+    Russian distinguishes between **living** (animate) and **non-living** (inanimate) things:
+    
+    - **Кто это?** — Who is this? (for people)
+    - **Что это?** — What is this? (for things)
+    
+    Note: **Что** is spelled Ч-Т-О but pronounced "shto"!
+
+patterns:
+  - id: "question_words"
+    name: "Question Word Usage"
+    description: "Different question words for different types of questions"
+    type: "syntax"
+    rules:
+      - word: "Где"
+        meaning: "Where"
+        use_for: "location"
+        answer_pattern: "тут/там/вот"
+      - word: "Кто"
+        meaning: "Who"
+        use_for: "animate nouns (people)"
+        answer_pattern: "Это + person"
+      - word: "Что"
+        meaning: "What"
+        use_for: "inanimate nouns (things)"
+        answer_pattern: "Это + thing"
+
+  - id: "animate_inanimate"
+    name: "Animate vs Inanimate"
+    description: "Russian grammar distinguishes living things from non-living things"
+    type: "category"
+    examples:
+      animate: ["доктор", "студент", "друг", "мама", "папа"]
+      inanimate: ["книга", "метро", "такси", "дом"]
 
 vocabulary:
   - word: "Где"
     translation: "Where"
     audio: "gde.mp3"
-    hints: ["Г sounds like 'g' in 'go'"]
+    hints: ["For locations: Где + noun?"]
 
   - word: "Кто"
     translation: "Who"
     audio: "kto.mp3"
-    hints: ["For people only"]
+    hints: ["For people (animate): Кто это?"]
 
   - word: "Что"
     translation: "What"
     audio: "shto.mp3"
-    hints: ["Spelled Ч-Т-О but say 'shto'!"]
+    hints: ["For things (inanimate), pronounced 'shto'"]
 
   - word: "Там"
     translation: "There"
     audio: "tam.mp3"
-    hints: ["Answer to 'Где?'"]
+    hints: ["Answer to 'Где?' — location pattern"]
 
   - word: "Тут"
     translation: "Here"
     audio: "tut.mp3"
-    hints: ["Answer to 'Где?'"]
+    hints: ["Answer to 'Где?' — location pattern"]
 
   - word: "Вот"
     translation: "Here is / There is"
     audio: "vot.mp3"
-    hints: ["Used when pointing at something"]
+    hints: ["Used when pointing: Вот + noun"]
 
   - word: "Доктор"
     translation: "Doctor"
     audio: "doktor.mp3"
-    hints: ["Same as English"]
+    hints: ["Animate (person) → use Кто"]
     gender: "m"
+    stem: "доктор"
+    pattern: "masc_hard_declension"
 
   - word: "Студент"
     translation: "Student"
     audio: "student.mp3"
-    hints: ["Same as English"]
+    hints: ["Animate (person) → use Кто"]
     gender: "m"
+    stem: "студент"
+    pattern: "masc_hard_declension"
 
   - word: "Друг"
     translation: "Friend"
     audio: "drug.mp3"
-    hints: ["Г at end sounds like 'k'"]
+    hints: ["Animate (person), final Г sounds like 'k'"]
     gender: "m"
+    stem: "друг"
+    pattern: "masc_hard_declension"
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "Где метро?"
     translation: "Where is the metro"
@@ -81,6 +121,7 @@ sentences:
       - { ru: "метро", en: "the metro" }
     distractors: ["Who", "What", "there", "here"]
     complexity: 1
+    pattern_note: "Где for location questions"
 
   - text: "Метро там."
     translation: "The metro is there"
@@ -105,6 +146,7 @@ sentences:
       - { ru: "такси", en: "the taxi" }
     distractors: ["Where is", "there", "Who", "What"]
     complexity: 1
+    pattern_note: "Вот for pointing/presenting"
 
   - text: "Кто это?"
     translation: "Who is this"
@@ -113,6 +155,7 @@ sentences:
       - { ru: "это", en: "is this" }
     distractors: ["What", "Where", "there", "here"]
     complexity: 1
+    pattern_note: "Кто for people (animate)"
 
   - text: "Это доктор."
     translation: "This is a doctor"
@@ -129,6 +172,7 @@ sentences:
       - { ru: "это", en: "is this" }
     distractors: ["Who", "Where", "there", "Here is"]
     complexity: 1
+    pattern_note: "Что for things (inanimate)"
 
   - text: "Это книга."
     translation: "This is a book"

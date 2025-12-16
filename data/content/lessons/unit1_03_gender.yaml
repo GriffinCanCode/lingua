@@ -1,74 +1,123 @@
 # Unit 1, Lesson 3: He, She, It
 # Focus: Grammatical gender and pronouns Он/Она/Оно
+# Pattern Focus: Gender endings as predictable rules
 
 lesson:
   id: "unit1_03_gender"
   title: "He & She"
   parts: 5
-  description: "Russian words have gender. Let's learn the basics."
+  description: "Russian words have gender. Let's learn the patterns."
 
 content:
   introduction: |
-    # He, She, or It?
+    # He, She, or It? — The Pattern
     
-    In Russian, every noun has a **gender**. You can usually tell by the last letter!
+    In Russian, every noun has a **gender**. The good news: you can **predict** it from the ending!
     
-    - **Consonant** (like к, т, м) → **Он** (He/Masculine)
-    - **-А / -Я** → **Она** (She/Feminine)
-    - **-О / -Е** → **Оно** (It/Neuter)
+    ## The Gender Pattern
     
-    Examples:
-    - **Кот** (cat) → ends in Т → Он (he)
-    - **Мама** → ends in А → Она (she)
-    - **Радио** → ends in О → Оно (it)
+    | Ending | Gender | Pronoun |
+    |--------|--------|---------|
+    | Consonant (к, т, м...) | Masculine | **Он** |
+    | **-а** / **-я** | Feminine | **Она** |
+    | **-о** / **-е** | Neuter | **Оно** |
+    
+    ## See the Pattern
+    
+    - **Кот** → ends in Т (consonant) → **Он** (masculine)
+    - **Мам|а** → ends in **-а** → **Она** (feminine)
+    - **Окн|о** → ends in **-о** → **Оно** (neuter)
+    
+    Once you learn this pattern, you can predict the gender of thousands of words!
+
+# Morphological patterns taught in this lesson
+patterns:
+  - id: "gender_endings"
+    name: "Gender from Endings"
+    description: "Russian noun gender is determined by the final letter"
+    type: "noun_declension"
+    rules:
+      - ending: "consonant"
+        gender: "masculine"
+        examples: ["кот", "парк", "банк"]
+      - ending: "-а/-я"
+        gender: "feminine"  
+        examples: ["мама", "пицца", "сестра"]
+      - ending: "-о/-е"
+        gender: "neuter"
+        examples: ["окно", "метро", "кафе"]
 
 vocabulary:
   - word: "Он"
     translation: "He/It (masc)"
     audio: "on.mp3"
-    hints: ["For masculine nouns"]
+    hints: ["Use for masculine nouns (consonant endings)"]
 
   - word: "Она"
     translation: "She/It (fem)"
     audio: "ona.mp3"
-    hints: ["For feminine nouns"]
+    hints: ["Use for feminine nouns (-а/-я endings)"]
 
   - word: "Оно"
     translation: "It (neuter)"
     audio: "ono.mp3"
-    hints: ["For neuter nouns"]
+    hints: ["Use for neuter nouns (-о/-е endings)"]
 
   - word: "Парк"
     translation: "Park"
     audio: "park.mp3"
-    hints: ["Same as English!"]
+    hints: ["Ends in К (consonant) → Masculine"]
     gender: "m"
+    stem: "парк"
+    pattern: "masc_hard_declension"
 
   - word: "Пицца"
     translation: "Pizza"
     audio: "pizza.mp3"
-    hints: ["Italian loan word"]
+    hints: ["Ends in -А → Feminine"]
     gender: "f"
+    stem: "пицц"
+    pattern: "fem_a_declension"
 
   - word: "Окно"
     translation: "Window"
     audio: "okno.mp3"
-    hints: ["Ends in -О = neuter"]
+    hints: ["Ends in -О → Neuter"]
     gender: "n"
+    stem: "окн"
+    pattern: "neut_o_declension"
 
   - word: "Папа"
     translation: "Dad"
     audio: "papa.mp3"
-    hints: ["Ends in -А but means dad → still uses 'он'!"]
+    hints: ["Exception: ends in -А but masculine (meaning overrides form)"]
     gender: "m"
+    stem: "пап"
+    pattern: "fem_a_declension"
 
   - word: "Банк"
     translation: "Bank"
     audio: "bank.mp3"
-    hints: ["Same as English"]
+    hints: ["Ends in К (consonant) → Masculine"]
     gender: "m"
+    stem: "банк"
+    pattern: "masc_hard_declension"
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
+  - word: "Книга"
+    translation: "Book"
+    audio: "kniga.mp3"
+    hints: ["Ends in -А → Feminine"]
+    gender: "f"
+    stem: "книг"
+    pattern: "fem_a_declension"
+
+  - word: "Метро"
+    translation: "Metro"
+    audio: "metro.mp3"
+    hints: ["Ends in -О → Neuter (indeclinable loan word)"]
+    gender: "n"
+    stem: "метро"
+
 sentences:
   - text: "Где парк?"
     translation: "Where is the park"
@@ -85,6 +134,7 @@ sentences:
       - { ru: "там", en: "is there" }
     distractors: ["She", "It", "is here", "Where is"]
     complexity: 1
+    pattern_note: "Парк ends in consonant → use Он"
 
   - text: "Где пицца?"
     translation: "Where is the pizza"
@@ -101,6 +151,7 @@ sentences:
       - { ru: "тут", en: "is here" }
     distractors: ["He", "It", "is there", "Where is"]
     complexity: 1
+    pattern_note: "Пицца ends in -а → use Она"
 
   - text: "Где окно?"
     translation: "Where is the window"
@@ -117,6 +168,7 @@ sentences:
       - { ru: "там", en: "is there" }
     distractors: ["He", "She", "is here", "Where is"]
     complexity: 1
+    pattern_note: "Окно ends in -о → use Оно"
 
   - text: "Папа тут."
     translation: "Dad is here"
@@ -125,6 +177,7 @@ sentences:
       - { ru: "тут", en: "is here" }
     distractors: ["is there", "He", "She", "Where is"]
     complexity: 1
+    pattern_note: "Exception: папа ends in -а but is masculine (natural gender)"
 
   - text: "Он там?"
     translation: "Is he there"
@@ -149,3 +202,20 @@ sentences:
       - { ru: "там", en: "is there" }
     distractors: ["She", "It", "is here", "Where is"]
     complexity: 1
+
+  - text: "Где книга?"
+    translation: "Where is the book"
+    words:
+      - { ru: "Где", en: "Where is" }
+      - { ru: "книга", en: "the book" }
+    distractors: ["She", "He", "It", "here"]
+    complexity: 1
+
+  - text: "Она тут."
+    translation: "It is here"
+    words:
+      - { ru: "Она", en: "It" }
+      - { ru: "тут", en: "is here" }
+    distractors: ["He", "It", "is there", "Where is"]
+    complexity: 1
+    pattern_note: "Книга ends in -а → use Она (even though 'book' is 'it' in English)"

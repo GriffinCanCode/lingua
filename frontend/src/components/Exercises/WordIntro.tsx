@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, ChevronRight, Lightbulb, Check } from 'lucide-react';
+import { Volume2, ChevronRight, Lightbulb, Check, BookOpen } from 'lucide-react';
 import clsx from 'clsx';
 
 export interface VocabWord {
@@ -11,7 +11,47 @@ export interface VocabWord {
   hints?: string[];
   icon?: string;
   gender?: string;
+  stem?: string;
+  pattern?: string;
 }
+
+// Pattern display names
+const PATTERN_NAMES: Record<string, string> = {
+  fem_a_declension: 'Type I (Fem -а)',
+  masc_hard_declension: 'Type II (Masc)',
+  neut_o_declension: 'Type III (Neut -о)',
+};
+
+// Infer stem/ending from word and gender
+const inferStemEnding = (word: string, gender?: string, stem?: string): { stem: string; ending: string } => {
+  if (stem) {
+    return { stem, ending: word.slice(stem.length) };
+  }
+  
+  const w = word.toLowerCase();
+  
+  // Feminine -а/-я endings
+  if (gender === 'f' && (w.endsWith('а') || w.endsWith('я'))) {
+    return { stem: word.slice(0, -1), ending: word.slice(-1) };
+  }
+  
+  // Neuter -о/-е endings
+  if (gender === 'n' && (w.endsWith('о') || w.endsWith('е'))) {
+    return { stem: word.slice(0, -1), ending: word.slice(-1) };
+  }
+  
+  // Masculine - consonant ending (no visible ending)
+  if (gender === 'm' && !w.endsWith('а') && !w.endsWith('я') && !w.endsWith('ь')) {
+    return { stem: word, ending: '' };
+  }
+  
+  // Default - try to find a vowel ending
+  if (/[аяоеуюыиь]$/.test(w)) {
+    return { stem: word.slice(0, -1), ending: word.slice(-1) };
+  }
+  
+  return { stem: word, ending: '' };
+};
 
 interface WordIntroProps {
   words: VocabWord[];
@@ -68,6 +108,12 @@ export const WordIntro: React.FC<WordIntroProps> = ({ words, onComplete }) => {
   const progress = (seenWords.size / words.length) * 100;
   const isLastWord = currentIndex === words.length - 1;
   const allSeen = seenWords.size === words.length;
+
+  // Compute stem/ending breakdown
+  const morphBreakdown = useMemo(() => {
+    if (!currentWord) return null;
+    return inferStemEnding(currentWord.word, currentWord.gender, currentWord.stem);
+  }, [currentWord]);
 
   const handleNext = useCallback(() => {
     if (isLastWord && allSeen) {
@@ -130,11 +176,30 @@ export const WordIntro: React.FC<WordIntroProps> = ({ words, onComplete }) => {
             </div>
           </div>
 
-          {/* Russian Word */}
+          {/* Russian Word with Morphological Breakdown */}
           <div className="text-center mb-2">
-            <h2 className="text-4xl font-bold text-gray-900 mb-1">
-              {currentWord.word}
-            </h2>
+            {morphBreakdown && (morphBreakdown.ending || currentWord.gender) ? (
+              <h2 className="text-4xl font-bold mb-1">
+                <span className="text-gray-600">{morphBreakdown.stem}</span>
+                {morphBreakdown.ending && (
+                  <span className={clsx(
+                    currentWord.gender === 'm' && 'text-blue-600',
+                    currentWord.gender === 'f' && 'text-pink-600',
+                    currentWord.gender === 'n' && 'text-purple-600',
+                    !currentWord.gender && 'text-primary-600'
+                  )}>
+                    {morphBreakdown.ending}
+                  </span>
+                )}
+                {!morphBreakdown.ending && currentWord.gender === 'm' && (
+                  <span className="text-blue-400 text-2xl align-baseline">∅</span>
+                )}
+              </h2>
+            ) : (
+              <h2 className="text-4xl font-bold text-gray-900 mb-1">
+                {currentWord.word}
+              </h2>
+            )}
             {currentWord.transliteration && (
               <p className="text-lg text-gray-400 italic">
                 ({currentWord.transliteration})
@@ -150,21 +215,33 @@ export const WordIntro: React.FC<WordIntroProps> = ({ words, onComplete }) => {
           </div>
 
           {/* Translation */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-4">
             <p className="text-2xl text-primary-600 font-medium">
               {currentWord.translation}
             </p>
-            {currentWord.gender && (
-              <span className={clsx(
-                "inline-block mt-2 px-3 py-1 rounded-full text-xs font-bold",
-                currentWord.gender === 'm' && "bg-blue-100 text-blue-700",
-                currentWord.gender === 'f' && "bg-pink-100 text-pink-700",
-                currentWord.gender === 'n' && "bg-gray-100 text-gray-700",
-              )}>
-                {currentWord.gender === 'm' ? 'Masculine' : currentWord.gender === 'f' ? 'Feminine' : 'Neuter'}
-              </span>
-            )}
           </div>
+
+          {/* Gender & Pattern Badges */}
+          {(currentWord.gender || currentWord.pattern) && (
+            <div className="flex items-center justify-center gap-2 mb-6">
+              {currentWord.gender && (
+                <span className={clsx(
+                  "px-3 py-1 rounded-full text-xs font-bold",
+                  currentWord.gender === 'm' && "bg-blue-100 text-blue-700",
+                  currentWord.gender === 'f' && "bg-pink-100 text-pink-700",
+                  currentWord.gender === 'n' && "bg-purple-100 text-purple-700",
+                )}>
+                  {currentWord.gender === 'm' ? 'Masculine' : currentWord.gender === 'f' ? 'Feminine' : 'Neuter'}
+                </span>
+              )}
+              {currentWord.pattern && (
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 flex items-center gap-1">
+                  <BookOpen size={12} />
+                  {PATTERN_NAMES[currentWord.pattern] || currentWord.pattern.replace(/_/g, ' ')}
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Audio Button */}
           {currentWord.audio && (

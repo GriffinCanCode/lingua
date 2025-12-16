@@ -1,16 +1,26 @@
 """Exercise Generator Engine
 
 Generates Duolingo-style exercises from lesson vocabulary and sentences.
-Supports: word_bank, typing, matching, multiple_choice, fill_blank
+Supports: word_bank, typing, matching, multiple_choice, fill_blank,
+          pattern_fill, paradigm_complete, pattern_apply
 """
 import random
 from uuid import uuid4
 from dataclasses import dataclass, field
 from typing import Literal
 
-ExerciseType = Literal['word_bank', 'typing', 'matching', 'multiple_choice', 'fill_blank']
+from core.logging import engine_logger
+from engines.morphology import MorphologyEngine
+
+log = engine_logger()
+
+ExerciseType = Literal[
+    'word_bank', 'typing', 'matching', 'multiple_choice', 'fill_blank',
+    'pattern_fill', 'paradigm_complete', 'pattern_apply'
+]
 TargetLanguage = Literal['ru', 'en']
 LevelType = Literal['intro', 'easy', 'medium', 'hard', 'review']
+GrammaticalCase = Literal['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional']
 
 
 @dataclass(slots=True)
@@ -21,6 +31,8 @@ class VocabItem:
     audio: str | None = None
     hints: list[str] = field(default_factory=list)
     gender: str | None = None
+    stem: str | None = None
+    pattern: str | None = None
 
 
 @dataclass(slots=True)
@@ -44,11 +56,10 @@ class Exercise:
 
 
 class ExerciseGenerator:
-    """Generates varied exercises from lesson content."""
+    """Generates varied exercises from lesson content including pattern-based morphology."""
 
-    __slots__ = ('_distractor_pool',)
+    __slots__ = ('_distractor_pool', '_morph')
 
-    # Common Russian distractor words by difficulty
     DISTRACTORS_RU = {
         1: ['и', 'в', 'на', 'с', 'это', 'он', 'она', 'они', 'мы', 'я', 'ты', 'да', 'нет'],
         2: ['где', 'кто', 'что', 'как', 'тут', 'там', 'очень', 'хорошо', 'плохо', 'большой', 'маленький'],
@@ -61,8 +72,12 @@ class ExerciseGenerator:
         3: ['because', 'when', 'why', 'now', 'always', 'never', 'can', 'must'],
     }
 
+    CASES: list[GrammaticalCase] = ['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional']
+
     def __init__(self):
         self._distractor_pool: dict[str, list[str]] = {}
+        self._morph = MorphologyEngine()
+        log.debug("exercise_generator_initialized")
 
     def generate_lesson_exercises(
         self,
@@ -92,13 +107,13 @@ class ExerciseGenerator:
             'en': self._build_distractor_pool([v.translation for v in all_vocab], 'en'),
         }
 
-        # Distribution by level type (Duolingo-style: use words in sentences immediately)
+        # Distribution by level type with pattern exercises integrated
         distributions: dict[str, dict[str, int]] = {
-            'intro': {'word_bank': 8, 'multiple_choice': 2},  # Heavy word_bank for immediate sentence use
-            'easy': {'word_bank': 5, 'multiple_choice': 4, 'matching': 1},
-            'medium': {'word_bank': 5, 'multiple_choice': 3, 'typing': 1, 'fill_blank': 1},
-            'hard': {'typing': 5, 'word_bank': 3, 'fill_blank': 2},
-            'review': {'word_bank': 3, 'typing': 3, 'multiple_choice': 2, 'matching': 1, 'fill_blank': 1},
+            'intro': {'word_bank': 6, 'multiple_choice': 2, 'pattern_fill': 2},
+            'easy': {'word_bank': 4, 'multiple_choice': 3, 'matching': 1, 'pattern_fill': 2},
+            'medium': {'word_bank': 4, 'multiple_choice': 2, 'typing': 1, 'fill_blank': 1, 'pattern_fill': 2},
+            'hard': {'typing': 4, 'word_bank': 2, 'fill_blank': 1, 'pattern_fill': 2, 'paradigm_complete': 1},
+            'review': {'word_bank': 2, 'typing': 2, 'multiple_choice': 2, 'matching': 1, 'pattern_fill': 2, 'pattern_apply': 1},
         }
 
         dist = distributions.get(level_type, distributions['medium'])
@@ -116,6 +131,7 @@ class ExerciseGenerator:
             ))
 
         random.shuffle(exercises)
+        log.debug("exercises_generated", count=len(exercises[:num_exercises]), level_type=level_type)
         return exercises[:num_exercises]
 
     def _generate_by_type(
@@ -134,6 +150,9 @@ class ExerciseGenerator:
             'matching': self._gen_matching,
             'multiple_choice': self._gen_multiple_choice,
             'fill_blank': self._gen_fill_blank,
+            'pattern_fill': self._gen_pattern_fill,
+            'paradigm_complete': self._gen_paradigm_complete,
+            'pattern_apply': self._gen_pattern_apply,
         }
         gen = generators.get(ex_type)
         return gen(count, vocab, sentences, review_vocab, difficulty) if gen else []
@@ -344,6 +363,207 @@ class ExerciseGenerator:
 
         return exercises
 
+    def _gen_pattern_fill(
+        self,
+        count: int,
+        vocab: list[VocabItem],
+        sentences: list[SentenceItem],
+        review_vocab: list[VocabItem],
+        difficulty: int,
+    ) -> list[Exercise]:
+        """Generate pattern fill exercises - select correct ending for stem + case."""
+        exercises = []
+        all_vocab = vocab + review_vocab
+        
+        # Filter to nouns with gender (can be declined)
+        declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
+        if not declinable:
+            return []
+
+        # Target cases based on difficulty
+        target_cases: list[GrammaticalCase] = ['genitive', 'accusative'] if difficulty <= 2 else self.CASES[1:]
+
+        for i in range(min(count, len(declinable) * len(target_cases))):
+            item = declinable[i % len(declinable)]
+            target_case = target_cases[i % len(target_cases)]
+            
+            # Get the inflected form
+            form = self._morph.generate_form(item.word, target_case, "singular")
+            if not form:
+                continue
+            
+            # Extract stem and ending
+            stem_data = self._morph.extract_stem_ending(form)
+            if not stem_data.ending:
+                continue
+            
+            # Get distractor endings
+            options = self._morph.get_ending_options(target_case, stem_data.ending, 4)
+            
+            exercises.append(Exercise(
+                id=str(uuid4()),
+                type='pattern_fill',
+                prompt='Select the correct ending',
+                difficulty=difficulty,
+                data={
+                    'stem': stem_data.stem,
+                    'targetCase': target_case,
+                    'targetNumber': 'singular',
+                    'correctEnding': stem_data.ending,
+                    'options': options,
+                    'baseWord': item.word,
+                    'translation': item.translation,
+                    'patternName': stem_data.pattern_id or 'unknown',
+                    'fullForm': form,
+                },
+            ))
+
+        return exercises
+
+    def _gen_paradigm_complete(
+        self,
+        count: int,
+        vocab: list[VocabItem],
+        sentences: list[SentenceItem],
+        review_vocab: list[VocabItem],
+        difficulty: int,
+    ) -> list[Exercise]:
+        """Generate paradigm completion exercises - fill missing cells in declension table."""
+        exercises = []
+        all_vocab = vocab + review_vocab
+        
+        declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
+        if not declinable:
+            return []
+
+        for i in range(min(count, len(declinable))):
+            item = declinable[i % len(declinable)]
+            paradigm = self._morph.get_pattern_paradigm(item.word, item.translation)
+            
+            if len(paradigm.cells) < 6:
+                continue
+            
+            # Select cells to blank based on difficulty
+            num_blanks = 2 if difficulty <= 2 else 4
+            singular_cells = [c for c in paradigm.cells if c['number'] == 'singular']
+            
+            if len(singular_cells) < num_blanks:
+                continue
+            
+            blank_indices = random.sample(range(len(singular_cells)), min(num_blanks, len(singular_cells)))
+            
+            cells = []
+            all_options = set()
+            for idx, cell in enumerate(singular_cells):
+                is_blank = idx in blank_indices
+                cells.append({
+                    'case': cell['case'],
+                    'number': cell['number'],
+                    'form': cell['form'],
+                    'isBlank': is_blank,
+                })
+                if is_blank:
+                    all_options.add(cell['form'])
+            
+            # Add distractors
+            distractor_forms = [c['form'] for c in singular_cells if c['form'] not in all_options][:2]
+            options = list(all_options) + distractor_forms
+            random.shuffle(options)
+            
+            exercises.append(Exercise(
+                id=str(uuid4()),
+                type='paradigm_complete',
+                prompt='Complete the paradigm table',
+                difficulty=difficulty,
+                data={
+                    'lemma': paradigm.lemma,
+                    'translation': paradigm.translation,
+                    'gender': paradigm.gender,
+                    'patternName': paradigm.pattern_name,
+                    'cells': cells,
+                    'blankIndices': blank_indices,
+                    'options': options,
+                },
+            ))
+
+        return exercises
+
+    def _gen_pattern_apply(
+        self,
+        count: int,
+        vocab: list[VocabItem],
+        sentences: list[SentenceItem],
+        review_vocab: list[VocabItem],
+        difficulty: int,
+    ) -> list[Exercise]:
+        """Generate pattern apply exercises - apply learned pattern to new word."""
+        exercises = []
+        all_vocab = vocab + review_vocab
+        
+        declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
+        if len(declinable) < 2:
+            return []
+
+        target_cases: list[GrammaticalCase] = ['genitive', 'dative', 'accusative']
+
+        for i in range(min(count, len(declinable))):
+            # Pick example word and new word of same gender
+            example_item = declinable[i % len(declinable)]
+            same_gender = [v for v in declinable if v.gender == example_item.gender and v.word != example_item.word]
+            
+            if not same_gender:
+                continue
+            
+            new_item = random.choice(same_gender)
+            target_case = target_cases[i % len(target_cases)]
+            
+            # Get example form
+            example_form = self._morph.generate_form(example_item.word, target_case, "singular")
+            if not example_form:
+                continue
+            
+            # Get correct answer for new word
+            correct_form = self._morph.generate_form(new_item.word, target_case, "singular")
+            if not correct_form:
+                continue
+            
+            # Generate distractors (other case forms of same word)
+            other_cases = [c for c in target_cases if c != target_case]
+            distractors = []
+            for other_case in other_cases[:2]:
+                other_form = self._morph.generate_form(new_item.word, other_case, "singular")
+                if other_form and other_form != correct_form:
+                    distractors.append(other_form)
+            
+            # Add nominative as distractor
+            if new_item.word != correct_form:
+                distractors.append(new_item.word)
+            
+            options = [correct_form] + distractors[:3]
+            random.shuffle(options)
+            
+            stem_data = self._morph.extract_stem_ending(example_item.word)
+            
+            exercises.append(Exercise(
+                id=str(uuid4()),
+                type='pattern_apply',
+                prompt='Apply the pattern to a new word',
+                difficulty=difficulty,
+                data={
+                    'newWord': new_item.word,
+                    'newWordTranslation': new_item.translation,
+                    'targetCase': target_case,
+                    'targetNumber': 'singular',
+                    'patternName': stem_data.pattern_id or 'unknown',
+                    'exampleWord': example_item.word,
+                    'exampleForm': example_form,
+                    'correctAnswer': correct_form,
+                    'options': options,
+                },
+            ))
+
+        return exercises
+
     def _build_distractor_pool(self, exclude: list[str], lang: TargetLanguage) -> list[str]:
         """Build pool of distractor words excluding lesson vocabulary."""
         exclude_lower = {w.lower() for w in exclude}
@@ -378,6 +598,8 @@ def generate_exercises(
         audio=v.get('audio'),
         hints=v.get('hints', []),
         gender=v.get('gender'),
+        stem=v.get('stem'),
+        pattern=v.get('pattern'),
     ) for v in vocabulary]
 
     sents = [SentenceItem(
@@ -388,7 +610,7 @@ def generate_exercises(
         complexity=s.get('complexity', 1),
     ) for s in sentences]
 
-    review = [VocabItem(word=v['word'], translation=v['translation']) for v in (review_vocabulary or [])]
+    review = [VocabItem(word=v['word'], translation=v['translation'], gender=v.get('gender')) for v in (review_vocabulary or [])]
     exercises = gen.generate_lesson_exercises(vocab, sents, review, num_exercises, level_type)
 
     return [{'id': ex.id, 'type': ex.type, 'prompt': ex.prompt, 'difficulty': ex.difficulty, **ex.data} for ex in exercises]

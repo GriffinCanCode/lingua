@@ -7,7 +7,10 @@ import clsx from 'clsx';
 import { getLessonExercises, completeLesson, LessonExercises } from '../../services/curriculum';
 import { LessonIntro } from './LessonIntro';
 import { useComponentLogger } from '../../lib/logger';
-import { WordBank, Typing, Matching, MultipleChoice, FillBlank } from '../Exercises';
+import {
+  WordBank, Typing, Matching, MultipleChoice, FillBlank,
+  PatternFill, PatternApply, ParadigmComplete,
+} from '../Exercises';
 import type { Exercise, ExerciseResult, ValidationResult } from '../../types/exercises';
 
 // Maximum hearts (lives) per lesson
@@ -83,7 +86,6 @@ export const LessonSession: React.FC = () => {
           acc => normalize(acc) === normalizedAnswer
         ) || normalize(exercise.targetText) === normalizedAnswer;
 
-        // Check for close typo
         const typoDetected = !isCorrect && levenshtein(normalizedAnswer, normalize(exercise.targetText)) <= 2;
 
         return {
@@ -107,8 +109,35 @@ export const LessonSession: React.FC = () => {
         };
 
       case 'matching':
-        // Matching auto-submits when all pairs matched
         return { correct: true, correctAnswer: '' };
+
+      case 'pattern_fill':
+        return {
+          correct: answer === exercise.correctEnding,
+          correctAnswer: exercise.fullForm,
+          feedback: answer === exercise.correctEnding
+            ? `${exercise.stem}${exercise.correctEnding} = ${exercise.translation}`
+            : `The ${exercise.targetCase} ending is -${exercise.correctEnding}`,
+        };
+
+      case 'pattern_apply':
+        return {
+          correct: answer === exercise.correctAnswer,
+          correctAnswer: exercise.correctAnswer,
+          feedback: answer === exercise.correctAnswer
+            ? `Like ${exercise.exampleWord} → ${exercise.exampleForm}`
+            : `Following the pattern: ${exercise.newWord} → ${exercise.correctAnswer}`,
+        };
+
+      case 'paradigm_complete': {
+        const answerArr = Array.isArray(answer) ? answer : [answer];
+        const correctForms = exercise.blankIndices.map(idx => exercise.cells[idx].form);
+        const allCorrect = answerArr.every((a, i) => a === correctForms[i]);
+        return {
+          correct: allCorrect,
+          correctAnswer: correctForms.join(', '),
+        };
+      }
 
       default:
         return { correct: false, correctAnswer: '' };
@@ -177,6 +206,12 @@ export const LessonSession: React.FC = () => {
         return <MultipleChoice {...props} exercise={exercise} />;
       case 'fill_blank':
         return <FillBlank {...props} exercise={exercise} />;
+      case 'pattern_fill':
+        return <PatternFill {...props} exercise={exercise} />;
+      case 'pattern_apply':
+        return <PatternApply {...props} exercise={exercise} />;
+      case 'paradigm_complete':
+        return <ParadigmComplete {...props} exercise={exercise} />;
       default:
         return <div>Unknown exercise type</div>;
     }

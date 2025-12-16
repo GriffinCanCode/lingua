@@ -1,5 +1,6 @@
 # Unit 1, Lesson 2: Is this a...?
 # Focus: Questions with intonation, Да/Нет answers
+# Pattern Focus: Question formation through intonation, negation with не
 
 lesson:
   id: "unit1_02_identification"
@@ -14,60 +15,92 @@ content:
     In Russian, you don't need special words like "is" or "are" to ask a question.
     You just **change your intonation**!
     
-    - **Это кот.** (Statement: This is a cat.)
-    - **Это кот?** (Question: Is this a cat?) ↗️
+    ## The Pattern
     
-    To answer:
-    - **Да** = Yes
-    - **Нет** = No
+    | Type | Pattern | Example |
+    |------|---------|---------|
+    | Statement | flat tone | **Это кот.** (This is a cat.) |
+    | Question | rising tone ↗️ | **Это кот?** (Is this a cat?) |
+    
+    ## Answering Pattern
+    
+    - **Да** + statement = "Yes, ..."
+    - **Нет** + **не** + noun = "No, it's not ..."
+    
+    The pattern is simple: question = statement + rising intonation!
+
+patterns:
+  - id: "question_intonation"
+    name: "Question Intonation"
+    description: "Questions are formed by rising intonation, not word order"
+    type: "syntax"
+    rules:
+      - pattern: "Это X."
+        meaning: "This is X."
+        type: "statement"
+      - pattern: "Это X?"
+        meaning: "Is this X?"
+        type: "question"
+
+  - id: "negation_ne"
+    name: "Negation with Не"
+    description: "Не comes directly before the word being negated"
+    type: "syntax"
+    examples: ["Это не кот", "Это не дом"]
 
 vocabulary:
   - word: "Да"
     translation: "Yes"
     audio: "da.mp3"
-    hints: ["Like 'duh' but shorter"]
+    hints: ["Affirmative answer pattern"]
 
   - word: "Нет"
     translation: "No"
     audio: "nyet.mp3"
-    hints: ["Н sounds like 'n', Е like 'ye'"]
+    hints: ["Negative answer, often followed by 'это не...'"]
 
   - word: "Дом"
     translation: "House"
     audio: "dom.mp3"
-    hints: ["Д sounds like 'd'"]
+    hints: ["Masculine: ends in consonant"]
     gender: "m"
+    stem: "дом"
+    pattern: "masc_hard_declension"
 
   - word: "Радио"
     translation: "Radio"
     audio: "radio.mp3"
-    hints: ["Same as English!"]
+    hints: ["Neuter: ends in -о"]
     gender: "n"
+    stem: "радио"
 
   - word: "Не"
     translation: "Not"
     audio: "nye.mp3"
-    hints: ["Used for negation"]
+    hints: ["Negation word - comes before what you're negating"]
 
   - word: "Карта"
     translation: "Map/Card"
     audio: "karta.mp3"
-    hints: ["Like 'carta' in Spanish"]
+    hints: ["Feminine: карт|а"]
     gender: "f"
+    stem: "карт"
+    pattern: "fem_a_declension"
 
   - word: "Метро"
     translation: "Metro/Subway"
     audio: "metro.mp3"
-    hints: ["Same as English 'metro'"]
+    hints: ["Neuter: ends in -о (indeclinable)"]
     gender: "n"
+    stem: "метро"
 
   - word: "Кофе"
     translation: "Coffee"
     audio: "kofe.mp3"
-    hints: ["Sounds like 'coffee' in Italian"]
+    hints: ["Exception: ends in -е but masculine"]
     gender: "m"
+    stem: "кофе"
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "Это дом?"
     translation: "Is this a house?"
@@ -76,6 +109,7 @@ sentences:
       - { ru: "дом", en: "a house" }
     distractors: ["the radio", "a cat", "Yes", "No"]
     complexity: 1
+    pattern_note: "Rising intonation makes it a question"
 
   - text: "Да, это дом."
     translation: "Yes this is a house"
@@ -103,6 +137,7 @@ sentences:
       - { ru: "радио", en: "a radio" }
     distractors: ["Yes", "a house", "here", "there"]
     complexity: 2
+    pattern_note: "Negation pattern: Нет, это не X"
 
   - text: "Это кофе?"
     translation: "Is this coffee"

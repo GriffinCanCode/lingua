@@ -4,6 +4,10 @@ export { Matching } from './Matching';
 export { MultipleChoice } from './MultipleChoice';
 export { FillBlank } from './FillBlank';
 export { WordIntro } from './WordIntro';
+export { PatternIntro } from './PatternIntro';
+export { PatternFill } from './PatternFill';
+export { PatternApply } from './PatternApply';
+export { ParadigmComplete } from './ParadigmComplete';
 export type { VocabWord } from './WordIntro';
 
 // Re-export types for convenience
@@ -15,5 +19,11 @@ export type {
   MatchingExercise,
   MultipleChoiceExercise,
   FillBlankExercise,
+  PatternFillExercise,
+  ParadigmCompleteExercise,
+  PatternApplyExercise,
+  MorphPattern,
+  MorphWord,
+  GrammaticalCase,
   ExerciseComponentProps,
 } from '../../types/exercises';

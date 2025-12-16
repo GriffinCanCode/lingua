@@ -1,5 +1,6 @@
 # Foundations, Lesson 1: Hello & Goodbye
 # Focus: Basic greetings - use words in sentences immediately (Duolingo-style)
+# Pattern Focus: Formal vs informal register, zero copula pattern
 
 lesson:
   id: "foundations_01"
@@ -12,49 +13,95 @@ content:
     # Hello & Goodbye
     
     Learn Russian greetings by using them in sentences right away!
+    
+    ## The Pattern: No "am/is/are" Needed!
+    
+    In Russian, you don't say "I **am** mom." You just say:
+    
+    **Я мама.** = I (am) mom.
+    
+    This is called the "zero copula" — Russian drops "to be" in present tense!
+    
+    | English | Russian Pattern |
+    |---------|-----------------|
+    | I am X | Я X |
+    | You are X | Ты X |
+    | This is X | Это X |
+
+patterns:
+  - id: "zero_copula"
+    name: "Zero Copula"
+    description: "Russian omits 'to be' (am/is/are) in present tense"
+    type: "syntax"
+    rules:
+      - english: "I am mom"
+        russian: "Я мама"
+        pattern: "Subject + Noun (no verb)"
+      - english: "You are dad"
+        russian: "Ты папа"
+        pattern: "Subject + Noun (no verb)"
+
+  - id: "formal_informal"
+    name: "Register (Formal vs Informal)"
+    description: "Different words for different social situations"
+    type: "sociolinguistic"
+    rules:
+      - context: "friends, family, children"
+        greeting: "Привет"
+        farewell: "Пока"
+        you: "Ты"
+      - context: "strangers, formal situations"
+        greeting: "Здравствуйте"
+        farewell: "До свидания"
+        you: "Вы"
 
 vocabulary:
   - word: "Привет"
     translation: "Hi"
     audio: "privet.mp3"
-    hints: ["pri-VYET - informal greeting"]
+    hints: ["Informal greeting for friends/family"]
 
   - word: "Пока"
     translation: "Bye"
     audio: "poka.mp3"
-    hints: ["po-KA - informal farewell"]
+    hints: ["Informal farewell"]
 
   - word: "мама"
     translation: "mom"
     audio: "mama.mp3"
-    hints: ["Same as English 'mama'!"]
+    hints: ["Feminine: мам|а"]
+    gender: "f"
+    stem: "мам"
+    pattern: "fem_a_declension"
 
   - word: "папа"
     translation: "dad"
     audio: "papa.mp3"
-    hints: ["Same as English 'papa'!"]
+    hints: ["Ends in -а but masculine (natural gender)"]
+    gender: "m"
+    stem: "пап"
+    pattern: "fem_a_declension"
 
   - word: "Я"
     translation: "I"
     audio: "ya.mp3"
-    hints: ["Just one letter: Я"]
+    hints: ["First person pronoun"]
 
   - word: "Ты"
     translation: "You"
     audio: "ty.mp3"
-    hints: ["For friends and family"]
+    hints: ["Informal 'you' for friends and family"]
 
   - word: "Спасибо"
     translation: "Thank you"
     audio: "spasibo.mp3"
-    hints: ["spa-SI-bo"]
+    hints: ["Works in both formal and informal contexts"]
 
   - word: "да"
     translation: "yes"
     audio: "da.mp3"
-    hints: ["Just two letters!"]
+    hints: ["Universal affirmative"]
 
-# Sentences with ENGLISH distractors (user builds English from word bank)
 sentences:
   - text: "Привет!"
     translation: "Hi!"
@@ -143,6 +190,7 @@ sentences:
       - { ru: "мама", en: "mom" }
     distractors: ["You", "dad", "is", "the"]
     complexity: 1
+    pattern_note: "Zero copula: no 'am' in Russian"
 
   - text: "Ты папа."
     translation: "You are dad"
@@ -152,6 +200,7 @@ sentences:
       - { ru: "папа", en: "dad" }
     distractors: ["I", "mom", "am", "is"]
     complexity: 1
+    pattern_note: "Zero copula: no 'are' in Russian"
 
   - text: "Привет! Я мама."
     translation: "Hi I am mom"

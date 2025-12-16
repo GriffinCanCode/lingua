@@ -37,6 +37,11 @@ modules:
       review: [mama, kot, taksi, metro, restoran, voda]
     exercises:
       count: 8
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Reading review
+        - { type: "audio_recognition", count: 2 }   # Sound review (false friends)
+        - { type: "multiple_choice", count: 2 }     # Letter sound quiz
+        - { type: "matching", count: 2 }            # Cyrillic to sound
 
   - id: "mod_2"
     title: "Review: Verbs"
@@ -70,6 +75,11 @@ modules:
       review: [znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # All verb conjugations
+        - { type: "translation_en_ru", count: 3 }   # Produce verb sentences
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Type recognition
 
   - id: "mod_3"
     title: "Review: Grammar"
@@ -102,6 +112,11 @@ modules:
     exercises:
       count: 12
       difficulty: "medium"
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Grammar patterns
+        - { type: "translation_en_ru", count: 3 }   # Production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "multiple_choice", count: 2 }     # Pattern recognition
 
   - id: "mod_4"
     title: "Test"
@@ -128,6 +143,12 @@ modules:
     exercises:
       count: 15
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 5 }   # Production test
+        - { type: "translation_ru_en", count: 4 }   # Comprehension test
+        - { type: "fill_in_blank", count: 3 }       # Grammar test
+        - { type: "audio_recognition", count: 2 }   # Listening test
+        - { type: "multiple_choice", count: 1 }     # Quick quiz
 
   - id: "mod_5"
     title: "Crown"
@@ -166,6 +187,12 @@ modules:
     exercises:
       count: 15
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 5 }   # Final production mastery
+        - { type: "translation_ru_en", count: 4 }   # Final comprehension
+        - { type: "fill_in_blank", count: 3 }       # Final grammar check
+        - { type: "audio_recognition", count: 2 }   # Final listening
+        - { type: "multiple_choice", count: 1 }     # Final quiz
 
 vocab_filter:
   primary: []

@@ -49,6 +49,10 @@ modules:
       review: [dom, kniga, okno]
     exercises:
       count: 6
+      types:
+        - { type: "fill_in_blank", count: 2 }       # мой/моя́/моё choice
+        - { type: "multiple_choice", count: 2 }     # Gender agreement
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
 
   - id: "mod_2"
     title: "Твой - Your (Informal)"
@@ -82,6 +86,10 @@ modules:
       review: [dom, kniga, okno]
     exercises:
       count: 7
+      types:
+        - { type: "fill_in_blank", count: 3 }       # твой/твоя́/твоё
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "multiple_choice", count: 2 }     # Gender agreement
 
   - id: "mod_3"
     title: "Наш - Our"
@@ -120,6 +128,11 @@ modules:
       review: [dom, kniga, mashina]
     exercises:
       count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # All possessives
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Pattern recognition
 
   - id: "mod_4"
     title: "Practice"
@@ -133,6 +146,11 @@ modules:
       review: [telefon, kot, sobaka]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Gender agreement drills
+        - { type: "translation_en_ru", count: 3 }   # Active production
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Quick recognition
 
   - id: "mod_5"
     title: "Master"
@@ -152,6 +170,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 5 }       # Possessive mastery
+        - { type: "translation_en_ru", count: 4 }   # Production focus
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Pattern mastery
 
 vocab_filter:
   primary: [moy, moya, moyo]

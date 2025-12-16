@@ -41,6 +41,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear Р/С/Н/В correctly
+        - { type: "multiple_choice", count: 2 }     # Letter sound recognition
+        - { type: "matching", count: 2 }            # Match letter to actual sound
 
   - id: "mod_2"
     title: "Words with New Letters"
@@ -110,6 +114,11 @@ modules:
       review: [bank]
     exercises:
       count: 8
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Decode international words
+        - { type: "audio_recognition", count: 2 }   # Listen and recognize
+        - { type: "multiple_choice", count: 2 }     # Letter sound quiz
+        - { type: "translation_en_ru", count: 1 }   # Spell with false friends
 
   - id: "mod_4"
     title: "Practice"
@@ -123,6 +132,11 @@ modules:
       review: [mama, kot, dom, eto]
     exercises:
       count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Reading fluency
+        - { type: "audio_recognition", count: 3 }   # Sound mastery
+        - { type: "translation_en_ru", count: 2 }   # Writing practice
+        - { type: "fill_in_blank", count: 2 }       # Sentence completion
 
   - id: "mod_5"
     title: "Master"
@@ -143,6 +157,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 4 }   # Sound mastery critical
+        - { type: "translation_en_ru", count: 3 }   # Production with false friends
+        - { type: "translation_ru_en", count: 3 }   # Decoding mastery
+        - { type: "multiple_choice", count: 2 }     # Final letter quiz
 
 vocab_filter:
   primary: [restoran, voda, sestra, brat, internet, telefon]

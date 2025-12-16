@@ -45,6 +45,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand У меня́ есть
+        - { type: "translation_en_ru", count: 2 }   # Express possession
+        - { type: "audio_recognition", count: 2 }   # Hear possession phrases
 
   - id: "mod_2"
     title: "Family & Things"
@@ -83,6 +87,11 @@ modules:
       review: []
     exercises:
       count: 7
+      types:
+        - { type: "translation_en_ru", count: 2 }   # Express possession
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Complete possession
+        - { type: "audio_recognition", count: 1 }   # маши́на pronunciation
 
   - id: "mod_3"
     title: "Negative Possession"
@@ -113,6 +122,11 @@ modules:
       review: [kot, dom]
     exercises:
       count: 8
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Positive/negative possession
+        - { type: "translation_en_ru", count: 2 }   # Form possession sentences
+        - { type: "multiple_choice", count: 2 }     # есть vs нет choice
+        - { type: "fill_in_blank", count: 2 }       # Complete patterns
 
   - id: "mod_4"
     title: "Practice"
@@ -126,6 +140,11 @@ modules:
       review: [kot, dom, telefon, mama]
     exercises:
       count: 10
+      types:
+        - { type: "translation_en_ru", count: 3 }   # Production practice
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Pattern completion
+        - { type: "audio_recognition", count: 2 }   # Listening
 
   - id: "mod_5"
     title: "Master"
@@ -145,6 +164,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Production mastery
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "fill_in_blank", count: 3 }       # Pattern mastery
+        - { type: "multiple_choice", count: 2 }     # Quick recognition
 
 vocab_filter:
   primary: [u_menya, yest, mashina, sobaka, zdorovo]

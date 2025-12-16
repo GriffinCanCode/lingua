@@ -40,6 +40,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear informal greetings
+        - { type: "translation_ru_en", count: 2 }   # Understand greetings
+        - { type: "multiple_choice", count: 2 }     # Formal vs informal context
 
   - id: "mod_2"
     title: "Formal Greetings"
@@ -75,6 +79,11 @@ modules:
       review: []
     exercises:
       count: 7
+      types:
+        - { type: "audio_recognition", count: 2 }   # Здравствуйте pronunciation
+        - { type: "translation_ru_en", count: 2 }   # Understand formal greetings
+        - { type: "multiple_choice", count: 2 }     # When to use formal
+        - { type: "translation_en_ru", count: 1 }   # Produce formal greetings
 
   - id: "mod_2b"
     title: "Magic Words"
@@ -115,6 +124,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Спасибо/пожалуйста sounds
+        - { type: "translation_ru_en", count: 2 }   # Understand magic words
+        - { type: "multiple_choice", count: 2 }     # When to use each
 
   - id: "mod_3"
     title: "Zero Copula"
@@ -139,6 +152,11 @@ modules:
       review: []
     exercises:
       count: 8
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand zero-copula sentences
+        - { type: "translation_en_ru", count: 3 }   # Produce sentences without "is"
+        - { type: "fill_in_blank", count: 2 }       # Complete identity sentences
+        - { type: "multiple_choice", count: 1 }     # Grammar pattern recognition
 
   - id: "mod_3b"
     title: "🇷🇺 Russian Names"
@@ -189,6 +207,9 @@ modules:
       review: [zdravstvuyte, privet]
     exercises:
       count: 4
+      types:
+        - { type: "multiple_choice", count: 2 }     # ты vs вы context
+        - { type: "translation_ru_en", count: 2 }   # Understand naming patterns
 
   - id: "mod_4"
     title: "Practice"
@@ -202,6 +223,11 @@ modules:
       review: [mama, kot, taksi, metro]
     exercises:
       count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Mixed comprehension
+        - { type: "translation_en_ru", count: 3 }   # Active production
+        - { type: "multiple_choice", count: 2 }     # Formal/informal choices
+        - { type: "audio_recognition", count: 2 }   # Listening practice
 
   - id: "mod_5"
     title: "Master"
@@ -222,6 +248,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Production mastery
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "audio_recognition", count: 3 }   # Pronunciation mastery
+        - { type: "multiple_choice", count: 2 }     # Context mastery
 
 vocab_filter:
   primary: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, ty, vy, student, doktor]

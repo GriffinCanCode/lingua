@@ -39,6 +39,10 @@ modules:
       review: [dom, kniga, okno]
     exercises:
       count: 6
+      types:
+        - { type: "fill_in_blank", count: 2 }       # Adjective ending choice
+        - { type: "multiple_choice", count: 2 }     # Gender agreement
+        - { type: "translation_ru_en", count: 2 }   # Understand adjectives
 
   - id: "mod_2"
     title: "Common Adjectives"
@@ -73,6 +77,11 @@ modules:
       review: [dom, kniga, okno, mashina]
     exercises:
       count: 7
+      types:
+        - { type: "translation_ru_en", count: 2 }   # хорошо́/пло́хо comprehension
+        - { type: "translation_en_ru", count: 2 }   # Use good/bad
+        - { type: "fill_in_blank", count: 2 }       # Adjective in context
+        - { type: "multiple_choice", count: 1 }     # Adjective vs adverb
 
   - id: "mod_3"
     title: "Size & Age"
@@ -115,6 +124,11 @@ modules:
       review: [dom, sobaka, okno]
     exercises:
       count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Adjective endings
+        - { type: "translation_en_ru", count: 2 }   # Describe things
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Size/age adjectives
 
   - id: "mod_4"
     title: "Practice"
@@ -128,6 +142,11 @@ modules:
       review: [dom, kniga, okno, kot, sobaka, mashina]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Adjective agreement drills
+        - { type: "translation_en_ru", count: 3 }   # Active description
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Quick recognition
 
   - id: "mod_5"
     title: "Master"
@@ -148,6 +167,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 5 }       # Adjective agreement mastery
+        - { type: "translation_en_ru", count: 4 }   # Production focus
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Pattern recognition
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]

@@ -53,6 +53,10 @@ modules:
       review: [ya, ty, on, ona]
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Х sound practice
+        - { type: "fill_in_blank", count: 2 }       # хотеть conjugation
+        - { type: "translation_ru_en", count: 2 }   # Understand "want"
 
   - id: "mod_2"
     title: "Жить & Рабо́тать"
@@ -110,6 +114,11 @@ modules:
       review: [ya, ty, on, ona, gde]
     exercises:
       count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }   # ЖИ=ЖЫ pronunciation
+        - { type: "fill_in_blank", count: 3 }       # жить/работать forms
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "translation_ru_en", count: 1 }   # Comprehension
 
   - id: "mod_2b"
     title: "Есть & Пить - Eating & Drinking"
@@ -166,6 +175,11 @@ modules:
       review: [kofe, voda, chto]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # есть/пить conjugation
+        - { type: "multiple_choice", count: 2 }     # Distinguish two есть
+        - { type: "translation_en_ru", count: 2 }   # Food/drink sentences
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
 
   - id: "mod_3"
     title: "Talking About Life"
@@ -204,6 +218,11 @@ modules:
       review: [gde, tut, tam]
     exercises:
       count: 8
+      types:
+        - { type: "translation_en_ru", count: 3 }   # Life questions production
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Verb in context
+        - { type: "audio_recognition", count: 1 }   # Pronunciation
 
   - id: "mod_4"
     title: "Practice"
@@ -217,6 +236,11 @@ modules:
       review: [ya, ty, on, ona, gde, tut, tam, kofe, voda, dom, chto, seychas, segodnya, zavtra]
     exercises:
       count: 12
+      types:
+        - { type: "fill_in_blank", count: 4 }       # All verb conjugations
+        - { type: "translation_en_ru", count: 3 }   # Active production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "audio_recognition", count: 2 }   # Listening practice
 
   - id: "mod_5"
     title: "Master"
@@ -239,6 +263,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 5 }       # Irregular verb mastery
+        - { type: "translation_en_ru", count: 4 }   # Production focus
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "audio_recognition", count: 1 }   # Final pronunciation check
 
 vocab_filter:
   primary: [khotet, zhit, rabotat, yest_eat, pit]

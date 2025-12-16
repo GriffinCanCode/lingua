@@ -48,6 +48,10 @@ modules:
       review: [kot, dom, kniga]
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear numbers 1-5
+        - { type: "matching", count: 2 }            # Number to word
+        - { type: "multiple_choice", count: 2 }     # Number recognition
 
   - id: "mod_2"
     title: "Numbers 6-10"
@@ -79,6 +83,11 @@ modules:
       review: [kot, sobaka, okno, telefon]
     exercises:
       count: 7
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear numbers 6-10
+        - { type: "matching", count: 2 }            # Number to word
+        - { type: "translation_ru_en", count: 2 }   # Number comprehension
+        - { type: "multiple_choice", count: 1 }     # Recognition
 
   - id: "mod_3"
     title: "Counting Things"
@@ -108,6 +117,11 @@ modules:
       review: [kot, kniga, okno, dom, sobaka]
     exercises:
       count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }   # Counting sequences
+        - { type: "translation_ru_en", count: 2 }   # Number comprehension
+        - { type: "translation_en_ru", count: 2 }   # Write numbers
+        - { type: "matching", count: 2 }            # Full 1-10 matching
 
   - id: "mod_4"
     title: "Practice"
@@ -121,6 +135,11 @@ modules:
       review: [telefon, okno, kniga, kot, sobaka, dom]
     exercises:
       count: 10
+      types:
+        - { type: "audio_recognition", count: 3 }   # Listening practice
+        - { type: "translation_en_ru", count: 3 }   # Production
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Numbers in sentences
 
   - id: "mod_5"
     title: "Master"
@@ -140,6 +159,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 4 }   # Number listening mastery
+        - { type: "translation_en_ru", count: 4 }   # Write numbers
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Numbers in context
 
 vocab_filter:
   primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, molodets]

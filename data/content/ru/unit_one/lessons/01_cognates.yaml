@@ -40,6 +40,11 @@ modules:
       review: []
     exercises:
       count: 7
+      types:
+        - { type: "multiple_choice", count: 2 }      # Letter/sound recognition
+        - { type: "audio_recognition", count: 2 }   # Hear first Russian words
+        - { type: "matching", count: 2 }            # Match letters to sounds
+        - { type: "translation_ru_en", count: 1 }   # Read simple words
       templates:
         - pattern: "Э́то {NOUN}."
           weight: 3
@@ -77,6 +82,11 @@ modules:
       review: []
     exercises:
       count: 7
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Read cognate words
+        - { type: "audio_recognition", count: 2 }   # Pronunciation practice
+        - { type: "multiple_choice", count: 2 }     # Word meaning recognition
+        - { type: "translation_en_ru", count: 1 }   # Produce simple words
 
   - id: "mod_3"
     title: "Location Patterns"
@@ -121,6 +131,11 @@ modules:
       review: []
     exercises:
       count: 8
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand location sentences
+        - { type: "translation_en_ru", count: 2 }   # Produce location sentences
+        - { type: "fill_in_blank", count: 2 }       # Practice тут/там/здесь
+        - { type: "multiple_choice", count: 2 }     # Choose correct location word
       templates:
         - pattern: "{NOUN} {LOCATION}."
           weight: 4
@@ -137,6 +152,11 @@ modules:
       review: []
     exercises:
       count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Reading fluency
+        - { type: "translation_en_ru", count: 3 }   # Production practice
+        - { type: "audio_recognition", count: 2 }   # Listening comprehension
+        - { type: "fill_in_blank", count: 2 }       # Pattern completion
 
   - id: "mod_5"
     title: "Master"
@@ -156,6 +176,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Active production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "audio_recognition", count: 3 }   # Listening mastery
+        - { type: "fill_in_blank", count: 2 }       # Pattern mastery
 
 # Vocabulary references for this lesson
 vocab_filter:

@@ -43,6 +43,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "multiple_choice", count: 3 }     # Identify masculine nouns
+        - { type: "matching", count: 2 }            # Noun to pronoun он
+        - { type: "translation_ru_en", count: 1 }   # Understand masculine sentences
 
   - id: "mod_2"
     title: "Feminine Nouns"
@@ -78,6 +82,11 @@ modules:
       review: [mama, sestra]
     exercises:
       count: 7
+      types:
+        - { type: "multiple_choice", count: 2 }     # Identify feminine nouns
+        - { type: "matching", count: 2 }            # Noun to pronoun она́
+        - { type: "fill_in_blank", count: 2 }       # Choose он/она́
+        - { type: "translation_ru_en", count: 1 }   # Feminine sentences
 
   - id: "mod_3"
     title: "Neuter Nouns"
@@ -119,6 +128,11 @@ modules:
       review: [metro, mama]
     exercises:
       count: 8
+      types:
+        - { type: "multiple_choice", count: 2 }     # All three genders
+        - { type: "fill_in_blank", count: 3 }       # Choose он/она́/оно́
+        - { type: "translation_ru_en", count: 2 }   # Pronoun comprehension
+        - { type: "matching", count: 1 }            # Gender pattern matching
 
   - id: "mod_4"
     title: "⚠️ Gender Exceptions"
@@ -170,6 +184,10 @@ modules:
       review: [mama, metro]
     exercises:
       count: 8
+      types:
+        - { type: "multiple_choice", count: 3 }     # Exception recognition
+        - { type: "fill_in_blank", count: 3 }       # Drill папа/кофе = он
+        - { type: "translation_en_ru", count: 2 }   # Produce exception sentences
 
   - id: "mod_5"
     title: "Practice"
@@ -183,6 +201,11 @@ modules:
       review: [kot, mama, metro, taksi]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Gender pronoun practice
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "multiple_choice", count: 2 }     # Mixed gender quiz
 
   - id: "mod_6"
     title: "Master"
@@ -203,6 +226,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Pronoun mastery
+        - { type: "translation_en_ru", count: 3 }   # Production with gender
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "multiple_choice", count: 2 }     # Exception mastery
 
 vocab_filter:
   primary: [on, ona, ono, dom, kniga, okno, park, sobaka, radio, papa, kofe]

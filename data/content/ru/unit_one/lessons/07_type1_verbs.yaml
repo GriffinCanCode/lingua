@@ -42,6 +42,10 @@ modules:
       review: [ya, ty, on, ona]
     exercises:
       count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand verb meanings
+        - { type: "audio_recognition", count: 2 }   # Hear conjugated forms
+        - { type: "multiple_choice", count: 2 }     # Infinitive meaning
 
   - id: "mod_2"
     title: "Type 1 Pattern"
@@ -97,6 +101,11 @@ modules:
       review: [ya, ty, on, ona, my, vy, oni]
     exercises:
       count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Conjugation practice
+        - { type: "translation_ru_en", count: 2 }   # Understand conjugated forms
+        - { type: "multiple_choice", count: 2 }     # Choose correct ending
+        - { type: "translation_en_ru", count: 1 }   # Produce conjugations
 
   - id: "mod_3"
     title: "Понима́ть, Чита́ть & Де́лать"
@@ -167,6 +176,11 @@ modules:
       review: [ya, ty, nye, kniga, chto]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Conjugation drills
+        - { type: "translation_en_ru", count: 3 }   # Produce verb sentences
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # Pattern recognition
 
   - id: "mod_4"
     title: "Practice"
@@ -180,6 +194,11 @@ modules:
       review: [ya, ty, on, ona, vy, da, nyet, nye, chto]
     exercises:
       count: 12
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Multiple verb conjugations
+        - { type: "translation_en_ru", count: 3 }   # Active production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "audio_recognition", count: 2 }   # Hear verb forms
 
   - id: "mod_5"
     title: "Master"
@@ -200,6 +219,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Conjugation mastery
+        - { type: "translation_en_ru", count: 4 }   # Production focus
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "audio_recognition", count: 2 }   # Listening mastery
 
 vocab_filter:
   primary: [znat, ponimat, delat, otlichno]

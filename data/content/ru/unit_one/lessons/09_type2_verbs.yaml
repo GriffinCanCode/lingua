@@ -44,6 +44,10 @@ modules:
       review: [ya, ty, on, ona]
     exercises:
       count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand Type 2 verbs
+        - { type: "audio_recognition", count: 2 }   # по-русски pronunciation
+        - { type: "multiple_choice", count: 2 }     # Verb meaning
 
   - id: "mod_2"
     title: "Type 2 Pattern"
@@ -109,6 +113,11 @@ modules:
       review: [ya, ty, on, ona, my, vy, oni, dom]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Type 2 conjugation drills
+        - { type: "translation_en_ru", count: 2 }   # Produce Type 2 sentences
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 2 }     # Correct form (д→ж!)
 
   - id: "mod_3"
     title: "Type 1 vs Type 2"
@@ -145,6 +154,11 @@ modules:
       review: [ya, ty, chto]
     exercises:
       count: 10
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Type 1 vs Type 2
+        - { type: "multiple_choice", count: 3 }     # Identify type by ending
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
 
   - id: "mod_4"
     title: "Practice"
@@ -158,6 +172,11 @@ modules:
       review: [ya, ty, on, ona, vy, da, nyet, chto, dom]
     exercises:
       count: 12
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Mixed conjugation
+        - { type: "translation_en_ru", count: 3 }   # Active production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "audio_recognition", count: 2 }   # Hear verb patterns
 
   - id: "mod_5"
     title: "Master"
@@ -178,6 +197,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "fill_in_blank", count: 4 }       # Conjugation mastery
+        - { type: "translation_en_ru", count: 4 }   # Production focus
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 2 }     # Type recognition
 
 vocab_filter:
   primary: [govorit, videt, po_russki, po_angliyski, ladno]

@@ -42,6 +42,10 @@ modules:
       review: [metro, kot]
     exercises:
       count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand где questions
+        - { type: "translation_en_ru", count: 2 }   # Form где questions
+        - { type: "fill_in_blank", count: 2 }       # Complete questions
 
   - id: "mod_2"
     title: "Кто & Что"
@@ -92,6 +96,11 @@ modules:
       review: [metro, kot]
     exercises:
       count: 7
+      types:
+        - { type: "audio_recognition", count: 2 }   # что = што pronunciation!
+        - { type: "multiple_choice", count: 2 }     # кто vs что choice
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "translation_en_ru", count: 1 }   # Production
 
   - id: "mod_3"
     title: "Как - How"
@@ -128,6 +137,10 @@ modules:
       review: [khorosho, da]
     exercises:
       count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Как questions
+        - { type: "translation_en_ru", count: 2 }   # Form как questions
+        - { type: "fill_in_blank", count: 2 }       # Question word choice
 
   - id: "mod_3a"
     title: "Когда́ - When & Time Words"
@@ -193,6 +206,11 @@ modules:
       review: [rabotat, delat, dom]
     exercises:
       count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }   # сегодня = севодня!
+        - { type: "translation_ru_en", count: 2 }   # Time word comprehension
+        - { type: "translation_en_ru", count: 2 }   # Use time words
+        - { type: "fill_in_blank", count: 2 }       # Time in sentences
 
   - id: "mod_3b"
     title: "Animate vs Inanimate"
@@ -230,6 +248,10 @@ modules:
       review: [mama, kot, sobaka]
     exercises:
       count: 6
+      types:
+        - { type: "multiple_choice", count: 2 }     # кто (animate) vs что
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Choose кто/что
 
   - id: "mod_3c"
     title: "Pronunciation Reminder"
@@ -257,6 +279,11 @@ modules:
       review: [eto, mama, kot, restoran, student, govorit, rabotat, delat]
     exercises:
       count: 12
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Mixed comprehension
+        - { type: "translation_en_ru", count: 3 }   # Question production
+        - { type: "fill_in_blank", count: 3 }       # Question word practice
+        - { type: "audio_recognition", count: 3 }   # Pronunciation rules
 
   - id: "mod_5"
     title: "Master"
@@ -279,6 +306,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Production mastery
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "audio_recognition", count: 3 }   # Pronunciation mastery
+        - { type: "fill_in_blank", count: 2 }       # Pattern completion
 
 vocab_filter:
   primary: [gde, kto, chto, kak, kogda, vot, doktor, drug, segodnya, zavtra, vchera]

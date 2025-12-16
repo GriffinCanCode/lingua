@@ -39,6 +39,10 @@ modules:
       review: []
     exercises:
       count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }   # Hear question intonation
+        - { type: "multiple_choice", count: 2 }     # Statement vs question
+        - { type: "translation_ru_en", count: 2 }   # Understand questions
 
   - id: "mod_2"
     title: "Yes & No"
@@ -102,6 +106,11 @@ modules:
       review: []
     exercises:
       count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Practice не placement
+        - { type: "translation_en_ru", count: 2 }   # Form negations
+        - { type: "translation_ru_en", count: 2 }   # Understand negations
+        - { type: "multiple_choice", count: 1 }     # Positive vs negative
       templates:
         - pattern: "Э́то не {NOUN}."
           weight: 4
@@ -145,6 +154,10 @@ modules:
       review: [sobaka, eto]
     exercises:
       count: 6
+      types:
+        - { type: "fill_in_blank", count: 2 }       # и/или/но practice
+        - { type: "translation_ru_en", count: 2 }   # Understand connectors
+        - { type: "translation_en_ru", count: 2 }   # Use connectors
 
   - id: "mod_4b"
     title: "Practice"
@@ -158,6 +171,11 @@ modules:
       review: [mama, metro, tut, tam]
     exercises:
       count: 10
+      types:
+        - { type: "translation_ru_en", count: 3 }   # Mixed comprehension
+        - { type: "translation_en_ru", count: 3 }   # Question/answer production
+        - { type: "fill_in_blank", count: 2 }       # Pattern practice
+        - { type: "audio_recognition", count: 2 }   # Intonation practice
 
   - id: "mod_5"
     title: "Master"
@@ -178,6 +196,11 @@ modules:
     exercises:
       count: 12
       difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Production mastery
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "fill_in_blank", count: 3 }       # Pattern mastery
+        - { type: "audio_recognition", count: 2 }   # Listening mastery
 
 vocab_filter:
   primary: [da, nyet, nye, i, ili, no, eto, kot, taksi, student, kofe, seychas]

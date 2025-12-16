@@ -1,0 +1,112 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# INTERJECTIONS
+# Greetings, farewells, and social expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+interjections:
+  - id: "privet"
+    word: "привет"
+    stressed: "приве́т"
+    transliteration: "privet"
+    translation: "hi"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "privet.mp3"
+    notes: "Informal. Use with friends, family. Р sounds like rolled 'r'. Stress on last syllable."
+    register: "informal"
+    examples:
+      - { ru: "Приве́т!", en: "Hi!" }
+      - { ru: "Приве́т, как дела́?", en: "Hi, how are you?" }
+
+  - id: "poka"
+    word: "пока"
+    stressed: "пока́"
+    transliteration: "poka"
+    translation: "bye"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "poka.mp3"
+    notes: "Informal. Also means 'for now', 'while'. Stress on last syllable."
+    register: "informal"
+    examples:
+      - { ru: "Пока́!", en: "Bye!" }
+      - { ru: "Ну, пока́!", en: "Well, bye!" }
+      - { ru: "Пока́-пока́!", en: "Bye-bye!" }
+
+  - id: "zdravstvuyte"
+    word: "здравствуйте"
+    stressed: "здра́вствуйте"
+    transliteration: "zdravstvuyte"
+    translation: "hello (formal)"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 3
+    audio: "zdravstvuyte.mp3"
+    notes: "Formal. The first В is SILENT! Say: zdra-STVUY-te. Literally means 'be healthy'. Stress on first syllable."
+    register: "formal"
+    examples:
+      - { ru: "Здра́вствуйте!", en: "Hello!" }
+      - { ru: "Здра́вствуйте, как дела́?", en: "Hello, how are you?" }
+      - { ru: "Здра́вствуйте, я студе́нт.", en: "Hello, I am a student." }
+
+  - id: "do_svidaniya"
+    word: "до свидания"
+    stressed: "до свида́ния"
+    transliteration: "do svidaniya"
+    translation: "goodbye (formal)"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "do_svidaniya.mp3"
+    notes: "Formal. Literally 'until meeting'. Two words but learned as one. Stress on 'да'."
+    register: "formal"
+    examples:
+      - { ru: "До свида́ния!", en: "Goodbye!" }
+      - { ru: "Спаси́бо! До свида́ния!", en: "Thank you! Goodbye!" }
+      - { ru: "До свида́ния, до за́втра!", en: "Goodbye, see you tomorrow!" }
+
+  - id: "spasibo"
+    word: "спасибо"
+    stressed: "спаси́бо"
+    transliteration: "spasibo"
+    translation: "thank you"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 1
+    audio: "spasibo.mp3"
+    notes: "Works in all situations. Stress on second syllable (СИ)."
+    examples:
+      - { ru: "Спаси́бо!", en: "Thank you!" }
+      - { ru: "Спаси́бо большо́е!", en: "Thank you very much!" }
+
+  - id: "pozhaluysta"
+    word: "пожалуйста"
+    stressed: "пожа́луйста"
+    transliteration: "pozhaluysta"
+    translation: "please / you're welcome"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "pozhaluysta.mp3"
+    notes: "Dual purpose: 'please' when asking, 'you're welcome' as response to спаси́бо. Stress on second syllable."
+    examples:
+      - { ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
+      - { ru: "— Спаси́бо! — Пожа́луйста.", en: "— Thanks! — You're welcome." }
+
+  - id: "izvinite"
+    word: "извините"
+    stressed: "извини́те"
+    transliteration: "izvinite"
+    translation: "excuse me / sorry"
+    pos: "interjection"
+    frequency: 1
+    difficulty: 2
+    audio: "izvinite.mp3"
+    notes: "Use to get attention, apologize, or say 'pardon?'. Stress on third syllable."
+    register: "formal"
+    examples:
+      - { ru: "Извини́те, где метро́?", en: "Excuse me, where is the metro?" }
+      - { ru: "Извини́те!", en: "I'm sorry!" }
+      - { ru: "Извини́те, я не понима́ю.", en: "Sorry, I don't understand." }

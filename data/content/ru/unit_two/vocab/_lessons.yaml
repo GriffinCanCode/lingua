@@ -1,0 +1,112 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  lesson_01_daily_verbs:
+    title: "Daily Actions"
+    focus: "де́лать, слу́шать, чита́ть - Type 1 verbs"
+    primary_vocab:
+      - delat
+      - slushat
+      - chitat
+    review_vocab:
+      - znat
+      - ponimat
+      - rabotat
+
+  lesson_02_watching_seeing:
+    title: "Watching & Seeing"
+    focus: "смотре́ть, ви́деть - Type 2 verbs with consonant changes"
+    primary_vocab:
+      - smotret
+      - videt
+      - televizor
+      - film
+    review_vocab:
+      - govorit
+
+  lesson_03_accusative_intro:
+    title: "Direct Objects"
+    focus: "Introduction to accusative case"
+    primary_vocab:
+      - kniga
+      - muzyka
+      - gazeta
+    grammar_focus: "accusative_case"
+
+  lesson_04_accusative_feminine:
+    title: "Accusative Feminine"
+    focus: "Feminine noun endings: -а → -у"
+    primary_vocab:
+      - rabota
+    review_vocab:
+      - kniga
+      - muzyka
+      - sestra
+      - mashina
+
+  lesson_05_accusative_animate:
+    title: "Accusative Animate"
+    focus: "Masculine animate: add -а"
+    review_vocab:
+      - kot
+      - brat
+      - drug
+      - doktor
+
+  lesson_06_time_expressions:
+    title: "When Things Happen"
+    focus: "Time adverbs"
+    primary_vocab:
+      - segodnya
+      - zavtra
+      - vchera
+      - utrom
+      - vecherom
+
+  lesson_07_daily_routine:
+    title: "My Daily Routine"
+    focus: "Talking about daily activities"
+    primary_vocab:
+      - zavtrak
+      - obed
+      - uzhin
+    review_vocab:
+      - utrom
+      - dnyom
+      - vecherom
+
+  lesson_08_frequency:
+    title: "How Often"
+    focus: "Frequency adverbs"
+    primary_vocab:
+      - vsegda
+      - nikogda
+      - inogda
+      - chasto
+
+  lesson_09_love_like:
+    title: "I Love, I Like"
+    focus: "люби́ть and preferences"
+    primary_vocab:
+      - lyubit
+    review_vocab:
+      - kofe
+      - muzyka
+      - film
+
+  lesson_10_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 2 review"
+    review_vocab:
+      - delat
+      - slushat
+      - chitat
+      - smotret
+      - videt
+      - lyubit
+      - segodnya
+      - zavtra
+      - vsegda

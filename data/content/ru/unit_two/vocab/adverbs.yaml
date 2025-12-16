@@ -1,0 +1,150 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ADVERBS
+# Time expressions and frequency adverbs
+# ══════════════════════════════════════════════════════════════════════════════
+
+time:
+  - id: "segodnya"
+    word: "сегодня"
+    stressed: "сего́дня"
+    transliteration: "sevodnya"
+    translation: "today"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    pronunciation_quirk: "ego_evo"
+    notes: "⚠️ PRONOUNCED 'СЕВО́ДНЯ' - the Г sounds like В! This is the -ЕГО→-ЕВО rule (from сего́ 'of this' + дня 'day'). Same pattern: его́→ево́, ничего́→ничево́."
+    examples:
+      - { ru: "Сего́дня я рабо́таю.", en: "I'm working today." }
+
+  - id: "zavtra"
+    word: "завтра"
+    stressed: "за́втра"
+    transliteration: "zavtra"
+    translation: "tomorrow"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "За́втра я не рабо́таю.", en: "I'm not working tomorrow." }
+
+  - id: "vchera"
+    word: "вчера"
+    stressed: "вчера́"
+    transliteration: "vchera"
+    translation: "yesterday"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Вчера́ я чита́л кни́гу.", en: "Yesterday I read a book." }
+
+  - id: "utrom"
+    word: "утром"
+    stressed: "у́тром"
+    transliteration: "utrom"
+    translation: "in the morning"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on first syllable. Instrumental case of у́тро (morning)."
+    examples:
+      - { ru: "У́тром я пью ко́фе.", en: "I drink coffee in the morning." }
+
+  - id: "dnyom"
+    word: "днём"
+    stressed: "днём"
+    transliteration: "dnyom"
+    translation: "in the afternoon / during the day"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 2
+    difficulty: 1
+    notes: "Ё is always stressed."
+    examples:
+      - { ru: "Днём я рабо́таю.", en: "I work during the day." }
+
+  - id: "vecherom"
+    word: "вечером"
+    stressed: "ве́чером"
+    transliteration: "vecherom"
+    translation: "in the evening"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Ве́чером я смотрю́ телеви́зор.", en: "I watch TV in the evening." }
+
+  - id: "nochyu"
+    word: "ночью"
+    stressed: "но́чью"
+    transliteration: "noch'yu"
+    translation: "at night"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 2
+    difficulty: 1
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Но́чью я сплю.", en: "I sleep at night." }
+
+frequency:
+  - id: "vsegda"
+    word: "всегда"
+    stressed: "всегда́"
+    transliteration: "vsegda"
+    translation: "always"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Я всегда́ пью ко́фе у́тром.", en: "I always drink coffee in the morning." }
+
+  - id: "nikogda"
+    word: "никогда"
+    stressed: "никогда́"
+    transliteration: "nikogda"
+    translation: "never"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    notes: "Requires не with verb: никогда́ не. Stress on last syllable."
+    examples:
+      - { ru: "Я никогда́ не пью чай.", en: "I never drink tea." }
+
+  - id: "inogda"
+    word: "иногда"
+    stressed: "иногда́"
+    transliteration: "inogda"
+    translation: "sometimes"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Иногда́ я чита́ю кни́ги.", en: "Sometimes I read books." }
+
+  - id: "chasto"
+    word: "часто"
+    stressed: "ча́сто"
+    transliteration: "chasto"
+    translation: "often"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    notes: "⚠️ Ч sounds like 'ch' in 'cheese' (always soft in Russian). Note: unlike ЧТО→ШТО, this word keeps normal Ч sound. Stress on first syllable."
+    examples:
+      - { ru: "Я ча́сто слу́шаю му́зыку.", en: "I often listen to music." }

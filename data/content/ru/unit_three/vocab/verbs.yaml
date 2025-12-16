@@ -1,0 +1,119 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# VERBS
+# Food verbs - eating, drinking, cooking
+# ══════════════════════════════════════════════════════════════════════════════
+
+irregular:
+  - id: "yest_verb"
+    word: "есть"
+    stressed: "есть"
+    transliteration: "yest'"
+    translation: "to eat"
+    pos: "verb"
+    irregular: true
+    aspect: "imperfective"
+    perfective_pair: "съесть"
+    frequency: 1
+    difficulty: 2
+    notes: "Don't confuse with есть (there is). Context makes it clear! Irregular conjugation."
+    conjugation:
+      ya: { word: "ем", stressed: "ем" }
+      ty: { word: "ешь", stressed: "ешь" }
+      on_ona: { word: "ест", stressed: "ест" }
+      my: { word: "едим", stressed: "еди́м" }
+      vy: { word: "едите", stressed: "еди́те" }
+      oni: { word: "едят", stressed: "едя́т" }
+    examples:
+      - { ru: "Я ем за́втрак.", en: "I'm eating breakfast." }
+      - { ru: "Что ты ешь?", en: "What are you eating?" }
+
+type1:
+  - id: "pit"
+    word: "пить"
+    stressed: "пить"
+    transliteration: "pit'"
+    translation: "to drink"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "вы́пить"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress moves in conjugation!"
+    conjugation:
+      ya: { word: "пью", stressed: "пью" }
+      ty: { word: "пьёшь", stressed: "пьёшь" }
+      on_ona: { word: "пьёт", stressed: "пьёт" }
+      my: { word: "пьём", stressed: "пьём" }
+      vy: { word: "пьёте", stressed: "пьёте" }
+      oni: { word: "пьют", stressed: "пьют" }
+    examples:
+      - { ru: "Я пью чай.", en: "I'm drinking tea." }
+      - { ru: "Что ты пьёшь?", en: "What are you drinking?" }
+
+  - id: "pokupat"
+    word: "покупать"
+    stressed: "покупа́ть"
+    transliteration: "pokupat'"
+    translation: "to buy"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "купи́ть"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on third syllable."
+    conjugation:
+      ya: { word: "покупаю", stressed: "покупа́ю" }
+      ty: { word: "покупаешь", stressed: "покупа́ешь" }
+      on_ona: { word: "покупает", stressed: "покупа́ет" }
+      my: { word: "покупаем", stressed: "покупа́ем" }
+      vy: { word: "покупаете", stressed: "покупа́ете" }
+      oni: { word: "покупают", stressed: "покупа́ют" }
+    examples:
+      - { ru: "Я покупа́ю хлеб.", en: "I'm buying bread." }
+
+  - id: "zakazyvat"
+    word: "заказывать"
+    stressed: "зака́зывать"
+    transliteration: "zakazyvat'"
+    translation: "to order"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "заказа́ть"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on second syllable."
+    conjugation:
+      ya: { word: "заказываю", stressed: "зака́зываю" }
+      ty: { word: "заказываешь", stressed: "зака́зываешь" }
+      on_ona: { word: "заказывает", stressed: "зака́зывает" }
+      my: { word: "заказываем", stressed: "зака́зываем" }
+      vy: { word: "заказываете", stressed: "зака́зываете" }
+      oni: { word: "заказывают", stressed: "зака́зывают" }
+    examples:
+      - { ru: "Я зака́зываю ко́фе.", en: "I'm ordering coffee." }
+
+type2:
+  - id: "gotovit"
+    word: "готовить"
+    stressed: "гото́вить"
+    transliteration: "gotovit'"
+    translation: "to cook / to prepare"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "пригото́вить"
+    frequency: 1
+    difficulty: 2
+    notes: "Consonant change: в → вл in 1st person singular. Stress on second syllable."
+    conjugation:
+      ya: { word: "готовлю", stressed: "гото́влю" }
+      ty: { word: "готовишь", stressed: "гото́вишь" }
+      on_ona: { word: "готовит", stressed: "гото́вит" }
+      my: { word: "готовим", stressed: "гото́вим" }
+      vy: { word: "готовите", stressed: "гото́вите" }
+      oni: { word: "готовят", stressed: "гото́вят" }
+    examples:
+      - { ru: "Я гото́влю у́жин.", en: "I'm cooking dinner." }

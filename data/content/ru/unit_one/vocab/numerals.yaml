@@ -1,0 +1,152 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# NUMERALS
+# Counting from 1 to 10
+# ══════════════════════════════════════════════════════════════════════════════
+
+numerals:
+  - id: "odin"
+    word: "один"
+    stressed: "оди́н"
+    transliteration: "odin"
+    translation: "one"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "odin.mp3"
+    notes: "Changes for gender: оди́н (m), одна́ (f), одно́ (n). Stress on second syllable."
+    examples:
+      - { ru: "оди́н кот", en: "one cat" }
+      - { ru: "одна́ кни́га", en: "one book" }
+
+  - id: "dva"
+    word: "два"
+    stressed: "два"
+    transliteration: "dva"
+    translation: "two"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "dva.mp3"
+    notes: "два (m/n), две (f). Followed by genitive singular."
+    examples:
+      - { ru: "два кота́", en: "two cats" }
+      - { ru: "две кни́ги", en: "two books" }
+
+  - id: "tri"
+    word: "три"
+    stressed: "три"
+    transliteration: "tri"
+    translation: "three"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "tri.mp3"
+    notes: "Sounds like 'tree'. Followed by genitive singular."
+    examples:
+      - { ru: "три до́ма", en: "three houses" }
+      - { ru: "три кота́", en: "three cats" }
+      - { ru: "У меня́ три бра́та.", en: "I have three brothers." }
+
+  - id: "chetyre"
+    word: "четыре"
+    stressed: "четы́ре"
+    transliteration: "chetyre"
+    translation: "four"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 2
+    audio: "chetyre.mp3"
+    notes: "Followed by genitive singular. Stress on second syllable."
+    examples:
+      - { ru: "четы́ре окна́", en: "four windows" }
+      - { ru: "четы́ре кни́ги", en: "four books" }
+      - { ru: "У меня́ четы́ре друга́.", en: "I have four friends." }
+
+  - id: "pyat"
+    word: "пять"
+    stressed: "пять"
+    transliteration: "pyat'"
+    translation: "five"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "pyat.mp3"
+    notes: "Followed by genitive plural (5+ uses genitive plural)."
+    examples:
+      - { ru: "пять кото́в", en: "five cats" }
+      - { ru: "пять книг", en: "five books" }
+      - { ru: "У меня́ пять рубле́й.", en: "I have five rubles." }
+
+  - id: "shest"
+    word: "шесть"
+    stressed: "шесть"
+    transliteration: "shest'"
+    translation: "six"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "shest.mp3"
+    examples:
+      - { ru: "шесть книг", en: "six books" }
+      - { ru: "шесть домо́в", en: "six houses" }
+      - { ru: "У меня́ шесть друзе́й.", en: "I have six friends." }
+
+  - id: "sem"
+    word: "семь"
+    stressed: "семь"
+    transliteration: "sem'"
+    translation: "seven"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "sem.mp3"
+    notes: "Cognate with English 'seven', Latin 'septem'."
+    examples:
+      - { ru: "семь дней", en: "seven days" }
+      - { ru: "семь часо́в", en: "seven hours" }
+      - { ru: "У меня́ семь книг.", en: "I have seven books." }
+
+  - id: "vosem"
+    word: "восемь"
+    stressed: "во́семь"
+    transliteration: "vosem'"
+    translation: "eight"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "vosem.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "во́семь челове́к", en: "eight people" }
+      - { ru: "во́семь часо́в", en: "eight o'clock" }
+      - { ru: "У меня́ во́семь яи́ц.", en: "I have eight eggs." }
+
+  - id: "devyat"
+    word: "девять"
+    stressed: "де́вять"
+    transliteration: "devyat'"
+    translation: "nine"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "devyat.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "де́вять рубле́й", en: "nine rubles" }
+      - { ru: "де́вять часо́в", en: "nine o'clock" }
+      - { ru: "У меня́ де́вять книг.", en: "I have nine books." }
+
+  - id: "desyat"
+    word: "десять"
+    stressed: "де́сять"
+    transliteration: "desyat'"
+    translation: "ten"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "desyat.mp3"
+    notes: "Base for teens and tens (11 = оди́н-на-дцать). Stress on first syllable."
+    examples:
+      - { ru: "де́сять мину́т", en: "ten minutes" }
+      - { ru: "де́сять рубле́й", en: "ten rubles" }
+      - { ru: "У меня́ де́сять друзе́й.", en: "I have ten friends." }

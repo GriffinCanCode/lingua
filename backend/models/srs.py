@@ -72,7 +72,7 @@ class UserPatternMastery(Base):
 
 
 class Vocabulary(Base):
-    """Vocabulary items from vocab.yaml"""
+    """Vocabulary items from modular vocab YAML files."""
     __tablename__ = "vocabulary"
 
     id = Column(String(100), primary_key=True)  # e.g., "mama", "kot"

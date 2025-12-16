@@ -19,31 +19,30 @@ All Russian language content organized by unit.
 ru/
 ├── CURRICULUM.md           # Full 25-unit course outline
 ├── README.md               # This file
+├── __init__.py             # Main vocab factory (aggregates all units)
 ├── unit_one/               # Unit 1: First Steps (15 lessons)
 │   ├── lessons/
 │   │   ├── 00_stress.yaml      # CRITICAL: Stress marks intro
 │   │   ├── 01_cognates.yaml
-│   │   ├── 02_hello.yaml
-│   │   ├── 03_false_friends.yaml
-│   │   ├── 04_questions.yaml
-│   │   ├── 05_gender.yaml
-│   │   ├── 06_type1_verbs.yaml
-│   │   ├── 07_possession.yaml
-│   │   ├── 08_type2_verbs.yaml
-│   │   ├── 09_where_who_what.yaml
-│   │   ├── 10_irregular_verbs.yaml
-│   │   ├── 11_possessives.yaml
-│   │   ├── 12_numbers.yaml
-│   │   ├── 13_adjectives.yaml
-│   │   └── 14_review.yaml
+│   │   └── ...
 │   └── vocab/
-│       └── vocab.yaml      # ~95 words with full verb conjugations
-├── unit_two/               # Unit 2: Everyday Life (outlined)
-│   └── vocab/
-│       └── vocab.yaml
-├── unit_three/             # Unit 3: Food & Drink (outlined)
-│   └── vocab/
-│       └── vocab.yaml
+│       ├── __init__.py         # Unit factory
+│       ├── _meta.yaml          # Unit metadata + pronunciation rules
+│       ├── _lessons.yaml       # Lesson mappings
+│       ├── pronouns.yaml       # Personal, demonstrative, possessive
+│       ├── nouns.yaml          # Cognates + essential nouns
+│       ├── verbs.yaml          # Type 1, Type 2, irregular
+│       ├── adjectives.yaml     # Descriptive adjectives
+│       ├── adverbs.yaml        # Location, interrogative, manner
+│       ├── numerals.yaml       # Numbers
+│       ├── particles.yaml      # да, нет, не, вот
+│       ├── conjunctions.yaml   # и, или, но
+│       ├── interjections.yaml  # Greetings, social expressions
+│       └── phrases.yaml        # Multi-word expressions
+├── unit_two/               # Unit 2: Everyday Life
+│   └── vocab/              # Same modular structure
+├── unit_three/             # Unit 3: Food & Drink
+│   └── vocab/              # Same modular structure
 └── ...
 ```
 
@@ -143,20 +142,36 @@ vocabulary:
     - on
 ```
 
-### In Exercise Generation
+### Direct Factory Access
+
+```python
+from data.content.ru import get_all_vocab, get_vocab, get_vocab_by_pos
+
+# Get all vocab across units
+all_vocab = get_all_vocab()  # Returns list with _unit tag
+
+# Get single vocab by ID (O(1) lookup)
+item = get_vocab("ya")
+
+# Filter by PoS
+verbs = get_vocab_by_pos("verb")
+```
+
+### Via VocabularyLoader
 
 ```python
 from ingest.vocabulary import VocabularyLoader
 
 loader = VocabularyLoader("ru")
 unit = loader.load_unit("unit1")
+lesson = loader.get_lesson_vocab("unit1", "lesson_01_cognates")
 ```
 
 ### Review Mixing
 
 ```python
 loader = VocabularyLoader("ru")
-review = loader.get_review_vocab("unit1", "01_cognates", max_items=10)
+review = loader.get_review_vocab("unit1", "lesson_01_cognates", max_items=10)
 ```
 
 ## Adding New Units

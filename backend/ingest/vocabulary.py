@@ -1,6 +1,7 @@
 """Vocabulary Loader
 
-Loads vocabulary sheets from YAML files and provides:
+Loads vocabulary from modular YAML files via unit factories.
+Provides:
 - Vocabulary by unit
 - Vocabulary by lesson
 - Review vocabulary (from previous lessons)
@@ -8,10 +9,18 @@ Loads vocabulary sheets from YAML files and provides:
 """
 from pathlib import Path
 from dataclasses import dataclass, field
-
+from functools import lru_cache
+from typing import Iterator
+import importlib
 import yaml
 
 CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
+
+
+def _get_unit_module(language: str, unit_folder: str):
+    """Dynamically import unit vocab module."""
+    module_path = f"data.content.{language}.{unit_folder}.vocab"
+    return importlib.import_module(module_path)
 
 
 def get_vocab_dirs(language: str = "ru") -> list[Path]:
@@ -28,6 +37,7 @@ class VocabEntry:
     id: str
     word: str
     translation: str
+    stressed: str = ""
     transliteration: str = ""
     pos: str = ""
     gender: str | None = None
@@ -59,12 +69,12 @@ class UnitVocab:
     description: str
     total_words: int
     all_vocab: list[VocabEntry]
-    by_section: dict[str, list[VocabEntry]]
+    by_pos: dict[str, list[VocabEntry]]
     by_lesson: dict[str, LessonVocab]
 
 
 class VocabularyLoader:
-    """Load and manage vocabulary from YAML sheets."""
+    """Load and manage vocabulary from modular YAML factories."""
 
     __slots__ = ('_cache', '_language')
 
@@ -72,48 +82,43 @@ class VocabularyLoader:
         self._cache: dict[str, UnitVocab] = {}
         self._language = language
 
+    def _unit_folder_to_id(self, folder: str) -> str:
+        """Map folder name to unit ID."""
+        mapping = {"unit_one": "unit1", "unit_two": "unit2", "unit_three": "unit3"}
+        return mapping.get(folder, folder)
+
+    def _unit_id_to_folder(self, unit_id: str) -> str:
+        """Map unit ID to folder name."""
+        mapping = {"unit1": "unit_one", "unit2": "unit_two", "unit3": "unit_three"}
+        return mapping.get(unit_id, unit_id)
+
     def load_unit(self, unit_id: str) -> UnitVocab | None:
         """Load vocabulary for a specific unit."""
         if unit_id in self._cache:
             return self._cache[unit_id]
 
-        for vocab_dir in get_vocab_dirs(self._language):
-            for yaml_file in vocab_dir.glob("*.yaml"):
-                unit = self._parse_unit_file(yaml_file)
-                if unit and unit.id == unit_id:
-                    self._cache[unit_id] = unit
-                    return unit
-        return None
-
-    def _parse_unit_file(self, path: Path) -> UnitVocab | None:
-        """Parse a unit vocabulary YAML file."""
-        with open(path) as f:
-            data = yaml.safe_load(f)
-
-        if not data or "unit" not in data:
+        folder = self._unit_id_to_folder(unit_id)
+        try:
+            module = _get_unit_module(self._language, folder)
+        except ImportError:
             return None
 
-        unit_info = data["unit"]
-        all_vocab: list[VocabEntry] = []
-        by_section: dict[str, list[VocabEntry]] = {}
+        unit_info = module.get_unit_info()
+        if not unit_info:
+            return None
 
-        sections = [
-            "pronouns", "questions", "particles", "location",
-            "greetings", "cognates", "nouns", "possession",
-            "descriptors", "numbers", "colors", "verbs",
-            "food_drink", "time", "phrases"
-        ]
-
-        for section in sections:
-            if section not in data:
-                continue
-            section_vocab = [self._parse_entry(entry) for entry in data[section]]
-            by_section[section] = section_vocab
-            all_vocab.extend(section_vocab)
-
-        by_lesson: dict[str, LessonVocab] = {}
-        lessons_data = data.get("lessons", {})
+        all_vocab_dicts = module.get_all_vocab()
+        all_vocab = [self._parse_entry(v) for v in all_vocab_dicts]
         vocab_by_id = {v.id: v for v in all_vocab}
+
+        # Group by PoS
+        by_pos: dict[str, list[VocabEntry]] = {}
+        for v in all_vocab:
+            by_pos.setdefault(v.pos, []).append(v)
+
+        # Build lesson vocab
+        by_lesson: dict[str, LessonVocab] = {}
+        lessons_data = module.get_lessons().get("lessons", {})
 
         for lesson_key, lesson_data in lessons_data.items():
             primary = [vocab_by_id[vid] for vid in lesson_data.get("primary_vocab", []) if vid in vocab_by_id]
@@ -128,22 +133,25 @@ class VocabularyLoader:
                 review=review,
             )
 
-        return UnitVocab(
-            id=unit_info.get("id", ""),
+        result = UnitVocab(
+            id=unit_info.get("id", unit_id),
             title=unit_info.get("title", ""),
             description=unit_info.get("description", ""),
             total_words=len(all_vocab),
             all_vocab=all_vocab,
-            by_section=by_section,
+            by_pos=by_pos,
             by_lesson=by_lesson,
         )
+        self._cache[unit_id] = result
+        return result
 
     def _parse_entry(self, data: dict) -> VocabEntry:
-        """Parse a single vocabulary entry."""
+        """Parse a single vocabulary entry from dict."""
         return VocabEntry(
             id=data.get("id", ""),
             word=data.get("word", ""),
             translation=data.get("translation", ""),
+            stressed=data.get("stressed", ""),
             transliteration=data.get("transliteration", ""),
             pos=data.get("pos", ""),
             gender=data.get("gender"),
@@ -199,6 +207,7 @@ class VocabularyLoader:
         return {
             "id": vocab.id,
             "word": vocab.word,
+            "stressed": vocab.stressed,
             "translation": vocab.translation,
             "pos": vocab.pos,
             "audio": vocab.audio,

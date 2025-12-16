@@ -1,0 +1,69 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ADJECTIVES
+# Descriptive words that agree with noun gender
+# ══════════════════════════════════════════════════════════════════════════════
+
+adjectives:
+  - id: "bolshoy"
+    word: "большой"
+    stressed: "большо́й"
+    transliteration: "bol'shoy"
+    translation: "big"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "bolshoy.mp3"
+    notes: "Masculine form. Changes for gender: больша́я (f), большо́е (n). Stress on last syllable."
+    examples:
+      - { ru: "Э́то большо́й дом.", en: "This is a big house." }
+      - { ru: "У меня́ больша́я соба́ка.", en: "I have a big dog." }
+      - { ru: "Большо́е окно́.", en: "A big window." }
+
+  - id: "malenkiy"
+    word: "маленький"
+    stressed: "ма́ленький"
+    transliteration: "malen'kiy"
+    translation: "small / little"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 2
+    audio: "malenkiy.mp3"
+    notes: "Masculine form. ма́ленькая (f), ма́ленькое (n). Stress on first syllable."
+    examples:
+      - { ru: "Э́то ма́ленький кот.", en: "This is a small cat." }
+      - { ru: "Ма́ленькая кни́га.", en: "A small book." }
+      - { ru: "У меня́ ма́ленький дом.", en: "I have a small house." }
+
+  - id: "noviy"
+    word: "новый"
+    stressed: "но́вый"
+    transliteration: "novyy"
+    translation: "new"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "noviy.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Э́то но́вый телефо́н.", en: "This is a new phone." }
+      - { ru: "У меня́ но́вая маши́на.", en: "I have a new car." }
+      - { ru: "Но́вый дом.", en: "A new house." }
+
+  - id: "stariy"
+    word: "старый"
+    stressed: "ста́рый"
+    transliteration: "staryy"
+    translation: "old"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "stariy.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Э́то ста́рый дом.", en: "This is an old house." }
+      - { ru: "Ста́рая кни́га.", en: "An old book." }
+      - { ru: "У меня́ ста́рый телефо́н.", en: "I have an old phone." }

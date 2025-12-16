@@ -1,0 +1,40 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 2: EVERYDAY LIFE - Metadata & Grammar Notes
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - Build on Unit 1 foundation with more verbs
+# - Introduce ACCUSATIVE CASE for direct objects
+# - Focus on daily activities and routines
+# - Time expressions for talking about when things happen
+#
+# STRESS MARKS:
+# - All entries include 'stressed' field with ́ (combining acute U+0301)
+# - Conjugations show stress patterns (stress often stays fixed but can move!)
+#
+# Grammar Focus:
+# - Accusative case (direct objects)
+# - More verbs: де́лать, слу́шать, смотре́ть, ви́деть, люби́ть
+# - Time expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+unit:
+  id: "unit2"
+  title: "Everyday Life"
+  description: "Daily activities, accusative case, and more verbs"
+  total_words: 70
+  target_lessons: 10
+
+grammar_notes:
+  accusative_case:
+    description: "Used for direct objects (what receives the action)"
+    rules:
+      masculine_inanimate: "No change (дом → дом)"
+      masculine_animate: "Add -а (кот → кота́, брат → бра́та)"
+      feminine_a: "Change -а to -у (кни́га → кни́гу)"
+      feminine_ya: "Change -я to -ю (сестра́ → сестру́)"
+      neuter: "No change (окно́ → окно́)"
+    examples:
+      - { nominative: "кни́га", accusative: "кни́гу", sentence: "Я чита́ю кни́гу." }
+      - { nominative: "журна́л", accusative: "журна́л", sentence: "Я чита́ю журна́л." }
+      - { nominative: "кот", accusative: "кота́", sentence: "Я ви́жу кота́." }

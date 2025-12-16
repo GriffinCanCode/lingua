@@ -77,19 +77,14 @@ async def create_curriculum(session: AsyncSession, language: str = "ru"):
                 print(f"  Warning: Unit folder {unit_folder_name} not found")
                 continue
 
-            # Load Unit Metadata from vocab file
-            # Assuming there's one main vocab file or we pick the first one
+            # Load Unit Metadata from _meta.yaml
             vocab_dir = unit_dir / "vocab"
             unit_data = {}
             if vocab_dir.exists():
-                vocab_files = list(vocab_dir.glob("*.yaml"))
-                if vocab_files:
-                    # Look for one that defines the unit metadata
-                    for v_file in vocab_files:
-                        data = load_yaml(v_file)
-                        if "unit" in data:
-                            unit_data = data["unit"]
-                            break
+                meta_file = vocab_dir / "_meta.yaml"
+                if meta_file.exists():
+                    data = load_yaml(meta_file)
+                    unit_data = data.get("unit", {})
             
             if not unit_data:
                 # Fallback if no metadata found

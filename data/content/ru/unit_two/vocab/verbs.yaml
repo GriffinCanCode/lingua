@@ -1,0 +1,166 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# VERBS
+# Action words for daily life
+# ══════════════════════════════════════════════════════════════════════════════
+
+type1:
+  # TYPE 1 VERBS
+  - id: "delat"
+    word: "делать"
+    stressed: "де́лать"
+    transliteration: "delat'"
+    translation: "to do / to make"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "сде́лать"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on first syllable throughout conjugation."
+    conjugation:
+      ya: { word: "делаю", stressed: "де́лаю" }
+      ty: { word: "делаешь", stressed: "де́лаешь" }
+      on_ona: { word: "делает", stressed: "де́лает" }
+      my: { word: "делаем", stressed: "де́лаем" }
+      vy: { word: "делаете", stressed: "де́лаете" }
+      oni: { word: "делают", stressed: "де́лают" }
+    examples:
+      - { ru: "Что ты де́лаешь?", en: "What are you doing?" }
+      - { ru: "Я де́лаю дома́шнее зада́ние.", en: "I'm doing homework." }
+
+  - id: "slushat"
+    word: "слушать"
+    stressed: "слу́шать"
+    transliteration: "slushat'"
+    translation: "to listen (to)"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    notes: "⚠️ Ш sounds like 'sh' (tongue further back than English). Takes accusative case for the object. Stress on first syllable."
+    conjugation:
+      ya: { word: "слушаю", stressed: "слу́шаю" }
+      ty: { word: "слушаешь", stressed: "слу́шаешь" }
+      on_ona: { word: "слушает", stressed: "слу́шает" }
+      my: { word: "слушаем", stressed: "слу́шаем" }
+      vy: { word: "слушаете", stressed: "слу́шаете" }
+      oni: { word: "слушают", stressed: "слу́шают" }
+    examples:
+      - { ru: "Я слу́шаю му́зыку.", en: "I'm listening to music." }
+      - { ru: "Слу́шай!", en: "Listen!" }
+
+  - id: "chitat"
+    word: "читать"
+    stressed: "чита́ть"
+    transliteration: "chitat'"
+    translation: "to read"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "прочита́ть"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on second syllable."
+    conjugation:
+      ya: { word: "читаю", stressed: "чита́ю" }
+      ty: { word: "читаешь", stressed: "чита́ешь" }
+      on_ona: { word: "читает", stressed: "чита́ет" }
+      my: { word: "читаем", stressed: "чита́ем" }
+      vy: { word: "читаете", stressed: "чита́ете" }
+      oni: { word: "читают", stressed: "чита́ют" }
+    examples:
+      - { ru: "Я чита́ю кни́гу.", en: "I'm reading a book." }
+      - { ru: "Что ты чита́ешь?", en: "What are you reading?" }
+
+  - id: "pisat"
+    word: "писать"
+    stressed: "писа́ть"
+    transliteration: "pisat'"
+    translation: "to write"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "написа́ть"
+    frequency: 1
+    difficulty: 2
+    notes: "Consonant change: с → ш in conjugation. Stress moves in conjugation!"
+    conjugation:
+      ya: { word: "пишу", stressed: "пишу́" }
+      ty: { word: "пишешь", stressed: "пи́шешь" }
+      on_ona: { word: "пишет", stressed: "пи́шет" }
+      my: { word: "пишем", stressed: "пи́шем" }
+      vy: { word: "пишете", stressed: "пи́шете" }
+      oni: { word: "пишут", stressed: "пи́шут" }
+    examples:
+      - { ru: "Я пишу́ письмо́.", en: "I'm writing a letter." }
+
+type2:
+  # TYPE 2 VERBS
+  - id: "smotret"
+    word: "смотреть"
+    stressed: "смотре́ть"
+    transliteration: "smotret'"
+    translation: "to watch / to look at"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "посмотре́ть"
+    frequency: 1
+    difficulty: 1
+    notes: "Stress on last syllable of infinitive, varies in conjugation."
+    conjugation:
+      ya: { word: "смотрю", stressed: "смотрю́" }
+      ty: { word: "смотришь", stressed: "смо́тришь" }
+      on_ona: { word: "смотрит", stressed: "смо́трит" }
+      my: { word: "смотрим", stressed: "смо́трим" }
+      vy: { word: "смотрите", stressed: "смо́трите" }
+      oni: { word: "смотрят", stressed: "смо́трят" }
+    examples:
+      - { ru: "Я смотрю́ телеви́зор.", en: "I'm watching TV." }
+      - { ru: "Смотри́!", en: "Look!" }
+
+  - id: "videt"
+    word: "видеть"
+    stressed: "ви́деть"
+    transliteration: "videt'"
+    translation: "to see"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "уви́деть"
+    frequency: 1
+    difficulty: 2
+    notes: "Consonant change: д → ж in 1st person singular. Stress on first syllable."
+    conjugation:
+      ya: { word: "вижу", stressed: "ви́жу" }
+      ty: { word: "видишь", stressed: "ви́дишь" }
+      on_ona: { word: "видит", stressed: "ви́дит" }
+      my: { word: "видим", stressed: "ви́дим" }
+      vy: { word: "видите", stressed: "ви́дите" }
+      oni: { word: "видят", stressed: "ви́дят" }
+    examples:
+      - { ru: "Я ви́жу дом.", en: "I see a house." }
+      - { ru: "Ты ви́дишь?", en: "Do you see?" }
+
+  - id: "lyubit"
+    word: "любить"
+    stressed: "люби́ть"
+    transliteration: "lyubit'"
+    translation: "to love / to like"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    notes: "Consonant change: б → бл in 1st person singular. Stress on second syllable."
+    conjugation:
+      ya: { word: "люблю", stressed: "люблю́" }
+      ty: { word: "любишь", stressed: "лю́бишь" }
+      on_ona: { word: "любит", stressed: "лю́бит" }
+      my: { word: "любим", stressed: "лю́бим" }
+      vy: { word: "любите", stressed: "лю́бите" }
+      oni: { word: "любят", stressed: "лю́бят" }
+    examples:
+      - { ru: "Я люблю́ ко́фе.", en: "I love coffee." }
+      - { ru: "Ты лю́бишь му́зыку?", en: "Do you like music?" }

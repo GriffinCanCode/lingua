@@ -1,0 +1,203 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ADVERBS
+# Location, manner, interrogative, and language adverbs
+# ══════════════════════════════════════════════════════════════════════════════
+
+location:
+  - id: "tut"
+    word: "тут"
+    stressed: "тут"
+    transliteration: "tut"
+    translation: "here"
+    pos: "adverb"
+    semantic: [location]
+    frequency: 1
+    difficulty: 1
+    audio: "tut.mp3"
+    notes: "У sounds like 'oo' in 'boot'."
+    examples:
+      - { ru: "Я тут.", en: "I'm here." }
+      - { ru: "Кот тут.", en: "The cat is here." }
+      - { ru: "Ко́фе тут?", en: "Is the coffee here?" }
+
+  - id: "tam"
+    word: "там"
+    stressed: "там"
+    transliteration: "tam"
+    translation: "there"
+    pos: "adverb"
+    semantic: [location]
+    frequency: 1
+    difficulty: 1
+    audio: "tam.mp3"
+    examples:
+      - { ru: "Он там.", en: "He's there." }
+      - { ru: "Метро́ там.", en: "The metro is there." }
+      - { ru: "Кто там?", en: "Who's there?" }
+
+  - id: "zdes"
+    word: "здесь"
+    stressed: "здесь"
+    transliteration: "zdes'"
+    translation: "here (formal)"
+    pos: "adverb"
+    semantic: [location]
+    frequency: 2
+    difficulty: 2
+    audio: "zdes.mp3"
+    notes: "More formal/written than тут. Ь makes the С soft."
+    examples:
+      - { ru: "Метро́ здесь.", en: "The metro is here." }
+      - { ru: "Вы живёте здесь?", en: "Do you live here?" }
+      - { ru: "Рестора́н здесь.", en: "The restaurant is here." }
+
+  - id: "doma"
+    word: "дома"
+    stressed: "до́ма"
+    transliteration: "doma"
+    translation: "at home"
+    pos: "adverb"
+    semantic: [location]
+    frequency: 1
+    difficulty: 1
+    audio: "doma.mp3"
+    notes: "This is the locative form. Дом = house, до́ма = at home. Stress on first syllable."
+    examples:
+      - { ru: "Я до́ма.", en: "I'm at home." }
+      - { ru: "Ма́ма до́ма?", en: "Is mom at home?" }
+      - { ru: "Он не до́ма.", en: "He's not at home." }
+
+interrogative:
+  - id: "gde"
+    word: "где"
+    stressed: "где"
+    transliteration: "gde"
+    translation: "where"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "gde.mp3"
+    notes: "Г sounds like 'g' in 'go'. Used for location (not direction)."
+    examples:
+      - { ru: "Где метро́?", en: "Where is the metro?" }
+      - { ru: "Где ты?", en: "Where are you?" }
+
+  - id: "kak"
+    word: "как"
+    stressed: "как"
+    transliteration: "kak"
+    translation: "how"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "kak.mp3"
+    notes: "Also means 'like/as'. Very versatile."
+    examples:
+      - { ru: "Как дела́?", en: "How are things?" }
+      - { ru: "Как тебя́ зову́т?", en: "What's your name?" }
+
+  - id: "pochemu"
+    word: "почему"
+    stressed: "почему́"
+    transliteration: "pochemu"
+    translation: "why"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 2
+    audio: "pochemu.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Почему́?", en: "Why?" }
+      - { ru: "Почему́ нет?", en: "Why not?" }
+      - { ru: "Почему́ ты тут?", en: "Why are you here?" }
+
+  - id: "kogda"
+    word: "когда"
+    stressed: "когда́"
+    transliteration: "kogda"
+    translation: "when"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 2
+    audio: "kogda.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Когда́?", en: "When?" }
+      - { ru: "Когда́ ты до́ма?", en: "When are you home?" }
+      - { ru: "Когда́ ты рабо́таешь?", en: "When do you work?" }
+
+manner:
+  - id: "khorosho"
+    word: "хорошо"
+    stressed: "хорошо́"
+    transliteration: "khorosho"
+    translation: "good / well / OK"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "khorosho.mp3"
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "⚠️ Two hard sounds: Х (like German 'ch' in Bach, NOT English 'h') and Ш (like 'sh' but tongue back). ШО pronounced with tongue back. Stress on last syllable."
+    examples:
+      - { ru: "Хорошо́!", en: "Good! / OK!" }
+      - { ru: "Всё хорошо́.", en: "Everything is fine." }
+
+  - id: "plokho"
+    word: "плохо"
+    stressed: "пло́хо"
+    transliteration: "plokho"
+    translation: "bad / badly"
+    pos: "adverb"
+    frequency: 2
+    difficulty: 1
+    audio: "plokho.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Э́то пло́хо.", en: "That's bad." }
+      - { ru: "Он говори́т пло́хо.", en: "He speaks badly." }
+      - { ru: "Не пло́хо!", en: "Not bad!" }
+
+  - id: "ochen"
+    word: "очень"
+    stressed: "о́чень"
+    transliteration: "ochen'"
+    translation: "very"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    audio: "ochen.mp3"
+    notes: "Ч sounds like 'ch'. Ь makes the Н soft. Stress on first syllable."
+    examples:
+      - { ru: "О́чень хорошо́!", en: "Very good!" }
+      - { ru: "О́чень прия́тно.", en: "Nice to meet you. (lit. Very pleasant)" }
+
+language:
+  - id: "po_russki"
+    word: "по-русски"
+    stressed: "по-ру́сски"
+    transliteration: "po-russki"
+    translation: "in Russian"
+    pos: "adverb"
+    semantic: [language]
+    frequency: 1
+    difficulty: 1
+    audio: "po_russki.mp3"
+    notes: "Used with говори́ть: Я говорю́ по-ру́сски. Stress on second syllable."
+    examples:
+      - { ru: "Я говорю́ по-ру́сски.", en: "I speak Russian." }
+      - { ru: "Как э́то по-ру́сски?", en: "How is this in Russian?" }
+
+  - id: "po_angliyski"
+    word: "по-английски"
+    stressed: "по-англи́йски"
+    transliteration: "po-angliyski"
+    translation: "in English"
+    pos: "adverb"
+    semantic: [language]
+    frequency: 1
+    difficulty: 1
+    audio: "po_angliyski.mp3"
+    notes: "Used with говори́ть: Вы говори́те по-англи́йски? Stress on third syllable."
+    examples:
+      - { ru: "Вы говори́те по-англи́йски?", en: "Do you speak English?" }
+      - { ru: "Я не говорю́ по-англи́йски.", en: "I don't speak English." }

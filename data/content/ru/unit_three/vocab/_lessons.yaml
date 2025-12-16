@@ -1,0 +1,110 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  lesson_01_eating_drinking:
+    title: "Eating & Drinking"
+    focus: "есть, пить - essential food verbs"
+    primary_vocab:
+      - yest_verb
+      - pit
+    review_vocab:
+      - kofe
+      - voda
+      - zavtrak
+
+  lesson_02_food_basics:
+    title: "Food Basics"
+    focus: "Common food vocabulary"
+    primary_vocab:
+      - khleb
+      - myaso
+      - ryba
+      - ovoshi
+      - frukty
+
+  lesson_03_drinks:
+    title: "Drinks"
+    focus: "Beverage vocabulary"
+    primary_vocab:
+      - chay
+      - moloko
+      - sok
+      - vino
+      - pivo
+
+  lesson_04_genitive_intro:
+    title: "Genitive Case Introduction"
+    focus: "The 'of' case - partitive expressions"
+    primary_vocab:
+      - chashka
+      - stakan
+      - bokal
+    grammar_focus: "genitive_case"
+
+  lesson_05_genitive_negation:
+    title: "I Don't Have"
+    focus: "Genitive in negation: У меня́ нет..."
+    review_vocab:
+      - khleb
+      - moloko
+      - voda
+      - chay
+
+  lesson_06_quantities:
+    title: "How Much?"
+    focus: "Quantity expressions with genitive"
+    primary_vocab:
+      - mnogo
+      - malo
+      - nemnogo
+      - skolko
+
+  lesson_07_restaurant:
+    title: "At the Restaurant"
+    focus: "Ordering food"
+    primary_vocab:
+      - menyu
+      - schyot
+      - zakazyvat
+      - ofitsiant
+
+  lesson_08_cooking:
+    title: "Cooking"
+    focus: "гото́вить and kitchen vocabulary"
+    primary_vocab:
+      - gotovit
+      - tarelka
+    review_vocab:
+      - sup
+      - salat
+      - uzhin
+
+  lesson_09_shopping:
+    title: "Food Shopping"
+    focus: "покупа́ть and quantities"
+    primary_vocab:
+      - pokupat
+    review_vocab:
+      - khleb
+      - myaso
+      - ovoshi
+      - frukty
+      - mnogo
+      - nemnogo
+
+  lesson_10_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 3 review"
+    review_vocab:
+      - yest_verb
+      - pit
+      - gotovit
+      - pokupat
+      - zakazyvat
+      - khleb
+      - chay
+      - mnogo
+      - nemnogo

@@ -1,0 +1,192 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# VERBS
+# Type 1, Type 2, and irregular verbs
+# ══════════════════════════════════════════════════════════════════════════════
+
+type1:
+  # TYPE 1 VERBS (First Conjugation) - endings: -ю, -ешь, -ет, -ем, -ете, -ют
+  - id: "znat"
+    word: "знать"
+    stressed: "знать"
+    transliteration: "znat'"
+    translation: "to know"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "znat.mp3"
+    notes: "Regular Type 1. Essential survival verb."
+    conjugation:
+      ya: { word: "знаю", stressed: "зна́ю" }
+      ty: { word: "знаешь", stressed: "зна́ешь" }
+      on_ona: { word: "знает", stressed: "зна́ет" }
+      my: { word: "знаем", stressed: "зна́ем" }
+      vy: { word: "знаете", stressed: "зна́ете" }
+      oni: { word: "знают", stressed: "зна́ют" }
+    examples:
+      - { ru: "Я зна́ю.", en: "I know." }
+      - { ru: "Ты зна́ешь?", en: "Do you know?" }
+      - { ru: "Я не зна́ю.", en: "I don't know." }
+
+  - id: "ponimat"
+    word: "понимать"
+    stressed: "понима́ть"
+    transliteration: "ponimat'"
+    translation: "to understand"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "ponimat.mp3"
+    notes: "Regular Type 1. The most important survival verb! Stress on third syllable."
+    conjugation:
+      ya: { word: "понимаю", stressed: "понима́ю" }
+      ty: { word: "понимаешь", stressed: "понима́ешь" }
+      on_ona: { word: "понимает", stressed: "понима́ет" }
+      my: { word: "понимаем", stressed: "понима́ем" }
+      vy: { word: "понимаете", stressed: "понима́ете" }
+      oni: { word: "понимают", stressed: "понима́ют" }
+    examples:
+      - { ru: "Я понима́ю.", en: "I understand." }
+      - { ru: "Я не понима́ю.", en: "I don't understand." }
+      - { ru: "Вы понима́ете?", en: "Do you understand?" }
+
+  - id: "rabotat"
+    word: "работать"
+    stressed: "рабо́тать"
+    transliteration: "rabotat'"
+    translation: "to work"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "rabotat.mp3"
+    notes: "Regular Type 1. Related to English 'robot'! Stress on second syllable."
+    conjugation:
+      ya: { word: "работаю", stressed: "рабо́таю" }
+      ty: { word: "работаешь", stressed: "рабо́таешь" }
+      on_ona: { word: "работает", stressed: "рабо́тает" }
+      my: { word: "работаем", stressed: "рабо́таем" }
+      vy: { word: "работаете", stressed: "рабо́таете" }
+      oni: { word: "работают", stressed: "рабо́тают" }
+    examples:
+      - { ru: "Я рабо́таю.", en: "I work." }
+      - { ru: "Где ты рабо́таешь?", en: "Where do you work?" }
+      - { ru: "Он не рабо́тает.", en: "He doesn't work." }
+
+  - id: "chitat"
+    word: "читать"
+    stressed: "чита́ть"
+    transliteration: "chitat'"
+    translation: "to read"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "chitat.mp3"
+    notes: "Regular Type 1. Stress on second syllable."
+    conjugation:
+      ya: { word: "читаю", stressed: "чита́ю" }
+      ty: { word: "читаешь", stressed: "чита́ешь" }
+      on_ona: { word: "читает", stressed: "чита́ет" }
+      my: { word: "читаем", stressed: "чита́ем" }
+      vy: { word: "читаете", stressed: "чита́ете" }
+      oni: { word: "читают", stressed: "чита́ют" }
+    examples:
+      - { ru: "Я чита́ю кни́гу.", en: "I am reading a book." }
+      - { ru: "Ты чита́ешь?", en: "Are you reading?" }
+
+  - id: "zhit"
+    word: "жить"
+    stressed: "жить"
+    transliteration: "zhit'"
+    translation: "to live"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    audio: "zhit.mp3"
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "⚠️ Ж sounds like 'zh' in 'pleasure'. ЖИ is written with И but pronounced like Ы! Type 1 with stem жив- in conjugation. Stress moves!"
+    conjugation:
+      ya: { word: "живу", stressed: "живу́" }
+      ty: { word: "живёшь", stressed: "живёшь" }
+      on_ona: { word: "живёт", stressed: "живёт" }
+      my: { word: "живём", stressed: "живём" }
+      vy: { word: "живёте", stressed: "живёте" }
+      oni: { word: "живут", stressed: "живу́т" }
+    examples:
+      - { ru: "Я живу́ в Москве́.", en: "I live in Moscow." }
+      - { ru: "Где ты живёшь?", en: "Where do you live?" }
+      - { ru: "Они́ живу́т тут.", en: "They live here." }
+
+type2:
+  # TYPE 2 VERBS (Second Conjugation) - endings: -ю/-у, -ишь, -ит, -им, -ите, -ят/-ат
+  - id: "govorit"
+    word: "говорить"
+    stressed: "говори́ть"
+    transliteration: "govorit'"
+    translation: "to speak / to say"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "govorit.mp3"
+    notes: "Type 2 verb (ends in -ить). Essential for language learning! Stress on third syllable."
+    conjugation:
+      ya: { word: "говорю", stressed: "говорю́" }
+      ty: { word: "говоришь", stressed: "говори́шь" }
+      on_ona: { word: "говорит", stressed: "говори́т" }
+      my: { word: "говорим", stressed: "говори́м" }
+      vy: { word: "говорите", stressed: "говори́те" }
+      oni: { word: "говорят", stressed: "говоря́т" }
+    examples:
+      - { ru: "Я говорю́ по-ру́сски.", en: "I speak Russian." }
+      - { ru: "Ты говори́шь по-англи́йски?", en: "Do you speak English?" }
+      - { ru: "Он говори́т бы́стро.", en: "He speaks fast." }
+
+irregular:
+  # IRREGULAR VERBS
+  - id: "khotet"
+    word: "хотеть"
+    stressed: "хоте́ть"
+    transliteration: "khotet'"
+    translation: "to want"
+    pos: "verb"
+    irregular: true
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    audio: "khotet.mp3"
+    notes: "⚠️ Х sounds like German 'ch' in Bach (NOT English 'h'). Irregular! Mixes Type 1 (singular: хочу́, хо́чешь) and Type 2 (plural: хоти́м). Stress moves!"
+    conjugation:
+      ya: { word: "хочу", stressed: "хочу́" }
+      ty: { word: "хочешь", stressed: "хо́чешь" }
+      on_ona: { word: "хочет", stressed: "хо́чет" }
+      my: { word: "хотим", stressed: "хоти́м" }
+      vy: { word: "хотите", stressed: "хоти́те" }
+      oni: { word: "хотят", stressed: "хотя́т" }
+    examples:
+      - { ru: "Я хочу́ ко́фе.", en: "I want coffee." }
+      - { ru: "Ты хо́чешь есть?", en: "Do you want to eat?" }
+      - { ru: "Мы хоти́м домо́й.", en: "We want to go home." }
+
+  - id: "yest"
+    word: "есть"
+    stressed: "есть"
+    transliteration: "yest'"
+    translation: "there is / to have"
+    pos: "verb"
+    frequency: 1
+    difficulty: 1
+    audio: "yest.mp3"
+    notes: "Often omitted in present tense, but used for emphasis or 'I have'."
+    examples:
+      - { ru: "У меня́ есть брат.", en: "I have a brother." }
+      - { ru: "Тут есть ко́фе?", en: "Is there coffee here?" }

@@ -1,0 +1,144 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# NOUNS
+# Daily activities nouns - things we do and use every day
+# ══════════════════════════════════════════════════════════════════════════════
+
+nouns:
+  - id: "muzyka"
+    word: "музыка"
+    stressed: "му́зыка"
+    transliteration: "muzyka"
+    translation: "music"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    accusative: "му́зыку"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Я слу́шаю му́зыку.", en: "I'm listening to music." }
+
+  - id: "televizor"
+    word: "телевизор"
+    stressed: "телеви́зор"
+    transliteration: "televizor"
+    translation: "TV / television"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "телеви́зор"
+    notes: "Stress on third syllable."
+    examples:
+      - { ru: "Я смотрю́ телеви́зор.", en: "I'm watching TV." }
+
+  - id: "film"
+    word: "фильм"
+    stressed: "фильм"
+    transliteration: "fil'm"
+    translation: "movie / film"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "фильм"
+    examples:
+      - { ru: "Я смотрю́ фильм.", en: "I'm watching a movie." }
+
+  - id: "gazeta"
+    word: "газета"
+    stressed: "газе́та"
+    transliteration: "gazeta"
+    translation: "newspaper"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    accusative: "газе́ту"
+    notes: "Stress on second syllable."
+    examples:
+      - { ru: "Я чита́ю газе́ту.", en: "I'm reading a newspaper." }
+
+  - id: "zhurnal"
+    word: "журнал"
+    stressed: "журна́л"
+    transliteration: "zhurnal"
+    translation: "magazine"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    accusative: "журна́л"
+    notes: "⚠️ Ж sounds like 'zh' in 'pleasure' (French 'je'). ЖУ pronounced with hard Ж. Stress on last syllable."
+    examples:
+      - { ru: "Я чита́ю журна́л.", en: "I'm reading a magazine." }
+
+  - id: "pismo"
+    word: "письмо"
+    stressed: "письмо́"
+    transliteration: "pis'mo"
+    translation: "letter"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    accusative: "письмо́"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Я пишу́ письмо́.", en: "I'm writing a letter." }
+
+  - id: "rabota"
+    word: "работа"
+    stressed: "рабо́та"
+    transliteration: "rabota"
+    translation: "work / job"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    accusative: "рабо́ту"
+    notes: "Stress on second syllable."
+    examples:
+      - { ru: "Я люблю́ свою́ рабо́ту.", en: "I love my job." }
+
+  - id: "zavtrak"
+    word: "завтрак"
+    stressed: "за́втрак"
+    transliteration: "zavtrak"
+    translation: "breakfast"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "за́втрак"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "У́тром я гото́влю за́втрак.", en: "I make breakfast in the morning." }
+
+  - id: "obed"
+    word: "обед"
+    stressed: "обе́д"
+    transliteration: "obed"
+    translation: "lunch"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "обе́д"
+    notes: "Stress on second syllable."
+    examples:
+      - { ru: "Днём у меня́ обе́д.", en: "I have lunch during the day." }
+
+  - id: "uzhin"
+    word: "ужин"
+    stressed: "у́жин"
+    transliteration: "uzhin"
+    translation: "dinner"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "у́жин"
+    notes: "⚠️ Ж sounds like 'zh'. ЖИ is written with И but pronounced like Ы! Stress on first syllable."
+    examples:
+      - { ru: "Ве́чером мы гото́вим у́жин.", en: "We make dinner in the evening." }

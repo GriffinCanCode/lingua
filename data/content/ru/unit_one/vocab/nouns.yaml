@@ -1,0 +1,433 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# NOUNS
+# Cognates, family, places, things, animals
+# ══════════════════════════════════════════════════════════════════════════════
+
+cognates:
+  - id: "mama"
+    word: "мама"
+    stressed: "ма́ма"
+    transliteration: "mama"
+    translation: "mom"
+    pos: "noun"
+    gender: "f"
+    semantic: [person, family]
+    frequency: 1
+    difficulty: 1
+    audio: "mama.mp3"
+    notes: "Identical to English! Uses only familiar letters. Stress on first syllable."
+    examples:
+      - { ru: "Э́то ма́ма.", en: "This is mom." }
+      - { ru: "Где ма́ма?", en: "Where is mom?" }
+      - { ru: "Ма́ма до́ма.", en: "Mom is at home." }
+
+  - id: "papa"
+    word: "папа"
+    stressed: "па́па"
+    transliteration: "papa"
+    translation: "dad"
+    pos: "noun"
+    gender: "m"
+    gender_exception: true
+    semantic: [person, family]
+    frequency: 1
+    difficulty: 1
+    audio: "papa.mp3"
+    notes: "⚠️ EXCEPTION: Ends in -а but masculine because it refers to a male person. Uses он, not она́!"
+    examples:
+      - { ru: "Па́па до́ма.", en: "Dad is at home." }
+      - { ru: "Где па́па? Он там.", en: "Where is dad? He's there." }
+      - { ru: "Э́то мой па́па.", en: "This is my dad." }
+
+  - id: "kot"
+    word: "кот"
+    stressed: "кот"
+    transliteration: "kot"
+    translation: "cat (male)"
+    pos: "noun"
+    gender: "m"
+    semantic: [animal]
+    frequency: 2
+    difficulty: 1
+    audio: "kot.mp3"
+    notes: "Male cat. Female cat is ко́шка."
+    examples:
+      - { ru: "Э́то кот.", en: "This is a cat." }
+      - { ru: "У меня́ есть кот.", en: "I have a cat." }
+      - { ru: "Где кот? Он тут.", en: "Where is the cat? It's here." }
+
+  - id: "taksi"
+    word: "такси"
+    stressed: "такси́"
+    transliteration: "taksi"
+    translation: "taxi"
+    pos: "noun"
+    gender: "n"
+    semantic: [transport, place]
+    frequency: 2
+    difficulty: 1
+    audio: "taksi.mp3"
+    notes: "Indeclinable (doesn't change). Neuter gender. Stress on last syllable."
+    examples:
+      - { ru: "Где такси́?", en: "Where is the taxi?" }
+      - { ru: "Вот такси́.", en: "Here's the taxi." }
+      - { ru: "Такси́ там.", en: "The taxi is there." }
+
+  - id: "metro"
+    word: "метро"
+    stressed: "метро́"
+    transliteration: "metro"
+    translation: "metro / subway"
+    pos: "noun"
+    gender: "n"
+    semantic: [transport, place]
+    frequency: 1
+    difficulty: 1
+    audio: "metro.mp3"
+    notes: "Indeclinable. Essential for any Russian city! Stress on last syllable."
+    examples:
+      - { ru: "Где метро́?", en: "Where is the metro?" }
+      - { ru: "Метро́ тут.", en: "The metro is here." }
+      - { ru: "Извини́те, где метро́?", en: "Excuse me, where is the metro?" }
+
+  - id: "radio"
+    word: "радио"
+    stressed: "ра́дио"
+    transliteration: "radio"
+    translation: "radio"
+    pos: "noun"
+    gender: "n"
+    semantic: [thing]
+    frequency: 2
+    difficulty: 1
+    audio: "radio.mp3"
+    notes: "Р sounds like rolled 'r', not English 'r'. Stress on first syllable."
+    examples:
+      - { ru: "Э́то ра́дио.", en: "This is a radio." }
+      - { ru: "Где ра́дио?", en: "Where is the radio?" }
+      - { ru: "У меня́ есть ра́дио.", en: "I have a radio." }
+
+  - id: "kofe"
+    word: "кофе"
+    stressed: "ко́фе"
+    transliteration: "kofe"
+    translation: "coffee"
+    pos: "noun"
+    gender: "m"
+    gender_exception: true
+    semantic: [food, drink]
+    frequency: 1
+    difficulty: 1
+    audio: "kofe.mp3"
+    notes: "⚠️ EXCEPTION: Ends in -е but masculine! Borrowed word, indeclinable. Uses он: Где ко́фе? Он тут."
+    examples:
+      - { ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
+      - { ru: "Я хочу́ ко́фе.", en: "I want coffee." }
+      - { ru: "Где ко́фе? Он тут.", en: "Where is the coffee? It's here." }
+
+  - id: "telefon"
+    word: "телефон"
+    stressed: "телефо́н"
+    transliteration: "telefon"
+    translation: "phone / telephone"
+    pos: "noun"
+    gender: "m"
+    semantic: [thing]
+    frequency: 1
+    difficulty: 1
+    audio: "telefon.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Где телефо́н?", en: "Where is the phone?" }
+      - { ru: "Э́то мой телефо́н.", en: "This is my phone." }
+      - { ru: "У меня́ есть телефо́н.", en: "I have a phone." }
+
+  - id: "doktor"
+    word: "доктор"
+    stressed: "до́ктор"
+    transliteration: "doktor"
+    translation: "doctor"
+    pos: "noun"
+    gender: "m"
+    semantic: [person, profession]
+    frequency: 2
+    difficulty: 1
+    audio: "doktor.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Он до́ктор.", en: "He is a doctor." }
+      - { ru: "Где до́ктор?", en: "Where is the doctor?" }
+      - { ru: "Вы до́ктор?", en: "Are you a doctor?" }
+
+  - id: "student"
+    word: "студент"
+    stressed: "студе́нт"
+    transliteration: "student"
+    translation: "student (male)"
+    pos: "noun"
+    gender: "m"
+    semantic: [person]
+    frequency: 2
+    difficulty: 1
+    audio: "student.mp3"
+    notes: "Female student is студе́нтка. Stress on second syllable."
+    examples:
+      - { ru: "Я студе́нт.", en: "I am a student." }
+      - { ru: "Он студе́нт?", en: "Is he a student?" }
+      - { ru: "Э́то студе́нт.", en: "This is a student." }
+
+  - id: "restoran"
+    word: "ресторан"
+    stressed: "рестора́н"
+    transliteration: "restoran"
+    translation: "restaurant"
+    pos: "noun"
+    gender: "m"
+    semantic: [place]
+    frequency: 2
+    difficulty: 1
+    audio: "restoran.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Где рестора́н?", en: "Where is the restaurant?" }
+      - { ru: "Рестора́н там.", en: "The restaurant is there." }
+      - { ru: "Э́то хоро́ший рестора́н.", en: "This is a good restaurant." }
+
+  - id: "bank"
+    word: "банк"
+    stressed: "банк"
+    transliteration: "bank"
+    translation: "bank"
+    pos: "noun"
+    gender: "m"
+    semantic: [place]
+    frequency: 2
+    difficulty: 1
+    audio: "bank.mp3"
+    examples:
+      - { ru: "Банк там.", en: "The bank is there." }
+      - { ru: "Где банк?", en: "Where is the bank?" }
+      - { ru: "Я рабо́таю в ба́нке.", en: "I work at a bank." }
+
+  - id: "park"
+    word: "парк"
+    stressed: "парк"
+    transliteration: "park"
+    translation: "park"
+    pos: "noun"
+    gender: "m"
+    semantic: [place]
+    frequency: 2
+    difficulty: 1
+    audio: "park.mp3"
+    examples:
+      - { ru: "Парк тут.", en: "The park is here." }
+      - { ru: "Где парк?", en: "Where is the park?" }
+      - { ru: "Э́то большо́й парк.", en: "This is a big park." }
+
+  - id: "internet"
+    word: "интернет"
+    stressed: "интерне́т"
+    transliteration: "internet"
+    translation: "internet"
+    pos: "noun"
+    gender: "m"
+    semantic: [thing]
+    frequency: 1
+    difficulty: 1
+    audio: "internet.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Где интерне́т?", en: "Where is the internet? / Is there wifi?" }
+      - { ru: "Тут есть интерне́т?", en: "Is there internet here?" }
+      - { ru: "У меня́ есть интерне́т.", en: "I have internet." }
+
+essential:
+  - id: "dom"
+    word: "дом"
+    stressed: "дом"
+    transliteration: "dom"
+    translation: "house / home"
+    pos: "noun"
+    gender: "m"
+    semantic: [place]
+    frequency: 1
+    difficulty: 1
+    audio: "dom.mp3"
+    notes: "Д sounds like 'd'. One of the most useful words."
+    examples:
+      - { ru: "Э́то мой дом.", en: "This is my house." }
+      - { ru: "Где дом?", en: "Where is the house?" }
+      - { ru: "Большо́й дом.", en: "A big house." }
+
+  - id: "kniga"
+    word: "книга"
+    stressed: "кни́га"
+    transliteration: "kniga"
+    translation: "book"
+    pos: "noun"
+    gender: "f"
+    semantic: [thing]
+    frequency: 2
+    difficulty: 1
+    audio: "kniga.mp3"
+    notes: "Say both consonants at start: k-niga. Stress on first syllable."
+    examples:
+      - { ru: "Э́то кни́га.", en: "This is a book." }
+      - { ru: "Где кни́га? Она́ там.", en: "Where is the book? It's there." }
+      - { ru: "Я чита́ю кни́гу.", en: "I am reading a book." }
+
+  - id: "okno"
+    word: "окно"
+    stressed: "окно́"
+    transliteration: "okno"
+    translation: "window"
+    pos: "noun"
+    gender: "n"
+    semantic: [thing]
+    frequency: 2
+    difficulty: 1
+    audio: "okno.mp3"
+    notes: "Classic neuter noun (ends in -о). Stress on last syllable."
+    examples:
+      - { ru: "Окно́ там.", en: "The window is there." }
+      - { ru: "Э́то большо́е окно́.", en: "This is a big window." }
+      - { ru: "Где окно́?", en: "Where is the window?" }
+
+  - id: "voda"
+    word: "вода"
+    stressed: "вода́"
+    transliteration: "voda"
+    translation: "water"
+    pos: "noun"
+    gender: "f"
+    semantic: [food, drink]
+    frequency: 1
+    difficulty: 1
+    audio: "voda.mp3"
+    notes: "В sounds like 'v'. Essential survival word! Stress on last syllable."
+    examples:
+      - { ru: "Вода́, пожа́луйста.", en: "Water, please." }
+      - { ru: "Я хочу́ воду́.", en: "I want water." }
+      - { ru: "Где вода́?", en: "Where is the water?" }
+
+  - id: "yeda"
+    word: "еда"
+    stressed: "еда́"
+    transliteration: "yeda"
+    translation: "food"
+    pos: "noun"
+    gender: "f"
+    semantic: [food]
+    frequency: 2
+    difficulty: 1
+    audio: "yeda.mp3"
+    notes: "Е at start of word = 'ye'. Stress on last syllable."
+    examples:
+      - { ru: "Где еда́?", en: "Where is food?" }
+      - { ru: "Я хочу́ еду́.", en: "I want food." }
+      - { ru: "Тут есть еда́?", en: "Is there food here?" }
+
+  - id: "drug"
+    word: "друг"
+    stressed: "друг"
+    transliteration: "druk"
+    translation: "friend (male)"
+    pos: "noun"
+    gender: "m"
+    semantic: [person]
+    frequency: 1
+    difficulty: 1
+    audio: "drug.mp3"
+    pronunciation_quirk: "final_g_devoicing"
+    notes: "⚠️ PRONOUNCED 'ДРУК' - final Г→К! This rule applies to all words ending in Г: враг→врак, снег→снек. Female friend is подру́га (Г stays voiced before vowel)."
+    examples:
+      - { ru: "Э́то мой друг.", en: "This is my friend." }
+      - { ru: "Кто э́то? Э́то мой друг.", en: "Who is this? This is my friend." }
+      - { ru: "У меня́ есть друг.", en: "I have a friend." }
+
+  - id: "brat"
+    word: "брат"
+    stressed: "брат"
+    transliteration: "brat"
+    translation: "brother"
+    pos: "noun"
+    gender: "m"
+    semantic: [person, family]
+    frequency: 2
+    difficulty: 1
+    audio: "brat.mp3"
+    notes: "Б sounds like 'b'."
+    examples:
+      - { ru: "Э́то мой брат.", en: "This is my brother." }
+      - { ru: "У меня́ есть брат.", en: "I have a brother." }
+      - { ru: "Где твой брат?", en: "Where is your brother?" }
+
+  - id: "sestra"
+    word: "сестра"
+    stressed: "сестра́"
+    transliteration: "sestra"
+    translation: "sister"
+    pos: "noun"
+    gender: "f"
+    semantic: [person, family]
+    frequency: 2
+    difficulty: 1
+    audio: "sestra.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Э́то моя́ сестра́.", en: "This is my sister." }
+      - { ru: "У меня́ есть сестра́.", en: "I have a sister." }
+      - { ru: "Моя́ сестра́ до́ма.", en: "My sister is at home." }
+
+  - id: "sobaka"
+    word: "собака"
+    stressed: "соба́ка"
+    transliteration: "sobaka"
+    translation: "dog"
+    pos: "noun"
+    gender: "f"
+    semantic: [animal]
+    frequency: 2
+    difficulty: 1
+    audio: "sobaka.mp3"
+    notes: "Stress on second syllable."
+    examples:
+      - { ru: "Э́то соба́ка.", en: "This is a dog." }
+      - { ru: "У меня́ есть соба́ка.", en: "I have a dog." }
+      - { ru: "Где соба́ка? Она́ там.", en: "Where is the dog? It's there." }
+
+  - id: "mashina"
+    word: "машина"
+    stressed: "маши́на"
+    transliteration: "mashina"
+    translation: "car"
+    pos: "noun"
+    gender: "f"
+    semantic: [transport, thing]
+    frequency: 1
+    difficulty: 1
+    audio: "mashina.mp3"
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "Ш sounds like 'sh' (tongue further back than English). ⚠️ ШИ is written with И but pronounced like Ы! Also means 'machine'. Stress on second syllable."
+    examples:
+      - { ru: "Э́то моя́ маши́на.", en: "This is my car." }
+      - { ru: "У меня́ есть маши́на.", en: "I have a car." }
+      - { ru: "Где маши́на?", en: "Where is the car?" }
+
+  - id: "ulitsa"
+    word: "улица"
+    stressed: "у́лица"
+    transliteration: "ulitsa"
+    translation: "street"
+    pos: "noun"
+    gender: "f"
+    semantic: [place]
+    frequency: 2
+    difficulty: 2
+    audio: "ulitsa.mp3"
+    notes: "Ц sounds like 'ts'. Stress on first syllable."
+    examples:
+      - { ru: "Где у́лица Пу́шкина?", en: "Where is Pushkin Street?" }
+      - { ru: "Э́то моя́ у́лица.", en: "This is my street." }
+      - { ru: "Больша́я у́лица.", en: "A big street." }

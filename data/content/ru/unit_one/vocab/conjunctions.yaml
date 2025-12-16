@@ -1,0 +1,50 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# CONJUNCTIONS
+# Words that connect clauses and phrases
+# ══════════════════════════════════════════════════════════════════════════════
+
+conjunctions:
+  - id: "i"
+    word: "и"
+    stressed: "и"
+    transliteration: "i"
+    translation: "and"
+    pos: "conjunction"
+    frequency: 1
+    difficulty: 1
+    audio: "i.mp3"
+    notes: "Just one letter! И sounds like 'ee'."
+    examples:
+      - { ru: "Ма́ма и па́па.", en: "Mom and dad." }
+      - { ru: "Кот и соба́ка.", en: "A cat and a dog." }
+      - { ru: "Я и ты.", en: "You and I." }
+
+  - id: "ili"
+    word: "или"
+    stressed: "и́ли"
+    transliteration: "ili"
+    translation: "or"
+    pos: "conjunction"
+    frequency: 2
+    difficulty: 1
+    audio: "ili.mp3"
+    notes: "Stress on first syllable."
+    examples:
+      - { ru: "Да и́ли нет?", en: "Yes or no?" }
+      - { ru: "Ко́фе и́ли чай?", en: "Coffee or tea?" }
+      - { ru: "Тут и́ли там?", en: "Here or there?" }
+
+  - id: "no"
+    word: "но"
+    stressed: "но"
+    transliteration: "no"
+    translation: "but"
+    pos: "conjunction"
+    frequency: 1
+    difficulty: 1
+    audio: "no.mp3"
+    notes: "Looks like English 'no' but means 'but'!"
+    examples:
+      - { ru: "Да, но...", en: "Yes, but..." }
+      - { ru: "Я понима́ю, но не говорю́.", en: "I understand, but I don't speak." }
+      - { ru: "Большо́й, но ста́рый.", en: "Big, but old." }

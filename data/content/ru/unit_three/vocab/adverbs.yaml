@@ -1,0 +1,55 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# ADVERBS
+# Quantity expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+quantity:
+  - id: "mnogo"
+    word: "много"
+    stressed: "мно́го"
+    transliteration: "mnogo"
+    translation: "much / many / a lot"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case. Stress on first syllable."
+    examples:
+      - { ru: "Мно́го воды́.", en: "A lot of water." }
+      - { ru: "У меня́ мно́го рабо́ты.", en: "I have a lot of work." }
+
+  - id: "malo"
+    word: "мало"
+    stressed: "ма́ло"
+    transliteration: "malo"
+    translation: "little / few / not much"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case. Stress on first syllable."
+    examples:
+      - { ru: "Ма́ло вре́мени.", en: "Little time." }
+
+  - id: "nemnogo"
+    word: "немного"
+    stressed: "немно́го"
+    transliteration: "nemnogo"
+    translation: "a little / some"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case. Stress on second syllable."
+    examples:
+      - { ru: "Немно́го молока́, пожа́луйста.", en: "A little milk, please." }
+
+  - id: "skolko"
+    word: "сколько"
+    stressed: "ско́лько"
+    transliteration: "skol'ko"
+    translation: "how much / how many"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Question word. Followed by genitive. Stress on first syllable."
+    examples:
+      - { ru: "Ско́лько э́то сто́ит?", en: "How much does this cost?" }
+      - { ru: "Ско́лько воды́?", en: "How much water?" }

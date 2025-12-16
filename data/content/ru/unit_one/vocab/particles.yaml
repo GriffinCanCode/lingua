@@ -1,0 +1,65 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# PARTICLES
+# Response particles and presentative particles
+# ══════════════════════════════════════════════════════════════════════════════
+
+particles:
+  - id: "da"
+    word: "да"
+    stressed: "да"
+    transliteration: "da"
+    translation: "yes"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "da.mp3"
+    notes: "Also used as 'yeah', 'right', 'uh-huh' in conversation."
+    examples:
+      - { ru: "Да, э́то кот.", en: "Yes, this is a cat." }
+      - { ru: "Да, я понима́ю.", en: "Yes, I understand." }
+      - { ru: "Да, пожа́луйста.", en: "Yes, please." }
+
+  - id: "nyet"
+    word: "нет"
+    stressed: "нет"
+    transliteration: "nyet"
+    translation: "no"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "nyet.mp3"
+    notes: "Н sounds like 'n'. Also means 'there isn't any'."
+    examples:
+      - { ru: "Нет, э́то не кот.", en: "No, this is not a cat." }
+      - { ru: "Нет, спаси́бо.", en: "No, thank you." }
+      - { ru: "Нет, я не зна́ю.", en: "No, I don't know." }
+
+  - id: "nye"
+    word: "не"
+    stressed: "не"
+    transliteration: "nye"
+    translation: "not"
+    pos: "particle"
+    frequency: 1
+    difficulty: 1
+    audio: "nye.mp3"
+    notes: "Goes directly before the word you're negating."
+    examples:
+      - { ru: "Э́то не дом.", en: "This is not a house." }
+      - { ru: "Я не понима́ю.", en: "I don't understand." }
+      - { ru: "Он не тут.", en: "He is not here." }
+
+  - id: "vot"
+    word: "вот"
+    stressed: "вот"
+    transliteration: "vot"
+    translation: "here is / there is"
+    pos: "particle"
+    semantic: [location, pointing]
+    frequency: 1
+    difficulty: 1
+    audio: "vot.mp3"
+    notes: "Use when pointing at something or presenting it."
+    examples:
+      - { ru: "Вот такси́.", en: "Here's the taxi." }
+      - { ru: "Вот и всё.", en: "That's all." }

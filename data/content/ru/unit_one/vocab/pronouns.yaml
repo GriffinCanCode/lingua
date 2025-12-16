@@ -1,0 +1,215 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# PRONOUNS
+# Personal, demonstrative, interrogative, and possessive pronouns
+# ══════════════════════════════════════════════════════════════════════════════
+
+personal:
+  - id: "ya"
+    word: "я"
+    stressed: "я"
+    transliteration: "ya"
+    translation: "I"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "ya.mp3"
+    notes: "Just one letter! The most common word in Russian."
+    examples:
+      - { ru: "Я тут.", en: "I am here." }
+      - { ru: "Я студе́нт.", en: "I am a student." }
+
+  - id: "ty"
+    word: "ты"
+    stressed: "ты"
+    transliteration: "ty"
+    translation: "you (informal)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "ty.mp3"
+    notes: "Use with friends, family, children, animals. ⚠️ Ы is Russian's hardest sound! Like 'i' in 'bit' but tongue pulled back, deeper in throat. Practice: ты, мы, вы, сы́р."
+    examples:
+      - { ru: "Ты где?", en: "Where are you?" }
+      - { ru: "Ты до́ма?", en: "Are you home?" }
+
+  - id: "vy"
+    word: "вы"
+    stressed: "вы"
+    transliteration: "vy"
+    translation: "you (formal/plural)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "vy.mp3"
+    notes: "Use with strangers, elders, in professional settings, OR when addressing multiple people."
+    examples:
+      - { ru: "Вы до́ктор?", en: "Are you a doctor?" }
+      - { ru: "Где вы живёте?", en: "Where do you live?" }
+      - { ru: "Вы говори́те по-ру́сски?", en: "Do you speak Russian?" }
+
+  - id: "on"
+    word: "он"
+    stressed: "он"
+    transliteration: "on"
+    translation: "he / it (masc)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "on.mp3"
+    notes: "For masculine nouns (ending in consonant) AND male people."
+    examples:
+      - { ru: "Он там.", en: "He is there." }
+      - { ru: "Где кот? Он тут.", en: "Where is the cat? It's here." }
+
+  - id: "ona"
+    word: "она"
+    stressed: "она́"
+    transliteration: "ona"
+    translation: "she / it (fem)"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "ona.mp3"
+    notes: "For feminine nouns (ending in -а/-я) AND female people. Stress on last syllable."
+    examples:
+      - { ru: "Она́ тут.", en: "She is here." }
+      - { ru: "Где кни́га? Она́ там.", en: "Where is the book? It's there." }
+
+  - id: "ono"
+    word: "оно"
+    stressed: "оно́"
+    transliteration: "ono"
+    translation: "it (neuter)"
+    pos: "pronoun"
+    frequency: 2
+    difficulty: 1
+    audio: "ono.mp3"
+    notes: "For neuter nouns (ending in -о/-е). Less common than он/она́. Stress on last syllable."
+    examples:
+      - { ru: "Где окно́? Оно́ там.", en: "Where is the window? It's there." }
+      - { ru: "Оно́ большо́е.", en: "It is big." }
+      - { ru: "Где метро́? Оно́ тут.", en: "Where is the metro? It's here." }
+
+  - id: "my"
+    word: "мы"
+    stressed: "мы"
+    transliteration: "my"
+    translation: "we"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "my.mp3"
+    examples:
+      - { ru: "Мы тут.", en: "We are here." }
+      - { ru: "Мы понима́ем.", en: "We understand." }
+      - { ru: "Мы хоти́м ко́фе.", en: "We want coffee." }
+
+  - id: "oni"
+    word: "они"
+    stressed: "они́"
+    transliteration: "oni"
+    translation: "they"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "oni.mp3"
+    notes: "Stress on last syllable."
+    examples:
+      - { ru: "Они́ там.", en: "They are there." }
+      - { ru: "Они́ говоря́т по-ру́сски.", en: "They speak Russian." }
+      - { ru: "Где они́?", en: "Where are they?" }
+
+demonstrative:
+  - id: "eto"
+    word: "это"
+    stressed: "э́то"
+    transliteration: "eto"
+    translation: "this / this is / it is"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "eto.mp3"
+    notes: "The Swiss Army knife of Russian. Use it constantly. Stress on first syllable."
+    examples:
+      - { ru: "Э́то кот.", en: "This is a cat." }
+      - { ru: "Что э́то?", en: "What is this?" }
+      - { ru: "Э́то хорошо́.", en: "That's good." }
+
+interrogative:
+  - id: "kto"
+    word: "кто"
+    stressed: "кто"
+    transliteration: "kto"
+    translation: "who"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 1
+    audio: "kto.mp3"
+    notes: "For people only. Say both consonants: k-to."
+    examples:
+      - { ru: "Кто э́то?", en: "Who is this?" }
+      - { ru: "Кто там?", en: "Who's there?" }
+
+  - id: "chto"
+    word: "что"
+    stressed: "что"
+    transliteration: "shto"
+    translation: "what"
+    pos: "pronoun"
+    frequency: 1
+    difficulty: 2
+    audio: "shto.mp3"
+    pronunciation_quirk: "chto_shto"
+    notes: "⚠️ PRONOUNCED 'ШТО' not 'ЧТО'! This applies to all ЧТО-words: чтобы→штобы, что-то→што-та, ничто́→ништо́. Exception: почта́ keeps the Ч."
+    examples:
+      - { ru: "Что э́то?", en: "What is this?" }
+      - { ru: "Что там?", en: "What's there?" }
+
+possessive:
+  - id: "moy"
+    word: "мой"
+    stressed: "мой"
+    transliteration: "moy"
+    translation: "my (masc)"
+    pos: "pronoun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "moy.mp3"
+    notes: "For masculine nouns. Й sounds like 'y' in 'boy'."
+    examples:
+      - { ru: "Э́то мой дом.", en: "This is my house." }
+      - { ru: "Э́то мой кот.", en: "This is my cat." }
+      - { ru: "Где мой телефо́н?", en: "Where is my phone?" }
+
+  - id: "moya"
+    word: "моя"
+    stressed: "моя́"
+    transliteration: "moya"
+    translation: "my (fem)"
+    pos: "pronoun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    audio: "moya.mp3"
+    notes: "For feminine nouns. Stress on last syllable."
+    examples:
+      - { ru: "Э́то моя́ кни́га.", en: "This is my book." }
+      - { ru: "Моя́ соба́ка тут.", en: "My dog is here." }
+      - { ru: "Где моя́ маши́на?", en: "Where is my car?" }
+
+  - id: "moyo"
+    word: "моё"
+    stressed: "моё"
+    transliteration: "moyo"
+    translation: "my (neuter)"
+    pos: "pronoun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    audio: "moyo.mp3"
+    notes: "For neuter nouns. Ё always stressed, sounds like 'yo'."
+    examples:
+      - { ru: "Э́то моё окно́.", en: "This is my window." }
+      - { ru: "Где моё ра́дио?", en: "Where is my radio?" }
+      - { ru: "Моё метро́ тут.", en: "My metro is here." }

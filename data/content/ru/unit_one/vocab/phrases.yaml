@@ -1,0 +1,19 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# PHRASES
+# Multi-word expressions and constructions
+# ══════════════════════════════════════════════════════════════════════════════
+
+possession:
+  - id: "u_menya"
+    word: "у меня"
+    stressed: "у меня́"
+    transliteration: "u menya"
+    translation: "I have / at me"
+    pos: "phrase"
+    frequency: 1
+    difficulty: 2
+    audio: "u_menya.mp3"
+    notes: "Literally 'by me'. У + genitive case. The standard 'I have' construction. Stress on last syllable."
+    examples:
+      - { ru: "У меня́ есть кот.", en: "I have a cat." }
+      - { ru: "У меня́ вопро́с.", en: "I have a question." }

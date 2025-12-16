@@ -1,0 +1,256 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  # LESSON ORDER
+  lesson_01_cognates:
+    title: "Cognates & Cyrillic"
+    focus: "Letters identical to Latin, instant vocabulary"
+    primary_vocab:
+      - mama
+      - kot
+      - taksi
+      - metro
+      - eto
+      - tam
+      - tut
+    secondary_vocab:
+      - da
+      - nyet
+
+  lesson_02_hello:
+    title: "Hello & Goodbye"
+    focus: "Greetings, formal/informal register"
+    primary_vocab:
+      - privet
+      - poka
+      - zdravstvuyte
+      - do_svidaniya
+      - spasibo
+      - pozhaluysta
+      - ya
+      - student
+    review_vocab:
+      - eto
+      - mama
+
+  lesson_03_false_friends:
+    title: "False Friends"
+    focus: "Letters Р, С, Н, В - they look familiar but sound different"
+    primary_vocab:
+      - restoran
+      - voda
+      - sestra
+      - brat
+      - internet
+      - telefon
+    review_vocab:
+      - mama
+      - kot
+      - dom
+
+  lesson_04_pronunciation:
+    title: "Hard Sounds & Quirks"
+    focus: "Ы, Ш, Щ, Ж, Х and pronunciation rules (ЧТО→ШТО, ЕГО→ЕВО, Г→К)"
+    teaching_only: true
+    skills:
+      - hard_consonants
+      - pronunciation_quirks
+      - devoicing
+      - y_sound
+
+  lesson_05_questions:
+    title: "Is this a...?"
+    focus: "Questions, yes/no, negation"
+    primary_vocab:
+      - da
+      - nyet
+      - nye
+      - dom
+      - radio
+      - kofe
+      - bank
+    review_vocab:
+      - eto
+      - tam
+      - tut
+      - kot
+      - taksi
+
+  lesson_06_gender:
+    title: "He, She, It"
+    focus: "Grammatical gender, pronouns, gender exceptions (папа, кофе)"
+    primary_vocab:
+      - on
+      - ona
+      - ono
+      - park
+      - okno
+      - papa
+      - kniga
+      - kofe
+    review_vocab:
+      - eto
+      - gde
+      - tam
+      - tut
+      - dom
+
+  lesson_07_type1_verbs:
+    title: "I Know, I Understand"
+    focus: "Type 1 conjugation - first verbs!"
+    primary_vocab:
+      - znat
+      - ponimat
+    review_vocab:
+      - ya
+      - ty
+      - on
+      - ona
+      - my
+      - vy
+      - oni
+      - nye
+
+  lesson_08_possession:
+    title: "I have..."
+    focus: "У меня́ есть construction"
+    primary_vocab:
+      - u_menya
+      - yest
+      - sobaka
+      - mashina
+    review_vocab:
+      - ya
+      - kot
+      - dom
+      - brat
+      - sestra
+      - da
+      - nyet
+
+  lesson_09_type2_verbs:
+    title: "I Speak Russian"
+    focus: "Type 2 conjugation, language skills"
+    primary_vocab:
+      - govorit
+      - po_russki
+      - po_angliyski
+    review_vocab:
+      - znat
+      - ponimat
+      - ya
+      - ty
+      - on
+      - ona
+
+  lesson_10_where_who_what:
+    title: "Where, Who, What"
+    focus: "Question words, basic information (что pronounced ШТО!)"
+    primary_vocab:
+      - gde
+      - kto
+      - chto
+      - vot
+      - doktor
+      - drug
+    review_vocab:
+      - tam
+      - tut
+      - eto
+      - on
+      - ona
+      - govorit
+
+  lesson_11_irregular_verbs:
+    title: "I Want, I Live, I Work"
+    focus: "Irregular verbs and daily life (жить has ЖИ→ЖЫ)"
+    primary_vocab:
+      - khotet
+      - zhit
+      - rabotat
+    review_vocab:
+      - znat
+      - ponimat
+      - govorit
+      - gde
+      - dom
+
+  lesson_12_possessives:
+    title: "My, Your, Our"
+    focus: "Possessive pronouns with gender agreement"
+    primary_vocab:
+      - moy
+      - moya
+      - moyo
+    review_vocab:
+      - dom
+      - kniga
+      - okno
+      - mashina
+      - telefon
+
+  lesson_13_numbers:
+    title: "Numbers 1-10"
+    focus: "Counting in Russian"
+    primary_vocab:
+      - odin
+      - dva
+      - tri
+      - chetyre
+      - pyat
+      - shest
+      - sem
+      - vosem
+      - devyat
+      - desyat
+    review_vocab:
+      - kot
+      - kniga
+      - okno
+      - dom
+
+  lesson_14_adjectives:
+    title: "Adjectives"
+    focus: "Describing things with gender agreement"
+    primary_vocab:
+      - bolshoy
+      - malenkiy
+      - noviy
+      - stariy
+      - khorosho
+      - plokho
+    review_vocab:
+      - dom
+      - kniga
+      - okno
+      - kot
+      - mashina
+
+  lesson_15_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 1 review"
+    review_vocab:
+      - mama
+      - kot
+      - dom
+      - taksi
+      - metro
+      - privet
+      - zdravstvuyte
+      - da
+      - nyet
+      - gde
+      - kto
+      - chto
+      - u_menya
+      - moy
+      - znat
+      - ponimat
+      - govorit
+      - khotet
+      - zhit
+      - rabotat
+      - bolshoy

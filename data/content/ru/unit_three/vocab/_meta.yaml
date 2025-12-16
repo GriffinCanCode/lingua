@@ -1,0 +1,47 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 3: FOOD & DRINK - Metadata & Grammar Notes
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - High-frequency survival vocabulary (restaurant, shopping)
+# - Introduce GENITIVE CASE (negation, quantities, "of")
+# - Partitive constructions (some of, a piece of)
+# - Cultural context: Russian cuisine and hospitality
+#
+# STRESS MARKS:
+# - All entries include 'stressed' field with ́ (combining acute U+0301)
+# - Critical for food/drink words - ordering correctly requires proper stress!
+#
+# Grammar Focus:
+# - Genitive case (negation, possession, quantities)
+# - Verbs: есть (to eat), пить (to drink), покупа́ть (to buy)
+# - Partitive expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+unit:
+  id: "unit3"
+  title: "Food & Drink"
+  description: "Ordering food, genitive case, and Russian cuisine"
+  total_words: 75
+  target_lessons: 10
+
+grammar_notes:
+  genitive_case:
+    description: "Used for: negation, 'of', quantities, after numbers 2+"
+    rules:
+      masculine_consonant: "Add -а (дом → до́ма, хлеб → хле́ба)"
+      masculine_soft: "Add -я (чай → ча́я)"
+      feminine_a: "Change -а to -ы (вода́ → воды́, кни́га → кни́ги)"
+      feminine_ya: "Change -я to -и (семья́ → семьи́)"
+      neuter_o: "Change -о to -а (окно́ → окна́, молоко́ → молока́)"
+      neuter_e: "Change -е to -я (мо́ре → мо́ря)"
+    uses:
+      - "Negation: У меня́ нет хле́ба (I don't have bread)"
+      - "Of: ча́шка ча́я (cup of tea), стака́н воды́ (glass of water)"
+      - "After мно́го/ма́ло/немно́го: мно́го рабо́ты (a lot of work)"
+      - "After numbers 2-4: два кота́ (two cats)"
+      - "After numbers 5+: пять кото́в (five cats) - genitive plural"
+    examples:
+      - { nominative: "хлеб", genitive: "хле́ба", sentence: "У нас нет хле́ба." }
+      - { nominative: "вода́", genitive: "воды́", sentence: "Стака́н воды́." }
+      - { nominative: "молоко́", genitive: "молока́", sentence: "Немно́го молока́." }

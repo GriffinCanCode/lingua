@@ -1,0 +1,72 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 1: FOUNDATIONS - Metadata & Pronunciation Rules
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - Start with cognates (instant wins, builds confidence)
+# - Introduce Cyrillic progressively (familiar letters first)
+# - Focus on HIGH FREQUENCY words (top 100 in Russian)
+# - Every word should be immediately useful in real life
+# - Grammar emerges naturally from vocabulary patterns
+#
+# STRESS MARKS:
+# - Russian stress is unpredictable and MUST be memorized
+# - The 'stressed' field shows stress with ́ (combining acute U+0301)
+# - Stress can change meaning: за́мок (castle) vs замо́к (lock)
+# - Unstressed О sounds like А, unstressed Е sounds like И
+#
+# Letter Introduction Order:
+# Phase 1: Identical to Latin (А, Е, К, М, О, Т)
+# Phase 2: False friends (Р=R, С=S, Н=N, В=V, У=U, Х=H)
+# Phase 3: Unique Cyrillic (Д, Б, Г, Л, П, Ф, Ж, Ш, Щ, Ч, Ц, Й, Ы, Ь, Ъ, Э, Ю, Я)
+#
+# Russian spelling is mostly phonetic, but these patterns differ from spelling:
+#
+# 1. ЧТО → ШТО: что, чтобы, ничто́ pronounced with Ш not Ч
+# 2. -ЕГО/-ОГО → -ЕВО/-ОВО: Genitive Г sounds like В (его́→ево́, сего́дня→сево́дня)
+# 3. Final Г → К: Voiced Г devoices at word end (друг→друк, снег→снек)
+# 4. Final consonant devoicing: б→п, в→ф, г→к, д→т, ж→ш, з→с at word end
+# 5. ЖИ/ШИ/ЦИ: Written И but pronounced Ы (жить→жыть, шить→шыть)
+#
+# ══════════════════════════════════════════════════════════════════════════════
+
+pronunciation_quirks:
+  - id: "chto_shto"
+    pattern: "ЧТО → ШТО"
+    description: "ЧТ pronounced as ШТ in что and derivatives"
+    applies_to: ["что", "чтобы", "ничто́", "что-то", "кое-что́", "потому́ что"]
+    exceptions: ["почта́"]
+    
+  - id: "ego_evo"
+    pattern: "-ЕГО/-ОГО → -ЕВО/-ОВО"
+    description: "Genitive ending Г pronounced as В"
+    applies_to: ["его́", "неё", "сего́дня", "ничего́", "чего́", "большо́го", "хоро́шего", "но́вого"]
+    
+  - id: "final_g_devoicing"
+    pattern: "Final Г → К"
+    description: "Voiced Г becomes voiceless К at word end"
+    applies_to: ["друг", "враг", "снег", "пиро́г", "круг"]
+    exceptions: ["Бог (→ Бох)"]
+    
+  - id: "final_devoicing"
+    pattern: "Final voiced → voiceless"
+    description: "All voiced consonants devoice at word end"
+    pairs:
+      - { voiced: "Б", voiceless: "П", example: "хлеб→хлеп" }
+      - { voiced: "В", voiceless: "Ф", example: "кров→кроф" }
+      - { voiced: "Г", voiceless: "К", example: "друг→друк" }
+      - { voiced: "Д", voiceless: "Т", example: "год→гот" }
+      - { voiced: "Ж", voiceless: "Ш", example: "муж→муш" }
+      - { voiced: "З", voiceless: "С", example: "раз→рас" }
+      
+  - id: "zhi_shi_tsi"
+    pattern: "ЖИ/ШИ/ЦИ → ЖЫ/ШЫ/ЦЫ"
+    description: "After Ж, Ш, Ц - write И but pronounce Ы"
+    applies_to: ["жить", "живу́", "живёт", "широ́кий", "маши́на", "хорошо́"]
+
+unit:
+  id: "unit1"
+  title: "Foundations"
+  description: "Essential vocabulary for survival Russian - including first verbs!"
+  total_words: 95
+  target_lessons: 16

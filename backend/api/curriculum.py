@@ -457,6 +457,9 @@ async def get_lesson_exercises(
             if vocabulary:
                 content = {"introduction": f"Learn {len(vocabulary)} new words!"}
 
+    # Extract dialogues from lesson data for dialogue exercises
+    dialogues = lesson_data.get("dialogues", []) if lesson_data else []
+
     exercises = generate_exercises(
         vocabulary=vocabulary,
         sentences=sentences,
@@ -464,6 +467,7 @@ async def get_lesson_exercises(
         num_exercises=num_exercises,
         level_type=node.level_type,
         language=language,
+        dialogues=dialogues,
     )
 
     # Parse modules from lesson data if available

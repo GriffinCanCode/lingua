@@ -17,7 +17,7 @@ log = engine_logger()
 ExerciseType = Literal[
     'word_bank', 'typing', 'matching', 'multiple_choice', 'fill_blank',
     'pattern_fill', 'paradigm_complete', 'pattern_apply', 'word_intro',
-    'dialogue_translate'
+    'dialogue_translate', 'error_correction'
 ]
 TargetLanguage = Literal['ru', 'en']
 LevelType = Literal['intro', 'easy', 'medium', 'hard', 'review']
@@ -29,8 +29,8 @@ EXERCISE_TYPES_BY_STATE: dict[VocabState, list[ExerciseType]] = {
     'unseen': ['word_intro'],
     'introduced': ['word_intro', 'multiple_choice'],
     'defined': ['word_bank', 'multiple_choice', 'matching'],
-    'practiced': ['word_bank', 'typing', 'fill_blank', 'pattern_fill'],
-    'mastered': ['typing', 'pattern_apply', 'paradigm_complete'],
+    'practiced': ['word_bank', 'typing', 'fill_blank', 'pattern_fill', 'error_correction'],
+    'mastered': ['typing', 'pattern_apply', 'paradigm_complete', 'error_correction'],
 }
 
 
@@ -116,8 +116,8 @@ class ExerciseGenerator:
             'intro': {'word_bank': 6, 'multiple_choice': 2, 'pattern_fill': 2},
             'easy': {'word_bank': 4, 'multiple_choice': 3, 'matching': 1, 'pattern_fill': 2},
             'medium': {'word_bank': 4, 'multiple_choice': 2, 'typing': 1, 'fill_blank': 1, 'pattern_fill': 2},
-            'hard': {'typing': 4, 'word_bank': 2, 'fill_blank': 1, 'pattern_fill': 2, 'paradigm_complete': 1},
-            'review': {'word_bank': 2, 'typing': 2, 'multiple_choice': 2, 'matching': 1, 'pattern_fill': 2, 'pattern_apply': 1},
+            'hard': {'typing': 4, 'word_bank': 2, 'fill_blank': 1, 'pattern_fill': 2, 'paradigm_complete': 1, 'error_correction': 2},
+            'review': {'word_bank': 2, 'typing': 2, 'multiple_choice': 2, 'matching': 1, 'pattern_fill': 2, 'pattern_apply': 1, 'error_correction': 1},
         }
 
         dist = distributions.get(level_type, distributions['medium'])
@@ -156,6 +156,7 @@ class ExerciseGenerator:
             'pattern_fill': self._gen_pattern_fill,
             'paradigm_complete': self._gen_paradigm_complete,
             'pattern_apply': self._gen_pattern_apply,
+            'error_correction': self._gen_error_correction,
         }
         if ex_type == 'dialogue_translate' and dialogues:
             return self._gen_dialogue_translate(count, dialogues, difficulty)
@@ -546,6 +547,86 @@ class ExerciseGenerator:
                     return exercises
 
         return exercises[:count]
+
+    def _gen_error_correction(
+        self,
+        count: int,
+        vocab: list[VocabItem],
+        sentences: list[SentenceItem],
+        review_vocab: list[VocabItem],
+        difficulty: int,
+    ) -> list[Exercise]:
+        """Generate error correction exercises - spot and fix grammar mistakes."""
+        exercises = []
+        all_vocab = vocab + review_vocab
+
+        # Common error patterns for Russian
+        error_generators = [
+            self._make_gender_error,
+            self._make_possessive_error,
+            self._make_negation_error,
+        ]
+
+        usable = [s for s in sentences if len(s.text.split()) >= 3]
+        if not usable:
+            return []
+
+        for i in range(count):
+            sent = usable[i % len(usable)]
+            gen_func = error_generators[i % len(error_generators)]
+            error_data = gen_func(sent.text, all_vocab)
+
+            if not error_data:
+                continue
+
+            exercises.append(Exercise(
+                id=str(uuid4()),
+                type='error_correction',
+                prompt='Find and fix the error',
+                difficulty=difficulty,
+                data={
+                    'incorrectSentence': error_data['incorrect'],
+                    'correctSentence': error_data['correct'],
+                    'errorType': error_data['error_type'],
+                    'explanation': error_data['explanation'],
+                    'translation': sent.translation,
+                },
+            ))
+
+        return exercises
+
+    def _make_gender_error(self, sentence: str, vocab: list[VocabItem]) -> dict | None:
+        """Create gender agreement error (мой/моя́/моё mismatch)."""
+        possessives = {'мой': 'моя́', 'моя́': 'мой', 'моё': 'моя́', 'твой': 'твоя́', 'твоя́': 'твой', 'наш': 'на́ша', 'на́ша': 'наш'}
+        for poss, wrong in possessives.items():
+            if poss in sentence:
+                return {
+                    'incorrect': sentence.replace(poss, wrong, 1),
+                    'correct': sentence,
+                    'error_type': 'gender_agreement',
+                    'explanation': f"Wrong possessive gender: should be {poss}, not {wrong}",
+                }
+        return None
+
+    def _make_possessive_error(self, sentence: str, vocab: list[VocabItem]) -> dict | None:
+        """Create possessive form error."""
+        if 'моя́' in sentence:
+            return {'incorrect': sentence.replace('моя́', 'моё', 1), 'correct': sentence, 'error_type': 'possessive_form', 'explanation': "моё is neuter, use моя́ for feminine nouns"}
+        if 'мой' in sentence and 'моя́' not in sentence:
+            return {'incorrect': sentence.replace('мой', 'моё', 1), 'correct': sentence, 'error_type': 'possessive_form', 'explanation': "моё is neuter, use мой for masculine nouns"}
+        return None
+
+    def _make_negation_error(self, sentence: str, vocab: list[VocabItem]) -> dict | None:
+        """Create negation position error."""
+        if ' не ' in sentence:
+            # Move не to wrong position
+            words = sentence.split()
+            ne_idx = words.index('не') if 'не' in words else -1
+            if ne_idx > 0 and ne_idx < len(words) - 1:
+                wrong_words = words.copy()
+                wrong_words[ne_idx], wrong_words[ne_idx - 1] = wrong_words[ne_idx - 1], wrong_words[ne_idx]
+                return {'incorrect': ' '.join(wrong_words), 'correct': sentence, 'error_type': 'word_order', 'explanation': "не should come directly before the verb"}
+        return None
 
     def _get_distractors(self, exclude: list[str], lang: TargetLanguage, count: int) -> list[str]:
         """Get distractor words not in exclude list."""

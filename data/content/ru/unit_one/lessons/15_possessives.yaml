@@ -140,16 +140,26 @@ modules:
     teaching:
       - type: "tip"
         content: "Practice with things around you: Э́то мой телефо́н. Э́то моя́ кни́га. Э́то моё..."
+      
+      - type: "explanation"
+        title: "Mixing It Up"
+        content: |
+          Now combine possessives with:
+          - Negation: Э́то не моя́ кни́га.
+          - Questions: Где твой кот?
+          - Verbs: Я ви́жу твою́ маши́ну.
     vocab_pool:
       introduce: []
       practice: [moy, moya, moyo, dom, kniga, okno, mashina]
-      review: [telefon, kot, sobaka]
+      review: [telefon, kot, sobaka, videt, znat, khotet, gde]
     exercises:
-      count: 10
+      count: 14
+      difficulty: "medium"
       types:
         - { type: "fill_in_blank", count: 4 }       # Gender agreement drills
-        - { type: "translation_en_ru", count: 3 }   # Active production
-        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "translation_en_ru", count: 4 }   # Multi-grammar production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "error_correction", count: 2 }    # Spot the mistake
         - { type: "multiple_choice", count: 1 }     # Quick recognition
 
   - id: "mod_5"
@@ -163,18 +173,23 @@ modules:
           - "твой/твоя́/твоё = your (informal)"
           - "наш/на́ша/на́ше = our"
           - "Possessive matches the possessed noun's gender"
+      
+      - type: "tip"
+        content: "Challenge mode! These exercises combine multiple grammar points."
     vocab_pool:
       introduce: []
       practice: []
-      review: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
+      review: [moy, moya, moyo, dom, kniga, okno, mashina, telefon, kot, sobaka, znat, videt, khotet, gde, chto]
     exercises:
-      count: 12
+      count: 18
       difficulty: "hard"
+      timed: true
       types:
-        - { type: "fill_in_blank", count: 5 }       # Possessive mastery
-        - { type: "translation_en_ru", count: 4 }   # Production focus
-        - { type: "translation_ru_en", count: 2 }   # Comprehension
-        - { type: "multiple_choice", count: 1 }     # Pattern mastery
+        - { type: "fill_in_blank", count: 5 }       # Possessive + verb blanks
+        - { type: "translation_en_ru", count: 5 }   # Multi-grammar production
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "error_correction", count: 3 }    # Spot the mistake
+        - { type: "multiple_choice", count: 2 }     # Pattern mastery
 
 vocab_filter:
   primary: [moy, moya, moyo]
@@ -240,6 +255,89 @@ templates:
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 2
 
+  # Multi-grammar challenge templates (possessive + verb)
+  - pattern: "Я ви́жу {POSS} {NOUN}."
+    translation: "I see {POSS.translation} {NOUN.translation}."
+    slots:
+      POSS: { pos: [pronoun] }
+      NOUN: { pos: [noun] }
+    weight: 3
+
+  - pattern: "Ты зна́ешь, где моя́ кни́га?"
+    translation: "Do you know where my book is?"
+    slots: {}
+    weight: 4
+
+  - pattern: "Он не ви́дит {POSS} {NOUN}."
+    translation: "He doesn't see {POSS.translation} {NOUN.translation}."
+    slots:
+      POSS: { pos: [pronoun], gender: [feminine] }
+      NOUN: { pos: [noun], gender: [feminine] }
+    weight: 3
+
+  - pattern: "Она́ хо́чет твой {NOUN}."
+    translation: "She wants your {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun], gender: [masculine] }
+    weight: 3
+
+  - pattern: "Где на́ша маши́на? Я не зна́ю."
+    translation: "Where is our car? I don't know."
+    slots: {}
+    weight: 4
+
+  - pattern: "Э́то не моя́ кни́га, э́то твоя́."
+    translation: "This is not my book, it's yours."
+    slots: {}
+    weight: 4
+
+  - pattern: "Наш кот до́ма, а твой?"
+    translation: "Our cat is at home, and yours?"
+    slots: {}
+    weight: 4
+
+  - pattern: "Я хочу́ ви́деть твою́ маши́ну."
+    translation: "I want to see your car."
+    slots: {}
+    weight: 3
+
+  - pattern: "Он не зна́ет, где мой дом."
+    translation: "He doesn't know where my house is."
+    slots: {}
+    weight: 4
+
+# Error correction examples (correct/incorrect pairs for practice)
+error_corrections:
+  - incorrect: "Э́то моя́ дом."
+    correct: "Э́то мой дом."
+    error_type: "gender_agreement"
+    explanation: "дом is masculine, use мой not моя́"
+
+  - incorrect: "Э́то твой кни́га."
+    correct: "Э́то твоя́ кни́га."
+    error_type: "gender_agreement"
+    explanation: "кни́га is feminine, use твоя́ not твой"
+
+  - incorrect: "Где на́ша окно́?"
+    correct: "Где на́ше окно́?"
+    error_type: "gender_agreement"
+    explanation: "окно́ is neuter, use на́ше not на́ша"
+
+  - incorrect: "Э́то моё маши́на."
+    correct: "Э́то моя́ маши́на."
+    error_type: "gender_agreement"
+    explanation: "маши́на is feminine, use моя́ not моё"
+
+  - incorrect: "Я ви́жу твой кни́га."
+    correct: "Я ви́жу твою́ кни́гу."
+    error_type: "case_agreement"
+    explanation: "After ви́деть use accusative: твою́ кни́гу"
+
+  - incorrect: "Мой кот большо́й, а твоя́?"
+    correct: "Мой кот большо́й, а твой?"
+    error_type: "gender_agreement"
+    explanation: "Referring back to кот (masculine), use твой"
+
 dialogues:
   - id: "whose_book"
     context: "Finding the owner"
@@ -254,3 +352,30 @@ dialogues:
       - { speaker: "A", ru: "Э́то наш дом.", en: "This is our house." }
       - { speaker: "B", ru: "Большо́й дом!", en: "Big house!" }
       - { speaker: "A", ru: "Да, и моя́ маши́на там.", en: "Yes, and my car is there." }
+
+  # Complex multi-grammar dialogues
+  - id: "lost_items"
+    context: "Looking for lost belongings"
+    lines:
+      - { speaker: "A", ru: "Ты не зна́ешь, где моя́ кни́га?", en: "Do you know where my book is?" }
+      - { speaker: "B", ru: "Нет, я не ви́жу твою́ кни́гу.", en: "No, I don't see your book." }
+      - { speaker: "A", ru: "А мой телефо́н?", en: "And my phone?" }
+      - { speaker: "B", ru: "Твой телефо́н там, на столе́.", en: "Your phone is there, on the table." }
+      - { speaker: "A", ru: "Спаси́бо! А где на́ша маши́на?", en: "Thanks! And where is our car?" }
+
+  - id: "comparing_things"
+    context: "Comparing possessions"
+    lines:
+      - { speaker: "A", ru: "Мой кот большо́й. А твой?", en: "My cat is big. And yours?" }
+      - { speaker: "B", ru: "Мой кот ма́ленький, но хоро́ший.", en: "My cat is small, but good." }
+      - { speaker: "A", ru: "Я хочу́ ви́деть твоего́ кота́!", en: "I want to see your cat!" }
+      - { speaker: "B", ru: "Ла́дно, он до́ма.", en: "OK, he's at home." }
+
+  - id: "family_visit"
+    context: "Visiting family"
+    lines:
+      - { speaker: "A", ru: "Э́то на́ша кварти́ра.", en: "This is our apartment." }
+      - { speaker: "B", ru: "Где твоя́ ко́мната?", en: "Where is your room?" }
+      - { speaker: "A", ru: "Моя́ ко́мната там. А э́то на́ша ку́хня.", en: "My room is there. And this is our kitchen." }
+      - { speaker: "B", ru: "Я ви́жу твою́ соба́ку!", en: "I see your dog!" }
+      - { speaker: "A", ru: "Да, э́то мой Ша́рик.", en: "Yes, this is my Sharik." }

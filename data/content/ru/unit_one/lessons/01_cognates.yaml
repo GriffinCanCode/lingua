@@ -1,168 +1,156 @@
 # Unit 1, Lesson 1: Cognates & Cyrillic
-# Focus: Letters that look/sound the same as English (М, А, К, О, Т)
-# Pattern Focus: Letter-sound correspondence as a predictable system
+# 5 modules with teaching content, etymology, and exercises
 
 lesson:
   id: "01_cognates"
   title: "Cognates & Cyrillic"
-  parts: 5
-  description: "Read your first Russian words instantly using letters you already know."
+  subtitle: "Read Russian words using letters you already know"
+  icon: "alphabet"
 
-content:
-  introduction: |
-    # The Secret to Reading Russian
+modules:
+  - id: "mod_1"
+    title: "Meet the Letters"
+    type: "intro"
     
-    Russian looks scary, but many letters are the same as English!
+    teaching:
+      - type: "explanation"
+        title: "The Secret"
+        content: |
+          Many Russian letters look AND sound like English!
+          With just 5 letters, you'll read real Russian words.
+          
+          No memorization needed - these letters work the same way.
+      
+      - type: "pattern_table"
+        title: "Cognate Letters"
+        columns: ["Russian", "Sound", "Like English"]
+        rows:
+          - ["А", "ah", "A in 'father'"]
+          - ["К", "k", "K in 'kite'"]
+          - ["М", "m", "M in 'mom'"]
+          - ["О", "o", "O in 'for'"]
+          - ["Т", "t", "T in 'top'"]
+      
+      - type: "tip"
+        content: "These 5 letters are identical in Russian and English! You already know them."
     
-    ## The Pattern: Same Letters
+    vocab_ids: [mama, kot]
+    exercises:
+      count: 7
+      templates:
+        - pattern: "Это {NOUN}."
+          weight: 3
+
+  - id: "mod_2"
+    title: "First Words"
+    type: "learn"
     
-    | Russian | English | Sound |
-    |---------|---------|-------|
-    | **А** | A | "ah" in "father" |
-    | **К** | K | "k" in "kite" |
-    | **М** | M | "m" in "mom" |
-    | **О** | O | "o" in "for" |
-    | **Т** | T | "t" in "top" |
+    teaching:
+      - type: "etymology"
+        title: "Word Family: мама"
+        word: "мама"
+        connections:
+          - { word: "mama", lang: "English", relation: "cognate" }
+          - { word: "mamma", lang: "Latin", relation: "ancestor" }
+          - { word: "mère", lang: "French", relation: "cousin" }
+          - { word: "Mama", lang: "German", relation: "cognate" }
+        insight: "The word for 'mother' is nearly universal across languages - one of humanity's first words!"
+      
+      - type: "word_intro"
+        words:
+          - word: "такси"
+            translation: "taxi"
+            note: "Same word, Russian spelling!"
+          - word: "метро"
+            translation: "metro"
+            note: "Used in every Russian city"
+          - word: "кот"
+            translation: "cat (male)"
+            note: "Rhymes with 'boat'"
     
-    With just these 5 letters, you can read real Russian words!
+    vocab_ids: [taksi, metro, kot]
+    exercises:
+      count: 7
 
-# Pattern: Cyrillic cognate letters
-patterns:
-  - id: "cyrillic_cognates"
-    name: "Cognate Letters"
-    description: "Letters that look and sound the same in Russian and English"
-    type: "phonetic"
-    rules:
-      - letter: "А"
-        sound: "ah"
-        english_equivalent: "A"
-      - letter: "К"
-        sound: "k"
-        english_equivalent: "K"
-      - letter: "М"
-        sound: "m"
-        english_equivalent: "M"
-      - letter: "О"
-        sound: "o"
-        english_equivalent: "O"
-      - letter: "Т"
-        sound: "t"
-        english_equivalent: "T"
-
-vocabulary:
-  - word: "Мама"
-    translation: "Mom"
-    audio: "mama.mp3"
-    hints: ["Same as English 'mama': М-А-М-А"]
-    gender: "f"
-    stem: "мам"
-    pattern: "fem_a_declension"
-
-  - word: "Кот"
-    translation: "Cat"
-    audio: "kot.mp3"
-    hints: ["К-О-Т: All cognate letters!"]
-    gender: "m"
-    stem: "кот"
-    pattern: "masc_hard_declension"
-
-  - word: "Атом"
-    translation: "Atom"
-    audio: "atom.mp3"
-    hints: ["А-Т-О-М: Identical to English!"]
-    gender: "m"
-    stem: "атом"
-    pattern: "masc_hard_declension"
-
-  - word: "Такси"
-    translation: "Taxi"
-    audio: "taxi.mp3"
-    hints: ["Т-А-К-С-И: Same word, Russian spelling"]
-    gender: "n"
-
-  - word: "Это"
-    translation: "This is"
-    audio: "eto.mp3"
-    hints: ["Э sounds like 'e' in 'pet'"]
-
-  - word: "Там"
-    translation: "There"
-    audio: "tam.mp3"
-    hints: ["Т-А-М: Easy cognate letters!"]
+  - id: "mod_3"
+    title: "Location Patterns"
+    type: "pattern"
     
-  - word: "Тут"
-    translation: "Here"
-    audio: "tut.mp3"
-    hints: ["У sounds like 'oo' in 'boot'"]
+    teaching:
+      - type: "morphology_pattern"
+        title: "The Location Pattern"
+        formula: "{NOUN} + {тут/там} = Where something is"
+        examples:
+          - { ru: "Кот тут.", en: "The cat is here." }
+          - { ru: "Мама там.", en: "Mom is there." }
+          - { ru: "Такси тут.", en: "The taxi is here." }
+        rule: "Russian doesn't need 'is' - just noun + location word!"
+      
+      - type: "etymology"
+        title: "тут vs там"
+        word: "тут/там"
+        connections:
+          - { word: "here/there", lang: "English", relation: "cognate" }
+        insight: |
+          тут (here) and там (there) form a pair, like English here/there.
+          Notice how they both start with Т - this isn't coincidence!
+    
+    vocab_ids: [tut, tam, vot]
+    exercises:
+      count: 8
+      templates:
+        - pattern: "{NOUN} {LOCATION}."
+          weight: 4
 
-  - word: "Том"
-    translation: "Tom (name)"
-    audio: "tom.mp3"
-    hints: ["The name Tom: Т-О-М"]
-    gender: "m"
-    stem: "том"
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Mix everything you've learned. Speed builds fluency! Don't overthink - trust your instincts."
+    exercises:
+      count: 10
+      review_previous: true
 
-sentences:
-  - text: "Это мама."
-    translation: "This is mom"
-    words:
-      - { ru: "Это", en: "This is" }
-      - { ru: "мама", en: "mom" }
-    distractors: ["dad", "a cat", "the", "here"]
-    complexity: 1
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "5 cognate letters: А, К, М, О, Т"
+          - "6 words: мама, кот, такси, метро, тут, там"
+          - "The location pattern: Noun + тут/там"
+          - "Russian drops 'is' - simpler than English!"
+    exercises:
+      count: 12
+      difficulty: "hard"
 
-  - text: "Это кот."
-    translation: "This is a cat"
-    words:
-      - { ru: "Это", en: "This is" }
-      - { ru: "кот", en: "a cat" }
-    distractors: ["there", "here", "mom", "a taxi"]
-    complexity: 1
+# Vocabulary filter
+vocab_filter:
+  primary:
+    ids: [mama, kot, taksi, metro, tut, tam, vot, eto]
+  review:
+    from_lessons: []
 
-  - text: "Кот там."
-    translation: "The cat is there"
-    words:
-      - { ru: "Кот", en: "The cat" }
-      - { ru: "там", en: "is there" }
-    distractors: ["This is", "is here", "mom", "a taxi"]
-    complexity: 1
+# Templates for exercise generation
+templates:
+  - pattern: "Это {NOUN}."
+    translation: "This is {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 4
 
-  - text: "Мама тут."
-    translation: "Mom is here"
-    words:
-      - { ru: "Мама", en: "Mom" }
-      - { ru: "тут", en: "is here" }
-    distractors: ["is there", "a cat", "an atom", "This is"]
-    complexity: 1
+  - pattern: "{NOUN} {LOCATION}."
+    translation: "{NOUN.translation} is {LOCATION.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
 
-  - text: "Это такси."
-    translation: "This is a taxi"
-    words:
-      - { ru: "Это", en: "This is" }
-      - { ru: "такси", en: "a taxi" }
-    distractors: ["mom", "a cat", "an atom", "here"]
-    complexity: 1
-
-  - text: "Такси там."
-    translation: "The taxi is there"
-    words:
-      - { ru: "Такси", en: "The taxi" }
-      - { ru: "там", en: "is there" }
-    distractors: ["is here", "This is", "mom", "a cat"]
-    complexity: 1
-
-  - text: "Это атом."
-    translation: "This is an atom"
-    words:
-      - { ru: "Это", en: "This is" }
-      - { ru: "атом", en: "an atom" }
-    distractors: ["a taxi", "a cat", "mom", "here"]
-    complexity: 1
-
-  - text: "Том тут."
-    translation: "Tom is here"
-    words:
-      - { ru: "Том", en: "Tom" }
-      - { ru: "тут", en: "is here" }
-    distractors: ["is there", "This is", "mom", "a cat"]
-    complexity: 1
+  - pattern: "Вот {NOUN}."
+    translation: "Here is {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 2

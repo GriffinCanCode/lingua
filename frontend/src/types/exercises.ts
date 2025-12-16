@@ -203,10 +203,33 @@ export interface ValidationResult {
 export type OnAnswerSubmit = (answer: string | string[], exercise: Exercise) => ValidationResult;
 export type OnExerciseComplete = (result: ExerciseResult) => void;
 
+// Grammar configuration from API
+export interface CaseColor {
+  bg: string;
+  text: string;
+  border: string;
+}
+
+export interface CaseConfig {
+  id: string;
+  label: string;
+  hint: string;
+  color: CaseColor;
+}
+
+export interface GrammarConfig {
+  cases: CaseConfig[];
+  genders: { id: string; label: string; short: string }[];
+  numbers: { id: string; label: string }[];
+  hasDeclension: boolean;
+  hasConjugation: boolean;
+}
+
 // Common props for exercise components
 export interface ExerciseComponentProps<T extends Exercise = Exercise> {
   exercise: T;
   onSubmit: (answer: string | string[]) => void;
   onSkip?: () => void;
   disabled?: boolean;
+  grammarConfig?: GrammarConfig;
 }

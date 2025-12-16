@@ -1,0 +1,159 @@
+# Unit 1, Lesson 7: Where, Who, What
+# 5 modules - Question words
+
+lesson:
+  id: "07_where_who_what"
+  title: "Where, Who, What"
+  subtitle: "Ask questions and get information"
+  icon: "search"
+
+modules:
+  - id: "mod_1"
+    title: "Где - Where"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Finding Things"
+        content: |
+          Где (gde) = Where
+          
+          This is one of the most useful words for travelers!
+          Just point and ask: Где метро? Где туалет? Где банк?
+      
+      - type: "word_intro"
+        words:
+          - word: "где"
+            translation: "where"
+            note: "Г sounds like 'g' in 'go'"
+      
+      - type: "morphology_pattern"
+        title: "Where Questions"
+        formula: "Где + {NOUN}?"
+        examples:
+          - { ru: "Где метро?", en: "Where is the metro?" }
+          - { ru: "Где ты?", en: "Where are you?" }
+          - { ru: "Где кот?", en: "Where is the cat?" }
+        rule: "Super simple - just Где + what you're looking for!"
+    
+    vocab_ids: [gde]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Кто & Что"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Who vs What"
+        content: |
+          Кто (kto) = Who (for people)
+          Что (shto) = What (for things)
+          
+          Important: Что is spelled ЧТО but pronounced 'shto'!
+      
+      - type: "word_intro"
+        words:
+          - word: "кто"
+            translation: "who"
+            note: "Say both consonants: k-to"
+          - word: "что"
+            translation: "what"
+            note: "Pronounced 'shto' NOT 'chto'!"
+      
+      - type: "etymology"
+        title: "Ancient Question Words"
+        word: "кто/что"
+        connections:
+          - { word: "who/what", lang: "English", relation: "cousin" }
+          - { word: "quis/quod", lang: "Latin", relation: "cousin" }
+          - { word: "wer/was", lang: "German", relation: "cousin" }
+        insight: "These question words come from Proto-Indo-European - 5000+ years old!"
+    
+    vocab_ids: [kto, chto]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Animate vs Inanimate"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "People vs Things"
+        content: |
+          Russian strictly separates living beings (animate) from things (inanimate).
+          
+          Кто это? → For people and animals
+          Что это? → For objects and ideas
+      
+      - type: "pattern_table"
+        title: "Which to Use"
+        columns: ["Use Кто for", "Use Что for"]
+        rows:
+          - ["people (мама, брат)", "objects (книга, дом)"]
+          - ["animals (кот, собака)", "abstract things (это)"]
+          - ["Кто там? (Who's there?)", "Что там? (What's there?)"]
+      
+      - type: "morphology_pattern"
+        title: "Кто/Что Patterns"
+        formula: "{Кто/Что} + это?"
+        examples:
+          - { ru: "Кто это?", en: "Who is this?" }
+          - { ru: "Что это?", en: "What is this?" }
+          - { ru: "Кто там?", en: "Who's there?" }
+        rule: "Animals count as 'who' in Russian - they're considered animate!"
+    
+    vocab_ids: [kto, chto, eto]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice asking questions about everything you see. Что это? Кто это? Где...?"
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Где = where (Где метро?)"
+          - "Кто = who (for people AND animals)"
+          - "Что = what (pronounced 'shto')"
+          - "Что это? = What is this?"
+          - "Кто это? = Who is this?"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [gde, kto, chto, vot, doktor, student, drug, restoran]
+  review:
+    from_lessons: [01_cognates, 03_questions]
+
+templates:
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.translation}?"
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "Кто это?"
+    translation: "Who is this?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Что это?"
+    translation: "What is this?"
+    slots: {}
+    weight: 2

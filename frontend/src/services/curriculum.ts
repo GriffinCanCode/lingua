@@ -99,6 +99,15 @@ export interface VocabItem {
   gender?: string;
 }
 
+// Module structure for lessons
+export interface LessonModule {
+  id: string;
+  title: string;
+  type: 'intro' | 'learn' | 'pattern' | 'practice' | 'master';
+  teaching: import('../types/teaching').TeachingContent[];
+  exerciseCount: number;
+}
+
 export interface LessonExercises {
   node_id: string;
   node_title: string;
@@ -109,6 +118,7 @@ export interface LessonExercises {
   vocabulary: VocabItem[];
   content?: {
     introduction?: string;
+    modules?: LessonModule[];
   };
 }
 

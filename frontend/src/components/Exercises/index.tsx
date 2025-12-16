@@ -26,4 +26,7 @@ export type {
   MorphWord,
   GrammaticalCase,
   ExerciseComponentProps,
+  GrammarConfig,
+  CaseConfig,
+  CaseColor,
 } from '../../types/exercises';

@@ -1,0 +1,143 @@
+# Unit 1, Lesson 11: Adjectives
+# 5 modules - Describing things
+
+lesson:
+  id: "11_adjectives"
+  title: "Adjectives"
+  subtitle: "Describe people, places, and things"
+  icon: "palette"
+
+modules:
+  - id: "mod_1"
+    title: "Gender Agreement"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Adjectives Match Nouns"
+        content: |
+          Just like possessives, adjectives change for gender!
+          
+          большой дом (big house) - masculine
+          большая книга (big book) - feminine
+          большое окно (big window) - neuter
+      
+      - type: "pattern_table"
+        title: "Adjective Endings"
+        columns: ["Gender", "Hard", "Example"]
+        rows:
+          - ["Masculine", "-ый / -ой", "большой, новый"]
+          - ["Feminine", "-ая", "большая, новая"]
+          - ["Neuter", "-ое", "большое, новое"]
+      
+      - type: "tip"
+        content: "The ending sounds like the noun gender: -ой sounds firm (masc), -ая sounds open (fem)."
+    
+    vocab_ids: [bolshoy, malenkiy]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Colors"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "красный"
+            translation: "red"
+            note: "Related to 'красивый' (beautiful) - red was the color of beauty!"
+          - word: "синий"
+            translation: "blue (dark)"
+          - word: "белый"
+            translation: "white"
+          - word: "чёрный"
+            translation: "black"
+      
+      - type: "etymology"
+        title: "Red = Beautiful"
+        word: "красный"
+        connections:
+          - { word: "красивый", lang: "Russian", relation: "cousin" }
+          - { word: "Red Square", lang: "English", relation: "descendant" }
+        insight: "Красная площадь (Red Square) originally meant 'Beautiful Square'!"
+    
+    vocab_ids: []
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Size & Age"
+    type: "pattern"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "большой"
+            translation: "big"
+          - word: "маленький"
+            translation: "small/little"
+          - word: "новый"
+            translation: "new"
+          - word: "старый"
+            translation: "old"
+      
+      - type: "morphology_pattern"
+        title: "Adjective Position"
+        formula: "{ADJECTIVE} + {NOUN} (same gender)"
+        examples:
+          - { ru: "большой дом", en: "big house" }
+          - { ru: "маленькая собака", en: "small dog" }
+          - { ru: "новое окно", en: "new window" }
+        rule: "Adjective comes before noun, just like English!"
+    
+    vocab_ids: [noviy, stariy]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Describe everything! Большой дом. Маленький кот. Новая книга."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Adjectives agree with noun gender"
+          - "Masculine: -ый/-ой (большой)"
+          - "Feminine: -ая (большая)"
+          - "Neuter: -ое (большое)"
+          - "Colors and descriptive words"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
+  review:
+    from_lessons: [04_gender, 09_possessives]
+
+templates:
+  - pattern: "Это {ADJ} {NOUN}."
+    translation: "This is a {ADJ.translation} {NOUN.translation}."
+    slots:
+      ADJ: { pos: [adjective] }
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "{NOUN} {ADJ}."
+    translation: "The {NOUN.translation} is {ADJ.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+      ADJ: { pos: [adjective] }
+    weight: 3

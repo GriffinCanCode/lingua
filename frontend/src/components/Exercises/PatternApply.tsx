@@ -2,30 +2,23 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Lightbulb } from 'lucide-react';
 import clsx from 'clsx';
-import type { PatternApplyExercise, ExerciseComponentProps, GrammaticalCase } from '../../types/exercises';
+import type { PatternApplyExercise, ExerciseComponentProps, GrammaticalCase, CaseConfig } from '../../types/exercises';
 
-const CASE_LABELS: Record<GrammaticalCase, string> = {
-  nominative: 'Nominative',
-  genitive: 'Genitive',
-  dative: 'Dative',
-  accusative: 'Accusative',
-  instrumental: 'Instrumental',
-  prepositional: 'Prepositional',
-};
-
-const CASE_COLORS: Record<GrammaticalCase, { bg: string; text: string }> = {
-  nominative: { bg: 'bg-blue-100', text: 'text-blue-700' },
-  genitive: { bg: 'bg-green-100', text: 'text-green-700' },
-  dative: { bg: 'bg-orange-100', text: 'text-orange-700' },
-  accusative: { bg: 'bg-purple-100', text: 'text-purple-700' },
-  instrumental: { bg: 'bg-pink-100', text: 'text-pink-700' },
-  prepositional: { bg: 'bg-cyan-100', text: 'text-cyan-700' },
+// Fallback case config when API data not available
+const DEFAULT_CASES: Record<GrammaticalCase, CaseConfig> = {
+  nominative: { id: 'nominative', label: 'Nominative', hint: '', color: { bg: 'bg-blue-100', text: 'text-blue-700', border: 'border-blue-300' } },
+  genitive: { id: 'genitive', label: 'Genitive', hint: '', color: { bg: 'bg-green-100', text: 'text-green-700', border: 'border-green-300' } },
+  dative: { id: 'dative', label: 'Dative', hint: '', color: { bg: 'bg-orange-100', text: 'text-orange-700', border: 'border-orange-300' } },
+  accusative: { id: 'accusative', label: 'Accusative', hint: '', color: { bg: 'bg-purple-100', text: 'text-purple-700', border: 'border-purple-300' } },
+  instrumental: { id: 'instrumental', label: 'Instrumental', hint: '', color: { bg: 'bg-pink-100', text: 'text-pink-700', border: 'border-pink-300' } },
+  prepositional: { id: 'prepositional', label: 'Prepositional', hint: '', color: { bg: 'bg-cyan-100', text: 'text-cyan-700', border: 'border-cyan-300' } },
 };
 
 export const PatternApply: React.FC<ExerciseComponentProps<PatternApplyExercise>> = ({
   exercise,
   onSubmit,
   disabled = false,
+  grammarConfig,
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -35,7 +28,13 @@ export const PatternApply: React.FC<ExerciseComponentProps<PatternApplyExercise>
     [exercise.options]
   );
 
-  const caseColors = CASE_COLORS[exercise.targetCase];
+  const caseConfig = useMemo(() => {
+    if (grammarConfig) {
+      const found = grammarConfig.cases.find(c => c.id === exercise.targetCase);
+      if (found) return found;
+    }
+    return DEFAULT_CASES[exercise.targetCase];
+  }, [grammarConfig, exercise.targetCase]);
 
   const handleSelect = useCallback((option: string) => {
     if (disabled || submitted) return;
@@ -73,9 +72,9 @@ export const PatternApply: React.FC<ExerciseComponentProps<PatternApplyExercise>
         </p>
         <div className={clsx(
           'inline-block px-3 py-1 rounded-full text-xs font-bold',
-          caseColors.bg, caseColors.text
+          caseConfig.color.bg, caseConfig.color.text
         )}>
-          {CASE_LABELS[exercise.targetCase]}
+          {caseConfig.label}
         </div>
       </div>
 
@@ -93,7 +92,7 @@ export const PatternApply: React.FC<ExerciseComponentProps<PatternApplyExercise>
             </div>
             <ArrowRight className="text-indigo-400" size={24} />
             <div className="text-center">
-              <span className={clsx('text-lg font-bold', caseColors.text)}>{exercise.exampleForm}</span>
+              <span className={clsx('text-lg font-bold', caseConfig.color.text)}>{exercise.exampleForm}</span>
               <span className="block text-xs text-gray-500 mt-1">{exercise.targetCase}</span>
             </div>
           </div>
@@ -115,7 +114,7 @@ export const PatternApply: React.FC<ExerciseComponentProps<PatternApplyExercise>
                   ? selected === exercise.correctAnswer
                     ? 'border-green-400 bg-green-50 text-green-700'
                     : 'border-red-400 bg-red-50 text-red-700'
-                  : `${caseColors.bg} ${caseColors.text} border-transparent`
+                  : `${caseConfig.color.bg} ${caseConfig.color.text} border-transparent`
                 : 'border-gray-300 bg-gray-50 text-gray-400'
             )}>
               {selected || '?'}

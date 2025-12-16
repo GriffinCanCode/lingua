@@ -2,13 +2,17 @@
 
 Generates Leipzig-style morpheme-by-morpheme breakdowns.
 """
-from typing import Optional
+from core.logging import engine_logger
+
+log = engine_logger()
 
 try:
-    import pymorphy2
+    import pymorphy3
     PYMORPHY_AVAILABLE = True
+    log.debug("pymorphy3_loaded", available=True)
 except ImportError:
     PYMORPHY_AVAILABLE = False
+    log.warning("pymorphy3_unavailable", message="Glossing analysis will be limited")
 
 
 # Leipzig glossing abbreviations
@@ -49,12 +53,11 @@ GLOSS_ABBREVIATIONS = {
 class GlossingEngine:
     """Engine for interlinear glossing"""
     
+    __slots__ = ("language", "_morph")
+    
     def __init__(self, language: str = "ru"):
         self.language = language
-        self._morph = None
-        
-        if language == "ru" and PYMORPHY_AVAILABLE:
-            self._morph = pymorphy2.MorphAnalyzer()
+        self._morph = pymorphy3.MorphAnalyzer() if language == "ru" and PYMORPHY_AVAILABLE else None
     
     def segment_word(self, word: str) -> list[dict]:
         """Segment a word into morphemes with glosses"""
@@ -143,6 +146,7 @@ class GlossingEngine:
         """Generate glosses for all words in text"""
         words = text.split()
         result = []
+        log.debug("glossing_text", word_count=len(words))
         
         for word_idx, word in enumerate(words):
             # Remove punctuation for analysis
@@ -184,7 +188,7 @@ class GlossingEngine:
         
         return result
     
-    def format_as_interlinear(self, text: str, morphemes: list, translation: Optional[str] = None) -> list[dict]:
+    def format_as_interlinear(self, text: str, morphemes: list, translation: str | None = None) -> list[dict]:
         """Format text with stored morphemes as interlinear lines"""
         # Split text into sentences
         sentences = text.replace("!", ".").replace("?", ".").split(".")

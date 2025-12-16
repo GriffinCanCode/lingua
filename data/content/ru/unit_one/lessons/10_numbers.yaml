@@ -1,0 +1,139 @@
+# Unit 1, Lesson 10: Numbers 1-10
+# 5 modules - Counting in Russian
+
+lesson:
+  id: "10_numbers"
+  title: "Numbers 1-10"
+  subtitle: "Count in Russian and talk about quantities"
+  icon: "hash"
+
+modules:
+  - id: "mod_1"
+    title: "Numbers 1-5"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "First Five"
+        content: |
+          Learn the first five numbers - the foundation of counting!
+          
+          1 - один (odin)
+          2 - два (dva)
+          3 - три (tri)
+          4 - четыре (chetyre)
+          5 - пять (pyat')
+      
+      - type: "pattern_table"
+        title: "Numbers 1-5"
+        columns: ["Number", "Russian", "Pronunciation"]
+        rows:
+          - ["1", "один", "ah-DEEN"]
+          - ["2", "два", "dvah"]
+          - ["3", "три", "tree"]
+          - ["4", "четыре", "cheh-TY-ryeh"]
+          - ["5", "пять", "pyaht"]
+      
+      - type: "tip"
+        content: "Три (3) sounds like 'tree' - easy to remember!"
+    
+    vocab_ids: []
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Numbers 6-10"
+    type: "learn"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "Numbers 6-10"
+        columns: ["Number", "Russian", "Pronunciation"]
+        rows:
+          - ["6", "шесть", "shest"]
+          - ["7", "семь", "syem"]
+          - ["8", "восемь", "VO-syem"]
+          - ["9", "девять", "DYEH-vyat"]
+          - ["10", "десять", "DYEH-syat"]
+      
+      - type: "etymology"
+        title: "Number Origins"
+        word: "семь (7)"
+        connections:
+          - { word: "seven", lang: "English", relation: "cognate" }
+          - { word: "septem", lang: "Latin", relation: "cognate" }
+          - { word: "sieben", lang: "German", relation: "cognate" }
+        insight: "Indo-European numbers are remarkably similar across languages!"
+    
+    vocab_ids: []
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Counting Things"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Numbers Change Nouns"
+        content: |
+          In Russian, nouns change form after numbers!
+          
+          1 кот (nominative singular)
+          2, 3, 4 кота (genitive singular)
+          5-10 котов (genitive plural)
+      
+      - type: "morphology_pattern"
+        title: "Number Agreement"
+        formula: "1 = singular | 2-4 = genitive sing. | 5+ = genitive plural"
+        examples:
+          - { ru: "один кот", en: "one cat" }
+          - { ru: "два кота", en: "two cats" }
+          - { ru: "пять котов", en: "five cats" }
+        rule: "For now, focus on 1-4. We'll learn genitive plural later!"
+      
+      - type: "tip"
+        content: "This is tricky! Start by just recognizing the pattern."
+    
+    vocab_ids: []
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Count things around you! Один телефон, два окна, три книги..."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Numbers 1-10 in Russian"
+          - "один, два, три, четыре, пять"
+          - "шесть, семь, восемь, девять, десять"
+          - "Numbers affect noun endings"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: []
+  review:
+    from_lessons: [04_gender, 08_cases_intro]
+
+templates:
+  - pattern: "Это {NUMBER} {NOUN}."
+    translation: "This is {NUMBER.translation} {NOUN.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { pos: [noun] }
+    weight: 3

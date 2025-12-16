@@ -17,10 +17,12 @@ from core.errors import (
 log = engine_logger()
 
 try:
-    import pymorphy2
+    import pymorphy3
     PYMORPHY_AVAILABLE = True
+    log.debug("pymorphy3_loaded", available=True)
 except ImportError:
     PYMORPHY_AVAILABLE = False
+    log.warning("pymorphy3_unavailable", message="Production analysis will be limited")
 
 
 @dataclass(frozen=True, slots=True)
@@ -49,7 +51,7 @@ class ProductionEngine:
     
     def __init__(self, language: str = "ru"):
         self.language = language
-        self._morph = pymorphy2.MorphAnalyzer() if language == "ru" and PYMORPHY_AVAILABLE else None
+        self._morph = pymorphy3.MorphAnalyzer() if language == "ru" and PYMORPHY_AVAILABLE else None
     
     def analyze_response(
         self,

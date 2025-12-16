@@ -10,10 +10,13 @@ from sqlalchemy import select, func, and_, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from core.logging import engine_logger
 from models.curriculum import (
     CurriculumSection, CurriculumUnit, CurriculumNode,
     UserNodeProgress, UserUnitProgress,
 )
+
+log = engine_logger()
 
 
 @dataclass(slots=True)
@@ -51,6 +54,7 @@ class CurriculumEngine:
         user_id: UUID,
     ) -> list[dict]:
         """Get the full learning path with user progress."""
+        log.debug("get_learning_path", user_id=str(user_id), language=self.language)
         # Get all sections with units and nodes (eager load to avoid lazy loading issues)
         result = await session.execute(
             select(CurriculumSection)
@@ -202,6 +206,7 @@ class CurriculumEngine:
         total: int,
     ) -> dict:
         """Update user's progress on a node after completing a lesson."""
+        log.debug("update_node_progress", user_id=str(user_id), node_id=str(node_id), correct=correct, total=total)
         # Get or create progress record
         result = await session.execute(
             select(UserNodeProgress).where(
@@ -242,12 +247,14 @@ class CurriculumEngine:
 
         await session.flush()
 
-        return {
+        result = {
             "status": progress.status,
             "level": progress.level,
             "total_reviews": progress.total_reviews,
             "accuracy": progress.correct_reviews / max(progress.total_reviews, 1),
         }
+        log.info("node_progress_updated", user_id=str(user_id), node_id=str(node_id), status=progress.status, level=progress.level)
+        return result
 
     async def _unlock_next_node(
         self,

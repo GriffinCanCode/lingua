@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from typing import Literal
 
 from core.logging import engine_logger
-from engines.morphology import MorphologyEngine
+from languages import get_module, LanguageModule
 
 log = engine_logger()
 
@@ -40,7 +40,7 @@ class SentenceItem:
     """Sentence from lesson."""
     text: str
     translation: str
-    words: list[dict] | None = None  # [{ru: "...", en: "..."}]
+    words: list[dict] | None = None
     distractors: list[str] = field(default_factory=list)
     complexity: int = 1
 
@@ -52,32 +52,19 @@ class Exercise:
     type: ExerciseType
     prompt: str
     difficulty: int
-    data: dict  # Type-specific data
+    data: dict
 
 
 class ExerciseGenerator:
     """Generates varied exercises from lesson content including pattern-based morphology."""
 
-    __slots__ = ('_distractor_pool', '_morph')
+    __slots__ = ('_distractor_pool', '_lang_module', '_morph')
 
-    DISTRACTORS_RU = {
-        1: ['и', 'в', 'на', 'с', 'это', 'он', 'она', 'они', 'мы', 'я', 'ты', 'да', 'нет'],
-        2: ['где', 'кто', 'что', 'как', 'тут', 'там', 'очень', 'хорошо', 'плохо', 'большой', 'маленький'],
-        3: ['потому', 'когда', 'почему', 'сейчас', 'всегда', 'никогда', 'может', 'должен'],
-    }
-
-    DISTRACTORS_EN = {
-        1: ['the', 'a', 'is', 'are', 'it', 'this', 'that', 'yes', 'no', 'and', 'or'],
-        2: ['where', 'who', 'what', 'how', 'here', 'there', 'very', 'good', 'bad'],
-        3: ['because', 'when', 'why', 'now', 'always', 'never', 'can', 'must'],
-    }
-
-    CASES: list[GrammaticalCase] = ['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional']
-
-    def __init__(self):
+    def __init__(self, language: str = "ru"):
         self._distractor_pool: dict[str, list[str]] = {}
-        self._morph = MorphologyEngine()
-        log.debug("exercise_generator_initialized")
+        self._lang_module: LanguageModule = get_module(language)
+        self._morph = self._lang_module.get_morphology_engine()
+        log.debug("exercise_generator_initialized", language=language)
 
     def generate_lesson_exercises(
         self,
@@ -87,27 +74,17 @@ class ExerciseGenerator:
         num_exercises: int = 15,
         level_type: LevelType = 'medium',
     ) -> list[Exercise]:
-        """
-        Generate a balanced mix of exercises based on level type.
-
-        Distribution varies by level_type:
-        - intro: No exercises (uses WordIntro component)
-        - easy: Mostly MC + matching (recognition)
-        - medium: Word bank + some typing (production)
-        - hard: Typing heavy (full production)
-        - review: Balanced mix of all types
-        """
+        """Generate a balanced mix of exercises based on level type."""
         review_vocab = review_vocab or []
         all_vocab = vocabulary + review_vocab
         exercises: list[Exercise] = []
 
-        # Build distractor pools
+        # Build distractor pools using language module
         self._distractor_pool = {
-            'ru': self._build_distractor_pool([v.word for v in all_vocab], 'ru'),
-            'en': self._build_distractor_pool([v.translation for v in all_vocab], 'en'),
+            'ru': self._lang_module.build_distractor_pool([v.word for v in all_vocab], 'ru'),
+            'en': self._lang_module.build_distractor_pool([v.translation for v in all_vocab], 'en'),
         }
 
-        # Distribution by level type with pattern exercises integrated
         distributions: dict[str, dict[str, int]] = {
             'intro': {'word_bank': 6, 'multiple_choice': 2, 'pattern_fill': 2},
             'easy': {'word_bank': 4, 'multiple_choice': 3, 'matching': 1, 'pattern_fill': 2},
@@ -126,9 +103,7 @@ class ExerciseGenerator:
 
         for ex_type, ratio in dist.items():
             count = max(1, round(num_exercises * ratio / total_ratio))
-            exercises.extend(self._generate_by_type(
-                ex_type, count, vocabulary, sentences, review_vocab, base_difficulty
-            ))
+            exercises.extend(self._generate_by_type(ex_type, count, vocabulary, sentences, review_vocab, base_difficulty))
 
         random.shuffle(exercises)
         log.debug("exercises_generated", count=len(exercises[:num_exercises]), level_type=level_type)
@@ -173,46 +148,27 @@ class ExerciseGenerator:
 
         for i in range(count):
             sent = usable[i % len(usable)]
-            
-            # Strictly alternate: even=English target, odd=Russian target
             to_russian = (i % 2 == 1)
 
             if to_russian:
-                # User sees English, builds Russian (tap Russian words)
                 source = sent.translation
                 target_lang: TargetLanguage = 'ru'
-                
-                # Get Russian words from mapping, fallback to splitting sentence
-                correct_words = []
-                if sent.words:
-                    correct_words = [w.get('ru', '') for w in sent.words if w.get('ru')]
+                correct_words = [w.get('ru', '') for w in sent.words if w.get('ru')] if sent.words else []
                 if not correct_words:
                     correct_words = sent.text.replace('?', '').replace('!', '').replace('.', '').replace(',', '').split()
-                
                 distractors = self._get_distractors(correct_words, 'ru', max(3, len(correct_words)))
             else:
-                # User sees Russian, builds English (tap English words)
                 source = sent.text
                 target_lang = 'en'
-                
-                # Get English words from mapping, fallback to splitting translation
-                correct_words = []
-                if sent.words:
-                    correct_words = [w.get('en', '') for w in sent.words if w.get('en')]
+                correct_words = [w.get('en', '') for w in sent.words if w.get('en')] if sent.words else []
                 if not correct_words:
                     correct_words = sent.translation.replace('?', '').replace('!', '').replace('.', '').replace(',', '').split()
-                
-                # Prefer sentence-specific distractors for English
-                if sent.distractors:
-                    distractors = sent.distractors[:max(3, len(correct_words))]
-                else:
-                    distractors = self._get_distractors(correct_words, 'en', max(3, len(correct_words)))
+                distractors = sent.distractors[:max(3, len(correct_words))] if sent.distractors else self._get_distractors(correct_words, 'en', max(3, len(correct_words)))
 
-            # Filter empty strings and build word bank
             correct_words = [w for w in correct_words if w and w.strip()]
             if not correct_words:
-                continue  # Skip if no valid words
-                
+                continue
+
             word_bank = correct_words + distractors
             random.shuffle(word_bank)
 
@@ -221,12 +177,7 @@ class ExerciseGenerator:
                 type='word_bank',
                 prompt='Translate this sentence',
                 difficulty=min(3, sent.complexity),
-                data={
-                    'targetText': ' '.join(correct_words),
-                    'targetLanguage': target_lang,
-                    'wordBank': word_bank,
-                    'translation': source,
-                },
+                data={'targetText': ' '.join(correct_words), 'targetLanguage': target_lang, 'wordBank': word_bank, 'translation': source},
             ))
 
         return exercises
@@ -242,14 +193,11 @@ class ExerciseGenerator:
         """Generate typing exercises."""
         exercises = []
         all_vocab = vocab + review_vocab
-
-        # Use shorter sentences or vocab for typing
         items = [(v.word, v.translation) for v in all_vocab]
         items += [(s.text, s.translation) for s in sentences if len(s.text.split()) <= 5]
 
         for i in range(min(count, len(items))):
             target_ru, target_en = items[i % len(items)]
-            # Higher difficulty = type in target language
             to_russian = difficulty >= 2
 
             exercises.append(Exercise(
@@ -315,12 +263,7 @@ class ExerciseGenerator:
                 type='multiple_choice',
                 prompt='Choose the correct answer',
                 difficulty=difficulty,
-                data={
-                    'question': f"What does '{item.word}' mean?",
-                    'correctAnswer': item.translation,
-                    'options': options,
-                    'audioUrl': item.audio,
-                },
+                data={'question': f"What does '{item.word}' mean?", 'correctAnswer': item.translation, 'options': options, 'audioUrl': item.audio},
             ))
 
         return exercises
@@ -352,13 +295,7 @@ class ExerciseGenerator:
                 type='fill_blank',
                 prompt='Complete the sentence',
                 difficulty=difficulty,
-                data={
-                    'sentenceBefore': ' '.join(words[:blank_idx]),
-                    'sentenceAfter': ' '.join(words[blank_idx + 1:]),
-                    'correctAnswer': correct,
-                    'options': options,
-                    'fullSentence': sent.text,
-                },
+                data={'sentenceBefore': ' '.join(words[:blank_idx]), 'sentenceAfter': ' '.join(words[blank_idx + 1:]), 'correctAnswer': correct, 'options': options, 'fullSentence': sent.text},
             ))
 
         return exercises
@@ -374,32 +311,27 @@ class ExerciseGenerator:
         """Generate pattern fill exercises - select correct ending for stem + case."""
         exercises = []
         all_vocab = vocab + review_vocab
-        
-        # Filter to nouns with gender (can be declined)
         declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
         if not declinable:
             return []
 
-        # Target cases based on difficulty
-        target_cases: list[GrammaticalCase] = ['genitive', 'accusative'] if difficulty <= 2 else self.CASES[1:]
+        cases = self._lang_module.get_cases() if hasattr(self._lang_module, 'get_cases') else ['genitive', 'accusative']
+        target_cases: list[GrammaticalCase] = ['genitive', 'accusative'] if difficulty <= 2 else cases[1:]
 
         for i in range(min(count, len(declinable) * len(target_cases))):
             item = declinable[i % len(declinable)]
             target_case = target_cases[i % len(target_cases)]
-            
-            # Get the inflected form
+
             form = self._morph.generate_form(item.word, target_case, "singular")
             if not form:
                 continue
-            
-            # Extract stem and ending
+
             stem_data = self._morph.extract_stem_ending(form)
             if not stem_data.ending:
                 continue
-            
-            # Get distractor endings
+
             options = self._morph.get_ending_options(target_case, stem_data.ending, 4)
-            
+
             exercises.append(Exercise(
                 id=str(uuid4()),
                 type='pattern_fill',
@@ -431,7 +363,6 @@ class ExerciseGenerator:
         """Generate paradigm completion exercises - fill missing cells in declension table."""
         exercises = []
         all_vocab = vocab + review_vocab
-        
         declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
         if not declinable:
             return []
@@ -439,37 +370,30 @@ class ExerciseGenerator:
         for i in range(min(count, len(declinable))):
             item = declinable[i % len(declinable)]
             paradigm = self._morph.get_pattern_paradigm(item.word, item.translation)
-            
+
             if len(paradigm.cells) < 6:
                 continue
-            
-            # Select cells to blank based on difficulty
+
             num_blanks = 2 if difficulty <= 2 else 4
             singular_cells = [c for c in paradigm.cells if c['number'] == 'singular']
-            
+
             if len(singular_cells) < num_blanks:
                 continue
-            
+
             blank_indices = random.sample(range(len(singular_cells)), min(num_blanks, len(singular_cells)))
-            
+
             cells = []
             all_options = set()
             for idx, cell in enumerate(singular_cells):
                 is_blank = idx in blank_indices
-                cells.append({
-                    'case': cell['case'],
-                    'number': cell['number'],
-                    'form': cell['form'],
-                    'isBlank': is_blank,
-                })
+                cells.append({'case': cell['case'], 'number': cell['number'], 'form': cell['form'], 'isBlank': is_blank})
                 if is_blank:
                     all_options.add(cell['form'])
-            
-            # Add distractors
+
             distractor_forms = [c['form'] for c in singular_cells if c['form'] not in all_options][:2]
             options = list(all_options) + distractor_forms
             random.shuffle(options)
-            
+
             exercises.append(Exercise(
                 id=str(uuid4()),
                 type='paradigm_complete',
@@ -499,7 +423,6 @@ class ExerciseGenerator:
         """Generate pattern apply exercises - apply learned pattern to new word."""
         exercises = []
         all_vocab = vocab + review_vocab
-        
         declinable = [v for v in all_vocab if v.gender in ('m', 'f', 'n')]
         if len(declinable) < 2:
             return []
@@ -507,43 +430,38 @@ class ExerciseGenerator:
         target_cases: list[GrammaticalCase] = ['genitive', 'dative', 'accusative']
 
         for i in range(min(count, len(declinable))):
-            # Pick example word and new word of same gender
             example_item = declinable[i % len(declinable)]
             same_gender = [v for v in declinable if v.gender == example_item.gender and v.word != example_item.word]
-            
+
             if not same_gender:
                 continue
-            
+
             new_item = random.choice(same_gender)
             target_case = target_cases[i % len(target_cases)]
-            
-            # Get example form
+
             example_form = self._morph.generate_form(example_item.word, target_case, "singular")
             if not example_form:
                 continue
-            
-            # Get correct answer for new word
+
             correct_form = self._morph.generate_form(new_item.word, target_case, "singular")
             if not correct_form:
                 continue
-            
-            # Generate distractors (other case forms of same word)
+
             other_cases = [c for c in target_cases if c != target_case]
             distractors = []
             for other_case in other_cases[:2]:
                 other_form = self._morph.generate_form(new_item.word, other_case, "singular")
                 if other_form and other_form != correct_form:
                     distractors.append(other_form)
-            
-            # Add nominative as distractor
+
             if new_item.word != correct_form:
                 distractors.append(new_item.word)
-            
+
             options = [correct_form] + distractors[:3]
             random.shuffle(options)
-            
+
             stem_data = self._morph.extract_stem_ending(example_item.word)
-            
+
             exercises.append(Exercise(
                 id=str(uuid4()),
                 type='pattern_apply',
@@ -564,15 +482,6 @@ class ExerciseGenerator:
 
         return exercises
 
-    def _build_distractor_pool(self, exclude: list[str], lang: TargetLanguage) -> list[str]:
-        """Build pool of distractor words excluding lesson vocabulary."""
-        exclude_lower = {w.lower() for w in exclude}
-        base = self.DISTRACTORS_RU if lang == 'ru' else self.DISTRACTORS_EN
-        pool = []
-        for words in base.values():
-            pool.extend(w for w in words if w.lower() not in exclude_lower)
-        return pool
-
     def _get_distractors(self, exclude: list[str], lang: TargetLanguage, count: int) -> list[str]:
         """Get distractor words not in exclude list."""
         pool = self._distractor_pool.get(lang, [])
@@ -581,16 +490,16 @@ class ExerciseGenerator:
         return random.sample(available, min(count, len(available))) if available else []
 
 
-# Convenience function for API use
 def generate_exercises(
     vocabulary: list[dict],
     sentences: list[dict],
     review_vocabulary: list[dict] | None = None,
     num_exercises: int = 15,
     level_type: str = 'medium',
+    language: str = 'ru',
 ) -> list[dict]:
     """Generate exercises from raw dict data (API-friendly)."""
-    gen = ExerciseGenerator()
+    gen = ExerciseGenerator(language=language)
 
     vocab = [VocabItem(
         word=v['word'],

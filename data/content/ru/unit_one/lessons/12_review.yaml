@@ -1,0 +1,162 @@
+# Unit 1, Lesson 12: Review & Checkpoint
+# 5 modules - Comprehensive review of Unit 1
+
+lesson:
+  id: "12_review"
+  title: "Review & Checkpoint"
+  subtitle: "Master everything from Unit 1"
+  icon: "trophy"
+
+modules:
+  - id: "mod_1"
+    title: "Review: Letters & Words"
+    type: "intro"
+    
+    teaching:
+      - type: "summary"
+        title: "Cyrillic Letters"
+        points:
+          - "Cognate letters: А, К, М, О, Т (same as English)"
+          - "False friends: Р=R, С=S, Н=N, В=V"
+          - "New letters: Д, Б, Г, Л, П, Ш, Ж..."
+          - "Soft sign Ь - makes consonants soft"
+      
+      - type: "pattern_table"
+        title: "Quick Reference"
+        columns: ["Looks like", "Actually"]
+        rows:
+          - ["Р", "R"]
+          - ["С", "S"]
+          - ["Н", "N"]
+          - ["В", "V"]
+          - ["У", "OO"]
+    
+    vocab_ids: []
+    exercises:
+      count: 8
+
+  - id: "mod_2"
+    title: "Review: Grammar"
+    type: "learn"
+    
+    teaching:
+      - type: "summary"
+        title: "Key Grammar Points"
+        points:
+          - "No 'is/am/are' in present tense"
+          - "Gender: masculine (-consonant), feminine (-а), neuter (-о)"
+          - "Pronouns match gender: он, она, оно"
+          - "У меня есть = I have"
+          - "Questions = rising intonation"
+      
+      - type: "morphology_pattern"
+        title: "The Big Patterns"
+        formula: "Subject + predicate (no 'is')"
+        examples:
+          - { ru: "Я студент.", en: "I am a student." }
+          - { ru: "Это мой дом.", en: "This is my house." }
+          - { ru: "У меня есть кот.", en: "I have a cat." }
+        rule: "Russian grammar is logical - trust the patterns!"
+    
+    vocab_ids: []
+    exercises:
+      count: 8
+
+  - id: "mod_3"
+    title: "Challenge: Mixed"
+    type: "pattern"
+    
+    teaching:
+      - type: "tip"
+        content: "This module mixes everything! Stay calm, think through each question."
+      
+      - type: "pattern_table"
+        title: "Possessives Quick Reference"
+        columns: ["Masculine", "Feminine", "Neuter"]
+        rows:
+          - ["мой", "моя", "моё"]
+          - ["твой", "твоя", "твоё"]
+          - ["наш", "наша", "наше"]
+    
+    vocab_ids: []
+    exercises:
+      count: 12
+      difficulty: "medium"
+
+  - id: "mod_4"
+    title: "Test"
+    type: "practice"
+    teaching:
+      - type: "explanation"
+        title: "Final Test"
+        content: |
+          This is your checkpoint test!
+          
+          You'll be tested on:
+          - Reading Cyrillic
+          - Basic vocabulary
+          - Gender agreement
+          - Question/answer patterns
+          - Possessives
+    exercises:
+      count: 15
+      review_previous: true
+      difficulty: "hard"
+
+  - id: "mod_5"
+    title: "Crown"
+    type: "master"
+    teaching:
+      - type: "explanation"
+        title: "🏆 Unit 1 Complete!"
+        content: |
+          Congratulations! You've completed Unit 1: Foundations!
+          
+          You can now:
+          ✓ Read Russian using Cyrillic letters
+          ✓ Introduce yourself and greet people
+          ✓ Ask and answer basic questions
+          ✓ Talk about what you have
+          ✓ Describe things using adjectives
+          ✓ Count to 10
+      
+      - type: "summary"
+        title: "Your Achievements"
+        points:
+          - "~65 vocabulary words learned"
+          - "6 core grammar patterns mastered"
+          - "Ready for Unit 2: Everyday Life!"
+    exercises:
+      count: 15
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: []
+  review:
+    from_lessons: [01_cognates, 02_hello, 03_questions, 04_gender, 05_false_friends, 06_possession, 07_where_who_what, 08_cases_intro, 09_possessives, 10_numbers, 11_adjectives]
+
+templates:
+  - pattern: "Это {NOUN}."
+    translation: "This is {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 2
+
+  - pattern: "Где {NOUN}?"
+    translation: "Where is {NOUN.translation}?"
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 2
+
+  - pattern: "У меня есть {NOUN}."
+    translation: "I have a {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 2
+
+  - pattern: "Это мой {NOUN_M}."
+    translation: "This is my {NOUN_M.translation}."
+    slots:
+      NOUN_M: { pos: [noun], gender: [m] }
+    weight: 2

@@ -5,15 +5,19 @@ Admin endpoints for data ingestion management.
 from pathlib import Path
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Query, HTTPException, BackgroundTasks
+from fastapi import APIRouter, Depends, Query, BackgroundTasks
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import get_db
+from core.logging import api_logger
 from core.security import get_current_user_id
+from core.errors import raise_error, not_found, validation_error
 from models.datasource import DataSource, IngestionRecord
 from ingest.pipeline import IngestionPipeline
+
+log = api_logger()
 
 
 router = APIRouter()
@@ -177,18 +181,22 @@ async def start_ingestion(
     db: AsyncSession = Depends(get_db),
 ):
     """Start a new ingestion job."""
+    log.info("ingestion_start_requested", source=request.source, file_path=request.file_path)
+    
     # Validate source
     valid_sources = {"universal_dependencies", "wiktionary", "tatoeba"}
     if request.source not in valid_sources:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid source. Must be one of: {valid_sources}",
-        )
+        raise_error(validation_error(
+            f"Invalid source. Must be one of: {valid_sources}",
+            field="source",
+            value=request.source,
+            origin="api.ingest",
+        ).error)
 
     # Check file exists
     file_path = Path(request.file_path)
     if not file_path.exists():
-        raise HTTPException(status_code=400, detail=f"File not found: {file_path}")
+        raise_error(not_found("File", str(file_path), origin="api.ingest").error)
 
     # Create record
     record = IngestionRecord(
@@ -213,6 +221,7 @@ async def start_ingestion(
     )
 
     _active_ingestions[record.id] = record
+    log.info("ingestion_job_started", record_id=str(record.id), source=request.source)
 
     return IngestionStatusResponse(
         record_id=record.id,
@@ -236,7 +245,7 @@ async def get_ingestion_status(
     record = result.scalar_one_or_none()
 
     if not record:
-        raise HTTPException(status_code=404, detail="Ingestion record not found")
+        raise_error(not_found("Ingestion record", record_id, origin="api.ingest").error)
 
     return IngestionStatusResponse(
         record_id=record.id,

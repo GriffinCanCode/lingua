@@ -47,7 +47,6 @@ const transformNode = (node: CurriculumNode): LevelNode => ({
   level_type: node.level_type,
   status: node.status,
   total_reviews: node.total_reviews,
-  estimated_duration_min: node.estimated_duration_min,
 });
 
 // Transform API data to internal format

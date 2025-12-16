@@ -308,6 +308,7 @@ location:
     transliteration: "tut"
     translation: "here"
     pos: "adverb"
+    semantic: [location]
     frequency: 1
     difficulty: 1
     audio: "tut.mp3"
@@ -320,6 +321,7 @@ location:
     transliteration: "tam"
     translation: "there"
     pos: "adverb"
+    semantic: [location]
     frequency: 1
     difficulty: 1
     audio: "tam.mp3"
@@ -331,6 +333,7 @@ location:
     transliteration: "zdes'"
     translation: "here (formal)"
     pos: "adverb"
+    semantic: [location]
     frequency: 2
     difficulty: 2
     audio: "zdes.mp3"
@@ -343,6 +346,7 @@ location:
     transliteration: "vot"
     translation: "here is / there is"
     pos: "particle"
+    semantic: [location, pointing]
     frequency: 1
     difficulty: 1
     audio: "vot.mp3"
@@ -356,6 +360,7 @@ location:
     transliteration: "doma"
     translation: "at home"
     pos: "adverb"
+    semantic: [location]
     frequency: 1
     difficulty: 1
     audio: "doma.mp3"
@@ -473,6 +478,7 @@ cognates:
     translation: "mom"
     pos: "noun"
     gender: "f"
+    semantic: [person, family]
     frequency: 1
     difficulty: 1
     audio: "mama.mp3"
@@ -486,6 +492,7 @@ cognates:
     translation: "dad"
     pos: "noun"
     gender: "m"
+    semantic: [person, family]
     frequency: 1
     difficulty: 1
     audio: "papa.mp3"
@@ -499,6 +506,7 @@ cognates:
     translation: "cat (male)"
     pos: "noun"
     gender: "m"
+    semantic: [animal]
     frequency: 2
     difficulty: 1
     audio: "kot.mp3"
@@ -512,6 +520,7 @@ cognates:
     translation: "taxi"
     pos: "noun"
     gender: "n"
+    semantic: [transport, place]
     frequency: 2
     difficulty: 1
     audio: "taksi.mp3"
@@ -525,6 +534,7 @@ cognates:
     translation: "metro / subway"
     pos: "noun"
     gender: "n"
+    semantic: [transport, place]
     frequency: 1
     difficulty: 1
     audio: "metro.mp3"
@@ -538,6 +548,7 @@ cognates:
     translation: "radio"
     pos: "noun"
     gender: "n"
+    semantic: [thing]
     frequency: 2
     difficulty: 1
     audio: "radio.mp3"
@@ -551,6 +562,7 @@ cognates:
     translation: "coffee"
     pos: "noun"
     gender: "m"
+    semantic: [food, drink]
     frequency: 1
     difficulty: 1
     audio: "kofe.mp3"
@@ -564,6 +576,7 @@ cognates:
     translation: "phone / telephone"
     pos: "noun"
     gender: "m"
+    semantic: [thing]
     frequency: 1
     difficulty: 1
     audio: "telefon.mp3"
@@ -576,6 +589,7 @@ cognates:
     translation: "doctor"
     pos: "noun"
     gender: "m"
+    semantic: [person, profession]
     frequency: 2
     difficulty: 1
     audio: "doktor.mp3"
@@ -588,6 +602,7 @@ cognates:
     translation: "student (male)"
     pos: "noun"
     gender: "m"
+    semantic: [person]
     frequency: 2
     difficulty: 1
     audio: "student.mp3"
@@ -601,6 +616,7 @@ cognates:
     translation: "restaurant"
     pos: "noun"
     gender: "m"
+    semantic: [place]
     frequency: 2
     difficulty: 1
     audio: "restoran.mp3"
@@ -613,6 +629,7 @@ cognates:
     translation: "bank"
     pos: "noun"
     gender: "m"
+    semantic: [place]
     frequency: 2
     difficulty: 1
     audio: "bank.mp3"
@@ -625,6 +642,7 @@ cognates:
     translation: "park"
     pos: "noun"
     gender: "m"
+    semantic: [place]
     frequency: 2
     difficulty: 1
     audio: "park.mp3"
@@ -637,6 +655,7 @@ cognates:
     translation: "internet"
     pos: "noun"
     gender: "m"
+    semantic: [thing]
     frequency: 1
     difficulty: 1
     audio: "internet.mp3"
@@ -655,6 +674,7 @@ nouns:
     translation: "house / home"
     pos: "noun"
     gender: "m"
+    semantic: [place]
     frequency: 1
     difficulty: 1
     audio: "dom.mp3"
@@ -668,6 +688,7 @@ nouns:
     translation: "book"
     pos: "noun"
     gender: "f"
+    semantic: [thing]
     frequency: 2
     difficulty: 1
     audio: "kniga.mp3"
@@ -681,6 +702,7 @@ nouns:
     translation: "window"
     pos: "noun"
     gender: "n"
+    semantic: [thing]
     frequency: 2
     difficulty: 1
     audio: "okno.mp3"
@@ -694,6 +716,7 @@ nouns:
     translation: "water"
     pos: "noun"
     gender: "f"
+    semantic: [food, drink]
     frequency: 1
     difficulty: 1
     audio: "voda.mp3"
@@ -707,6 +730,7 @@ nouns:
     translation: "food"
     pos: "noun"
     gender: "f"
+    semantic: [food]
     frequency: 2
     difficulty: 1
     audio: "yeda.mp3"
@@ -720,6 +744,7 @@ nouns:
     translation: "friend (male)"
     pos: "noun"
     gender: "m"
+    semantic: [person]
     frequency: 1
     difficulty: 1
     audio: "drug.mp3"
@@ -733,6 +758,7 @@ nouns:
     translation: "brother"
     pos: "noun"
     gender: "m"
+    semantic: [person, family]
     frequency: 2
     difficulty: 1
     audio: "brat.mp3"
@@ -746,6 +772,7 @@ nouns:
     translation: "sister"
     pos: "noun"
     gender: "f"
+    semantic: [person, family]
     frequency: 2
     difficulty: 1
     audio: "sestra.mp3"
@@ -758,6 +785,7 @@ nouns:
     translation: "dog"
     pos: "noun"
     gender: "f"
+    semantic: [animal]
     frequency: 2
     difficulty: 1
     audio: "sobaka.mp3"
@@ -770,6 +798,7 @@ nouns:
     translation: "car"
     pos: "noun"
     gender: "f"
+    semantic: [transport, thing]
     frequency: 1
     difficulty: 1
     audio: "mashina.mp3"
@@ -783,6 +812,7 @@ nouns:
     translation: "street"
     pos: "noun"
     gender: "f"
+    semantic: [place]
     frequency: 2
     difficulty: 2
     audio: "ulitsa.mp3"

@@ -1,0 +1,148 @@
+# Unit 1, Lesson 5: False Friends
+# 5 modules - Letters that look familiar but sound different
+
+lesson:
+  id: "05_false_friends"
+  title: "False Friends"
+  subtitle: "Letters Р, С, Н, В - they're not what they seem!"
+  icon: "alert-triangle"
+
+modules:
+  - id: "mod_1"
+    title: "New Letters"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Tricky Letters"
+        content: |
+          These letters LOOK like English but sound DIFFERENT!
+          
+          Р = R (not P!)
+          С = S (not C!)
+          Н = N (not H!)
+          В = V (not B!)
+      
+      - type: "pattern_table"
+        title: "False Friends"
+        columns: ["Russian", "Looks like", "Actually sounds like"]
+        rows:
+          - ["Р", "P", "R (rolled)"]
+          - ["С", "C", "S"]
+          - ["Н", "H", "N"]
+          - ["В", "B", "V"]
+      
+      - type: "tip"
+        content: "РЕСТОРАН looks like 'pectopah' but sounds like 'restoran' (restaurant)!"
+    
+    vocab_ids: [restoran, voda]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Words with New Letters"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "ресторан"
+            translation: "restaurant"
+            note: "Р=R, С=S, Н=N"
+          - word: "вода"
+            translation: "water"
+            note: "В=V"
+          - word: "сестра"
+            translation: "sister"
+            note: "С=S at the start"
+          - word: "брат"
+            translation: "brother"
+            note: "New letter Б = B"
+      
+      - type: "etymology"
+        title: "Word Family: вода"
+        word: "вода"
+        connections:
+          - { word: "water", lang: "English", relation: "cognate" }
+          - { word: "Wasser", lang: "German", relation: "cognate" }
+          - { word: "vodka", lang: "Russian", relation: "descendant" }
+        insight: "Vodka literally means 'little water' - вода + ка (diminutive)!"
+    
+    vocab_ids: [restoran, voda, sestra, brat]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Reading Practice"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Decoding Words"
+        content: |
+          Now you can decode many international words!
+          
+          РОССИЯ = Rossiya (Russia)
+          МОСКВА = Moskva (Moscow)
+          САНКТ-ПЕТЕРБУРГ = Sankt-Peterburg
+      
+      - type: "pattern_table"
+        title: "Decode These"
+        columns: ["Russian", "Transliteration", "Meaning"]
+        rows:
+          - ["автобус", "avtobus", "bus"]
+          - ["интернет", "internet", "internet"]
+          - ["телефон", "telefon", "telephone"]
+          - ["банк", "bank", "bank"]
+      
+      - type: "tip"
+        content: "Most international words are spelled phonetically in Russian!"
+    
+    vocab_ids: [internet, telefon, bank]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Read words out loud! Your brain will adjust faster when you hear the correct sounds."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Р = R (rolled), not P"
+          - "С = S, not C"
+          - "Н = N, not H"
+          - "В = V, not B"
+          - "Many international words are just respelled"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [restoran, voda, sestra, brat, internet, telefon]
+  review:
+    from_lessons: [01_cognates, 04_gender]
+
+templates:
+  - pattern: "Где {PLACE}?"
+    translation: "Where is the {PLACE.translation}?"
+    slots:
+      PLACE: { pos: [noun], semantic: [place] }
+    weight: 3
+
+  - pattern: "Это мой {FAMILY}."
+    translation: "This is my {FAMILY.translation}."
+    slots:
+      FAMILY: { pos: [noun], semantic: [family] }
+    weight: 3

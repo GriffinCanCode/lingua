@@ -1,0 +1,159 @@
+# Unit 1, Lesson 9: My, Your, Our
+# 5 modules - Possessive pronouns
+
+lesson:
+  id: "09_possessives"
+  title: "My, Your, Our"
+  subtitle: "Talk about what belongs to whom"
+  icon: "heart"
+
+modules:
+  - id: "mod_1"
+    title: "Мой / Моя"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "My (Changes by Gender)"
+        content: |
+          Russian possessives change to match the noun's gender!
+          
+          мой = my (masculine)
+          моя = my (feminine)
+          моё = my (neuter)
+      
+      - type: "word_intro"
+        words:
+          - word: "мой"
+            translation: "my (masculine)"
+            note: "мой дом, мой кот"
+          - word: "моя"
+            translation: "my (feminine)"
+            note: "моя книга, моя мама"
+          - word: "моё"
+            translation: "my (neuter)"
+            note: "моё окно"
+      
+      - type: "morphology_pattern"
+        title: "Gender Agreement"
+        formula: "мой/моя/моё + {NOUN} (matching gender)"
+        examples:
+          - { ru: "Это мой дом.", en: "This is my house." }
+          - { ru: "Это моя книга.", en: "This is my book." }
+          - { ru: "Это моё окно.", en: "This is my window." }
+        rule: "The possessive must match the gender of what is possessed!"
+    
+    vocab_ids: [moy, moya, moyo]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Твой - Your (Informal)"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Your (Singular)"
+        content: |
+          Твой follows the same pattern as мой!
+          
+          твой = your (masculine)
+          твоя = your (feminine)
+          твоё = your (neuter)
+      
+      - type: "word_intro"
+        words:
+          - word: "твой"
+            translation: "your (masc., informal)"
+          - word: "твоя"
+            translation: "your (fem., informal)"
+          - word: "твоё"
+            translation: "your (neut., informal)"
+      
+      - type: "tip"
+        content: "Use твой with people you call 'ты' - friends, family, children."
+    
+    vocab_ids: [ty]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Наш - Our"
+    type: "pattern"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "наш"
+            translation: "our (masculine)"
+          - word: "наша"
+            translation: "our (feminine)"
+          - word: "наше"
+            translation: "our (neuter)"
+      
+      - type: "pattern_table"
+        title: "All Possessives"
+        columns: ["Person", "Masculine", "Feminine", "Neuter"]
+        rows:
+          - ["I", "мой", "моя", "моё"]
+          - ["You (inf)", "твой", "твоя", "твоё"]
+          - ["We", "наш", "наша", "наше"]
+      
+      - type: "morphology_pattern"
+        title: "The Pattern"
+        formula: "Possessive agrees with POSSESSED noun, not possessor"
+        examples:
+          - { ru: "Это наш дом.", en: "This is our house." }
+          - { ru: "Это наша машина.", en: "This is our car." }
+          - { ru: "Где твоя книга?", en: "Where is your book?" }
+        rule: "Look at what is owned, not who owns it, to pick the ending."
+    
+    vocab_ids: [my]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice with things around you: Это мой телефон. Это моя книга. Это моё..."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "мой/моя/моё = my (by gender)"
+          - "твой/твоя/твоё = your (informal)"
+          - "наш/наша/наше = our"
+          - "Possessive matches the possessed noun's gender"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
+  review:
+    from_lessons: [04_gender, 06_possession]
+
+templates:
+  - pattern: "Это {POSS} {NOUN}."
+    translation: "This is {POSS.translation} {NOUN.translation}."
+    slots:
+      POSS: { pos: [pronoun] }
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "Где {POSS} {NOUN}?"
+    translation: "Where is {POSS.translation} {NOUN.translation}?"
+    slots:
+      POSS: { pos: [pronoun] }
+      NOUN: { pos: [noun] }
+    weight: 3

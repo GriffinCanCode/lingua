@@ -1,0 +1,159 @@
+# Unit 1, Lesson 4: He, She, It
+# 5 modules with teaching content
+
+lesson:
+  id: "04_gender"
+  title: "He, She, It"
+  subtitle: "Master grammatical gender and pronouns"
+  icon: "users"
+
+modules:
+  - id: "mod_1"
+    title: "Masculine Nouns"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Gender System"
+        content: |
+          Russian has 3 genders: masculine, feminine, and neuter.
+          Good news: you can usually tell by the ending!
+          
+          Masculine nouns typically end in a consonant:
+          кот, дом, банк, парк
+      
+      - type: "pattern_table"
+        title: "Masculine Examples"
+        columns: ["Word", "Translation", "Ending"]
+        rows:
+          - ["кот", "cat", "consonant"]
+          - ["дом", "house", "consonant"]
+          - ["банк", "bank", "consonant"]
+          - ["парк", "park", "consonant"]
+      
+      - type: "word_intro"
+        words:
+          - word: "он"
+            translation: "he / it (masculine)"
+            note: "Use for masculine nouns AND male people"
+    
+    vocab_ids: [on, kot, dom, bank, park]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Feminine Nouns"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Spotting Feminine"
+        content: |
+          Feminine nouns usually end in -а or -я.
+          This is one of the most reliable patterns!
+          
+          мама, книга, собака - all feminine!
+      
+      - type: "pattern_table"
+        title: "Feminine Examples"
+        columns: ["Word", "Translation", "Ending"]
+        rows:
+          - ["мама", "mom", "-а"]
+          - ["книга", "book", "-а"]
+          - ["собака", "dog", "-а"]
+          - ["сестра", "sister", "-а"]
+      
+      - type: "word_intro"
+        words:
+          - word: "она"
+            translation: "she / it (feminine)"
+            note: "Use for feminine nouns AND female people"
+    
+    vocab_ids: [ona, mama, kniga, sobaka, sestra]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Neuter Nouns"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Third Gender"
+        content: |
+          Neuter nouns end in -о or -е.
+          They're less common, but very predictable.
+      
+      - type: "pattern_table"
+        title: "Neuter Examples"
+        columns: ["Word", "Translation", "Ending"]
+        rows:
+          - ["окно", "window", "-о"]
+          - ["метро", "metro", "-о"]
+          - ["радио", "radio", "-о"]
+      
+      - type: "word_intro"
+        words:
+          - word: "оно"
+            translation: "it (neuter)"
+            note: "Less common than он/она"
+      
+      - type: "morphology_pattern"
+        title: "Gender Summary"
+        formula: "Consonant → он | -а/-я → она | -о/-е → оно"
+        examples:
+          - { ru: "Где кот? Он там.", en: "Where's the cat? It's there." }
+          - { ru: "Где книга? Она тут.", en: "Where's the book? It's here." }
+          - { ru: "Где окно? Оно там.", en: "Where's the window? It's there." }
+        rule: "Match the pronoun to the noun's gender, not the meaning!"
+    
+    vocab_ids: [ono, okno, metro, radio]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Look at the ending! Consonant = он, -а = она, -о = оно. Trust the pattern!"
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Masculine (он): ends in consonant"
+          - "Feminine (она): ends in -а or -я"
+          - "Neuter (оно): ends in -о or -е"
+          - "Pronouns match noun gender, not biological gender"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [on, ona, ono, dom, kniga, okno, park, sobaka]
+  review:
+    from_lessons: [01_cognates, 02_hello]
+
+templates:
+  - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."
+    translation: "Where is {NOUN.translation}? {PRONOUN.translation} is {LOCATION.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+      PRONOUN: { pos: [pronoun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 4
+
+  - pattern: "{PRONOUN} {LOCATION}."
+    translation: "{PRONOUN.translation} is {LOCATION.translation}."
+    slots:
+      PRONOUN: { pos: [pronoun] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3

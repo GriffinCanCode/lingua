@@ -1,39 +1,23 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
-import type { PatternFillExercise, ExerciseComponentProps, GrammaticalCase } from '../../types/exercises';
+import type { PatternFillExercise, ExerciseComponentProps, GrammaticalCase, CaseConfig } from '../../types/exercises';
 
-const CASE_LABELS: Record<GrammaticalCase, string> = {
-  nominative: 'Nominative',
-  genitive: 'Genitive',
-  dative: 'Dative',
-  accusative: 'Accusative',
-  instrumental: 'Instrumental',
-  prepositional: 'Prepositional',
-};
-
-const CASE_HINTS: Record<GrammaticalCase, string> = {
-  nominative: 'кто? что? (who? what?)',
-  genitive: 'кого? чего? (of whom? of what?)',
-  dative: 'кому? чему? (to whom? to what?)',
-  accusative: 'кого? что? (whom? what?)',
-  instrumental: 'кем? чем? (with whom? with what?)',
-  prepositional: 'о ком? о чём? (about whom? about what?)',
-};
-
-const CASE_COLORS: Record<GrammaticalCase, { bg: string; text: string; border: string }> = {
-  nominative: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-300' },
-  genitive: { bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-300' },
-  dative: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-300' },
-  accusative: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-300' },
-  instrumental: { bg: 'bg-pink-50', text: 'text-pink-700', border: 'border-pink-300' },
-  prepositional: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-300' },
+// Fallback case config when API data not available
+const DEFAULT_CASES: Record<GrammaticalCase, CaseConfig> = {
+  nominative: { id: 'nominative', label: 'Nominative', hint: 'кто? что? (who? what?)', color: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-300' } },
+  genitive: { id: 'genitive', label: 'Genitive', hint: 'кого? чего? (of whom? of what?)', color: { bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-300' } },
+  dative: { id: 'dative', label: 'Dative', hint: 'кому? чему? (to whom? to what?)', color: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-300' } },
+  accusative: { id: 'accusative', label: 'Accusative', hint: 'кого? что? (whom? what?)', color: { bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-300' } },
+  instrumental: { id: 'instrumental', label: 'Instrumental', hint: 'кем? чем? (with whom? with what?)', color: { bg: 'bg-pink-50', text: 'text-pink-700', border: 'border-pink-300' } },
+  prepositional: { id: 'prepositional', label: 'Prepositional', hint: 'о ком? о чём? (about whom? about what?)', color: { bg: 'bg-cyan-50', text: 'text-cyan-700', border: 'border-cyan-300' } },
 };
 
 export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> = ({
   exercise,
   onSubmit,
   disabled = false,
+  grammarConfig,
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -43,7 +27,14 @@ export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> 
     [exercise.options]
   );
 
-  const caseColors = CASE_COLORS[exercise.targetCase];
+  // Get case config from grammar config or fallback
+  const caseConfig = useMemo(() => {
+    if (grammarConfig) {
+      const found = grammarConfig.cases.find(c => c.id === exercise.targetCase);
+      if (found) return found;
+    }
+    return DEFAULT_CASES[exercise.targetCase];
+  }, [grammarConfig, exercise.targetCase]);
 
   const handleSelect = useCallback((option: string) => {
     if (disabled || submitted) return;
@@ -59,7 +50,7 @@ export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> 
   const getOptionStyle = (option: string) => {
     if (!submitted) {
       return selected === option
-        ? `${caseColors.bg} ${caseColors.text} border-2 ${caseColors.border}`
+        ? `${caseConfig.color.bg} ${caseConfig.color.text} border-2 ${caseConfig.color.border}`
         : 'bg-white border-gray-200 text-gray-800 hover:border-gray-400';
     }
 
@@ -81,9 +72,9 @@ export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> 
         </p>
         <div className={clsx(
           'inline-block px-3 py-1 rounded-full text-xs font-bold',
-          caseColors.bg, caseColors.text
+          caseConfig.color.bg, caseConfig.color.text
         )}>
-          {CASE_LABELS[exercise.targetCase]} • {exercise.targetNumber}
+          {caseConfig.label} • {exercise.targetNumber}
         </div>
       </div>
 
@@ -91,7 +82,7 @@ export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> 
       <div className="flex-1 flex flex-col items-center justify-center">
         <div className="mb-4">
           <p className="text-gray-500 text-sm mb-1">{exercise.translation}</p>
-          <p className="text-gray-400 text-xs">{CASE_HINTS[exercise.targetCase]}</p>
+          <p className="text-gray-400 text-xs">{caseConfig.hint}</p>
         </div>
 
         {/* Stem + Ending visualization */}
@@ -104,7 +95,7 @@ export const PatternFill: React.FC<ExerciseComponentProps<PatternFillExercise>> 
                 ? selected === exercise.correctEnding
                   ? 'border-green-400 bg-green-100 text-green-700'
                   : 'border-red-400 bg-red-100 text-red-700'
-                : `${caseColors.border} ${caseColors.bg} ${caseColors.text}`
+                : `${caseConfig.color.border} ${caseConfig.color.bg} ${caseConfig.color.text}`
               : 'border-gray-300 bg-gray-50 text-gray-400'
           )}>
             {selected || '?'}

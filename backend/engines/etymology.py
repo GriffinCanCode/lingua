@@ -5,6 +5,7 @@ with monadic error handling.
 """
 from dataclasses import dataclass
 
+from core.logging import engine_logger
 from core.errors import (
     AppError,
     Ok,
@@ -12,6 +13,8 @@ from core.errors import (
     Result,
     not_found,
 )
+
+log = engine_logger()
 
 
 @dataclass(frozen=True, slots=True)
@@ -89,6 +92,7 @@ class EtymologyEngine:
     def find_cognates(self, word: str, source_language: str = "ru") -> list[dict]:
         """Find cognates of a word across languages."""
         cognates = SAMPLE_COGNATES.get(word, [])
+        log.debug("find_cognates", word=word, source_language=source_language, found=len(cognates))
         return [
             {"word": c.word, "language": c.language, "meaning": c.meaning, "is_reconstructed": c.is_reconstructed}
             for c in cognates
@@ -98,7 +102,9 @@ class EtymologyEngine:
         """Find cognates with Result type."""
         cognates = SAMPLE_COGNATES.get(word)
         if cognates is None:
+            log.debug("cognates_not_found", word=word)
             return not_found("Cognates", word, origin="etymology_engine")
+        log.debug("cognates_found", word=word, count=len(cognates))
         return Ok(list(cognates))
     
     def get_etymology_chain(self, word: str, language: str = "ru") -> list[dict]:

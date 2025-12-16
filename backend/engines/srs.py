@@ -6,13 +6,15 @@ Uses Result types for predictable error propagation.
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 
+from core.logging import srs_logger
 from core.errors import (
     AppError,
     Ok,
-    Err,
     Result,
     out_of_range,
 )
+
+log = srs_logger()
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,12 +71,14 @@ class SRSEngine:
         elif quality == 5:
             new_interval = round(new_interval * 1.3)
         
-        return {
+        result = {
             "ease_factor": new_ef,
             "interval": new_interval,
             "repetitions": new_repetitions,
             "next_review": datetime.utcnow() + timedelta(days=new_interval),
         }
+        log.debug("sm2_calculated", quality=quality, new_interval=new_interval, new_ef=round(new_ef, 2))
+        return result
     
     def calculate_sm2_result(
         self,
@@ -90,6 +94,7 @@ class SRSEngine:
             Err(AppError) if quality out of range
         """
         if not 0 <= quality <= 5:
+            log.warning("sm2_quality_out_of_range", quality=quality)
             return out_of_range("quality", quality, 0, 5, origin="srs_engine")
         
         result = self.calculate_sm2(quality, repetitions, ease_factor, interval)

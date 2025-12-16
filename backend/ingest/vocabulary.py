@@ -31,6 +31,7 @@ class VocabEntry:
     transliteration: str = ""
     pos: str = ""
     gender: str | None = None
+    semantic: list[str] = field(default_factory=list)
     frequency: int = 2
     difficulty: int = 1
     audio: str | None = None
@@ -146,6 +147,7 @@ class VocabularyLoader:
             transliteration=data.get("transliteration", ""),
             pos=data.get("pos", ""),
             gender=data.get("gender"),
+            semantic=data.get("semantic", []),
             frequency=data.get("frequency", 2),
             difficulty=data.get("difficulty", 1),
             audio=data.get("audio"),
@@ -195,11 +197,14 @@ class VocabularyLoader:
     def vocab_to_dict(self, vocab: VocabEntry) -> dict:
         """Convert VocabEntry to dict for API/exercise generation."""
         return {
+            "id": vocab.id,
             "word": vocab.word,
             "translation": vocab.translation,
+            "pos": vocab.pos,
             "audio": vocab.audio,
             "hints": [vocab.notes] if vocab.notes else [],
             "gender": vocab.gender,
+            "semantic": vocab.semantic,
             "transliteration": vocab.transliteration,
         }
 

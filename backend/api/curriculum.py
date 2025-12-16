@@ -23,12 +23,126 @@ from models.curriculum import (
 )
 from engines.curriculum import CurriculumEngine
 from engines.exercises import generate_exercises
+from engines.templates import TemplateFiller, Template, VocabItem, load_templates
 from ingest.vocabulary import get_vocabulary_loader
 
 log = api_logger()
 
+
+def _load_vocab_for_lesson(lesson_data: dict, language: str) -> tuple[list[dict], list[dict]]:
+    """Load vocabulary based on lesson's vocab_filter."""
+    loader = get_vocabulary_loader(language)
+    vocab_filter = lesson_data.get("vocab_filter", {})
+    
+    # Load primary vocabulary
+    primary_ids = vocab_filter.get("primary", {}).get("ids", [])
+    unit = loader.load_unit("unit1")  # TODO: Make unit dynamic
+    
+    if not unit:
+        return [], []
+    
+    vocab_by_id = {v.id: v for v in unit.all_vocab}
+    primary = [loader.vocab_to_dict(vocab_by_id[vid]) for vid in primary_ids if vid in vocab_by_id]
+    
+    # Load review vocabulary from previous lessons
+    review: list[dict] = []
+    review_lessons = vocab_filter.get("review", {}).get("from_lessons", [])
+    for lesson_id in review_lessons:
+        lesson_vocab = unit.by_lesson.get(f"lesson_{lesson_id.split('_')[0]}_{lesson_id.split('_')[1] if '_' in lesson_id else lesson_id}")
+        if lesson_vocab:
+            review.extend([loader.vocab_to_dict(v) for v in lesson_vocab.primary[:3]])
+    
+    return primary, review
+
+
+def _generate_sentences_from_templates(lesson_data: dict, vocabulary: list[dict], count: int = 15) -> list[dict]:
+    """Generate sentences from templates using vocabulary."""
+    templates = load_templates(lesson_data)
+    if not templates:
+        return []
+    
+    # Convert vocab dicts to VocabItems
+    vocab_items = [
+        VocabItem(
+            id=v.get("id", v.get("word", "")),
+            word=v.get("word", ""),
+            translation=v.get("translation", ""),
+            pos=v.get("pos", ""),
+            gender=v.get("gender"),
+            semantic=v.get("semantic", []),
+        )
+        for v in vocabulary
+    ]
+    
+    filler = TemplateFiller(vocab_items, "ru")
+    filled = filler.generate_sentences(templates, count)
+    
+    # Convert FilledSentences to dict format for exercise generator
+    return [
+        {
+            "text": s.text,
+            "translation": s.translation,
+            "words": s.words,
+            "distractors": s.distractors,
+            "complexity": s.complexity,
+        }
+        for s in filled
+    ]
+
 # Base path for content
 CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
+
+
+def _parse_modules(raw_modules: list[dict], exercises: list[dict]) -> list["ModuleResponse"]:
+    """Parse module definitions and distribute exercises among them."""
+    modules = []
+    total_exercises = len(exercises)
+    exercise_idx = 0
+    
+    for mod in raw_modules:
+        mod_id = mod.get("id", f"mod_{len(modules) + 1}")
+        mod_title = mod.get("title", f"Module {len(modules) + 1}")
+        mod_type = mod.get("type", "practice")
+        
+        # Parse teaching content
+        teaching = []
+        for t in mod.get("teaching", []):
+            teaching.append(TeachingContentResponse(
+                type=t.get("type", "explanation"),
+                title=t.get("title"),
+                content=t.get("content"),
+                columns=t.get("columns"),
+                rows=t.get("rows"),
+                word=t.get("word"),
+                connections=t.get("connections"),
+                insight=t.get("insight"),
+                formula=t.get("formula"),
+                examples=t.get("examples"),
+                rule=t.get("rule"),
+                words=t.get("words"),
+                points=t.get("points"),
+            ))
+        
+        # Calculate exercise count for this module
+        exercise_config = mod.get("exercises", {})
+        mod_exercise_count = exercise_config.get("count", 7) if isinstance(exercise_config, dict) else 7
+        
+        # Distribute remaining exercises proportionally
+        remaining_modules = len(raw_modules) - len(modules)
+        remaining_exercises = total_exercises - exercise_idx
+        actual_count = min(mod_exercise_count, remaining_exercises // max(remaining_modules, 1))
+        
+        modules.append(ModuleResponse(
+            id=mod_id,
+            title=mod_title,
+            type=mod_type,
+            teaching=teaching,
+            exercise_count=max(actual_count, 1) if remaining_exercises > 0 else 0,
+        ))
+        
+        exercise_idx += actual_count
+    
+    return modules
 
 
 def get_lessons_dirs(language: str) -> list[Path]:
@@ -106,6 +220,31 @@ class ExerciseResponse(BaseModel):
     model_config = {"extra": "allow"}
 
 
+class TeachingContentResponse(BaseModel):
+    type: str
+    title: str | None = None
+    content: str | None = None
+    columns: list[str] | None = None
+    rows: list[list[str]] | None = None
+    word: str | None = None
+    connections: list[dict[str, str]] | None = None
+    insight: str | None = None
+    formula: str | None = None
+    examples: list[dict[str, str]] | None = None
+    rule: str | None = None
+    words: list[dict[str, str]] | None = None
+    points: list[str] | None = None
+    model_config = {"extra": "allow"}
+
+
+class ModuleResponse(BaseModel):
+    id: str
+    title: str
+    type: str  # intro, learn, pattern, practice, master
+    teaching: list[TeachingContentResponse]
+    exercise_count: int
+
+
 class LessonExercisesResponse(BaseModel):
     node_id: str
     node_title: str
@@ -115,6 +254,7 @@ class LessonExercisesResponse(BaseModel):
     total_exercises: int
     vocabulary: list[dict[str, Any]]
     content: dict[str, Any] | None = None
+    modules: list[ModuleResponse] | None = None
 
 
 # === Helper Functions ===
@@ -303,7 +443,20 @@ async def get_lesson_exercises(
         language=language,
     )
 
-    log.info("exercises_generated", node_id=str(node_id), exercise_count=len(exercises), language=language)
+    # Parse modules from lesson data if available
+    modules = None
+    if lesson_data:
+        raw_modules = lesson_data.get("modules", [])
+        if raw_modules:
+            modules = _parse_modules(raw_modules, exercises)
+    
+    # Include modules in content for frontend compatibility
+    if modules and content:
+        content["modules"] = [m.model_dump() for m in modules]
+    elif modules:
+        content = {"modules": [m.model_dump() for m in modules]}
+
+    log.info("exercises_generated", node_id=str(node_id), exercise_count=len(exercises), module_count=len(modules) if modules else 0, language=language)
     return LessonExercisesResponse(
         node_id=str(node_id),
         node_title=node.title,
@@ -313,6 +466,7 @@ async def get_lesson_exercises(
         total_exercises=len(exercises),
         vocabulary=vocabulary,
         content=content,
+        modules=modules,
     )
 
 

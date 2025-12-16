@@ -17,6 +17,9 @@ from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import get_db_session
+from core.logging import db_logger
+
+log = db_logger()
 from models.srs import Sentence, SyntacticPattern, SentencePattern
 from models.morphology import Lemma, Inflection
 from models.etymology import EtymologyNode, EtymologyRelation
@@ -163,6 +166,7 @@ class IngestionPipeline:
         """Ingest UD corpus with bulk operations."""
         stats = IngestionStats()
         source = "universal_dependencies"
+        log.info("ud_ingestion_started", file_path=str(conllu_path), language=self.language)
 
         # Parse all sentences first for complexity calibration
         sentences = list(CoNLLUParser().parse_file(conllu_path))
@@ -199,11 +203,13 @@ class IngestionPipeline:
                 record.status = "failed"
                 record.error_log = [str(e)]
                 stats.errors.append(str(e))
+                log.error("ud_ingestion_failed", error=str(e), records_processed=stats.records_processed)
                 raise
             finally:
                 await session.commit()
 
         stats.completed_at = datetime.utcnow()
+        log.info("ud_ingestion_completed", records_created=stats.records_created, records_skipped=stats.records_skipped)
         return stats
 
     async def _process_ud_batch(
@@ -287,6 +293,7 @@ class IngestionPipeline:
         """Ingest Tatoeba with bulk operations."""
         stats = IngestionStats()
         source = "tatoeba"
+        log.info("tatoeba_ingestion_started", sentences_path=str(sentences_path), language=self.language, limit=limit)
 
         async with get_db_session() as session:
             await self._preload_caches(session, source)
@@ -331,11 +338,13 @@ class IngestionPipeline:
                 record.status = "failed"
                 record.error_log = [str(e)]
                 stats.errors.append(str(e))
+                log.error("tatoeba_ingestion_failed", error=str(e), records_processed=stats.records_processed)
                 raise
             finally:
                 await session.commit()
 
         stats.completed_at = datetime.utcnow()
+        log.info("tatoeba_ingestion_completed", records_created=stats.records_created, records_updated=stats.records_updated)
         return stats
 
     async def _process_tatoeba_batch(
@@ -404,6 +413,7 @@ class IngestionPipeline:
         """Ingest Wiktionary with bulk operations."""
         stats = IngestionStats()
         source = "wiktionary"
+        log.info("wiktionary_ingestion_started", dump_path=str(dump_path), language=self.language)
 
         async with get_db_session() as session:
             await self._preload_caches(session, source)
@@ -440,11 +450,13 @@ class IngestionPipeline:
                 record.status = "failed"
                 record.error_log = [str(e)]
                 stats.errors.append(str(e))
+                log.error("wiktionary_ingestion_failed", error=str(e), records_processed=stats.records_processed)
                 raise
             finally:
                 await session.commit()
 
         stats.completed_at = datetime.utcnow()
+        log.info("wiktionary_ingestion_completed", records_created=stats.records_created, records_skipped=stats.records_skipped)
         return stats
 
     async def _process_wikt_batch(

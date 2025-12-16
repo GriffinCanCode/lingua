@@ -1,0 +1,145 @@
+# Unit 1, Lesson 3: Is this a...?
+# 5 modules with teaching content
+
+lesson:
+  id: "03_questions"
+  title: "Is this a...?"
+  subtitle: "Ask yes/no questions and understand answers"
+  icon: "help-circle"
+
+modules:
+  - id: "mod_1"
+    title: "Question Intonation"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Magic of Intonation"
+        content: |
+          In Russian, you don't need to change word order for questions!
+          Just raise your voice at the end.
+          
+          Это кот. (This is a cat.) ↘
+          Это кот? (Is this a cat?) ↗
+      
+      - type: "pattern_table"
+        title: "Statement vs Question"
+        columns: ["Statement", "Question"]
+        rows:
+          - ["Это такси.", "Это такси?"]
+          - ["Мама там.", "Мама там?"]
+          - ["Он студент.", "Он студент?"]
+      
+      - type: "tip"
+        content: "The only difference is how you say it. Raise your pitch on the stressed syllable!"
+    
+    vocab_ids: [eto, kot, taksi]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Yes & No"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "да"
+            translation: "yes"
+            note: "Also used as 'yeah', 'uh-huh' in conversation"
+          - word: "нет"
+            translation: "no"
+            note: "Н sounds like 'n'. Also means 'there isn't any'"
+      
+      - type: "etymology"
+        title: "Universal Words"
+        word: "да"
+        connections:
+          - { word: "da", lang: "Serbian", relation: "cognate" }
+          - { word: "da", lang: "Bulgarian", relation: "cognate" }
+          - { word: "tak", lang: "Polish", relation: "cousin" }
+        insight: "Да is shared across all Slavic languages - instant communication with millions!"
+    
+    vocab_ids: [da, nyet]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Negation"
+    type: "pattern"
+    
+    teaching:
+      - type: "morphology_pattern"
+        title: "Making Things Negative"
+        formula: "не + {WORD} = not {WORD}"
+        examples:
+          - { ru: "Это не кот.", en: "This is not a cat." }
+          - { ru: "Он не там.", en: "He is not there." }
+          - { ru: "Я не студент.", en: "I am not a student." }
+        rule: "Put 'не' right before what you're negating. It's that simple!"
+      
+      - type: "word_intro"
+        words:
+          - word: "не"
+            translation: "not"
+            note: "Goes directly before the negated word"
+      
+      - type: "tip"
+        content: "не кот = not a cat. не там = not there. Just add не!"
+    
+    vocab_ids: [nye, da, nyet]
+    exercises:
+      count: 8
+      templates:
+        - pattern: "Это не {NOUN}."
+          weight: 4
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice asking questions, then answering them yourself. Да, это кот. Нет, это не кот."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Questions use rising intonation (no word changes!)"
+          - "да = yes, нет = no"
+          - "не = not (put it before what you negate)"
+          - "Question and answer patterns"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [da, nyet, nye, eto, kot, taksi, student]
+  review:
+    from_lessons: [01_cognates, 02_hello]
+
+templates:
+  - pattern: "Это {NOUN}?"
+    translation: "Is this {NOUN.translation}?"
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "Это не {NOUN}."
+    translation: "This is not {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 3
+
+  - pattern: "Да, это {NOUN}."
+    translation: "Yes, this is {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 2

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Lock, Star, Zap, Target, Award, Check, Lightbulb } from 'lucide-react';
+import { ChevronDown, ChevronUp, Lock, Check, Crown } from 'lucide-react';
 import clsx from 'clsx';
 
 export interface LevelNode {
@@ -10,7 +10,8 @@ export interface LevelNode {
   level_type: 'intro' | 'easy' | 'medium' | 'hard' | 'review';
   status: 'locked' | 'available' | 'in_progress' | 'completed';
   total_reviews: number;
-  estimated_duration_min: number;
+  modules_completed?: number;
+  modules_total?: number;
 }
 
 interface UnitCardProps {
@@ -27,121 +28,214 @@ interface UnitCardProps {
   onNodeClick: (node: LevelNode) => void;
 }
 
-// Level type styling and icons
-const LEVEL_CONFIG: Record<string, { icon: React.ReactNode; color: string; bgColor: string; label: string }> = {
-  intro: {
-    icon: <Lightbulb size={16} />,
-    color: 'text-yellow-600',
-    bgColor: 'bg-yellow-100 border-yellow-300',
-    label: 'Learn',
-  },
-  easy: {
-    icon: <Star size={16} />,
-    color: 'text-green-600',
-    bgColor: 'bg-green-100 border-green-300',
-    label: 'Easy',
-  },
-  medium: {
-    icon: <Zap size={16} />,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-100 border-blue-300',
-    label: 'Medium',
-  },
-  hard: {
-    icon: <Target size={16} />,
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-100 border-purple-300',
-    label: 'Hard',
-  },
-  review: {
-    icon: <Award size={16} />,
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-100 border-orange-300',
-    label: 'Review',
-  },
+// Duolingo-style progress ring with segments
+const LessonRing: React.FC<{
+  progress: number; // 0-100
+  size?: number;
+  strokeWidth?: number;
+  isActive?: boolean;
+  isCompleted?: boolean;
+  isLocked?: boolean;
+  color?: string;
+}> = ({ progress, size = 80, strokeWidth = 6, isActive, isCompleted, isLocked, color = '#58cc02' }) => {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const offset = circumference - (progress / 100) * circumference;
+
+  return (
+    <div className="relative" style={{ width: size, height: size }}>
+      {/* Background ring */}
+      <svg width={size} height={size} className="absolute inset-0 transform -rotate-90">
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke={isLocked ? '#e5e7eb' : '#e5e7eb'}
+          strokeWidth={strokeWidth}
+          fill="none"
+        />
+        {/* Progress ring */}
+        {!isLocked && (
+          <motion.circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={isCompleted ? '#22c55e' : color}
+            strokeWidth={strokeWidth}
+            fill="none"
+            strokeLinecap="round"
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset: offset }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ strokeDasharray: circumference }}
+          />
+        )}
+      </svg>
+      
+      {/* Glow effect for active lesson */}
+      {isActive && !isCompleted && (
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: `radial-gradient(circle, ${color}20 0%, transparent 70%)`,
+          }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+      )}
+    </div>
+  );
 };
 
-const LevelBubble: React.FC<{
+// Single lesson node with Duolingo-style ring
+const LessonNode: React.FC<{
   node: LevelNode;
+  index: number;
   isFirst: boolean;
   onClick: () => void;
-}> = ({ node, isFirst, onClick }) => {
-  const config = LEVEL_CONFIG[node.level_type] || LEVEL_CONFIG.medium;
+}> = ({ node, index, isFirst, onClick }) => {
   const isLocked = node.status === 'locked';
   const isCompleted = node.status === 'completed';
   const isActive = node.status === 'available' || node.status === 'in_progress';
+  
+  // Module progress (default to 5 modules if not specified)
+  const modulesTotal = node.modules_total ?? 5;
+  const modulesCompleted = node.modules_completed ?? 0;
+  const moduleProgress = isCompleted ? 100 : (modulesCompleted / modulesTotal) * 100;
+  
+  // Alternating zigzag pattern like Duolingo
+  const offsetX = index % 2 === 0 ? 0 : 60;
+  
+  // Colors based on status
+  const ringColor = isCompleted ? '#22c55e' : isActive ? '#58cc02' : '#9ca3af';
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Connector line (except for first) */}
+    <div className="relative flex flex-col items-center" style={{ marginLeft: offsetX }}>
+      {/* Connector path to previous node */}
       {!isFirst && (
-        <div className={clsx(
-          "w-8 h-1 -mt-1 mb-1 rounded-full",
-          isLocked ? "bg-gray-200" : isCompleted ? "bg-green-400" : "bg-gray-300"
-        )} />
+        <svg
+          className="absolute -top-8 left-1/2"
+          width="80"
+          height="32"
+          style={{ transform: `translateX(${index % 2 === 0 ? '-70px' : '-10px'})` }}
+        >
+          <path
+            d={index % 2 === 0 
+              ? "M 70 32 Q 40 16 10 0"
+              : "M 10 32 Q 40 16 70 0"
+            }
+            stroke={isLocked ? '#e5e7eb' : isCompleted || isActive ? '#22c55e' : '#d1d5db'}
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
       )}
 
+      {/* Main lesson ring button */}
       <motion.button
-        whileHover={!isLocked ? { scale: 1.1 } : {}}
-        whileTap={!isLocked ? { scale: 0.95 } : {}}
         onClick={onClick}
         disabled={isLocked}
+        whileHover={!isLocked ? { scale: 1.05 } : {}}
+        whileTap={!isLocked ? { scale: 0.95 } : {}}
+        animate={isActive && !isCompleted ? { y: [0, -4, 0] } : {}}
+        transition={isActive ? { duration: 1.5, repeat: Infinity } : {}}
         className={clsx(
-          "relative w-14 h-14 rounded-full flex items-center justify-center border-2 transition-all",
-          isLocked && "bg-gray-100 border-gray-200 text-gray-300 cursor-not-allowed",
-          isCompleted && "bg-green-500 border-green-600 text-white",
-          isActive && `${config.bgColor} ${config.color} border-2 shadow-lg`,
+          "relative flex items-center justify-center rounded-full transition-all",
+          isLocked && "cursor-not-allowed",
+          isActive && "shadow-lg"
         )}
       >
-        {isLocked ? (
-          <Lock size={18} />
-        ) : isCompleted ? (
-          <Check size={20} strokeWidth={3} />
-        ) : (
-          config.icon
-        )}
+        <LessonRing
+          progress={moduleProgress}
+          size={isActive ? 88 : 76}
+          strokeWidth={isActive ? 7 : 5}
+          isActive={isActive}
+          isCompleted={isCompleted}
+          isLocked={isLocked}
+          color={ringColor}
+        />
+        
+        {/* Inner circle with icon/content */}
+        <div
+          className={clsx(
+            "absolute rounded-full flex items-center justify-center font-black text-lg transition-all",
+            isLocked && "bg-gray-100 text-gray-400",
+            isCompleted && "bg-green-500 text-white",
+            isActive && "bg-[#58cc02] text-white shadow-md"
+          )}
+          style={{
+            width: isActive ? 64 : 56,
+            height: isActive ? 64 : 56,
+          }}
+        >
+          {isLocked ? (
+            <Lock size={24} />
+          ) : isCompleted ? (
+            modulesCompleted >= modulesTotal ? (
+              <Crown size={24} className="text-yellow-300" />
+            ) : (
+              <Check size={24} strokeWidth={3} />
+            )
+          ) : (
+            <span className="text-xl">{node.level}</span>
+          )}
+        </div>
 
-        {/* Level number badge */}
-        <span className={clsx(
-          "absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center",
-          isLocked ? "bg-gray-200 text-gray-400" :
-          isCompleted ? "bg-green-700 text-white" :
-          "bg-white border border-gray-200 text-gray-600"
-        )}>
-          {node.level}
-        </span>
+        {/* Module segment indicators */}
+        {isActive && !isCompleted && modulesTotal > 0 && (
+          <div className="absolute -bottom-6 flex gap-1">
+            {Array.from({ length: modulesTotal }).map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                className={clsx(
+                  "w-2 h-2 rounded-full",
+                  i < modulesCompleted ? "bg-green-500" : "bg-gray-300"
+                )}
+              />
+            ))}
+          </div>
+        )}
       </motion.button>
 
-      {/* Label */}
-      <span className={clsx(
-        "mt-2 text-xs font-medium",
-        isLocked ? "text-gray-300" :
-        isCompleted ? "text-green-600" :
-        isActive ? config.color : "text-gray-500"
-      )}>
-        {config.label}
-      </span>
+      {/* Lesson title */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className={clsx(
+          "mt-3 text-center max-w-[100px]",
+          isActive && "mt-8" // Extra margin for module dots
+        )}
+      >
+        <p className={clsx(
+          "text-sm font-bold truncate",
+          isLocked ? "text-gray-400" :
+          isCompleted ? "text-green-600" :
+          isActive ? "text-gray-800" : "text-gray-500"
+        )}>
+          {node.title}
+        </p>
+        {isActive && !isCompleted && (
+          <p className="text-xs text-gray-500 mt-0.5">
+            {modulesCompleted}/{modulesTotal} modules
+          </p>
+        )}
+      </motion.div>
     </div>
   );
 };
 
 export const UnitCard: React.FC<UnitCardProps> = ({
-  title,
-  description,
-  unitNumber,
-  nodes,
-  isExpanded: initialExpanded = false,
-  isCurrent = false,
-  isLocked = false,
-  completedCount,
-  totalCount,
-  onNodeClick,
+  title, description, unitNumber, nodes,
+  isExpanded: initialExpanded = false, isCurrent = false, isLocked = false,
+  completedCount, totalCount, onNodeClick,
 }) => {
   const [isExpanded, setIsExpanded] = useState(initialExpanded || isCurrent);
   const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
   const isComplete = completedCount === totalCount && totalCount > 0;
-
-  // Find the next available level
   const nextLevel = nodes.find(n => n.status === 'available' || n.status === 'in_progress');
 
   return (
@@ -150,34 +244,27 @@ export const UnitCard: React.FC<UnitCardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       className={clsx(
         "rounded-3xl overflow-hidden transition-all",
-        isCurrent
-          ? "bg-gradient-to-br from-green-500 to-emerald-600 shadow-xl shadow-green-200"
-          : isLocked
-            ? "bg-gray-100 opacity-60"
-            : isComplete
-              ? "bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg"
-              : "bg-white border border-gray-200 shadow-sm"
+        isCurrent ? "bg-gradient-to-br from-green-500 to-emerald-600 shadow-xl shadow-green-200" :
+        isLocked ? "bg-gray-100 opacity-60" :
+        isComplete ? "bg-gradient-to-br from-yellow-400 to-amber-500 shadow-lg shadow-yellow-200" :
+        "bg-white border border-gray-200 shadow-sm"
       )}
     >
       {/* Header */}
       <button
         onClick={() => !isLocked && setIsExpanded(!isExpanded)}
         disabled={isLocked}
-        className={clsx(
-          "w-full p-6 flex items-center gap-4 text-left transition-colors",
-          !isLocked && "hover:bg-white/10"
-        )}
+        className={clsx("w-full p-6 flex items-center gap-4 text-left transition-colors", !isLocked && "hover:bg-white/10")}
       >
-        {/* Unit Number Badge */}
+        {/* Unit badge with crown for completed */}
         <div className={clsx(
-          "w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shrink-0",
-          isCurrent || isComplete
-            ? "bg-white/20 text-white"
-            : isLocked
-              ? "bg-gray-200 text-gray-400"
-              : "bg-primary-100 text-primary-600"
+          "w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shrink-0 relative",
+          isCurrent ? "bg-white/20 text-white" :
+          isComplete ? "bg-white/30 text-white" :
+          isLocked ? "bg-gray-200 text-gray-400" :
+          "bg-primary-100 text-primary-600"
         )}>
-          {unitNumber}
+          {isComplete ? <Crown size={28} /> : unitNumber}
         </div>
 
         {/* Title & Description */}
@@ -186,7 +273,7 @@ export const UnitCard: React.FC<UnitCardProps> = ({
             "text-xs font-bold uppercase tracking-wider mb-1",
             isCurrent || isComplete ? "text-white/70" : "text-gray-400"
           )}>
-            Unit {unitNumber} · {nodes.length} levels
+            Unit {unitNumber} · {nodes.length} lessons
           </p>
           <h3 className={clsx(
             "font-bold text-lg truncate",
@@ -202,37 +289,27 @@ export const UnitCard: React.FC<UnitCardProps> = ({
           </p>
         </div>
 
-        {/* Progress & Expand */}
+        {/* Progress ring for unit */}
         <div className="flex items-center gap-3 shrink-0">
           {!isLocked && (
-            <div className="text-right">
-              <div className={clsx(
-                "text-xs font-bold",
-                isCurrent || isComplete ? "text-white/70" : "text-gray-400"
+            <div className="relative w-12 h-12">
+              <LessonRing
+                progress={progress}
+                size={48}
+                strokeWidth={4}
+                isCompleted={isComplete}
+                color={isCurrent ? '#ffffff' : isComplete ? '#fbbf24' : '#58cc02'}
+              />
+              <span className={clsx(
+                "absolute inset-0 flex items-center justify-center text-xs font-bold",
+                isCurrent || isComplete ? "text-white" : "text-gray-600"
               )}>
                 {completedCount}/{totalCount}
-              </div>
-              <div className={clsx(
-                "w-16 h-2 rounded-full overflow-hidden mt-1",
-                isCurrent || isComplete ? "bg-white/20" : "bg-gray-200"
-              )}>
-                <motion.div
-                  className={clsx(
-                    "h-full rounded-full",
-                    isCurrent || isComplete ? "bg-white" : "bg-primary-500"
-                  )}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
+              </span>
             </div>
           )}
 
-          <div className={clsx(
-            "w-10 h-10 rounded-xl flex items-center justify-center",
-            isCurrent || isComplete ? "bg-white/10" : "bg-gray-100"
-          )}>
+          <div className={clsx("w-10 h-10 rounded-xl flex items-center justify-center", isCurrent || isComplete ? "bg-white/10" : "bg-gray-100")}>
             {isLocked ? (
               <Lock size={20} className="text-gray-400" />
             ) : isExpanded ? (
@@ -244,7 +321,7 @@ export const UnitCard: React.FC<UnitCardProps> = ({
         </div>
       </button>
 
-      {/* Expanded Content - Level Bubbles */}
+      {/* Expanded Content - Duolingo-style path */}
       <AnimatePresence>
         {isExpanded && !isLocked && (
           <motion.div
@@ -255,34 +332,42 @@ export const UnitCard: React.FC<UnitCardProps> = ({
             className="overflow-hidden"
           >
             <div className={clsx(
-              "p-6 pt-2",
-              isCurrent || isComplete ? "bg-white/10" : "bg-gray-50"
+              "px-6 pb-8 pt-4",
+              isCurrent || isComplete ? "bg-white/5" : "bg-gradient-to-b from-gray-50 to-white"
             )}>
-              {/* Level bubbles in a row */}
-              <div className="flex items-start justify-center gap-4 overflow-x-auto pb-2">
+              {/* Lesson path */}
+              <div className="flex flex-col items-center gap-10 py-4">
                 {nodes.map((node, idx) => (
-                  <LevelBubble
+                  <LessonNode
                     key={node.id}
                     node={node}
+                    index={idx}
                     isFirst={idx === 0}
                     onClick={() => onNodeClick(node)}
                   />
                 ))}
               </div>
 
-              {/* Quick start button for next level */}
+              {/* Quick start button */}
               {nextLevel && (
-                <button
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   onClick={() => onNodeClick(nextLevel)}
                   className={clsx(
-                    "w-full mt-4 py-3 rounded-xl font-bold text-sm transition-all",
+                    "w-full mt-6 py-4 rounded-2xl font-bold text-base transition-all shadow-lg",
                     isCurrent || isComplete
-                      ? "bg-white text-green-600 hover:bg-white/90"
-                      : "bg-primary-500 text-white hover:bg-primary-600"
+                      ? "bg-white text-green-600 hover:bg-white/90 shadow-white/20"
+                      : "bg-[#58cc02] text-white hover:bg-[#4db302] shadow-green-300/50"
                   )}
                 >
-                  {nextLevel.level === 1 ? 'Start Learning' : `Continue Level ${nextLevel.level}`}
-                </button>
+                  {nextLevel.status === 'in_progress' 
+                    ? `Continue: ${nextLevel.title}` 
+                    : nextLevel.level === 1 
+                      ? 'Start Learning' 
+                      : `Start: ${nextLevel.title}`
+                  }
+                </motion.button>
               )}
             </div>
           </motion.div>

@@ -1,0 +1,138 @@
+# Unit 1, Lesson 6: I have...
+# 5 modules - The possession construction
+
+lesson:
+  id: "06_possession"
+  title: "I have..."
+  subtitle: "Express what you have with У меня есть"
+  icon: "package"
+
+modules:
+  - id: "mod_1"
+    title: "У меня"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "How Russians Say 'I Have'"
+        content: |
+          Russian doesn't have a verb 'to have' like English.
+          Instead, they say "By me there is..."
+          
+          У меня есть кот = By me there is a cat = I have a cat
+      
+      - type: "word_intro"
+        words:
+          - word: "у меня"
+            translation: "I have / by me"
+            note: "Literally 'by me'"
+          - word: "есть"
+            translation: "there is / is"
+            note: "Often optional in simple statements"
+      
+      - type: "morphology_pattern"
+        title: "The Possession Formula"
+        formula: "У меня (есть) + {NOUN}"
+        examples:
+          - { ru: "У меня есть кот.", en: "I have a cat." }
+          - { ru: "У меня есть брат.", en: "I have a brother." }
+          - { ru: "У меня машина.", en: "I have a car." }
+        rule: "Есть is often dropped in casual speech, especially for obvious possessions."
+    
+    vocab_ids: [u_menya, yest]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Family & Things"
+    type: "learn"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "брат"
+            translation: "brother"
+          - word: "сестра"
+            translation: "sister"
+          - word: "машина"
+            translation: "car"
+            note: "Also means 'machine'"
+          - word: "собака"
+            translation: "dog"
+      
+      - type: "etymology"
+        title: "Word Family: машина"
+        word: "машина"
+        connections:
+          - { word: "machine", lang: "English", relation: "cognate" }
+          - { word: "machina", lang: "Latin", relation: "ancestor" }
+        insight: "In Russian, машина primarily means 'car' - the machine of the 20th century!"
+    
+    vocab_ids: [brat, sestra, mashina, sobaka]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Negative Possession"
+    type: "pattern"
+    
+    teaching:
+      - type: "morphology_pattern"
+        title: "I Don't Have"
+        formula: "У меня нет + {NOUN (genitive)}"
+        examples:
+          - { ru: "У меня нет кота.", en: "I don't have a cat." }
+          - { ru: "У меня нет машины.", en: "I don't have a car." }
+          - { ru: "У меня нет брата.", en: "I don't have a brother." }
+        rule: "Нет replaces есть, and the noun changes form (genitive case - we'll learn this later!)"
+      
+      - type: "tip"
+        content: "For now, just learn the negative phrases as set expressions. The grammar will come!"
+    
+    vocab_ids: [u_menya, yest]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Talk about what you have! У меня есть телефон. У меня есть кот. Real practice = real progress."
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "У меня есть = I have (by me there is)"
+          - "У меня нет = I don't have"
+          - "Family: брат (brother), сестра (sister)"
+          - "Things: машина (car), собака (dog)"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [u_menya, yest, brat, sestra, mashina, sobaka, telefon]
+  review:
+    from_lessons: [01_cognates, 04_gender]
+
+templates:
+  - pattern: "У меня есть {NOUN}."
+    translation: "I have a {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "У меня {NOUN}."
+    translation: "I have a {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 3

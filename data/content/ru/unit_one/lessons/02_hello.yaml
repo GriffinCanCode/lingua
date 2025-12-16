@@ -1,0 +1,136 @@
+# Unit 1, Lesson 2: Hello & Goodbye
+# 5 modules with teaching content
+
+lesson:
+  id: "02_hello"
+  title: "Hello & Goodbye"
+  subtitle: "Greet people and make a good impression"
+  icon: "wave"
+
+modules:
+  - id: "mod_1"
+    title: "Informal Greetings"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Friends & Family"
+        content: |
+          Russian has two levels of politeness.
+          With friends, family, and kids - keep it casual!
+          
+          привет = hi (like 'hey!')
+          пока = bye (like 'later!')
+      
+      - type: "word_intro"
+        words:
+          - word: "привет"
+            translation: "hi"
+            note: "Informal - use with friends"
+          - word: "пока"
+            translation: "bye"
+            note: "Informal - also means 'for now'"
+      
+      - type: "tip"
+        content: "Say 'привет' to anyone you'd call by their first name."
+    
+    vocab_ids: [privet, poka]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Formal Greetings"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Showing Respect"
+        content: |
+          With strangers, elders, or in professional settings, use formal greetings.
+          It shows respect - and Russians appreciate it!
+      
+      - type: "word_intro"
+        words:
+          - word: "здравствуйте"
+            translation: "hello (formal)"
+            note: "The first В is silent! Say: zdra-STVUY-te"
+          - word: "до свидания"
+            translation: "goodbye (formal)"
+            note: "Literally 'until meeting'"
+      
+      - type: "etymology"
+        title: "Hidden Meaning"
+        word: "здравствуйте"
+        connections:
+          - { word: "health", lang: "English", relation: "cognate" }
+          - { word: "здоровье", lang: "Russian", relation: "cousin" }
+        insight: "Здравствуйте literally means 'be healthy!' - a wish, not just a greeting."
+    
+    vocab_ids: [zdravstvuyte, do_svidaniya]
+    exercises:
+      count: 7
+
+  - id: "mod_3"
+    title: "Zero Copula"
+    type: "pattern"
+    
+    teaching:
+      - type: "morphology_pattern"
+        title: "No 'is' Needed"
+        formula: "{SUBJECT} + {PREDICATE} (no 'is'!)"
+        examples:
+          - { ru: "Я студент.", en: "I am a student." }
+          - { ru: "Она доктор.", en: "She is a doctor." }
+          - { ru: "Это такси.", en: "This is a taxi." }
+        rule: "Russian doesn't use 'am/is/are' in present tense. Just put words together!"
+      
+      - type: "tip"
+        content: "This makes Russian simpler than English in many ways. 'Я студент' = 'I student' = 'I am a student'"
+    
+    vocab_ids: [ya, student, doktor]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Practice switching between formal and informal. Context is everything!"
+    exercises:
+      count: 10
+      review_previous: true
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Informal: привет (hi), пока (bye)"
+          - "Formal: здравствуйте (hello), до свидания (goodbye)"
+          - "Russian drops 'is/am/are' - simpler sentences!"
+          - "Use formal with strangers and elders"
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary:
+    ids: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+  review:
+    from_lessons: [01_cognates]
+
+templates:
+  - pattern: "Привет! Я {PROFESSION}."
+    translation: "Hi! I am a {PROFESSION.translation}."
+    slots:
+      PROFESSION: { pos: [noun], semantic: [person] }
+    weight: 3
+
+  - pattern: "{GREETING}!"
+    translation: "{GREETING.translation}!"
+    slots:
+      GREETING: { pos: [interjection] }
+    weight: 2

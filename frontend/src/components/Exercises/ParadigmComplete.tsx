@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
-import type { ParadigmCompleteExercise, ExerciseComponentProps, GrammaticalCase } from '../../types/exercises';
+import type { ParadigmCompleteExercise, ExerciseComponentProps, GrammaticalCase, CaseConfig } from '../../types/exercises';
 
 const CASE_ORDER: GrammaticalCase[] = ['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional'];
 
-const CASE_COLORS: Record<GrammaticalCase, string> = {
+// Fallback case colors when API data not available
+const DEFAULT_CASE_COLORS: Record<GrammaticalCase, string> = {
   nominative: 'bg-blue-50 text-blue-700',
   genitive: 'bg-green-50 text-green-700',
   dative: 'bg-orange-50 text-orange-700',
@@ -18,12 +19,22 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
   exercise,
   onSubmit,
   disabled = false,
+  grammarConfig,
 }) => {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
   const blanks = exercise.blankIndices;
   const allFilled = blanks.every(idx => answers[idx]);
+
+  // Build case colors from grammar config or use defaults
+  const caseColors = useMemo(() => {
+    if (!grammarConfig) return DEFAULT_CASE_COLORS;
+    return grammarConfig.cases.reduce((acc, c) => ({
+      ...acc,
+      [c.id]: `${c.color.bg} ${c.color.text}`,
+    }), {} as Record<string, string>);
+  }, [grammarConfig]);
 
   const handleCellClick = useCallback((idx: number, option: string) => {
     if (disabled || submitted || !exercise.cells[idx].isBlank) return;
@@ -37,7 +48,6 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
     setTimeout(() => onSubmit(answerArray), 500);
   }, [allFilled, blanks, answers, onSubmit]);
 
-  // Sort cells by case order
   const sortedCells = [...exercise.cells].sort((a, b) =>
     CASE_ORDER.indexOf(a.case as GrammaticalCase) - CASE_ORDER.indexOf(b.case as GrammaticalCase)
   );
@@ -46,14 +56,15 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
     const originalIdx = exercise.cells.indexOf(cell);
     const isBlank = cell.isBlank;
     const answer = answers[originalIdx];
-    
+
     if (!isBlank) {
       return 'bg-gray-50 text-gray-700';
     }
 
     if (!submitted) {
+      const colorClass = caseColors[cell.case as GrammaticalCase] || DEFAULT_CASE_COLORS[cell.case as GrammaticalCase];
       return answer
-        ? `${CASE_COLORS[cell.case as GrammaticalCase]} font-bold`
+        ? `${colorClass} font-bold`
         : 'bg-white border-2 border-dashed border-gray-300 text-gray-400';
     }
 
@@ -100,24 +111,15 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
             <tbody>
               {sortedCells.map((cell, displayIdx) => {
                 const originalIdx = exercise.cells.indexOf(cell);
+                const bgClass = (caseColors[cell.case as GrammaticalCase] || DEFAULT_CASE_COLORS[cell.case as GrammaticalCase])?.split(' ')[0] || 'bg-gray-50';
                 return (
                   <tr key={displayIdx} className="border-t border-gray-100">
-                    <td className={clsx(
-                      'px-4 py-3 font-medium capitalize',
-                      CASE_COLORS[cell.case as GrammaticalCase]?.split(' ')[0] || 'bg-gray-50'
-                    )}>
+                    <td className={clsx('px-4 py-3 font-medium capitalize', bgClass)}>
                       {cell.case}
                     </td>
                     <td className="px-4 py-3 text-center">
-                      <motion.div
-                        className={clsx(
-                          'px-3 py-2 rounded-lg text-lg transition-all',
-                          getCellStyle(cell, originalIdx)
-                        )}
-                      >
-                        {cell.isBlank
-                          ? (answers[originalIdx] || '___')
-                          : cell.form}
+                      <motion.div className={clsx('px-3 py-2 rounded-lg text-lg transition-all', getCellStyle(cell, originalIdx))}>
+                        {cell.isBlank ? (answers[originalIdx] || '___') : cell.form}
                       </motion.div>
                     </td>
                   </tr>
@@ -137,7 +139,6 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
                 whileHover={!submitted && !isUsed ? { scale: 1.05 } : {}}
                 whileTap={!submitted && !isUsed ? { scale: 0.95 } : {}}
                 onClick={() => {
-                  // Find first unfilled blank and fill it
                   const firstEmpty = blanks.find(idx => !answers[idx]);
                   if (firstEmpty !== undefined) {
                     handleCellClick(firstEmpty, option);
@@ -159,10 +160,7 @@ export const ParadigmComplete: React.FC<ExerciseComponentProps<ParadigmCompleteE
 
         {/* Clear button */}
         {Object.keys(answers).length > 0 && !submitted && (
-          <button
-            onClick={() => setAnswers({})}
-            className="mt-4 text-sm text-gray-500 hover:text-gray-700"
-          >
+          <button onClick={() => setAnswers({})} className="mt-4 text-sm text-gray-500 hover:text-gray-700">
             Clear all
           </button>
         )}

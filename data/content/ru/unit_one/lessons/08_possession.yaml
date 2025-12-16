@@ -89,17 +89,23 @@ modules:
     type: "pattern"
     
     teaching:
-      - type: "morphology_pattern"
-        title: "I Don't Have"
-        formula: "У меня́ нет + {NOUN (genitive)}"
-        examples:
-          - { ru: "У меня́ нет кота́.", en: "I don't have a cat." }
-          - { ru: "У меня́ нет маши́ны.", en: "I don't have a car." }
-          - { ru: "У меня́ нет бра́та.", en: "I don't have a brother." }
-        rule: "Нет replaces есть, and the noun changes form (genitive case - we'll learn this later!)"
+      - type: "tip"
+        content: |
+          To say "I don't have", use: У меня́ нет...
+          
+          For now, just learn these as set phrases!
+          Later you'll learn why the nouns change slightly.
+      
+      - type: "pattern_table"
+        title: "I Have vs I Don't Have"
+        columns: ["Positive", "Negative"]
+        rows:
+          - ["У меня́ есть кот.", "У меня́ нет кота́."]
+          - ["У меня́ есть маши́на.", "У меня́ нет маши́ны."]
+          - ["У меня́ есть брат.", "У меня́ нет бра́та."]
       
       - type: "tip"
-        content: "For now, just learn the negative phrases as set expressions. The grammar will come!"
+        content: "Notice nouns change after 'нет' - don't worry about why yet, just recognize the pattern!"
     
     vocab_pool:
       introduce: []

@@ -19,7 +19,7 @@ modules:
           Learn the first five numbers - the foundation of counting!
           
           1 - оди́н (odín) - stress on second syllable
-          2 - два (dva)
+          2 - два (dva) / две (dve) for feminine
           3 - три (tri)
           4 - четы́ре (chetýre) - stress on second syllable
           5 - пять (pyat')
@@ -29,13 +29,18 @@ modules:
         columns: ["Number", "Russian", "Pronunciation"]
         rows:
           - ["1", "оди́н", "ah-DEEN"]
-          - ["2", "два", "dvah"]
+          - ["2", "два / две", "dvah / dvyeh"]
           - ["3", "три", "tree"]
           - ["4", "четы́ре", "cheh-TY-ryeh"]
           - ["5", "пять", "pyaht"]
       
       - type: "tip"
         content: "Три (3) sounds like 'tree' - easy to remember!"
+      
+      - type: "tip"
+        content: |
+          'Two' has two forms: два (masculine/neuter) vs две (feminine)
+          два бра́та (two brothers) | две сестры́ (two sisters)
     
     vocab_pool:
       introduce: [odin, dva, tri, chetyre, pyat]
@@ -80,26 +85,22 @@ modules:
     type: "pattern"
     
     teaching:
-      - type: "explanation"
-        title: "Numbers Change Nouns"
+      - type: "tip"
         content: |
-          In Russian, nouns change form after numbers!
-          
-          1 кот (nominative singular)
-          2, 3, 4 кота́ (genitive singular)
-          5-10 кото́в (genitive plural)
+          For now, just learn to count 1-10!
+          Later you'll learn how nouns change after numbers.
+          (Preview: "два кота́" vs "пять кото́в" - don't worry about this yet!)
       
-      - type: "morphology_pattern"
-        title: "Number Agreement"
-        formula: "1 = singular | 2-4 = genitive sing. | 5+ = genitive plural"
-        examples:
-          - { ru: "оди́н кот", en: "one cat" }
-          - { ru: "два кота́", en: "two cats" }
-          - { ru: "пять кото́в", en: "five cats" }
-        rule: "For now, focus on 1-4. We'll learn genitive plural later!"
+      - type: "pattern_table"
+        title: "Counting Practice"
+        columns: ["Russian", "English"]
+        rows:
+          - ["оди́н, два, три...", "one, two, three..."]
+          - ["четы́ре, пять, шесть...", "four, five, six..."]
+          - ["семь, во́семь, де́вять, де́сять!", "seven, eight, nine, ten!"]
       
       - type: "tip"
-        content: "This is tricky! Start by just recognizing the pattern."
+        content: "Practice counting objects without worrying about noun endings for now!"
     
     vocab_pool:
       introduce: []
@@ -131,7 +132,7 @@ modules:
           - "Numbers 1-10 in Russian"
           - "оди́н, два, три, четы́ре, пять"
           - "шесть, семь, во́семь, де́вять, де́сять"
-          - "Numbers affect noun endings"
+          - "два vs две (masculine vs feminine 'two')"
     vocab_pool:
       introduce: []
       practice: []

@@ -4,7 +4,6 @@ Provides parsers and utilities for ingesting data from:
 - Universal Dependencies (CoNLL-U format)
 - Wiktionary dumps
 - Tatoeba sentence pairs
-- OpenRussian word database
 """
 from ingest.parsers.conllu import CoNLLUParser, UDSentence, UDToken
 from ingest.parsers.wiktionary import WiktionaryParser, WiktionaryEntry
@@ -16,7 +15,5 @@ __all__ = [
     "CoNLLUParser", "UDSentence", "UDToken",
     "WiktionaryParser", "WiktionaryEntry",
     "TatoebaParser", "SentencePair",
-    "IngestionPipeline",
-    "ComplexityScorer",
+    "IngestionPipeline", "ComplexityScorer",
 ]
-

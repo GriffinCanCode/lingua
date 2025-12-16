@@ -1,30 +1,28 @@
-"""CoNLL-U Parser for Universal Dependencies
+"""CoNLL-U Parser - Optimized
 
-Parses CoNLL-U format files from Universal Dependencies project.
-Extracts sentences, tokens, morphological features, and dependency relations.
-
-CoNLL-U Format Reference:
-https://universaldependencies.org/format.html
+High-performance parser for Universal Dependencies CoNLL-U format.
+Uses minimal allocations and efficient string operations.
 """
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterator, TextIO
-import re
+import mmap
+import os
 
 
 @dataclass(slots=True)
 class UDToken:
     """Single token from Universal Dependencies annotation."""
-    id: str  # Token ID (1, 2, 3, or 1-2 for multiword)
-    form: str  # Word form (surface)
-    lemma: str  # Lemma (dictionary form)
-    upos: str  # Universal POS tag
-    xpos: str  # Language-specific POS tag
-    feats: dict[str, str]  # Morphological features
-    head: int  # Head token ID
-    deprel: str  # Dependency relation
-    deps: str  # Enhanced dependencies
-    misc: dict[str, str]  # Miscellaneous annotations
+    id: str
+    form: str
+    lemma: str
+    upos: str
+    xpos: str
+    feats: dict[str, str]
+    head: int
+    deprel: str
+    deps: str
+    misc: dict[str, str]
 
     @property
     def is_multiword(self) -> bool:
@@ -63,28 +61,21 @@ class UDToken:
         return self.feats.get("Voice")
 
     def get_pattern_key(self) -> str | None:
-        """Generate a pattern key from morphological features for grouping."""
-        if self.upos in ("NOUN", "PROPN", "ADJ", "DET", "PRON", "NUM"):
-            parts = [self.upos.lower()]
-            if self.case:
-                parts.append(self.case.lower())
-            if self.number:
-                parts.append(self.number.lower())
-            if self.gender:
-                parts.append(self.gender.lower())
+        """Generate pattern key from morphological features."""
+        upos = self.upos
+        if upos in ("NOUN", "PROPN", "ADJ", "DET", "PRON", "NUM"):
+            parts = [upos.lower()]
+            if (c := self.case): parts.append(c.lower())
+            if (n := self.number): parts.append(n.lower())
+            if (g := self.gender): parts.append(g.lower())
             return "_".join(parts)
-        elif self.upos == "VERB":
+        elif upos == "VERB":
             parts = ["verb"]
-            if self.tense:
-                parts.append(self.tense.lower())
-            if self.aspect:
-                parts.append(self.aspect.lower())
-            if self.mood:
-                parts.append(self.mood.lower())
-            if self.person:
-                parts.append(f"p{self.person}")
-            if self.number:
-                parts.append(self.number.lower())
+            if (t := self.tense): parts.append(t.lower())
+            if (a := self.aspect): parts.append(a.lower())
+            if (m := self.mood): parts.append(m.lower())
+            if (p := self.person): parts.append(f"p{p}")
+            if (n := self.number): parts.append(n.lower())
             return "_".join(parts)
         return None
 
@@ -99,127 +90,123 @@ class UDSentence:
 
     @property
     def word_count(self) -> int:
-        return len([t for t in self.tokens if not t.is_multiword])
+        return sum(1 for t in self.tokens if "-" not in t.id)
 
     @property
     def lemmas(self) -> list[str]:
-        return [t.lemma for t in self.tokens if not t.is_multiword]
+        return [t.lemma for t in self.tokens if "-" not in t.id]
 
     def get_patterns(self) -> set[str]:
-        """Extract unique pattern keys from all tokens."""
-        patterns = set()
-        for token in self.tokens:
-            if not token.is_multiword:
-                key = token.get_pattern_key()
-                if key:
-                    patterns.add(key)
-        return patterns
+        """Extract unique pattern keys."""
+        return {k for t in self.tokens if "-" not in t.id and (k := t.get_pattern_key())}
 
     def get_pattern_positions(self) -> list[tuple[str, int]]:
-        """Get pattern keys with their positions in the sentence."""
-        result = []
-        for i, token in enumerate(self.tokens):
-            if not token.is_multiword:
-                key = token.get_pattern_key()
-                if key:
-                    result.append((key, i))
-        return result
+        """Get pattern keys with positions."""
+        return [(k, i) for i, t in enumerate(self.tokens)
+                if "-" not in t.id and (k := t.get_pattern_key())]
 
 
 class CoNLLUParser:
-    """Parser for CoNLL-U format files."""
+    """High-performance CoNLL-U parser."""
 
-    __slots__ = ("_feat_pattern", "_misc_pattern")
+    __slots__ = ()
 
-    def __init__(self):
-        self._feat_pattern = re.compile(r"([^=|]+)=([^=|]+)")
-        self._misc_pattern = re.compile(r"([^=|]+)=([^=|]+)")
-
-    def parse_features(self, feat_string: str) -> dict[str, str]:
-        """Parse morphological features from CoNLL-U format."""
+    @staticmethod
+    def _parse_features(feat_string: str) -> dict[str, str]:
+        """Parse morphological features efficiently."""
         if feat_string == "_":
             return {}
-        return dict(self._feat_pattern.findall(feat_string))
+        result = {}
+        for pair in feat_string.split("|"):
+            if (eq := pair.find("=")) != -1:
+                result[pair[:eq]] = pair[eq + 1:]
+        return result
 
-    def parse_misc(self, misc_string: str) -> dict[str, str]:
-        """Parse miscellaneous column from CoNLL-U format."""
-        if misc_string == "_":
-            return {}
-        return dict(self._misc_pattern.findall(misc_string))
-
-    def parse_token(self, line: str) -> UDToken:
-        """Parse a single token line."""
-        parts = line.split("\t")
-        if len(parts) != 10:
-            raise ValueError(f"Invalid CoNLL-U token line: expected 10 fields, got {len(parts)}")
-
+    @staticmethod
+    def _parse_token(parts: list[str]) -> UDToken:
+        """Parse a single token from split line parts."""
         return UDToken(
             id=parts[0],
             form=parts[1],
             lemma=parts[2],
             upos=parts[3],
             xpos=parts[4],
-            feats=self.parse_features(parts[5]),
+            feats=CoNLLUParser._parse_features(parts[5]),
             head=int(parts[6]) if parts[6] != "_" else 0,
             deprel=parts[7],
             deps=parts[8],
-            misc=self.parse_misc(parts[9]),
+            misc=CoNLLUParser._parse_features(parts[9]) if parts[9] != "_" else {},
         )
 
-    def parse_sentence(self, lines: list[str]) -> UDSentence:
-        """Parse a sentence block (metadata + tokens)."""
+    def parse_file(self, path: Path | str) -> Iterator[UDSentence]:
+        """Parse CoNLL-U file with optimized memory usage."""
+        path = Path(path)
+
+        with open(path, "r", encoding="utf-8") as f:
+            sent_id = ""
+            text = ""
+            metadata: dict[str, str] = {}
+            tokens: list[UDToken] = []
+
+            for line in f:
+                line = line.rstrip("\n")
+                if not line:
+                    if tokens:
+                        yield UDSentence(sent_id=sent_id, text=text, tokens=tokens, metadata=metadata)
+                        sent_id = ""
+                        text = ""
+                        metadata = {}
+                        tokens = []
+                elif line[0] == "#":
+                    if line.startswith("# sent_id"):
+                        sent_id = line.split("=", 1)[1].strip()
+                    elif line.startswith("# text"):
+                        text = line.split("=", 1)[1].strip()
+                    elif "=" in line:
+                        key, value = line[1:].split("=", 1)
+                        metadata[key.strip()] = value.strip()
+                else:
+                    parts = line.split("\t")
+                    if len(parts) == 10:
+                        tokens.append(self._parse_token(parts))
+
+            # Handle last sentence
+            if tokens:
+                yield UDSentence(sent_id=sent_id, text=text, tokens=tokens, metadata=metadata)
+
+    def parse_stream(self, stream: TextIO) -> Iterator[UDSentence]:
+        """Parse a CoNLL-U stream."""
         sent_id = ""
         text = ""
         metadata: dict[str, str] = {}
         tokens: list[UDToken] = []
 
-        for line in lines:
-            if line.startswith("# sent_id"):
-                sent_id = line.split("=", 1)[1].strip()
-            elif line.startswith("# text"):
-                text = line.split("=", 1)[1].strip()
-            elif line.startswith("#"):
-                # Other metadata
-                if "=" in line:
-                    key, value = line[1:].split("=", 1)
-                    metadata[key.strip()] = value.strip()
-            elif line and not line.startswith("#"):
-                tokens.append(self.parse_token(line))
-
-        return UDSentence(sent_id=sent_id, text=text, tokens=tokens, metadata=metadata)
-
-    def parse_file(self, path: Path | str) -> Iterator[UDSentence]:
-        """Parse a CoNLL-U file and yield sentences."""
-        with open(path, "r", encoding="utf-8") as f:
-            yield from self.parse_stream(f)
-
-    def parse_stream(self, stream: TextIO) -> Iterator[UDSentence]:
-        """Parse a CoNLL-U stream and yield sentences."""
-        current_block: list[str] = []
-
         for line in stream:
             line = line.rstrip("\n")
             if not line:
-                if current_block:
-                    yield self.parse_sentence(current_block)
-                    current_block = []
+                if tokens:
+                    yield UDSentence(sent_id=sent_id, text=text, tokens=tokens, metadata=metadata)
+                    sent_id, text, metadata, tokens = "", "", {}, []
+            elif line[0] == "#":
+                if line.startswith("# sent_id"):
+                    sent_id = line.split("=", 1)[1].strip()
+                elif line.startswith("# text"):
+                    text = line.split("=", 1)[1].strip()
+                elif "=" in line:
+                    key, value = line[1:].split("=", 1)
+                    metadata[key.strip()] = value.strip()
             else:
-                current_block.append(line)
+                parts = line.split("\t")
+                if len(parts) == 10:
+                    tokens.append(self._parse_token(parts))
 
-        # Handle last sentence if file doesn't end with blank line
-        if current_block:
-            yield self.parse_sentence(current_block)
-
-    def parse_string(self, content: str) -> Iterator[UDSentence]:
-        """Parse a CoNLL-U string and yield sentences."""
-        from io import StringIO
-        yield from self.parse_stream(StringIO(content))
+        if tokens:
+            yield UDSentence(sent_id=sent_id, text=text, tokens=tokens, metadata=metadata)
 
     def extract_patterns_from_file(self, path: Path | str) -> dict[str, int]:
-        """Extract all unique patterns and their frequencies from a file."""
-        pattern_counts: dict[str, int] = {}
+        """Extract pattern frequencies from file."""
+        counts: dict[str, int] = {}
         for sentence in self.parse_file(path):
             for pattern in sentence.get_patterns():
-                pattern_counts[pattern] = pattern_counts.get(pattern, 0) + 1
-        return pattern_counts
-
+                counts[pattern] = counts.get(pattern, 0) + 1
+        return counts

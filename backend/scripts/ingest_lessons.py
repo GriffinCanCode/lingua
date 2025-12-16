@@ -1,19 +1,8 @@
-#!/usr/bin/env python3
-"""Ingest lesson content from YAML files into the database.
-
-Reads YAML files from data/content/lessons/ and populates:
-- CurriculumSection
-- CurriculumUnit
-- CurriculumNode
-- Sentences (and links them to nodes via extra_data)
-
-Run with: python3 -m scripts.ingest_lessons
-"""
-import asyncio
-import yaml
-import logging
 from pathlib import Path
-from typing import Dict, Any, List
+import logging
+import argparse
+import yaml
+import asyncio
 from uuid import UUID
 
 from sqlalchemy import select
@@ -23,45 +12,42 @@ from core.database import get_db_session, engine, Base
 from models.curriculum import CurriculumSection, CurriculumUnit, CurriculumNode
 from models.srs import Sentence, SyntacticPattern
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content" / "lessons"
+CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
 
-async def get_or_create_section(session: AsyncSession, data: Dict[str, Any]) -> CurriculumSection:
+
+def get_lessons_dirs(language: str) -> list[Path]:
+    """Get all lesson directories for a language (one per unit)."""
+    lang_dir = CONTENT_DIR / language
+    if not lang_dir.exists():
+        return []
+    return sorted([d / "lessons" for d in lang_dir.iterdir() if d.is_dir() and (d / "lessons").exists()])
+
+
+async def get_or_create_section(session: AsyncSession, data: dict, language: str) -> CurriculumSection:
     """Get or create a curriculum section."""
-    stmt = select(CurriculumSection).where(
-        CurriculumSection.title == data["title"],
-        CurriculumSection.language == "ru" # Assuming Russian for now
-    )
+    stmt = select(CurriculumSection).where(CurriculumSection.title == data["title"], CurriculumSection.language == language)
     result = await session.execute(stmt)
     section = result.scalar_one_or_none()
 
     if not section:
-        section = CurriculumSection(
-            title=data["title"],
-            description=data.get("description"),
-            order_index=data.get("order", 0),
-            language="ru"
-        )
+        section = CurriculumSection(title=data["title"], description=data.get("description"), order_index=data.get("order", 0), language=language)
         session.add(section)
         await session.flush()
         logger.info(f"Created Section: {section.title}")
     else:
-        # Update fields
         section.description = data.get("description", section.description)
         section.order_index = data.get("order", section.order_index)
         logger.info(f"Updated Section: {section.title}")
-    
+
     return section
 
-async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, data: Dict[str, Any]) -> CurriculumUnit:
+
+async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, data: dict) -> CurriculumUnit:
     """Get or create a curriculum unit."""
-    stmt = select(CurriculumUnit).where(
-        CurriculumUnit.section_id == section.id,
-        CurriculumUnit.title == data["title"]
-    )
+    stmt = select(CurriculumUnit).where(CurriculumUnit.section_id == section.id, CurriculumUnit.title == data["title"])
     result = await session.execute(stmt)
     unit = result.scalar_one_or_none()
 
@@ -71,8 +57,8 @@ async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, 
             title=data["title"],
             description=data.get("description"),
             order_index=data.get("order", 0),
-            prerequisite_units=[], # TODO: Handle prerequisites by ID lookup
-            target_patterns=[] # TODO: Aggregate from lessons
+            prerequisite_units=[],
+            target_patterns=[],
         )
         session.add(unit)
         await session.flush()
@@ -84,30 +70,25 @@ async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, 
 
     return unit
 
-async def get_or_create_pattern(session: AsyncSession, pattern_id: str) -> UUID:
-    """Get pattern ID by name (creating a placeholder if missing is risky, better to warn)."""
-    # For now, we assume patterns exist or we just log a warning.
-    # In a real scenario, we might want to create them or fail.
+
+async def get_or_create_pattern(session: AsyncSession, pattern_id: str) -> UUID | None:
+    """Get pattern ID by name."""
     stmt = select(SyntacticPattern).where(SyntacticPattern.pattern_type == pattern_id)
     result = await session.execute(stmt)
     pattern = result.scalar_one_or_none()
-    
+
     if pattern:
         return pattern.id
-    else:
-        logger.warning(f"Pattern not found: {pattern_id}")
-        return None
+    logger.warning(f"Pattern not found: {pattern_id}")
+    return None
 
-async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: Dict[str, Any]):
+
+async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: dict, language: str):
     """Ingest a single lesson (node)."""
-    stmt = select(CurriculumNode).where(
-        CurriculumNode.unit_id == unit.id,
-        CurriculumNode.title == data["title"]
-    )
+    stmt = select(CurriculumNode).where(CurriculumNode.unit_id == unit.id, CurriculumNode.title == data["title"])
     result = await session.execute(stmt)
     node = result.scalar_one_or_none()
 
-    # Process patterns
     pattern_ids = []
     if "patterns" in data:
         for p_name in data["patterns"]:
@@ -115,37 +96,29 @@ async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: Dict[
             if p_id:
                 pattern_ids.append(p_id)
 
-    # Process Sentences
     featured_sentence_ids = []
     if "sentences" in data:
         for s_data in data["sentences"]:
-            # Check if sentence exists by text
             stmt = select(Sentence).where(Sentence.text == s_data["text"])
             result = await session.execute(stmt)
             sentence = result.scalars().first()
-            
+
             if not sentence:
                 sentence = Sentence(
                     text=s_data["text"],
                     translation=s_data.get("translation"),
                     complexity_score=s_data.get("complexity", 1),
-                    language="ru",
-                    extra_data={"audio": s_data.get("audio")}
+                    language=language,
+                    extra_data={"audio": s_data.get("audio")},
                 )
                 session.add(sentence)
                 await session.flush()
                 logger.info(f"Created Sentence: {sentence.text[:20]}...")
-            
+
             featured_sentence_ids.append(str(sentence.id))
 
-    # Process Vocabulary (store in extra_data for now)
     vocabulary = data.get("vocabulary", [])
-
-    extra_data = {
-        "featured_sentences": featured_sentence_ids,
-        "vocabulary": vocabulary,
-        "content": data.get("content", {})
-    }
+    extra_data = {"featured_sentences": featured_sentence_ids, "vocabulary": vocabulary, "content": data.get("content", {})}
 
     if not node:
         node = CurriculumNode(
@@ -156,7 +129,7 @@ async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: Dict[
             node_type=data.get("type", "practice"),
             target_patterns=pattern_ids,
             extra_data=extra_data,
-            estimated_duration_min=5 # Default
+            estimated_duration_min=5,
         )
         session.add(node)
         logger.info(f"Created Lesson: {node.title}")
@@ -167,38 +140,43 @@ async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: Dict[
         node.target_patterns = pattern_ids
         logger.info(f"Updated Lesson: {node.title}")
 
-async def process_file(session: AsyncSession, file_path: Path):
+
+async def process_file(session: AsyncSession, file_path: Path, language: str):
     """Process a single YAML file."""
     logger.info(f"Processing {file_path.name}...")
-    with open(file_path, "r") as f:
+    with open(file_path) as f:
         data = yaml.safe_load(f)
 
     if not data:
         return
 
-    # 1. Section
-    section = await get_or_create_section(session, data["section"])
-
-    # 2. Unit
+    section = await get_or_create_section(session, data["section"], language)
     unit = await get_or_create_unit(session, section, data["unit"])
 
-    # 3. Lessons
     for lesson_data in data.get("lessons", []):
-        await ingest_lesson(session, unit, lesson_data)
+        await ingest_lesson(session, unit, lesson_data, language)
 
-async def main():
+
+async def main(language: str = "ru"):
     """Main entry point."""
-    if not CONTENT_DIR.exists():
-        logger.error(f"Content directory not found: {CONTENT_DIR}")
+    lessons_dirs = get_lessons_dirs(language)
+    if not lessons_dirs:
+        logger.error(f"No lesson directories found for language: {language}")
         return
 
     async with get_db_session() as session:
-        files = sorted(CONTENT_DIR.glob("*.yaml"))
-        for file_path in files:
-            await process_file(session, file_path)
-        
+        for lessons_dir in lessons_dirs:
+            logger.info(f"Processing unit: {lessons_dir.parent.name}")
+            files = sorted(lessons_dir.glob("*.yaml"))
+            for file_path in files:
+                await process_file(session, file_path, language)
+
         await session.commit()
-        logger.info("Ingestion complete.")
+        logger.info(f"Ingestion complete for language: {language}")
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="Ingest lesson content from YAML files")
+    parser.add_argument("--language", "-l", default="ru", help="Language code (default: ru)")
+    args = parser.parse_args()
+    asyncio.run(main(args.language))

@@ -8,12 +8,18 @@ Loads vocabulary sheets from YAML files and provides:
 """
 from pathlib import Path
 from dataclasses import dataclass, field
-from functools import lru_cache
 
 import yaml
 
+CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
 
-VOCAB_DIR = Path(__file__).parent.parent.parent / "data" / "vocabulary"
+
+def get_vocab_dirs(language: str = "ru") -> list[Path]:
+    """Get all vocabulary directories for a language (one per unit)."""
+    lang_dir = CONTENT_DIR / language
+    if not lang_dir.exists():
+        return []
+    return sorted([d / "vocab" for d in lang_dir.iterdir() if d.is_dir() and (d / "vocab").exists()])
 
 
 @dataclass(slots=True)
@@ -59,24 +65,23 @@ class UnitVocab:
 class VocabularyLoader:
     """Load and manage vocabulary from YAML sheets."""
 
-    __slots__ = ('_cache',)
+    __slots__ = ('_cache', '_language')
 
-    def __init__(self):
+    def __init__(self, language: str = "ru"):
         self._cache: dict[str, UnitVocab] = {}
+        self._language = language
 
     def load_unit(self, unit_id: str) -> UnitVocab | None:
         """Load vocabulary for a specific unit."""
         if unit_id in self._cache:
             return self._cache[unit_id]
 
-        # Find the unit file
-        for yaml_file in VOCAB_DIR.glob("*.yaml"):
-            if unit_id in yaml_file.stem:
+        for vocab_dir in get_vocab_dirs(self._language):
+            for yaml_file in vocab_dir.glob("*.yaml"):
                 unit = self._parse_unit_file(yaml_file)
-                if unit:
+                if unit and unit.id == unit_id:
                     self._cache[unit_id] = unit
                     return unit
-
         return None
 
     def _parse_unit_file(self, path: Path) -> UnitVocab | None:
@@ -91,7 +96,6 @@ class VocabularyLoader:
         all_vocab: list[VocabEntry] = []
         by_section: dict[str, list[VocabEntry]] = {}
 
-        # Parse each section
         sections = [
             "pronouns", "questions", "particles", "location",
             "greetings", "cognates", "nouns", "possession",
@@ -102,16 +106,10 @@ class VocabularyLoader:
         for section in sections:
             if section not in data:
                 continue
-
-            section_vocab = []
-            for entry in data[section]:
-                vocab = self._parse_entry(entry)
-                section_vocab.append(vocab)
-                all_vocab.append(vocab)
-
+            section_vocab = [self._parse_entry(entry) for entry in data[section]]
             by_section[section] = section_vocab
+            all_vocab.extend(section_vocab)
 
-        # Parse lesson mappings
         by_lesson: dict[str, LessonVocab] = {}
         lessons_data = data.get("lessons", {})
         vocab_by_id = {v.id: v for v in all_vocab}
@@ -160,9 +158,7 @@ class VocabularyLoader:
     def get_lesson_vocab(self, unit_id: str, lesson_key: str) -> LessonVocab | None:
         """Get vocabulary for a specific lesson."""
         unit = self.load_unit(unit_id)
-        if not unit:
-            return None
-        return unit.by_lesson.get(lesson_key)
+        return unit.by_lesson.get(lesson_key) if unit else None
 
     def get_review_vocab(self, unit_id: str, lesson_key: str, max_items: int = 10) -> list[VocabEntry]:
         """Get review vocabulary from previous lessons in the unit."""
@@ -176,14 +172,12 @@ class VocabularyLoader:
         except ValueError:
             return []
 
-        # Collect vocab from all previous lessons
         review_pool: list[VocabEntry] = []
         for prev_key in lesson_keys[:current_idx]:
             prev_lesson = unit.by_lesson.get(prev_key)
             if prev_lesson:
                 review_pool.extend(prev_lesson.primary)
 
-        # Sort by frequency (most important first) and limit
         review_pool.sort(key=lambda v: v.frequency)
         return review_pool[:max_items]
 
@@ -194,13 +188,9 @@ class VocabularyLoader:
             return []
 
         exclude_lower = {w.lower() for w in exclude}
-
         if language == "ru":
-            words = [v.word for v in unit.all_vocab if v.word.lower() not in exclude_lower]
-        else:
-            words = [v.translation for v in unit.all_vocab if v.translation.lower() not in exclude_lower]
-
-        return words
+            return [v.word for v in unit.all_vocab if v.word.lower() not in exclude_lower]
+        return [v.translation for v in unit.all_vocab if v.translation.lower() not in exclude_lower]
 
     def vocab_to_dict(self, vocab: VocabEntry) -> dict:
         """Convert VocabEntry to dict for API/exercise generation."""
@@ -220,22 +210,19 @@ class VocabularyLoader:
         return primary, review
 
 
-# Singleton instance
-_loader: VocabularyLoader | None = None
+# Singleton instances per language
+_loaders: dict[str, VocabularyLoader] = {}
 
 
-def get_vocabulary_loader() -> VocabularyLoader:
-    """Get the singleton vocabulary loader."""
-    global _loader
-    if _loader is None:
-        _loader = VocabularyLoader()
-    return _loader
+def get_vocabulary_loader(language: str = "ru") -> VocabularyLoader:
+    """Get the vocabulary loader for a language."""
+    if language not in _loaders:
+        _loaders[language] = VocabularyLoader(language)
+    return _loaders[language]
 
 
-def get_lesson_vocabulary(unit_id: str, lesson_key: str) -> tuple[list[dict], list[dict]]:
+def get_lesson_vocabulary(unit_id: str, lesson_key: str, language: str = "ru") -> tuple[list[dict], list[dict]]:
     """Convenience function to get lesson vocabulary as dicts."""
-    loader = get_vocabulary_loader()
+    loader = get_vocabulary_loader(language)
     lesson = loader.get_lesson_vocab(unit_id, lesson_key)
-    if not lesson:
-        return [], []
-    return loader.lesson_vocab_to_dicts(lesson)
+    return loader.lesson_vocab_to_dicts(lesson) if lesson else ([], [])

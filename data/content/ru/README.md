@@ -1,14 +1,22 @@
-# Vocabulary Sheets
+# Russian Content
 
-Master vocabulary files that drive the entire curriculum. Each unit has one vocabulary sheet containing all words, organized by theme.
+All Russian language content organized by unit.
 
 ## File Structure
 
 ```
-vocabulary/
-├── unit1_foundations.yaml   # ~65 words: pronouns, questions, basics
-├── unit2_basics.yaml        # ~55 words: numbers, colors, verbs, food
-├── unit3_grammar.yaml       # Cases, adjective agreement
+ru/
+├── unit_one/
+│   ├── lessons/
+│   │   ├── foundations.yaml
+│   │   ├── 01_cognates.yaml
+│   │   └── ...
+│   └── vocab/
+│       └── foundations.yaml
+├── unit_two/
+│   ├── lessons/
+│   └── vocab/
+│       └── basics.yaml
 └── ...
 ```
 
@@ -90,7 +98,7 @@ Reference vocabulary by ID:
 ```yaml
 # In lesson file
 vocabulary:
-  from_unit: "unit1"
+  from_unit: "unit1"  # unit ID from vocab YAML
   words:
     - ya
     - ty
@@ -98,32 +106,28 @@ vocabulary:
 ```
 
 ### In Exercise Generation
-The exercise generator pulls from vocabulary sheets:
 
 ```python
-from ingest.vocabulary import get_lesson_vocabulary
+from ingest.vocabulary import VocabularyLoader
 
-vocab, review = get_lesson_vocabulary("unit1", "lesson_1_cognates")
-exercises = generate_exercises(vocabulary=vocab, review_vocabulary=review)
+loader = VocabularyLoader("ru")
+unit = loader.load_unit("unit1")
 ```
 
 ### Review Mixing
-The loader automatically provides previous lesson vocabulary for spaced repetition:
 
 ```python
-loader = VocabularyLoader()
-review = loader.get_review_vocab("unit1", "lesson_3", max_items=10)
-# Returns vocab from lessons 1 & 2
+loader = VocabularyLoader("ru")
+review = loader.get_review_vocab("unit1", "01_cognates", max_items=10)
 ```
 
 ## Adding New Units
 
-1. Create `unitN_theme.yaml`
-2. Add unit metadata
-3. Add vocabulary sections (pronouns, nouns, verbs, etc.)
-4. Define lesson mappings
-5. Run vocabulary validation script
+1. Create `unit_name/` folder with `lessons/` and `vocab/` subfolders
+2. Add lesson YAML files to `lessons/`
+3. Add vocabulary YAML to `vocab/`
+4. Run ingestion script
 
 ```bash
-python3 -m scripts.validate_vocabulary
+python3 -m scripts.ingest_lessons --language ru
 ```

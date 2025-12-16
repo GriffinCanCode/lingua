@@ -117,13 +117,14 @@ modules:
           - Basic vocabulary
           - Gender agreement
           - Verb conjugation (11 verbs!)
-          - Question/answer patterns (где, кто, что, как)
+          - Question/answer patterns (где, кто, что, как, когда́)
+          - Time words (сейча́с, сего́дня, за́втра, вчера́)
           - Possessives
           - Conjunctions (и, и́ли, но)
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda]
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, kogda, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, delat, govorit, videt, khotet, yest_eat, pit, kofe, voda, seychas, segodnya, zavtra, vchera]
     exercises:
       count: 15
       difficulty: "hard"
@@ -140,7 +141,8 @@ modules:
           You can now:
           - Read Russian using Cyrillic letters
           - Introduce yourself and greet people (спаси́бо, пожа́луйста!)
-          - Ask and answer basic questions (где, кто, что, как)
+          - Ask and answer basic questions (где, кто, что, как, когда́)
+          - Talk about time (сейча́с, сего́дня, за́втра, вчера́)
           - Talk about what you have
           - Describe things using adjectives
           - Count to 10
@@ -152,13 +154,15 @@ modules:
         points:
           - "~100 vocabulary words learned"
           - "11 verbs conjugated (знать, понима́ть, чита́ть, де́лать, говори́ть, ви́деть, хоте́ть, жить, рабо́тать, есть, пить)"
+          - "5 question words (где, кто, что, как, когда́)"
+          - "4 time words (сейча́с, сего́дня, за́втра, вчера́)"
           - "6 core grammar patterns mastered"
           - "Culture: patronymics, ты vs вы"
           - "Ready for Unit 2: Everyday Life!"
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit]
+      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, kogda, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, delat, govorit, videt, khotet, zhit, rabotat, yest_eat, pit, seychas, segodnya, zavtra, vchera]
     exercises:
       count: 15
       difficulty: "hard"
@@ -220,7 +224,15 @@ dialogues:
       - { speaker: "B", ru: "Я живу́ в Москве́. А ты?", en: "I live in Moscow. And you?" }
       - { speaker: "A", ru: "Я то́же живу́ в Москве́!", en: "I live in Moscow too!" }
       - { speaker: "B", ru: "Здо́рово! Где ты рабо́таешь?", en: "Cool! Where do you work?" }
-      - { speaker: "A", ru: "Я рабо́таю в рестора́не.", en: "I work at a restaurant." }
+      - { speaker: "A", ru: "Я рабо́таю в рестора́не. Сего́дня и за́втра.", en: "I work at a restaurant. Today and tomorrow." }
+
+  - id: "making_plans"
+    context: "Planning when to meet"
+    lines:
+      - { speaker: "A", ru: "Когда́ ты до́ма?", en: "When are you home?" }
+      - { speaker: "B", ru: "Сейча́с я на рабо́те. За́втра до́ма.", en: "Now I'm at work. Tomorrow at home." }
+      - { speaker: "A", ru: "Хорошо́! До за́втра!", en: "Good! See you tomorrow!" }
+      - { speaker: "B", ru: "До за́втра!", en: "See you tomorrow!" }
 
   - id: "final_goodbye"
     context: "Saying goodbye"

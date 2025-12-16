@@ -210,11 +210,11 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Use all your verbs together: Я живу́ в Москве́. Я рабо́таю в ба́нке. Я хочу́ ко́фе! Я пью чай."
+        content: "Use all your verbs with time words! Сего́дня я рабо́таю. За́втра я не рабо́таю. Я сейча́с хочу́ ко́фе!"
     vocab_pool:
       introduce: []
       practice: [khotet, zhit, rabotat, yest_eat, pit, znat, ponimat, govorit, videt, delat]
-      review: [ya, ty, on, ona, gde, tut, tam, kofe, voda, dom, chto]
+      review: [ya, ty, on, ona, gde, tut, tam, kofe, voda, dom, chto, seychas, segodnya, zavtra]
     exercises:
       count: 12
 
@@ -295,6 +295,21 @@ templates:
       VERB: { pos: [verb] }
     weight: 2
 
+  - pattern: "Сего́дня я рабо́таю."
+    translation: "Today I work."
+    slots: {}
+    weight: 3
+
+  - pattern: "За́втра я не рабо́таю."
+    translation: "Tomorrow I don't work."
+    slots: {}
+    weight: 3
+
+  - pattern: "Что ты де́лаешь сего́дня?"
+    translation: "What are you doing today?"
+    slots: {}
+    weight: 3
+
 dialogues:
   - id: "where_do_you_live"
     context: "Getting to know someone"
@@ -302,7 +317,7 @@ dialogues:
       - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
       - { speaker: "B", ru: "Я живу́ в Москве́.", en: "I live in Moscow." }
       - { speaker: "A", ru: "А где ты рабо́таешь?", en: "And where do you work?" }
-      - { speaker: "B", ru: "Я рабо́таю в ба́нке.", en: "I work at a bank." }
+      - { speaker: "B", ru: "Я рабо́таю в ба́нке. Сего́дня и за́втра.", en: "I work at a bank. Today and tomorrow." }
 
   - id: "want_coffee"
     context: "Offering something"

@@ -154,15 +154,19 @@ lessons:
       - ona
 
   lesson_10_where_who_what:
-    title: "Where, Who, What"
-    focus: "Question words, basic information (что pronounced ШТО!)"
+    title: "Where, Who, What, When"
+    focus: "Question words & time expressions (что→ШТО, сего́дня→сево́дня)"
     primary_vocab:
       - gde
       - kto
       - chto
+      - kogda
       - vot
       - doktor
       - drug
+      - segodnya
+      - zavtra
+      - vchera
     review_vocab:
       - tam
       - tut
@@ -170,6 +174,7 @@ lessons:
       - on
       - ona
       - govorit
+      - seychas
 
   lesson_11_irregular_verbs:
     title: "I Want, I Live, I Work"
@@ -191,6 +196,8 @@ lessons:
       - kofe
       - voda
       - seychas
+      - segodnya
+      - zavtra
 
   lesson_12_possessives:
     title: "My, Your, Our"
@@ -260,6 +267,7 @@ lessons:
       - gde
       - kto
       - chto
+      - kogda
       - u_menya
       - moy
       - znat
@@ -279,5 +287,8 @@ lessons:
       - ponyatno
       - otlichno
       - seychas
+      - segodnya
+      - zavtra
+      - vchera
       - molodets
       - konechno

@@ -260,3 +260,52 @@ time:
       - { ru: "Сейча́с!", en: "Right away! / Just a moment!" }
       - { ru: "Я сейча́с до́ма.", en: "I'm at home now." }
       - { ru: "Что ты де́лаешь сейча́с?", en: "What are you doing now?" }
+
+  - id: "segodnya"
+    word: "сегодня"
+    stressed: "сего́дня"
+    transliteration: "segodnya"
+    translation: "today"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    audio: "segodnya.mp3"
+    pronunciation_quirk: "ego_evo"
+    notes: "⚠️ Pronounced 'сево́дня' (Г sounds like В)! From 'сего дня' = 'of this day'. Stress on second syllable."
+    examples:
+      - { ru: "Что ты де́лаешь сего́дня?", en: "What are you doing today?" }
+      - { ru: "Сего́дня я рабо́таю.", en: "Today I work." }
+      - { ru: "Сего́дня хорошо́!", en: "Today is good!" }
+
+  - id: "zavtra"
+    word: "завтра"
+    stressed: "за́втра"
+    transliteration: "zavtra"
+    translation: "tomorrow"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    audio: "zavtra.mp3"
+    notes: "Stress on first syllable. До за́втра! = See you tomorrow!"
+    examples:
+      - { ru: "До за́втра!", en: "See you tomorrow!" }
+      - { ru: "За́втра я не рабо́таю.", en: "Tomorrow I don't work." }
+      - { ru: "Что ты де́лаешь за́втра?", en: "What are you doing tomorrow?" }
+
+  - id: "vchera"
+    word: "вчера"
+    stressed: "вчера́"
+    transliteration: "vchera"
+    translation: "yesterday"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 2
+    audio: "vchera.mp3"
+    notes: "Stress on last syllable. Past tense verbs needed for full sentences - for now, just learn the word!"
+    examples:
+      - { ru: "Вчера́ я был до́ма.", en: "Yesterday I was at home." }
+      - { ru: "А вчера́?", en: "And yesterday?" }
+      - { ru: "Не сего́дня, вчера́!", en: "Not today, yesterday!" }

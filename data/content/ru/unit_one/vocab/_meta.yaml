@@ -41,6 +41,7 @@ pronunciation_quirks:
     pattern: "-ЕГО/-ОГО → -ЕВО/-ОВО"
     description: "Genitive ending Г pronounced as В"
     applies_to: ["его́", "неё", "сего́дня", "ничего́", "чего́", "большо́го", "хоро́шего", "но́вого"]
+    notes: "сего́дня is from 'сего дня' (of this day) - so the Г follows the genitive rule!"
     
   - id: "final_g_devoicing"
     pattern: "Final Г → К"
@@ -68,5 +69,5 @@ unit:
   id: "unit1"
   title: "Foundations"
   description: "Essential vocabulary for survival Russian - including first verbs!"
-  total_words: 104
+  total_words: 107
   target_lessons: 16

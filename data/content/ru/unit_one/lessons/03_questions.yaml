@@ -33,7 +33,10 @@ modules:
       - type: "tip"
         content: "The only difference is how you say it. Raise your pitch on the stressed syllable!"
     
-    vocab_ids: [eto, kot, taksi]
+    vocab_pool:
+      introduce: []
+      practice: [eto, kot, taksi]
+      review: []
     exercises:
       count: 6
 
@@ -60,7 +63,10 @@ modules:
           - { word: "tak", lang: "Polish", relation: "cousin" }
         insight: "Да is shared across all Slavic languages - instant communication with millions!"
     
-    vocab_ids: [da, nyet]
+    vocab_pool:
+      introduce: [da, nyet]
+      practice: [eto, kot, taksi]
+      review: []
     exercises:
       count: 7
 
@@ -87,7 +93,10 @@ modules:
       - type: "tip"
         content: "не кот = not a cat. не там = not there. Just add не!"
     
-    vocab_ids: [nye, da, nyet]
+    vocab_pool:
+      introduce: [nye]
+      practice: [da, nyet, eto, kot, taksi]
+      review: []
     exercises:
       count: 8
       templates:
@@ -100,9 +109,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Practice asking questions, then answering them yourself. Да, это кот. Нет, это не кот."
+    vocab_pool:
+      introduce: []
+      practice: [da, nyet, nye, eto, kot, taksi]
+      review: [mama, metro, tut, tam]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -115,15 +127,17 @@ modules:
           - "да = yes, нет = no"
           - "не = not (put it before what you negate)"
           - "Question and answer patterns"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [da, nyet, nye, eto, kot, taksi, student]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [da, nyet, nye, eto, kot, taksi, student]
-  review:
-    from_lessons: [01_cognates, 02_hello]
+  primary: [da, nyet, nye, eto, kot, taksi, student]
+  review_from: [01_cognates, 02_hello]
 
 templates:
   - pattern: "Это {NOUN}?"

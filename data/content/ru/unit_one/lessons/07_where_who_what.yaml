@@ -36,7 +36,10 @@ modules:
           - { ru: "Где кот?", en: "Where is the cat?" }
         rule: "Super simple - just Где + what you're looking for!"
     
-    vocab_ids: [gde]
+    vocab_pool:
+      introduce: [gde]
+      practice: []
+      review: [metro, kot]
     exercises:
       count: 6
 
@@ -71,7 +74,10 @@ modules:
           - { word: "wer/was", lang: "German", relation: "cousin" }
         insight: "These question words come from Proto-Indo-European - 5000+ years old!"
     
-    vocab_ids: [kto, chto]
+    vocab_pool:
+      introduce: [kto, chto]
+      practice: [gde]
+      review: [metro, kot]
     exercises:
       count: 7
 
@@ -105,7 +111,10 @@ modules:
           - { ru: "Кто там?", en: "Who's there?" }
         rule: "Animals count as 'who' in Russian - they're considered animate!"
     
-    vocab_ids: [kto, chto, eto]
+    vocab_pool:
+      introduce: [doktor, drug]
+      practice: [gde, kto, chto, eto]
+      review: [mama, kot, sobaka]
     exercises:
       count: 8
 
@@ -115,9 +124,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Practice asking questions about everything you see. Что это? Кто это? Где...?"
+    vocab_pool:
+      introduce: []
+      practice: [gde, kto, chto, vot, doktor, drug]
+      review: [eto, mama, kot, restoran, student]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -131,15 +143,17 @@ modules:
           - "Что = what (pronounced 'shto')"
           - "Что это? = What is this?"
           - "Кто это? = Who is this?"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [gde, kto, chto, vot, doktor, student, drug, restoran]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [gde, kto, chto, vot, doktor, student, drug, restoran]
-  review:
-    from_lessons: [01_cognates, 03_questions]
+  primary: [gde, kto, chto, vot, doktor, student, drug, restoran]
+  review_from: [01_cognates, 03_questions]
 
 templates:
   - pattern: "Где {NOUN}?"

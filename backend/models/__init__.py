@@ -1,7 +1,10 @@
 
 from models.morphology import Lemma, MorphologicalRule, Inflection
 from models.etymology import EtymologyNode, EtymologyRelation
-from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
+from models.srs import (
+    Sentence, SyntacticPattern, SentencePattern, UserPatternMastery,
+    Vocabulary, UserVocabMastery,
+)
 from models.glossing import GlossedText, Morpheme
 from models.production import ProductionPrompt, ProductionAttempt, ProductionFeedback
 from models.curriculum import (
@@ -15,6 +18,7 @@ __all__ = [
     "Lemma", "MorphologicalRule", "Inflection",
     "EtymologyNode", "EtymologyRelation",
     "Sentence", "SyntacticPattern", "SentencePattern", "UserPatternMastery",
+    "Vocabulary", "UserVocabMastery",
     "GlossedText", "Morpheme",
     "ProductionPrompt", "ProductionAttempt", "ProductionFeedback",
     "CurriculumSection", "CurriculumUnit", "CurriculumNode",

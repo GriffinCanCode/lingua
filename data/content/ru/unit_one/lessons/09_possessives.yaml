@@ -43,7 +43,10 @@ modules:
           - { ru: "Это моё окно.", en: "This is my window." }
         rule: "The possessive must match the gender of what is possessed!"
     
-    vocab_ids: [moy, moya, moyo]
+    vocab_pool:
+      introduce: [moy, moya, moyo]
+      practice: []
+      review: [dom, kniga, okno]
     exercises:
       count: 6
 
@@ -73,7 +76,10 @@ modules:
       - type: "tip"
         content: "Use твой with people you call 'ты' - friends, family, children."
     
-    vocab_ids: [ty]
+    vocab_pool:
+      introduce: []
+      practice: [moy, moya, moyo, ty]
+      review: [dom, kniga, okno]
     exercises:
       count: 7
 
@@ -108,7 +114,10 @@ modules:
           - { ru: "Где твоя книга?", en: "Where is your book?" }
         rule: "Look at what is owned, not who owns it, to pick the ending."
     
-    vocab_ids: [my]
+    vocab_pool:
+      introduce: []
+      practice: [moy, moya, moyo, my]
+      review: [dom, kniga, mashina]
     exercises:
       count: 8
 
@@ -118,9 +127,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Practice with things around you: Это мой телефон. Это моя книга. Это моё..."
+    vocab_pool:
+      introduce: []
+      practice: [moy, moya, moyo, dom, kniga, okno, mashina]
+      review: [telefon, kot, sobaka]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -133,15 +145,17 @@ modules:
           - "твой/твоя/твоё = your (informal)"
           - "наш/наша/наше = our"
           - "Possessive matches the possessed noun's gender"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
-  review:
-    from_lessons: [04_gender, 06_possession]
+  primary: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
+  review_from: [04_gender, 06_possession]
 
 templates:
   - pattern: "Это {POSS} {NOUN}."

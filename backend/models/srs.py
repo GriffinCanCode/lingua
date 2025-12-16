@@ -70,3 +70,42 @@ class UserPatternMastery(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+
+class Vocabulary(Base):
+    """Vocabulary items from vocab.yaml"""
+    __tablename__ = "vocabulary"
+
+    id = Column(String(100), primary_key=True)  # e.g., "mama", "kot"
+    word = Column(String(255), nullable=False)
+    translation = Column(String(255), nullable=False)
+    language = Column(String(10), default="ru")
+    pos = Column(String(50))
+    gender = Column(String(1))
+    semantic = Column(JSON, default=list)
+    frequency = Column(Integer, default=1)
+    difficulty = Column(Integer, default=1)
+    audio = Column(String(500))
+    notes = Column(Text)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user_mastery = relationship("UserVocabMastery", back_populates="vocab", cascade="all, delete-orphan")
+
+
+class UserVocabMastery(Base):
+    """Track user mastery per vocabulary item"""
+    __tablename__ = "user_vocab_mastery"
+
+    user_id = Column(GUID, primary_key=True)
+    vocab_id = Column(String(100), ForeignKey("vocabulary.id", ondelete="CASCADE"), primary_key=True)
+    state = Column(String(20), default="unseen")  # unseen/introduced/defined/practiced/mastered
+    exposure_count = Column(Integer, default=0)
+    correct_count = Column(Integer, default=0)
+    ease_factor = Column(Float, default=2.5)  # SM-2 for mastered state
+    interval = Column(Integer, default=1)
+    next_review = Column(DateTime)
+    last_review = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    vocab = relationship("Vocabulary", back_populates="user_mastery")
+

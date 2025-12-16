@@ -31,7 +31,10 @@ modules:
           - ["В", "V"]
           - ["У", "OO"]
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [mama, kot, taksi, metro, restoran, voda]
     exercises:
       count: 8
 
@@ -58,7 +61,10 @@ modules:
           - { ru: "У меня есть кот.", en: "I have a cat." }
         rule: "Russian grammar is logical - trust the patterns!"
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [ya, student, dom, moy, u_menya, yest, kot, on, ona, ono]
     exercises:
       count: 8
 
@@ -78,7 +84,10 @@ modules:
           - ["твой", "твоя", "твоё"]
           - ["наш", "наша", "наше"]
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [moy, moya, moyo, dom, kniga, okno, gde, kto, chto]
     exercises:
       count: 12
       difficulty: "medium"
@@ -98,9 +107,12 @@ modules:
           - Gender agreement
           - Question/answer patterns
           - Possessives
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, da, nyet, privet, u_menya]
     exercises:
       count: 15
-      review_previous: true
       difficulty: "hard"
 
   - id: "mod_5"
@@ -126,15 +138,17 @@ modules:
           - "~65 vocabulary words learned"
           - "6 core grammar patterns mastered"
           - "Ready for Unit 2: Everyday Life!"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, da, nyet, gde, kto, chto, u_menya, moy, bolshoy]
     exercises:
       count: 15
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: []
-  review:
-    from_lessons: [01_cognates, 02_hello, 03_questions, 04_gender, 05_false_friends, 06_possession, 07_where_who_what, 08_cases_intro, 09_possessives, 10_numbers, 11_adjectives]
+  primary: []
+  review_from: [01_cognates, 02_hello, 03_questions, 04_gender, 05_false_friends, 06_possession, 07_where_who_what, 08_cases_intro, 09_possessives, 10_numbers, 11_adjectives]
 
 templates:
   - pattern: "Это {NOUN}."

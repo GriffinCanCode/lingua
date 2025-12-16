@@ -1,9 +1,10 @@
 """SRS (Spaced Repetition System) API with Monadic Error Handling
 
-Handles sentence management, review scheduling, and mastery tracking
-using Result types for predictable error propagation.
+Handles sentence management, review scheduling, mastery tracking,
+and vocabulary state tracking using Result types for predictable error propagation.
 """
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query
@@ -14,8 +15,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from core.database import get_db, fetch_one, create_entity
 from core.security import get_current_user_id
 from core.errors import raise_result
-from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
+from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery, Vocabulary, UserVocabMastery
 from engines.srs import SRSEngine
+from engines.tracking import WordTracker, VocabState
 
 router = APIRouter()
 
@@ -250,4 +252,167 @@ async def get_mastery_stats(
             total_reviews=mastery.total_reviews,
         )
         for mastery, pattern in result.all()
+    ]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VOCABULARY TRACKING ENDPOINTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class VocabResponse(BaseModel):
+    id: str
+    word: str
+    translation: str
+    pos: str | None
+    gender: str | None
+
+    class Config:
+        from_attributes = True
+
+
+class VocabStateResponse(BaseModel):
+    vocab_id: str
+    word: str
+    translation: str
+    state: str
+    exposure_count: int
+    correct_count: int
+    pos: str | None = None
+    gender: str | None = None
+
+
+class VocabPoolResponse(BaseModel):
+    new: list[VocabStateResponse]
+    practice: list[VocabStateResponse]
+    review: list[VocabStateResponse]
+
+
+class VocabExposureRequest(BaseModel):
+    vocab_id: str
+    exposure_type: Literal["intro", "definition", "exercise", "review"]
+    correct: bool | None = None
+
+
+class VocabExposureBatchRequest(BaseModel):
+    exposures: list[VocabExposureRequest]
+
+
+@router.get("/vocab", response_model=list[VocabResponse])
+async def list_vocabulary(
+    language: str = Query("ru"),
+    pos: str | None = Query(None),
+    limit: int = Query(50, le=200),
+    db: AsyncSession = Depends(get_db),
+):
+    """List vocabulary items with optional filters."""
+    query = select(Vocabulary).where(Vocabulary.language == language)
+    if pos:
+        query = query.where(Vocabulary.pos == pos)
+    result = await db.execute(query.limit(limit))
+    return result.scalars().all()
+
+
+@router.get("/vocab/states", response_model=list[VocabStateResponse])
+async def get_vocab_states(
+    vocab_ids: str = Query(..., description="Comma-separated vocab IDs"),
+    user_id: str = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get user's mastery states for vocabulary items."""
+    ids = [v.strip() for v in vocab_ids.split(",") if v.strip()]
+    tracker = WordTracker(db)
+    states = await tracker.get_vocab_states(UUID(user_id), ids)
+    return [
+        VocabStateResponse(
+            vocab_id=ws.vocab_id,
+            word=ws.word,
+            translation=ws.translation,
+            state=ws.state,
+            exposure_count=ws.exposure_count,
+            correct_count=ws.correct_count,
+            pos=ws.pos,
+            gender=ws.gender,
+        )
+        for ws in states.values()
+    ]
+
+
+@router.get("/vocab/pool", response_model=VocabPoolResponse)
+async def get_vocab_pool(
+    lesson_vocab: str = Query(..., description="Comma-separated lesson vocab IDs"),
+    review_vocab: str | None = Query(None, description="Comma-separated review vocab IDs"),
+    max_new: int = Query(5, le=10),
+    user_id: str = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get vocabulary pool for a lesson session, categorized by learning state."""
+    lesson_ids = [v.strip() for v in lesson_vocab.split(",") if v.strip()]
+    review_ids = [v.strip() for v in review_vocab.split(",")] if review_vocab else []
+
+    tracker = WordTracker(db)
+    pool = await tracker.get_vocab_pool(UUID(user_id), lesson_ids, review_ids, max_new)
+
+    def to_response(ws):
+        return VocabStateResponse(
+            vocab_id=ws.vocab_id, word=ws.word, translation=ws.translation,
+            state=ws.state, exposure_count=ws.exposure_count, correct_count=ws.correct_count,
+            pos=ws.pos, gender=ws.gender,
+        )
+
+    return VocabPoolResponse(
+        new=[to_response(ws) for ws in pool.new],
+        practice=[to_response(ws) for ws in pool.practice],
+        review=[to_response(ws) for ws in pool.review],
+    )
+
+
+@router.post("/vocab/exposure")
+async def record_vocab_exposure(
+    request: VocabExposureRequest,
+    user_id: str = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db),
+):
+    """Record a vocabulary exposure event and update state."""
+    tracker = WordTracker(db)
+    new_state = await tracker.record_exposure(
+        UUID(user_id), request.vocab_id, request.exposure_type, request.correct
+    )
+    await db.commit()
+    return {"vocab_id": request.vocab_id, "new_state": new_state}
+
+
+@router.post("/vocab/exposure/batch")
+async def record_vocab_exposure_batch(
+    request: VocabExposureBatchRequest,
+    user_id: str = Depends(get_current_user_id),
+    db: AsyncSession = Depends(get_db),
+):
+    """Record multiple vocabulary exposure events."""
+    tracker = WordTracker(db)
+    results = []
+    for exp in request.exposures:
+        new_state = await tracker.record_exposure(
+            UUID(user_id), exp.vocab_id, exp.exposure_type, exp.correct
+        )
+        results.append({"vocab_id": exp.vocab_id, "new_state": new_state})
+    await db.commit()
+    return {"updated": results}
+
+
+@router.get("/vocab/due", response_model=list[VocabStateResponse])
+async def get_due_vocab_reviews(
+    user_id: str = Depends(get_current_user_id),
+    limit: int = Query(20, le=50),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get vocabulary items due for SRS review."""
+    tracker = WordTracker(db)
+    due = await tracker.get_due_reviews(UUID(user_id), limit)
+    return [
+        VocabStateResponse(
+            vocab_id=ws.vocab_id, word=ws.word, translation=ws.translation,
+            state=ws.state, exposure_count=ws.exposure_count, correct_count=ws.correct_count,
+            pos=ws.pos, gender=ws.gender,
+        )
+        for ws in due
     ]

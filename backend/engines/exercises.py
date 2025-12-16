@@ -2,7 +2,7 @@
 
 Generates Duolingo-style exercises from lesson vocabulary and sentences.
 Supports: word_bank, typing, matching, multiple_choice, fill_blank,
-          pattern_fill, paradigm_complete, pattern_apply
+          pattern_fill, paradigm_complete, pattern_apply, word_intro
 """
 import random
 from uuid import uuid4
@@ -16,11 +16,21 @@ log = engine_logger()
 
 ExerciseType = Literal[
     'word_bank', 'typing', 'matching', 'multiple_choice', 'fill_blank',
-    'pattern_fill', 'paradigm_complete', 'pattern_apply'
+    'pattern_fill', 'paradigm_complete', 'pattern_apply', 'word_intro'
 ]
 TargetLanguage = Literal['ru', 'en']
 LevelType = Literal['intro', 'easy', 'medium', 'hard', 'review']
+VocabState = Literal['unseen', 'introduced', 'defined', 'practiced', 'mastered']
 GrammaticalCase = Literal['nominative', 'genitive', 'dative', 'accusative', 'instrumental', 'prepositional']
+
+# Exercise types appropriate for each vocabulary state
+EXERCISE_TYPES_BY_STATE: dict[VocabState, list[ExerciseType]] = {
+    'unseen': ['word_intro'],
+    'introduced': ['word_intro', 'multiple_choice'],
+    'defined': ['word_bank', 'multiple_choice', 'matching'],
+    'practiced': ['word_bank', 'typing', 'fill_blank', 'pattern_fill'],
+    'mastered': ['typing', 'pattern_apply', 'paradigm_complete'],
+}
 
 
 @dataclass(slots=True)
@@ -490,6 +500,31 @@ class ExerciseGenerator:
         return random.sample(available, min(count, len(available))) if available else []
 
 
+def select_exercise_type(vocab_states: list[VocabState]) -> ExerciseType:
+    """Randomly select appropriate exercise type based on vocab states."""
+    eligible: set[ExerciseType] = set()
+    for state in vocab_states:
+        eligible.update(EXERCISE_TYPES_BY_STATE.get(state, []))
+    return random.choice(list(eligible)) if eligible else 'multiple_choice'
+
+
+def get_eligible_types_for_state(state: VocabState) -> list[ExerciseType]:
+    """Get exercise types eligible for a vocabulary state."""
+    return EXERCISE_TYPES_BY_STATE.get(state, ['multiple_choice'])
+
+
+@dataclass(slots=True)
+class StateAwareVocab:
+    """Vocabulary item with tracking state."""
+    word: str
+    translation: str
+    state: VocabState
+    vocab_id: str
+    audio: str | None = None
+    gender: str | None = None
+    pos: str | None = None
+
+
 def generate_exercises(
     vocabulary: list[dict],
     sentences: list[dict],
@@ -523,3 +558,94 @@ def generate_exercises(
     exercises = gen.generate_lesson_exercises(vocab, sents, review, num_exercises, level_type)
 
     return [{'id': ex.id, 'type': ex.type, 'prompt': ex.prompt, 'difficulty': ex.difficulty, **ex.data} for ex in exercises]
+
+
+def generate_state_aware_exercises(
+    vocab_pool: dict[str, list[StateAwareVocab]],
+    sentences: list[dict],
+    num_exercises: int = 15,
+    language: str = 'ru',
+) -> list[dict]:
+    """Generate exercises based on vocabulary learning states.
+    
+    Args:
+        vocab_pool: Dict with keys 'new', 'practice', 'review' containing StateAwareVocab items
+        sentences: Sentence data for word_bank/fill_blank exercises
+        num_exercises: Target number of exercises
+        language: Target language code
+    
+    Returns:
+        List of exercise dicts with type selected based on vocab state
+    """
+    gen = ExerciseGenerator(language=language)
+    exercises: list[Exercise] = []
+
+    new_vocab = vocab_pool.get('new', [])
+    practice_vocab = vocab_pool.get('practice', [])
+    review_vocab = vocab_pool.get('review', [])
+
+    # Convert to VocabItem for existing generators
+    all_vocab = [
+        VocabItem(word=v.word, translation=v.translation, audio=v.audio, gender=v.gender)
+        for v in new_vocab + practice_vocab + review_vocab
+    ]
+
+    sents = [SentenceItem(
+        text=s['text'],
+        translation=s['translation'],
+        words=s.get('words'),
+        distractors=s.get('distractors', []),
+        complexity=s.get('complexity', 1),
+    ) for s in sentences]
+
+    # Build distractor pool
+    gen._distractor_pool = {
+        'ru': gen._lang_module.build_distractor_pool([v.word for v in all_vocab], 'ru'),
+        'en': gen._lang_module.build_distractor_pool([v.translation for v in all_vocab], 'en'),
+    }
+
+    # Generate word_intro for new words first
+    for v in new_vocab[:5]:
+        exercises.append(Exercise(
+            id=str(uuid4()),
+            type='word_intro',
+            prompt='Learn this word',
+            difficulty=1,
+            data={
+                'word': v.word,
+                'translation': v.translation,
+                'audio': v.audio,
+                'vocabId': v.vocab_id,
+            },
+        ))
+
+    # Determine distribution based on pool composition
+    remaining = num_exercises - len(exercises)
+    if remaining <= 0:
+        random.shuffle(exercises)
+        return [{'id': ex.id, 'type': ex.type, 'prompt': ex.prompt, 'difficulty': ex.difficulty, **ex.data} for ex in exercises[:num_exercises]]
+
+    # Collect states for type selection
+    states = [v.state for v in practice_vocab + review_vocab]
+    if not states:
+        states = ['introduced']
+
+    # Generate varied exercises based on states
+    type_counts: dict[ExerciseType, int] = {}
+    for _ in range(remaining):
+        ex_type = select_exercise_type(states)
+        type_counts[ex_type] = type_counts.get(ex_type, 0) + 1
+
+    # Generate exercises by type
+    practice_items = [VocabItem(word=v.word, translation=v.translation, audio=v.audio, gender=v.gender) for v in practice_vocab]
+    review_items = [VocabItem(word=v.word, translation=v.translation, audio=v.audio, gender=v.gender) for v in review_vocab]
+
+    for ex_type, count in type_counts.items():
+        if ex_type == 'word_intro':
+            continue  # Already handled
+        generated = gen._generate_by_type(ex_type, count, practice_items, sents, review_items, 2)
+        exercises.extend(generated)
+
+    random.shuffle(exercises)
+    log.debug("state_aware_exercises_generated", count=len(exercises), types=list(type_counts.keys()))
+    return [{'id': ex.id, 'type': ex.type, 'prompt': ex.prompt, 'difficulty': ex.difficulty, **ex.data} for ex in exercises[:num_exercises]]

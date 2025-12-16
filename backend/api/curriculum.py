@@ -34,21 +34,28 @@ def _load_vocab_for_lesson(lesson_data: dict, unit_id: str, language: str) -> tu
     loader = get_vocabulary_loader(language)
     vocab_filter = lesson_data.get("vocab_filter", {})
     
-    # Load primary vocabulary
-    primary_ids = vocab_filter.get("primary", {}).get("ids", [])
-    unit = loader.load_unit(unit_id)
+    # Handle both new flat format (primary: [ids]) and old nested format (primary: {ids: [ids]})
+    primary_raw = vocab_filter.get("primary", [])
+    primary_ids = primary_raw if isinstance(primary_raw, list) else primary_raw.get("ids", [])
     
+    unit = loader.load_unit(unit_id)
     if not unit:
         return [], []
     
     vocab_by_id = {v.id: v for v in unit.all_vocab}
     primary = [loader.vocab_to_dict(vocab_by_id[vid]) for vid in primary_ids if vid in vocab_by_id]
     
-    # Load review vocabulary from previous lessons
+    # Handle both formats for review: review_from (new) or review.from_lessons (old)
     review: list[dict] = []
-    review_lessons = vocab_filter.get("review", {}).get("from_lessons", [])
+    review_lessons = vocab_filter.get("review_from", [])
+    if not review_lessons:
+        review_raw = vocab_filter.get("review", {})
+        review_lessons = review_raw.get("from_lessons", []) if isinstance(review_raw, dict) else []
+    
     for lesson_id in review_lessons:
-        lesson_vocab = unit.by_lesson.get(f"lesson_{lesson_id.split('_')[0]}_{lesson_id.split('_')[1] if '_' in lesson_id else lesson_id}")
+        parts = lesson_id.split("_") if "_" in lesson_id else [lesson_id]
+        lesson_key = f"lesson_{parts[0]}_{parts[1]}" if len(parts) > 1 else lesson_id
+        lesson_vocab = unit.by_lesson.get(lesson_key)
         if lesson_vocab:
             review.extend([loader.vocab_to_dict(v) for v in lesson_vocab.primary[:3]])
     

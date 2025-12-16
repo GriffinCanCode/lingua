@@ -34,7 +34,10 @@ modules:
       - type: "tip"
         content: "These 5 letters are identical in Russian and English! You already know them."
     
-    vocab_ids: [mama, kot]
+    vocab_pool:
+      introduce: [mama, kot]
+      practice: []
+      review: []
     exercises:
       count: 7
       templates:
@@ -68,7 +71,10 @@ modules:
             translation: "cat (male)"
             note: "Rhymes with 'boat'"
     
-    vocab_ids: [taksi, metro, kot]
+    vocab_pool:
+      introduce: [taksi, metro]
+      practice: [mama, kot]
+      review: []
     exercises:
       count: 7
 
@@ -95,7 +101,10 @@ modules:
           тут (here) and там (there) form a pair, like English here/there.
           Notice how they both start with Т - this isn't coincidence!
     
-    vocab_ids: [tut, tam, vot]
+    vocab_pool:
+      introduce: [tut, tam, vot]
+      practice: [mama, kot, taksi, metro]
+      review: []
     exercises:
       count: 8
       templates:
@@ -108,9 +117,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Mix everything you've learned. Speed builds fluency! Don't overthink - trust your instincts."
+    vocab_pool:
+      introduce: []
+      practice: [mama, kot, taksi, metro, tut, tam, vot]
+      review: []
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -123,16 +135,18 @@ modules:
           - "6 words: мама, кот, такси, метро, тут, там"
           - "The location pattern: Noun + тут/там"
           - "Russian drops 'is' - simpler than English!"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [mama, kot, taksi, metro, tut, tam, vot, eto]
     exercises:
       count: 12
       difficulty: "hard"
 
-# Vocabulary filter
+# Vocabulary references for this lesson
 vocab_filter:
-  primary:
-    ids: [mama, kot, taksi, metro, tut, tam, vot, eto]
-  review:
-    from_lessons: []
+  primary: [mama, kot, taksi, metro, tut, tam, vot, eto]
+  review_from: []
 
 # Templates for exercise generation
 templates:

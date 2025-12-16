@@ -34,7 +34,10 @@ modules:
       - type: "tip"
         content: "Say 'привет' to anyone you'd call by their first name."
     
-    vocab_ids: [privet, poka]
+    vocab_pool:
+      introduce: [privet, poka]
+      practice: []
+      review: []
     exercises:
       count: 6
 
@@ -66,7 +69,10 @@ modules:
           - { word: "здоровье", lang: "Russian", relation: "cousin" }
         insight: "Здравствуйте literally means 'be healthy!' - a wish, not just a greeting."
     
-    vocab_ids: [zdravstvuyte, do_svidaniya]
+    vocab_pool:
+      introduce: [zdravstvuyte, do_svidaniya]
+      practice: [privet, poka]
+      review: []
     exercises:
       count: 7
 
@@ -87,7 +93,10 @@ modules:
       - type: "tip"
         content: "This makes Russian simpler than English in many ways. 'Я студент' = 'I student' = 'I am a student'"
     
-    vocab_ids: [ya, student, doktor]
+    vocab_pool:
+      introduce: [ya, student, doktor]
+      practice: [privet, poka, zdravstvuyte, do_svidaniya]
+      review: []
     exercises:
       count: 8
 
@@ -97,9 +106,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Practice switching between formal and informal. Context is everything!"
+    vocab_pool:
+      introduce: []
+      practice: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+      review: [mama, kot, taksi, metro]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -112,15 +124,17 @@ modules:
           - "Formal: здравствуйте (hello), до свидания (goodbye)"
           - "Russian drops 'is/am/are' - simpler sentences!"
           - "Use formal with strangers and elders"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
-  review:
-    from_lessons: [01_cognates]
+  primary: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+  review_from: [01_cognates]
 
 templates:
   - pattern: "Привет! Я {PROFESSION}."

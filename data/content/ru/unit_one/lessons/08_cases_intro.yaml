@@ -37,7 +37,10 @@ modules:
           - ["Instrumental", "With what?", "котом (with the cat)"]
           - ["Prepositional", "About what?", "коте (about the cat)"]
     
-    vocab_ids: [kot]
+    vocab_pool:
+      introduce: []
+      practice: [kot]
+      review: []
     exercises:
       count: 5
 
@@ -64,7 +67,10 @@ modules:
           - { ru: "Это мама.", en: "This is mom." }
         rule: "If the noun is doing something or being described, use nominative (no change!)."
     
-    vocab_ids: [kot, sobaka, mama]
+    vocab_pool:
+      introduce: []
+      practice: [kot, sobaka]
+      review: [mama, tam, tut]
     exercises:
       count: 7
 
@@ -96,7 +102,10 @@ modules:
       - type: "tip"
         content: "Start with these patterns. More exceptions will come later!"
     
-    vocab_ids: [kot, mama, dom, okno]
+    vocab_pool:
+      introduce: []
+      practice: [kot, mama, dom, okno]
+      review: [sobaka, kniga]
     exercises:
       count: 8
 
@@ -106,9 +115,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Focus on recognizing when to use each case. Production will come with practice!"
+    vocab_pool:
+      introduce: []
+      practice: [kot, mama, dom, okno, sobaka, kniga]
+      review: [on, ona, ono, gde]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -122,15 +134,17 @@ modules:
           - "Accusative = object (what receives action)"
           - "Masculine animate: add -а"
           - "Feminine -а: change to -у"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kot, mama, dom, okno, sobaka, kniga]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [kot, mama, dom, okno, sobaka, kniga]
-  review:
-    from_lessons: [04_gender, 06_possession]
+  primary: [kot, mama, dom, okno, sobaka, kniga]
+  review_from: [04_gender, 06_possession]
 
 templates:
   - pattern: "{SUBJECT} {LOCATION}."

@@ -37,7 +37,10 @@ modules:
             translation: "he / it (masculine)"
             note: "Use for masculine nouns AND male people"
     
-    vocab_ids: [on, kot, dom, bank, park]
+    vocab_pool:
+      introduce: [on, dom, park]
+      practice: [kot, bank]
+      review: []
     exercises:
       count: 6
 
@@ -69,7 +72,10 @@ modules:
             translation: "she / it (feminine)"
             note: "Use for feminine nouns AND female people"
     
-    vocab_ids: [ona, mama, kniga, sobaka, sestra]
+    vocab_pool:
+      introduce: [ona, kniga, sobaka, sestra]
+      practice: [on, dom, park, kot]
+      review: [mama]
     exercises:
       count: 7
 
@@ -107,7 +113,10 @@ modules:
           - { ru: "Где окно? Оно там.", en: "Where's the window? It's there." }
         rule: "Match the pronoun to the noun's gender, not the meaning!"
     
-    vocab_ids: [ono, okno, metro, radio]
+    vocab_pool:
+      introduce: [ono, okno, radio]
+      practice: [on, ona, kniga, sobaka]
+      review: [metro, mama]
     exercises:
       count: 8
 
@@ -117,9 +126,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Look at the ending! Consonant = он, -а = она, -о = оно. Trust the pattern!"
+    vocab_pool:
+      introduce: []
+      practice: [on, ona, ono, dom, kniga, okno, park, sobaka]
+      review: [kot, mama, metro, taksi]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -132,15 +144,17 @@ modules:
           - "Feminine (она): ends in -а or -я"
           - "Neuter (оно): ends in -о or -е"
           - "Pronouns match noun gender, not biological gender"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [on, ona, ono, dom, kniga, okno, park, sobaka]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [on, ona, ono, dom, kniga, okno, park, sobaka]
-  review:
-    from_lessons: [01_cognates, 02_hello]
+  primary: [on, ona, ono, dom, kniga, okno, park, sobaka, sestra, radio]
+  review_from: [01_cognates, 02_hello]
 
 templates:
   - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."

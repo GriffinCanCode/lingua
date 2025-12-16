@@ -35,7 +35,10 @@ modules:
       - type: "tip"
         content: "РЕСТОРАН looks like 'pectopah' but sounds like 'restoran' (restaurant)!"
     
-    vocab_ids: [restoran, voda]
+    vocab_pool:
+      introduce: [restoran, voda]
+      practice: []
+      review: []
     exercises:
       count: 6
 
@@ -68,7 +71,10 @@ modules:
           - { word: "vodka", lang: "Russian", relation: "descendant" }
         insight: "Vodka literally means 'little water' - вода + ка (diminutive)!"
     
-    vocab_ids: [restoran, voda, sestra, brat]
+    vocab_pool:
+      introduce: [brat]
+      practice: [restoran, voda, sestra]
+      review: []
     exercises:
       count: 7
 
@@ -98,7 +104,10 @@ modules:
       - type: "tip"
         content: "Most international words are spelled phonetically in Russian!"
     
-    vocab_ids: [internet, telefon, bank]
+    vocab_pool:
+      introduce: [internet, telefon]
+      practice: [restoran, voda, brat]
+      review: [bank]
     exercises:
       count: 8
 
@@ -108,9 +117,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Read words out loud! Your brain will adjust faster when you hear the correct sounds."
+    vocab_pool:
+      introduce: []
+      practice: [restoran, voda, sestra, brat, internet, telefon]
+      review: [mama, kot, dom, on, ona]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -124,15 +136,17 @@ modules:
           - "Н = N, not H"
           - "В = V, not B"
           - "Many international words are just respelled"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [restoran, voda, sestra, brat, internet, telefon]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [restoran, voda, sestra, brat, internet, telefon]
-  review:
-    from_lessons: [01_cognates, 04_gender]
+  primary: [restoran, voda, sestra, brat, internet, telefon]
+  review_from: [01_cognates, 04_gender]
 
 templates:
   - pattern: "Где {PLACE}?"

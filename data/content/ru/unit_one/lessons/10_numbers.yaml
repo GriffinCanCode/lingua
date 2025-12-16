@@ -37,7 +37,10 @@ modules:
       - type: "tip"
         content: "Три (3) sounds like 'tree' - easy to remember!"
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kot, dom, kniga]
     exercises:
       count: 6
 
@@ -65,7 +68,10 @@ modules:
           - { word: "sieben", lang: "German", relation: "cognate" }
         insight: "Indo-European numbers are remarkably similar across languages!"
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kot, sobaka, okno, telefon]
     exercises:
       count: 7
 
@@ -95,7 +101,10 @@ modules:
       - type: "tip"
         content: "This is tricky! Start by just recognizing the pattern."
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kot, kniga, okno, dom, sobaka]
     exercises:
       count: 8
 
@@ -105,9 +114,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Count things around you! Один телефон, два окна, три книги..."
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [telefon, okno, kniga, kot, sobaka, dom]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -120,15 +132,17 @@ modules:
           - "один, два, три, четыре, пять"
           - "шесть, семь, восемь, девять, десять"
           - "Numbers affect noun endings"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [kot, dom, kniga, okno, sobaka, telefon]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: []
-  review:
-    from_lessons: [04_gender, 08_cases_intro]
+  primary: []
+  review_from: [04_gender, 08_cases_intro]
 
 templates:
   - pattern: "Это {NUMBER} {NOUN}."

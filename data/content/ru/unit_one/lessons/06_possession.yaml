@@ -39,7 +39,10 @@ modules:
           - { ru: "У меня машина.", en: "I have a car." }
         rule: "Есть is often dropped in casual speech, especially for obvious possessions."
     
-    vocab_ids: [u_menya, yest]
+    vocab_pool:
+      introduce: [u_menya, yest]
+      practice: []
+      review: []
     exercises:
       count: 6
 
@@ -68,7 +71,10 @@ modules:
           - { word: "machina", lang: "Latin", relation: "ancestor" }
         insight: "In Russian, машина primarily means 'car' - the machine of the 20th century!"
     
-    vocab_ids: [brat, sestra, mashina, sobaka]
+    vocab_pool:
+      introduce: [mashina]
+      practice: [u_menya, yest, brat, sestra, sobaka]
+      review: []
     exercises:
       count: 7
 
@@ -89,7 +95,10 @@ modules:
       - type: "tip"
         content: "For now, just learn the negative phrases as set expressions. The grammar will come!"
     
-    vocab_ids: [u_menya, yest]
+    vocab_pool:
+      introduce: []
+      practice: [u_menya, yest, brat, sestra, mashina, sobaka]
+      review: [kot, dom]
     exercises:
       count: 8
 
@@ -99,9 +108,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Talk about what you have! У меня есть телефон. У меня есть кот. Real practice = real progress."
+    vocab_pool:
+      introduce: []
+      practice: [u_menya, yest, brat, sestra, mashina, sobaka]
+      review: [kot, dom, telefon, mama]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -114,15 +126,17 @@ modules:
           - "У меня нет = I don't have"
           - "Family: брат (brother), сестра (sister)"
           - "Things: машина (car), собака (dog)"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [u_menya, yest, brat, sestra, mashina, sobaka, telefon]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [u_menya, yest, brat, sestra, mashina, sobaka, telefon]
-  review:
-    from_lessons: [01_cognates, 04_gender]
+  primary: [u_menya, yest, brat, sestra, mashina, sobaka, telefon]
+  review_from: [01_cognates, 04_gender]
 
 templates:
   - pattern: "У меня есть {NOUN}."

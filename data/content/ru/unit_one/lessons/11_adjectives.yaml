@@ -33,7 +33,10 @@ modules:
       - type: "tip"
         content: "The ending sounds like the noun gender: -ой sounds firm (masc), -ая sounds open (fem)."
     
-    vocab_ids: [bolshoy, malenkiy]
+    vocab_pool:
+      introduce: [bolshoy, malenkiy]
+      practice: []
+      review: [dom, kniga, okno]
     exercises:
       count: 6
 
@@ -62,7 +65,10 @@ modules:
           - { word: "Red Square", lang: "English", relation: "descendant" }
         insight: "Красная площадь (Red Square) originally meant 'Beautiful Square'!"
     
-    vocab_ids: []
+    vocab_pool:
+      introduce: []
+      practice: [bolshoy, malenkiy]
+      review: [dom, kniga, okno, mashina]
     exercises:
       count: 7
 
@@ -91,7 +97,10 @@ modules:
           - { ru: "новое окно", en: "new window" }
         rule: "Adjective comes before noun, just like English!"
     
-    vocab_ids: [noviy, stariy]
+    vocab_pool:
+      introduce: [noviy, stariy]
+      practice: [bolshoy, malenkiy]
+      review: [dom, sobaka, okno]
     exercises:
       count: 8
 
@@ -101,9 +110,12 @@ modules:
     teaching:
       - type: "tip"
         content: "Describe everything! Большой дом. Маленький кот. Новая книга."
+    vocab_pool:
+      introduce: []
+      practice: [bolshoy, malenkiy, noviy, stariy]
+      review: [dom, kniga, okno, kot, sobaka, mashina]
     exercises:
       count: 10
-      review_previous: true
 
   - id: "mod_5"
     title: "Master"
@@ -117,15 +129,17 @@ modules:
           - "Feminine: -ая (большая)"
           - "Neuter: -ое (большое)"
           - "Colors and descriptive words"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary:
-    ids: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review:
-    from_lessons: [04_gender, 09_possessives]
+  primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
+  review_from: [04_gender, 09_possessives]
 
 templates:
   - pattern: "Это {ADJ} {NOUN}."

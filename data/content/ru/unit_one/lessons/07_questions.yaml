@@ -210,7 +210,7 @@ templates:
   - pattern: "Э́то {NOUN}?"
     translation: "Is this {NOUN.a}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 4
 
   - pattern: "Э́то {NOUN}?"
@@ -222,7 +222,7 @@ templates:
   - pattern: "Э́то не {NOUN}."
     translation: "This is not {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Э́то не {NOUN}."
@@ -234,7 +234,7 @@ templates:
   - pattern: "Да, э́то {NOUN}."
     translation: "Yes, this is {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   - pattern: "Да, э́то {NOUN}."
@@ -247,13 +247,13 @@ templates:
   - pattern: "Нет, э́то не {NOUN}."
     translation: "No, this is not {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Э́то {NOUN}? — Нет, не {NOUN}."
     translation: "Is this {NOUN.a}? — No, it's not."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Он тут? — Нет, он не тут."
@@ -274,8 +274,8 @@ templates:
   - pattern: "Нет, не {NOUN}, а {NOUN2}."
     translation: "No, not {NOUN.a}, but {NOUN2.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
-      NOUN2: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
+      NOUN2: { preset: standard_noun }
     weight: 2
 
 error_corrections:

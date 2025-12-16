@@ -182,13 +182,13 @@ templates:
     translation: "This is {ADJ.a} {NOUN.translation}."
     slots:
       ADJ: { pos: [adjective] }
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 4
 
   - pattern: "{NOUN} {ADJ}."
     translation: "{NOUN.the} is {ADJ.translation}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
       ADJ: { pos: [adjective] }
     weight: 3
 

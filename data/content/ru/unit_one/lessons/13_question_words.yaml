@@ -239,7 +239,7 @@ templates:
   - pattern: "Где {NOUN}?"
     translation: "Where is {NOUN.the}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 4
   
   - pattern: "Где {NOUN}?"
@@ -272,7 +272,7 @@ templates:
   - pattern: "Где {NOUN}? — Я не зна́ю."
     translation: "Where is {NOUN.the}? — I don't know."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Кто э́то? — Я не зна́ю."

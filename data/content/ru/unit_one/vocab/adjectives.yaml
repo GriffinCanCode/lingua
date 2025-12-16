@@ -67,3 +67,35 @@ adjectives:
       - { ru: "Э́то ста́рый дом.", en: "This is an old house." }
       - { ru: "Ста́рая кни́га.", en: "An old book." }
       - { ru: "У меня́ ста́рый телефо́н.", en: "I have an old phone." }
+
+  - id: "khoroshiy"
+    word: "хороший"
+    stressed: "хоро́ший"
+    transliteration: "khoroshiy"
+    translation: "good"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    audio: "khoroshiy.mp3"
+    notes: "Masculine form. хоро́шая (f), хоро́шее (n). Related to adverb хорошо́."
+    examples:
+      - { ru: "Э́то хоро́ший рестора́н.", en: "This is a good restaurant." }
+      - { ru: "Хоро́шая иде́я!", en: "Good idea!" }
+      - { ru: "У меня́ хоро́ший друг.", en: "I have a good friend." }
+
+  - id: "krasivyy"
+    word: "красивый"
+    stressed: "краси́вый"
+    transliteration: "krasivyy"
+    translation: "beautiful"
+    pos: "adjective"
+    gender: "m"
+    frequency: 1
+    difficulty: 2
+    audio: "krasivyy.mp3"
+    notes: "Masculine form. краси́вая (f), краси́вое (n). Stress on second syllable."
+    examples:
+      - { ru: "Како́й краси́вый дом!", en: "What a beautiful house!" }
+      - { ru: "Краси́вая ко́шка.", en: "A beautiful cat." }
+      - { ru: "Э́то краси́вый го́род.", en: "This is a beautiful city." }

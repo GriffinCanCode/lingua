@@ -431,3 +431,140 @@ essential:
       - { ru: "Где у́лица Пу́шкина?", en: "Where is Pushkin Street?" }
       - { ru: "Э́то моя́ у́лица.", en: "This is my street." }
       - { ru: "Больша́я у́лица.", en: "A big street." }
+
+  - id: "chay"
+    word: "чай"
+    stressed: "чай"
+    transliteration: "chay"
+    translation: "tea"
+    pos: "noun"
+    gender: "m"
+    semantic: [food, drink]
+    frequency: 1
+    difficulty: 1
+    audio: "chay.mp3"
+    notes: "Ч sounds like 'ch'. One syllable word, no stress mark needed."
+    examples:
+      - { ru: "Ты хо́чешь чай?", en: "Do you want tea?" }
+      - { ru: "Чай и́ли ко́фе?", en: "Tea or coffee?" }
+      - { ru: "Я пью чай.", en: "I drink tea." }
+
+  - id: "shkola"
+    word: "школа"
+    stressed: "шко́ла"
+    transliteration: "shkola"
+    translation: "school"
+    pos: "noun"
+    gender: "f"
+    semantic: [place]
+    frequency: 1
+    difficulty: 2
+    audio: "shkola.mp3"
+    notes: "Ш sounds like 'sh'. Cognate with English 'school'."
+    examples:
+      - { ru: "Где шко́ла?", en: "Where is the school?" }
+      - { ru: "Э́то больша́я шко́ла.", en: "This is a big school." }
+      - { ru: "Я рабо́таю в шко́ле.", en: "I work at a school." }
+
+  - id: "tsentr"
+    word: "центр"
+    stressed: "центр"
+    transliteration: "tsentr"
+    translation: "center"
+    pos: "noun"
+    gender: "m"
+    semantic: [place]
+    frequency: 1
+    difficulty: 2
+    audio: "tsentr.mp3"
+    notes: "Ц sounds like 'ts'. Cognate with English 'center'."
+    examples:
+      - { ru: "Где центр?", en: "Where is the center?" }
+      - { ru: "Я живу́ в це́нтре.", en: "I live in the center." }
+      - { ru: "Центр го́рода.", en: "City center." }
+
+  - id: "zhurnal"
+    word: "журнал"
+    stressed: "журна́л"
+    transliteration: "zhurnal"
+    translation: "magazine"
+    pos: "noun"
+    gender: "m"
+    semantic: [thing]
+    frequency: 2
+    difficulty: 2
+    audio: "zhurnal.mp3"
+    notes: "Ж sounds like 'zh'. Cognate with French 'journal'."
+    examples:
+      - { ru: "Э́то мой журна́л.", en: "This is my magazine." }
+      - { ru: "Ты чита́ешь журна́л?", en: "Are you reading a magazine?" }
+      - { ru: "Интере́сный журна́л.", en: "An interesting magazine." }
+
+  - id: "god"
+    word: "год"
+    stressed: "год"
+    transliteration: "god"
+    translation: "year"
+    pos: "noun"
+    gender: "m"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    pronunciation_quirk: "final_g_devoicing"
+    audio: "god.mp3"
+    notes: "Final Г devoices to К sound. One syllable."
+    examples:
+      - { ru: "Но́вый год!", en: "New Year!" }
+      - { ru: "Како́й сейча́с год?", en: "What year is it now?" }
+      - { ru: "Оди́н год.", en: "One year." }
+
+  - id: "zima"
+    word: "зима"
+    stressed: "зима́"
+    transliteration: "zima"
+    translation: "winter"
+    pos: "noun"
+    gender: "f"
+    semantic: [time]
+    frequency: 2
+    difficulty: 1
+    audio: "zima.mp3"
+    notes: "З sounds like 'z'. Stress on last syllable."
+    examples:
+      - { ru: "Сейча́с зима́.", en: "It's winter now." }
+      - { ru: "Зимо́й хо́лодно.", en: "It's cold in winter." }
+      - { ru: "Я люблю́ зи́му.", en: "I love winter." }
+
+  - id: "yazyk"
+    word: "язык"
+    stressed: "язы́к"
+    transliteration: "yazyk"
+    translation: "language / tongue"
+    pos: "noun"
+    gender: "m"
+    semantic: [thing]
+    frequency: 1
+    difficulty: 2
+    audio: "yazyk.mp3"
+    notes: "Means both 'language' and 'tongue'. Stress on last syllable."
+    examples:
+      - { ru: "Ру́сский язы́к.", en: "Russian language." }
+      - { ru: "Како́й э́то язы́к?", en: "What language is this?" }
+      - { ru: "Я изуча́ю язы́к.", en: "I'm studying the language." }
+
+  - id: "yumor"
+    word: "юмор"
+    stressed: "ю́мор"
+    transliteration: "yumor"
+    translation: "humor"
+    pos: "noun"
+    gender: "m"
+    semantic: [thing]
+    frequency: 2
+    difficulty: 1
+    audio: "yumor.mp3"
+    notes: "Cognate! Ю sounds like 'yu'. Stress on first syllable."
+    examples:
+      - { ru: "У него́ хоро́ший ю́мор.", en: "He has good humor." }
+      - { ru: "Э́то ю́мор.", en: "This is humor." }
+      - { ru: "Я люблю́ ю́мор.", en: "I love humor." }

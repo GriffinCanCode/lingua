@@ -336,7 +336,7 @@ templates:
   - pattern: "Извини́те, где {NOUN}?"
     translation: "Excuse me, where is {NOUN.the}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 4
 
   - pattern: "Извини́те, я не понима́ю."

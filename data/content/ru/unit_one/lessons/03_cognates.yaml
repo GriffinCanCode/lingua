@@ -193,7 +193,7 @@ templates:
   - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 4
 
   # Family (without articles)
@@ -207,8 +207,8 @@ templates:
   - pattern: "{NOUN} {LOCATION}."
     translation: "{NOUN.the} is {LOCATION.translation}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      NOUN: { preset: standard_noun }
+      LOCATION: { preset: location }
     weight: 3
 
   # Family (definite - proper noun style)
@@ -216,14 +216,14 @@ templates:
     translation: "{NOUN.translation} is {LOCATION.translation}."
     slots:
       NOUN: { ids: [mama, papa] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   # Presentation
   - pattern: "Вот {NOUN}."
     translation: "Here is {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   - pattern: "Вот {NOUN}."
@@ -236,20 +236,20 @@ templates:
   - pattern: "Э́то {NOUN}?"
     translation: "Is this {NOUN.a}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Где {NOUN}?"
     translation: "Where is {NOUN.the}?"
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   # Negation
   - pattern: "Э́то не {NOUN}."
     translation: "This is not {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 2
 
   # Combined patterns

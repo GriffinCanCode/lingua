@@ -240,24 +240,24 @@ templates:
   - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."
     translation: "Where is {NOUN.the}? {PRONOUN.translation} is {LOCATION.translation}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
-      PRONOUN: { pos: [pronoun] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      NOUN: { preset: standard_noun }
+      PRONOUN: { preset: pronoun }
+      LOCATION: { preset: location }
     weight: 4
 
   - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."
     translation: "Where is {NOUN.translation}? {PRONOUN.translation} is {LOCATION.translation}."
     slots:
       NOUN: { ids: [mama, papa] }
-      PRONOUN: { pos: [pronoun] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      PRONOUN: { preset: pronoun }
+      LOCATION: { preset: location }
     weight: 4
 
   - pattern: "{PRONOUN} {LOCATION}."
     translation: "{PRONOUN.translation} is {LOCATION.translation}."
     slots:
-      PRONOUN: { pos: [pronoun] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      PRONOUN: { preset: pronoun }
+      LOCATION: { preset: location }
     weight: 3
 
   # Gender exception templates - higher weight for drilling
@@ -265,7 +265,7 @@ templates:
     translation: "Where is {EXCEPTION.translation}? It is {LOCATION.translation}."
     slots:
       EXCEPTION: { ids: [papa, kofe] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 5
     notes: "Drills gender exceptions - папа and кофе use он!"
 
@@ -273,39 +273,39 @@ templates:
   - pattern: "Э́то {NOUN}. {PRONOUN} {LOCATION}."
     translation: "This is {NOUN.a}. {PRONOUN.translation} is {LOCATION.translation}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa, kofe] }
-      PRONOUN: { pos: [pronoun] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      NOUN: { preset: masc_noun }
+      PRONOUN: { preset: pronoun }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Где кни́га? Она́ {LOCATION}."
     translation: "Where is the book? It is {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Где дом? Он {LOCATION}."
     translation: "Where is the house? It is {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Где окно́? Оно́ {LOCATION}."
     translation: "Where is the window? It is {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Кот {LOCATION}? — Да, он {LOCATION}."
     translation: "Is the cat {LOCATION.translation}? — Yes, it is {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 2
 
   - pattern: "Соба́ка {LOCATION}? — Да, она́ {LOCATION}."
     translation: "Is the dog {LOCATION.translation}? — Yes, it is {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 2
 
 error_corrections:

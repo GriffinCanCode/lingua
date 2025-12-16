@@ -174,14 +174,14 @@ templates:
     translation: "{NUMBER.translation} {NOUN.translation}"
     slots:
       NUMBER: { pos: [numeral] }
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 4
 
   - pattern: "У меня́ {NUMBER} {NOUN}."
     translation: "I have {NUMBER.translation} {NOUN.translation}."
     slots:
       NUMBER: { pos: [numeral] }
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 3
 
   - pattern: "Оди́н, два, три."
@@ -209,7 +209,7 @@ templates:
     translation: "Do you have {NUMBER.translation} {NOUN.translation}?"
     slots:
       NUMBER: { pos: [numeral] }
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 3
 
   - pattern: "Э́то {NUMBER}."

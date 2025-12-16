@@ -251,8 +251,8 @@ templates:
   - pattern: "{PRONOUN} {VERB}."
     translation: "{PRONOUN.translation} {VERB.translation}."
     slots:
-      PRONOUN: { pos: [pronoun] }
-      VERB: { pos: [verb] }
+      PRONOUN: { preset: pronoun }
+      VERB: { preset: verb }
     weight: 2
 
   - pattern: "Что ты де́лаешь?"

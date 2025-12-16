@@ -211,25 +211,25 @@ templates:
   - pattern: "Я говорю́ {LANGUAGE}."
     translation: "I speak {LANGUAGE.translation}."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 4
 
   - pattern: "Ты говори́шь {LANGUAGE}?"
     translation: "Do you speak {LANGUAGE.translation}?"
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 3
 
   - pattern: "Я не говорю́ {LANGUAGE}."
     translation: "I don't speak {LANGUAGE.translation}."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 3
 
   - pattern: "Я ви́жу {NOUN}."
     translation: "I see {NOUN.a}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Ты ви́дишь?"
@@ -245,8 +245,8 @@ templates:
   - pattern: "{PRONOUN} {VERB}."
     translation: "{PRONOUN.translation} {VERB.translation}."
     slots:
-      PRONOUN: { pos: [pronoun] }
-      VERB: { pos: [verb] }
+      PRONOUN: { preset: pronoun }
+      VERB: { preset: verb }
     weight: 2
 
   # Negative verb patterns - Type 2
@@ -258,7 +258,7 @@ templates:
   - pattern: "Я не ви́жу {NOUN}."
     translation: "I don't see {NOUN.the}."
     slots:
-      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN: { preset: standard_noun }
     weight: 3
 
   - pattern: "Ты не ви́дишь?"
@@ -269,25 +269,25 @@ templates:
   - pattern: "Он не говори́т {LANGUAGE}."
     translation: "He doesn't speak {LANGUAGE.translation}."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 3
 
   - pattern: "Она́ не говори́т {LANGUAGE}."
     translation: "She doesn't speak {LANGUAGE.translation}."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 3
 
   - pattern: "Они́ не говоря́т {LANGUAGE}."
     translation: "They don't speak {LANGUAGE.translation}."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 2
 
   - pattern: "Ты говори́шь {LANGUAGE}? — Нет, я не говорю́."
     translation: "Do you speak {LANGUAGE.translation}? — No, I don't speak it."
     slots:
-      LANGUAGE: { pos: [adverb], semantic: [language] }
+      LANGUAGE: { preset: language }
     weight: 3
 
 error_corrections:

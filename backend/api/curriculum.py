@@ -62,9 +62,21 @@ def _load_vocab_for_lesson(lesson_data: dict, unit_id: str, language: str) -> tu
     return primary, review
 
 
-def _generate_sentences_from_templates(lesson_data: dict, vocabulary: list[dict], count: int = 15) -> list[dict]:
+def _load_slot_presets(language: str = "ru", unit_id: str = "unit_one") -> dict[str, dict]:
+    """Load slot_presets from unit _meta.yaml."""
+    meta_path = CONTENT_DIR / language / unit_id / "vocab" / "_meta.yaml"
+    if meta_path.exists():
+        with open(meta_path) as f:
+            data = yaml.safe_load(f)
+            return data.get("slot_presets", {}) if data else {}
+    return {}
+
+
+def _generate_sentences_from_templates(
+    lesson_data: dict, vocabulary: list[dict], count: int = 15, presets: dict[str, dict] | None = None
+) -> list[dict]:
     """Generate sentences from templates using vocabulary."""
-    templates = load_templates(lesson_data)
+    templates = load_templates(lesson_data, presets)
     if not templates:
         return []
     
@@ -435,7 +447,8 @@ async def get_lesson_exercises(
             review_vocabulary = review
         
         if not sentences and "templates" in lesson_data and vocabulary:
-            sentences = _generate_sentences_from_templates(lesson_data, vocabulary, num_exercises)
+            presets = _load_slot_presets(language, vocab_unit_id if "vocab_filter" in lesson_data else "unit_one")
+            sentences = _generate_sentences_from_templates(lesson_data, vocabulary, num_exercises, presets)
     else:
         extra = node.extra_data or {}
         vocab_unit = extra.get("vocab_unit")

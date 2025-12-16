@@ -56,8 +56,14 @@ class SlotConstraint:
     exclude_ids: list[str] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'SlotConstraint':
-        """Parse constraint from YAML dict."""
+    def from_dict(cls, data: dict, presets: dict[str, dict] | None = None) -> 'SlotConstraint':
+        """Parse constraint from YAML dict, resolving presets if referenced."""
+        # Resolve preset if specified
+        if presets and (preset_name := data.get('preset')):
+            preset = presets.get(preset_name, {})
+            # Merge preset with explicit overrides (explicit wins)
+            data = {**preset, **{k: v for k, v in data.items() if k != 'preset'}}
+        
         return cls(
             pos=_ensure_list(data.get('pos', [])),
             gender=_ensure_list(data.get('gender', [])),
@@ -76,10 +82,10 @@ class Template:
     weight: int = 1           # How often to use this template
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'Template':
-        """Parse template from YAML dict."""
+    def from_dict(cls, data: dict, presets: dict[str, dict] | None = None) -> 'Template':
+        """Parse template from YAML dict, resolving slot presets."""
         slots = {
-            name: SlotConstraint.from_dict(constraints)
+            name: SlotConstraint.from_dict(constraints, presets)
             for name, constraints in data.get('slots', {}).items()
         }
         return cls(
@@ -448,10 +454,17 @@ def _ensure_list(value) -> list:
     return [value]
 
 
-def load_templates(data: dict) -> list[Template]:
-    """Load templates from lesson YAML data."""
+def load_templates(data: dict, presets: dict[str, dict] | None = None) -> list[Template]:
+    """Load templates from lesson YAML data.
+    
+    Args:
+        data: Lesson YAML data containing 'templates' list
+        presets: Optional slot_presets dict for resolving preset references
+    """
+    # Merge lesson-level presets with passed-in presets (lesson wins)
+    combined_presets = {**(presets or {}), **data.get('slot_presets', {})}
     templates_data = data.get('templates', [])
-    return [Template.from_dict(t) for t in templates_data]
+    return [Template.from_dict(t, combined_presets or None) for t in templates_data]
 
 
 def load_dialogues(data: dict) -> list[dict]:

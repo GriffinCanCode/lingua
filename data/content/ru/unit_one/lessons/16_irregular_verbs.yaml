@@ -277,7 +277,7 @@ templates:
   - pattern: "Я хочу́ {NOUN}."
     translation: "I want {NOUN.a}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 4
 
   - pattern: "Где ты живёшь?"
@@ -293,7 +293,7 @@ templates:
   - pattern: "Я живу́ {LOCATION}."
     translation: "I live {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Ты хо́чешь есть?"
@@ -320,8 +320,8 @@ templates:
   - pattern: "{PRONOUN} {VERB}."
     translation: "{PRONOUN.translation} {VERB.translation}."
     slots:
-      PRONOUN: { pos: [pronoun] }
-      VERB: { pos: [verb] }
+      PRONOUN: { preset: pronoun }
+      VERB: { preset: verb }
     weight: 2
 
   - pattern: "Сего́дня я рабо́таю."
@@ -348,7 +348,7 @@ templates:
   - pattern: "Я не хочу́ {NOUN}."
     translation: "I don't want {NOUN.a}."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 4
 
   - pattern: "Он не хо́чет."
@@ -364,7 +364,7 @@ templates:
   - pattern: "Я не живу́ {LOCATION}."
     translation: "I don't live {LOCATION.translation}."
     slots:
-      LOCATION: { pos: [adverb], semantic: [location] }
+      LOCATION: { preset: location }
     weight: 3
 
   - pattern: "Я не рабо́таю сего́дня."
@@ -401,7 +401,7 @@ templates:
   - pattern: "Ты хо́чешь {NOUN}? — Нет, я не хочу́."
     translation: "Do you want {NOUN.a}? — No, I don't want it."
     slots:
-      NOUN: { pos: [noun] }
+      NOUN: { preset: noun }
     weight: 3
 
 dialogues:

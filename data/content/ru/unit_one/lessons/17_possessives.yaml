@@ -199,15 +199,15 @@ templates:
   - pattern: "Э́то {POSS} {NOUN}."
     translation: "This is {POSS.translation} {NOUN.translation}."
     slots:
-      POSS: { pos: [pronoun] }
-      NOUN: { pos: [noun] }
+      POSS: { preset: pronoun }
+      NOUN: { preset: noun }
     weight: 4
 
   - pattern: "Где {POSS} {NOUN}?"
     translation: "Where is {POSS.translation} {NOUN.translation}?"
     slots:
-      POSS: { pos: [pronoun] }
-      NOUN: { pos: [noun] }
+      POSS: { preset: pronoun }
+      NOUN: { preset: noun }
     weight: 3
 
   - pattern: "Э́то мой дом."
@@ -223,13 +223,13 @@ templates:
   - pattern: "Э́то твой {NOUN}?"
     translation: "Is this your {NOUN.translation}?"
     slots:
-      NOUN: { pos: [noun], gender: [masculine] }
+      NOUN: { preset: noun_m }
     weight: 3
 
   - pattern: "Э́то твоя́ {NOUN}?"
     translation: "Is this your {NOUN.translation}?"
     slots:
-      NOUN: { pos: [noun], gender: [feminine] }
+      NOUN: { preset: noun_f }
     weight: 3
 
   - pattern: "Нет, э́то не моя́ кни́га."
@@ -250,17 +250,17 @@ templates:
   - pattern: "{POSS} {NOUN} {LOCATION}."
     translation: "{POSS.translation} {NOUN.translation} is {LOCATION.translation}."
     slots:
-      POSS: { pos: [pronoun] }
-      NOUN: { pos: [noun] }
-      LOCATION: { pos: [adverb], semantic: [location] }
+      POSS: { preset: pronoun }
+      NOUN: { preset: noun }
+      LOCATION: { preset: location }
     weight: 2
 
   # Multi-grammar challenge templates (possessive + verb)
   - pattern: "Я ви́жу {POSS} {NOUN}."
     translation: "I see {POSS.translation} {NOUN.translation}."
     slots:
-      POSS: { pos: [pronoun] }
-      NOUN: { pos: [noun] }
+      POSS: { preset: pronoun }
+      NOUN: { preset: noun }
     weight: 3
 
   - pattern: "Ты зна́ешь, где моя́ кни́га?"
@@ -271,14 +271,14 @@ templates:
   - pattern: "Он не ви́дит {POSS} {NOUN}."
     translation: "He doesn't see {POSS.translation} {NOUN.translation}."
     slots:
-      POSS: { pos: [pronoun], gender: [feminine] }
-      NOUN: { pos: [noun], gender: [feminine] }
+      POSS: { preset: pronoun, gender: [f] }
+      NOUN: { preset: noun_f }
     weight: 3
 
   - pattern: "Она́ хо́чет твой {NOUN}."
     translation: "She wants your {NOUN.translation}."
     slots:
-      NOUN: { pos: [noun], gender: [masculine] }
+      NOUN: { preset: noun_m }
     weight: 3
 
   - pattern: "Где на́ша маши́на? Я не зна́ю."

@@ -71,3 +71,32 @@ unit:
   description: "Essential vocabulary for survival Russian - including first verbs!"
   total_words: 107
   target_lessons: 16
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SLOT PRESETS - Reusable constraints for template slots
+# ══════════════════════════════════════════════════════════════════════════════
+# Use in templates: slots: { NOUN: { preset: standard_noun } }
+# Presets can be overridden: { preset: standard_noun, gender: [m] }
+#
+# IMPORTANT: Gender values must match vocab files: "m", "f", "n" (not "masculine")
+slot_presets:
+  # Nouns
+  noun: { pos: [noun] }
+  noun_m: { pos: [noun], gender: [m] }
+  noun_f: { pos: [noun], gender: [f] }
+  noun_n: { pos: [noun], gender: [n] }
+  # Standard excludes family words that don't use articles in translation
+  standard_noun: { pos: [noun], exclude_ids: [mama, papa] }
+  masc_noun: { pos: [noun], gender: [m], exclude_ids: [mama, papa, kofe] }
+  fem_noun: { pos: [noun], gender: [f], exclude_ids: [mama, papa] }
+  neut_noun: { pos: [noun], gender: [n] }
+  
+  # Pronouns
+  pronoun: { pos: [pronoun] }
+  
+  # Verbs (base forms - override with form: for conjugations)
+  verb: { pos: [verb] }
+  
+  # Adverbs with semantic tags
+  location: { pos: [adverb], semantic: [location] }
+  language: { pos: [adverb], semantic: [language] }

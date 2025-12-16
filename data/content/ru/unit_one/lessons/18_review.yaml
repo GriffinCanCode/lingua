@@ -68,6 +68,32 @@ modules:
           - ["жить", "живу́", "живёшь", "живёт"]
           - ["есть (eat)", "ем", "ешь", "ест"]
           - ["пить", "пью", "пьёшь", "пьёт"]
+      
+      - type: "morphology_pattern"
+        title: "Verb Negation: не + verb"
+        formula: "Subject + не + conjugated verb"
+        examples:
+          - { ru: "Я не зна́ю.", en: "I don't know." }
+          - { ru: "Он не понима́ет.", en: "He doesn't understand." }
+          - { ru: "Она́ не говори́т по-ру́сски.", en: "She doesn't speak Russian." }
+          - { ru: "Мы не рабо́таем сего́дня.", en: "We don't work today." }
+          - { ru: "Я не хочу́.", en: "I don't want to." }
+          - { ru: "Он не ест мя́со.", en: "He doesn't eat meat." }
+        rule: "Place не directly before the verb. Works the same for all verb types!"
+      
+      - type: "pattern_table"
+        title: "Negative Verb Forms"
+        columns: ["Positive", "Negative", "Translation"]
+        rows:
+          - ["Я зна́ю", "Я не зна́ю", "I don't know"]
+          - ["Ты понима́ешь", "Ты не понима́ешь", "You don't understand"]
+          - ["Он говори́т", "Он не говори́т", "He doesn't speak"]
+          - ["Она́ ви́дит", "Она́ не ви́дит", "She doesn't see"]
+          - ["Я хочу́", "Я не хочу́", "I don't want"]
+          - ["Он живёт", "Он не живёт", "He doesn't live"]
+          - ["Я рабо́таю", "Я не рабо́таю", "I don't work"]
+          - ["Он ест", "Он не ест", "He doesn't eat"]
+          - ["Я пью", "Я не пью", "I don't drink"]
     
     vocab_pool:
       introduce: []
@@ -237,6 +263,57 @@ templates:
       NOUN_M: { pos: [noun], gender: [m] }
     weight: 2
 
+  # Negative verb review patterns
+  - pattern: "Я не {VERB_1SG}."
+    translation: "I don't {VERB.translation}."
+    slots:
+      VERB_1SG: { pos: [verb], form: "1sg" }
+    weight: 3
+
+  - pattern: "Он не {VERB_3SG}."
+    translation: "He doesn't {VERB.translation}."
+    slots:
+      VERB_3SG: { pos: [verb], form: "3sg" }
+    weight: 3
+
+  - pattern: "Она́ не {VERB_3SG}."
+    translation: "She doesn't {VERB.translation}."
+    slots:
+      VERB_3SG: { pos: [verb], form: "3sg" }
+    weight: 3
+
+  - pattern: "Ты {VERB_2SG}? — Нет, не {VERB_1SG}."
+    translation: "Do you {VERB.translation}? — No, I don't."
+    slots:
+      VERB_2SG: { pos: [verb], form: "2sg" }
+      VERB_1SG: { pos: [verb], form: "1sg" }
+    weight: 3
+
+  - pattern: "Я не зна́ю."
+    translation: "I don't know."
+    slots: {}
+    weight: 4
+
+  - pattern: "Я не понима́ю."
+    translation: "I don't understand."
+    slots: {}
+    weight: 4
+
+  - pattern: "Я не хочу́."
+    translation: "I don't want to."
+    slots: {}
+    weight: 4
+
+  - pattern: "Я не говорю́ по-ру́сски."
+    translation: "I don't speak Russian."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не рабо́таю сего́дня."
+    translation: "I don't work today."
+    slots: {}
+    weight: 3
+
 dialogues:
   - id: "full_introduction"
     context: "Meeting someone new"
@@ -270,6 +347,30 @@ dialogues:
       - { speaker: "B", ru: "Ла́дно. До свида́ния!", en: "Alright. Goodbye!" }
       - { speaker: "A", ru: "Пока́! Спаси́бо за всё!", en: "Bye! Thanks for everything!" }
       - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }
+
+  - id: "negation_review"
+    context: "Explaining what you don't do"
+    lines:
+      - { speaker: "A", ru: "Ты говори́шь по-францу́зски?", en: "Do you speak French?" }
+      - { speaker: "B", ru: "Нет, я не говорю́ по-францу́зски.", en: "No, I don't speak French." }
+      - { speaker: "A", ru: "А по-ру́сски?", en: "And Russian?" }
+      - { speaker: "B", ru: "Да, немно́го. Я понима́ю, но не говорю́ хорошо́.", en: "Yes, a little. I understand, but I don't speak well." }
+
+  - id: "dont_know_dont_understand"
+    context: "Being lost"
+    lines:
+      - { speaker: "A", ru: "Где рестора́н?", en: "Where's the restaurant?" }
+      - { speaker: "B", ru: "Извини́те, я не зна́ю.", en: "Sorry, I don't know." }
+      - { speaker: "A", ru: "А где метро́?", en: "And where's the metro?" }
+      - { speaker: "B", ru: "Я то́же не зна́ю. Я тут не живу́.", en: "I don't know either. I don't live here." }
+
+  - id: "declining_offers"
+    context: "Politely declining"
+    lines:
+      - { speaker: "A", ru: "Ты хо́чешь ко́фе?", en: "Do you want coffee?" }
+      - { speaker: "B", ru: "Нет, спаси́бо, я не пью ко́фе.", en: "No, thanks, I don't drink coffee." }
+      - { speaker: "A", ru: "А чай?", en: "And tea?" }
+      - { speaker: "B", ru: "Да, пожа́луйста! Я хочу́ чай.", en: "Yes, please! I want tea." }
 
   - id: "tourist_survival"
     context: "Tourist asking for directions"

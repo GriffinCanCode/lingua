@@ -21,6 +21,24 @@ log = engine_logger()
 # Slot pattern: {WORD} or {WORD.modifier}
 SLOT_PATTERN = re.compile(r'\{(\w+)(?:\.(\w+))?\}')
 
+# Russian verb conjugation patterns for negation detection (with and without stress marks)
+RU_VERB_ENDINGS = (
+    'ю', 'ю́', 'у', 'у́', 'ешь', 'е́шь', 'ишь', 'и́шь', 'ёшь',
+    'ет', 'е́т', 'ит', 'и́т', 'ёт',
+    'ем', 'е́м', 'им', 'и́м', 'ём',
+    'ете', 'е́те', 'ите', 'и́те', 'ёте',
+    'ют', 'ю́т', 'ят', 'я́т', 'ут', 'у́т', 'ат', 'а́т',
+)
+
+# Strip stress marks for comparison
+STRESS_MARKS = '\u0301'  # combining acute accent
+
+# English subject-verb patterns for negation
+EN_SUBJECT_MAP = {
+    'i': "don't", 'you': "don't", 'we': "don't", 'they': "don't",
+    'he': "doesn't", 'she': "doesn't", 'it': "doesn't",
+}
+
 # Case abbreviations
 CASE_ABBREV = {
     'nom': 'nominative', 'gen': 'genitive', 'dat': 'dative',
@@ -99,12 +117,13 @@ class FilledSentence:
 class TemplateFiller:
     """Fills sentence templates with vocabulary."""
 
-    __slots__ = ('_vocab', '_by_pos', '_by_semantic', '_by_id', '_lang', '_morph')
+    __slots__ = ('_vocab', '_by_pos', '_by_semantic', '_by_id', '_lang', '_morph', '_negation_prob')
 
-    def __init__(self, vocabulary: list[VocabItem], language: str = 'ru'):
+    def __init__(self, vocabulary: list[VocabItem], language: str = 'ru', negation_probability: float = 0.2):
         self._vocab = vocabulary
         self._lang = get_module(language)
         self._morph = self._lang.get_morphology_engine()
+        self._negation_prob = negation_probability
 
         # Build indexes for fast lookup
         self._by_pos: dict[str, list[VocabItem]] = {}
@@ -117,7 +136,7 @@ class TemplateFiller:
             for sem in v.semantic:
                 self._by_semantic.setdefault(sem, []).append(v)
 
-        log.debug("template_filler_init", vocab_count=len(vocabulary), pos_groups=list(self._by_pos.keys()))
+        log.debug("template_filler_init", vocab_count=len(vocabulary), pos_groups=list(self._by_pos.keys()), negation_prob=negation_probability)
 
     def fill_template(self, template: Template, max_variants: int = 10) -> list[FilledSentence]:
         """Fill a template with compatible vocabulary combinations."""
@@ -216,6 +235,10 @@ class TemplateFiller:
         # Generate distractors
         distractors = self._generate_distractors(slot_values)
 
+        # Randomly apply negation
+        if random.random() < self._negation_prob:
+            text, translation = self._apply_negation(text, translation)
+
         return FilledSentence(
             text=text,
             translation=translation,
@@ -224,6 +247,86 @@ class TemplateFiller:
             distractors=distractors,
             complexity=len(slot_values),
         )
+
+    def _apply_negation(self, ru_text: str, en_text: str) -> tuple[str, str]:
+        """Apply negation to both Russian and English sentences."""
+        # Skip if already negated
+        if ' не ' in ru_text or ru_text.startswith('Не ') or ru_text.startswith('не '):
+            return ru_text, en_text
+        if "don't" in en_text.lower() or "doesn't" in en_text.lower() or "not" in en_text.lower():
+            return ru_text, en_text
+
+        ru_negated = self._negate_russian(ru_text)
+        en_negated = self._negate_english(en_text)
+
+        # Only return negated if both succeeded
+        if ru_negated != ru_text and en_negated != en_text:
+            return ru_negated, en_negated
+        return ru_text, en_text
+
+    def _negate_russian(self, text: str) -> str:
+        """Add 'не' before the verb in Russian text."""
+        words = text.split()
+        for i, word in enumerate(words):
+            clean = word.rstrip('.,!?')
+            # Strip stress marks for comparison
+            clean_no_stress = clean.replace(STRESS_MARKS, '')
+            # Check if word looks like a conjugated verb
+            if any(clean_no_stress.lower().endswith(end.replace(STRESS_MARKS, '')) for end in RU_VERB_ENDINGS):
+                # Don't negate if previous word is already не
+                if i > 0 and words[i - 1].lower() == 'не':
+                    return text
+                # Insert не before the verb
+                words.insert(i, 'не')
+                return ' '.join(words)
+        return text
+
+    def _negate_english(self, text: str) -> str:
+        """Transform English sentence to negative form."""
+        words = text.split()
+        if not words:
+            return text
+
+        # Handle "Is this..." → "This is not..."
+        if words[0].lower() == 'is' and len(words) > 1:
+            # "Is this a cat?" → "This is not a cat."
+            return text  # Skip question transformations
+
+        for i, word in enumerate(words):
+            word_lower = word.lower().rstrip('.,!?')
+            if word_lower in EN_SUBJECT_MAP:
+                neg = EN_SUBJECT_MAP[word_lower]
+                # Find the verb (next word after subject)
+                if i + 1 < len(words):
+                    verb = words[i + 1]
+                    verb_clean = verb.rstrip('.,!?')
+                    punct = verb[len(verb_clean):] if len(verb) > len(verb_clean) else ''
+
+                    # Handle "I am" → "I am not" / "I'm not"
+                    if verb_clean.lower() in ('am', "i'm", 'are', "you're", "we're", "they're"):
+                        words.insert(i + 2, 'not')
+                        return ' '.join(words)
+
+                    # Handle "he/she is" → "he/she is not"
+                    if verb_clean.lower() in ('is', "he's", "she's", "it's"):
+                        words.insert(i + 2, 'not')
+                        return ' '.join(words)
+
+                    # Handle third person "speaks" → "doesn't speak"
+                    if word_lower in ('he', 'she', 'it') and verb_clean.endswith('s') and not verb_clean.endswith('ss'):
+                        base_verb = verb_clean[:-1]  # Remove 's'
+                        if verb_clean.endswith('es') and not verb_clean.endswith('ses'):
+                            base_verb = verb_clean[:-2]
+                        if verb_clean.endswith('ies'):
+                            base_verb = verb_clean[:-3] + 'y'
+                        words[i + 1] = base_verb + punct
+                        words.insert(i + 1, neg)
+                        return ' '.join(words)
+
+                    # Standard case: "I know" → "I don't know"
+                    words.insert(i + 1, neg)
+                    return ' '.join(words)
+        return text
 
     def _apply_modifier(self, vocab: VocabItem, modifier: str | None, lang: str) -> str:
         """Apply modifier (case, translation) to get the right form."""
@@ -365,8 +468,18 @@ def load_dialogues(data: dict) -> list[dict]:
     return data.get('dialogues', [])
 
 
-def create_filler_from_vocab_dicts(vocab_dicts: list[dict], language: str = 'ru') -> TemplateFiller:
-    """Create TemplateFiller from vocabulary dictionaries."""
+def create_filler_from_vocab_dicts(
+    vocab_dicts: list[dict],
+    language: str = 'ru',
+    negation_probability: float = 0.2,
+) -> TemplateFiller:
+    """Create TemplateFiller from vocabulary dictionaries.
+    
+    Args:
+        vocab_dicts: List of vocabulary dictionaries
+        language: Target language code
+        negation_probability: Chance (0.0-1.0) of randomly negating sentences
+    """
     vocab_items = [
         VocabItem(
             id=v.get('id', v.get('word', '')),
@@ -380,4 +493,4 @@ def create_filler_from_vocab_dicts(vocab_dicts: list[dict], language: str = 'ru'
         )
         for v in vocab_dicts
     ]
-    return TemplateFiller(vocab_items, language)
+    return TemplateFiller(vocab_items, language, negation_probability)

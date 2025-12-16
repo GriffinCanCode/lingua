@@ -208,6 +208,44 @@ templates:
       TIME2: { ids: [zavtra] }
     weight: 3
 
+  # Time + negation patterns
+  - pattern: "{TIME} я не рабо́таю."
+    translation: "{TIME.translation} I don't work."
+    slots:
+      TIME: { ids: [segodnya, zavtra] }
+    weight: 4
+
+  - pattern: "Я не рабо́таю за́втра."
+    translation: "I don't work tomorrow."
+    slots: {}
+    weight: 4
+
+  - pattern: "Сего́дня я не рабо́таю."
+    translation: "Today I don't work."
+    slots: {}
+    weight: 4
+
+  - pattern: "Сейча́с я не могу́."
+    translation: "I can't right now."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не зна́ю, когда́."
+    translation: "I don't know when."
+    slots: {}
+    weight: 3
+
+  - pattern: "Ты рабо́таешь {TIME}? — Нет, не рабо́таю."
+    translation: "Do you work {TIME.translation}? — No, I don't."
+    slots:
+      TIME: { ids: [segodnya, zavtra] }
+    weight: 3
+
+  - pattern: "Не сего́дня, за́втра."
+    translation: "Not today, tomorrow."
+    slots: {}
+    weight: 3
+
 dialogues:
   - id: "making_plans"
     context: "Talking about plans"
@@ -231,3 +269,34 @@ dialogues:
       - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
       - { speaker: "B", ru: "Ла́дно. До за́втра!", en: "Alright. See you tomorrow!" }
       - { speaker: "A", ru: "До за́втра!", en: "See you tomorrow!" }
+
+  - id: "dont_work_tomorrow"
+    context: "Discussing schedule"
+    lines:
+      - { speaker: "A", ru: "Ты рабо́таешь за́втра?", en: "Do you work tomorrow?" }
+      - { speaker: "B", ru: "Нет, за́втра я не рабо́таю.", en: "No, tomorrow I don't work." }
+      - { speaker: "A", ru: "А сего́дня?", en: "And today?" }
+      - { speaker: "B", ru: "Да, сего́дня рабо́таю.", en: "Yes, today I work." }
+
+  - id: "not_today"
+    context: "Postponing something"
+    lines:
+      - { speaker: "A", ru: "Когда́ ты до́ма?", en: "When are you home?" }
+      - { speaker: "B", ru: "Не сего́дня. За́втра.", en: "Not today. Tomorrow." }
+      - { speaker: "A", ru: "Ла́дно, до за́втра!", en: "OK, see you tomorrow!" }
+
+  - id: "busy_now"
+    context: "Being busy"
+    lines:
+      - { speaker: "A", ru: "Ты де́лаешь что-то сейча́с?", en: "Are you doing something now?" }
+      - { speaker: "B", ru: "Да, я рабо́таю.", en: "Yes, I'm working." }
+      - { speaker: "A", ru: "А когда́ ты не рабо́таешь?", en: "And when don't you work?" }
+      - { speaker: "B", ru: "За́втра я не рабо́таю.", en: "Tomorrow I don't work." }
+
+  - id: "dont_know_when"
+    context: "Uncertain timing"
+    lines:
+      - { speaker: "A", ru: "Когда́ он придёт?", en: "When will he come?" }
+      - { speaker: "B", ru: "Я не зна́ю, когда́.", en: "I don't know when." }
+      - { speaker: "A", ru: "Сего́дня и́ли за́втра?", en: "Today or tomorrow?" }
+      - { speaker: "B", ru: "Я не зна́ю. Сейча́с его́ нет.", en: "I don't know. He's not here now." }

@@ -249,6 +249,47 @@ templates:
       VERB: { pos: [verb] }
     weight: 2
 
+  # Negative verb patterns - Type 2
+  - pattern: "Я не ви́жу."
+    translation: "I don't see."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не ви́жу {NOUN}."
+    translation: "I don't see {NOUN.the}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Ты не ви́дишь?"
+    translation: "Don't you see?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Он не говори́т {LANGUAGE}."
+    translation: "He doesn't speak {LANGUAGE.translation}."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
+  - pattern: "Она́ не говори́т {LANGUAGE}."
+    translation: "She doesn't speak {LANGUAGE.translation}."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
+  - pattern: "Они́ не говоря́т {LANGUAGE}."
+    translation: "They don't speak {LANGUAGE.translation}."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 2
+
+  - pattern: "Ты говори́шь {LANGUAGE}? — Нет, я не говорю́."
+    translation: "Do you speak {LANGUAGE.translation}? — No, I don't speak it."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
 dialogues:
   - id: "do_you_speak_russian"
     context: "Language abilities"
@@ -271,3 +312,26 @@ dialogues:
       - { speaker: "B", ru: "Да, я ви́жу.", en: "Yes, I see." }
       - { speaker: "A", ru: "Там рестора́н.", en: "There's a restaurant there." }
       - { speaker: "B", ru: "Я ви́жу!", en: "I see it!" }
+
+  - id: "cant_see"
+    context: "Can't see something"
+    lines:
+      - { speaker: "A", ru: "Ты ви́дишь метро́?", en: "Do you see the metro?" }
+      - { speaker: "B", ru: "Нет, я не ви́жу. Где?", en: "No, I don't see it. Where?" }
+      - { speaker: "A", ru: "Там, спра́ва!", en: "There, on the right!" }
+      - { speaker: "B", ru: "А, тепе́рь ви́жу!", en: "Ah, now I see!" }
+
+  - id: "doesnt_speak"
+    context: "Language barrier"
+    lines:
+      - { speaker: "A", ru: "Он говори́т по-ру́сски?", en: "Does he speak Russian?" }
+      - { speaker: "B", ru: "Нет, он не говори́т по-ру́сски.", en: "No, he doesn't speak Russian." }
+      - { speaker: "A", ru: "А по-англи́йски?", en: "And English?" }
+      - { speaker: "B", ru: "Да, он говори́т по-англи́йски.", en: "Yes, he speaks English." }
+
+  - id: "they_dont_understand"
+    context: "Communication issue"
+    lines:
+      - { speaker: "A", ru: "Они́ понима́ют?", en: "Do they understand?" }
+      - { speaker: "B", ru: "Нет, они́ не понима́ют. Они́ не говоря́т по-ру́сски.", en: "No, they don't understand. They don't speak Russian." }
+      - { speaker: "A", ru: "Ла́дно, я говорю́ по-англи́йски.", en: "OK, I speak English." }

@@ -339,6 +339,71 @@ templates:
     slots: {}
     weight: 3
 
+  # Negative patterns - Irregular verbs
+  - pattern: "Я не хочу́."
+    translation: "I don't want to."
+    slots: {}
+    weight: 4
+
+  - pattern: "Я не хочу́ {NOUN}."
+    translation: "I don't want {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "Он не хо́чет."
+    translation: "He doesn't want to."
+    slots: {}
+    weight: 3
+
+  - pattern: "Она́ не хо́чет."
+    translation: "She doesn't want to."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не живу́ {LOCATION}."
+    translation: "I don't live {LOCATION.translation}."
+    slots:
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 3
+
+  - pattern: "Я не рабо́таю сего́дня."
+    translation: "I don't work today."
+    slots: {}
+    weight: 4
+
+  - pattern: "Он не рабо́тает."
+    translation: "He doesn't work."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не ем."
+    translation: "I don't eat."
+    slots: {}
+    weight: 3
+
+  - pattern: "Он не ест."
+    translation: "He doesn't eat."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не пью {NOUN}."
+    translation: "I don't drink {NOUN.translation}."
+    slots:
+      NOUN: { pos: [noun], ids: [kofe, voda] }
+    weight: 3
+
+  - pattern: "Я не хочу́ есть."
+    translation: "I'm not hungry."
+    slots: {}
+    weight: 4
+
+  - pattern: "Ты хо́чешь {NOUN}? — Нет, я не хочу́."
+    translation: "Do you want {NOUN.a}? — No, I don't want it."
+    slots:
+      NOUN: { pos: [noun] }
+    weight: 3
+
 dialogues:
   - id: "where_do_you_live"
     context: "Getting to know someone"
@@ -369,3 +434,43 @@ dialogues:
       - { speaker: "A", ru: "Что ты пьёшь?", en: "What are you drinking?" }
       - { speaker: "B", ru: "Я пью ко́фе. А ты?", en: "I'm drinking coffee. And you?" }
       - { speaker: "A", ru: "Я пью во́ду.", en: "I'm drinking water." }
+
+  - id: "dont_want_coffee"
+    context: "Declining an offer"
+    lines:
+      - { speaker: "A", ru: "Ты хо́чешь ко́фе?", en: "Do you want coffee?" }
+      - { speaker: "B", ru: "Нет, спаси́бо. Я не хочу́ ко́фе.", en: "No, thanks. I don't want coffee." }
+      - { speaker: "A", ru: "А во́ду?", en: "And water?" }
+      - { speaker: "B", ru: "Да, я хочу́ во́ду.", en: "Yes, I want water." }
+
+  - id: "not_hungry"
+    context: "Not hungry"
+    lines:
+      - { speaker: "A", ru: "Ты хо́чешь есть?", en: "Are you hungry?" }
+      - { speaker: "B", ru: "Нет, я не хочу́ есть.", en: "No, I'm not hungry." }
+      - { speaker: "A", ru: "А пить?", en: "And thirsty?" }
+      - { speaker: "B", ru: "Да, я хочу́ пить.", en: "Yes, I'm thirsty." }
+
+  - id: "dont_work_tomorrow"
+    context: "Plans for tomorrow"
+    lines:
+      - { speaker: "A", ru: "Ты рабо́таешь за́втра?", en: "Do you work tomorrow?" }
+      - { speaker: "B", ru: "Нет, я не рабо́таю за́втра.", en: "No, I don't work tomorrow." }
+      - { speaker: "A", ru: "Здо́рово! Что ты де́лаешь?", en: "Great! What are you doing?" }
+      - { speaker: "B", ru: "Я не зна́ю ещё.", en: "I don't know yet." }
+
+  - id: "he_doesnt_live_here"
+    context: "Looking for someone"
+    lines:
+      - { speaker: "A", ru: "Ива́н тут живёт?", en: "Does Ivan live here?" }
+      - { speaker: "B", ru: "Нет, он тут не живёт.", en: "No, he doesn't live here." }
+      - { speaker: "A", ru: "А где он живёт?", en: "And where does he live?" }
+      - { speaker: "B", ru: "Я не зна́ю.", en: "I don't know." }
+
+  - id: "doesnt_eat_meat"
+    context: "Dietary preferences"
+    lines:
+      - { speaker: "A", ru: "Он ест мя́со?", en: "Does he eat meat?" }
+      - { speaker: "B", ru: "Нет, он не ест мя́со.", en: "No, he doesn't eat meat." }
+      - { speaker: "A", ru: "Понима́ю. А ры́бу?", en: "I understand. And fish?" }
+      - { speaker: "B", ru: "Да, он ест ры́бу.", en: "Yes, he eats fish." }

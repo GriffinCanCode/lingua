@@ -268,6 +268,38 @@ templates:
     slots: {}
     weight: 2
 
+  # Question + negative response patterns
+  - pattern: "Где {NOUN}? — Я не зна́ю."
+    translation: "Where is {NOUN.the}? — I don't know."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Кто э́то? — Я не зна́ю."
+    translation: "Who is this? — I don't know."
+    slots: {}
+    weight: 3
+
+  - pattern: "Что э́то? — Я не зна́ю."
+    translation: "What is this? — I don't know."
+    slots: {}
+    weight: 3
+
+  - pattern: "Я не понима́ю. Что э́то?"
+    translation: "I don't understand. What is this?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Где он? — Я не зна́ю, где он."
+    translation: "Where is he? — I don't know where he is."
+    slots: {}
+    weight: 2
+
+  - pattern: "Кто там? — Я не ви́жу."
+    translation: "Who's there? — I don't see."
+    slots: {}
+    weight: 2
+
 dialogues:
   - id: "who_is_this"
     context: "Asking about people"
@@ -291,3 +323,27 @@ dialogues:
       - { speaker: "B", ru: "Хорошо́, спаси́бо!", en: "Good, thanks!" }
       - { speaker: "A", ru: "Как тебя́ зову́т?", en: "What's your name?" }
       - { speaker: "B", ru: "Меня́ зову́т Ма́ша.", en: "My name is Masha." }
+
+  - id: "dont_know_where"
+    context: "Looking for something"
+    lines:
+      - { speaker: "A", ru: "Где рестора́н?", en: "Where is the restaurant?" }
+      - { speaker: "B", ru: "Извини́те, я не зна́ю.", en: "Sorry, I don't know." }
+      - { speaker: "A", ru: "А где метро́?", en: "And where's the metro?" }
+      - { speaker: "B", ru: "Я то́же не зна́ю. Я не живу́ тут.", en: "I don't know either. I don't live here." }
+
+  - id: "dont_understand_question"
+    context: "Communication breakdown"
+    lines:
+      - { speaker: "A", ru: "Что ты де́лаешь?", en: "What are you doing?" }
+      - { speaker: "B", ru: "Я не понима́ю. Что?", en: "I don't understand. What?" }
+      - { speaker: "A", ru: "Что... ты... де́лаешь?", en: "What... are you... doing?" }
+      - { speaker: "B", ru: "А! Я чита́ю.", en: "Ah! I'm reading." }
+
+  - id: "who_is_that"
+    context: "Asking about someone"
+    lines:
+      - { speaker: "A", ru: "Кто э́то?", en: "Who is that?" }
+      - { speaker: "B", ru: "Я не зна́ю.", en: "I don't know." }
+      - { speaker: "A", ru: "Он говори́т по-ру́сски?", en: "Does he speak Russian?" }
+      - { speaker: "B", ru: "Я не зна́ю. Я его́ не зна́ю.", en: "I don't know. I don't know him." }

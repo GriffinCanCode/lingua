@@ -265,6 +265,38 @@ templates:
     slots: {}
     weight: 2
 
+  # Negative verb patterns
+  - pattern: "Ты {VERB_2SG}? — Нет, я не {VERB_1SG}."
+    translation: "Do you {VERB.translation}? — No, I don't {VERB.translation}."
+    slots:
+      VERB_2SG: { pos: [verb], form: "2sg" }
+      VERB_1SG: { pos: [verb], form: "1sg" }
+    weight: 3
+
+  - pattern: "Он не {VERB_3SG}."
+    translation: "He doesn't {VERB.translation}."
+    slots:
+      VERB_3SG: { pos: [verb], form: "3sg" }
+    weight: 3
+
+  - pattern: "Она́ не {VERB_3SG}."
+    translation: "She doesn't {VERB.translation}."
+    slots:
+      VERB_3SG: { pos: [verb], form: "3sg" }
+    weight: 3
+
+  - pattern: "Мы не {VERB_1PL}."
+    translation: "We don't {VERB.translation}."
+    slots:
+      VERB_1PL: { pos: [verb], form: "1pl" }
+    weight: 2
+
+  - pattern: "Они́ не {VERB_3PL}."
+    translation: "They don't {VERB.translation}."
+    slots:
+      VERB_3PL: { pos: [verb], form: "3pl" }
+    weight: 2
+
 dialogues:
   - id: "do_you_know"
     context: "Asking if someone knows"
@@ -286,3 +318,18 @@ dialogues:
       - { speaker: "A", ru: "Что ты де́лаешь?", en: "What are you doing?" }
       - { speaker: "B", ru: "Я чита́ю кни́гу.", en: "I'm reading a book." }
       - { speaker: "A", ru: "Интере́сно!", en: "Interesting!" }
+
+  - id: "dont_know"
+    context: "Admitting you don't know"
+    lines:
+      - { speaker: "A", ru: "Ты зна́ешь, где метро́?", en: "Do you know where the metro is?" }
+      - { speaker: "B", ru: "Нет, я не зна́ю. Извини́те.", en: "No, I don't know. Sorry." }
+      - { speaker: "A", ru: "Ла́дно, спаси́бо!", en: "OK, thanks!" }
+
+  - id: "he_doesnt_read"
+    context: "Talking about someone else"
+    lines:
+      - { speaker: "A", ru: "Он чита́ет?", en: "Does he read?" }
+      - { speaker: "B", ru: "Нет, он не чита́ет. Он не понима́ет по-ру́сски.", en: "No, he doesn't read. He doesn't understand Russian." }
+      - { speaker: "A", ru: "А ты понима́ешь?", en: "And do you understand?" }
+      - { speaker: "B", ru: "Да, я понима́ю немно́го.", en: "Yes, I understand a little." }

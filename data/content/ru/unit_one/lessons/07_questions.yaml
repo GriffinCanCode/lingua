@@ -243,6 +243,41 @@ templates:
       NOUN: { ids: [mama, papa] }
     weight: 2
 
+  # Question-Answer with negation patterns
+  - pattern: "Нет, э́то не {NOUN}."
+    translation: "No, this is not {NOUN.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Э́то {NOUN}? — Нет, не {NOUN}."
+    translation: "Is this {NOUN.a}? — No, it's not."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 3
+
+  - pattern: "Он тут? — Нет, он не тут."
+    translation: "Is he here? — No, he's not here."
+    slots: {}
+    weight: 2
+
+  - pattern: "Она́ там? — Нет, она́ не там."
+    translation: "Is she there? — No, she's not there."
+    slots: {}
+    weight: 2
+
+  - pattern: "Да и́ли нет?"
+    translation: "Yes or no?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Нет, не {NOUN}, а {NOUN2}."
+    translation: "No, not {NOUN.a}, but {NOUN2.a}."
+    slots:
+      NOUN: { pos: [noun], exclude_ids: [mama, papa] }
+      NOUN2: { pos: [noun], exclude_ids: [mama, papa] }
+    weight: 2
+
 # Dialogue exercises for conversational practice
 dialogues:
   - id: "whats_this"
@@ -274,3 +309,20 @@ dialogues:
       - { speaker: "B", ru: "Да.", en: "Yes." }
       - { speaker: "A", ru: "Спаси́бо!", en: "Thanks!" }
       - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }
+
+  - id: "multiple_negations"
+    context: "Finding out what something is"
+    lines:
+      - { speaker: "A", ru: "Э́то рестора́н?", en: "Is this a restaurant?" }
+      - { speaker: "B", ru: "Нет, э́то не рестора́н.", en: "No, this is not a restaurant." }
+      - { speaker: "A", ru: "А кафе́?", en: "A café then?" }
+      - { speaker: "B", ru: "Нет, не кафе́. Э́то магази́н.", en: "No, not a café. It's a store." }
+      - { speaker: "A", ru: "А, поня́тно!", en: "Ah, I see!" }
+
+  - id: "is_it_here"
+    context: "Looking for something"
+    lines:
+      - { speaker: "A", ru: "Метро́ тут?", en: "Is the metro here?" }
+      - { speaker: "B", ru: "Нет, не тут.", en: "No, not here." }
+      - { speaker: "A", ru: "А где?", en: "Then where?" }
+      - { speaker: "B", ru: "Там!", en: "There!" }

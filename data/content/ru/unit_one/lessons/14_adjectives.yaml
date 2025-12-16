@@ -159,3 +159,18 @@ templates:
       NOUN: { pos: [noun] }
       ADJ: { pos: [adjective] }
     weight: 3
+
+dialogues:
+  - id: "big_or_small"
+    context: "Describing size"
+    lines:
+      - { speaker: "A", ru: "Это большой дом.", en: "This is a big house." }
+      - { speaker: "B", ru: "Да, очень большой!", en: "Yes, very big!" }
+      - { speaker: "A", ru: "А это маленькая собака.", en: "And this is a small dog." }
+
+  - id: "new_car"
+    context: "Showing something new"
+    lines:
+      - { speaker: "A", ru: "Это моя новая машина.", en: "This is my new car." }
+      - { speaker: "B", ru: "Красивая!", en: "Beautiful!" }
+      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }

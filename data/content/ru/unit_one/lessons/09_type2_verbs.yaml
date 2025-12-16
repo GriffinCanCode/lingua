@@ -182,3 +182,18 @@ templates:
       PRONOUN: { pos: [pronoun] }
       VERB: { pos: [verb] }
     weight: 2
+
+dialogues:
+  - id: "do_you_speak_russian"
+    context: "Language abilities"
+    lines:
+      - { speaker: "A", ru: "Ты говоришь по-русски?", en: "Do you speak Russian?" }
+      - { speaker: "B", ru: "Да, немного.", en: "Yes, a little." }
+      - { speaker: "A", ru: "Очень хорошо!", en: "Very good!" }
+
+  - id: "i_dont_speak"
+    context: "Language barrier"
+    lines:
+      - { speaker: "A", ru: "Ты говоришь по-английски?", en: "Do you speak English?" }
+      - { speaker: "B", ru: "Нет, я не говорю по-английски.", en: "No, I don't speak English." }
+      - { speaker: "A", ru: "Хорошо, по-русски.", en: "Okay, in Russian." }

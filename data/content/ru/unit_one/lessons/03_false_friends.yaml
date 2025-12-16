@@ -160,3 +160,18 @@ templates:
     slots:
       FAMILY: { pos: [noun], semantic: [family] }
     weight: 3
+
+dialogues:
+  - id: "finding_restaurant"
+    context: "Looking for a restaurant"
+    lines:
+      - { speaker: "A", ru: "Где ресторан?", en: "Where is the restaurant?" }
+      - { speaker: "B", ru: "Там.", en: "There." }
+      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }
+
+  - id: "introducing_family"
+    context: "Introducing family"
+    lines:
+      - { speaker: "A", ru: "Это мой брат.", en: "This is my brother." }
+      - { speaker: "B", ru: "Привет!", en: "Hi!" }
+      - { speaker: "A", ru: "А это моя сестра.", en: "And this is my sister." }

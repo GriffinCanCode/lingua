@@ -251,3 +251,27 @@ templates:
     translation: "How is this in Russian?"
     slots: {}
     weight: 2
+
+dialogues:
+  - id: "who_is_this"
+    context: "Asking about people"
+    lines:
+      - { speaker: "A", ru: "Кто это?", en: "Who is this?" }
+      - { speaker: "B", ru: "Это мой друг.", en: "This is my friend." }
+      - { speaker: "A", ru: "Привет!", en: "Hi!" }
+
+  - id: "what_is_this"
+    context: "Asking about objects"
+    lines:
+      - { speaker: "A", ru: "Что это?", en: "What is this?" }
+      - { speaker: "B", ru: "Это книга.", en: "This is a book." }
+      - { speaker: "A", ru: "А что там?", en: "And what is there?" }
+      - { speaker: "B", ru: "Там телефон.", en: "There is a phone." }
+
+  - id: "how_are_you"
+    context: "Greetings"
+    lines:
+      - { speaker: "A", ru: "Привет! Как дела?", en: "Hi! How are you?" }
+      - { speaker: "B", ru: "Хорошо, спасибо!", en: "Good, thanks!" }
+      - { speaker: "A", ru: "Как тебя зовут?", en: "What's your name?" }
+      - { speaker: "B", ru: "Меня зовут Маша.", en: "My name is Masha." }

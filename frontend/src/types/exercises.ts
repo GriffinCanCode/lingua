@@ -12,7 +12,8 @@ export type ExerciseType =
   | 'fill_blank'
   | 'pattern_fill'
   | 'paradigm_complete'
-  | 'pattern_apply';
+  | 'pattern_apply'
+  | 'dialogue_translate';
 
 export type TargetLanguage = 'ru' | 'en';
 export type Difficulty = 1 | 2 | 3;
@@ -161,6 +162,25 @@ export interface PatternApplyExercise extends BaseExercise {
   options: string[];
 }
 
+// Dialogue Line: Single line in conversation
+export interface DialogueLine {
+  speaker: string;
+  ru: string;
+  en: string;
+}
+
+// Dialogue Translate: Translate lines within conversation context
+export interface DialogueTranslateExercise extends BaseExercise {
+  type: 'dialogue_translate';
+  context: string;
+  dialogueId: string;
+  dialogueLines: DialogueLine[];
+  currentLineIndex: number;
+  targetLanguage: TargetLanguage;
+  sourceText: string;
+  targetText: string;
+}
+
 // Union type for all exercises
 export type Exercise =
   | WordBankExercise
@@ -171,7 +191,8 @@ export type Exercise =
   | FillBlankExercise
   | PatternFillExercise
   | ParadigmCompleteExercise
-  | PatternApplyExercise;
+  | PatternApplyExercise
+  | DialogueTranslateExercise;
 
 // Exercise result tracking
 export interface ExerciseResult {

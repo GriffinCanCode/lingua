@@ -351,6 +351,20 @@ def load_templates(data: dict) -> list[Template]:
     return [Template.from_dict(t) for t in templates_data]
 
 
+def load_dialogues(data: dict) -> list[dict]:
+    """Load dialogues from lesson YAML data.
+    
+    Dialogue YAML structure:
+    dialogues:
+      - id: "cafe_order"
+        context: "At a café"
+        lines:
+          - { speaker: "A", ru: "Кофе, пожалуйста.", en: "Coffee, please." }
+          - { speaker: "B", ru: "Один?", en: "One?" }
+    """
+    return data.get('dialogues', [])
+
+
 def create_filler_from_vocab_dicts(vocab_dicts: list[dict], language: str = 'ru') -> TemplateFiller:
     """Create TemplateFiller from vocabulary dictionaries."""
     vocab_items = [

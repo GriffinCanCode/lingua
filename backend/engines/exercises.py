@@ -16,7 +16,8 @@ log = engine_logger()
 
 ExerciseType = Literal[
     'word_bank', 'typing', 'matching', 'multiple_choice', 'fill_blank',
-    'pattern_fill', 'paradigm_complete', 'pattern_apply', 'word_intro'
+    'pattern_fill', 'paradigm_complete', 'pattern_apply', 'word_intro',
+    'dialogue_translate'
 ]
 TargetLanguage = Literal['ru', 'en']
 LevelType = Literal['intro', 'easy', 'medium', 'hard', 'review']
@@ -53,6 +54,22 @@ class SentenceItem:
     words: list[dict] | None = None
     distractors: list[str] = field(default_factory=list)
     complexity: int = 1
+
+
+@dataclass(slots=True)
+class DialogueLine:
+    """Single line in a dialogue."""
+    speaker: str
+    ru: str
+    en: str
+
+
+@dataclass(slots=True)
+class DialogueItem:
+    """Dialogue conversation block."""
+    id: str
+    context: str
+    lines: list[DialogueLine]
 
 
 @dataclass(slots=True)
@@ -127,6 +144,7 @@ class ExerciseGenerator:
         sentences: list[SentenceItem],
         review_vocab: list[VocabItem],
         difficulty: int,
+        dialogues: list[DialogueItem] | None = None,
     ) -> list[Exercise]:
         """Generate exercises of a specific type."""
         generators = {
@@ -139,6 +157,8 @@ class ExerciseGenerator:
             'paradigm_complete': self._gen_paradigm_complete,
             'pattern_apply': self._gen_pattern_apply,
         }
+        if ex_type == 'dialogue_translate' and dialogues:
+            return self._gen_dialogue_translate(count, dialogues, difficulty)
         gen = generators.get(ex_type)
         return gen(count, vocab, sentences, review_vocab, difficulty) if gen else []
 
@@ -492,6 +512,41 @@ class ExerciseGenerator:
 
         return exercises
 
+    def _gen_dialogue_translate(
+        self,
+        count: int,
+        dialogues: list[DialogueItem],
+        difficulty: int,
+    ) -> list[Exercise]:
+        """Generate dialogue translation exercises - translate lines in conversation context."""
+        exercises = []
+        if not dialogues:
+            return []
+
+        for dialogue in dialogues:
+            for idx, line in enumerate(dialogue.lines):
+                # Alternate translation direction
+                to_russian = idx % 2 == 0
+                exercises.append(Exercise(
+                    id=str(uuid4()),
+                    type='dialogue_translate',
+                    prompt='Translate this line',
+                    difficulty=difficulty,
+                    data={
+                        'context': dialogue.context,
+                        'dialogueId': dialogue.id,
+                        'dialogueLines': [{'speaker': ln.speaker, 'ru': ln.ru, 'en': ln.en} for ln in dialogue.lines],
+                        'currentLineIndex': idx,
+                        'targetLanguage': 'ru' if to_russian else 'en',
+                        'sourceText': line.en if to_russian else line.ru,
+                        'targetText': line.ru if to_russian else line.en,
+                    },
+                ))
+                if len(exercises) >= count:
+                    return exercises
+
+        return exercises[:count]
+
     def _get_distractors(self, exclude: list[str], lang: TargetLanguage, count: int) -> list[str]:
         """Get distractor words not in exclude list."""
         pool = self._distractor_pool.get(lang, [])
@@ -532,6 +587,7 @@ def generate_exercises(
     num_exercises: int = 15,
     level_type: str = 'medium',
     language: str = 'ru',
+    dialogues: list[dict] | None = None,
 ) -> list[dict]:
     """Generate exercises from raw dict data (API-friendly)."""
     gen = ExerciseGenerator(language=language)
@@ -556,6 +612,19 @@ def generate_exercises(
 
     review = [VocabItem(word=v['word'], translation=v['translation'], gender=v.get('gender')) for v in (review_vocabulary or [])]
     exercises = gen.generate_lesson_exercises(vocab, sents, review, num_exercises, level_type)
+
+    # Add dialogue exercises if provided
+    if dialogues:
+        dialogue_items = [
+            DialogueItem(
+                id=d.get('id', str(uuid4())),
+                context=d.get('context', ''),
+                lines=[DialogueLine(speaker=ln['speaker'], ru=ln['ru'], en=ln['en']) for ln in d.get('lines', [])],
+            ) for d in dialogues
+        ]
+        dialogue_exercises = gen._gen_dialogue_translate(len(dialogue_items) * 3, dialogue_items, 2)
+        exercises.extend(dialogue_exercises)
+        random.shuffle(exercises)
 
     return [{'id': ex.id, 'type': ex.type, 'prompt': ex.prompt, 'difficulty': ex.difficulty, **ex.data} for ex in exercises]
 

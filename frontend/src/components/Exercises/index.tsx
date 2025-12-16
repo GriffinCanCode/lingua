@@ -8,6 +8,7 @@ export { PatternIntro } from './PatternIntro';
 export { PatternFill } from './PatternFill';
 export { PatternApply } from './PatternApply';
 export { ParadigmComplete } from './ParadigmComplete';
+export { DialogueTranslate } from './DialogueTranslate';
 export type { VocabWord } from './WordIntro';
 
 // Re-export types for convenience
@@ -22,6 +23,8 @@ export type {
   PatternFillExercise,
   ParadigmCompleteExercise,
   PatternApplyExercise,
+  DialogueTranslateExercise,
+  DialogueLine,
   MorphPattern,
   MorphWord,
   GrammaticalCase,

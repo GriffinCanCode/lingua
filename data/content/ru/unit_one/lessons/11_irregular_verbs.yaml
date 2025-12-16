@@ -215,3 +215,19 @@ templates:
       PRONOUN: { pos: [pronoun] }
       VERB: { pos: [verb] }
     weight: 2
+
+dialogues:
+  - id: "where_do_you_live"
+    context: "Getting to know someone"
+    lines:
+      - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
+      - { speaker: "B", ru: "Я живу в Москве.", en: "I live in Moscow." }
+      - { speaker: "A", ru: "А где ты работаешь?", en: "And where do you work?" }
+      - { speaker: "B", ru: "Я работаю в банке.", en: "I work at a bank." }
+
+  - id: "want_coffee"
+    context: "Offering something"
+    lines:
+      - { speaker: "A", ru: "Ты хочешь кофе?", en: "Do you want coffee?" }
+      - { speaker: "B", ru: "Да, я хочу кофе.", en: "Yes, I want coffee." }
+      - { speaker: "A", ru: "Хорошо!", en: "Okay!" }

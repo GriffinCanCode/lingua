@@ -16,6 +16,11 @@ class Settings(BaseSettings):
     LOG_JSON: bool = False  # True for production (structured JSON), False for dev (colored)
     LOG_SQL: bool = False   # Enable SQLAlchemy query logging
     
+    # OpenAI
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4o-mini"
+    CHAT_MAX_TOKENS: int = 500
+    
     @property
     def is_production(self) -> bool:
         return not self.APP_DEBUG

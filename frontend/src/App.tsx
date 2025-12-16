@@ -7,6 +7,7 @@ import { GlossReader } from './components/GlossReader';
 import { ProductionPractice } from './components/ProductionPractice';
 import { LearnPath } from './components/LearnPath';
 import { LessonSession } from './components/LearnPath/LessonSession';
+import { SpeechPractice } from './components/SpeechPractice';
 import { useNavigationLogger, useGlobalErrorLogger } from './lib/logger';
 import { Layout } from './components/Layout';
 import { ToolsDashboard } from './components/ToolsDashboard';
@@ -26,6 +27,7 @@ const AppContent = () => {
         {/* Core Activities */}
         <Route path="/practice" element={<ProductionPractice />} />
         <Route path="/reader" element={<GlossReader />} />
+        <Route path="/chat" element={<SpeechPractice />} />
 
         {/* Tools Section */}
         <Route path="/tools" element={<ToolsDashboard />} />

@@ -15,7 +15,7 @@ import {
 } from '../Celebrations';
 import {
   WordBank, Typing, Matching, MultipleChoice, FillBlank,
-  PatternFill, PatternApply, ParadigmComplete,
+  PatternFill, PatternApply, ParadigmComplete, DialogueTranslate,
 } from '../Exercises';
 import type { Exercise, ExerciseResult, ValidationResult } from '../../types/exercises';
 import type { TeachingContent, ModuleType } from '../../types/teaching';
@@ -415,6 +415,13 @@ export const LessonSession: React.FC = () => {
         return { correct: allCorrect, correctAnswer: correctForms.join(', ') };
       }
 
+      case 'dialogue_translate': {
+        const normalizedAnswer = normalize(answer as string);
+        const isCorrect = normalizedAnswer === normalize(exercise.targetText);
+        const typoDetected = !isCorrect && levenshtein(normalizedAnswer, normalize(exercise.targetText)) <= 2;
+        return { correct: isCorrect || typoDetected, correctAnswer: exercise.targetText, typoDetected };
+      }
+
       default:
         return { correct: false, correctAnswer: '' };
     }
@@ -527,6 +534,7 @@ export const LessonSession: React.FC = () => {
       case 'pattern_fill': return <PatternFill {...baseProps} exercise={exercise} />;
       case 'pattern_apply': return <PatternApply {...baseProps} exercise={exercise} />;
       case 'paradigm_complete': return <ParadigmComplete {...baseProps} exercise={exercise} />;
+      case 'dialogue_translate': return <DialogueTranslate {...baseProps} exercise={exercise} />;
       default: return <div>Unknown exercise type</div>;
     }
   }, [handleSubmit, showFeedback, grammarConfig]);

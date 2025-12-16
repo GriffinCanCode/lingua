@@ -158,3 +158,18 @@ templates:
       NUMBER: { pos: [numeral] }
       NOUN: { pos: [noun] }
     weight: 3
+
+dialogues:
+  - id: "how_many_cats"
+    context: "Counting things"
+    lines:
+      - { speaker: "A", ru: "У тебя есть кот?", en: "Do you have a cat?" }
+      - { speaker: "B", ru: "Да, у меня два кота.", en: "Yes, I have two cats." }
+      - { speaker: "A", ru: "Два?!", en: "Two?!" }
+
+  - id: "counting"
+    context: "Learning to count"
+    lines:
+      - { speaker: "A", ru: "Один, два, три...", en: "One, two, three..." }
+      - { speaker: "B", ru: "Четыре, пять!", en: "Four, five!" }
+      - { speaker: "A", ru: "Хорошо!", en: "Good!" }

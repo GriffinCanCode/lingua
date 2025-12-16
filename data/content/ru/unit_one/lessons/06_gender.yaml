@@ -240,3 +240,19 @@ templates:
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 5
     notes: "Drills gender exceptions - папа and кофе use он!"
+
+dialogues:
+  - id: "wheres_book"
+    context: "Looking for things"
+    lines:
+      - { speaker: "A", ru: "Где книга?", en: "Where is the book?" }
+      - { speaker: "B", ru: "Она там.", en: "It is there." }
+      - { speaker: "A", ru: "А где кот?", en: "And where is the cat?" }
+      - { speaker: "B", ru: "Он тут.", en: "He is here." }
+
+  - id: "gender_exception"
+    context: "Talking about coffee"
+    lines:
+      - { speaker: "A", ru: "Где кофе?", en: "Where is the coffee?" }
+      - { speaker: "B", ru: "Он там.", en: "It is there." }
+      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }

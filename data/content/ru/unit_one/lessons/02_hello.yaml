@@ -239,3 +239,35 @@ templates:
     slots:
       GREETING: { pos: [interjection] }
     weight: 2
+
+# Dialogue exercises for conversational practice
+dialogues:
+  - id: "meeting_friend"
+    context: "Meeting a friend"
+    lines:
+      - { speaker: "A", ru: "Привет!", en: "Hi!" }
+      - { speaker: "B", ru: "Привет! Как дела?", en: "Hi! How are you?" }
+      - { speaker: "A", ru: "Хорошо, спасибо!", en: "Good, thanks!" }
+
+  - id: "formal_greeting"
+    context: "Formal meeting"
+    lines:
+      - { speaker: "A", ru: "Здравствуйте!", en: "Hello!" }
+      - { speaker: "B", ru: "Здравствуйте! Как вас зовут?", en: "Hello! What is your name?" }
+      - { speaker: "A", ru: "Меня зовут Иван.", en: "My name is Ivan." }
+      - { speaker: "B", ru: "Очень приятно!", en: "Nice to meet you!" }
+
+  - id: "cafe_order"
+    context: "At a café"
+    lines:
+      - { speaker: "A", ru: "Кофе, пожалуйста.", en: "Coffee, please." }
+      - { speaker: "B", ru: "Один?", en: "One?" }
+      - { speaker: "A", ru: "Да, спасибо.", en: "Yes, thank you." }
+      - { speaker: "B", ru: "Пожалуйста!", en: "You're welcome!" }
+
+  - id: "goodbye"
+    context: "Saying goodbye"
+    lines:
+      - { speaker: "A", ru: "Ну, мне пора.", en: "Well, I have to go." }
+      - { speaker: "B", ru: "До свидания!", en: "Goodbye!" }
+      - { speaker: "A", ru: "Пока!", en: "Bye!" }

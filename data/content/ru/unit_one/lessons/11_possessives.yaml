@@ -1,8 +1,8 @@
-# Unit 1, Lesson 9: My, Your, Our
+# Unit 1, Lesson 11: My, Your, Our
 # 5 modules - Possessive pronouns
 
 lesson:
-  id: "09_possessives"
+  id: "11_possessives"
   title: "My, Your, Our"
   subtitle: "Talk about what belongs to whom"
   icon: "heart"
@@ -154,8 +154,8 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [moy, moya, moyo, dom, kniga, okno, mashina, telefon]
-  review_from: [04_gender, 06_possession]
+  primary: [moy, moya, moyo]
+  review_from: [05_gender, 07_possession, 10_irregular_verbs]
 
 templates:
   - pattern: "Это {POSS} {NOUN}."

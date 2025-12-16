@@ -1,0 +1,187 @@
+# Unit 1, Lesson 6: I Know, I Understand
+# 5 modules - Type 1 (First Conjugation) Verbs
+
+lesson:
+  id: "06_type1_verbs"
+  title: "I Know, I Understand"
+  subtitle: "Your first Russian verbs - Type 1 conjugation"
+  icon: "brain"
+
+modules:
+  - id: "mod_1"
+    title: "Verbs in Russian"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Action Words"
+        content: |
+          Time to learn verbs! Russian verbs change based on who's doing the action.
+          
+          Good news: There are only 2 main patterns (conjugations).
+          Today we learn Type 1 - the most common pattern.
+      
+      - type: "word_intro"
+        words:
+          - word: "знать"
+            translation: "to know"
+            note: "Type 1 verb - regular pattern"
+          - word: "понимать"
+            translation: "to understand"
+            note: "Type 1 verb - essential survival word!"
+      
+      - type: "tip"
+        content: "These two verbs will get you out of many situations: Я не знаю (I don't know), Я не понимаю (I don't understand)."
+    
+    vocab_pool:
+      introduce: [znat, ponimat]
+      practice: []
+      review: [ya, ty, on, ona]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Type 1 Pattern"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "The -ю, -ешь Pattern"
+        content: |
+          Type 1 verbs follow this pattern:
+          
+          я знаю (I know)
+          ты знаешь (you know)
+          он/она знает (he/she knows)
+          мы знаем (we know)
+          вы знаете (you know - formal/plural)
+          они знают (they know)
+      
+      - type: "pattern_table"
+        title: "знать - to know"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "знаю", "I know"]
+          - ["ты", "знаешь", "you know"]
+          - ["он/она", "знает", "he/she knows"]
+          - ["мы", "знаем", "we know"]
+          - ["вы", "знаете", "you know (formal)"]
+          - ["они", "знают", "they know"]
+      
+      - type: "morphology_pattern"
+        title: "Type 1 Endings"
+        formula: "Stem + {-ю, -ешь, -ет, -ем, -ете, -ют}"
+        examples:
+          - { ru: "Я знаю.", en: "I know." }
+          - { ru: "Ты знаешь?", en: "Do you know?" }
+          - { ru: "Он знает.", en: "He knows." }
+        rule: "Remove -ть from infinitive, add the ending for each person."
+    
+    vocab_pool:
+      introduce: []
+      practice: [znat]
+      review: [ya, ty, on, ona, my, vy, oni]
+    exercises:
+      count: 8
+
+  - id: "mod_3"
+    title: "Понимать"
+    type: "pattern"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "понимать - to understand"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "понимаю", "I understand"]
+          - ["ты", "понимаешь", "you understand"]
+          - ["он/она", "понимает", "he/she understands"]
+          - ["мы", "понимаем", "we understand"]
+          - ["вы", "понимаете", "you understand (formal)"]
+          - ["они", "понимают", "they understand"]
+      
+      - type: "morphology_pattern"
+        title: "Survival Phrases"
+        formula: "Я (не) понимаю = I (don't) understand"
+        examples:
+          - { ru: "Я понимаю.", en: "I understand." }
+          - { ru: "Я не понимаю.", en: "I don't understand." }
+          - { ru: "Вы понимаете?", en: "Do you understand?" }
+        rule: "Add не before the verb to negate it."
+      
+      - type: "etymology"
+        title: "Word Root"
+        word: "понимать"
+        connections:
+          - { word: "иметь", lang: "Russian", relation: "cousin" }
+          - { word: "comprehend", lang: "English", relation: "cousin" }
+        insight: "По-ним-ать contains the root 'ним' (take/grasp) - to understand is to 'grasp' an idea!"
+    
+    vocab_pool:
+      introduce: []
+      practice: [znat, ponimat]
+      review: [ya, ty, nye]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Focus on я, ты, and он/она forms first - these are the most common. The pattern will become natural!"
+    vocab_pool:
+      introduce: []
+      practice: [znat, ponimat]
+      review: [ya, ty, on, ona, vy, da, nyet, nye]
+    exercises:
+      count: 10
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Type 1 conjugation pattern: -ю, -ешь, -ет, -ем, -ете, -ют"
+          - "знать (to know) - Я знаю, Ты знаешь..."
+          - "понимать (to understand) - Я понимаю, Ты понимаешь..."
+          - "Negation: Я не знаю, Я не понимаю"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [znat, ponimat, ya, ty, on, ona, my, vy, oni]
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary: [znat, ponimat]
+  review_from: [01_cognates, 02_hello, 04_gender]
+
+templates:
+  - pattern: "Я {VERB_1SG}."
+    translation: "I {VERB.translation}."
+    slots:
+      VERB_1SG: { pos: [verb], form: "1sg" }
+    weight: 4
+
+  - pattern: "Ты {VERB_2SG}?"
+    translation: "Do you {VERB.translation}?"
+    slots:
+      VERB_2SG: { pos: [verb], form: "2sg" }
+    weight: 3
+
+  - pattern: "Я не {VERB_1SG}."
+    translation: "I don't {VERB.translation}."
+    slots:
+      VERB_1SG: { pos: [verb], form: "1sg" }
+    weight: 3
+
+  - pattern: "{PRONOUN} {VERB}."
+    translation: "{PRONOUN.translation} {VERB.translation}."
+    slots:
+      PRONOUN: { pos: [pronoun] }
+      VERB: { pos: [verb] }
+    weight: 2

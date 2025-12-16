@@ -1,0 +1,564 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 2: EVERYDAY LIFE - Master Vocabulary Sheet
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - Build on Unit 1 foundation with more verbs
+# - Introduce ACCUSATIVE CASE for direct objects
+# - Focus on daily activities and routines
+# - Time expressions for talking about when things happen
+#
+# Grammar Focus:
+# - Accusative case (direct objects)
+# - More verbs: делать, слушать, смотреть, видеть, любить
+# - Time expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+unit:
+  id: "unit2"
+  title: "Everyday Life"
+  description: "Daily activities, accusative case, and more verbs"
+  total_words: 70
+  target_lessons: 10
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 1: NEW VERBS
+# Action words for daily life
+# ══════════════════════════════════════════════════════════════════════════════
+
+verbs:
+  # TYPE 1 VERBS
+  - id: "delat"
+    word: "делать"
+    transliteration: "delat'"
+    translation: "to do / to make"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "сделать"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "делаю"
+      ty: "делаешь"
+      on_ona: "делает"
+      my: "делаем"
+      vy: "делаете"
+      oni: "делают"
+    examples:
+      - { ru: "Что ты делаешь?", en: "What are you doing?" }
+      - { ru: "Я делаю домашнее задание.", en: "I'm doing homework." }
+
+  - id: "slushat"
+    word: "слушать"
+    transliteration: "slushat'"
+    translation: "to listen (to)"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "слушаю"
+      ty: "слушаешь"
+      on_ona: "слушает"
+      my: "слушаем"
+      vy: "слушаете"
+      oni: "слушают"
+    notes: "Takes accusative case for the object being listened to."
+    examples:
+      - { ru: "Я слушаю музыку.", en: "I'm listening to music." }
+      - { ru: "Слушай!", en: "Listen!" }
+
+  - id: "chitat"
+    word: "читать"
+    transliteration: "chitat'"
+    translation: "to read"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "прочитать"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "читаю"
+      ty: "читаешь"
+      on_ona: "читает"
+      my: "читаем"
+      vy: "читаете"
+      oni: "читают"
+    examples:
+      - { ru: "Я читаю книгу.", en: "I'm reading a book." }
+      - { ru: "Что ты читаешь?", en: "What are you reading?" }
+
+  - id: "pisat"
+    word: "писать"
+    transliteration: "pisat'"
+    translation: "to write"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "написать"
+    frequency: 1
+    difficulty: 2
+    conjugation:
+      ya: "пишу"
+      ty: "пишешь"
+      on_ona: "пишет"
+      my: "пишем"
+      vy: "пишете"
+      oni: "пишут"
+    notes: "Consonant change: с → ш in conjugation."
+    examples:
+      - { ru: "Я пишу письмо.", en: "I'm writing a letter." }
+
+  # TYPE 2 VERBS
+  - id: "smotret"
+    word: "смотреть"
+    transliteration: "smotret'"
+    translation: "to watch / to look at"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "посмотреть"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "смотрю"
+      ty: "смотришь"
+      on_ona: "смотрит"
+      my: "смотрим"
+      vy: "смотрите"
+      oni: "смотрят"
+    examples:
+      - { ru: "Я смотрю телевизор.", en: "I'm watching TV." }
+      - { ru: "Смотри!", en: "Look!" }
+
+  - id: "videt"
+    word: "видеть"
+    transliteration: "videt'"
+    translation: "to see"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "увидеть"
+    frequency: 1
+    difficulty: 2
+    conjugation:
+      ya: "вижу"
+      ty: "видишь"
+      on_ona: "видит"
+      my: "видим"
+      vy: "видите"
+      oni: "видят"
+    notes: "Consonant change: д → ж in 1st person singular."
+    examples:
+      - { ru: "Я вижу дом.", en: "I see a house." }
+      - { ru: "Ты видишь?", en: "Do you see?" }
+
+  - id: "lyubit"
+    word: "любить"
+    transliteration: "lyubit'"
+    translation: "to love / to like"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    conjugation:
+      ya: "люблю"
+      ty: "любишь"
+      on_ona: "любит"
+      my: "любим"
+      vy: "любите"
+      oni: "любят"
+    notes: "Consonant change: б → бл in 1st person singular."
+    examples:
+      - { ru: "Я люблю кофе.", en: "I love coffee." }
+      - { ru: "Ты любишь музыку?", en: "Do you like music?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 2: TIME EXPRESSIONS
+# When things happen
+# ══════════════════════════════════════════════════════════════════════════════
+
+time_expressions:
+  - id: "segodnya"
+    word: "сегодня"
+    transliteration: "segodnya"
+    translation: "today"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Сегодня я работаю.", en: "I'm working today." }
+
+  - id: "zavtra"
+    word: "завтра"
+    transliteration: "zavtra"
+    translation: "tomorrow"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Завтра я не работаю.", en: "I'm not working tomorrow." }
+
+  - id: "vchera"
+    word: "вчера"
+    transliteration: "vchera"
+    translation: "yesterday"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Вчера я читал книгу.", en: "Yesterday I read a book." }
+
+  - id: "utrom"
+    word: "утром"
+    transliteration: "utrom"
+    translation: "in the morning"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Утром я пью кофе.", en: "I drink coffee in the morning." }
+
+  - id: "dnyom"
+    word: "днём"
+    transliteration: "dnyom"
+    translation: "in the afternoon / during the day"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 2
+    difficulty: 1
+    examples:
+      - { ru: "Днём я работаю.", en: "I work during the day." }
+
+  - id: "vecherom"
+    word: "вечером"
+    transliteration: "vecherom"
+    translation: "in the evening"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Вечером я смотрю телевизор.", en: "I watch TV in the evening." }
+
+  - id: "nochyu"
+    word: "ночью"
+    transliteration: "noch'yu"
+    translation: "at night"
+    pos: "adverb"
+    semantic: [time]
+    frequency: 2
+    difficulty: 1
+    examples:
+      - { ru: "Ночью я сплю.", en: "I sleep at night." }
+
+  - id: "vsegda"
+    word: "всегда"
+    transliteration: "vsegda"
+    translation: "always"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Я всегда пью кофе утром.", en: "I always drink coffee in the morning." }
+
+  - id: "nikogda"
+    word: "никогда"
+    transliteration: "nikogda"
+    translation: "never"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    notes: "Requires не with verb: никогда не"
+    examples:
+      - { ru: "Я никогда не пью чай.", en: "I never drink tea." }
+
+  - id: "inogda"
+    word: "иногда"
+    transliteration: "inogda"
+    translation: "sometimes"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Иногда я читаю книги.", en: "Sometimes I read books." }
+
+  - id: "chasto"
+    word: "часто"
+    transliteration: "chasto"
+    translation: "often"
+    pos: "adverb"
+    semantic: [frequency]
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Я часто слушаю музыку.", en: "I often listen to music." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 3: DAILY ACTIVITIES NOUNS
+# Things we do and use every day
+# ══════════════════════════════════════════════════════════════════════════════
+
+nouns:
+  - id: "muzyka"
+    word: "музыка"
+    transliteration: "muzyka"
+    translation: "music"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    accusative: "музыку"
+    examples:
+      - { ru: "Я слушаю музыку.", en: "I'm listening to music." }
+
+  - id: "televizor"
+    word: "телевизор"
+    transliteration: "televizor"
+    translation: "TV / television"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "телевизор"
+    examples:
+      - { ru: "Я смотрю телевизор.", en: "I'm watching TV." }
+
+  - id: "film"
+    word: "фильм"
+    transliteration: "fil'm"
+    translation: "movie / film"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "фильм"
+    examples:
+      - { ru: "Я смотрю фильм.", en: "I'm watching a movie." }
+
+  - id: "gazeta"
+    word: "газета"
+    transliteration: "gazeta"
+    translation: "newspaper"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    accusative: "газету"
+    examples:
+      - { ru: "Я читаю газету.", en: "I'm reading a newspaper." }
+
+  - id: "zhurnal"
+    word: "журнал"
+    transliteration: "zhurnal"
+    translation: "magazine"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    accusative: "журнал"
+    examples:
+      - { ru: "Я читаю журнал.", en: "I'm reading a magazine." }
+
+  - id: "pismo"
+    word: "письмо"
+    transliteration: "pis'mo"
+    translation: "letter"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    accusative: "письмо"
+    examples:
+      - { ru: "Я пишу письмо.", en: "I'm writing a letter." }
+
+  - id: "rabota"
+    word: "работа"
+    transliteration: "rabota"
+    translation: "work / job"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    accusative: "работу"
+    examples:
+      - { ru: "Я люблю свою работу.", en: "I love my job." }
+
+  - id: "zavtrak"
+    word: "завтрак"
+    transliteration: "zavtrak"
+    translation: "breakfast"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "завтрак"
+    examples:
+      - { ru: "Утром я готовлю завтрак.", en: "I make breakfast in the morning." }
+
+  - id: "obed"
+    word: "обед"
+    transliteration: "obed"
+    translation: "lunch"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "обед"
+    examples:
+      - { ru: "Днём у меня обед.", en: "I have lunch during the day." }
+
+  - id: "uzhin"
+    word: "ужин"
+    transliteration: "uzhin"
+    translation: "dinner"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    accusative: "ужин"
+    examples:
+      - { ru: "Вечером мы готовим ужин.", en: "We make dinner in the evening." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 4: ACCUSATIVE CASE REFERENCE
+# How nouns change as direct objects
+# ══════════════════════════════════════════════════════════════════════════════
+
+grammar_notes:
+  accusative_case:
+    description: "Used for direct objects (what receives the action)"
+    rules:
+      masculine_inanimate: "No change (дом → дом)"
+      masculine_animate: "Add -а (кот → кота, брат → брата)"
+      feminine_a: "Change -а to -у (книга → книгу)"
+      feminine_ya: "Change -я to -ю (сестра → сестрю)"
+      neuter: "No change (окно → окно)"
+    examples:
+      - { nominative: "книга", accusative: "книгу", sentence: "Я читаю книгу." }
+      - { nominative: "журнал", accusative: "журнал", sentence: "Я читаю журнал." }
+      - { nominative: "кот", accusative: "кота", sentence: "Я вижу кота." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  lesson_01_daily_verbs:
+    title: "Daily Actions"
+    focus: "делать, слушать, читать - Type 1 verbs"
+    primary_vocab:
+      - delat
+      - slushat
+      - chitat
+    review_vocab:
+      - znat
+      - ponimat
+      - rabotat
+
+  lesson_02_watching_seeing:
+    title: "Watching & Seeing"
+    focus: "смотреть, видеть - Type 2 verbs with consonant changes"
+    primary_vocab:
+      - smotret
+      - videt
+      - televizor
+      - film
+    review_vocab:
+      - govorit
+
+  lesson_03_accusative_intro:
+    title: "Direct Objects"
+    focus: "Introduction to accusative case"
+    primary_vocab:
+      - kniga
+      - muzyka
+      - gazeta
+    grammar_focus: "accusative_case"
+
+  lesson_04_accusative_feminine:
+    title: "Accusative Feminine"
+    focus: "Feminine noun endings: -а → -у"
+    primary_vocab:
+      - rabota
+    review_vocab:
+      - kniga
+      - muzyka
+      - sestra
+      - mashina
+
+  lesson_05_accusative_animate:
+    title: "Accusative Animate"
+    focus: "Masculine animate: add -а"
+    review_vocab:
+      - kot
+      - brat
+      - drug
+      - doktor
+
+  lesson_06_time_expressions:
+    title: "When Things Happen"
+    focus: "Time adverbs"
+    primary_vocab:
+      - segodnya
+      - zavtra
+      - vchera
+      - utrom
+      - vecherom
+
+  lesson_07_daily_routine:
+    title: "My Daily Routine"
+    focus: "Talking about daily activities"
+    primary_vocab:
+      - zavtrak
+      - obed
+      - uzhin
+    review_vocab:
+      - utrom
+      - dnyom
+      - vecherom
+
+  lesson_08_frequency:
+    title: "How Often"
+    focus: "Frequency adverbs"
+    primary_vocab:
+      - vsegda
+      - nikogda
+      - inogda
+      - chasto
+
+  lesson_09_love_like:
+    title: "I Love, I Like"
+    focus: "любить and preferences"
+    primary_vocab:
+      - lyubit
+    review_vocab:
+      - kofe
+      - muzyka
+      - film
+
+  lesson_10_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 2 review"
+    review_vocab:
+      - delat
+      - slushat
+      - chitat
+      - smotret
+      - videt
+      - lyubit
+      - segodnya
+      - zavtra
+      - vsegda

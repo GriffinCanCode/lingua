@@ -1,8 +1,8 @@
-# Unit 1, Lesson 6: I have...
+# Unit 1, Lesson 7: I have...
 # 5 modules - The possession construction
 
 lesson:
-  id: "06_possession"
+  id: "07_possession"
   title: "I have..."
   subtitle: "Express what you have with У меня есть"
   icon: "package"
@@ -53,10 +53,6 @@ modules:
     teaching:
       - type: "word_intro"
         words:
-          - word: "брат"
-            translation: "brother"
-          - word: "сестра"
-            translation: "sister"
           - word: "машина"
             translation: "car"
             note: "Also means 'machine'"
@@ -135,8 +131,8 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [u_menya, yest, brat, sestra, mashina, sobaka, telefon]
-  review_from: [01_cognates, 04_gender]
+  primary: [u_menya, yest, mashina, sobaka]
+  review_from: [03_false_friends, 05_gender, 06_type1_verbs]
 
 templates:
   - pattern: "У меня есть {NOUN}."

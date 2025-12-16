@@ -1,0 +1,184 @@
+# Unit 1, Lesson 8: I Speak Russian
+# 5 modules - Type 2 (Second Conjugation) Verbs
+
+lesson:
+  id: "08_type2_verbs"
+  title: "I Speak Russian"
+  subtitle: "Type 2 conjugation and language skills"
+  icon: "message-circle"
+
+modules:
+  - id: "mod_1"
+    title: "Type 2 Verbs"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Second Pattern"
+        content: |
+          Type 2 verbs have different endings than Type 1.
+          
+          The key verb today: говорить (to speak)
+          
+          This lets you say the most important sentence:
+          Я говорю по-русски! (I speak Russian!)
+      
+      - type: "word_intro"
+        words:
+          - word: "говорить"
+            translation: "to speak/say"
+            note: "Type 2 verb - different endings"
+          - word: "по-русски"
+            translation: "in Russian"
+            note: "Adverb - how you speak"
+      
+      - type: "tip"
+        content: "Say 'Я не говорю по-русски' when you need help in English!"
+    
+    vocab_pool:
+      introduce: [govorit, po_russki]
+      practice: []
+      review: [ya, ty, on, ona]
+    exercises:
+      count: 6
+
+  - id: "mod_2"
+    title: "Type 2 Pattern"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "The -ю, -ишь Pattern"
+        content: |
+          Type 2 verbs use different vowels:
+          
+          я говорю (I speak)
+          ты говоришь (you speak)
+          он/она говорит (he/she speaks)
+          мы говорим (we speak)
+          вы говорите (you speak - formal/plural)
+          они говорят (they speak)
+      
+      - type: "pattern_table"
+        title: "говорить - to speak"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "говорю", "I speak"]
+          - ["ты", "говоришь", "you speak"]
+          - ["он/она", "говорит", "he/she speaks"]
+          - ["мы", "говорим", "we speak"]
+          - ["вы", "говорите", "you speak (formal)"]
+          - ["они", "говорят", "they speak"]
+      
+      - type: "morphology_pattern"
+        title: "Type 2 Endings"
+        formula: "Stem + {-ю/-у, -ишь, -ит, -им, -ите, -ят/-ат}"
+        examples:
+          - { ru: "Я говорю по-русски.", en: "I speak Russian." }
+          - { ru: "Ты говоришь по-английски?", en: "Do you speak English?" }
+          - { ru: "Она говорит быстро.", en: "She speaks fast." }
+        rule: "Type 2 uses -и- in most forms (ишь, ит, им, ите) vs Type 1's -е-."
+    
+    vocab_pool:
+      introduce: [po_angliyski]
+      practice: [govorit, po_russki]
+      review: [ya, ty, on, ona, my, vy, oni]
+    exercises:
+      count: 8
+
+  - id: "mod_3"
+    title: "Type 1 vs Type 2"
+    type: "pattern"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "Compare the Patterns"
+        columns: ["Person", "Type 1 (знать)", "Type 2 (говорить)"]
+        rows:
+          - ["я", "знаю", "говорю"]
+          - ["ты", "знаешь", "говоришь"]
+          - ["он/она", "знает", "говорит"]
+          - ["мы", "знаем", "говорим"]
+          - ["вы", "знаете", "говорите"]
+          - ["они", "знают", "говорят"]
+      
+      - type: "explanation"
+        title: "Spotting the Difference"
+        content: |
+          Type 1: uses -Е- vowel (знаЕшь, знаЕт, знаЕм)
+          Type 2: uses -И- vowel (говорИшь, говорИт, говорИм)
+          
+          Most verbs ending in -ить are Type 2.
+          Most other verbs are Type 1.
+      
+      - type: "tip"
+        content: "говорИТЬ ends in -ить → Type 2. знаТЬ ends in -ать → Type 1."
+    
+    vocab_pool:
+      introduce: []
+      practice: [govorit, znat, ponimat]
+      review: [ya, ty]
+    exercises:
+      count: 8
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Mix Type 1 and Type 2 verbs. Feel the pattern difference: знаЕшь vs говорИшь."
+    vocab_pool:
+      introduce: []
+      practice: [govorit, znat, ponimat, po_russki, po_angliyski]
+      review: [ya, ty, on, ona, vy, da, nyet]
+    exercises:
+      count: 10
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Type 2 conjugation: -ю, -ишь, -ит, -им, -ите, -ят"
+          - "говорить (to speak) - Я говорю, Ты говоришь..."
+          - "по-русски (in Russian), по-английски (in English)"
+          - "Type 1 uses -е-, Type 2 uses -и-"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [govorit, znat, ponimat, po_russki, po_angliyski]
+    exercises:
+      count: 12
+      difficulty: "hard"
+
+vocab_filter:
+  primary: [govorit, po_russki, po_angliyski]
+  review_from: [06_type1_verbs]
+
+templates:
+  - pattern: "Я говорю {LANGUAGE}."
+    translation: "I speak {LANGUAGE.translation}."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 4
+
+  - pattern: "Ты говоришь {LANGUAGE}?"
+    translation: "Do you speak {LANGUAGE.translation}?"
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
+  - pattern: "Я не говорю {LANGUAGE}."
+    translation: "I don't speak {LANGUAGE.translation}."
+    slots:
+      LANGUAGE: { pos: [adverb], semantic: [language] }
+    weight: 3
+
+  - pattern: "{PRONOUN} {VERB}."
+    translation: "{PRONOUN.translation} {VERB.translation}."
+    slots:
+      PRONOUN: { pos: [pronoun] }
+      VERB: { pos: [verb] }
+    weight: 2

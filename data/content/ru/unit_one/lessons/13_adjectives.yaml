@@ -1,8 +1,8 @@
-# Unit 1, Lesson 11: Adjectives
+# Unit 1, Lesson 13: Adjectives
 # 5 modules - Describing things
 
 lesson:
-  id: "11_adjectives"
+  id: "13_adjectives"
   title: "Adjectives"
   subtitle: "Describe people, places, and things"
   icon: "palette"
@@ -41,32 +41,34 @@ modules:
       count: 6
 
   - id: "mod_2"
-    title: "Colors"
+    title: "Common Adjectives"
     type: "learn"
     
     teaching:
       - type: "word_intro"
         words:
-          - word: "красный"
-            translation: "red"
-            note: "Related to 'красивый' (beautiful) - red was the color of beauty!"
-          - word: "синий"
-            translation: "blue (dark)"
-          - word: "белый"
-            translation: "white"
-          - word: "чёрный"
-            translation: "black"
+          - word: "хорошо"
+            translation: "good / well"
+            note: "Adverb form - doesn't change"
+          - word: "плохо"
+            translation: "bad / badly"
+            note: "Adverb form - doesn't change"
+          - word: "новый"
+            translation: "new"
+            note: "новый (m), новая (f), новое (n)"
+          - word: "старый"
+            translation: "old"
+            note: "старый (m), старая (f), старое (n)"
       
       - type: "etymology"
-        title: "Red = Beautiful"
-        word: "красный"
+        title: "Good and Bad"
+        word: "хорошо"
         connections:
-          - { word: "красивый", lang: "Russian", relation: "cousin" }
-          - { word: "Red Square", lang: "English", relation: "descendant" }
-        insight: "Красная площадь (Red Square) originally meant 'Beautiful Square'!"
+          - { word: "хороший", lang: "Russian", relation: "adjective form" }
+        insight: "Хорошо is the adverb ('well'), хороший is the adjective ('good'). They work differently!"
     
     vocab_pool:
-      introduce: []
+      introduce: [khorosho, plokho]
       practice: [bolshoy, malenkiy]
       review: [dom, kniga, okno, mashina]
     exercises:
@@ -112,7 +114,7 @@ modules:
         content: "Describe everything! Большой дом. Маленький кот. Новая книга."
     vocab_pool:
       introduce: []
-      practice: [bolshoy, malenkiy, noviy, stariy]
+      practice: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
       review: [dom, kniga, okno, kot, sobaka, mashina]
     exercises:
       count: 10
@@ -128,7 +130,7 @@ modules:
           - "Masculine: -ый/-ой (большой)"
           - "Feminine: -ая (большая)"
           - "Neuter: -ое (большое)"
-          - "Colors and descriptive words"
+          - "Size and descriptive words"
     vocab_pool:
       introduce: []
       practice: []
@@ -139,7 +141,7 @@ modules:
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review_from: [04_gender, 09_possessives]
+  review_from: [05_gender, 11_possessives, 12_numbers]
 
 templates:
   - pattern: "Это {ADJ} {NOUN}."

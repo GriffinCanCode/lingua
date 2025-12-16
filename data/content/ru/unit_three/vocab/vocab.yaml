@@ -1,0 +1,608 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# UNIT 3: FOOD & DRINK - Master Vocabulary Sheet
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Teaching Philosophy:
+# - High-frequency survival vocabulary (restaurant, shopping)
+# - Introduce GENITIVE CASE (negation, quantities, "of")
+# - Partitive constructions (some of, a piece of)
+# - Cultural context: Russian cuisine and hospitality
+#
+# Grammar Focus:
+# - Genitive case (negation, possession, quantities)
+# - Verbs: есть (to eat), пить (to drink), покупать (to buy)
+# - Partitive expressions
+# ══════════════════════════════════════════════════════════════════════════════
+
+unit:
+  id: "unit3"
+  title: "Food & Drink"
+  description: "Ordering food, genitive case, and Russian cuisine"
+  total_words: 75
+  target_lessons: 10
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 1: FOOD VERBS
+# Eating, drinking, cooking
+# ══════════════════════════════════════════════════════════════════════════════
+
+verbs:
+  - id: "yest_verb"
+    word: "есть"
+    transliteration: "yest'"
+    translation: "to eat"
+    pos: "verb"
+    irregular: true
+    aspect: "imperfective"
+    perfective_pair: "съесть"
+    frequency: 1
+    difficulty: 2
+    conjugation:
+      ya: "ем"
+      ty: "ешь"
+      on_ona: "ест"
+      my: "едим"
+      vy: "едите"
+      oni: "едят"
+    notes: "Don't confuse with есть (there is). Context makes it clear!"
+    examples:
+      - { ru: "Я ем завтрак.", en: "I'm eating breakfast." }
+      - { ru: "Что ты ешь?", en: "What are you eating?" }
+
+  - id: "pit"
+    word: "пить"
+    transliteration: "pit'"
+    translation: "to drink"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "выпить"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "пью"
+      ty: "пьёшь"
+      on_ona: "пьёт"
+      my: "пьём"
+      vy: "пьёте"
+      oni: "пьют"
+    examples:
+      - { ru: "Я пью чай.", en: "I'm drinking tea." }
+      - { ru: "Что ты пьёшь?", en: "What are you drinking?" }
+
+  - id: "pokupat"
+    word: "покупать"
+    transliteration: "pokupat'"
+    translation: "to buy"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "купить"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "покупаю"
+      ty: "покупаешь"
+      on_ona: "покупает"
+      my: "покупаем"
+      vy: "покупаете"
+      oni: "покупают"
+    examples:
+      - { ru: "Я покупаю хлеб.", en: "I'm buying bread." }
+
+  - id: "gotovit"
+    word: "готовить"
+    transliteration: "gotovit'"
+    translation: "to cook / to prepare"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    perfective_pair: "приготовить"
+    frequency: 1
+    difficulty: 2
+    conjugation:
+      ya: "готовлю"
+      ty: "готовишь"
+      on_ona: "готовит"
+      my: "готовим"
+      vy: "готовите"
+      oni: "готовят"
+    notes: "Consonant change: в → вл in 1st person singular."
+    examples:
+      - { ru: "Я готовлю ужин.", en: "I'm cooking dinner." }
+
+  - id: "zakazyvat"
+    word: "заказывать"
+    transliteration: "zakazyvat'"
+    translation: "to order"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    perfective_pair: "заказать"
+    frequency: 1
+    difficulty: 1
+    conjugation:
+      ya: "заказываю"
+      ty: "заказываешь"
+      on_ona: "заказывает"
+      my: "заказываем"
+      vy: "заказываете"
+      oni: "заказывают"
+    examples:
+      - { ru: "Я заказываю кофе.", en: "I'm ordering coffee." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 2: FOOD NOUNS
+# Common foods
+# ══════════════════════════════════════════════════════════════════════════════
+
+food_nouns:
+  - id: "khleb"
+    word: "хлеб"
+    transliteration: "khleb"
+    translation: "bread"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "хлеба"
+    examples:
+      - { ru: "У нас нет хлеба.", en: "We don't have bread." }
+
+  - id: "myaso"
+    word: "мясо"
+    transliteration: "myaso"
+    translation: "meat"
+    pos: "noun"
+    gender: "n"
+    frequency: 1
+    difficulty: 1
+    genitive: "мяса"
+    examples:
+      - { ru: "Я не ем мясо.", en: "I don't eat meat." }
+
+  - id: "ryba"
+    word: "рыба"
+    transliteration: "ryba"
+    translation: "fish"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    genitive: "рыбы"
+    examples:
+      - { ru: "Я люблю рыбу.", en: "I love fish." }
+
+  - id: "ovoshi"
+    word: "овощи"
+    transliteration: "ovoshchi"
+    translation: "vegetables"
+    pos: "noun"
+    gender: "m"
+    plural: true
+    frequency: 1
+    difficulty: 1
+    genitive: "овощей"
+    examples:
+      - { ru: "Я покупаю овощи.", en: "I'm buying vegetables." }
+
+  - id: "frukty"
+    word: "фрукты"
+    transliteration: "frukty"
+    translation: "fruit(s)"
+    pos: "noun"
+    gender: "m"
+    plural: true
+    frequency: 1
+    difficulty: 1
+    genitive: "фруктов"
+    examples:
+      - { ru: "Я люблю фрукты.", en: "I love fruit." }
+
+  - id: "syr"
+    word: "сыр"
+    transliteration: "syr"
+    translation: "cheese"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "сыра"
+    examples:
+      - { ru: "Дай мне сыра.", en: "Give me some cheese." }
+
+  - id: "yayco"
+    word: "яйцо"
+    transliteration: "yaytso"
+    translation: "egg"
+    pos: "noun"
+    gender: "n"
+    frequency: 1
+    difficulty: 1
+    genitive: "яйца"
+    plural: "яйца"
+    examples:
+      - { ru: "Два яйца, пожалуйста.", en: "Two eggs, please." }
+
+  - id: "sup"
+    word: "суп"
+    transliteration: "sup"
+    translation: "soup"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "супа"
+    examples:
+      - { ru: "Я хочу суп.", en: "I want soup." }
+
+  - id: "salat"
+    word: "салат"
+    transliteration: "salat"
+    translation: "salad"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "салата"
+    examples:
+      - { ru: "Я заказываю салат.", en: "I'm ordering a salad." }
+
+  - id: "ris"
+    word: "рис"
+    transliteration: "ris"
+    translation: "rice"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    genitive: "риса"
+    examples:
+      - { ru: "У вас есть рис?", en: "Do you have rice?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 3: DRINK NOUNS
+# Common beverages
+# ══════════════════════════════════════════════════════════════════════════════
+
+drink_nouns:
+  - id: "chay"
+    word: "чай"
+    transliteration: "chay"
+    translation: "tea"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "чая"
+    notes: "Russians drink a LOT of tea. Very cultural!"
+    examples:
+      - { ru: "Я пью чай.", en: "I'm drinking tea." }
+      - { ru: "Чашка чая, пожалуйста.", en: "A cup of tea, please." }
+
+  - id: "moloko"
+    word: "молоко"
+    transliteration: "moloko"
+    translation: "milk"
+    pos: "noun"
+    gender: "n"
+    frequency: 1
+    difficulty: 1
+    genitive: "молока"
+    examples:
+      - { ru: "Кофе с молоком.", en: "Coffee with milk." }
+
+  - id: "sok"
+    word: "сок"
+    transliteration: "sok"
+    translation: "juice"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "сока"
+    examples:
+      - { ru: "Апельсиновый сок, пожалуйста.", en: "Orange juice, please." }
+
+  - id: "vino"
+    word: "вино"
+    transliteration: "vino"
+    translation: "wine"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    genitive: "вина"
+    examples:
+      - { ru: "Бокал вина, пожалуйста.", en: "A glass of wine, please." }
+
+  - id: "pivo"
+    word: "пиво"
+    transliteration: "pivo"
+    translation: "beer"
+    pos: "noun"
+    gender: "n"
+    frequency: 2
+    difficulty: 1
+    genitive: "пива"
+    examples:
+      - { ru: "Два пива, пожалуйста.", en: "Two beers, please." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 4: RESTAURANT VOCABULARY
+# At the restaurant
+# ══════════════════════════════════════════════════════════════════════════════
+
+restaurant:
+  - id: "menyu"
+    word: "меню"
+    transliteration: "menyu"
+    translation: "menu"
+    pos: "noun"
+    gender: "n"
+    indeclinable: true
+    frequency: 1
+    difficulty: 1
+    examples:
+      - { ru: "Меню, пожалуйста.", en: "Menu, please." }
+
+  - id: "schyot"
+    word: "счёт"
+    transliteration: "schyot"
+    translation: "bill / check"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "счёта"
+    examples:
+      - { ru: "Счёт, пожалуйста.", en: "The bill, please." }
+
+  - id: "ofitsiant"
+    word: "официант"
+    transliteration: "ofitsiant"
+    translation: "waiter"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    genitive: "официанта"
+    examples:
+      - { ru: "Где официант?", en: "Where is the waiter?" }
+
+  - id: "tarelka"
+    word: "тарелка"
+    transliteration: "tarelka"
+    translation: "plate"
+    pos: "noun"
+    gender: "f"
+    frequency: 2
+    difficulty: 1
+    genitive: "тарелки"
+    examples:
+      - { ru: "Тарелка супа.", en: "A plate of soup." }
+
+  - id: "chashka"
+    word: "чашка"
+    transliteration: "chashka"
+    translation: "cup"
+    pos: "noun"
+    gender: "f"
+    frequency: 1
+    difficulty: 1
+    genitive: "чашки"
+    examples:
+      - { ru: "Чашка кофе.", en: "A cup of coffee." }
+
+  - id: "stakan"
+    word: "стакан"
+    transliteration: "stakan"
+    translation: "glass"
+    pos: "noun"
+    gender: "m"
+    frequency: 1
+    difficulty: 1
+    genitive: "стакана"
+    examples:
+      - { ru: "Стакан воды.", en: "A glass of water." }
+
+  - id: "bokal"
+    word: "бокал"
+    transliteration: "bokal"
+    translation: "wine glass / goblet"
+    pos: "noun"
+    gender: "m"
+    frequency: 2
+    difficulty: 1
+    genitive: "бокала"
+    examples:
+      - { ru: "Бокал вина.", en: "A glass of wine." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 5: QUANTITY EXPRESSIONS
+# How much, partitive
+# ══════════════════════════════════════════════════════════════════════════════
+
+quantities:
+  - id: "mnogo"
+    word: "много"
+    transliteration: "mnogo"
+    translation: "much / many / a lot"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case."
+    examples:
+      - { ru: "Много воды.", en: "A lot of water." }
+      - { ru: "У меня много работы.", en: "I have a lot of work." }
+
+  - id: "malo"
+    word: "мало"
+    transliteration: "malo"
+    translation: "little / few / not much"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case."
+    examples:
+      - { ru: "Мало времени.", en: "Little time." }
+
+  - id: "nemnogo"
+    word: "немного"
+    transliteration: "nemnogo"
+    translation: "a little / some"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Followed by genitive case."
+    examples:
+      - { ru: "Немного молока, пожалуйста.", en: "A little milk, please." }
+
+  - id: "skolko"
+    word: "сколько"
+    transliteration: "skol'ko"
+    translation: "how much / how many"
+    pos: "adverb"
+    frequency: 1
+    difficulty: 1
+    notes: "Question word. Followed by genitive."
+    examples:
+      - { ru: "Сколько это стоит?", en: "How much does this cost?" }
+      - { ru: "Сколько воды?", en: "How much water?" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 6: GRAMMAR NOTES
+# Genitive case reference
+# ══════════════════════════════════════════════════════════════════════════════
+
+grammar_notes:
+  genitive_case:
+    description: "Used for: negation, 'of', quantities, after numbers 2+"
+    rules:
+      masculine_consonant: "Add -а (дом → дома, хлеб → хлеба)"
+      masculine_soft: "Add -я (чай → чая)"
+      feminine_a: "Change -а to -ы (вода → воды, книга → книги)"
+      feminine_ya: "Change -я to -и (семья → семьи)"
+      neuter_o: "Change -о to -а (окно → окна, молоко → молока)"
+      neuter_e: "Change -е to -я (море → моря)"
+    uses:
+      - "Negation: У меня нет хлеба (I don't have bread)"
+      - "Of: чашка чая (cup of tea), стакан воды (glass of water)"
+      - "After много/мало/немного: много работы (a lot of work)"
+      - "After numbers 2-4: два кота (two cats)"
+      - "After numbers 5+: пять котов (five cats) - genitive plural"
+    examples:
+      - { nominative: "хлеб", genitive: "хлеба", sentence: "У нас нет хлеба." }
+      - { nominative: "вода", genitive: "воды", sentence: "Стакан воды." }
+      - { nominative: "молоко", genitive: "молока", sentence: "Немного молока." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# LESSON MAPPING
+# Which vocabulary goes in which lesson
+# ══════════════════════════════════════════════════════════════════════════════
+
+lessons:
+  lesson_01_eating_drinking:
+    title: "Eating & Drinking"
+    focus: "есть, пить - essential food verbs"
+    primary_vocab:
+      - yest_verb
+      - pit
+    review_vocab:
+      - kofe
+      - voda
+      - zavtrak
+
+  lesson_02_food_basics:
+    title: "Food Basics"
+    focus: "Common food vocabulary"
+    primary_vocab:
+      - khleb
+      - myaso
+      - ryba
+      - ovoshi
+      - frukty
+
+  lesson_03_drinks:
+    title: "Drinks"
+    focus: "Beverage vocabulary"
+    primary_vocab:
+      - chay
+      - moloko
+      - sok
+      - vino
+      - pivo
+
+  lesson_04_genitive_intro:
+    title: "Genitive Case Introduction"
+    focus: "The 'of' case - partitive expressions"
+    primary_vocab:
+      - chashka
+      - stakan
+      - bokal
+    grammar_focus: "genitive_case"
+
+  lesson_05_genitive_negation:
+    title: "I Don't Have"
+    focus: "Genitive in negation: У меня нет..."
+    review_vocab:
+      - khleb
+      - moloko
+      - voda
+      - chay
+
+  lesson_06_quantities:
+    title: "How Much?"
+    focus: "Quantity expressions with genitive"
+    primary_vocab:
+      - mnogo
+      - malo
+      - nemnogo
+      - skolko
+
+  lesson_07_restaurant:
+    title: "At the Restaurant"
+    focus: "Ordering food"
+    primary_vocab:
+      - menyu
+      - schyot
+      - zakazyvat
+      - ofitsiant
+
+  lesson_08_cooking:
+    title: "Cooking"
+    focus: "готовить and kitchen vocabulary"
+    primary_vocab:
+      - gotovit
+      - tarelka
+    review_vocab:
+      - sup
+      - salat
+      - uzhin
+
+  lesson_09_shopping:
+    title: "Food Shopping"
+    focus: "покупать and quantities"
+    primary_vocab:
+      - pokupat
+    review_vocab:
+      - khleb
+      - myaso
+      - ovoshi
+      - frukty
+      - mnogo
+      - nemnogo
+
+  lesson_10_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 3 review"
+    review_vocab:
+      - yest_verb
+      - pit
+      - gotovit
+      - pokupat
+      - zakazyvat
+      - khleb
+      - chay
+      - mnogo
+      - nemnogo

@@ -1,8 +1,8 @@
-# Unit 1, Lesson 10: Numbers 1-10
+# Unit 1, Lesson 12: Numbers 1-10
 # 5 modules - Counting in Russian
 
 lesson:
-  id: "10_numbers"
+  id: "12_numbers"
   title: "Numbers 1-10"
   subtitle: "Count in Russian and talk about quantities"
   icon: "hash"
@@ -38,7 +38,7 @@ modules:
         content: "Три (3) sounds like 'tree' - easy to remember!"
     
     vocab_pool:
-      introduce: []
+      introduce: [odin, dva, tri, chetyre, pyat]
       practice: []
       review: [kot, dom, kniga]
     exercises:
@@ -69,8 +69,8 @@ modules:
         insight: "Indo-European numbers are remarkably similar across languages!"
     
     vocab_pool:
-      introduce: []
-      practice: []
+      introduce: [shest, sem, vosem, devyat, desyat]
+      practice: [odin, dva, tri, chetyre, pyat]
       review: [kot, sobaka, okno, telefon]
     exercises:
       count: 7
@@ -103,7 +103,7 @@ modules:
     
     vocab_pool:
       introduce: []
-      practice: []
+      practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
       review: [kot, kniga, okno, dom, sobaka]
     exercises:
       count: 8
@@ -116,7 +116,7 @@ modules:
         content: "Count things around you! Один телефон, два окна, три книги..."
     vocab_pool:
       introduce: []
-      practice: []
+      practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
       review: [telefon, okno, kniga, kot, sobaka, dom]
     exercises:
       count: 10
@@ -135,18 +135,25 @@ modules:
     vocab_pool:
       introduce: []
       practice: []
-      review: [kot, dom, kniga, okno, sobaka, telefon]
+      review: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, kot, dom, kniga]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: []
-  review_from: [04_gender, 08_cases_intro]
+  primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
+  review_from: [05_gender, 11_possessives]
 
 templates:
-  - pattern: "Это {NUMBER} {NOUN}."
-    translation: "This is {NUMBER.translation} {NOUN.translation}."
+  - pattern: "{NUMBER} {NOUN}"
+    translation: "{NUMBER.translation} {NOUN.translation}"
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { pos: [noun] }
+    weight: 4
+
+  - pattern: "У меня {NUMBER} {NOUN}."
+    translation: "I have {NUMBER.translation} {NOUN.translation}."
     slots:
       NUMBER: { pos: [numeral] }
       NOUN: { pos: [noun] }

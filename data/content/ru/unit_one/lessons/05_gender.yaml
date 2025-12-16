@@ -1,8 +1,8 @@
-# Unit 1, Lesson 4: He, She, It
+# Unit 1, Lesson 5: He, She, It
 # 5 modules with teaching content
 
 lesson:
-  id: "04_gender"
+  id: "05_gender"
   title: "He, She, It"
   subtitle: "Master grammatical gender and pronouns"
   icon: "users"
@@ -73,9 +73,9 @@ modules:
             note: "Use for feminine nouns AND female people"
     
     vocab_pool:
-      introduce: [ona, kniga, sobaka, sestra]
+      introduce: [ona, kniga, sobaka]
       practice: [on, dom, park, kot]
-      review: [mama]
+      review: [mama, sestra]
     exercises:
       count: 7
 
@@ -153,8 +153,8 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [on, ona, ono, dom, kniga, okno, park, sobaka, sestra, radio]
-  review_from: [01_cognates, 02_hello]
+  primary: [on, ona, ono, dom, kniga, okno, park, sobaka, radio]
+  review_from: [01_cognates, 02_hello, 03_false_friends]
 
 templates:
   - pattern: "Где {NOUN}? {PRONOUN} {LOCATION}."

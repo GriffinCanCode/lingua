@@ -2,21 +2,47 @@
 
 All Russian language content organized by unit.
 
+**See [CURRICULUM.md](./CURRICULUM.md) for the complete 25-unit course outline.**
+
+## Course Overview
+
+| Phase | Units | Level | Focus |
+|-------|-------|-------|-------|
+| Foundations | 1-5 | A1 | Cyrillic, verbs, all 6 cases |
+| Building Blocks | 6-12 | A2 | Tenses, aspect, complex sentences |
+| Intermediate | 13-18 | B1 | Motion verbs, conditionals, numbers |
+| Upper-Int | 19-25 | B2 | Participles, gerunds, style |
+
 ## File Structure
 
 ```
 ru/
-├── unit_one/
+├── CURRICULUM.md           # Full 25-unit course outline
+├── README.md               # This file
+├── unit_one/               # Unit 1: First Steps (14 lessons)
 │   ├── lessons/
-│   │   ├── foundations.yaml
 │   │   ├── 01_cognates.yaml
-│   │   └── ...
+│   │   ├── 02_hello.yaml
+│   │   ├── 03_false_friends.yaml
+│   │   ├── 04_questions.yaml
+│   │   ├── 05_gender.yaml
+│   │   ├── 06_type1_verbs.yaml
+│   │   ├── 07_possession.yaml
+│   │   ├── 08_type2_verbs.yaml
+│   │   ├── 09_where_who_what.yaml
+│   │   ├── 10_irregular_verbs.yaml
+│   │   ├── 11_possessives.yaml
+│   │   ├── 12_numbers.yaml
+│   │   ├── 13_adjectives.yaml
+│   │   └── 14_review.yaml
 │   └── vocab/
-│       └── foundations.yaml
-├── unit_two/
-│   ├── lessons/
+│       └── vocab.yaml      # ~95 words with full verb conjugations
+├── unit_two/               # Unit 2: Everyday Life (outlined)
 │   └── vocab/
-│       └── basics.yaml
+│       └── vocab.yaml
+├── unit_three/             # Unit 3: Food & Drink (outlined)
+│   └── vocab/
+│       └── vocab.yaml
 └── ...
 ```
 

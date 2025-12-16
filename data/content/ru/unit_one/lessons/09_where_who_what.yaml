@@ -1,8 +1,8 @@
-# Unit 1, Lesson 7: Where, Who, What
+# Unit 1, Lesson 9: Where, Who, What
 # 5 modules - Question words
 
 lesson:
-  id: "07_where_who_what"
+  id: "09_where_who_what"
   title: "Where, Who, What"
   subtitle: "Ask questions and get information"
   icon: "search"
@@ -127,7 +127,7 @@ modules:
     vocab_pool:
       introduce: []
       practice: [gde, kto, chto, vot, doktor, drug]
-      review: [eto, mama, kot, restoran, student]
+      review: [eto, mama, kot, restoran, student, govorit]
     exercises:
       count: 10
 
@@ -152,8 +152,8 @@ modules:
       difficulty: "hard"
 
 vocab_filter:
-  primary: [gde, kto, chto, vot, doktor, student, drug, restoran]
-  review_from: [01_cognates, 03_questions]
+  primary: [gde, kto, chto, vot, doktor, drug]
+  review_from: [01_cognates, 04_questions, 08_type2_verbs]
 
 templates:
   - pattern: "Где {NOUN}?"

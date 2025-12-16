@@ -18,9 +18,9 @@
 unit:
   id: "unit1"
   title: "Foundations"
-  description: "Essential vocabulary for survival Russian"
-  total_words: 65
-  target_lessons: 5
+  description: "Essential vocabulary for survival Russian - including first verbs!"
+  total_words: 95
+  target_lessons: 14
   
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 1: PRONOUNS & DEMONSTRATIVES
@@ -985,12 +985,341 @@ descriptors:
       - { ru: "Это старый дом.", en: "This is an old house." }
 
 # ══════════════════════════════════════════════════════════════════════════════
+# SECTION 10: VERBS
+# Action words - the heart of communication
+# ══════════════════════════════════════════════════════════════════════════════
+
+verbs:
+  # TYPE 1 VERBS (First Conjugation) - endings: -ю, -ешь, -ет, -ем, -ете, -ют
+  - id: "znat"
+    word: "знать"
+    transliteration: "znat'"
+    translation: "to know"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "znat.mp3"
+    notes: "Regular Type 1. Essential survival verb."
+    conjugation:
+      ya: "знаю"
+      ty: "знаешь"
+      on_ona: "знает"
+      my: "знаем"
+      vy: "знаете"
+      oni: "знают"
+    examples:
+      - { ru: "Я знаю.", en: "I know." }
+      - { ru: "Ты знаешь?", en: "Do you know?" }
+      - { ru: "Я не знаю.", en: "I don't know." }
+
+  - id: "ponimat"
+    word: "понимать"
+    transliteration: "ponimat'"
+    translation: "to understand"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "ponimat.mp3"
+    notes: "Regular Type 1. The most important survival verb!"
+    conjugation:
+      ya: "понимаю"
+      ty: "понимаешь"
+      on_ona: "понимает"
+      my: "понимаем"
+      vy: "понимаете"
+      oni: "понимают"
+    examples:
+      - { ru: "Я понимаю.", en: "I understand." }
+      - { ru: "Я не понимаю.", en: "I don't understand." }
+      - { ru: "Вы понимаете?", en: "Do you understand?" }
+
+  - id: "rabotat"
+    word: "работать"
+    transliteration: "rabotat'"
+    translation: "to work"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "rabotat.mp3"
+    notes: "Regular Type 1. Related to English 'robot'!"
+    conjugation:
+      ya: "работаю"
+      ty: "работаешь"
+      on_ona: "работает"
+      my: "работаем"
+      vy: "работаете"
+      oni: "работают"
+    examples:
+      - { ru: "Я работаю.", en: "I work." }
+      - { ru: "Где ты работаешь?", en: "Where do you work?" }
+      - { ru: "Он не работает.", en: "He doesn't work." }
+
+  - id: "chitat"
+    word: "читать"
+    transliteration: "chitat'"
+    translation: "to read"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "chitat.mp3"
+    notes: "Regular Type 1."
+    conjugation:
+      ya: "читаю"
+      ty: "читаешь"
+      on_ona: "читает"
+      my: "читаем"
+      vy: "читаете"
+      oni: "читают"
+    examples:
+      - { ru: "Я читаю книгу.", en: "I am reading a book." }
+      - { ru: "Ты читаешь?", en: "Are you reading?" }
+
+  # TYPE 2 VERBS (Second Conjugation) - endings: -ю/-у, -ишь, -ит, -им, -ите, -ят/-ат
+  - id: "govorit"
+    word: "говорить"
+    transliteration: "govorit'"
+    translation: "to speak / to say"
+    pos: "verb"
+    conjugation_type: 2
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 1
+    audio: "govorit.mp3"
+    notes: "Type 2 verb (ends in -ить). Essential for language learning!"
+    conjugation:
+      ya: "говорю"
+      ty: "говоришь"
+      on_ona: "говорит"
+      my: "говорим"
+      vy: "говорите"
+      oni: "говорят"
+    examples:
+      - { ru: "Я говорю по-русски.", en: "I speak Russian." }
+      - { ru: "Ты говоришь по-английски?", en: "Do you speak English?" }
+      - { ru: "Он говорит быстро.", en: "He speaks fast." }
+
+  # IRREGULAR VERBS
+  - id: "khotet"
+    word: "хотеть"
+    transliteration: "khotet'"
+    translation: "to want"
+    pos: "verb"
+    irregular: true
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    audio: "khotet.mp3"
+    notes: "Irregular! Mixes Type 1 (singular) and Type 2 (plural) patterns."
+    conjugation:
+      ya: "хочу"
+      ty: "хочешь"
+      on_ona: "хочет"
+      my: "хотим"
+      vy: "хотите"
+      oni: "хотят"
+    examples:
+      - { ru: "Я хочу кофе.", en: "I want coffee." }
+      - { ru: "Ты хочешь есть?", en: "Do you want to eat?" }
+      - { ru: "Мы хотим домой.", en: "We want to go home." }
+
+  - id: "zhit"
+    word: "жить"
+    transliteration: "zhit'"
+    translation: "to live"
+    pos: "verb"
+    conjugation_type: 1
+    aspect: "imperfective"
+    frequency: 1
+    difficulty: 2
+    audio: "zhit.mp3"
+    notes: "Type 1 with consonant change: ж → жив in conjugation."
+    conjugation:
+      ya: "живу"
+      ty: "живёшь"
+      on_ona: "живёт"
+      my: "живём"
+      vy: "живёте"
+      oni: "живут"
+    examples:
+      - { ru: "Я живу в Москве.", en: "I live in Moscow." }
+      - { ru: "Где ты живёшь?", en: "Where do you live?" }
+      - { ru: "Они живут тут.", en: "They live here." }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 11: NUMBERS
+# Counting from 1 to 10
+# ══════════════════════════════════════════════════════════════════════════════
+
+numbers:
+  - id: "odin"
+    word: "один"
+    transliteration: "odin"
+    translation: "one"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "odin.mp3"
+    notes: "Changes for gender: один (m), одна (f), одно (n)."
+    examples:
+      - { ru: "один кот", en: "one cat" }
+      - { ru: "одна книга", en: "one book" }
+
+  - id: "dva"
+    word: "два"
+    transliteration: "dva"
+    translation: "two"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "dva.mp3"
+    notes: "два (m/n), две (f). Followed by genitive singular."
+    examples:
+      - { ru: "два кота", en: "two cats" }
+      - { ru: "две книги", en: "two books" }
+
+  - id: "tri"
+    word: "три"
+    transliteration: "tri"
+    translation: "three"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "tri.mp3"
+    notes: "Sounds like 'tree'. Followed by genitive singular."
+    examples:
+      - { ru: "три дома", en: "three houses" }
+
+  - id: "chetyre"
+    word: "четыре"
+    transliteration: "chetyre"
+    translation: "four"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 2
+    audio: "chetyre.mp3"
+    notes: "Followed by genitive singular."
+    examples:
+      - { ru: "четыре окна", en: "four windows" }
+
+  - id: "pyat"
+    word: "пять"
+    transliteration: "pyat'"
+    translation: "five"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "pyat.mp3"
+    notes: "Followed by genitive plural (5+ uses genitive plural)."
+    examples:
+      - { ru: "пять котов", en: "five cats" }
+
+  - id: "shest"
+    word: "шесть"
+    transliteration: "shest'"
+    translation: "six"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "shest.mp3"
+    examples:
+      - { ru: "шесть книг", en: "six books" }
+
+  - id: "sem"
+    word: "семь"
+    transliteration: "sem'"
+    translation: "seven"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "sem.mp3"
+    notes: "Cognate with English 'seven', Latin 'septem'."
+    examples:
+      - { ru: "семь дней", en: "seven days" }
+
+  - id: "vosem"
+    word: "восемь"
+    transliteration: "vosem'"
+    translation: "eight"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "vosem.mp3"
+    examples:
+      - { ru: "восемь человек", en: "eight people" }
+
+  - id: "devyat"
+    word: "девять"
+    transliteration: "devyat'"
+    translation: "nine"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "devyat.mp3"
+    examples:
+      - { ru: "девять рублей", en: "nine rubles" }
+
+  - id: "desyat"
+    word: "десять"
+    transliteration: "desyat'"
+    translation: "ten"
+    pos: "numeral"
+    frequency: 1
+    difficulty: 1
+    audio: "desyat.mp3"
+    notes: "Base for teens and tens (11 = один-на-дцать)."
+    examples:
+      - { ru: "десять минут", en: "ten minutes" }
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SECTION 12: LANGUAGE ADVERBS
+# How you speak
+# ══════════════════════════════════════════════════════════════════════════════
+
+language_adverbs:
+  - id: "po_russki"
+    word: "по-русски"
+    transliteration: "po-russki"
+    translation: "in Russian"
+    pos: "adverb"
+    semantic: [language]
+    frequency: 1
+    difficulty: 1
+    audio: "po_russki.mp3"
+    notes: "Used with говорить: Я говорю по-русски."
+    examples:
+      - { ru: "Я говорю по-русски.", en: "I speak Russian." }
+      - { ru: "Как это по-русски?", en: "How is this in Russian?" }
+
+  - id: "po_angliyski"
+    word: "по-английски"
+    transliteration: "po-angliyski"
+    translation: "in English"
+    pos: "adverb"
+    semantic: [language]
+    frequency: 1
+    difficulty: 1
+    audio: "po_angliyski.mp3"
+    notes: "Used with говорить: Вы говорите по-английски?"
+    examples:
+      - { ru: "Вы говорите по-английски?", en: "Do you speak English?" }
+      - { ru: "Я не говорю по-английски.", en: "I don't speak English." }
+
+# ══════════════════════════════════════════════════════════════════════════════
 # LESSON MAPPING
 # Which vocabulary goes in which lesson
 # ══════════════════════════════════════════════════════════════════════════════
 
 lessons:
-  lesson_1_cognates:
+  # NEW LESSON ORDER PER CURRICULUM PLAN
+  lesson_01_cognates:
     title: "Cognates & Cyrillic"
     focus: "Letters identical to Latin, instant vocabulary"
     primary_vocab:
@@ -1005,7 +1334,38 @@ lessons:
       - da
       - nyet
 
-  lesson_2_identification:
+  lesson_02_hello:
+    title: "Hello & Goodbye"
+    focus: "Greetings, formal/informal register"
+    primary_vocab:
+      - privet
+      - poka
+      - zdravstvuyte
+      - do_svidaniya
+      - spasibo
+      - pozhaluysta
+      - ya
+      - student
+    review_vocab:
+      - eto
+      - mama
+
+  lesson_03_false_friends:
+    title: "False Friends"
+    focus: "Letters Р, С, Н, В - they look familiar but sound different"
+    primary_vocab:
+      - restoran
+      - voda
+      - sestra
+      - brat
+      - internet
+      - telefon
+    review_vocab:
+      - mama
+      - kot
+      - dom
+
+  lesson_04_questions:
     title: "Is this a...?"
     focus: "Questions, yes/no, negation"
     primary_vocab:
@@ -1023,7 +1383,7 @@ lessons:
       - kot
       - taksi
 
-  lesson_3_gender:
+  lesson_05_gender:
     title: "He, She, It"
     focus: "Grammatical gender, pronouns"
     primary_vocab:
@@ -1041,25 +1401,55 @@ lessons:
       - tut
       - dom
 
-  lesson_4_possession:
+  lesson_06_type1_verbs:
+    title: "I Know, I Understand"
+    focus: "Type 1 conjugation - first verbs!"
+    primary_vocab:
+      - znat
+      - ponimat
+    review_vocab:
+      - ya
+      - ty
+      - on
+      - ona
+      - my
+      - vy
+      - oni
+      - nye
+
+  lesson_07_possession:
     title: "I have..."
     focus: "У меня есть construction"
     primary_vocab:
       - u_menya
       - yest
-      - brat
-      - sestra
       - sobaka
       - mashina
-      - telefon
     review_vocab:
       - ya
       - kot
       - dom
+      - brat
+      - sestra
       - da
       - nyet
 
-  lesson_5_questions:
+  lesson_08_type2_verbs:
+    title: "I Speak Russian"
+    focus: "Type 2 conjugation, language skills"
+    primary_vocab:
+      - govorit
+      - po_russki
+      - po_angliyski
+    review_vocab:
+      - znat
+      - ponimat
+      - ya
+      - ty
+      - on
+      - ona
+
+  lesson_09_where_who_what:
     title: "Where, Who, What"
     focus: "Question words, basic information"
     primary_vocab:
@@ -1068,12 +1458,102 @@ lessons:
       - chto
       - vot
       - doktor
-      - student
       - drug
-      - restoran
     review_vocab:
       - tam
       - tut
       - eto
       - on
       - ona
+      - govorit
+
+  lesson_10_irregular_verbs:
+    title: "I Want, I Live, I Work"
+    focus: "Irregular verbs and daily life"
+    primary_vocab:
+      - khotet
+      - zhit
+      - rabotat
+    review_vocab:
+      - znat
+      - ponimat
+      - govorit
+      - gde
+      - dom
+
+  lesson_11_possessives:
+    title: "My, Your, Our"
+    focus: "Possessive pronouns with gender agreement"
+    primary_vocab:
+      - moy
+      - moya
+      - moyo
+    review_vocab:
+      - dom
+      - kniga
+      - okno
+      - mashina
+      - telefon
+
+  lesson_12_numbers:
+    title: "Numbers 1-10"
+    focus: "Counting in Russian"
+    primary_vocab:
+      - odin
+      - dva
+      - tri
+      - chetyre
+      - pyat
+      - shest
+      - sem
+      - vosem
+      - devyat
+      - desyat
+    review_vocab:
+      - kot
+      - kniga
+      - okno
+      - dom
+
+  lesson_13_adjectives:
+    title: "Adjectives"
+    focus: "Describing things with gender agreement"
+    primary_vocab:
+      - bolshoy
+      - malenkiy
+      - noviy
+      - stariy
+      - khorosho
+      - plokho
+    review_vocab:
+      - dom
+      - kniga
+      - okno
+      - kot
+      - mashina
+
+  lesson_14_review:
+    title: "Review & Checkpoint"
+    focus: "Comprehensive Unit 1 review"
+    review_vocab:
+      - mama
+      - kot
+      - dom
+      - taksi
+      - metro
+      - privet
+      - zdravstvuyte
+      - da
+      - nyet
+      - gde
+      - kto
+      - chto
+      - u_menya
+      - moy
+      - znat
+      - ponimat
+      - govorit
+      - khotet
+      - zhit
+      - rabotat
+      - bolshoy

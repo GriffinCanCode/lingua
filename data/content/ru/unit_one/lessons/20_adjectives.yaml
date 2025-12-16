@@ -1,8 +1,8 @@
-# Unit 1, Lesson 19: Adjectives
-# 5 modules - Describing things
+# Unit 1, Lesson 20: Adjectives
+# 6 modules - Describing things + Russian directness culture
 
 lesson:
-  id: "19_adjectives"
+  id: "20_adjectives"
   title: "Adjectives"
   subtitle: "Describe people, places, and things"
   icon: "palette"
@@ -131,6 +131,49 @@ modules:
         - { type: "multiple_choice", count: 1 }     # Size/age adjectives
 
   - id: "mod_4"
+    title: "🇷🇺 Russian Directness"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "Honest Opinions 💬"
+        emoji: "💬"
+        content: |
+          Russians are DIRECT when describing things!
+          
+          Where Americans soften criticism:
+          🇺🇸 "It's not my favorite" / "It's interesting"
+          
+          Russians just say:
+          🇷🇺 "Э́то пло́хо" (It's bad) / "Он ста́рый" (He's old)
+          
+          It's not rude — it's honest! Expect direct feedback.
+        funFact: "A Russian might say 'Ты вы́глядишь уста́лым' (You look tired) as genuine concern, not criticism!"
+      
+      - type: "culture_note"
+        title: "Beauty Standards 🌟"
+        emoji: "🌟"
+        content: |
+          Russians have specific aesthetic vocabulary:
+          
+          краси́вый/краси́вая — beautiful (high praise!)
+          симпати́чный/симпати́чная — nice-looking, cute
+          интере́сный — interesting (appearance)
+          обы́чный — ordinary (not meant as an insult!)
+          
+          Complimenting appearance is common and expected.
+        funFact: "Russians dress UP for everyday outings — looking 'ordinary' is something to avoid!"
+    
+    vocab_pool:
+      introduce: []
+      practice: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
+      review: [dom, kniga, okno]
+    exercises:
+      count: 4
+      types:
+        - { type: "multiple_choice", count: 4 }     # Cultural context
+
+  - id: "mod_5"
     title: "Practice"
     type: "practice"
     teaching:
@@ -148,7 +191,7 @@ modules:
         - { type: "translation_ru_en", count: 2 }   # Comprehension
         - { type: "multiple_choice", count: 1 }     # Quick recognition
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Master"
     type: "master"
     teaching:
@@ -160,6 +203,7 @@ modules:
           - "Feminine: -ая (больша́я)"
           - "Neuter: -ое (большо́е)"
           - "Size and descriptive words"
+          - "💬 Russians are direct — честность (honesty) is valued!"
     vocab_pool:
       introduce: []
       practice: []
@@ -175,7 +219,7 @@ modules:
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review_from: [08_gender, 11_possession, 17_possessives]
+  review_from: [08_gender, 11_possession, 18_possessives]
 
 templates:
   - pattern: "Э́то {ADJ} {NOUN}."

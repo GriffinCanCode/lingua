@@ -1,0 +1,246 @@
+# Unit 1, Lesson 19: Numbers 6-10 + Culture
+# 5 modules - Complete counting + Russian number culture
+
+lesson:
+  id: "19_numbers"
+  title: "Numbers 6-10 & Culture"
+  subtitle: "Complete your counting + dates, phones, and time!"
+  icon: "hash"
+
+modules:
+  - id: "mod_1"
+    title: "Numbers 6-10"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "The Second Half"
+        content: |
+          You know 1-5. Now let's finish counting to 10!
+          
+          6 - шесть (shest)
+          7 - семь (syem) — cognate with "seven"!
+          8 - во́семь (VO-syem) — stress first syllable
+          9 - де́вять (DYEH-vyat)
+          10 - де́сять (DYEH-syat)
+      
+      - type: "pattern_table"
+        title: "Numbers 6-10"
+        columns: ["#", "Russian", "Sound"]
+        rows:
+          - ["6", "шесть", "shest"]
+          - ["7", "семь", "syem"]
+          - ["8", "во́семь", "VO-syem"]
+          - ["9", "де́вять", "DYEH-vyat"]
+          - ["10", "де́сять", "DYEH-syat"]
+      
+      - type: "etymology"
+        title: "Number Origins"
+        word: "семь (7)"
+        connections:
+          - { word: "seven", lang: "English", relation: "cognate" }
+          - { word: "septem", lang: "Latin", relation: "cognate" }
+          - { word: "sieben", lang: "German", relation: "cognate" }
+        insight: "Indo-European numbers are remarkably similar across languages!"
+    
+    vocab_pool:
+      introduce: [shest, sem, vosem, devyat, desyat]
+      practice: [odin, dva, tri, chetyre, pyat]
+      review: [kot, sobaka]
+    exercises:
+      count: 7
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "matching", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "multiple_choice", count: 1 }
+
+  - id: "mod_2"
+    title: "Counting 1-10"
+    type: "learn"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "Full Count 1-10"
+        columns: ["Russian", "English"]
+        rows:
+          - ["оди́н, два, три...", "one, two, three..."]
+          - ["четы́ре, пять, шесть...", "four, five, six..."]
+          - ["семь, во́семь, де́вять, де́сять!", "seven, eight, nine, ten!"]
+      
+      - type: "tip"
+        content: |
+          For now, just count! Noun endings after numbers are complex.
+          Preview: "два кота́" vs "пять кото́в" — we'll cover this later!
+    
+    vocab_pool:
+      introduce: []
+      practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
+      review: [kot, kniga, okno, dom, sobaka]
+    exercises:
+      count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "matching", count: 2 }
+
+  - id: "mod_3"
+    title: "🇷🇺 Numbers in Real Life"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "Russian Date Format 📅"
+        emoji: "📅"
+        content: |
+          Russia writes dates as DD.MM.YYYY (day first!):
+          
+          16.12.2024 = December 16, 2024
+          01.05.1990 = May 1, 1990
+          
+          This is the OPPOSITE of American format (MM/DD/YYYY).
+          It matches most of Europe and makes logical sense: small → big!
+        funFact: "Russians also use Roman numerals for months in formal writing: 16.XII.2024"
+      
+      - type: "culture_note"
+        title: "Russian Phone Numbers 📱"
+        emoji: "📱"
+        content: |
+          Russian mobile numbers: +7 (XXX) XXX-XX-XX
+          
+          +7 — Russia's country code
+          Moscow landlines start with 495 or 499
+          St. Petersburg starts with 812
+          
+          Say numbers in pairs: "де́вять-пять, три́-два, оди́н-во́семь"
+          (95-32-18)
+        funFact: "Emergency: 112 (like EU) or 01 (fire), 02 (police), 03 (ambulance)"
+      
+      - type: "pattern_table"
+        title: "Practice: Date Numbers"
+        columns: ["Date", "Russian Reading"]
+        rows:
+          - ["01.01", "пе́рвое января́ (1st of January)"]
+          - ["25.12", "два́дцать пя́тое декабря́"]
+          - ["07.03", "седьмо́е ма́рта"]
+    
+    vocab_pool:
+      introduce: []
+      practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
+      review: [telefon, dom]
+    exercises:
+      count: 6
+      types:
+        - { type: "multiple_choice", count: 3 }
+        - { type: "translation_ru_en", count: 3 }
+
+  - id: "mod_4"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: "Count things around you! Оди́н телефо́н, два окна́, три кни́ги..."
+    vocab_pool:
+      introduce: []
+      practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
+      review: [telefon, okno, kniga, kot, sobaka, dom]
+    exercises:
+      count: 10
+      types:
+        - { type: "audio_recognition", count: 3 }
+        - { type: "translation_en_ru", count: 3 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Numbers 6-10: шесть, семь, во́семь, де́вять, де́сять"
+          - "Full count 1-10 in Russian"
+          - "🇷🇺 Russian date format: DD.MM.YYYY"
+          - "📱 Russian phone numbers: +7 (XXX) XXX-XX-XX"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, kot, dom, kniga, telefon]
+    exercises:
+      count: 12
+      difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 4 }
+        - { type: "translation_en_ru", count: 4 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "fill_in_blank", count: 2 }
+
+vocab_filter:
+  primary: [shest, sem, vosem, devyat, desyat, molodets]
+  review_from: [08_gender, 15_numbers_basic, 18_possessives]
+
+templates:
+  - pattern: "{NUMBER} {NOUN}"
+    translation: "{NUMBER.translation} {NOUN.translation}"
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { preset: noun }
+    weight: 4
+
+  - pattern: "У меня́ {NUMBER} {NOUN}."
+    translation: "I have {NUMBER.translation} {NOUN.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { preset: noun }
+    weight: 3
+
+  - pattern: "Шесть, семь, во́семь."
+    translation: "Six, seven, eight."
+    slots: {}
+    weight: 3
+
+  - pattern: "Де́вять, де́сять!"
+    translation: "Nine, ten!"
+    slots: {}
+    weight: 3
+
+  - pattern: "Ско́лько? — {NUMBER}."
+    translation: "How many? — {NUMBER.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+    weight: 3
+
+  - pattern: "У тебя́ есть {NUMBER} {NOUN}?"
+    translation: "Do you have {NUMBER.translation} {NOUN.translation}?"
+    slots:
+      NUMBER: { pos: [numeral] }
+      NOUN: { preset: noun }
+    weight: 3
+
+  - pattern: "Э́то {NUMBER}."
+    translation: "This is {NUMBER.translation}."
+    slots:
+      NUMBER: { pos: [numeral] }
+    weight: 2
+
+  - pattern: "Пять плюс пять — де́сять."
+    translation: "Five plus five is ten."
+    slots: {}
+    weight: 2
+
+dialogues:
+  - id: "how_many_cats"
+    context: "Counting things"
+    lines:
+      - { speaker: "A", ru: "У тебя́ есть кот?", en: "Do you have a cat?" }
+      - { speaker: "B", ru: "Да, у меня́ два кота́.", en: "Yes, I have two cats." }
+      - { speaker: "A", ru: "Два?!", en: "Two?!" }
+
+  - id: "full_count"
+    context: "Counting to ten"
+    lines:
+      - { speaker: "A", ru: "Оди́н, два, три, четы́ре, пять...", en: "One, two, three, four, five..." }
+      - { speaker: "B", ru: "Шесть, семь, во́семь, де́вять, де́сять!", en: "Six, seven, eight, nine, ten!" }
+      - { speaker: "A", ru: "Молоде́ц!", en: "Well done!" }

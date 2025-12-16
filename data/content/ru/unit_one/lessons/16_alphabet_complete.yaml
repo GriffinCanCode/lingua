@@ -3,7 +3,7 @@
 # Final alphabet lesson - completes all 33 letters
 
 lesson:
-  id: "15_alphabet_complete"
+  id: "16_alphabet_complete"
   title: "Completing the Alphabet"
   subtitle: "Unique vowels, special letters & the full 33"
   icon: "alphabet"
@@ -271,5 +271,5 @@ vocab_filter:
 
 metadata:
   prerequisite: "14_time_words"
-  unlocks: ["16_irregular_verbs"]
+  unlocks: ["17_irregular_verbs"]
   skills: ["cyrillic_complete", "vowel_recognition", "special_letters", "alphabet_order"]

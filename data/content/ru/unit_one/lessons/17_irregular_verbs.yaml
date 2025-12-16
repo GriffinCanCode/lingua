@@ -1,8 +1,8 @@
-# Unit 1, Lesson 16: I Want, I Live, I Eat
-# 6 modules - Irregular and mixed verbs
+# Unit 1, Lesson 17: I Want, I Live, I Eat
+# 7 modules - Irregular verbs + Russian food/tea culture
 
 lesson:
-  id: "16_irregular_verbs"
+  id: "17_irregular_verbs"
   title: "I Want, I Live, I Eat"
   subtitle: "Essential irregular verbs for daily life"
   icon: "star"
@@ -225,6 +225,56 @@ modules:
         - { type: "audio_recognition", count: 1 }   # Pronunciation
 
   - id: "mod_4"
+    title: "🇷🇺 Food & Tea Culture"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "Чай Is Life ☕"
+        emoji: "☕"
+        content: |
+          Russians LOVE tea — it's not just a drink, it's a ritual!
+          
+          • Чай is offered to EVERY guest
+          • Refusing is mildly rude (accept at least once!)
+          • The самова́р (samovar) is a cultural icon
+          • Tea is often served very hot and strong
+          
+          "Давай попьём ча́йку!" = Let's have some tea! (invitation)
+        funFact: "Russians consume ~3 lbs of tea per person per year — one of the highest rates in the world!"
+      
+      - type: "culture_note"
+        title: "Meal Times 🍽️"
+        emoji: "🍽️"
+        content: |
+          Russian meals are structured:
+          
+          • За́втрак (breakfast) — light, maybe каша (porridge)
+          • Обе́д (lunch) — THE main meal, often hot soup!
+          • У́жин (dinner) — lighter than lunch
+          
+          "Прия́тного аппети́та!" = Bon appétit! (said before eating)
+        funFact: "Soup is sacred! Щи (cabbage soup) and борщ (borscht) are considered essential — 'without soup, no meal'"
+      
+      - type: "pattern_table"
+        title: "Food Phrases"
+        columns: ["Russian", "English", "When to Use"]
+        rows:
+          - ["Ты хо́чешь есть?", "Are you hungry?", "Asking if someone's hungry"]
+          - ["Я хочу́ пить.", "I'm thirsty.", "Expressing thirst"]
+          - ["Спаси́бо, я сыт/сыта́.", "Thanks, I'm full.", "Politely refusing more food (m/f)"]
+    
+    vocab_pool:
+      introduce: []
+      practice: [yest_eat, pit, khotet]
+      review: [kofe, voda, spasibo]
+    exercises:
+      count: 5
+      types:
+        - { type: "multiple_choice", count: 3 }     # Cultural context
+        - { type: "translation_ru_en", count: 2 }   # Food phrases
+
+  - id: "mod_5"
     title: "Practice"
     type: "practice"
     teaching:
@@ -242,7 +292,7 @@ modules:
         - { type: "translation_ru_en", count: 3 }   # Comprehension
         - { type: "audio_recognition", count: 2 }   # Listening practice
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Master"
     type: "master"
     teaching:
@@ -254,8 +304,8 @@ modules:
           - "рабо́тать (work) - regular Type 1: рабо́таю, рабо́таешь..."
           - "есть (eat) - completely irregular: ем, ешь, ест, еди́м, еди́те, едя́т"
           - "пить (drink) - soft stem: пью, пьёшь, пьёт..."
-          - "Asking where: Где ты живёшь? Где ты рабо́таешь?"
-          - "⚠️ Pronunciation: Х = raspy 'kh', ЖИ = ЖЫ sound"
+          - "☕ Tea is central to Russian culture — always accept!"
+          - "🍽️ Soup is essential — no soup = no meal!"
     vocab_pool:
       introduce: []
       practice: []

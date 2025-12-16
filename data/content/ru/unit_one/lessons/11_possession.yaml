@@ -1,5 +1,5 @@
 # Unit 1, Lesson 11: I have...
-# 5 modules - The possession construction
+# 6 modules - Possession + Russian hospitality culture
 
 lesson:
   id: "11_possession"
@@ -129,6 +129,48 @@ modules:
         - { type: "fill_in_blank", count: 2 }       # Complete patterns
 
   - id: "mod_4"
+    title: "🇷🇺 Russian Hospitality"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "What's Mine Is Yours 🏠"
+        emoji: "🏠"
+        content: |
+          Russians are EXTREMELY generous hosts!
+          
+          When visiting a Russian home:
+          • Bring a gift (flowers, chocolate, wine)
+          • Remove your shoes! (You'll get тапочки - slippers)
+          • You WILL be fed, even if you say no
+          • Refusing food/drink is considered rude
+        funFact: "An old Russian saying: 'Гость в дом — Бог в дом' (A guest in the house is God in the house)"
+      
+      - type: "culture_note"
+        title: "Sharing Culture 🤝"
+        emoji: "🤝"
+        content: |
+          "У меня́ есть" isn't just grammar — it's about sharing!
+          
+          У меня́ есть ко́фе. Хо́чешь?
+          (I have coffee. Want some?)
+          
+          У меня́ есть маши́на. Я могу́ тебя́ подве́зти.
+          (I have a car. I can give you a ride.)
+          
+          Possessions = opportunities to help friends!
+        funFact: "Russians often downplay their possessions with 'есть' but no quantity — 'У меня есть деньги' could mean a little or a lot"
+    
+    vocab_pool:
+      introduce: []
+      practice: [u_menya, yest]
+      review: [kofe, mashina, dom]
+    exercises:
+      count: 4
+      types:
+        - { type: "multiple_choice", count: 4 }     # Cultural context questions
+
+  - id: "mod_5"
     title: "Practice"
     type: "practice"
     teaching:
@@ -146,7 +188,7 @@ modules:
         - { type: "fill_in_blank", count: 2 }       # Pattern completion
         - { type: "audio_recognition", count: 2 }   # Listening
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Master"
     type: "master"
     teaching:
@@ -157,6 +199,7 @@ modules:
           - "У меня́ нет = I don't have"
           - "Family: брат (brother), сестра́ (sister)"
           - "Things: маши́на (car), соба́ка (dog)"
+          - "🏠 Russian hospitality: guests are treated like royalty!"
     vocab_pool:
       introduce: []
       practice: []

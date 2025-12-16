@@ -87,38 +87,44 @@ lessons:
     primary_vocab: [kogda, segodnya, zavtra, vchera]
     review_vocab: [seychas, gde, kto, chto, kak, rabotat, delat]
 
-  lesson_15_alphabet_complete:
+  lesson_15_numbers_basic:
+    title: "Numbers 1-5"
+    focus: "First steps in counting"
+    primary_vocab: [odin, dva, tri, chetyre, pyat]
+    review_vocab: [kot, dom, kniga, okno, sobaka]
+
+  lesson_16_alphabet_complete:
     title: "Completing the Alphabet"
     focus: "Unique vowels, special letters & the full 33"
     primary_vocab: [yazyk, yumor]
     review_vocab: [ya, ty, my, vy]
     skills: [cyrillic_complete, vowel_recognition, special_letters]
 
-  lesson_16_irregular_verbs:
+  lesson_17_irregular_verbs:
     title: "I Want, I Live, I Eat"
     focus: "Irregular verbs, eating & drinking"
     primary_vocab: [khotet, zhit, rabotat, yest_eat, pit, yeda]
     review_vocab: [znat, ponimat, govorit, videt, delat, kofe, voda]
 
-  lesson_17_possessives:
+  lesson_18_possessives:
     title: "My, Your, Our"
     focus: "Possessive pronouns with gender agreement"
     primary_vocab: [moy, moya, moyo]
     review_vocab: [dom, kniga, okno, mashina, telefon]
 
-  lesson_18_numbers:
-    title: "Numbers 1-10"
-    focus: "Counting in Russian"
-    primary_vocab: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat, molodets]
-    review_vocab: [kot, kniga, okno, dom]
+  lesson_19_numbers:
+    title: "Numbers 6-10 & Culture"
+    focus: "Complete counting + dates, phones, time culture"
+    primary_vocab: [shest, sem, vosem, devyat, desyat, molodets]
+    review_vocab: [odin, dva, tri, chetyre, pyat, kot, kniga, telefon]
 
-  lesson_19_adjectives:
+  lesson_20_adjectives:
     title: "Adjectives"
     focus: "Describing things with gender agreement"
     primary_vocab: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho, khoroshiy, krasivyy, ochen]
     review_vocab: [dom, kniga, okno, kot, mashina]
 
-  lesson_20_review:
+  lesson_21_review:
     title: "Review & Checkpoint"
     focus: "Comprehensive Unit 1 review"
     review_vocab:

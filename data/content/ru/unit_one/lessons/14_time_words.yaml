@@ -1,5 +1,5 @@
 # Unit 1, Lesson 14: When & Time Words
-# 5 modules - Когда́ + сейча́с, сего́дня, за́втра, вчера́
+# 6 modules - Когда́ + time words + 24h clock culture
 
 lesson:
   id: "14_time_words"
@@ -123,6 +123,54 @@ modules:
         - { type: "fill_in_blank", count: 2 }
 
   - id: "mod_4"
+    title: "🇷🇺 Russian Time Culture"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "24-Hour Clock ⏰"
+        emoji: "⏰"
+        content: |
+          Russia uses 24-hour time in ALL official contexts!
+          
+          Train at 14:30 = 2:30 PM
+          Movie at 21:00 = 9:00 PM
+          Store closes at 22:00 = 10:00 PM
+          
+          No "AM/PM" confusion — just add 12 for afternoon!
+        funFact: "TV schedules, store hours, tickets — everything uses 24h format. Only casual speech uses 12h!"
+      
+      - type: "culture_note"
+        title: "Time Zones 🌍"
+        emoji: "🌍"
+        content: |
+          Russia spans 11 time zones!
+          
+          Moscow Time (MSK) is the reference.
+          Vladivostok is 7 hours ahead of Moscow!
+          
+          When it's noon in Moscow, it's 7 PM in Vladivostok.
+        funFact: "Russians say 'по моско́вскому вре́мени' (Moscow time) to clarify!"
+      
+      - type: "pattern_table"
+        title: "24h → 12h Conversion"
+        columns: ["24h", "12h", "Russian"]
+        rows:
+          - ["09:00", "9 AM", "де́вять утра́ (morning)"]
+          - ["14:00", "2 PM", "два дня (afternoon)"]
+          - ["20:00", "8 PM", "во́семь ве́чера (evening)"]
+    
+    vocab_pool:
+      introduce: []
+      practice: [kogda, seychas, segodnya, zavtra]
+      review: [rabotat, dom]
+    exercises:
+      count: 5
+      types:
+        - { type: "multiple_choice", count: 3 }
+        - { type: "translation_ru_en", count: 2 }
+
+  - id: "mod_5"
     title: "Practice"
     type: "practice"
     teaching:
@@ -140,7 +188,7 @@ modules:
         - { type: "fill_in_blank", count: 2 }
         - { type: "audio_recognition", count: 2 }
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Master"
     type: "master"
     teaching:
@@ -152,6 +200,8 @@ modules:
           - "сего́дня = today (pronounced 'сево́дня'!)"
           - "за́втра = tomorrow (До за́втра!)"
           - "вчера́ = yesterday"
+          - "⏰ Russia uses 24-hour clock officially!"
+          - "🌍 Russia spans 11 time zones!"
     vocab_pool:
       introduce: []
       practice: []

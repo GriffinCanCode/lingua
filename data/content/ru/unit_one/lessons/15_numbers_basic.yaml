@@ -1,0 +1,181 @@
+# Unit 1, Lesson 15: Numbers 1-5
+# 4 modules - First steps in counting
+
+lesson:
+  id: "15_numbers_basic"
+  title: "Numbers 1-5"
+  subtitle: "Start counting in Russian!"
+  icon: "hash"
+
+modules:
+  - id: "mod_1"
+    title: "Оди́н, Два, Три!"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Your First Numbers"
+        content: |
+          Counting is essential! Let's start with 1-3:
+          
+          1 - оди́н (ah-DEEN) — stress on second syllable
+          2 - два (dvah)
+          3 - три (tree) — sounds like English "tree"!
+      
+      - type: "pattern_table"
+        title: "Numbers 1-3"
+        columns: ["#", "Russian", "Sound"]
+        rows:
+          - ["1", "оди́н", "ah-DEEN"]
+          - ["2", "два", "dvah"]
+          - ["3", "три", "tree"]
+      
+      - type: "tip"
+        content: "🌳 Три sounds like 'tree' - picture three trees to remember!"
+    
+    vocab_pool:
+      introduce: [odin, dva, tri]
+      practice: []
+      review: [kot, dom]
+    exercises:
+      count: 5
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "matching", count: 2 }
+        - { type: "multiple_choice", count: 1 }
+
+  - id: "mod_2"
+    title: "Четы́ре, Пять"
+    type: "learn"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "Numbers 4-5"
+        columns: ["#", "Russian", "Sound"]
+        rows:
+          - ["4", "четы́ре", "cheh-TY-ryeh"]
+          - ["5", "пять", "pyaht"]
+      
+      - type: "tip"
+        content: |
+          **Gender alert for 'two'!**
+          два (m/n) vs две (f)
+          
+          два бра́та (two brothers)
+          две сестры́ (two sisters)
+      
+      - type: "tip"
+        content: "Четы́ре has stress on the second syllable — cheh-TY-ryeh"
+    
+    vocab_pool:
+      introduce: [chetyre, pyat]
+      practice: [odin, dva, tri]
+      review: [kniga, okno, sobaka]
+    exercises:
+      count: 6
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "matching", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+
+  - id: "mod_3"
+    title: "Practice 1-5"
+    type: "practice"
+    
+    teaching:
+      - type: "pattern_table"
+        title: "Full Count 1-5"
+        columns: ["#", "Russian", "Pronunciation"]
+        rows:
+          - ["1", "оди́н", "ah-DEEN"]
+          - ["2", "два / две", "dvah / dvyeh"]
+          - ["3", "три", "tree"]
+          - ["4", "четы́ре", "cheh-TY-ryeh"]
+          - ["5", "пять", "pyaht"]
+      
+      - type: "tip"
+        content: "Count on your fingers: оди́н, два, три, четы́ре, пять! 🖐️"
+    
+    vocab_pool:
+      introduce: []
+      practice: [odin, dva, tri, chetyre, pyat]
+      review: [kot, dom, kniga, okno, sobaka]
+    exercises:
+      count: 8
+      types:
+        - { type: "audio_recognition", count: 2 }
+        - { type: "translation_ru_en", count: 2 }
+        - { type: "translation_en_ru", count: 2 }
+        - { type: "matching", count: 2 }
+
+  - id: "mod_4"
+    title: "Master"
+    type: "master"
+    
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Numbers 1-5 in Russian"
+          - "оди́н, два, три, четы́ре, пять"
+          - "два vs две (masculine vs feminine 'two')"
+          - "Три sounds like 'tree'!"
+    
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [odin, dva, tri, chetyre, pyat, kot, dom, kniga]
+    exercises:
+      count: 8
+      difficulty: "hard"
+      types:
+        - { type: "audio_recognition", count: 3 }
+        - { type: "translation_en_ru", count: 3 }
+        - { type: "fill_in_blank", count: 2 }
+
+vocab_filter:
+  primary: [odin, dva, tri, chetyre, pyat]
+  review_from: [08_gender, 14_time_words]
+
+templates:
+  - pattern: "Оди́н, два, три."
+    translation: "One, two, three."
+    slots: {}
+    weight: 4
+
+  - pattern: "Четы́ре, пять!"
+    translation: "Four, five!"
+    slots: {}
+    weight: 4
+
+  - pattern: "Оди́н {NOUN}."
+    translation: "One {NOUN.translation}."
+    slots:
+      NOUN: { preset: noun }
+    weight: 3
+
+  - pattern: "Два {NOUN}."
+    translation: "Two {NOUN.translation}."
+    slots:
+      NOUN: { preset: noun }
+    weight: 3
+
+  - pattern: "Три {NOUN}."
+    translation: "Three {NOUN.translation}."
+    slots:
+      NOUN: { preset: noun }
+    weight: 3
+
+  - pattern: "Ско́лько? — {NUMBER}."
+    translation: "How many? — {NUMBER.translation}."
+    slots:
+      NUMBER: { ids: [odin, dva, tri, chetyre, pyat] }
+    weight: 3
+
+dialogues:
+  - id: "counting_start"
+    context: "Learning to count"
+    lines:
+      - { speaker: "A", ru: "Оди́н, два, три...", en: "One, two, three..." }
+      - { speaker: "B", ru: "Четы́ре, пять!", en: "Four, five!" }
+      - { speaker: "A", ru: "Молоде́ц!", en: "Well done!" }

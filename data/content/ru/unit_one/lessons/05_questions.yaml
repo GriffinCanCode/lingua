@@ -225,29 +225,29 @@ dialogues:
   - id: "whats_this"
     context: "Identifying objects"
     lines:
-      - { speaker: "A", ru: "Это такси?", en: "Is this a taxi?" }
-      - { speaker: "B", ru: "Да, это такси.", en: "Yes, this is a taxi." }
-      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }
+      - { speaker: "A", ru: "Э́то такси́?", en: "Is this a taxi?" }
+      - { speaker: "B", ru: "Да, э́то такси́.", en: "Yes, this is a taxi." }
+      - { speaker: "A", ru: "Спаси́бо!", en: "Thanks!" }
 
   - id: "coffee_or_tea"
     context: "Offering drinks"
     lines:
-      - { speaker: "A", ru: "Кофе или чай?", en: "Coffee or tea?" }
-      - { speaker: "B", ru: "Кофе, пожалуйста.", en: "Coffee, please." }
-      - { speaker: "A", ru: "Хорошо!", en: "Okay!" }
+      - { speaker: "A", ru: "Ко́фе и́ли чай?", en: "Coffee or tea?" }
+      - { speaker: "B", ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
+      - { speaker: "A", ru: "Хорошо́!", en: "Okay!" }
 
   - id: "not_a_cat"
     context: "Correcting mistakes"
     lines:
-      - { speaker: "A", ru: "Это кот?", en: "Is this a cat?" }
-      - { speaker: "B", ru: "Нет, это не кот.", en: "No, this is not a cat." }
-      - { speaker: "A", ru: "А что это?", en: "Then what is it?" }
-      - { speaker: "B", ru: "Это собака!", en: "It's a dog!" }
+      - { speaker: "A", ru: "Э́то кот?", en: "Is this a cat?" }
+      - { speaker: "B", ru: "Нет, э́то не кот.", en: "No, this is not a cat." }
+      - { speaker: "A", ru: "А что э́то?", en: "Then what is it?" }
+      - { speaker: "B", ru: "Э́то соба́ка!", en: "It's a dog!" }
 
   - id: "yes_or_no"
     context: "Simple questions"
     lines:
-      - { speaker: "A", ru: "Это метро?", en: "Is this the metro?" }
+      - { speaker: "A", ru: "Э́то метро́?", en: "Is this the metro?" }
       - { speaker: "B", ru: "Да.", en: "Yes." }
-      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }
-      - { speaker: "B", ru: "Пожалуйста!", en: "You're welcome!" }
+      - { speaker: "A", ru: "Спаси́бо!", en: "Thanks!" }
+      - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }

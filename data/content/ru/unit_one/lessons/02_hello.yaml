@@ -245,29 +245,29 @@ dialogues:
   - id: "meeting_friend"
     context: "Meeting a friend"
     lines:
-      - { speaker: "A", ru: "Привет!", en: "Hi!" }
-      - { speaker: "B", ru: "Привет! Как дела?", en: "Hi! How are you?" }
-      - { speaker: "A", ru: "Хорошо, спасибо!", en: "Good, thanks!" }
+      - { speaker: "A", ru: "Приве́т!", en: "Hi!" }
+      - { speaker: "B", ru: "Приве́т! Как дела́?", en: "Hi! How are you?" }
+      - { speaker: "A", ru: "Хорошо́, спаси́бо!", en: "Good, thanks!" }
 
   - id: "formal_greeting"
     context: "Formal meeting"
     lines:
-      - { speaker: "A", ru: "Здравствуйте!", en: "Hello!" }
-      - { speaker: "B", ru: "Здравствуйте! Как вас зовут?", en: "Hello! What is your name?" }
-      - { speaker: "A", ru: "Меня зовут Иван.", en: "My name is Ivan." }
-      - { speaker: "B", ru: "Очень приятно!", en: "Nice to meet you!" }
+      - { speaker: "A", ru: "Здра́вствуйте!", en: "Hello!" }
+      - { speaker: "B", ru: "Здра́вствуйте! Как вас зову́т?", en: "Hello! What is your name?" }
+      - { speaker: "A", ru: "Меня́ зову́т Ива́н.", en: "My name is Ivan." }
+      - { speaker: "B", ru: "О́чень прия́тно!", en: "Nice to meet you!" }
 
   - id: "cafe_order"
     context: "At a café"
     lines:
-      - { speaker: "A", ru: "Кофе, пожалуйста.", en: "Coffee, please." }
-      - { speaker: "B", ru: "Один?", en: "One?" }
-      - { speaker: "A", ru: "Да, спасибо.", en: "Yes, thank you." }
-      - { speaker: "B", ru: "Пожалуйста!", en: "You're welcome!" }
+      - { speaker: "A", ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
+      - { speaker: "B", ru: "Оди́н?", en: "One?" }
+      - { speaker: "A", ru: "Да, спаси́бо.", en: "Yes, thank you." }
+      - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }
 
   - id: "goodbye"
     context: "Saying goodbye"
     lines:
-      - { speaker: "A", ru: "Ну, мне пора.", en: "Well, I have to go." }
-      - { speaker: "B", ru: "До свидания!", en: "Goodbye!" }
-      - { speaker: "A", ru: "Пока!", en: "Bye!" }
+      - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
+      - { speaker: "B", ru: "До свида́ния!", en: "Goodbye!" }
+      - { speaker: "A", ru: "Пока́!", en: "Bye!" }

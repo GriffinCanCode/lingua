@@ -218,13 +218,13 @@ dialogues:
   - id: "do_you_know"
     context: "Asking if someone knows"
     lines:
-      - { speaker: "A", ru: "Ты знаешь?", en: "Do you know?" }
-      - { speaker: "B", ru: "Да, я знаю.", en: "Yes, I know." }
-      - { speaker: "A", ru: "Хорошо!", en: "Good!" }
+      - { speaker: "A", ru: "Ты зна́ешь?", en: "Do you know?" }
+      - { speaker: "B", ru: "Да, я зна́ю.", en: "Yes, I know." }
+      - { speaker: "A", ru: "Хорошо́!", en: "Good!" }
 
   - id: "dont_understand"
     context: "Not understanding"
     lines:
-      - { speaker: "A", ru: "Ты понимаешь?", en: "Do you understand?" }
-      - { speaker: "B", ru: "Нет, я не понимаю.", en: "No, I don't understand." }
-      - { speaker: "A", ru: "Я тоже не понимаю!", en: "I don't understand either!" }
+      - { speaker: "A", ru: "Ты понима́ешь?", en: "Do you understand?" }
+      - { speaker: "B", ru: "Нет, я не понима́ю.", en: "No, I don't understand." }
+      - { speaker: "A", ru: "Я то́же не понима́ю!", en: "I don't understand either!" }

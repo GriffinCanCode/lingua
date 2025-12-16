@@ -203,24 +203,24 @@ dialogues:
   - id: "full_introduction"
     context: "Meeting someone new"
     lines:
-      - { speaker: "A", ru: "Здравствуйте!", en: "Hello!" }
-      - { speaker: "B", ru: "Здравствуйте! Как вас зовут?", en: "Hello! What is your name?" }
-      - { speaker: "A", ru: "Меня зовут Иван. А вас?", en: "My name is Ivan. And yours?" }
-      - { speaker: "B", ru: "Очень приятно! Меня зовут Мария.", en: "Nice to meet you! My name is Maria." }
+      - { speaker: "A", ru: "Здра́вствуйте!", en: "Hello!" }
+      - { speaker: "B", ru: "Здра́вствуйте! Как вас зову́т?", en: "Hello! What is your name?" }
+      - { speaker: "A", ru: "Меня́ зову́т Ива́н. А вас?", en: "My name is Ivan. And yours?" }
+      - { speaker: "B", ru: "О́чень прия́тно! Меня́ зову́т Мари́я.", en: "Nice to meet you! My name is Maria." }
 
   - id: "about_yourself"
     context: "Talking about yourself"
     lines:
       - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
-      - { speaker: "B", ru: "Я живу в Москве. А ты?", en: "I live in Moscow. And you?" }
-      - { speaker: "A", ru: "Я тоже живу в Москве!", en: "I live in Moscow too!" }
-      - { speaker: "B", ru: "Хорошо! Где ты работаешь?", en: "Great! Where do you work?" }
-      - { speaker: "A", ru: "Я работаю в ресторане.", en: "I work at a restaurant." }
+      - { speaker: "B", ru: "Я живу́ в Москве́. А ты?", en: "I live in Moscow. And you?" }
+      - { speaker: "A", ru: "Я то́же живу́ в Москве́!", en: "I live in Moscow too!" }
+      - { speaker: "B", ru: "Хорошо́! Где ты рабо́таешь?", en: "Great! Where do you work?" }
+      - { speaker: "A", ru: "Я рабо́таю в рестора́не.", en: "I work at a restaurant." }
 
   - id: "final_goodbye"
     context: "Saying goodbye"
     lines:
-      - { speaker: "A", ru: "Ну, мне пора.", en: "Well, I have to go." }
-      - { speaker: "B", ru: "Хорошо. До свидания!", en: "Okay. Goodbye!" }
-      - { speaker: "A", ru: "Пока! Спасибо за всё!", en: "Bye! Thanks for everything!" }
-      - { speaker: "B", ru: "Пожалуйста!", en: "You're welcome!" }
+      - { speaker: "A", ru: "Ну, мне пора́.", en: "Well, I have to go." }
+      - { speaker: "B", ru: "Хорошо́. До свида́ния!", en: "Okay. Goodbye!" }
+      - { speaker: "A", ru: "Пока́! Спаси́бо за всё!", en: "Bye! Thanks for everything!" }
+      - { speaker: "B", ru: "Пожа́луйста!", en: "You're welcome!" }

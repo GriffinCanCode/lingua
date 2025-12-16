@@ -256,22 +256,22 @@ dialogues:
   - id: "who_is_this"
     context: "Asking about people"
     lines:
-      - { speaker: "A", ru: "Кто это?", en: "Who is this?" }
-      - { speaker: "B", ru: "Это мой друг.", en: "This is my friend." }
-      - { speaker: "A", ru: "Привет!", en: "Hi!" }
+      - { speaker: "A", ru: "Кто э́то?", en: "Who is this?" }
+      - { speaker: "B", ru: "Э́то мой друг.", en: "This is my friend." }
+      - { speaker: "A", ru: "Приве́т!", en: "Hi!" }
 
   - id: "what_is_this"
     context: "Asking about objects"
     lines:
-      - { speaker: "A", ru: "Что это?", en: "What is this?" }
-      - { speaker: "B", ru: "Это книга.", en: "This is a book." }
+      - { speaker: "A", ru: "Что э́то?", en: "What is this?" }
+      - { speaker: "B", ru: "Э́то кни́га.", en: "This is a book." }
       - { speaker: "A", ru: "А что там?", en: "And what is there?" }
-      - { speaker: "B", ru: "Там телефон.", en: "There is a phone." }
+      - { speaker: "B", ru: "Там телефо́н.", en: "There is a phone." }
 
   - id: "how_are_you"
     context: "Greetings"
     lines:
-      - { speaker: "A", ru: "Привет! Как дела?", en: "Hi! How are you?" }
-      - { speaker: "B", ru: "Хорошо, спасибо!", en: "Good, thanks!" }
-      - { speaker: "A", ru: "Как тебя зовут?", en: "What's your name?" }
-      - { speaker: "B", ru: "Меня зовут Маша.", en: "My name is Masha." }
+      - { speaker: "A", ru: "Приве́т! Как дела́?", en: "Hi! How are you?" }
+      - { speaker: "B", ru: "Хорошо́, спаси́бо!", en: "Good, thanks!" }
+      - { speaker: "A", ru: "Как тебя́ зову́т?", en: "What's your name?" }
+      - { speaker: "B", ru: "Меня́ зову́т Ма́ша.", en: "My name is Masha." }

@@ -221,13 +221,13 @@ dialogues:
     context: "Getting to know someone"
     lines:
       - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
-      - { speaker: "B", ru: "Я живу в Москве.", en: "I live in Moscow." }
-      - { speaker: "A", ru: "А где ты работаешь?", en: "And where do you work?" }
-      - { speaker: "B", ru: "Я работаю в банке.", en: "I work at a bank." }
+      - { speaker: "B", ru: "Я живу́ в Москве́.", en: "I live in Moscow." }
+      - { speaker: "A", ru: "А где ты рабо́таешь?", en: "And where do you work?" }
+      - { speaker: "B", ru: "Я рабо́таю в ба́нке.", en: "I work at a bank." }
 
   - id: "want_coffee"
     context: "Offering something"
     lines:
-      - { speaker: "A", ru: "Ты хочешь кофе?", en: "Do you want coffee?" }
-      - { speaker: "B", ru: "Да, я хочу кофе.", en: "Yes, I want coffee." }
-      - { speaker: "A", ru: "Хорошо!", en: "Okay!" }
+      - { speaker: "A", ru: "Ты хо́чешь ко́фе?", en: "Do you want coffee?" }
+      - { speaker: "B", ru: "Да, я хочу́ ко́фе.", en: "Yes, I want coffee." }
+      - { speaker: "A", ru: "Хорошо́!", en: "Okay!" }

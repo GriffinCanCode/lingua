@@ -165,13 +165,13 @@ dialogues:
   - id: "finding_restaurant"
     context: "Looking for a restaurant"
     lines:
-      - { speaker: "A", ru: "Где ресторан?", en: "Where is the restaurant?" }
+      - { speaker: "A", ru: "Где рестора́н?", en: "Where is the restaurant?" }
       - { speaker: "B", ru: "Там.", en: "There." }
-      - { speaker: "A", ru: "Спасибо!", en: "Thanks!" }
+      - { speaker: "A", ru: "Спаси́бо!", en: "Thanks!" }
 
   - id: "introducing_family"
     context: "Introducing family"
     lines:
-      - { speaker: "A", ru: "Это мой брат.", en: "This is my brother." }
-      - { speaker: "B", ru: "Привет!", en: "Hi!" }
-      - { speaker: "A", ru: "А это моя сестра.", en: "And this is my sister." }
+      - { speaker: "A", ru: "Э́то мой брат.", en: "This is my brother." }
+      - { speaker: "B", ru: "Приве́т!", en: "Hi!" }
+      - { speaker: "A", ru: "А э́то моя́ сестра́.", en: "And this is my sister." }

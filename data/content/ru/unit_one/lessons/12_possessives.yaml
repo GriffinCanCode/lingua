@@ -176,13 +176,13 @@ dialogues:
   - id: "whose_book"
     context: "Finding the owner"
     lines:
-      - { speaker: "A", ru: "Это твоя книга?", en: "Is this your book?" }
-      - { speaker: "B", ru: "Нет, это не моя книга.", en: "No, this is not my book." }
-      - { speaker: "A", ru: "А чья это книга?", en: "Then whose book is it?" }
+      - { speaker: "A", ru: "Э́то твоя́ кни́га?", en: "Is this your book?" }
+      - { speaker: "B", ru: "Нет, э́то не моя́ кни́га.", en: "No, this is not my book." }
+      - { speaker: "A", ru: "А чья э́то кни́га?", en: "Then whose book is it?" }
 
   - id: "my_house"
     context: "Showing your home"
     lines:
-      - { speaker: "A", ru: "Это наш дом.", en: "This is our house." }
-      - { speaker: "B", ru: "Большой дом!", en: "Big house!" }
-      - { speaker: "A", ru: "Да, и моя машина там.", en: "Yes, and my car is there." }
+      - { speaker: "A", ru: "Э́то наш дом.", en: "This is our house." }
+      - { speaker: "B", ru: "Большо́й дом!", en: "Big house!" }
+      - { speaker: "A", ru: "Да, и моя́ маши́на там.", en: "Yes, and my car is there." }

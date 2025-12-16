@@ -211,12 +211,12 @@ dialogues:
   - id: "pointing_things"
     context: "Pointing at things"
     lines:
-      - { speaker: "A", ru: "Вот такси.", en: "Here is a taxi." }
+      - { speaker: "A", ru: "Вот такси́.", en: "Here is a taxi." }
       - { speaker: "B", ru: "Где?", en: "Where?" }
       - { speaker: "A", ru: "Там!", en: "There!" }
 
   - id: "at_metro"
     context: "At the metro"
     lines:
-      - { speaker: "A", ru: "Метро тут.", en: "The metro is here." }
-      - { speaker: "B", ru: "Спасибо!", en: "Thanks!" }
+      - { speaker: "A", ru: "Метро́ тут.", en: "The metro is here." }
+      - { speaker: "B", ru: "Спаси́бо!", en: "Thanks!" }

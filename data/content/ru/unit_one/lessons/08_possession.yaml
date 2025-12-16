@@ -161,13 +161,13 @@ dialogues:
   - id: "do_you_have_car"
     context: "Asking about possessions"
     lines:
-      - { speaker: "A", ru: "У тебя есть машина?", en: "Do you have a car?" }
-      - { speaker: "B", ru: "Да, у меня есть машина.", en: "Yes, I have a car." }
-      - { speaker: "A", ru: "Хорошо!", en: "Great!" }
+      - { speaker: "A", ru: "У тебя́ есть маши́на?", en: "Do you have a car?" }
+      - { speaker: "B", ru: "Да, у меня́ есть маши́на.", en: "Yes, I have a car." }
+      - { speaker: "A", ru: "Хорошо́!", en: "Great!" }
 
   - id: "pets"
     context: "Talking about pets"
     lines:
-      - { speaker: "A", ru: "У тебя есть собака?", en: "Do you have a dog?" }
-      - { speaker: "B", ru: "Нет, у меня есть кот.", en: "No, I have a cat." }
-      - { speaker: "A", ru: "У меня тоже кот!", en: "I have a cat too!" }
+      - { speaker: "A", ru: "У тебя́ есть соба́ка?", en: "Do you have a dog?" }
+      - { speaker: "B", ru: "Нет, у меня́ есть кот.", en: "No, I have a cat." }
+      - { speaker: "A", ru: "У меня́ то́же кот!", en: "I have a cat too!" }

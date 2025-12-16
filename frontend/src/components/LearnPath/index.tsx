@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Flame, Target, Award, RefreshCw } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Flame, Target, Award, RefreshCw, BookOpen, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { SectionHeader } from './SectionHeader';
 import { UnitCard } from './UnitCard';
 import { MilestoneModal } from './MilestoneModal';
 import { SkillNodeData, NodeState } from './SkillNode';
-import { useComponentLogger, useTracedAsync } from '../../lib/logger';
+import { useComponentLogger } from '../../lib/logger';
+import {
+  getLearningPath,
+  initializeProgress,
+  CurriculumSection,
+  CurriculumNode,
+} from '../../services/curriculum';
 
-// Mock data types - replace with actual service types
+// Internal UI types
 interface Section {
   id: string;
   number: number;
@@ -34,110 +40,62 @@ interface UserProgress {
   totalXp: number;
 }
 
-// Icon mapping for node types
-const getNodeIcon = (patternType: string) => {
-  const icons: Record<string, React.ElementType> = {
-    case: Award,
-    tense: Flame,
-    agreement: Target,
-  };
-  return icons[patternType] || Award;
+// Map API node status to internal state
+const mapNodeState = (status: CurriculumNode['status'], level: number): NodeState => {
+  if (level >= 5) return 'crowned';
+  switch (status) {
+    case 'locked': return 'locked';
+    case 'available': return 'available';
+    case 'in_progress': return 'current';
+    case 'completed': return 'completed';
+    case 'needs_practice': return 'needs_practice';
+    default: return 'locked';
+  }
 };
 
-// Generate mock learning path data
-const generateMockData = (): { sections: Section[]; progress: UserProgress } => {
-  const sections: Section[] = [
-    {
-      id: 'section-1',
-      number: 1,
-      title: 'Case Foundations',
-      units: [
-        {
-          id: 'unit-1',
-          number: 1,
-          title: 'Nominative Case',
-          description: 'Subject marking and basic sentence structure',
-          isCurrent: false,
-          isLocked: false,
-          nodes: [
-            { id: 'n1', title: 'Singular Nouns', icon: Award, state: 'completed' as NodeState, level: 5, maxLevel: 5, patternCount: 3, estimatedMinutes: 5 },
-            { id: 'n2', title: 'Plural Nouns', icon: Award, state: 'completed' as NodeState, level: 5, maxLevel: 5, patternCount: 3, estimatedMinutes: 5 },
-            { id: 'n3', title: 'Mixed Practice', icon: Target, state: 'crowned' as NodeState, level: 5, maxLevel: 5, patternCount: 6, estimatedMinutes: 8 },
-          ],
-        },
-        {
-          id: 'unit-2',
-          number: 2,
-          title: 'Accusative Case',
-          description: 'Direct objects and motion verbs',
-          isCurrent: true,
-          isLocked: false,
-          nodes: [
-            { id: 'n4', title: 'Inanimate Objects', icon: Award, state: 'completed' as NodeState, level: 4, maxLevel: 5, patternCount: 4, estimatedMinutes: 5 },
-            { id: 'n5', title: 'Animate Objects', icon: Award, state: 'current' as NodeState, level: 2, maxLevel: 5, patternCount: 4, estimatedMinutes: 6 },
-            { id: 'n6', title: 'Motion Verbs', icon: Award, state: 'available' as NodeState, level: 0, maxLevel: 5, patternCount: 5, estimatedMinutes: 7 },
-          ],
-        },
-        {
-          id: 'unit-3',
-          number: 3,
-          title: 'Genitive Case',
-          description: 'Possession and negation',
-          isCurrent: false,
-          isLocked: false,
-          nodes: [
-            { id: 'n7', title: 'Possession', icon: Award, state: 'needs_practice' as NodeState, level: 3, maxLevel: 5, patternCount: 4, estimatedMinutes: 5 },
-            { id: 'n8', title: 'Negation', icon: Award, state: 'locked' as NodeState, level: 0, maxLevel: 5, patternCount: 3, estimatedMinutes: 5 },
-            { id: 'n9', title: 'Quantities', icon: Award, state: 'locked' as NodeState, level: 0, maxLevel: 5, patternCount: 4, estimatedMinutes: 6 },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'section-2',
-      number: 2,
-      title: 'Verbal System',
-      units: [
-        {
-          id: 'unit-4',
-          number: 4,
-          title: 'Present Tense',
-          description: 'Conjugation patterns for present actions',
-          isCurrent: false,
-          isLocked: true,
-          nodes: [
-            { id: 'n10', title: 'First Conjugation', icon: Flame, state: 'locked' as NodeState, level: 0, maxLevel: 5, patternCount: 5, estimatedMinutes: 7 },
-            { id: 'n11', title: 'Second Conjugation', icon: Flame, state: 'locked' as NodeState, level: 0, maxLevel: 5, patternCount: 5, estimatedMinutes: 7 },
-          ],
-        },
-        {
-          id: 'unit-5',
-          number: 5,
-          title: 'Past Tense',
-          description: 'Gender agreement and aspect introduction',
-          isCurrent: false,
-          isLocked: true,
-          nodes: [
-            { id: 'n12', title: 'Past Formation', icon: Flame, state: 'locked' as NodeState, level: 0, maxLevel: 5, patternCount: 4, estimatedMinutes: 6 },
-          ],
-        },
-      ],
-    },
-  ];
+// Get icon based on node type
+const getNodeIcon = (nodeType: string): React.ElementType => {
+  switch (nodeType) {
+    case 'introduction': return BookOpen;
+    case 'practice': return Award;
+    case 'mixed': return Target;
+    case 'checkpoint': return Trophy;
+    default: return Award;
+  }
+};
 
-  const progress: UserProgress = {
-    streak: 7,
-    dailyGoal: 50,
-    dailyProgress: 30,
-    totalXp: 1250,
-  };
-
-  return { sections, progress };
+// Transform API data to internal format
+const transformApiData = (apiSections: CurriculumSection[]): Section[] => {
+  return apiSections.map((section, sIdx) => ({
+    id: section.id,
+    number: sIdx + 1,
+    title: section.title,
+    units: section.units.map((unit, uIdx) => {
+      const hasCurrentNode = unit.nodes.some(n => n.status === 'in_progress' || n.status === 'available');
+      return {
+        id: unit.id,
+        number: uIdx + 1,
+        title: unit.title,
+        description: unit.description || '',
+        isCurrent: hasCurrentNode && unit.status !== 'locked',
+        isLocked: unit.status === 'locked',
+        nodes: unit.nodes.map(node => ({
+          id: node.id,
+          title: node.title,
+          icon: getNodeIcon(node.node_type),
+          state: mapNodeState(node.status, node.level),
+          level: node.level,
+          maxLevel: 5,
+          patternCount: 3, // Could be derived from target_patterns length if available
+          estimatedMinutes: node.estimated_duration_min,
+        })),
+      };
+    }),
+  }));
 };
 
 export const LearnPath: React.FC = () => {
   const { logger } = useComponentLogger('LearnPath');
-  const traceAsync = useTracedAsync('learn');
   const navigate = useNavigate();
 
   const [sections, setSections] = useState<Section[]>([]);
@@ -155,12 +113,42 @@ export const LearnPath: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // TODO: Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network
-      const { sections: s, progress: p } = generateMockData();
-      setSections(s);
-      setProgress(p);
-      logger.info('Learning path loaded', { unitCount: s.reduce((a, s) => a + s.units.length, 0) });
+      // Try to get learning path
+      let apiSections = await getLearningPath('ru');
+      
+      // If no sections, initialize progress first
+      if (apiSections.length === 0) {
+        await initializeProgress('ru');
+        apiSections = await getLearningPath('ru');
+      }
+      
+      const transformedSections = transformApiData(apiSections);
+      setSections(transformedSections);
+      
+      // Calculate progress from sections
+      let totalNodes = 0;
+      let completedNodes = 0;
+      let crownedUnits = 0;
+      
+      for (const section of apiSections) {
+        for (const unit of section.units) {
+          totalNodes += unit.total_nodes;
+          completedNodes += unit.completed_nodes;
+          if (unit.is_crowned) crownedUnits++;
+        }
+      }
+      
+      setProgress({
+        streak: 0, // Would come from user stats API
+        dailyGoal: 50,
+        dailyProgress: completedNodes * 10, // Rough XP estimate
+        totalXp: completedNodes * 50 + crownedUnits * 100,
+      });
+      
+      logger.info('Learning path loaded', { 
+        sectionCount: transformedSections.length,
+        unitCount: transformedSections.reduce((a, s) => a + s.units.length, 0),
+      });
     } catch (err) {
       logger.error('Failed to load learning path', err instanceof Error ? err : undefined);
       setError('Failed to load your learning path. Please try again.');
@@ -323,7 +311,7 @@ export const LearnPath: React.FC = () => {
 
       {/* Learning Path */}
       <div className="space-y-8">
-        {sections.map((section, sIdx) => (
+        {sections.map((section) => (
           <div key={section.id}>
             <SectionHeader
               sectionNumber={section.number}

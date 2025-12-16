@@ -5,6 +5,8 @@ __pycache__/
 *$py.class
 .venv/
 venv/
+bin/
+.builder-cache/
 env/
 
 # Environment

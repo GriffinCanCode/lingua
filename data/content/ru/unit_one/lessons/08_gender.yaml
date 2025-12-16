@@ -1,5 +1,5 @@
 # Unit 1, Lesson 8: He, She, It
-# 6 modules with teaching content (including gender exceptions)
+# 7 modules with teaching content + cultural notes
 
 lesson:
   id: "08_gender"
@@ -36,6 +36,7 @@ modules:
           - word: "он"
             translation: "he / it (masculine)"
             note: "Use for masculine nouns AND male people"
+            mnemonic: "Sounds like 'own' - 'he owns' = masculine strength"
     
     vocab_pool:
       introduce: [on, dom, park]
@@ -75,6 +76,7 @@ modules:
           - word: "она́"
             translation: "she / it (feminine)"
             note: "Use for feminine nouns AND female people. Stress on last syllable."
+            mnemonic: "Sounds like 'ah-NAH' - like Anna, a feminine name"
     
     vocab_pool:
       introduce: [ona, kniga, sobaka]
@@ -121,6 +123,18 @@ modules:
           - { ru: "Где кни́га? Она́ тут.", en: "Where's the book? It's here." }
           - { ru: "Где окно́? Оно́ там.", en: "Where's the window? It's there." }
         rule: "Match the pronoun to the noun's gender, not the meaning!"
+      
+      - type: "english_comparison"
+        comparison_type: "different"
+        title: "Objects Have Gender"
+        content: |
+          English only genders people (he/she). Russian genders EVERYTHING.
+          
+          A book is "she" (она́), a house is "he" (он).
+          This affects pronouns, adjectives, and verb endings!
+        examples:
+          - { ru: "Где кни́га? Она́ тут.", en: "Where's the book? IT's here.", note: "English: it, Russian: she" }
+          - { ru: "Дом большо́й. Он там.", en: "The house is big. IT's there.", note: "English: it, Russian: he" }
     
     vocab_pool:
       introduce: [ono, okno, radio]
@@ -171,12 +185,19 @@ modules:
           - ["па́па", "feminine (-а)", "masculine", "он"]
           - ["ко́фе", "neuter (-е)", "masculine", "он"]
       
-      - type: "tip"
+      - type: "english_comparison"
+        comparison_type: "trap"
+        title: "Endings Lie for People!"
         content: |
-          🧠 **Memory trick:** Words for MALE PEOPLE always use ОН, 
-          regardless of ending. Biology wins over grammar!
+          Don't trust endings for people words!
           
-          For ко́фе, just memorize it - blame the Italians! ☕
+          па́па, де́душка, дя́дя all end in -а (looks feminine)
+          but they're MASCULINE because they refer to males.
+          
+          **Rule:** For people, MEANING beats ENDING.
+        examples:
+          - { ru: "Где па́па? Он там.", en: "Where's dad? He's there.", note: "-а ending, but masculine!" }
+          - { ru: "Где де́душка? Он тут.", en: "Where's grandpa? He's here.", note: "-а ending, but masculine!" }
     
     vocab_pool:
       introduce: [papa, kofe]
@@ -190,6 +211,46 @@ modules:
         - { type: "translation_en_ru", count: 2 }   # Produce exception sentences
 
   - id: "mod_5"
+    title: "🇷🇺 Gender in Culture"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "Gender Is Everywhere 🎭"
+        emoji: "🎭"
+        content: |
+          Gender affects EVERYTHING in Russian:
+          
+          • Adjectives change: большо́й дом / больша́я кни́га
+          • Past verbs change: он говори́л / она́ говори́ла
+          • Even "one" and "two": оди́н/одна́, два/две
+          
+          It's woven into the fabric of the language!
+        funFact: "Poets play with gender for effect — 'Россия' (Russia) is feminine, often called 'Mother Russia'"
+      
+      - type: "culture_note"
+        title: "Professional Titles 👩‍⚕️"
+        emoji: "👩‍⚕️"
+        content: |
+          Russian has feminine versions of many professions:
+          
+          до́ктор → до́кторша (female doctor, informal)
+          учи́тель → учи́тельница (female teacher)
+          студе́нт → студе́нтка (female student)
+          
+          Some women prefer the masculine form for prestige jobs!
+        funFact: "The word 'врач' (doctor) is grammatically masculine even for female doctors — 'Врач пришла́' (fem. verb!)"
+    
+    vocab_pool:
+      introduce: []
+      practice: [on, ona, ono]
+      review: [doktor, student]
+    exercises:
+      count: 4
+      types:
+        - { type: "multiple_choice", count: 4 }     # Cultural context questions
+
+  - id: "mod_6"
     title: "Practice"
     type: "practice"
     teaching:
@@ -207,7 +268,7 @@ modules:
         - { type: "translation_en_ru", count: 2 }   # Production
         - { type: "multiple_choice", count: 2 }     # Mixed gender quiz
 
-  - id: "mod_6"
+  - id: "mod_7"
     title: "Master"
     type: "master"
     teaching:
@@ -219,6 +280,7 @@ modules:
           - "Neuter (оно́): ends in -о or -е"
           - "⚠️ EXCEPTION: Male family words (папа, дедушка, дядя) use он despite -а ending"
           - "⚠️ EXCEPTION: кофе is masculine (он) despite -е ending"
+          - "🎭 Gender affects adjectives, verbs, and numbers too!"
     vocab_pool:
       introduce: []
       practice: []

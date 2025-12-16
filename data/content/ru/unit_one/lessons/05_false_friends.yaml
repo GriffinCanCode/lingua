@@ -32,8 +32,21 @@ modules:
           - ["Н", "H", "N"]
           - ["В", "B", "V"]
       
-      - type: "tip"
-        content: "РЕСТОРА́Н looks like 'pectopah' but sounds like 'restorán' (restaurant)!"
+      - type: "english_comparison"
+        comparison_type: "trap"
+        title: "Visual Interference"
+        content: |
+          These letters trigger incorrect English associations:
+          
+          Р looks like P but = R
+          С looks like C but = S
+          Н looks like H but = N
+          В looks like B but = V
+          
+          Override the instinct: РЕСТОРА́Н = "restoran" not "pectopah"
+        examples:
+          - { ru: "РОССИЯ", en: "ROSSIYA (not POCCNR)", note: "Russia" }
+          - { ru: "НОВОСТИ", en: "NOVOSTI (not HOBOCTN)", note: "News" }
     
     vocab_pool:
       introduce: [restoran, voda]
@@ -56,15 +69,19 @@ modules:
           - word: "рестора́н"
             translation: "restaurant"
             note: "Р=R, С=S, Н=N. Stress on last syllable."
+            mnemonic: "Same as English 'restaurant' - just respelled phonetically!"
           - word: "вода́"
             translation: "water"
             note: "В=V. Stress on last syllable."
+            mnemonic: "Cognate with English 'water' (W→V shift) - same Proto-Indo-European root"
           - word: "сестра́"
             translation: "sister"
             note: "С=S at the start. Stress on last syllable."
+            mnemonic: "Cognate with English 'sister' - hear the similarity!"
           - word: "брат"
             translation: "brother"
             note: "New letter Б = B"
+            mnemonic: "Cognate with English 'brother' - same Proto-Indo-European family"
       
       - type: "etymology"
         title: "Word Family: вода́"
@@ -105,8 +122,18 @@ modules:
           - ["телефо́н", "telefón", "telephone"]
           - ["банк", "bank", "bank"]
       
-      - type: "tip"
-        content: "Most international words are spelled phonetically in Russian!"
+      - type: "english_comparison"
+        comparison_type: "similar"
+        title: "International Words Are Easy"
+        content: |
+          Once you crack the code, international words become EASIER than English!
+          
+          Russian spells them PHONETICALLY - exactly how they sound.
+          No weird English spelling rules like "knight" or "through".
+        examples:
+          - { ru: "интерне́т", en: "internet", note: "Spelled exactly as pronounced" }
+          - { ru: "телефо́н", en: "telephone", note: "Phonetic spelling" }
+          - { ru: "компью́тер", en: "computer", note: "What you hear = what you write" }
     
     vocab_pool:
       introduce: [internet, telefon]

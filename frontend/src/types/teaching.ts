@@ -14,7 +14,9 @@ export type TeachingContentType =
   | 'morphology_pattern'
   | 'tip'
   | 'word_intro'
-  | 'summary';
+  | 'summary'
+  | 'culture_note'
+  | 'english_comparison';
 
 // Pattern table for grammar explanations
 export interface PatternTableContent {
@@ -72,6 +74,7 @@ export interface WordIntroItem {
   word: string;
   translation: string;
   note?: string;
+  mnemonic?: string;  // English comparison for memorization (e.g. "sounds like 'knee' in English")
   audio?: string;
 }
 
@@ -87,6 +90,26 @@ export interface SummaryContent {
   points: string[];
 }
 
+// Fun cultural notes with optional emoji icon
+export interface CultureNoteContent {
+  type: 'culture_note';
+  title: string;
+  content: string;
+  emoji?: string;  // Default: 🇷🇺
+  funFact?: string;
+}
+
+// English comparison for memorization - patterns, anti-patterns, traps
+export type ComparisonType = 'similar' | 'different' | 'trap';
+
+export interface EnglishComparisonContent {
+  type: 'english_comparison';
+  comparison_type: ComparisonType;  // similar=green, different=blue, trap=red
+  title: string;
+  content: string;
+  examples?: { ru: string; en: string; note?: string }[];
+}
+
 // Union of all teaching content types
 export type TeachingContent =
   | PatternTableContent
@@ -95,7 +118,9 @@ export type TeachingContent =
   | ExplanationContent
   | TipContent
   | WordIntroContent
-  | SummaryContent;
+  | SummaryContent
+  | CultureNoteContent
+  | EnglishComparisonContent;
 
 // Exercise config within a module
 export interface ModuleExerciseConfig {

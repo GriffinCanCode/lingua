@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, Volume2, CheckCircle2, Info } from 'lucide-react';
-import clsx from 'clsx';
-import type { TeachingContent, WordIntroContent, SummaryContent, ExplanationContent, TipContent } from '../../types/teaching';
+import { Lightbulb, Volume2, CheckCircle2, Info, Brain, CheckCheck, Shuffle, AlertTriangle } from 'lucide-react';
+import type { TeachingContent, WordIntroContent, SummaryContent, ExplanationContent, TipContent, CultureNoteContent, EnglishComparisonContent } from '../../types/teaching';
 import { PatternTable } from './PatternTable';
 import { EtymologyCard } from './EtymologyCard';
 import { MorphologyPattern } from './MorphologyPattern';
@@ -43,6 +42,37 @@ const TipCard: React.FC<{ content: TipContent }> = ({ content }) => (
   </motion.div>
 );
 
+const CultureCard: React.FC<{ content: CultureNoteContent }> = ({ content }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="w-full bg-gradient-to-br from-purple-50 via-pink-50 to-red-50 rounded-2xl p-6 border border-purple-200 shadow-sm"
+  >
+    <div className="flex items-center gap-3 mb-4">
+      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-red-500 flex items-center justify-center text-2xl">
+        {content.emoji || '🇷🇺'}
+      </div>
+      <h3 className="font-bold text-gray-800 text-lg">{content.title}</h3>
+    </div>
+    <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap mb-3">
+      {content.content}
+    </div>
+    {content.funFact && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="mt-4 p-3 bg-white/60 rounded-xl border border-purple-100"
+      >
+        <p className="text-sm text-purple-800 font-medium">
+          <span className="mr-2">✨</span>
+          {content.funFact}
+        </p>
+      </motion.div>
+    )}
+  </motion.div>
+);
+
 interface WordIntroCardProps {
   content: WordIntroContent;
   onPlayAudio?: (url: string) => void;
@@ -78,11 +108,95 @@ const WordIntroCard: React.FC<WordIntroCardProps> = ({ content, onPlayAudio }) =
           {item.note && (
             <p className="mt-2 text-sm text-gray-500 italic">{item.note}</p>
           )}
+          {item.mnemonic && (
+            <div className="mt-2 flex items-center gap-1.5 text-sm text-indigo-600">
+              <Brain size={14} className="flex-shrink-0" />
+              <span>{item.mnemonic}</span>
+            </div>
+          )}
         </motion.div>
       ))}
     </div>
   </motion.div>
 );
+
+const COMPARISON_STYLES = {
+  similar: {
+    bg: 'bg-gradient-to-br from-emerald-50 to-green-50',
+    border: 'border-emerald-200',
+    icon: CheckCheck,
+    iconBg: 'bg-emerald-500',
+    label: '✓ Like English',
+    labelColor: 'text-emerald-700',
+    textColor: 'text-emerald-900',
+  },
+  different: {
+    bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
+    border: 'border-blue-200',
+    icon: Shuffle,
+    iconBg: 'bg-blue-500',
+    label: '≠ Unlike English',
+    labelColor: 'text-blue-700',
+    textColor: 'text-blue-900',
+  },
+  trap: {
+    bg: 'bg-gradient-to-br from-red-50 to-orange-50',
+    border: 'border-red-200',
+    icon: AlertTriangle,
+    iconBg: 'bg-red-500',
+    label: '⚠️ English Speaker Trap',
+    labelColor: 'text-red-700',
+    textColor: 'text-red-900',
+  },
+} as const;
+
+const EnglishComparisonCard: React.FC<{ content: EnglishComparisonContent }> = ({ content }) => {
+  const style = COMPARISON_STYLES[content.comparison_type];
+  const Icon = style.icon;
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`w-full ${style.bg} rounded-2xl p-6 border ${style.border} shadow-sm`}
+    >
+      <div className="flex items-center gap-3 mb-1">
+        <div className={`w-10 h-10 rounded-xl ${style.iconBg} flex items-center justify-center`}>
+          <Icon size={20} className="text-white" />
+        </div>
+        <div>
+          <span className={`text-xs font-semibold uppercase tracking-wide ${style.labelColor}`}>
+            {style.label}
+          </span>
+          <h3 className="font-bold text-gray-800 text-lg -mt-0.5">{content.title}</h3>
+        </div>
+      </div>
+      <div className={`prose prose-sm max-w-none ${style.textColor} whitespace-pre-wrap mt-3`}>
+        {content.content}
+      </div>
+      {content.examples && content.examples.length > 0 && (
+        <div className="mt-4 space-y-2">
+          {content.examples.map((ex, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="p-3 bg-white/60 rounded-xl border border-white/80"
+            >
+              <div className="flex items-baseline gap-2">
+                <span className="font-bold text-gray-800">{ex.ru}</span>
+                <span className="text-gray-400">→</span>
+                <span className="text-gray-600">{ex.en}</span>
+              </div>
+              {ex.note && <p className="text-xs text-gray-500 mt-1 italic">{ex.note}</p>}
+            </motion.div>
+          ))}
+        </div>
+      )}
+    </motion.div>
+  );
+};
 
 const SummaryCard: React.FC<{ content: SummaryContent }> = ({ content }) => (
   <motion.div
@@ -131,6 +245,10 @@ export const TeachingCard: React.FC<TeachingCardProps> = ({ content, onPlayAudio
       return <WordIntroCard content={content} onPlayAudio={onPlayAudio} />;
     case 'summary':
       return <SummaryCard content={content} />;
+    case 'culture_note':
+      return <CultureCard content={content} />;
+    case 'english_comparison':
+      return <EnglishComparisonCard content={content} />;
     default:
       return null;
   }

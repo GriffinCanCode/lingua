@@ -1,5 +1,5 @@
 # Unit 1, Lesson 4: Hello & Goodbye
-# 5 modules with teaching content
+# 7 modules with teaching content + cultural notes
 
 lesson:
   id: "04_hello"
@@ -27,9 +27,11 @@ modules:
           - word: "приве́т"
             translation: "hi"
             note: "Informal - use with friends. Stress on last syllable."
+            mnemonic: "Sounds like 'pree-VYET' - the VY sound distinguishes it"
           - word: "пока́"
             translation: "bye"
             note: "Informal - also means 'for now'. Stress on last syllable."
+            mnemonic: "Sounds like 'pa-KA' - short and casual, like the word itself"
       
       - type: "tip"
         content: "Say 'приве́т' to anyone you'd call by their first name."
@@ -61,9 +63,11 @@ modules:
           - word: "здра́вствуйте"
             translation: "hello (formal)"
             note: "The first В is silent! Say: zdra-STVUY-te. Stress on first syllable."
+            mnemonic: "Think 'I wish you HEALTH' - same root as English 'hale'"
           - word: "до свида́ния"
             translation: "goodbye (formal)"
             note: "Literally 'until meeting'. Stress on 'да'."
+            mnemonic: "Like English 'until we see (vidanya/видеть)' - related to 'video'"
       
       - type: "etymology"
         title: "Hidden Meaning"
@@ -101,12 +105,15 @@ modules:
           - word: "спаси́бо"
             translation: "thank you"
             note: "Stress on second syllable: spa-SI-ba. The О reduces to 'a'."
+            mnemonic: "Think 'spa-SEE-ba' - the spa saves you, you're thankful!"
           - word: "пожа́луйста"
             translation: "please / you're welcome"
             note: "Stress on second syllable. Used both to ask AND to respond to thanks!"
+            mnemonic: "Sounds like 'pa-ZHAL-sta' - think 'pause, I'll stay' politely"
           - word: "извини́те"
             translation: "excuse me / sorry"
             note: "Stress on third syllable. Critical for streets/metro - use to get attention!"
+            mnemonic: "Sounds like 'iz-vee-NEE-tye' - stress on third syllable"
       
       - type: "etymology"
         title: "Hidden Meaning"
@@ -204,8 +211,16 @@ modules:
           - { ru: "Э́то такси́.", en: "This is a taxi." }
         rule: "Russian doesn't use 'am/is/are' in present tense. Just put words together!"
       
-      - type: "tip"
-        content: "This makes Russian simpler than English in many ways. 'Я студе́нт' = 'I student' = 'I am a student'"
+      - type: "english_comparison"
+        comparison_type: "different"
+        title: "Zero Copula = Simpler Sentences"
+        content: |
+          Unlike English, Russian drops "am/is/are" entirely.
+          This makes sentences SHORTER and easier to form!
+        examples:
+          - { ru: "Я студе́нт.", en: "I am a student.", note: "No 'am' needed" }
+          - { ru: "Она́ до́ктор.", en: "She is a doctor.", note: "No 'is' needed" }
+          - { ru: "Э́то такси́.", en: "This is a taxi.", note: "Just 'this taxi'" }
     
     vocab_pool:
       introduce: [ya, student, doktor]
@@ -254,13 +269,17 @@ modules:
           Using first name + patronymic shows respect to elders,
           teachers, bosses, etc. It's similar to using "Mr./Mrs." + name.
       
-      - type: "warning"
+      - type: "english_comparison"
+        comparison_type: "trap"
+        title: "Two 'You's - English Lost This!"
         content: |
-          **Ты vs Вы:**
-          - ты = informal "you" (friends, family, kids)
-          - вы = formal "you" (strangers, elders, professional)
+          English USED to have this: "thou" (informal) vs "you" (formal).
+          Russian kept both! Using the wrong one is socially awkward.
           
-          When in doubt, use вы! It's better to be too polite.
+          **Rule:** When in doubt, use вы (formal). Better too polite than rude!
+        examples:
+          - { ru: "Ты где?", en: "Where are you? (to friend)", note: "Informal - friends only" }
+          - { ru: "Вы где?", en: "Where are you? (to stranger)", note: "Formal - safe default" }
     
     vocab_pool:
       introduce: []
@@ -271,6 +290,46 @@ modules:
       types:
         - { type: "multiple_choice", count: 2 }     # ты vs вы context
         - { type: "translation_ru_en", count: 2 }   # Understand naming patterns
+
+  - id: "mod_3c"
+    title: "🇷🇺 Greeting Culture"
+    type: "pattern"
+    
+    teaching:
+      - type: "culture_note"
+        title: "Physical Greetings 🤝"
+        emoji: "🤝"
+        content: |
+          Russian greetings are MORE physical than American ones!
+          
+          **Men meeting men:** Firm handshake, direct eye contact
+          **Women meeting women:** Kiss on cheeks (1-3 times!)
+          **Men meeting women:** Usually just handshake
+          **Close friends:** Hug + back slaps
+        funFact: "Never shake hands across a doorway — it's bad luck! Step inside first."
+      
+      - type: "culture_note"
+        title: "Greeting Rules 📋"
+        emoji: "📋"
+        content: |
+          **Smile alert!** 🙂
+          Russians don't smile at strangers — it seems fake.
+          Save your smile for real connection!
+          
+          **Who greets first:**
+          - Younger person greets elder first
+          - Man greets woman first
+          - Arriving person greets those already there
+        funFact: "A Russian proverb: 'Смех без причины — признак дурачины' (Laughing without reason is a sign of foolishness)"
+    
+    vocab_pool:
+      introduce: []
+      practice: [privet, zdravstvuyte, do_svidaniya, poka]
+      review: []
+    exercises:
+      count: 4
+      types:
+        - { type: "multiple_choice", count: 4 }     # Cultural context questions
 
   - id: "mod_4"
     title: "Practice"

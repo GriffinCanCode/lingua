@@ -26,12 +26,15 @@ modules:
           - word: "знать"
             translation: "to know"
             note: "Type 1 verb - regular pattern"
+            mnemonic: "Cognate with English 'know' via 'gnostic/gnosis' - same root!"
           - word: "понима́ть"
             translation: "to understand"
             note: "Type 1 verb - essential survival word! Stress on third syllable."
+            mnemonic: "Root 'ним' means 'grasp' - like 'comprehend' you grasp ideas"
           - word: "де́лать"
             translation: "to do / to make"
             note: "Type 1 verb - extremely common! Stress on first syllable."
+            mnemonic: "Related to 'deed' - both from Proto-Indo-European *dʰeh₁"
       
       - type: "tip"
         content: "These verbs will get you out of many situations: Я не зна́ю (I don't know), Я не понима́ю (I don't understand), Что ты де́лаешь? (What are you doing?)."
@@ -94,6 +97,17 @@ modules:
           - { ru: "Ты зна́ешь?", en: "Do you know?" }
           - { ru: "Он зна́ет.", en: "He knows." }
         rule: "Remove -ть from infinitive, add the ending for each person."
+      
+      - type: "english_comparison"
+        comparison_type: "similar"
+        title: "Verbs Change Like English"
+        content: |
+          English: I know, he knowS (ending changes!)
+          Russian: Я зна́ю, он зна́ет (ending changes too!)
+          
+          Both languages conjugate verbs - Russian just has MORE endings.
+        examples:
+          - { ru: "Я зна́ю → Он зна́ет", en: "I know → He knows", note: "Same concept - ending shows who" }
     
     vocab_pool:
       introduce: []
@@ -128,6 +142,7 @@ modules:
           - word: "чита́ть"
             translation: "to read"
             note: "Type 1 verb - same pattern as знать! Stress on second syllable."
+            mnemonic: "Root чит- relates to counting/reckoning - reading as 'accounting' letters"
       
       - type: "pattern_table"
         title: "чита́ть - to read"
@@ -169,6 +184,21 @@ modules:
           - { word: "име́ть", lang: "Russian", relation: "cousin" }
           - { word: "comprehend", lang: "English", relation: "cousin" }
         insight: "По-ним-а́ть contains the root 'ним' (take/grasp) - to understand is to 'grasp' an idea!"
+      
+      - type: "english_comparison"
+        comparison_type: "different"
+        title: "No 'Do' Helper Verbs"
+        content: |
+          English needs "do/does" for questions and negatives:
+          "DO you know?" / "I DON'T know"
+          
+          Russian just adds не (not) or changes intonation:
+          "Ты зна́ешь?" / "Я не зна́ю"
+          
+          Simpler! No helper verbs needed.
+        examples:
+          - { ru: "Ты зна́ешь?", en: "Do you know?", note: "No 'do' - just rising tone" }
+          - { ru: "Я не зна́ю.", en: "I don't know.", note: "No 'don't' - just не + verb" }
     
     vocab_pool:
       introduce: [chitat]

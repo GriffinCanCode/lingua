@@ -36,9 +36,21 @@ modules:
           - word: "э́то"
             translation: "this is"
             note: "The Swiss Army knife of Russian. Use it to point at anything!"
+            mnemonic: "Sounds like 'EH-ta' - 'Eh, THAT?' when pointing"
       
       - type: "tip"
         content: "э́то + noun = 'This is...' - the most useful pattern in Russian!"
+      
+      - type: "english_comparison"
+        comparison_type: "similar"
+        title: "Cognates Are Your Friends"
+        content: |
+          Russian borrowed THOUSANDS of words from Western languages.
+          If a word sounds international, it probably means the same thing!
+        examples:
+          - { ru: "такси́", en: "taxi", note: "Identical meaning" }
+          - { ru: "метро́", en: "metro", note: "Same word, different alphabet" }
+          - { ru: "интерне́т", en: "internet", note: "Phonetically spelled" }
     
     vocab_pool:
       introduce: [eto, mama, kot]
@@ -75,12 +87,15 @@ modules:
           - word: "такси́"
             translation: "taxi"
             note: "Same word, Russian spelling! Stress on last syllable."
+            mnemonic: "Identical to English 'taxi' - borrowed word!"
           - word: "метро́"
             translation: "metro"
             note: "Used in every Russian city. Stress on last syllable."
+            mnemonic: "Same as English 'metro' - international word"
           - word: "кот"
             translation: "cat (male)"
             note: "Rhymes with 'boat'"
+            mnemonic: "Think 'kot' → 'cat' - similar sound, same animal!"
     
     vocab_pool:
       introduce: [taksi, metro]
@@ -122,15 +137,19 @@ modules:
           - word: "тут"
             translation: "here"
             note: "Casual, everyday 'here'"
+            mnemonic: "Short and punchy like 'put' - points to immediate location"
           - word: "там"
             translation: "there"
             note: "Points to something farther away"
+            mnemonic: "Sounds like 'tom' - points to distant location"
           - word: "здесь"
             translation: "here"
             note: "Synonym for тут - slightly more formal. Ь makes the С soft."
+            mnemonic: "The 'zd' cluster is distinctive - more emphatic than тут"
           - word: "вот"
             translation: "here is / there is"
             note: "Use when pointing at or presenting something"
+            mnemonic: "Functions like French 'voilà' - draws attention"
       
       - type: "tip"
         content: |
@@ -139,6 +158,18 @@ modules:
           - здесь = slightly more formal or emphatic
           
           Use either - Russians mix them freely!
+      
+      - type: "english_comparison"
+        comparison_type: "different"
+        title: "No 'Is' Needed"
+        content: |
+          Russian drops "is/am/are" in present tense. This is SIMPLER than English!
+          
+          English: "The cat IS here."
+          Russian: "Кот тут." (Cat here.)
+        examples:
+          - { ru: "Кот тут.", en: "The cat is here.", note: "No 'is' in Russian" }
+          - { ru: "Ма́ма там.", en: "Mom is there.", note: "Just noun + location" }
     
     vocab_pool:
       introduce: [tut, tam, zdes, vot]

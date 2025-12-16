@@ -55,22 +55,22 @@ modules:
           Feminine nouns usually end in -а or -я.
           This is one of the most reliable patterns!
           
-          мама, книга, собака - all feminine!
+          ма́ма, кни́га, соба́ка - all feminine!
       
       - type: "pattern_table"
         title: "Feminine Examples"
         columns: ["Word", "Translation", "Ending"]
         rows:
-          - ["мама", "mom", "-а"]
-          - ["книга", "book", "-а"]
-          - ["собака", "dog", "-а"]
-          - ["сестра", "sister", "-а"]
+          - ["ма́ма", "mom", "-а"]
+          - ["кни́га", "book", "-а"]
+          - ["соба́ка", "dog", "-а"]
+          - ["сестра́", "sister", "-а"]
       
       - type: "word_intro"
         words:
-          - word: "она"
+          - word: "она́"
             translation: "she / it (feminine)"
-            note: "Use for feminine nouns AND female people"
+            note: "Use for feminine nouns AND female people. Stress on last syllable."
     
     vocab_pool:
       introduce: [ona, kniga, sobaka]
@@ -94,23 +94,23 @@ modules:
         title: "Neuter Examples"
         columns: ["Word", "Translation", "Ending"]
         rows:
-          - ["окно", "window", "-о"]
-          - ["метро", "metro", "-о"]
-          - ["радио", "radio", "-о"]
+          - ["окно́", "window", "-о"]
+          - ["метро́", "metro", "-о"]
+          - ["ра́дио", "radio", "-о"]
       
       - type: "word_intro"
         words:
-          - word: "оно"
+          - word: "оно́"
             translation: "it (neuter)"
-            note: "Less common than он/она"
+            note: "Less common than он/она́. Stress on last syllable."
       
       - type: "morphology_pattern"
         title: "Gender Summary"
-        formula: "Consonant → он | -а/-я → она | -о/-е → оно"
+        formula: "Consonant → он | -а/-я → она́ | -о/-е → оно́"
         examples:
           - { ru: "Где кот? Он там.", en: "Where's the cat? It's there." }
-          - { ru: "Где книга? Она тут.", en: "Where's the book? It's here." }
-          - { ru: "Где окно? Оно там.", en: "Where's the window? It's there." }
+          - { ru: "Где кни́га? Она́ тут.", en: "Where's the book? It's here." }
+          - { ru: "Где окно́? Оно́ там.", en: "Where's the window? It's there." }
         rule: "Match the pronoun to the noun's gender, not the meaning!"
     
     vocab_pool:
@@ -125,7 +125,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Look at the ending! Consonant = он, -а = она, -о = оно. Trust the pattern!"
+        content: "Look at the ending! Consonant = он, -а = она́, -о = оно́. Trust the pattern!"
     vocab_pool:
       introduce: []
       practice: [on, ona, ono, dom, kniga, okno, park, sobaka]
@@ -141,8 +141,8 @@ modules:
         title: "You learned:"
         points:
           - "Masculine (он): ends in consonant"
-          - "Feminine (она): ends in -а or -я"
-          - "Neuter (оно): ends in -о or -е"
+          - "Feminine (она́): ends in -а or -я"
+          - "Neuter (оно́): ends in -о or -е"
           - "Pronouns match noun gender, not biological gender"
     vocab_pool:
       introduce: []

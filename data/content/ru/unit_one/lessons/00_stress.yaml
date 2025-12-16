@@ -1,0 +1,169 @@
+# Unit 1, Lesson 0: Russian Stress
+# A critical mini-lesson on stress marks - comes before or alongside cognates
+# Understanding stress is ESSENTIAL for Russian pronunciation
+
+lesson:
+  id: "00_stress"
+  title: "Russian Stress"
+  subtitle: "The key to sounding Russian, not robotic"
+  icon: "sound"
+  duration: "5 min"
+  type: "foundational"
+
+modules:
+  - id: "mod_1"
+    title: "Why Stress Matters"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Russian Has Unpredictable Stress"
+        content: |
+          Unlike English (where stress follows patterns) or Spanish (where rules exist),
+          Russian stress is **completely unpredictable**. Every word must be memorized!
+          
+          The good news: we mark stress for you with an accent mark (◌́).
+          The challenge: incorrect stress can change meaning or sound very foreign.
+      
+      - type: "audio_comparison"
+        title: "Hear the Difference"
+        pairs:
+          - { correct: "понима́ть", wrong: "по́нимать", note: "Stress on -МА-, not ПО-" }
+          - { correct: "хорошо́", wrong: "хо́рошо", note: "Stress on -ШО, not ХО-" }
+          - { correct: "спаси́бо", wrong: "спа́сибо", note: "Stress on -СИ-, not СПА-" }
+      
+      - type: "warning"
+        content: |
+          **Stress changes meaning!**
+          - за́мок = castle
+          - замо́к = lock
+          
+          Same letters, different stress = different word!
+
+  - id: "mod_2"
+    title: "How Stress Works"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "What Happens to Unstressed Vowels"
+        content: |
+          Stressed vowels are pronounced clearly. Unstressed vowels get **reduced**:
+          
+          - Unstressed **О** sounds like **А** (short, unclear)
+          - Unstressed **Е** sounds like **И** (reduced)
+          - Unstressed **Я** sounds like **И** (reduced)
+          
+          This is called **vowel reduction** and it's a huge part of the Russian accent!
+      
+      - type: "pattern_table"
+        title: "Stress Examples"
+        columns: ["Word", "Stressed", "Sounds Like", "Meaning"]
+        rows:
+          - ["молоко", "молоко́", "ma-la-KO", "milk"]
+          - ["хорошо", "хорошо́", "kha-ra-SHO", "good"]
+          - ["вода", "вода́", "va-DA", "water"]
+          - ["она", "она́", "a-NA", "she"]
+          - ["спасибо", "спаси́бо", "spa-SI-ba", "thanks"]
+      
+      - type: "tip"
+        content: |
+          **The pattern**: In молоко́ (milk), both О's before the stress sound like 'a'!
+          Write: молоко → Hear: malakó
+          
+          This is why stress marks are critical for learners.
+
+  - id: "mod_3"
+    title: "Stress Patterns"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Some Helpful Patterns"
+        content: |
+          While stress is unpredictable overall, some patterns can help:
+          
+          **Always stressed:**
+          - **Ё** (yo) is ALWAYS stressed: живёт, идёт, моё
+          - No accent mark needed - if you see Ё, that's the stress!
+          
+          **Common endings:**
+          - Verbs in **-а́ть**: понима́ть, чита́ть, де́лать (varies!)
+          - Adjectives often stress the **ending**: большо́й, молодо́й
+          - **-ция** words: stress before -ция: ста́нция, ле́кция
+      
+      - type: "morphology_pattern"
+        title: "Stress Can Move!"
+        formula: "Infinitive → Conjugation stress may shift"
+        examples:
+          - { ru: "писа́ть → пишу́", en: "to write → I write (stress moves!)" }
+          - { ru: "хоте́ть → хочу́ → хо́чешь", en: "to want → I want → you want (moves again!)" }
+          - { ru: "понима́ть → понима́ю", en: "to understand → I understand (stays)" }
+        rule: |
+          Verbs are tricky! The stress can move between infinitive and conjugated forms.
+          That's why we mark stress on ALL conjugation forms.
+
+  - id: "mod_4"
+    title: "Reading Stress Marks"
+    type: "practice"
+    
+    teaching:
+      - type: "explanation"
+        title: "How We Mark Stress"
+        content: |
+          Throughout this course, we use the **acute accent** (◌́) to show stress:
+          
+          - понима́ть (stress on third syllable)
+          - рабо́тать (stress on second syllable)
+          - телефо́н (stress on last syllable)
+          
+          **In real Russian text, stress is NOT marked!**
+          That's why learning it now is critical - you won't see these marks in the wild.
+      
+      - type: "tip"
+        content: |
+          **Practice tip**: When learning a new word, ALWAYS say it with correct stress.
+          Wrong stress is a hard habit to break later!
+          
+          Audio files in this course use native speakers - match their stress.
+
+  - id: "mod_5"
+    title: "Minimal Pairs"
+    type: "master"
+    
+    teaching:
+      - type: "explanation"
+        title: "Words That Change With Stress"
+        content: |
+          These pairs prove why stress matters for meaning:
+      
+      - type: "pattern_table"
+        title: "Stress Changes Meaning"
+        columns: ["Spelling", "Stress A", "Meaning A", "Stress B", "Meaning B"]
+        rows:
+          - ["замок", "за́мок", "castle", "замо́к", "lock"]
+          - ["мука", "му́ка", "torment", "мука́", "flour"]
+          - ["уже", "у́же", "narrower", "уже́", "already"]
+          - ["село", "се́ло", "sat down", "село́", "village"]
+          - ["стоит", "сто́ит", "costs", "стои́т", "stands"]
+      
+      - type: "summary"
+        title: "Key Takeaways"
+        points:
+          - "Russian stress is unpredictable - memorize it with each word"
+          - "Stressed vowels are clear; unstressed О sounds like А"
+          - "Ё is always stressed - no mark needed"
+          - "Stress can change meaning (за́мок ≠ замо́к)"
+          - "We mark stress with ◌́ - use it to learn correctly"
+          - "In verb conjugations, stress can move - check each form"
+
+# No exercises for this foundational lesson - just teaching
+vocab_filter:
+  primary: []
+  review_from: []
+
+# Teaching-only lesson - awareness before vocabulary
+metadata:
+  prerequisite: null
+  unlocks: ["01_cognates"]
+  skills: ["stress_awareness", "vowel_reduction", "pronunciation"]

@@ -41,7 +41,7 @@ modules:
     exercises:
       count: 7
       templates:
-        - pattern: "Это {NOUN}."
+        - pattern: "Э́то {NOUN}."
           weight: 3
 
   - id: "mod_2"
@@ -50,8 +50,8 @@ modules:
     
     teaching:
       - type: "etymology"
-        title: "Word Family: мама"
-        word: "мама"
+        title: "Word Family: ма́ма"
+        word: "ма́ма"
         connections:
           - { word: "mama", lang: "English", relation: "cognate" }
           - { word: "mamma", lang: "Latin", relation: "ancestor" }
@@ -61,12 +61,12 @@ modules:
       
       - type: "word_intro"
         words:
-          - word: "такси"
+          - word: "такси́"
             translation: "taxi"
-            note: "Same word, Russian spelling!"
-          - word: "метро"
+            note: "Same word, Russian spelling! Stress on last syllable."
+          - word: "метро́"
             translation: "metro"
-            note: "Used in every Russian city"
+            note: "Used in every Russian city. Stress on last syllable."
           - word: "кот"
             translation: "cat (male)"
             note: "Rhymes with 'boat'"
@@ -88,8 +88,8 @@ modules:
         formula: "{NOUN} + {тут/там} = Where something is"
         examples:
           - { ru: "Кот тут.", en: "The cat is here." }
-          - { ru: "Мама там.", en: "Mom is there." }
-          - { ru: "Такси тут.", en: "The taxi is here." }
+          - { ru: "Ма́ма там.", en: "Mom is there." }
+          - { ru: "Такси́ тут.", en: "The taxi is here." }
         rule: "Russian doesn't need 'is' - just noun + location word!"
       
       - type: "etymology"
@@ -132,7 +132,7 @@ modules:
         title: "You learned:"
         points:
           - "5 cognate letters: А, К, М, О, Т"
-          - "6 words: мама, кот, такси, метро, тут, там"
+          - "6 words: ма́ма, кот, такси́, метро́, тут, там"
           - "The location pattern: Noun + тут/там"
           - "Russian drops 'is' - simpler than English!"
     vocab_pool:
@@ -151,14 +151,14 @@ vocab_filter:
 # Templates for exercise generation
 templates:
   # General nouns (with articles)
-  - pattern: "Это {NOUN}."
+  - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 4
 
   # Family (without articles)
-  - pattern: "Это {NOUN}."
+  - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.translation}."
     slots:
       NOUN: { ids: [mama, papa] }

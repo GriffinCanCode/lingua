@@ -4,12 +4,12 @@
 lesson:
   id: "07_possession"
   title: "I have..."
-  subtitle: "Express what you have with У меня есть"
+  subtitle: "Express what you have with У меня́ есть"
   icon: "package"
 
 modules:
   - id: "mod_1"
-    title: "У меня"
+    title: "У меня́"
     type: "intro"
     
     teaching:
@@ -19,24 +19,24 @@ modules:
           Russian doesn't have a verb 'to have' like English.
           Instead, they say "By me there is..."
           
-          У меня есть кот = By me there is a cat = I have a cat
+          У меня́ есть кот = By me there is a cat = I have a cat
       
       - type: "word_intro"
         words:
-          - word: "у меня"
+          - word: "у меня́"
             translation: "I have / by me"
-            note: "Literally 'by me'"
+            note: "Literally 'by me'. Stress on last syllable."
           - word: "есть"
             translation: "there is / is"
             note: "Often optional in simple statements"
       
       - type: "morphology_pattern"
         title: "The Possession Formula"
-        formula: "У меня (есть) + {NOUN}"
+        formula: "У меня́ (есть) + {NOUN}"
         examples:
-          - { ru: "У меня есть кот.", en: "I have a cat." }
-          - { ru: "У меня есть брат.", en: "I have a brother." }
-          - { ru: "У меня машина.", en: "I have a car." }
+          - { ru: "У меня́ есть кот.", en: "I have a cat." }
+          - { ru: "У меня́ есть брат.", en: "I have a brother." }
+          - { ru: "У меня́ маши́на.", en: "I have a car." }
         rule: "Есть is often dropped in casual speech, especially for obvious possessions."
     
     vocab_pool:
@@ -53,19 +53,20 @@ modules:
     teaching:
       - type: "word_intro"
         words:
-          - word: "машина"
+          - word: "маши́на"
             translation: "car"
-            note: "Also means 'machine'"
-          - word: "собака"
+            note: "Also means 'machine'. Stress on second syllable."
+          - word: "соба́ка"
             translation: "dog"
+            note: "Stress on second syllable."
       
       - type: "etymology"
-        title: "Word Family: машина"
-        word: "машина"
+        title: "Word Family: маши́на"
+        word: "маши́на"
         connections:
           - { word: "machine", lang: "English", relation: "cognate" }
           - { word: "machina", lang: "Latin", relation: "ancestor" }
-        insight: "In Russian, машина primarily means 'car' - the machine of the 20th century!"
+        insight: "In Russian, маши́на primarily means 'car' - the machine of the 20th century!"
     
     vocab_pool:
       introduce: [mashina]
@@ -81,11 +82,11 @@ modules:
     teaching:
       - type: "morphology_pattern"
         title: "I Don't Have"
-        formula: "У меня нет + {NOUN (genitive)}"
+        formula: "У меня́ нет + {NOUN (genitive)}"
         examples:
-          - { ru: "У меня нет кота.", en: "I don't have a cat." }
-          - { ru: "У меня нет машины.", en: "I don't have a car." }
-          - { ru: "У меня нет брата.", en: "I don't have a brother." }
+          - { ru: "У меня́ нет кота́.", en: "I don't have a cat." }
+          - { ru: "У меня́ нет маши́ны.", en: "I don't have a car." }
+          - { ru: "У меня́ нет бра́та.", en: "I don't have a brother." }
         rule: "Нет replaces есть, and the noun changes form (genitive case - we'll learn this later!)"
       
       - type: "tip"
@@ -103,7 +104,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Talk about what you have! У меня есть телефон. У меня есть кот. Real practice = real progress."
+        content: "Talk about what you have! У меня́ есть телефо́н. У меня́ есть кот. Real practice = real progress."
     vocab_pool:
       introduce: []
       practice: [u_menya, yest, brat, sestra, mashina, sobaka]
@@ -118,10 +119,10 @@ modules:
       - type: "summary"
         title: "You learned:"
         points:
-          - "У меня есть = I have (by me there is)"
-          - "У меня нет = I don't have"
-          - "Family: брат (brother), сестра (sister)"
-          - "Things: машина (car), собака (dog)"
+          - "У меня́ есть = I have (by me there is)"
+          - "У меня́ нет = I don't have"
+          - "Family: брат (brother), сестра́ (sister)"
+          - "Things: маши́на (car), соба́ка (dog)"
     vocab_pool:
       introduce: []
       practice: []
@@ -135,13 +136,13 @@ vocab_filter:
   review_from: [03_false_friends, 05_gender, 06_type1_verbs]
 
 templates:
-  - pattern: "У меня есть {NOUN}."
+  - pattern: "У меня́ есть {NOUN}."
     translation: "I have {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 4
 
-  - pattern: "У меня {NOUN}."
+  - pattern: "У меня́ {NOUN}."
     translation: "I have {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }

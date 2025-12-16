@@ -19,20 +19,20 @@ modules:
           Russian has two levels of politeness.
           With friends, family, and kids - keep it casual!
           
-          привет = hi (like 'hey!')
-          пока = bye (like 'later!')
+          приве́т = hi (like 'hey!')
+          пока́ = bye (like 'later!')
       
       - type: "word_intro"
         words:
-          - word: "привет"
+          - word: "приве́т"
             translation: "hi"
-            note: "Informal - use with friends"
-          - word: "пока"
+            note: "Informal - use with friends. Stress on last syllable."
+          - word: "пока́"
             translation: "bye"
-            note: "Informal - also means 'for now'"
+            note: "Informal - also means 'for now'. Stress on last syllable."
       
       - type: "tip"
-        content: "Say 'привет' to anyone you'd call by their first name."
+        content: "Say 'приве́т' to anyone you'd call by their first name."
     
     vocab_pool:
       introduce: [privet, poka]
@@ -54,20 +54,20 @@ modules:
       
       - type: "word_intro"
         words:
-          - word: "здравствуйте"
+          - word: "здра́вствуйте"
             translation: "hello (formal)"
-            note: "The first В is silent! Say: zdra-STVUY-te"
-          - word: "до свидания"
+            note: "The first В is silent! Say: zdra-STVUY-te. Stress on first syllable."
+          - word: "до свида́ния"
             translation: "goodbye (formal)"
-            note: "Literally 'until meeting'"
+            note: "Literally 'until meeting'. Stress on 'да'."
       
       - type: "etymology"
         title: "Hidden Meaning"
-        word: "здравствуйте"
+        word: "здра́вствуйте"
         connections:
           - { word: "health", lang: "English", relation: "cognate" }
-          - { word: "здоровье", lang: "Russian", relation: "cousin" }
-        insight: "Здравствуйте literally means 'be healthy!' - a wish, not just a greeting."
+          - { word: "здоро́вье", lang: "Russian", relation: "cousin" }
+        insight: "Здра́вствуйте literally means 'be healthy!' - a wish, not just a greeting."
     
     vocab_pool:
       introduce: [zdravstvuyte, do_svidaniya]
@@ -85,13 +85,13 @@ modules:
         title: "No 'is' Needed"
         formula: "{SUBJECT} + {PREDICATE} (no 'is'!)"
         examples:
-          - { ru: "Я студент.", en: "I am a student." }
-          - { ru: "Она доктор.", en: "She is a doctor." }
-          - { ru: "Это такси.", en: "This is a taxi." }
+          - { ru: "Я студе́нт.", en: "I am a student." }
+          - { ru: "Она́ до́ктор.", en: "She is a doctor." }
+          - { ru: "Э́то такси́.", en: "This is a taxi." }
         rule: "Russian doesn't use 'am/is/are' in present tense. Just put words together!"
       
       - type: "tip"
-        content: "This makes Russian simpler than English in many ways. 'Я студент' = 'I student' = 'I am a student'"
+        content: "This makes Russian simpler than English in many ways. 'Я студе́нт' = 'I student' = 'I am a student'"
     
     vocab_pool:
       introduce: [ya, student, doktor]
@@ -120,8 +120,8 @@ modules:
       - type: "summary"
         title: "You learned:"
         points:
-          - "Informal: привет (hi), пока (bye)"
-          - "Formal: здравствуйте (hello), до свидания (goodbye)"
+          - "Informal: приве́т (hi), пока́ (bye)"
+          - "Formal: здра́вствуйте (hello), до свида́ния (goodbye)"
           - "Russian drops 'is/am/are' - simpler sentences!"
           - "Use formal with strangers and elders"
     vocab_pool:
@@ -137,7 +137,7 @@ vocab_filter:
   review_from: [01_cognates]
 
 templates:
-  - pattern: "Привет! Я {PROFESSION}."
+  - pattern: "Приве́т! Я {PROFESSION}."
     translation: "Hi! I am {PROFESSION.a}."
     slots:
       PROFESSION: { pos: [noun], semantic: [person] }

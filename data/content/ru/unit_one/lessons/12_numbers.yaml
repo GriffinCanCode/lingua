@@ -18,20 +18,20 @@ modules:
         content: |
           Learn the first five numbers - the foundation of counting!
           
-          1 - один (odin)
+          1 - оди́н (odín) - stress on second syllable
           2 - два (dva)
           3 - три (tri)
-          4 - четыре (chetyre)
+          4 - четы́ре (chetýre) - stress on second syllable
           5 - пять (pyat')
       
       - type: "pattern_table"
         title: "Numbers 1-5"
         columns: ["Number", "Russian", "Pronunciation"]
         rows:
-          - ["1", "один", "ah-DEEN"]
+          - ["1", "оди́н", "ah-DEEN"]
           - ["2", "два", "dvah"]
           - ["3", "три", "tree"]
-          - ["4", "четыре", "cheh-TY-ryeh"]
+          - ["4", "четы́ре", "cheh-TY-ryeh"]
           - ["5", "пять", "pyaht"]
       
       - type: "tip"
@@ -55,9 +55,9 @@ modules:
         rows:
           - ["6", "шесть", "shest"]
           - ["7", "семь", "syem"]
-          - ["8", "восемь", "VO-syem"]
-          - ["9", "девять", "DYEH-vyat"]
-          - ["10", "десять", "DYEH-syat"]
+          - ["8", "во́семь", "VO-syem"]
+          - ["9", "де́вять", "DYEH-vyat"]
+          - ["10", "де́сять", "DYEH-syat"]
       
       - type: "etymology"
         title: "Number Origins"
@@ -86,16 +86,16 @@ modules:
           In Russian, nouns change form after numbers!
           
           1 кот (nominative singular)
-          2, 3, 4 кота (genitive singular)
-          5-10 котов (genitive plural)
+          2, 3, 4 кота́ (genitive singular)
+          5-10 кото́в (genitive plural)
       
       - type: "morphology_pattern"
         title: "Number Agreement"
         formula: "1 = singular | 2-4 = genitive sing. | 5+ = genitive plural"
         examples:
-          - { ru: "один кот", en: "one cat" }
-          - { ru: "два кота", en: "two cats" }
-          - { ru: "пять котов", en: "five cats" }
+          - { ru: "оди́н кот", en: "one cat" }
+          - { ru: "два кота́", en: "two cats" }
+          - { ru: "пять кото́в", en: "five cats" }
         rule: "For now, focus on 1-4. We'll learn genitive plural later!"
       
       - type: "tip"
@@ -113,7 +113,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Count things around you! Один телефон, два окна, три книги..."
+        content: "Count things around you! Оди́н телефо́н, два окна́, три кни́ги..."
     vocab_pool:
       introduce: []
       practice: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
@@ -129,8 +129,8 @@ modules:
         title: "You learned:"
         points:
           - "Numbers 1-10 in Russian"
-          - "один, два, три, четыре, пять"
-          - "шесть, семь, восемь, девять, десять"
+          - "оди́н, два, три, четы́ре, пять"
+          - "шесть, семь, во́семь, де́вять, де́сять"
           - "Numbers affect noun endings"
     vocab_pool:
       introduce: []
@@ -152,7 +152,7 @@ templates:
       NOUN: { pos: [noun] }
     weight: 4
 
-  - pattern: "У меня {NUMBER} {NOUN}."
+  - pattern: "У меня́ {NUMBER} {NOUN}."
     translation: "I have {NUMBER.translation} {NOUN.translation}."
     slots:
       NUMBER: { pos: [numeral] }

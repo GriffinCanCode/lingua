@@ -19,7 +19,7 @@ modules:
           Где (gde) = Where
           
           This is one of the most useful words for travelers!
-          Just point and ask: Где метро? Где туалет? Где банк?
+          Just point and ask: Где метро́? Где туале́т? Где банк?
       
       - type: "word_intro"
         words:
@@ -31,7 +31,7 @@ modules:
         title: "Where Questions"
         formula: "Где + {NOUN}?"
         examples:
-          - { ru: "Где метро?", en: "Where is the metro?" }
+          - { ru: "Где метро́?", en: "Where is the metro?" }
           - { ru: "Где ты?", en: "Where are you?" }
           - { ru: "Где кот?", en: "Where is the cat?" }
         rule: "Super simple - just Где + what you're looking for!"
@@ -91,23 +91,23 @@ modules:
         content: |
           Russian strictly separates living beings (animate) from things (inanimate).
           
-          Кто это? → For people and animals
-          Что это? → For objects and ideas
+          Кто э́то? → For people and animals
+          Что э́то? → For objects and ideas
       
       - type: "pattern_table"
         title: "Which to Use"
         columns: ["Use Кто for", "Use Что for"]
         rows:
-          - ["people (мама, брат)", "objects (книга, дом)"]
-          - ["animals (кот, собака)", "abstract things (это)"]
+          - ["people (ма́ма, брат)", "objects (кни́га, дом)"]
+          - ["animals (кот, соба́ка)", "abstract things (э́то)"]
           - ["Кто там? (Who's there?)", "Что там? (What's there?)"]
       
       - type: "morphology_pattern"
         title: "Кто/Что Patterns"
-        formula: "{Кто/Что} + это?"
+        formula: "{Кто/Что} + э́то?"
         examples:
-          - { ru: "Кто это?", en: "Who is this?" }
-          - { ru: "Что это?", en: "What is this?" }
+          - { ru: "Кто э́то?", en: "Who is this?" }
+          - { ru: "Что э́то?", en: "What is this?" }
           - { ru: "Кто там?", en: "Who's there?" }
         rule: "Animals count as 'who' in Russian - they're considered animate!"
     
@@ -123,7 +123,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Practice asking questions about everything you see. Что это? Кто это? Где...?"
+        content: "Practice asking questions about everything you see. Что э́то? Кто э́то? Где...?"
     vocab_pool:
       introduce: []
       practice: [gde, kto, chto, vot, doktor, drug]
@@ -138,11 +138,11 @@ modules:
       - type: "summary"
         title: "You learned:"
         points:
-          - "Где = where (Где метро?)"
+          - "Где = where (Где метро́?)"
           - "Кто = who (for people AND animals)"
           - "Что = what (pronounced 'shto')"
-          - "Что это? = What is this?"
-          - "Кто это? = Who is this?"
+          - "Что э́то? = What is this?"
+          - "Кто э́то? = Who is this?"
     vocab_pool:
       introduce: []
       practice: []
@@ -168,12 +168,12 @@ templates:
       NOUN: { ids: [mama, papa] }
     weight: 4
 
-  - pattern: "Кто это?"
+  - pattern: "Кто э́то?"
     translation: "Who is this?"
     slots: {}
     weight: 2
 
-  - pattern: "Что это?"
+  - pattern: "Что э́то?"
     translation: "What is this?"
     slots: {}
     weight: 2

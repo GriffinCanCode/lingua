@@ -18,20 +18,20 @@ modules:
         content: |
           Just like possessives, adjectives change for gender!
           
-          большой дом (big house) - masculine
-          большая книга (big book) - feminine
-          большое окно (big window) - neuter
+          большо́й дом (big house) - masculine
+          больша́я кни́га (big book) - feminine
+          большо́е окно́ (big window) - neuter
       
       - type: "pattern_table"
         title: "Adjective Endings"
         columns: ["Gender", "Hard", "Example"]
         rows:
-          - ["Masculine", "-ый / -ой", "большой, новый"]
-          - ["Feminine", "-ая", "большая, новая"]
-          - ["Neuter", "-ое", "большое, новое"]
+          - ["Masculine", "-ый / -о́й", "большо́й, но́вый"]
+          - ["Feminine", "-ая", "больша́я, но́вая"]
+          - ["Neuter", "-ое", "большо́е, но́вое"]
       
       - type: "tip"
-        content: "The ending sounds like the noun gender: -ой sounds firm (masc), -ая sounds open (fem)."
+        content: "The ending sounds like the noun gender: -о́й sounds firm (masc), -а́я sounds open (fem)."
     
     vocab_pool:
       introduce: [bolshoy, malenkiy]
@@ -47,25 +47,25 @@ modules:
     teaching:
       - type: "word_intro"
         words:
-          - word: "хорошо"
+          - word: "хорошо́"
             translation: "good / well"
-            note: "Adverb form - doesn't change"
-          - word: "плохо"
+            note: "Adverb form - doesn't change. Stress on last syllable."
+          - word: "пло́хо"
             translation: "bad / badly"
-            note: "Adverb form - doesn't change"
-          - word: "новый"
+            note: "Adverb form - doesn't change. Stress on first syllable."
+          - word: "но́вый"
             translation: "new"
-            note: "новый (m), новая (f), новое (n)"
-          - word: "старый"
+            note: "но́вый (m), но́вая (f), но́вое (n). Stress on first syllable."
+          - word: "ста́рый"
             translation: "old"
-            note: "старый (m), старая (f), старое (n)"
+            note: "ста́рый (m), ста́рая (f), ста́рое (n). Stress on first syllable."
       
       - type: "etymology"
         title: "Good and Bad"
-        word: "хорошо"
+        word: "хорошо́"
         connections:
-          - { word: "хороший", lang: "Russian", relation: "adjective form" }
-        insight: "Хорошо is the adverb ('well'), хороший is the adjective ('good'). They work differently!"
+          - { word: "хоро́ший", lang: "Russian", relation: "adjective form" }
+        insight: "Хорошо́ is the adverb ('well'), хоро́ший is the adjective ('good'). They work differently!"
     
     vocab_pool:
       introduce: [khorosho, plokho]
@@ -81,22 +81,24 @@ modules:
     teaching:
       - type: "word_intro"
         words:
-          - word: "большой"
+          - word: "большо́й"
             translation: "big"
-          - word: "маленький"
+            note: "Stress on last syllable."
+          - word: "ма́ленький"
             translation: "small/little"
-          - word: "новый"
+            note: "Stress on first syllable."
+          - word: "но́вый"
             translation: "new"
-          - word: "старый"
+          - word: "ста́рый"
             translation: "old"
       
       - type: "morphology_pattern"
         title: "Adjective Position"
         formula: "{ADJECTIVE} + {NOUN} (same gender)"
         examples:
-          - { ru: "большой дом", en: "big house" }
-          - { ru: "маленькая собака", en: "small dog" }
-          - { ru: "новое окно", en: "new window" }
+          - { ru: "большо́й дом", en: "big house" }
+          - { ru: "ма́ленькая соба́ка", en: "small dog" }
+          - { ru: "но́вое окно́", en: "new window" }
         rule: "Adjective comes before noun, just like English!"
     
     vocab_pool:
@@ -111,7 +113,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Describe everything! Большой дом. Маленький кот. Новая книга."
+        content: "Describe everything! Большо́й дом. Ма́ленький кот. Но́вая кни́га."
     vocab_pool:
       introduce: []
       practice: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
@@ -127,9 +129,9 @@ modules:
         title: "You learned:"
         points:
           - "Adjectives agree with noun gender"
-          - "Masculine: -ый/-ой (большой)"
-          - "Feminine: -ая (большая)"
-          - "Neuter: -ое (большое)"
+          - "Masculine: -ый/-о́й (большо́й)"
+          - "Feminine: -ая (больша́я)"
+          - "Neuter: -ое (большо́е)"
           - "Size and descriptive words"
     vocab_pool:
       introduce: []
@@ -144,7 +146,7 @@ vocab_filter:
   review_from: [05_gender, 11_possessives, 12_numbers]
 
 templates:
-  - pattern: "Это {ADJ} {NOUN}."
+  - pattern: "Э́то {ADJ} {NOUN}."
     translation: "This is {ADJ.a} {NOUN.translation}."
     slots:
       ADJ: { pos: [adjective] }

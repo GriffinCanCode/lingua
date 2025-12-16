@@ -9,34 +9,34 @@ lesson:
 
 modules:
   - id: "mod_1"
-    title: "Хотеть - To Want"
+    title: "Хоте́ть - To Want"
     type: "intro"
     
     teaching:
       - type: "explanation"
         title: "The Most Useful Irregular Verb"
         content: |
-          хотеть (to want) is irregular - it mixes Type 1 and Type 2!
+          хоте́ть (to want) is irregular - it mixes Type 1 and Type 2!
           
-          я хочу (I want)
-          ты хочешь (you want)
-          он/она хочет (he/she wants)
+          я хочу́ (I want)
+          ты хо́чешь (you want)
+          он/она́ хо́чет (he/she wants)
           
-          Notice: хоч- stem changes, and it uses Type 1 endings in singular!
+          Notice: хоч- stem changes, and stress moves!
       
       - type: "pattern_table"
-        title: "хотеть - to want"
+        title: "хоте́ть - to want"
         columns: ["Person", "Russian", "Pattern"]
         rows:
-          - ["я", "хочу", "хоч- + Type 1"]
-          - ["ты", "хочешь", "хоч- + Type 1"]
-          - ["он/она", "хочет", "хоч- + Type 1"]
-          - ["мы", "хотим", "хот- + Type 2"]
-          - ["вы", "хотите", "хот- + Type 2"]
-          - ["они", "хотят", "хот- + Type 2"]
+          - ["я", "хочу́", "хоч- + Type 1 (stress on -у́)"]
+          - ["ты", "хо́чешь", "хоч- + Type 1 (stress moves!)"]
+          - ["он/она́", "хо́чет", "хоч- + Type 1"]
+          - ["мы", "хоти́м", "хот- + Type 2"]
+          - ["вы", "хоти́те", "хот- + Type 2"]
+          - ["они́", "хотя́т", "хот- + Type 2"]
       
       - type: "tip"
-        content: "Singular uses хоч- + Type 1, plural uses хот- + Type 2. Just memorize it!"
+        content: "Singular uses хоч- + Type 1, plural uses хот- + Type 2. Stress moves! Just memorize it!"
     
     vocab_pool:
       introduce: [khotet]
@@ -46,7 +46,7 @@ modules:
       count: 6
 
   - id: "mod_2"
-    title: "Жить & Работать"
+    title: "Жить & Рабо́тать"
     type: "learn"
     
     teaching:
@@ -54,35 +54,35 @@ modules:
         words:
           - word: "жить"
             translation: "to live"
-            note: "Type 1 with consonant change: жив-"
-          - word: "работать"
+            note: "Type 1 with consonant change: жив-. Stress moves!"
+          - word: "рабо́тать"
             translation: "to work"
-            note: "Regular Type 1 - easy!"
+            note: "Regular Type 1 - easy! Stress on second syllable."
       
       - type: "pattern_table"
         title: "жить - to live"
         columns: ["Person", "Russian", "English"]
         rows:
-          - ["я", "живу", "I live"]
+          - ["я", "живу́", "I live"]
           - ["ты", "живёшь", "you live"]
-          - ["он/она", "живёт", "he/she lives"]
+          - ["он/она́", "живёт", "he/she lives"]
           - ["мы", "живём", "we live"]
           - ["вы", "живёте", "you live (formal)"]
-          - ["они", "живут", "they live"]
+          - ["они́", "живу́т", "they live"]
       
       - type: "pattern_table"
-        title: "работать - to work"
+        title: "рабо́тать - to work"
         columns: ["Person", "Russian", "English"]
         rows:
-          - ["я", "работаю", "I work"]
-          - ["ты", "работаешь", "you work"]
-          - ["он/она", "работает", "he/she works"]
-          - ["мы", "работаем", "we work"]
-          - ["вы", "работаете", "you work (formal)"]
-          - ["они", "работают", "they work"]
+          - ["я", "рабо́таю", "I work"]
+          - ["ты", "рабо́таешь", "you work"]
+          - ["он/она́", "рабо́тает", "he/she works"]
+          - ["мы", "рабо́таем", "we work"]
+          - ["вы", "рабо́таете", "you work (formal)"]
+          - ["они́", "рабо́тают", "they work"]
       
       - type: "tip"
-        content: "работать is completely regular Type 1. жить has the stem жив- (в appears in conjugation)."
+        content: "рабо́тать is completely regular Type 1. жить has the stem жив- (в appears in conjugation). Ё is always stressed!"
     
     vocab_pool:
       introduce: [zhit, rabotat]
@@ -101,26 +101,26 @@ modules:
         formula: "Где + ты/вы + живёшь/живёте?"
         examples:
           - { ru: "Где ты живёшь?", en: "Where do you live?" }
-          - { ru: "Я живу в Москве.", en: "I live in Moscow." }
+          - { ru: "Я живу́ в Москве́.", en: "I live in Moscow." }
           - { ru: "Он живёт тут.", en: "He lives here." }
         rule: "Use в + city name for 'in [city]'."
       
       - type: "morphology_pattern"
         title: "What Do You Do?"
-        formula: "Где + ты/вы + работаешь/работаете?"
+        formula: "Где + ты/вы + рабо́таешь/рабо́таете?"
         examples:
-          - { ru: "Где ты работаешь?", en: "Where do you work?" }
-          - { ru: "Я работаю в банке.", en: "I work at a bank." }
-          - { ru: "Она не работает.", en: "She doesn't work." }
+          - { ru: "Где ты рабо́таешь?", en: "Where do you work?" }
+          - { ru: "Я рабо́таю в ба́нке.", en: "I work at a bank." }
+          - { ru: "Она́ не рабо́тает.", en: "She doesn't work." }
         rule: "в + place for 'at/in [place]'."
       
       - type: "etymology"
         title: "Word Connection"
-        word: "работать"
+        word: "рабо́тать"
         connections:
           - { word: "раб", lang: "Russian", relation: "ancestor" }
           - { word: "robot", lang: "English", relation: "descendant" }
-        insight: "Работать comes from 'раб' (slave). The word 'robot' was coined from this Slavic root!"
+        insight: "Рабо́тать comes from 'раб' (slave). The word 'robot' was coined from this Slavic root!"
     
     vocab_pool:
       introduce: []
@@ -134,7 +134,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Use all your verbs together: Я живу в Москве. Я работаю в банке. Я хочу кофе!"
+        content: "Use all your verbs together: Я живу́ в Москве́. Я рабо́таю в ба́нке. Я хочу́ ко́фе!"
     vocab_pool:
       introduce: []
       practice: [khotet, zhit, rabotat, znat, ponimat, govorit]
@@ -149,10 +149,10 @@ modules:
       - type: "summary"
         title: "You learned:"
         points:
-          - "хотеть (want) - irregular: хочу, хочешь, хочет, хотим, хотите, хотят"
-          - "жить (live) - consonant change: живу, живёшь, живёт..."
-          - "работать (work) - regular Type 1: работаю, работаешь..."
-          - "Asking where: Где ты живёшь? Где ты работаешь?"
+          - "хоте́ть (want) - irregular: хочу́, хо́чешь, хо́чет, хоти́м, хоти́те, хотя́т"
+          - "жить (live) - consonant change: живу́, живёшь, живёт..."
+          - "рабо́тать (work) - regular Type 1: рабо́таю, рабо́таешь..."
+          - "Asking where: Где ты живёшь? Где ты рабо́таешь?"
     vocab_pool:
       introduce: []
       practice: []
@@ -166,7 +166,7 @@ vocab_filter:
   review_from: [06_type1_verbs, 08_type2_verbs]
 
 templates:
-  - pattern: "Я хочу {NOUN}."
+  - pattern: "Я хочу́ {NOUN}."
     translation: "I want {NOUN.a}."
     slots:
       NOUN: { pos: [noun] }
@@ -177,12 +177,12 @@ templates:
     slots: {}
     weight: 3
 
-  - pattern: "Где ты работаешь?"
+  - pattern: "Где ты рабо́таешь?"
     translation: "Where do you work?"
     slots: {}
     weight: 3
 
-  - pattern: "Я живу {LOCATION}."
+  - pattern: "Я живу́ {LOCATION}."
     translation: "I live {LOCATION.translation}."
     slots:
       LOCATION: { pos: [adverb], semantic: [location] }

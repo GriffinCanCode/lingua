@@ -46,18 +46,18 @@ modules:
       - type: "summary"
         title: "Verb Conjugation"
         points:
-          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понимать, работать)"
-          - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говорить)"
-          - "Irregular: хотеть (mixed pattern), жить (consonant change)"
+          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, рабо́тать)"
+          - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говори́ть)"
+          - "Irregular: хоте́ть (mixed pattern), жить (consonant change)"
       
       - type: "pattern_table"
         title: "Key Verbs"
-        columns: ["Verb", "Я", "Ты", "Он/Она"]
+        columns: ["Verb", "Я", "Ты", "Он/Она́"]
         rows:
-          - ["знать", "знаю", "знаешь", "знает"]
-          - ["говорить", "говорю", "говоришь", "говорит"]
-          - ["хотеть", "хочу", "хочешь", "хочет"]
-          - ["жить", "живу", "живёшь", "живёт"]
+          - ["знать", "зна́ю", "зна́ешь", "зна́ет"]
+          - ["говори́ть", "говорю́", "говори́шь", "говори́т"]
+          - ["хоте́ть", "хочу́", "хо́чешь", "хо́чет"]
+          - ["жить", "живу́", "живёшь", "живёт"]
     
     vocab_pool:
       introduce: []
@@ -76,18 +76,18 @@ modules:
         points:
           - "No 'is/am/are' in present tense"
           - "Gender: masculine (-consonant), feminine (-а), neuter (-о)"
-          - "Pronouns match gender: он, она, оно"
-          - "У меня есть = I have"
+          - "Pronouns match gender: он, она́, оно́"
+          - "У меня́ есть = I have"
           - "Questions = rising intonation"
       
       - type: "morphology_pattern"
         title: "The Big Patterns"
         formula: "Subject + predicate (no 'is')"
         examples:
-          - { ru: "Я студент.", en: "I am a student." }
-          - { ru: "Это мой дом.", en: "This is my house." }
-          - { ru: "У меня есть кот.", en: "I have a cat." }
-          - { ru: "Я говорю по-русски.", en: "I speak Russian." }
+          - { ru: "Я студе́нт.", en: "I am a student." }
+          - { ru: "Э́то мой дом.", en: "This is my house." }
+          - { ru: "У меня́ есть кот.", en: "I have a cat." }
+          - { ru: "Я говорю́ по-ру́сски.", en: "I speak Russian." }
         rule: "Russian grammar is logical - trust the patterns!"
     
     vocab_pool:
@@ -160,13 +160,13 @@ vocab_filter:
   review_from: [01_cognates, 02_hello, 03_false_friends, 04_questions, 05_gender, 06_type1_verbs, 07_possession, 08_type2_verbs, 09_where_who_what, 10_irregular_verbs, 11_possessives, 12_numbers, 13_adjectives]
 
 templates:
-  - pattern: "Это {NOUN}."
+  - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 2
 
-  - pattern: "Это {NOUN}."
+  - pattern: "Э́то {NOUN}."
     translation: "This is {NOUN.translation}."
     slots:
       NOUN: { ids: [mama, papa] }
@@ -178,7 +178,7 @@ templates:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 2
 
-  - pattern: "У меня есть {NOUN}."
+  - pattern: "У меня́ есть {NOUN}."
     translation: "I have {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
@@ -190,7 +190,7 @@ templates:
       VERB_1SG: { pos: [verb], form: "1sg" }
     weight: 2
 
-  - pattern: "Это мой {NOUN_M}."
+  - pattern: "Э́то мой {NOUN_M}."
     translation: "This is my {NOUN_M.translation}."
     slots:
       NOUN_M: { pos: [noun], gender: [m] }

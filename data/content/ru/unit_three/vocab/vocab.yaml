@@ -8,9 +8,13 @@
 # - Partitive constructions (some of, a piece of)
 # - Cultural context: Russian cuisine and hospitality
 #
+# STRESS MARKS:
+# - All entries include 'stressed' field with ́ (combining acute U+0301)
+# - Critical for food/drink words - ordering correctly requires proper stress!
+#
 # Grammar Focus:
 # - Genitive case (negation, possession, quantities)
-# - Verbs: есть (to eat), пить (to drink), покупать (to buy)
+# - Verbs: есть (to eat), пить (to drink), покупа́ть (to buy)
 # - Partitive expressions
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -29,6 +33,7 @@ unit:
 verbs:
   - id: "yest_verb"
     word: "есть"
+    stressed: "есть"
     transliteration: "yest'"
     translation: "to eat"
     pos: "verb"
@@ -37,99 +42,106 @@ verbs:
     perfective_pair: "съесть"
     frequency: 1
     difficulty: 2
+    notes: "Don't confuse with есть (there is). Context makes it clear! Irregular conjugation."
     conjugation:
-      ya: "ем"
-      ty: "ешь"
-      on_ona: "ест"
-      my: "едим"
-      vy: "едите"
-      oni: "едят"
-    notes: "Don't confuse with есть (there is). Context makes it clear!"
+      ya: { word: "ем", stressed: "ем" }
+      ty: { word: "ешь", stressed: "ешь" }
+      on_ona: { word: "ест", stressed: "ест" }
+      my: { word: "едим", stressed: "еди́м" }
+      vy: { word: "едите", stressed: "еди́те" }
+      oni: { word: "едят", stressed: "едя́т" }
     examples:
-      - { ru: "Я ем завтрак.", en: "I'm eating breakfast." }
+      - { ru: "Я ем за́втрак.", en: "I'm eating breakfast." }
       - { ru: "Что ты ешь?", en: "What are you eating?" }
 
   - id: "pit"
     word: "пить"
+    stressed: "пить"
     transliteration: "pit'"
     translation: "to drink"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "выпить"
+    perfective_pair: "вы́пить"
     frequency: 1
     difficulty: 1
+    notes: "Stress moves in conjugation!"
     conjugation:
-      ya: "пью"
-      ty: "пьёшь"
-      on_ona: "пьёт"
-      my: "пьём"
-      vy: "пьёте"
-      oni: "пьют"
+      ya: { word: "пью", stressed: "пью" }
+      ty: { word: "пьёшь", stressed: "пьёшь" }
+      on_ona: { word: "пьёт", stressed: "пьёт" }
+      my: { word: "пьём", stressed: "пьём" }
+      vy: { word: "пьёте", stressed: "пьёте" }
+      oni: { word: "пьют", stressed: "пьют" }
     examples:
       - { ru: "Я пью чай.", en: "I'm drinking tea." }
       - { ru: "Что ты пьёшь?", en: "What are you drinking?" }
 
   - id: "pokupat"
     word: "покупать"
+    stressed: "покупа́ть"
     transliteration: "pokupat'"
     translation: "to buy"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "купить"
+    perfective_pair: "купи́ть"
     frequency: 1
     difficulty: 1
+    notes: "Stress on third syllable."
     conjugation:
-      ya: "покупаю"
-      ty: "покупаешь"
-      on_ona: "покупает"
-      my: "покупаем"
-      vy: "покупаете"
-      oni: "покупают"
+      ya: { word: "покупаю", stressed: "покупа́ю" }
+      ty: { word: "покупаешь", stressed: "покупа́ешь" }
+      on_ona: { word: "покупает", stressed: "покупа́ет" }
+      my: { word: "покупаем", stressed: "покупа́ем" }
+      vy: { word: "покупаете", stressed: "покупа́ете" }
+      oni: { word: "покупают", stressed: "покупа́ют" }
     examples:
-      - { ru: "Я покупаю хлеб.", en: "I'm buying bread." }
+      - { ru: "Я покупа́ю хлеб.", en: "I'm buying bread." }
 
   - id: "gotovit"
     word: "готовить"
+    stressed: "гото́вить"
     transliteration: "gotovit'"
     translation: "to cook / to prepare"
     pos: "verb"
     conjugation_type: 2
     aspect: "imperfective"
-    perfective_pair: "приготовить"
+    perfective_pair: "пригото́вить"
     frequency: 1
     difficulty: 2
+    notes: "Consonant change: в → вл in 1st person singular. Stress on second syllable."
     conjugation:
-      ya: "готовлю"
-      ty: "готовишь"
-      on_ona: "готовит"
-      my: "готовим"
-      vy: "готовите"
-      oni: "готовят"
-    notes: "Consonant change: в → вл in 1st person singular."
+      ya: { word: "готовлю", stressed: "гото́влю" }
+      ty: { word: "готовишь", stressed: "гото́вишь" }
+      on_ona: { word: "готовит", stressed: "гото́вит" }
+      my: { word: "готовим", stressed: "гото́вим" }
+      vy: { word: "готовите", stressed: "гото́вите" }
+      oni: { word: "готовят", stressed: "гото́вят" }
     examples:
-      - { ru: "Я готовлю ужин.", en: "I'm cooking dinner." }
+      - { ru: "Я гото́влю у́жин.", en: "I'm cooking dinner." }
 
   - id: "zakazyvat"
     word: "заказывать"
+    stressed: "зака́зывать"
     transliteration: "zakazyvat'"
     translation: "to order"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "заказать"
+    perfective_pair: "заказа́ть"
     frequency: 1
     difficulty: 1
+    notes: "Stress on second syllable."
     conjugation:
-      ya: "заказываю"
-      ty: "заказываешь"
-      on_ona: "заказывает"
-      my: "заказываем"
-      vy: "заказываете"
-      oni: "заказывают"
+      ya: { word: "заказываю", stressed: "зака́зываю" }
+      ty: { word: "заказываешь", stressed: "зака́зываешь" }
+      on_ona: { word: "заказывает", stressed: "зака́зывает" }
+      my: { word: "заказываем", stressed: "зака́зываем" }
+      vy: { word: "заказываете", stressed: "зака́зываете" }
+      oni: { word: "заказывают", stressed: "зака́зывают" }
     examples:
-      - { ru: "Я заказываю кофе.", en: "I'm ordering coffee." }
+      - { ru: "Я зака́зываю ко́фе.", en: "I'm ordering coffee." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 2: FOOD NOUNS
@@ -139,42 +151,48 @@ verbs:
 food_nouns:
   - id: "khleb"
     word: "хлеб"
+    stressed: "хлеб"
     transliteration: "khleb"
     translation: "bread"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "хлеба"
+    genitive: "хле́ба"
     examples:
-      - { ru: "У нас нет хлеба.", en: "We don't have bread." }
+      - { ru: "У нас нет хле́ба.", en: "We don't have bread." }
 
   - id: "myaso"
     word: "мясо"
+    stressed: "мя́со"
     transliteration: "myaso"
     translation: "meat"
     pos: "noun"
     gender: "n"
     frequency: 1
     difficulty: 1
-    genitive: "мяса"
+    genitive: "мя́са"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Я не ем мясо.", en: "I don't eat meat." }
+      - { ru: "Я не ем мя́со.", en: "I don't eat meat." }
 
   - id: "ryba"
     word: "рыба"
+    stressed: "ры́ба"
     transliteration: "ryba"
     translation: "fish"
     pos: "noun"
     gender: "f"
     frequency: 1
     difficulty: 1
-    genitive: "рыбы"
+    genitive: "ры́бы"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Я люблю рыбу.", en: "I love fish." }
+      - { ru: "Я люблю́ ры́бу.", en: "I love fish." }
 
   - id: "ovoshi"
     word: "овощи"
+    stressed: "о́вощи"
     transliteration: "ovoshchi"
     translation: "vegetables"
     pos: "noun"
@@ -182,12 +200,14 @@ food_nouns:
     plural: true
     frequency: 1
     difficulty: 1
-    genitive: "овощей"
+    genitive: "овоще́й"
+    notes: "Stress on first syllable (nominative), shifts in genitive."
     examples:
-      - { ru: "Я покупаю овощи.", en: "I'm buying vegetables." }
+      - { ru: "Я покупа́ю о́вощи.", en: "I'm buying vegetables." }
 
   - id: "frukty"
     word: "фрукты"
+    stressed: "фру́кты"
     transliteration: "frukty"
     translation: "fruit(s)"
     pos: "noun"
@@ -195,68 +215,76 @@ food_nouns:
     plural: true
     frequency: 1
     difficulty: 1
-    genitive: "фруктов"
+    genitive: "фру́ктов"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Я люблю фрукты.", en: "I love fruit." }
+      - { ru: "Я люблю́ фру́кты.", en: "I love fruit." }
 
   - id: "syr"
     word: "сыр"
+    stressed: "сыр"
     transliteration: "syr"
     translation: "cheese"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "сыра"
+    genitive: "сы́ра"
     examples:
-      - { ru: "Дай мне сыра.", en: "Give me some cheese." }
+      - { ru: "Дай мне сы́ра.", en: "Give me some cheese." }
 
   - id: "yayco"
     word: "яйцо"
+    stressed: "яйцо́"
     transliteration: "yaytso"
     translation: "egg"
     pos: "noun"
     gender: "n"
     frequency: 1
     difficulty: 1
-    genitive: "яйца"
-    plural: "яйца"
+    genitive: "яйца́"
+    plural: "я́йца"
+    notes: "Stress on last syllable (singular), shifts in plural."
     examples:
-      - { ru: "Два яйца, пожалуйста.", en: "Two eggs, please." }
+      - { ru: "Два яйца́, пожа́луйста.", en: "Two eggs, please." }
 
   - id: "sup"
     word: "суп"
+    stressed: "суп"
     transliteration: "sup"
     translation: "soup"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "супа"
+    genitive: "су́па"
     examples:
-      - { ru: "Я хочу суп.", en: "I want soup." }
+      - { ru: "Я хочу́ суп.", en: "I want soup." }
 
   - id: "salat"
     word: "салат"
+    stressed: "сала́т"
     transliteration: "salat"
     translation: "salad"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "салата"
+    genitive: "сала́та"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Я заказываю салат.", en: "I'm ordering a salad." }
+      - { ru: "Я зака́зываю сала́т.", en: "I'm ordering a salad." }
 
   - id: "ris"
     word: "рис"
+    stressed: "рис"
     transliteration: "ris"
     translation: "rice"
     pos: "noun"
     gender: "m"
     frequency: 2
     difficulty: 1
-    genitive: "риса"
+    genitive: "ри́са"
     examples:
       - { ru: "У вас есть рис?", en: "Do you have rice?" }
 
@@ -268,65 +296,73 @@ food_nouns:
 drink_nouns:
   - id: "chay"
     word: "чай"
+    stressed: "чай"
     transliteration: "chay"
     translation: "tea"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "чая"
+    genitive: "ча́я"
     notes: "Russians drink a LOT of tea. Very cultural!"
     examples:
       - { ru: "Я пью чай.", en: "I'm drinking tea." }
-      - { ru: "Чашка чая, пожалуйста.", en: "A cup of tea, please." }
+      - { ru: "Ча́шка ча́я, пожа́луйста.", en: "A cup of tea, please." }
 
   - id: "moloko"
     word: "молоко"
+    stressed: "молоко́"
     transliteration: "moloko"
     translation: "milk"
     pos: "noun"
     gender: "n"
     frequency: 1
     difficulty: 1
-    genitive: "молока"
+    genitive: "молока́"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Кофе с молоком.", en: "Coffee with milk." }
+      - { ru: "Ко́фе с молоко́м.", en: "Coffee with milk." }
 
   - id: "sok"
     word: "сок"
+    stressed: "сок"
     transliteration: "sok"
     translation: "juice"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "сока"
+    genitive: "со́ка"
     examples:
-      - { ru: "Апельсиновый сок, пожалуйста.", en: "Orange juice, please." }
+      - { ru: "Апельси́новый сок, пожа́луйста.", en: "Orange juice, please." }
 
   - id: "vino"
     word: "вино"
+    stressed: "вино́"
     transliteration: "vino"
     translation: "wine"
     pos: "noun"
     gender: "n"
     frequency: 2
     difficulty: 1
-    genitive: "вина"
+    genitive: "вина́"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Бокал вина, пожалуйста.", en: "A glass of wine, please." }
+      - { ru: "Бока́л вина́, пожа́луйста.", en: "A glass of wine, please." }
 
   - id: "pivo"
     word: "пиво"
+    stressed: "пи́во"
     transliteration: "pivo"
     translation: "beer"
     pos: "noun"
     gender: "n"
     frequency: 2
     difficulty: 1
-    genitive: "пива"
+    genitive: "пи́ва"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Два пива, пожалуйста.", en: "Two beers, please." }
+      - { ru: "Два пи́ва, пожа́луйста.", en: "Two beers, please." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 4: RESTAURANT VOCABULARY
@@ -336,6 +372,7 @@ drink_nouns:
 restaurant:
   - id: "menyu"
     word: "меню"
+    stressed: "меню́"
     transliteration: "menyu"
     translation: "menu"
     pos: "noun"
@@ -343,11 +380,13 @@ restaurant:
     indeclinable: true
     frequency: 1
     difficulty: 1
+    notes: "Stress on last syllable. Indeclinable."
     examples:
-      - { ru: "Меню, пожалуйста.", en: "Menu, please." }
+      - { ru: "Меню́, пожа́луйста.", en: "Menu, please." }
 
   - id: "schyot"
     word: "счёт"
+    stressed: "счёт"
     transliteration: "schyot"
     translation: "bill / check"
     pos: "noun"
@@ -355,68 +394,79 @@ restaurant:
     frequency: 1
     difficulty: 1
     genitive: "счёта"
+    notes: "Ё is always stressed."
     examples:
-      - { ru: "Счёт, пожалуйста.", en: "The bill, please." }
+      - { ru: "Счёт, пожа́луйста.", en: "The bill, please." }
 
   - id: "ofitsiant"
     word: "официант"
+    stressed: "официа́нт"
     transliteration: "ofitsiant"
     translation: "waiter"
     pos: "noun"
     gender: "m"
     frequency: 2
     difficulty: 1
-    genitive: "официанта"
+    genitive: "официа́нта"
+    notes: "Stress on third syllable."
     examples:
-      - { ru: "Где официант?", en: "Where is the waiter?" }
+      - { ru: "Где официа́нт?", en: "Where is the waiter?" }
 
   - id: "tarelka"
     word: "тарелка"
+    stressed: "таре́лка"
     transliteration: "tarelka"
     translation: "plate"
     pos: "noun"
     gender: "f"
     frequency: 2
     difficulty: 1
-    genitive: "тарелки"
+    genitive: "таре́лки"
+    notes: "Stress on second syllable."
     examples:
-      - { ru: "Тарелка супа.", en: "A plate of soup." }
+      - { ru: "Таре́лка су́па.", en: "A plate of soup." }
 
   - id: "chashka"
     word: "чашка"
+    stressed: "ча́шка"
     transliteration: "chashka"
     translation: "cup"
     pos: "noun"
     gender: "f"
     frequency: 1
     difficulty: 1
-    genitive: "чашки"
+    genitive: "ча́шки"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Чашка кофе.", en: "A cup of coffee." }
+      - { ru: "Ча́шка ко́фе.", en: "A cup of coffee." }
 
   - id: "stakan"
     word: "стакан"
+    stressed: "стака́н"
     transliteration: "stakan"
     translation: "glass"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    genitive: "стакана"
+    genitive: "стака́на"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Стакан воды.", en: "A glass of water." }
+      - { ru: "Стака́н воды́.", en: "A glass of water." }
 
   - id: "bokal"
     word: "бокал"
+    stressed: "бока́л"
     transliteration: "bokal"
     translation: "wine glass / goblet"
     pos: "noun"
     gender: "m"
     frequency: 2
     difficulty: 1
-    genitive: "бокала"
+    genitive: "бока́ла"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Бокал вина.", en: "A glass of wine." }
+      - { ru: "Бока́л вина́.", en: "A glass of wine." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 5: QUANTITY EXPRESSIONS
@@ -426,49 +476,53 @@ restaurant:
 quantities:
   - id: "mnogo"
     word: "много"
+    stressed: "мно́го"
     transliteration: "mnogo"
     translation: "much / many / a lot"
     pos: "adverb"
     frequency: 1
     difficulty: 1
-    notes: "Followed by genitive case."
+    notes: "Followed by genitive case. Stress on first syllable."
     examples:
-      - { ru: "Много воды.", en: "A lot of water." }
-      - { ru: "У меня много работы.", en: "I have a lot of work." }
+      - { ru: "Мно́го воды́.", en: "A lot of water." }
+      - { ru: "У меня́ мно́го рабо́ты.", en: "I have a lot of work." }
 
   - id: "malo"
     word: "мало"
+    stressed: "ма́ло"
     transliteration: "malo"
     translation: "little / few / not much"
     pos: "adverb"
     frequency: 1
     difficulty: 1
-    notes: "Followed by genitive case."
+    notes: "Followed by genitive case. Stress on first syllable."
     examples:
-      - { ru: "Мало времени.", en: "Little time." }
+      - { ru: "Ма́ло вре́мени.", en: "Little time." }
 
   - id: "nemnogo"
     word: "немного"
+    stressed: "немно́го"
     transliteration: "nemnogo"
     translation: "a little / some"
     pos: "adverb"
     frequency: 1
     difficulty: 1
-    notes: "Followed by genitive case."
+    notes: "Followed by genitive case. Stress on second syllable."
     examples:
-      - { ru: "Немного молока, пожалуйста.", en: "A little milk, please." }
+      - { ru: "Немно́го молока́, пожа́луйста.", en: "A little milk, please." }
 
   - id: "skolko"
     word: "сколько"
+    stressed: "ско́лько"
     transliteration: "skol'ko"
     translation: "how much / how many"
     pos: "adverb"
     frequency: 1
     difficulty: 1
-    notes: "Question word. Followed by genitive."
+    notes: "Question word. Followed by genitive. Stress on first syllable."
     examples:
-      - { ru: "Сколько это стоит?", en: "How much does this cost?" }
-      - { ru: "Сколько воды?", en: "How much water?" }
+      - { ru: "Ско́лько э́то сто́ит?", en: "How much does this cost?" }
+      - { ru: "Ско́лько воды́?", en: "How much water?" }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 6: GRAMMAR NOTES
@@ -479,22 +533,22 @@ grammar_notes:
   genitive_case:
     description: "Used for: negation, 'of', quantities, after numbers 2+"
     rules:
-      masculine_consonant: "Add -а (дом → дома, хлеб → хлеба)"
-      masculine_soft: "Add -я (чай → чая)"
-      feminine_a: "Change -а to -ы (вода → воды, книга → книги)"
-      feminine_ya: "Change -я to -и (семья → семьи)"
-      neuter_o: "Change -о to -а (окно → окна, молоко → молока)"
-      neuter_e: "Change -е to -я (море → моря)"
+      masculine_consonant: "Add -а (дом → до́ма, хлеб → хле́ба)"
+      masculine_soft: "Add -я (чай → ча́я)"
+      feminine_a: "Change -а to -ы (вода́ → воды́, кни́га → кни́ги)"
+      feminine_ya: "Change -я to -и (семья́ → семьи́)"
+      neuter_o: "Change -о to -а (окно́ → окна́, молоко́ → молока́)"
+      neuter_e: "Change -е to -я (мо́ре → мо́ря)"
     uses:
-      - "Negation: У меня нет хлеба (I don't have bread)"
-      - "Of: чашка чая (cup of tea), стакан воды (glass of water)"
-      - "After много/мало/немного: много работы (a lot of work)"
-      - "After numbers 2-4: два кота (two cats)"
-      - "After numbers 5+: пять котов (five cats) - genitive plural"
+      - "Negation: У меня́ нет хле́ба (I don't have bread)"
+      - "Of: ча́шка ча́я (cup of tea), стака́н воды́ (glass of water)"
+      - "After мно́го/ма́ло/немно́го: мно́го рабо́ты (a lot of work)"
+      - "After numbers 2-4: два кота́ (two cats)"
+      - "After numbers 5+: пять кото́в (five cats) - genitive plural"
     examples:
-      - { nominative: "хлеб", genitive: "хлеба", sentence: "У нас нет хлеба." }
-      - { nominative: "вода", genitive: "воды", sentence: "Стакан воды." }
-      - { nominative: "молоко", genitive: "молока", sentence: "Немного молока." }
+      - { nominative: "хлеб", genitive: "хле́ба", sentence: "У нас нет хле́ба." }
+      - { nominative: "вода́", genitive: "воды́", sentence: "Стака́н воды́." }
+      - { nominative: "молоко́", genitive: "молока́", sentence: "Немно́го молока́." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # LESSON MAPPING
@@ -544,7 +598,7 @@ lessons:
 
   lesson_05_genitive_negation:
     title: "I Don't Have"
-    focus: "Genitive in negation: У меня нет..."
+    focus: "Genitive in negation: У меня́ нет..."
     review_vocab:
       - khleb
       - moloko
@@ -571,7 +625,7 @@ lessons:
 
   lesson_08_cooking:
     title: "Cooking"
-    focus: "готовить and kitchen vocabulary"
+    focus: "гото́вить and kitchen vocabulary"
     primary_vocab:
       - gotovit
       - tarelka
@@ -582,7 +636,7 @@ lessons:
 
   lesson_09_shopping:
     title: "Food Shopping"
-    focus: "покупать and quantities"
+    focus: "покупа́ть and quantities"
     primary_vocab:
       - pokupat
     review_vocab:

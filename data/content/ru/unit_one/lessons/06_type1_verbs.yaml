@@ -26,12 +26,12 @@ modules:
           - word: "знать"
             translation: "to know"
             note: "Type 1 verb - regular pattern"
-          - word: "понимать"
+          - word: "понима́ть"
             translation: "to understand"
-            note: "Type 1 verb - essential survival word!"
+            note: "Type 1 verb - essential survival word! Stress on third syllable."
       
       - type: "tip"
-        content: "These two verbs will get you out of many situations: Я не знаю (I don't know), Я не понимаю (I don't understand)."
+        content: "These two verbs will get you out of many situations: Я не зна́ю (I don't know), Я не понима́ю (I don't understand)."
     
     vocab_pool:
       introduce: [znat, ponimat]
@@ -50,31 +50,31 @@ modules:
         content: |
           Type 1 verbs follow this pattern:
           
-          я знаю (I know)
-          ты знаешь (you know)
-          он/она знает (he/she knows)
-          мы знаем (we know)
-          вы знаете (you know - formal/plural)
-          они знают (they know)
+          я зна́ю (I know)
+          ты зна́ешь (you know)
+          он/она́ зна́ет (he/she knows)
+          мы зна́ем (we know)
+          вы зна́ете (you know - formal/plural)
+          они́ зна́ют (they know)
       
       - type: "pattern_table"
         title: "знать - to know"
         columns: ["Person", "Russian", "English"]
         rows:
-          - ["я", "знаю", "I know"]
-          - ["ты", "знаешь", "you know"]
-          - ["он/она", "знает", "he/she knows"]
-          - ["мы", "знаем", "we know"]
-          - ["вы", "знаете", "you know (formal)"]
-          - ["они", "знают", "they know"]
+          - ["я", "зна́ю", "I know"]
+          - ["ты", "зна́ешь", "you know"]
+          - ["он/она́", "зна́ет", "he/she knows"]
+          - ["мы", "зна́ем", "we know"]
+          - ["вы", "зна́ете", "you know (formal)"]
+          - ["они́", "зна́ют", "they know"]
       
       - type: "morphology_pattern"
         title: "Type 1 Endings"
         formula: "Stem + {-ю, -ешь, -ет, -ем, -ете, -ют}"
         examples:
-          - { ru: "Я знаю.", en: "I know." }
-          - { ru: "Ты знаешь?", en: "Do you know?" }
-          - { ru: "Он знает.", en: "He knows." }
+          - { ru: "Я зна́ю.", en: "I know." }
+          - { ru: "Ты зна́ешь?", en: "Do you know?" }
+          - { ru: "Он зна́ет.", en: "He knows." }
         rule: "Remove -ть from infinitive, add the ending for each person."
     
     vocab_pool:
@@ -85,37 +85,37 @@ modules:
       count: 8
 
   - id: "mod_3"
-    title: "Понимать"
+    title: "Понима́ть"
     type: "pattern"
     
     teaching:
       - type: "pattern_table"
-        title: "понимать - to understand"
+        title: "понима́ть - to understand"
         columns: ["Person", "Russian", "English"]
         rows:
-          - ["я", "понимаю", "I understand"]
-          - ["ты", "понимаешь", "you understand"]
-          - ["он/она", "понимает", "he/she understands"]
-          - ["мы", "понимаем", "we understand"]
-          - ["вы", "понимаете", "you understand (formal)"]
-          - ["они", "понимают", "they understand"]
+          - ["я", "понима́ю", "I understand"]
+          - ["ты", "понима́ешь", "you understand"]
+          - ["он/она́", "понима́ет", "he/she understands"]
+          - ["мы", "понима́ем", "we understand"]
+          - ["вы", "понима́ете", "you understand (formal)"]
+          - ["они́", "понима́ют", "they understand"]
       
       - type: "morphology_pattern"
         title: "Survival Phrases"
-        formula: "Я (не) понимаю = I (don't) understand"
+        formula: "Я (не) понима́ю = I (don't) understand"
         examples:
-          - { ru: "Я понимаю.", en: "I understand." }
-          - { ru: "Я не понимаю.", en: "I don't understand." }
-          - { ru: "Вы понимаете?", en: "Do you understand?" }
+          - { ru: "Я понима́ю.", en: "I understand." }
+          - { ru: "Я не понима́ю.", en: "I don't understand." }
+          - { ru: "Вы понима́ете?", en: "Do you understand?" }
         rule: "Add не before the verb to negate it."
       
       - type: "etymology"
         title: "Word Root"
-        word: "понимать"
+        word: "понима́ть"
         connections:
-          - { word: "иметь", lang: "Russian", relation: "cousin" }
+          - { word: "име́ть", lang: "Russian", relation: "cousin" }
           - { word: "comprehend", lang: "English", relation: "cousin" }
-        insight: "По-ним-ать contains the root 'ним' (take/grasp) - to understand is to 'grasp' an idea!"
+        insight: "По-ним-а́ть contains the root 'ним' (take/grasp) - to understand is to 'grasp' an idea!"
     
     vocab_pool:
       introduce: []
@@ -129,7 +129,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Focus on я, ты, and он/она forms first - these are the most common. The pattern will become natural!"
+        content: "Focus on я, ты, and он/она́ forms first - these are the most common. The pattern will become natural!"
     vocab_pool:
       introduce: []
       practice: [znat, ponimat]
@@ -145,9 +145,9 @@ modules:
         title: "You learned:"
         points:
           - "Type 1 conjugation pattern: -ю, -ешь, -ет, -ем, -ете, -ют"
-          - "знать (to know) - Я знаю, Ты знаешь..."
-          - "понимать (to understand) - Я понимаю, Ты понимаешь..."
-          - "Negation: Я не знаю, Я не понимаю"
+          - "знать (to know) - Я зна́ю, Ты зна́ешь..."
+          - "понима́ть (to understand) - Я понима́ю, Ты понима́ешь..."
+          - "Negation: Я не зна́ю, Я не понима́ю"
     vocab_pool:
       introduce: []
       practice: []

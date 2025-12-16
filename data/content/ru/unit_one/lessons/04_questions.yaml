@@ -19,16 +19,16 @@ modules:
           In Russian, you don't need to change word order for questions!
           Just raise your voice at the end.
           
-          Это кот. (This is a cat.) ↘
-          Это кот? (Is this a cat?) ↗
+          Э́то кот. (This is a cat.) ↘
+          Э́то кот? (Is this a cat?) ↗
       
       - type: "pattern_table"
         title: "Statement vs Question"
         columns: ["Statement", "Question"]
         rows:
-          - ["Это такси.", "Это такси?"]
-          - ["Мама там.", "Мама там?"]
-          - ["Он студент.", "Он студент?"]
+          - ["Э́то такси́.", "Э́то такси́?"]
+          - ["Ма́ма там.", "Ма́ма там?"]
+          - ["Он студе́нт.", "Он студе́нт?"]
       
       - type: "tip"
         content: "The only difference is how you say it. Raise your pitch on the stressed syllable!"
@@ -79,9 +79,9 @@ modules:
         title: "Making Things Negative"
         formula: "не + {WORD} = not {WORD}"
         examples:
-          - { ru: "Это не кот.", en: "This is not a cat." }
+          - { ru: "Э́то не кот.", en: "This is not a cat." }
           - { ru: "Он не там.", en: "He is not there." }
-          - { ru: "Я не студент.", en: "I am not a student." }
+          - { ru: "Я не студе́нт.", en: "I am not a student." }
         rule: "Put 'не' right before what you're negating. It's that simple!"
       
       - type: "word_intro"
@@ -100,7 +100,7 @@ modules:
     exercises:
       count: 8
       templates:
-        - pattern: "Это не {NOUN}."
+        - pattern: "Э́то не {NOUN}."
           weight: 4
 
   - id: "mod_4"
@@ -108,7 +108,7 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Practice asking questions, then answering them yourself. Да, это кот. Нет, это не кот."
+        content: "Practice asking questions, then answering them yourself. Да, э́то кот. Нет, э́то не кот."
     vocab_pool:
       introduce: []
       practice: [da, nyet, nye, eto, kot, taksi]
@@ -140,37 +140,37 @@ vocab_filter:
   review_from: [01_cognates, 02_hello, 03_false_friends]
 
 templates:
-  - pattern: "Это {NOUN}?"
+  - pattern: "Э́то {NOUN}?"
     translation: "Is this {NOUN.a}?"
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 4
 
-  - pattern: "Это {NOUN}?"
+  - pattern: "Э́то {NOUN}?"
     translation: "Is this {NOUN.translation}?"
     slots:
       NOUN: { ids: [mama, papa] }
     weight: 4
 
-  - pattern: "Это не {NOUN}."
+  - pattern: "Э́то не {NOUN}."
     translation: "This is not {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 3
 
-  - pattern: "Это не {NOUN}."
+  - pattern: "Э́то не {NOUN}."
     translation: "This is not {NOUN.translation}."
     slots:
       NOUN: { ids: [mama, papa] }
     weight: 3
 
-  - pattern: "Да, это {NOUN}."
+  - pattern: "Да, э́то {NOUN}."
     translation: "Yes, this is {NOUN.a}."
     slots:
       NOUN: { pos: [noun], exclude_ids: [mama, papa] }
     weight: 2
 
-  - pattern: "Да, это {NOUN}."
+  - pattern: "Да, э́то {NOUN}."
     translation: "Yes, this is {NOUN.translation}."
     slots:
       NOUN: { ids: [mama, papa] }

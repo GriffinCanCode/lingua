@@ -19,8 +19,9 @@ All Russian language content organized by unit.
 ru/
 ├── CURRICULUM.md           # Full 25-unit course outline
 ├── README.md               # This file
-├── unit_one/               # Unit 1: First Steps (14 lessons)
+├── unit_one/               # Unit 1: First Steps (15 lessons)
 │   ├── lessons/
+│   │   ├── 00_stress.yaml      # CRITICAL: Stress marks intro
 │   │   ├── 01_cognates.yaml
 │   │   ├── 02_hello.yaml
 │   │   ├── 03_false_friends.yaml
@@ -59,7 +60,8 @@ unit:
 # Vocabulary is organized by theme/function
 pronouns:
   - id: "ya"                    # Unique identifier for references
-    word: "я"                   # Russian word
+    word: "я"                   # Russian word (clean, for matching/TTS)
+    stressed: "я"               # Stressed form with ́ marks for display
     transliteration: "ya"       # Pronunciation guide
     translation: "I"            # English meaning
     pos: "pronoun"              # Part of speech
@@ -72,8 +74,8 @@ pronouns:
     examples:
       - { ru: "Я тут.", en: "I am here." }
     conjugation:                # For verbs only
-      ya: "хочу"
-      ty: "хочешь"
+      ya: "хочу́"               # Conjugations also show stress
+      ty: "хо́чешь"
       ...
 
 # Lesson mappings define what vocab goes where
@@ -95,22 +97,32 @@ lessons:
 
 ## Design Principles
 
-### 1. Frequency First
+### 1. Stress Marks First
+Russian stress is unpredictable and changes meaning. Every word includes:
+- `word`: Clean form (for matching, TTS, user input)
+- `stressed`: Display form with ́ accent marks (понима́ть, рабо́тать)
+
+**Why this matters:**
+- за́мок (castle) vs замо́к (lock) - same letters, different meaning!
+- Unstressed О sounds like А (молоко́ = "malakó")
+- Incorrect stress sounds very foreign to native speakers
+
+### 2. Frequency First
 Words are ordered by how often they appear in real Russian. Pronouns and question words come before obscure nouns.
 
-### 2. Progressive Cyrillic
+### 3. Progressive Cyrillic
 Letters are introduced in order of familiarity:
 - Phase 1: Identical to Latin (А, Е, К, М, О, Т)
 - Phase 2: False friends (Р=R, С=S, Н=N, В=V)
 - Phase 3: Unique Cyrillic (Д, Б, Г, Ш, Щ, Ч, Ц, Й, Ы, Ь, Ъ, Э, Ю, Я)
 
-### 3. Survival Vocabulary
+### 4. Survival Vocabulary
 Every word should answer: "Would a tourist need this in the first week?"
 
-### 4. Natural Grammar
+### 5. Natural Grammar
 Grammar patterns emerge from vocabulary. Learn "У меня есть кот" before explaining genitive case.
 
-### 5. Thematic Clusters
+### 6. Thematic Clusters
 Related words taught together:
 - да/нет (yes/no)
 - тут/там (here/there)

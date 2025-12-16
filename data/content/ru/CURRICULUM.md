@@ -9,6 +9,7 @@
 ## Design Principles
 
 - **Serious learners** heading for real fluency
+- **STRESS MARKS on all words** - Russian stress is unpredictable and critical
 - **Full Cyrillic fluency** - no transliteration crutches past Unit 2
 - **Culture heavily integrated** - topics drive vocabulary selection
 - **Hybrid grammar** - explicit rules delivered through patterns and examples
@@ -30,38 +31,40 @@
 ## Phase 1: Foundations (Units 1-5) — A1
 
 ### Unit 1: First Steps
-**Lessons:** 14  
+**Lessons:** 15 (including stress intro)  
 **Words:** ~95  
 **Theme:** First contact with Russian
 
 #### Grammar Focus
+- **STRESS MARKS** - Critical foundation (lesson 0)
 - Cyrillic alphabet (complete)
 - Gender system (masculine/feminine/neuter)
-- Personal pronouns (я, ты, он, она, оно, мы, вы, они)
-- Zero copula (Я студент = I am a student)
-- **Type 1 verbs:** знать, понимать, работать, читать
-- **Type 2 verbs:** говорить
-- **Irregular verbs:** хотеть, жить
-- Possession: У меня есть
+- Personal pronouns (я, ты, он, она́, оно́, мы, вы, они́)
+- Zero copula (Я студе́нт = I am a student)
+- **Type 1 verbs:** знать, понима́ть, рабо́тать, чита́ть
+- **Type 2 verbs:** говори́ть
+- **Irregular verbs:** хоте́ть, жить
+- Possession: У меня́ есть
 - Question words: где, кто, что, как
 - Numbers 1-10
-- Possessive pronouns: мой/моя/моё
+- Possessive pronouns: мой/моя́/моё
 - Adjective gender agreement
 
 #### Lesson Breakdown
+0. **Russian Stress** - Why stress matters, vowel reduction, minimal pairs
 1. **Cognates & Cyrillic** - А, К, М, О, Т letters, instant vocabulary
-2. **Hello & Goodbye** - Greetings (formal/informal), спасибо, пожалуйста
+2. **Hello & Goodbye** - Greetings (formal/informal), спаси́бо, пожа́луйста
 3. **False Friends** - Р=R, С=S, Н=N, В=V
 4. **Is this a...?** - да, нет, не, question intonation
-5. **He, She, It** - Gender system, pronouns он/она/оно
-6. **I Know, I Understand** - Type 1 verb conjugation (знать, понимать)
-7. **I Have...** - У меня есть construction
-8. **I Speak Russian** - Type 2 verb conjugation (говорить)
+5. **He, She, It** - Gender system, pronouns он/она́/оно́
+6. **I Know, I Understand** - Type 1 verb conjugation (знать, понима́ть)
+7. **I Have...** - У меня́ есть construction
+8. **I Speak Russian** - Type 2 verb conjugation (говори́ть)
 9. **Where, Who, What** - Question words (где, кто, что)
-10. **I Want, I Live, I Work** - Irregular verbs (хотеть, жить, работать)
+10. **I Want, I Live, I Work** - Irregular verbs (хоте́ть, жить, рабо́тать)
 11. **My, Your, Our** - Possessive pronouns with gender agreement
 12. **Numbers 1-10** - Counting, number-noun agreement basics
-13. **Adjectives** - Gender agreement (большой/большая/большое)
+13. **Adjectives** - Gender agreement (большо́й/больша́я/большо́е)
 14. **Review & Checkpoint** - Comprehensive assessment
 
 #### Vocabulary Themes

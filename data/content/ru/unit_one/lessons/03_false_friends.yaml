@@ -33,7 +33,7 @@ modules:
           - ["В", "B", "V"]
       
       - type: "tip"
-        content: "РЕСТОРАН looks like 'pectopah' but sounds like 'restoran' (restaurant)!"
+        content: "РЕСТОРА́Н looks like 'pectopah' but sounds like 'restorán' (restaurant)!"
     
     vocab_pool:
       introduce: [restoran, voda]
@@ -49,27 +49,27 @@ modules:
     teaching:
       - type: "word_intro"
         words:
-          - word: "ресторан"
+          - word: "рестора́н"
             translation: "restaurant"
-            note: "Р=R, С=S, Н=N"
-          - word: "вода"
+            note: "Р=R, С=S, Н=N. Stress on last syllable."
+          - word: "вода́"
             translation: "water"
-            note: "В=V"
-          - word: "сестра"
+            note: "В=V. Stress on last syllable."
+          - word: "сестра́"
             translation: "sister"
-            note: "С=S at the start"
+            note: "С=S at the start. Stress on last syllable."
           - word: "брат"
             translation: "brother"
             note: "New letter Б = B"
       
       - type: "etymology"
-        title: "Word Family: вода"
-        word: "вода"
+        title: "Word Family: вода́"
+        word: "вода́"
         connections:
           - { word: "water", lang: "English", relation: "cognate" }
           - { word: "Wasser", lang: "German", relation: "cognate" }
-          - { word: "vodka", lang: "Russian", relation: "descendant" }
-        insight: "Vodka literally means 'little water' - вода + ка (diminutive)!"
+          - { word: "во́дка", lang: "Russian", relation: "descendant" }
+        insight: "Во́дка literally means 'little water' - вода́ + ка (diminutive)!"
     
     vocab_pool:
       introduce: [brat, sestra]
@@ -88,17 +88,17 @@ modules:
         content: |
           Now you can decode many international words!
           
-          РОССИЯ = Rossiya (Russia)
-          МОСКВА = Moskva (Moscow)
-          САНКТ-ПЕТЕРБУРГ = Sankt-Peterburg
+          РОССИ́Я = Rossíya (Russia)
+          МОСКВА́ = Moskvá (Moscow)
+          САНКТ-ПЕТЕРБУ́РГ = Sankt-Peterbúrg
       
       - type: "pattern_table"
         title: "Decode These"
         columns: ["Russian", "Transliteration", "Meaning"]
         rows:
-          - ["автобус", "avtobus", "bus"]
-          - ["интернет", "internet", "internet"]
-          - ["телефон", "telefon", "telephone"]
+          - ["авто́бус", "avtóbus", "bus"]
+          - ["интерне́т", "internét", "internet"]
+          - ["телефо́н", "telefón", "telephone"]
           - ["банк", "bank", "bank"]
       
       - type: "tip"
@@ -155,7 +155,7 @@ templates:
       PLACE: { pos: [noun], semantic: [place] }
     weight: 3
 
-  - pattern: "Это мой {FAMILY}."
+  - pattern: "Э́то мой {FAMILY}."
     translation: "This is my {FAMILY.translation}."
     slots:
       FAMILY: { pos: [noun], semantic: [family] }

@@ -8,9 +8,13 @@
 # - Focus on daily activities and routines
 # - Time expressions for talking about when things happen
 #
+# STRESS MARKS:
+# - All entries include 'stressed' field with ́ (combining acute U+0301)
+# - Conjugations show stress patterns (stress often stays fixed but can move!)
+#
 # Grammar Focus:
 # - Accusative case (direct objects)
-# - More verbs: делать, слушать, смотреть, видеть, любить
+# - More verbs: де́лать, слу́шать, смотре́ть, ви́деть, люби́ть
 # - Time expressions
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -30,27 +34,30 @@ verbs:
   # TYPE 1 VERBS
   - id: "delat"
     word: "делать"
+    stressed: "де́лать"
     transliteration: "delat'"
     translation: "to do / to make"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "сделать"
+    perfective_pair: "сде́лать"
     frequency: 1
     difficulty: 1
+    notes: "Stress on first syllable throughout conjugation."
     conjugation:
-      ya: "делаю"
-      ty: "делаешь"
-      on_ona: "делает"
-      my: "делаем"
-      vy: "делаете"
-      oni: "делают"
+      ya: { word: "делаю", stressed: "де́лаю" }
+      ty: { word: "делаешь", stressed: "де́лаешь" }
+      on_ona: { word: "делает", stressed: "де́лает" }
+      my: { word: "делаем", stressed: "де́лаем" }
+      vy: { word: "делаете", stressed: "де́лаете" }
+      oni: { word: "делают", stressed: "де́лают" }
     examples:
-      - { ru: "Что ты делаешь?", en: "What are you doing?" }
-      - { ru: "Я делаю домашнее задание.", en: "I'm doing homework." }
+      - { ru: "Что ты де́лаешь?", en: "What are you doing?" }
+      - { ru: "Я де́лаю дома́шнее зада́ние.", en: "I'm doing homework." }
 
   - id: "slushat"
     word: "слушать"
+    stressed: "слу́шать"
     transliteration: "slushat'"
     translation: "to listen (to)"
     pos: "verb"
@@ -58,106 +65,113 @@ verbs:
     aspect: "imperfective"
     frequency: 1
     difficulty: 1
+    notes: "Takes accusative case for the object. Stress on first syllable."
     conjugation:
-      ya: "слушаю"
-      ty: "слушаешь"
-      on_ona: "слушает"
-      my: "слушаем"
-      vy: "слушаете"
-      oni: "слушают"
-    notes: "Takes accusative case for the object being listened to."
+      ya: { word: "слушаю", stressed: "слу́шаю" }
+      ty: { word: "слушаешь", stressed: "слу́шаешь" }
+      on_ona: { word: "слушает", stressed: "слу́шает" }
+      my: { word: "слушаем", stressed: "слу́шаем" }
+      vy: { word: "слушаете", stressed: "слу́шаете" }
+      oni: { word: "слушают", stressed: "слу́шают" }
     examples:
-      - { ru: "Я слушаю музыку.", en: "I'm listening to music." }
-      - { ru: "Слушай!", en: "Listen!" }
+      - { ru: "Я слу́шаю му́зыку.", en: "I'm listening to music." }
+      - { ru: "Слу́шай!", en: "Listen!" }
 
   - id: "chitat"
     word: "читать"
+    stressed: "чита́ть"
     transliteration: "chitat'"
     translation: "to read"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "прочитать"
+    perfective_pair: "прочита́ть"
     frequency: 1
     difficulty: 1
+    notes: "Stress on second syllable."
     conjugation:
-      ya: "читаю"
-      ty: "читаешь"
-      on_ona: "читает"
-      my: "читаем"
-      vy: "читаете"
-      oni: "читают"
+      ya: { word: "читаю", stressed: "чита́ю" }
+      ty: { word: "читаешь", stressed: "чита́ешь" }
+      on_ona: { word: "читает", stressed: "чита́ет" }
+      my: { word: "читаем", stressed: "чита́ем" }
+      vy: { word: "читаете", stressed: "чита́ете" }
+      oni: { word: "читают", stressed: "чита́ют" }
     examples:
-      - { ru: "Я читаю книгу.", en: "I'm reading a book." }
-      - { ru: "Что ты читаешь?", en: "What are you reading?" }
+      - { ru: "Я чита́ю кни́гу.", en: "I'm reading a book." }
+      - { ru: "Что ты чита́ешь?", en: "What are you reading?" }
 
   - id: "pisat"
     word: "писать"
+    stressed: "писа́ть"
     transliteration: "pisat'"
     translation: "to write"
     pos: "verb"
     conjugation_type: 1
     aspect: "imperfective"
-    perfective_pair: "написать"
+    perfective_pair: "написа́ть"
     frequency: 1
     difficulty: 2
+    notes: "Consonant change: с → ш in conjugation. Stress moves in conjugation!"
     conjugation:
-      ya: "пишу"
-      ty: "пишешь"
-      on_ona: "пишет"
-      my: "пишем"
-      vy: "пишете"
-      oni: "пишут"
-    notes: "Consonant change: с → ш in conjugation."
+      ya: { word: "пишу", stressed: "пишу́" }
+      ty: { word: "пишешь", stressed: "пи́шешь" }
+      on_ona: { word: "пишет", stressed: "пи́шет" }
+      my: { word: "пишем", stressed: "пи́шем" }
+      vy: { word: "пишете", stressed: "пи́шете" }
+      oni: { word: "пишут", stressed: "пи́шут" }
     examples:
-      - { ru: "Я пишу письмо.", en: "I'm writing a letter." }
+      - { ru: "Я пишу́ письмо́.", en: "I'm writing a letter." }
 
   # TYPE 2 VERBS
   - id: "smotret"
     word: "смотреть"
+    stressed: "смотре́ть"
     transliteration: "smotret'"
     translation: "to watch / to look at"
     pos: "verb"
     conjugation_type: 2
     aspect: "imperfective"
-    perfective_pair: "посмотреть"
+    perfective_pair: "посмотре́ть"
     frequency: 1
     difficulty: 1
+    notes: "Stress on last syllable of infinitive, varies in conjugation."
     conjugation:
-      ya: "смотрю"
-      ty: "смотришь"
-      on_ona: "смотрит"
-      my: "смотрим"
-      vy: "смотрите"
-      oni: "смотрят"
+      ya: { word: "смотрю", stressed: "смотрю́" }
+      ty: { word: "смотришь", stressed: "смо́тришь" }
+      on_ona: { word: "смотрит", stressed: "смо́трит" }
+      my: { word: "смотрим", stressed: "смо́трим" }
+      vy: { word: "смотрите", stressed: "смо́трите" }
+      oni: { word: "смотрят", stressed: "смо́трят" }
     examples:
-      - { ru: "Я смотрю телевизор.", en: "I'm watching TV." }
-      - { ru: "Смотри!", en: "Look!" }
+      - { ru: "Я смотрю́ телеви́зор.", en: "I'm watching TV." }
+      - { ru: "Смотри́!", en: "Look!" }
 
   - id: "videt"
     word: "видеть"
+    stressed: "ви́деть"
     transliteration: "videt'"
     translation: "to see"
     pos: "verb"
     conjugation_type: 2
     aspect: "imperfective"
-    perfective_pair: "увидеть"
+    perfective_pair: "уви́деть"
     frequency: 1
     difficulty: 2
+    notes: "Consonant change: д → ж in 1st person singular. Stress on first syllable."
     conjugation:
-      ya: "вижу"
-      ty: "видишь"
-      on_ona: "видит"
-      my: "видим"
-      vy: "видите"
-      oni: "видят"
-    notes: "Consonant change: д → ж in 1st person singular."
+      ya: { word: "вижу", stressed: "ви́жу" }
+      ty: { word: "видишь", stressed: "ви́дишь" }
+      on_ona: { word: "видит", stressed: "ви́дит" }
+      my: { word: "видим", stressed: "ви́дим" }
+      vy: { word: "видите", stressed: "ви́дите" }
+      oni: { word: "видят", stressed: "ви́дят" }
     examples:
-      - { ru: "Я вижу дом.", en: "I see a house." }
-      - { ru: "Ты видишь?", en: "Do you see?" }
+      - { ru: "Я ви́жу дом.", en: "I see a house." }
+      - { ru: "Ты ви́дишь?", en: "Do you see?" }
 
   - id: "lyubit"
     word: "любить"
+    stressed: "люби́ть"
     transliteration: "lyubit'"
     translation: "to love / to like"
     pos: "verb"
@@ -165,17 +179,17 @@ verbs:
     aspect: "imperfective"
     frequency: 1
     difficulty: 2
+    notes: "Consonant change: б → бл in 1st person singular. Stress on second syllable."
     conjugation:
-      ya: "люблю"
-      ty: "любишь"
-      on_ona: "любит"
-      my: "любим"
-      vy: "любите"
-      oni: "любят"
-    notes: "Consonant change: б → бл in 1st person singular."
+      ya: { word: "люблю", stressed: "люблю́" }
+      ty: { word: "любишь", stressed: "лю́бишь" }
+      on_ona: { word: "любит", stressed: "лю́бит" }
+      my: { word: "любим", stressed: "лю́бим" }
+      vy: { word: "любите", stressed: "лю́бите" }
+      oni: { word: "любят", stressed: "лю́бят" }
     examples:
-      - { ru: "Я люблю кофе.", en: "I love coffee." }
-      - { ru: "Ты любишь музыку?", en: "Do you like music?" }
+      - { ru: "Я люблю́ ко́фе.", en: "I love coffee." }
+      - { ru: "Ты лю́бишь му́зыку?", en: "Do you like music?" }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 2: TIME EXPRESSIONS
@@ -185,125 +199,146 @@ verbs:
 time_expressions:
   - id: "segodnya"
     word: "сегодня"
+    stressed: "сего́дня"
     transliteration: "segodnya"
     translation: "today"
     pos: "adverb"
     semantic: [time]
     frequency: 1
     difficulty: 1
+    notes: "Stress on second syllable. The Г is pronounced as В!"
     examples:
-      - { ru: "Сегодня я работаю.", en: "I'm working today." }
+      - { ru: "Сего́дня я рабо́таю.", en: "I'm working today." }
 
   - id: "zavtra"
     word: "завтра"
+    stressed: "за́втра"
     transliteration: "zavtra"
     translation: "tomorrow"
     pos: "adverb"
     semantic: [time]
     frequency: 1
     difficulty: 1
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Завтра я не работаю.", en: "I'm not working tomorrow." }
+      - { ru: "За́втра я не рабо́таю.", en: "I'm not working tomorrow." }
 
   - id: "vchera"
     word: "вчера"
+    stressed: "вчера́"
     transliteration: "vchera"
     translation: "yesterday"
     pos: "adverb"
     semantic: [time]
     frequency: 1
     difficulty: 1
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Вчера я читал книгу.", en: "Yesterday I read a book." }
+      - { ru: "Вчера́ я чита́л кни́гу.", en: "Yesterday I read a book." }
 
   - id: "utrom"
     word: "утром"
+    stressed: "у́тром"
     transliteration: "utrom"
     translation: "in the morning"
     pos: "adverb"
     semantic: [time]
     frequency: 1
     difficulty: 1
+    notes: "Stress on first syllable. Instrumental case of у́тро (morning)."
     examples:
-      - { ru: "Утром я пью кофе.", en: "I drink coffee in the morning." }
+      - { ru: "У́тром я пью ко́фе.", en: "I drink coffee in the morning." }
 
   - id: "dnyom"
     word: "днём"
+    stressed: "днём"
     transliteration: "dnyom"
     translation: "in the afternoon / during the day"
     pos: "adverb"
     semantic: [time]
     frequency: 2
     difficulty: 1
+    notes: "Ё is always stressed."
     examples:
-      - { ru: "Днём я работаю.", en: "I work during the day." }
+      - { ru: "Днём я рабо́таю.", en: "I work during the day." }
 
   - id: "vecherom"
     word: "вечером"
+    stressed: "ве́чером"
     transliteration: "vecherom"
     translation: "in the evening"
     pos: "adverb"
     semantic: [time]
     frequency: 1
     difficulty: 1
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Вечером я смотрю телевизор.", en: "I watch TV in the evening." }
+      - { ru: "Ве́чером я смотрю́ телеви́зор.", en: "I watch TV in the evening." }
 
   - id: "nochyu"
     word: "ночью"
+    stressed: "но́чью"
     transliteration: "noch'yu"
     translation: "at night"
     pos: "adverb"
     semantic: [time]
     frequency: 2
     difficulty: 1
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Ночью я сплю.", en: "I sleep at night." }
+      - { ru: "Но́чью я сплю.", en: "I sleep at night." }
 
   - id: "vsegda"
     word: "всегда"
+    stressed: "всегда́"
     transliteration: "vsegda"
     translation: "always"
     pos: "adverb"
     semantic: [frequency]
     frequency: 1
     difficulty: 1
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Я всегда пью кофе утром.", en: "I always drink coffee in the morning." }
+      - { ru: "Я всегда́ пью ко́фе у́тром.", en: "I always drink coffee in the morning." }
 
   - id: "nikogda"
     word: "никогда"
+    stressed: "никогда́"
     transliteration: "nikogda"
     translation: "never"
     pos: "adverb"
     semantic: [frequency]
     frequency: 1
     difficulty: 1
-    notes: "Requires не with verb: никогда не"
+    notes: "Requires не with verb: никогда́ не. Stress on last syllable."
     examples:
-      - { ru: "Я никогда не пью чай.", en: "I never drink tea." }
+      - { ru: "Я никогда́ не пью чай.", en: "I never drink tea." }
 
   - id: "inogda"
     word: "иногда"
+    stressed: "иногда́"
     transliteration: "inogda"
     translation: "sometimes"
     pos: "adverb"
     semantic: [frequency]
     frequency: 1
     difficulty: 1
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Иногда я читаю книги.", en: "Sometimes I read books." }
+      - { ru: "Иногда́ я чита́ю кни́ги.", en: "Sometimes I read books." }
 
   - id: "chasto"
     word: "часто"
+    stressed: "ча́сто"
     transliteration: "chasto"
     translation: "often"
     pos: "adverb"
     semantic: [frequency]
     frequency: 1
     difficulty: 1
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Я часто слушаю музыку.", en: "I often listen to music." }
+      - { ru: "Я ча́сто слу́шаю му́зыку.", en: "I often listen to music." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 3: DAILY ACTIVITIES NOUNS
@@ -313,30 +348,35 @@ time_expressions:
 nouns:
   - id: "muzyka"
     word: "музыка"
+    stressed: "му́зыка"
     transliteration: "muzyka"
     translation: "music"
     pos: "noun"
     gender: "f"
     frequency: 1
     difficulty: 1
-    accusative: "музыку"
+    accusative: "му́зыку"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Я слушаю музыку.", en: "I'm listening to music." }
+      - { ru: "Я слу́шаю му́зыку.", en: "I'm listening to music." }
 
   - id: "televizor"
     word: "телевизор"
+    stressed: "телеви́зор"
     transliteration: "televizor"
     translation: "TV / television"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    accusative: "телевизор"
+    accusative: "телеви́зор"
+    notes: "Stress on third syllable."
     examples:
-      - { ru: "Я смотрю телевизор.", en: "I'm watching TV." }
+      - { ru: "Я смотрю́ телеви́зор.", en: "I'm watching TV." }
 
   - id: "film"
     word: "фильм"
+    stressed: "фильм"
     transliteration: "fil'm"
     translation: "movie / film"
     pos: "noun"
@@ -345,91 +385,105 @@ nouns:
     difficulty: 1
     accusative: "фильм"
     examples:
-      - { ru: "Я смотрю фильм.", en: "I'm watching a movie." }
+      - { ru: "Я смотрю́ фильм.", en: "I'm watching a movie." }
 
   - id: "gazeta"
     word: "газета"
+    stressed: "газе́та"
     transliteration: "gazeta"
     translation: "newspaper"
     pos: "noun"
     gender: "f"
     frequency: 2
     difficulty: 1
-    accusative: "газету"
+    accusative: "газе́ту"
+    notes: "Stress on second syllable."
     examples:
-      - { ru: "Я читаю газету.", en: "I'm reading a newspaper." }
+      - { ru: "Я чита́ю газе́ту.", en: "I'm reading a newspaper." }
 
   - id: "zhurnal"
     word: "журнал"
+    stressed: "журна́л"
     transliteration: "zhurnal"
     translation: "magazine"
     pos: "noun"
     gender: "m"
     frequency: 2
     difficulty: 1
-    accusative: "журнал"
+    accusative: "журна́л"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Я читаю журнал.", en: "I'm reading a magazine." }
+      - { ru: "Я чита́ю журна́л.", en: "I'm reading a magazine." }
 
   - id: "pismo"
     word: "письмо"
+    stressed: "письмо́"
     transliteration: "pis'mo"
     translation: "letter"
     pos: "noun"
     gender: "n"
     frequency: 2
     difficulty: 1
-    accusative: "письмо"
+    accusative: "письмо́"
+    notes: "Stress on last syllable."
     examples:
-      - { ru: "Я пишу письмо.", en: "I'm writing a letter." }
+      - { ru: "Я пишу́ письмо́.", en: "I'm writing a letter." }
 
   - id: "rabota"
     word: "работа"
+    stressed: "рабо́та"
     transliteration: "rabota"
     translation: "work / job"
     pos: "noun"
     gender: "f"
     frequency: 1
     difficulty: 1
-    accusative: "работу"
+    accusative: "рабо́ту"
+    notes: "Stress on second syllable."
     examples:
-      - { ru: "Я люблю свою работу.", en: "I love my job." }
+      - { ru: "Я люблю́ свою́ рабо́ту.", en: "I love my job." }
 
   - id: "zavtrak"
     word: "завтрак"
+    stressed: "за́втрак"
     transliteration: "zavtrak"
     translation: "breakfast"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    accusative: "завтрак"
+    accusative: "за́втрак"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Утром я готовлю завтрак.", en: "I make breakfast in the morning." }
+      - { ru: "У́тром я гото́влю за́втрак.", en: "I make breakfast in the morning." }
 
   - id: "obed"
     word: "обед"
+    stressed: "обе́д"
     transliteration: "obed"
     translation: "lunch"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    accusative: "обед"
+    accusative: "обе́д"
+    notes: "Stress on second syllable."
     examples:
-      - { ru: "Днём у меня обед.", en: "I have lunch during the day." }
+      - { ru: "Днём у меня́ обе́д.", en: "I have lunch during the day." }
 
   - id: "uzhin"
     word: "ужин"
+    stressed: "у́жин"
     transliteration: "uzhin"
     translation: "dinner"
     pos: "noun"
     gender: "m"
     frequency: 1
     difficulty: 1
-    accusative: "ужин"
+    accusative: "у́жин"
+    notes: "Stress on first syllable."
     examples:
-      - { ru: "Вечером мы готовим ужин.", en: "We make dinner in the evening." }
+      - { ru: "Ве́чером мы гото́вим у́жин.", en: "We make dinner in the evening." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 4: ACCUSATIVE CASE REFERENCE
@@ -441,14 +495,14 @@ grammar_notes:
     description: "Used for direct objects (what receives the action)"
     rules:
       masculine_inanimate: "No change (дом → дом)"
-      masculine_animate: "Add -а (кот → кота, брат → брата)"
-      feminine_a: "Change -а to -у (книга → книгу)"
-      feminine_ya: "Change -я to -ю (сестра → сестрю)"
-      neuter: "No change (окно → окно)"
+      masculine_animate: "Add -а (кот → кота́, брат → бра́та)"
+      feminine_a: "Change -а to -у (кни́га → кни́гу)"
+      feminine_ya: "Change -я to -ю (сестра́ → сестру́)"
+      neuter: "No change (окно́ → окно́)"
     examples:
-      - { nominative: "книга", accusative: "книгу", sentence: "Я читаю книгу." }
-      - { nominative: "журнал", accusative: "журнал", sentence: "Я читаю журнал." }
-      - { nominative: "кот", accusative: "кота", sentence: "Я вижу кота." }
+      - { nominative: "кни́га", accusative: "кни́гу", sentence: "Я чита́ю кни́гу." }
+      - { nominative: "журна́л", accusative: "журна́л", sentence: "Я чита́ю журна́л." }
+      - { nominative: "кот", accusative: "кота́", sentence: "Я ви́жу кота́." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # LESSON MAPPING
@@ -458,7 +512,7 @@ grammar_notes:
 lessons:
   lesson_01_daily_verbs:
     title: "Daily Actions"
-    focus: "делать, слушать, читать - Type 1 verbs"
+    focus: "де́лать, слу́шать, чита́ть - Type 1 verbs"
     primary_vocab:
       - delat
       - slushat
@@ -470,7 +524,7 @@ lessons:
 
   lesson_02_watching_seeing:
     title: "Watching & Seeing"
-    focus: "смотреть, видеть - Type 2 verbs with consonant changes"
+    focus: "смотре́ть, ви́деть - Type 2 verbs with consonant changes"
     primary_vocab:
       - smotret
       - videt
@@ -541,7 +595,7 @@ lessons:
 
   lesson_09_love_like:
     title: "I Love, I Like"
-    focus: "любить and preferences"
+    focus: "люби́ть and preferences"
     primary_vocab:
       - lyubit
     review_vocab:

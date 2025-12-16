@@ -2,7 +2,7 @@
 # 5 modules - Counting in Russian
 
 lesson:
-  id: "12_numbers"
+  id: "13_numbers"
   title: "Numbers 1-10"
   subtitle: "Count in Russian and talk about quantities"
   icon: "hash"
@@ -142,7 +142,7 @@ modules:
 
 vocab_filter:
   primary: [odin, dva, tri, chetyre, pyat, shest, sem, vosem, devyat, desyat]
-  review_from: [05_gender, 11_possessives]
+  review_from: [06_gender, 12_possessives]
 
 templates:
   - pattern: "{NUMBER} {NOUN}"

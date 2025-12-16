@@ -2,7 +2,7 @@
 # 5 modules - Irregular and mixed verbs
 
 lesson:
-  id: "10_irregular_verbs"
+  id: "11_irregular_verbs"
   title: "I Want, I Live, I Work"
   subtitle: "Essential irregular verbs for daily life"
   icon: "star"
@@ -23,6 +23,15 @@ modules:
           он/она́ хо́чет (he/she wants)
           
           Notice: хоч- stem changes, and stress moves!
+      
+      - type: "tip"
+        title: "⚠️ Х Sound Reminder"
+        content: |
+          Х is NOT like English 'h'! It's a raspy sound from the back of the throat.
+          
+          Think: German 'ch' in "Bach" or Scottish "loch"
+          
+          Practice: хочу́, хо́чешь, хорошо́
       
       - type: "pattern_table"
         title: "хоте́ть - to want"
@@ -54,10 +63,21 @@ modules:
         words:
           - word: "жить"
             translation: "to live"
-            note: "Type 1 with consonant change: жив-. Stress moves!"
+            note: "⚠️ Ж sounds like 'zh' in 'pleasure'. ЖИ pronounced like ЖЫ!"
           - word: "рабо́тать"
             translation: "to work"
             note: "Regular Type 1 - easy! Stress on second syllable."
+      
+      - type: "warning"
+        title: "⚠️ Pronunciation: ЖИ = ЖЫ"
+        content: |
+          Remember from lesson 4: After Ж, Ш, Ц - we write И but pronounce Ы!
+          
+          жить → sounds like "жыть"
+          живу́ → sounds like "жыву́"
+          живёшь → sounds like "жывёшь"
+          
+          The spelling rule is historical, but pronunciation follows the hard consonant.
       
       - type: "pattern_table"
         title: "жить - to live"
@@ -153,6 +173,7 @@ modules:
           - "жить (live) - consonant change: живу́, живёшь, живёт..."
           - "рабо́тать (work) - regular Type 1: рабо́таю, рабо́таешь..."
           - "Asking where: Где ты живёшь? Где ты рабо́таешь?"
+          - "⚠️ Pronunciation: Х = raspy 'kh', ЖИ = ЖЫ sound"
     vocab_pool:
       introduce: []
       practice: []
@@ -163,7 +184,7 @@ modules:
 
 vocab_filter:
   primary: [khotet, zhit, rabotat]
-  review_from: [06_type1_verbs, 08_type2_verbs]
+  review_from: [07_type1_verbs, 09_type2_verbs]
 
 templates:
   - pattern: "Я хочу́ {NOUN}."

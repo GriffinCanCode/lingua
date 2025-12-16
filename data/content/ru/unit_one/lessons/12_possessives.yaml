@@ -2,7 +2,7 @@
 # 5 modules - Possessive pronouns
 
 lesson:
-  id: "11_possessives"
+  id: "12_possessives"
   title: "My, Your, Our"
   subtitle: "Talk about what belongs to whom"
   icon: "heart"
@@ -155,7 +155,7 @@ modules:
 
 vocab_filter:
   primary: [moy, moya, moyo]
-  review_from: [05_gender, 07_possession, 10_irregular_verbs]
+  review_from: [06_gender, 08_possession, 11_irregular_verbs]
 
 templates:
   - pattern: "Э́то {POSS} {NOUN}."

@@ -19,14 +19,58 @@
 # Phase 1: Identical to Latin (А, Е, К, М, О, Т)
 # Phase 2: False friends (Р=R, С=S, Н=N, В=V, У=U, Х=H)
 # Phase 3: Unique Cyrillic (Д, Б, Г, Л, П, Ф, Ж, Ш, Щ, Ч, Ц, Й, Ы, Ь, Ъ, Э, Ю, Я)
+#
+# Russian spelling is mostly phonetic, but these patterns differ from spelling:
+#
+# 1. ЧТО → ШТО: что, чтобы, ничто́ pronounced with Ш not Ч
+# 2. -ЕГО/-ОГО → -ЕВО/-ОВО: Genitive Г sounds like В (его́→ево́, сего́дня→сево́дня)
+# 3. Final Г → К: Voiced Г devoices at word end (друг→друк, снег→снек)
+# 4. Final consonant devoicing: б→п, в→ф, г→к, д→т, ж→ш, з→с at word end
+# 5. ЖИ/ШИ/ЦИ: Written И but pronounced Ы (жить→жыть, шить→шыть)
+#
 # ══════════════════════════════════════════════════════════════════════════════
+
+# Pronunciation rules
+pronunciation_quirks:
+  - id: "chto_shto"
+    pattern: "ЧТО → ШТО"
+    description: "ЧТ pronounced as ШТ in что and derivatives"
+    applies_to: ["что", "чтобы", "ничто́", "что-то", "кое-что́", "потому́ что"]
+    exceptions: ["почта́"]
+    
+  - id: "ego_evo"
+    pattern: "-ЕГО/-ОГО → -ЕВО/-ОВО"
+    description: "Genitive ending Г pronounced as В"
+    applies_to: ["его́", "неё", "сего́дня", "ничего́", "чего́", "большо́го", "хоро́шего", "но́вого"]
+    
+  - id: "final_g_devoicing"
+    pattern: "Final Г → К"
+    description: "Voiced Г becomes voiceless К at word end"
+    applies_to: ["друг", "враг", "снег", "пиро́г", "круг"]
+    exceptions: ["Бог (→ Бох)"]
+    
+  - id: "final_devoicing"
+    pattern: "Final voiced → voiceless"
+    description: "All voiced consonants devoice at word end"
+    pairs:
+      - { voiced: "Б", voiceless: "П", example: "хлеб→хлеп" }
+      - { voiced: "В", voiceless: "Ф", example: "кров→кроф" }
+      - { voiced: "Г", voiceless: "К", example: "друг→друк" }
+      - { voiced: "Д", voiceless: "Т", example: "год→гот" }
+      - { voiced: "Ж", voiceless: "Ш", example: "муж→муш" }
+      - { voiced: "З", voiceless: "С", example: "раз→рас" }
+      
+  - id: "zhi_shi_tsi"
+    pattern: "ЖИ/ШИ/ЦИ → ЖЫ/ШЫ/ЦЫ"
+    description: "After Ж, Ш, Ц - write И but pronounce Ы"
+    applies_to: ["жить", "живу́", "живёт", "широ́кий", "маши́на", "хорошо́"]
 
 unit:
   id: "unit1"
   title: "Foundations"
   description: "Essential vocabulary for survival Russian - including first verbs!"
   total_words: 95
-  target_lessons: 14
+  target_lessons: 16
   
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 1: PRONOUNS & DEMONSTRATIVES
@@ -57,7 +101,7 @@ pronouns:
     frequency: 1
     difficulty: 1
     audio: "ty.mp3"
-    notes: "Use with friends, family, children, animals. Ы sounds like 'i' in 'bit' but deeper."
+    notes: "Use with friends, family, children, animals. ⚠️ Ы is Russian's hardest sound! Like 'i' in 'bit' but tongue pulled back, deeper in throat. Practice: ты, мы, вы, сы́р."
     examples:
       - { ru: "Ты где?", en: "Where are you?" }
       - { ru: "Ты до́ма?", en: "Are you home?" }
@@ -199,7 +243,8 @@ questions:
     frequency: 1
     difficulty: 2
     audio: "shto.mp3"
-    notes: "IMPORTANT: Spelled ЧТО but pronounced 'shto'! One of Russian's quirks."
+    pronunciation_quirk: "chto_shto"
+    notes: "⚠️ PRONOUNCED 'ШТО' not 'ЧТО'! This applies to all ЧТО-words: чтобы→штобы, что-то→што-та, ничто́→ништо́. Exception: почта́ keeps the Ч."
     examples:
       - { ru: "Что э́то?", en: "What is this?" }
       - { ru: "Что там?", en: "What's there?" }
@@ -815,7 +860,8 @@ nouns:
     frequency: 1
     difficulty: 1
     audio: "drug.mp3"
-    notes: "Г at end of word sounds like 'k'. Female friend is подру́га."
+    pronunciation_quirk: "final_g_devoicing"
+    notes: "⚠️ PRONOUNCED 'ДРУК' - final Г→К! This rule applies to all words ending in Г: враг→врак, снег→снек. Female friend is подру́га (Г stays voiced before vowel)."
     examples:
       - { ru: "Э́то мой друг.", en: "This is my friend." }
 
@@ -875,7 +921,8 @@ nouns:
     frequency: 1
     difficulty: 1
     audio: "mashina.mp3"
-    notes: "Ш sounds like 'sh'. Also means 'machine'. Stress on second syllable."
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "Ш sounds like 'sh' (tongue further back than English). ⚠️ ШИ is written with И but pronounced like Ы! Also means 'machine'. Stress on second syllable."
     examples:
       - { ru: "Э́то моя́ маши́на.", en: "This is my car." }
 
@@ -985,7 +1032,8 @@ descriptors:
     frequency: 1
     difficulty: 1
     audio: "khorosho.mp3"
-    notes: "Х sounds like German 'ch' or Scottish 'loch'. Very useful! Stress on last syllable."
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "⚠️ Two hard sounds: Х (like German 'ch' in Bach, NOT English 'h') and Ш (like 'sh' but tongue back). ШО pronounced with tongue back. Stress on last syllable."
     examples:
       - { ru: "Хорошо́!", en: "Good! / OK!" }
       - { ru: "Всё хорошо́.", en: "Everything is fine." }
@@ -1212,7 +1260,7 @@ verbs:
     frequency: 1
     difficulty: 2
     audio: "khotet.mp3"
-    notes: "Irregular! Mixes Type 1 (singular) and Type 2 (plural) patterns. Stress moves!"
+    notes: "⚠️ Х sounds like German 'ch' in Bach (NOT English 'h'). Irregular! Mixes Type 1 (singular: хочу́, хо́чешь) and Type 2 (plural: хоти́м). Stress moves!"
     conjugation:
       ya: { word: "хочу", stressed: "хочу́" }
       ty: { word: "хочешь", stressed: "хо́чешь" }
@@ -1236,7 +1284,8 @@ verbs:
     frequency: 1
     difficulty: 2
     audio: "zhit.mp3"
-    notes: "Type 1 with consonant change: ж → жив in conjugation. Stress moves!"
+    pronunciation_quirk: "zhi_shi_tsi"
+    notes: "⚠️ Ж sounds like 'zh' in 'pleasure'. ЖИ is written with И but pronounced like Ы! Type 1 with stem жив- in conjugation. Stress moves!"
     conjugation:
       ya: { word: "живу", stressed: "живу́" }
       ty: { word: "живёшь", stressed: "живёшь" }
@@ -1428,7 +1477,7 @@ language_adverbs:
 # ══════════════════════════════════════════════════════════════════════════════
 
 lessons:
-  # NEW LESSON ORDER PER CURRICULUM PLAN
+  # LESSON ORDER - Updated with pronunciation lesson at 04
   lesson_01_cognates:
     title: "Cognates & Cyrillic"
     focus: "Letters identical to Latin, instant vocabulary"
@@ -1475,7 +1524,17 @@ lessons:
       - kot
       - dom
 
-  lesson_04_questions:
+  lesson_04_pronunciation:
+    title: "Hard Sounds & Quirks"
+    focus: "Ы, Ш, Щ, Ж, Х and pronunciation rules (ЧТО→ШТО, ЕГО→ЕВО, Г→К)"
+    teaching_only: true
+    skills:
+      - hard_consonants
+      - pronunciation_quirks
+      - devoicing
+      - y_sound
+
+  lesson_05_questions:
     title: "Is this a...?"
     focus: "Questions, yes/no, negation"
     primary_vocab:
@@ -1493,7 +1552,7 @@ lessons:
       - kot
       - taksi
 
-  lesson_05_gender:
+  lesson_06_gender:
     title: "He, She, It"
     focus: "Grammatical gender, pronouns"
     primary_vocab:
@@ -1511,7 +1570,7 @@ lessons:
       - tut
       - dom
 
-  lesson_06_type1_verbs:
+  lesson_07_type1_verbs:
     title: "I Know, I Understand"
     focus: "Type 1 conjugation - first verbs!"
     primary_vocab:
@@ -1527,7 +1586,7 @@ lessons:
       - oni
       - nye
 
-  lesson_07_possession:
+  lesson_08_possession:
     title: "I have..."
     focus: "У меня́ есть construction"
     primary_vocab:
@@ -1544,7 +1603,7 @@ lessons:
       - da
       - nyet
 
-  lesson_08_type2_verbs:
+  lesson_09_type2_verbs:
     title: "I Speak Russian"
     focus: "Type 2 conjugation, language skills"
     primary_vocab:
@@ -1559,9 +1618,9 @@ lessons:
       - on
       - ona
 
-  lesson_09_where_who_what:
+  lesson_10_where_who_what:
     title: "Where, Who, What"
-    focus: "Question words, basic information"
+    focus: "Question words, basic information (что pronounced ШТО!)"
     primary_vocab:
       - gde
       - kto
@@ -1577,9 +1636,9 @@ lessons:
       - ona
       - govorit
 
-  lesson_10_irregular_verbs:
+  lesson_11_irregular_verbs:
     title: "I Want, I Live, I Work"
-    focus: "Irregular verbs and daily life"
+    focus: "Irregular verbs and daily life (жить has ЖИ→ЖЫ)"
     primary_vocab:
       - khotet
       - zhit
@@ -1591,7 +1650,7 @@ lessons:
       - gde
       - dom
 
-  lesson_11_possessives:
+  lesson_12_possessives:
     title: "My, Your, Our"
     focus: "Possessive pronouns with gender agreement"
     primary_vocab:
@@ -1605,7 +1664,7 @@ lessons:
       - mashina
       - telefon
 
-  lesson_12_numbers:
+  lesson_13_numbers:
     title: "Numbers 1-10"
     focus: "Counting in Russian"
     primary_vocab:
@@ -1625,7 +1684,7 @@ lessons:
       - okno
       - dom
 
-  lesson_13_adjectives:
+  lesson_14_adjectives:
     title: "Adjectives"
     focus: "Describing things with gender agreement"
     primary_vocab:
@@ -1642,7 +1701,7 @@ lessons:
       - kot
       - mashina
 
-  lesson_14_review:
+  lesson_15_review:
     title: "Review & Checkpoint"
     focus: "Comprehensive Unit 1 review"
     review_vocab:

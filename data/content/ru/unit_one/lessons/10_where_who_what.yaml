@@ -2,7 +2,7 @@
 # 5 modules - Question words
 
 lesson:
-  id: "09_where_who_what"
+  id: "10_where_who_what"
   title: "Where, Who, What"
   subtitle: "Ask questions and get information"
   icon: "search"
@@ -53,8 +53,20 @@ modules:
         content: |
           Кто (kto) = Who (for people)
           Что (shto) = What (for things)
+      
+      - type: "warning"
+        title: "⚠️ Pronunciation Alert: ЧТО → ШТО"
+        content: |
+          **Что is spelled ЧТО but pronounced 'ШТО'!**
           
-          Important: Что is spelled ЧТО but pronounced 'shto'!
+          This is one of Russian's most important pronunciation rules.
+          It applies to ALL words with ЧТО:
+          - что → што (what)
+          - чтобы → штобы (in order to)  
+          - ничто́ → ништо́ (nothing)
+          - что-то → што-та (something)
+          
+          Exception: почта́ (mail) keeps normal Ч.
       
       - type: "word_intro"
         words:
@@ -63,7 +75,7 @@ modules:
             note: "Say both consonants: k-to"
           - word: "что"
             translation: "what"
-            note: "Pronounced 'shto' NOT 'chto'!"
+            note: "⚠️ Pronounced 'ШТО' not 'ЧТО'! Remember lesson 4!"
       
       - type: "etymology"
         title: "Ancient Question Words"
@@ -118,6 +130,21 @@ modules:
     exercises:
       count: 8
 
+  - id: "mod_3b"
+    title: "Pronunciation Reminder"
+    type: "pattern"
+    
+    teaching:
+      - type: "tip"
+        title: "⚠️ друг = ДРУК"
+        content: |
+          Remember from lesson 4: final Г sounds like К!
+          
+          друг → pronounced "друк" (friend)
+          
+          But: друга́ (genitive) keeps the Г sound because it's not at the end.
+          The spelling preserves the root - that's how you know it's Г not К.
+
   - id: "mod_4"
     title: "Practice"
     type: "practice"
@@ -153,7 +180,7 @@ modules:
 
 vocab_filter:
   primary: [gde, kto, chto, vot, doktor, drug]
-  review_from: [01_cognates, 04_questions, 08_type2_verbs]
+  review_from: [01_cognates, 05_questions, 09_type2_verbs]
 
 templates:
   - pattern: "Где {NOUN}?"

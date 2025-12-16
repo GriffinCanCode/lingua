@@ -2,7 +2,7 @@
 # 5 modules - Describing things
 
 lesson:
-  id: "13_adjectives"
+  id: "14_adjectives"
   title: "Adjectives"
   subtitle: "Describe people, places, and things"
   icon: "palette"
@@ -143,7 +143,7 @@ modules:
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review_from: [05_gender, 11_possessives, 12_numbers]
+  review_from: [06_gender, 12_possessives, 13_numbers]
 
 templates:
   - pattern: "Э́то {ADJ} {NOUN}."

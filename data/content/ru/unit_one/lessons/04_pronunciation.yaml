@@ -1,0 +1,196 @@
+# Unit 1, Lesson 4: Hard Sounds & Pronunciation Quirks
+# Critical pronunciation rules that differ from spelling
+
+lesson:
+  id: "04_pronunciation"
+  title: "Hard Sounds & Quirks"
+  subtitle: "Master the sounds that trip up learners"
+  icon: "volume-2"
+  duration: "8 min"
+  type: "foundational"
+
+modules:
+  - id: "mod_1"
+    title: "Hard Consonants"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "The 'Hard' Sounds"
+        content: |
+          Russian has some sounds that don't exist in English.
+          These take practice, but getting them right makes you sound native!
+          
+          **Ж** = like 'zh' in "pleasure" or French "je"
+          **Ш** = like 'sh' in "ship" (but tongue further back)
+          **Щ** = like 'shch' - a soft, hissing 'sh' (longer than Ш)
+          **Х** = like German 'ch' in "Bach" or Scottish "loch"
+      
+      - type: "pattern_table"
+        title: "Hard Consonants"
+        columns: ["Letter", "Sound", "Example", "Meaning"]
+        rows:
+          - ["Ж", "zh (pleasure)", "живу́", "I live"]
+          - ["Ш", "sh (ship)", "хорошо́", "good"]
+          - ["Щ", "shch (fresh cheese)", "ещё", "more/still"]
+          - ["Х", "kh (Bach)", "хоте́ть", "to want"]
+      
+      - type: "tip"
+        content: |
+          **Ж, Ш, Ц are always hard** - the vowel after them doesn't soften them!
+          жи, ши sound like "zhy, shy" (not "zhee, shee")
+
+  - id: "mod_2"
+    title: "The Mysterious Ы"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Russia's Hardest Sound"
+        content: |
+          **Ы** is the sound foreigners struggle with most!
+          
+          It's like the 'i' in "bit" but:
+          - Pull your tongue back
+          - Keep lips unrounded
+          - Make it deeper in your throat
+          
+          Think of getting punched in the stomach and saying "uh" - that's close!
+      
+      - type: "pattern_table"
+        title: "И vs Ы"
+        columns: ["Letter", "Sound", "Example", "Meaning"]
+        rows:
+          - ["И", "ee (feet)", "они́", "they"]
+          - ["Ы", "uh-ee (bit, but deeper)", "ты", "you"]
+          - ["И", "ee", "ви́жу", "I see"]
+          - ["Ы", "uh-ee", "мы", "we"]
+      
+      - type: "tip"
+        content: |
+          Practice: ты, мы, вы, сы́р (cheese), ры́ба (fish)
+          
+          After Ж, Ш, Ц - write И but pronounce Ы!
+          жить (zhyt'), шить (shyt'), живу́ (zhyvu)
+
+  - id: "mod_3"
+    title: "Pronunciation Quirks"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "When Spelling ≠ Sound"
+        content: |
+          Russian has consistent spelling rules, but some words are pronounced
+          differently than written. Learn these patterns!
+      
+      - type: "pattern_table"
+        title: "ЧТО → ШТО"
+        columns: ["Written", "Pronounced", "Meaning"]
+        rows:
+          - ["что", "што", "what"]
+          - ["чтобы", "штобы", "in order to"]
+          - ["ничто́", "ништо́", "nothing"]
+          - ["что-то", "што-та", "something"]
+          - ["кое-что́", "кой-што́", "something (specific)"]
+      
+      - type: "warning"
+        content: |
+          **ЧТО is ALWAYS pronounced ШТО!**
+          This is one of Russian's most important pronunciation rules.
+          
+          Exception: почта́ (mail) keeps the Ч sound.
+      
+      - type: "pattern_table"
+        title: "-ЕГО/-ОГО → -ЕВО/-ОВО"
+        columns: ["Written", "Pronounced", "Meaning"]
+        rows:
+          - ["его́", "ево́", "his/him"]
+          - ["неё", "нево́", "her (genitive)"]
+          - ["сего́дня", "сево́дня", "today"]
+          - ["ничего́", "ничево́", "nothing/it's okay"]
+          - ["большо́го", "большо́ва", "big (genitive)"]
+          - ["хоро́шего", "хоро́шева", "good (genitive)"]
+      
+      - type: "tip"
+        content: |
+          **Genitive -ого/-его endings: Г → В**
+          
+          This applies to:
+          - Pronouns: его́, неё, чего́
+          - Adjective endings: но́вого, ста́рого
+          - The word сего́дня (literally "of this day")
+
+  - id: "mod_4"
+    title: "Final Consonant Devoicing"
+    type: "practice"
+    
+    teaching:
+      - type: "explanation"
+        title: "Voiced → Voiceless at Word End"
+        content: |
+          At the end of words, voiced consonants become voiceless:
+          
+          **Б → П** (b → p)
+          **В → Ф** (v → f)
+          **Г → К** (g → k)
+          **Д → Т** (d → t)
+          **Ж → Ш** (zh → sh)
+          **З → С** (z → s)
+      
+      - type: "pattern_table"
+        title: "Г → К at Word End"
+        columns: ["Written", "Pronounced", "Meaning"]
+        rows:
+          - ["друг", "друк", "friend"]
+          - ["враг", "врак", "enemy"]
+          - ["снег", "снек", "snow"]
+          - ["пиро́г", "пиро́к", "pie"]
+          - ["Бог", "Бох", "God (exception: х not к)"]
+      
+      - type: "pattern_table"
+        title: "Other Final Devoicing"
+        columns: ["Written", "Pronounced", "Meaning"]
+        rows:
+          - ["хлеб", "хлеп", "bread"]
+          - ["год", "гот", "year"]
+          - ["муж", "муш", "husband"]
+          - ["раз", "рас", "time/once"]
+          - ["глаз", "глас", "eye"]
+      
+      - type: "tip"
+        content: |
+          **Why this matters:** When you hear "друк", you write "друг"!
+          The spelling preserves the root - друга́ (genitive) keeps the Г sound.
+
+  - id: "mod_5"
+    title: "Master"
+    type: "master"
+    
+    teaching:
+      - type: "summary"
+        title: "Key Pronunciation Rules"
+        points:
+          - "**Ж, Ш** = always hard (жи, ши sound like 'zhy, shy')"
+          - "**Щ** = soft 'shch' sound"
+          - "**Х** = like German 'ch' in Bach"
+          - "**Ы** = deep 'i' sound (tongue back)"
+          - "**ЧТО → ШТО** (что, чтобы, ничто́)"
+          - "**-ЕГО/-ОГО → -ЕВО/-ОВО** (его́, сего́дня, большо́го)"
+          - "**Final Г → К** (друг → друк, снег → снек)"
+          - "**Final voiced consonants devoice** (хлеб → хлеп)"
+      
+      - type: "tip"
+        content: |
+          These rules are consistent! Once you learn them, you can predict
+          pronunciation for thousands of words.
+
+# Pronunciation-focused lesson - teaching only, exercises come from vocab practice
+vocab_filter:
+  primary: []
+  review_from: [01_cognates, 02_hello, 03_false_friends]
+
+metadata:
+  prerequisite: "03_false_friends"
+  unlocks: ["05_questions"]
+  skills: ["hard_consonants", "pronunciation_quirks", "devoicing", "y_sound"]

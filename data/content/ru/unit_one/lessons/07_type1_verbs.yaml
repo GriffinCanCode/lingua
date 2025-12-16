@@ -2,7 +2,7 @@
 # 5 modules - Type 1 (First Conjugation) Verbs
 
 lesson:
-  id: "06_type1_verbs"
+  id: "07_type1_verbs"
   title: "I Know, I Understand"
   subtitle: "Your first Russian verbs - Type 1 conjugation"
   icon: "brain"
@@ -45,6 +45,17 @@ modules:
     type: "learn"
     
     teaching:
+      - type: "tip"
+        title: "⚠️ Pronunciation: The Ы Sound"
+        content: |
+          You'll be saying ты, мы, вы constantly with verbs!
+          
+          Remember from lesson 4: Ы is Russian's hardest sound.
+          - Not like English 'ee' - tongue pulled BACK
+          - Deeper in throat, almost like "uh-ee" combined
+          
+          Practice: ты зна́ешь, мы зна́ем, вы зна́ете
+      
       - type: "explanation"
         title: "The -ю, -ешь Pattern"
         content: |
@@ -158,7 +169,7 @@ modules:
 
 vocab_filter:
   primary: [znat, ponimat]
-  review_from: [01_cognates, 02_hello, 04_gender]
+  review_from: [01_cognates, 02_hello, 06_gender]
 
 templates:
   - pattern: "Я {VERB_1SG}."

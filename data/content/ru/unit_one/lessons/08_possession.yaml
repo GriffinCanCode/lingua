@@ -2,7 +2,7 @@
 # 5 modules - The possession construction
 
 lesson:
-  id: "07_possession"
+  id: "08_possession"
   title: "I have..."
   subtitle: "Express what you have with У меня́ есть"
   icon: "package"
@@ -55,10 +55,19 @@ modules:
         words:
           - word: "маши́на"
             translation: "car"
-            note: "Also means 'machine'. Stress on second syllable."
+            note: "⚠️ Ш sounds like 'sh'. ШИ written with И but pronounced like Ы!"
           - word: "соба́ка"
             translation: "dog"
             note: "Stress on second syllable."
+      
+      - type: "tip"
+        title: "⚠️ Pronunciation: ШИ = ШЫ"
+        content: |
+          Remember from lesson 4: After Ш (and Ж, Ц) we write И but pronounce Ы!
+          
+          маши́на → sounds like "машы́на"
+          
+          The Ш is always hard - it can't be softened.
       
       - type: "etymology"
         title: "Word Family: маши́на"
@@ -133,7 +142,7 @@ modules:
 
 vocab_filter:
   primary: [u_menya, yest, mashina, sobaka]
-  review_from: [03_false_friends, 05_gender, 06_type1_verbs]
+  review_from: [03_false_friends, 06_gender, 07_type1_verbs]
 
 templates:
   - pattern: "У меня́ есть {NOUN}."

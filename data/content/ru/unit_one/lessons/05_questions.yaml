@@ -2,7 +2,7 @@
 # 5 modules with teaching content
 
 lesson:
-  id: "04_questions"
+  id: "05_questions"
   title: "Is this a...?"
   subtitle: "Ask yes/no questions and understand answers"
   icon: "help-circle"

@@ -118,6 +118,8 @@ pronouns:
     notes: "Use with strangers, elders, in professional settings, OR when addressing multiple people."
     examples:
       - { ru: "Вы до́ктор?", en: "Are you a doctor?" }
+      - { ru: "Где вы живёте?", en: "Where do you live?" }
+      - { ru: "Вы говори́те по-ру́сски?", en: "Do you speak Russian?" }
 
   - id: "on"
     word: "он"
@@ -159,6 +161,8 @@ pronouns:
     notes: "For neuter nouns (ending in -о/-е). Less common than он/она́. Stress on last syllable."
     examples:
       - { ru: "Где окно́? Оно́ там.", en: "Where is the window? It's there." }
+      - { ru: "Оно́ большо́е.", en: "It is big." }
+      - { ru: "Где метро́? Оно́ тут.", en: "Where is the metro? It's here." }
 
   - id: "my"
     word: "мы"
@@ -171,6 +175,8 @@ pronouns:
     audio: "my.mp3"
     examples:
       - { ru: "Мы тут.", en: "We are here." }
+      - { ru: "Мы понима́ем.", en: "We understand." }
+      - { ru: "Мы хоти́м ко́фе.", en: "We want coffee." }
 
   - id: "oni"
     word: "они"
@@ -184,6 +190,8 @@ pronouns:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Они́ там.", en: "They are there." }
+      - { ru: "Они́ говоря́т по-ру́сски.", en: "They speak Russian." }
+      - { ru: "Где они́?", en: "Where are they?" }
 
   - id: "eto"
     word: "это"
@@ -275,6 +283,8 @@ questions:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Почему́?", en: "Why?" }
+      - { ru: "Почему́ нет?", en: "Why not?" }
+      - { ru: "Почему́ ты тут?", en: "Why are you here?" }
 
   - id: "kogda"
     word: "когда"
@@ -288,6 +298,8 @@ questions:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Когда́?", en: "When?" }
+      - { ru: "Когда́ ты до́ма?", en: "When are you home?" }
+      - { ru: "Когда́ ты рабо́таешь?", en: "When do you work?" }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 3: BASIC RESPONSES & PARTICLES
@@ -307,6 +319,8 @@ particles:
     notes: "Also used as 'yeah', 'right', 'uh-huh' in conversation."
     examples:
       - { ru: "Да, э́то кот.", en: "Yes, this is a cat." }
+      - { ru: "Да, я понима́ю.", en: "Yes, I understand." }
+      - { ru: "Да, пожа́луйста.", en: "Yes, please." }
 
   - id: "nyet"
     word: "нет"
@@ -320,6 +334,8 @@ particles:
     notes: "Н sounds like 'n'. Also means 'there isn't any'."
     examples:
       - { ru: "Нет, э́то не кот.", en: "No, this is not a cat." }
+      - { ru: "Нет, спаси́бо.", en: "No, thank you." }
+      - { ru: "Нет, я не зна́ю.", en: "No, I don't know." }
 
   - id: "nye"
     word: "не"
@@ -333,6 +349,8 @@ particles:
     notes: "Goes directly before the word you're negating."
     examples:
       - { ru: "Э́то не дом.", en: "This is not a house." }
+      - { ru: "Я не понима́ю.", en: "I don't understand." }
+      - { ru: "Он не тут.", en: "He is not here." }
 
   - id: "i"
     word: "и"
@@ -346,6 +364,8 @@ particles:
     notes: "Just one letter! И sounds like 'ee'."
     examples:
       - { ru: "Ма́ма и па́па.", en: "Mom and dad." }
+      - { ru: "Кот и соба́ка.", en: "A cat and a dog." }
+      - { ru: "Я и ты.", en: "You and I." }
 
   - id: "ili"
     word: "или"
@@ -359,6 +379,8 @@ particles:
     notes: "Stress on first syllable."
     examples:
       - { ru: "Да и́ли нет?", en: "Yes or no?" }
+      - { ru: "Ко́фе и́ли чай?", en: "Coffee or tea?" }
+      - { ru: "Тут и́ли там?", en: "Here or there?" }
 
   - id: "no"
     word: "но"
@@ -372,6 +394,8 @@ particles:
     notes: "Looks like English 'no' but means 'but'!"
     examples:
       - { ru: "Да, но...", en: "Yes, but..." }
+      - { ru: "Я понима́ю, но не говорю́.", en: "I understand, but I don't speak." }
+      - { ru: "Большо́й, но ста́рый.", en: "Big, but old." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 4: LOCATION WORDS
@@ -392,6 +416,8 @@ location:
     notes: "У sounds like 'oo' in 'boot'."
     examples:
       - { ru: "Я тут.", en: "I'm here." }
+      - { ru: "Кот тут.", en: "The cat is here." }
+      - { ru: "Ко́фе тут?", en: "Is the coffee here?" }
 
   - id: "tam"
     word: "там"
@@ -405,6 +431,8 @@ location:
     audio: "tam.mp3"
     examples:
       - { ru: "Он там.", en: "He's there." }
+      - { ru: "Метро́ там.", en: "The metro is there." }
+      - { ru: "Кто там?", en: "Who's there?" }
 
   - id: "zdes"
     word: "здесь"
@@ -419,6 +447,8 @@ location:
     notes: "More formal/written than тут. Ь makes the С soft."
     examples:
       - { ru: "Метро́ здесь.", en: "The metro is here." }
+      - { ru: "Вы живёте здесь?", en: "Do you live here?" }
+      - { ru: "Рестора́н здесь.", en: "The restaurant is here." }
 
   - id: "vot"
     word: "вот"
@@ -448,6 +478,8 @@ location:
     notes: "This is the locative form. Дом = house, до́ма = at home. Stress on first syllable."
     examples:
       - { ru: "Я до́ма.", en: "I'm at home." }
+      - { ru: "Ма́ма до́ма?", en: "Is mom at home?" }
+      - { ru: "Он не до́ма.", en: "He's not at home." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 5: GREETINGS & SOCIAL
@@ -483,6 +515,8 @@ greetings:
     register: "informal"
     examples:
       - { ru: "Пока́!", en: "Bye!" }
+      - { ru: "Ну, пока́!", en: "Well, bye!" }
+      - { ru: "Пока́-пока́!", en: "Bye-bye!" }
 
   - id: "zdravstvuyte"
     word: "здравствуйте"
@@ -497,6 +531,8 @@ greetings:
     register: "formal"
     examples:
       - { ru: "Здра́вствуйте!", en: "Hello!" }
+      - { ru: "Здра́вствуйте, как дела́?", en: "Hello, how are you?" }
+      - { ru: "Здра́вствуйте, я студе́нт.", en: "Hello, I am a student." }
 
   - id: "do_svidaniya"
     word: "до свидания"
@@ -511,6 +547,8 @@ greetings:
     register: "formal"
     examples:
       - { ru: "До свида́ния!", en: "Goodbye!" }
+      - { ru: "Спаси́бо! До свида́ния!", en: "Thank you! Goodbye!" }
+      - { ru: "До свида́ния, до за́втра!", en: "Goodbye, see you tomorrow!" }
 
   - id: "spasibo"
     word: "спасибо"
@@ -553,6 +591,8 @@ greetings:
     register: "formal"
     examples:
       - { ru: "Извини́те, где метро́?", en: "Excuse me, where is the metro?" }
+      - { ru: "Извини́те!", en: "I'm sorry!" }
+      - { ru: "Извини́те, я не понима́ю.", en: "Sorry, I don't understand." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 6: COGNATES & INTERNATIONAL WORDS
@@ -574,6 +614,8 @@ cognates:
     notes: "Identical to English! Uses only familiar letters. Stress on first syllable."
     examples:
       - { ru: "Э́то ма́ма.", en: "This is mom." }
+      - { ru: "Где ма́ма?", en: "Where is mom?" }
+      - { ru: "Ма́ма до́ма.", en: "Mom is at home." }
 
   - id: "papa"
     word: "папа"
@@ -590,6 +632,8 @@ cognates:
     notes: "⚠️ EXCEPTION: Ends in -а but masculine because it refers to a male person. Uses он, not она́!"
     examples:
       - { ru: "Па́па до́ма.", en: "Dad is at home." }
+      - { ru: "Где па́па? Он там.", en: "Where is dad? He's there." }
+      - { ru: "Э́то мой па́па.", en: "This is my dad." }
 
   - id: "kot"
     word: "кот"
@@ -605,6 +649,8 @@ cognates:
     notes: "Male cat. Female cat is ко́шка."
     examples:
       - { ru: "Э́то кот.", en: "This is a cat." }
+      - { ru: "У меня́ есть кот.", en: "I have a cat." }
+      - { ru: "Где кот? Он тут.", en: "Where is the cat? It's here." }
 
   - id: "taksi"
     word: "такси"
@@ -620,6 +666,8 @@ cognates:
     notes: "Indeclinable (doesn't change). Neuter gender. Stress on last syllable."
     examples:
       - { ru: "Где такси́?", en: "Where is the taxi?" }
+      - { ru: "Вот такси́.", en: "Here's the taxi." }
+      - { ru: "Такси́ там.", en: "The taxi is there." }
 
   - id: "metro"
     word: "метро"
@@ -635,6 +683,8 @@ cognates:
     notes: "Indeclinable. Essential for any Russian city! Stress on last syllable."
     examples:
       - { ru: "Где метро́?", en: "Where is the metro?" }
+      - { ru: "Метро́ тут.", en: "The metro is here." }
+      - { ru: "Извини́те, где метро́?", en: "Excuse me, where is the metro?" }
 
   - id: "radio"
     word: "радио"
@@ -650,6 +700,8 @@ cognates:
     notes: "Р sounds like rolled 'r', not English 'r'. Stress on first syllable."
     examples:
       - { ru: "Э́то ра́дио.", en: "This is a radio." }
+      - { ru: "Где ра́дио?", en: "Where is the radio?" }
+      - { ru: "У меня́ есть ра́дио.", en: "I have a radio." }
 
   - id: "kofe"
     word: "кофе"
@@ -666,6 +718,8 @@ cognates:
     notes: "⚠️ EXCEPTION: Ends in -е but masculine! Borrowed word, indeclinable. Uses он: Где ко́фе? Он тут."
     examples:
       - { ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
+      - { ru: "Я хочу́ ко́фе.", en: "I want coffee." }
+      - { ru: "Где ко́фе? Он тут.", en: "Where is the coffee? It's here." }
 
   - id: "telefon"
     word: "телефон"
@@ -681,6 +735,8 @@ cognates:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Где телефо́н?", en: "Where is the phone?" }
+      - { ru: "Э́то мой телефо́н.", en: "This is my phone." }
+      - { ru: "У меня́ есть телефо́н.", en: "I have a phone." }
 
   - id: "doktor"
     word: "доктор"
@@ -696,6 +752,8 @@ cognates:
     notes: "Stress on first syllable."
     examples:
       - { ru: "Он до́ктор.", en: "He is a doctor." }
+      - { ru: "Где до́ктор?", en: "Where is the doctor?" }
+      - { ru: "Вы до́ктор?", en: "Are you a doctor?" }
 
   - id: "student"
     word: "студент"
@@ -711,6 +769,8 @@ cognates:
     notes: "Female student is студе́нтка. Stress on second syllable."
     examples:
       - { ru: "Я студе́нт.", en: "I am a student." }
+      - { ru: "Он студе́нт?", en: "Is he a student?" }
+      - { ru: "Э́то студе́нт.", en: "This is a student." }
 
   - id: "restoran"
     word: "ресторан"
@@ -726,6 +786,8 @@ cognates:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Где рестора́н?", en: "Where is the restaurant?" }
+      - { ru: "Рестора́н там.", en: "The restaurant is there." }
+      - { ru: "Э́то хоро́ший рестора́н.", en: "This is a good restaurant." }
 
   - id: "bank"
     word: "банк"
@@ -740,6 +802,8 @@ cognates:
     audio: "bank.mp3"
     examples:
       - { ru: "Банк там.", en: "The bank is there." }
+      - { ru: "Где банк?", en: "Where is the bank?" }
+      - { ru: "Я рабо́таю в ба́нке.", en: "I work at a bank." }
 
   - id: "park"
     word: "парк"
@@ -754,6 +818,8 @@ cognates:
     audio: "park.mp3"
     examples:
       - { ru: "Парк тут.", en: "The park is here." }
+      - { ru: "Где парк?", en: "Where is the park?" }
+      - { ru: "Э́то большо́й парк.", en: "This is a big park." }
 
   - id: "internet"
     word: "интернет"
@@ -769,6 +835,8 @@ cognates:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Где интерне́т?", en: "Where is the internet? / Is there wifi?" }
+      - { ru: "Тут есть интерне́т?", en: "Is there internet here?" }
+      - { ru: "У меня́ есть интерне́т.", en: "I have internet." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 7: ESSENTIAL NOUNS
@@ -790,6 +858,8 @@ nouns:
     notes: "Д sounds like 'd'. One of the most useful words."
     examples:
       - { ru: "Э́то мой дом.", en: "This is my house." }
+      - { ru: "Где дом?", en: "Where is the house?" }
+      - { ru: "Большо́й дом.", en: "A big house." }
 
   - id: "kniga"
     word: "книга"
@@ -805,6 +875,8 @@ nouns:
     notes: "Say both consonants at start: k-niga. Stress on first syllable."
     examples:
       - { ru: "Э́то кни́га.", en: "This is a book." }
+      - { ru: "Где кни́га? Она́ там.", en: "Where is the book? It's there." }
+      - { ru: "Я чита́ю кни́гу.", en: "I am reading a book." }
 
   - id: "okno"
     word: "окно"
@@ -820,6 +892,8 @@ nouns:
     notes: "Classic neuter noun (ends in -о). Stress on last syllable."
     examples:
       - { ru: "Окно́ там.", en: "The window is there." }
+      - { ru: "Э́то большо́е окно́.", en: "This is a big window." }
+      - { ru: "Где окно́?", en: "Where is the window?" }
 
   - id: "voda"
     word: "вода"
@@ -835,6 +909,8 @@ nouns:
     notes: "В sounds like 'v'. Essential survival word! Stress on last syllable."
     examples:
       - { ru: "Вода́, пожа́луйста.", en: "Water, please." }
+      - { ru: "Я хочу́ воду́.", en: "I want water." }
+      - { ru: "Где вода́?", en: "Where is the water?" }
 
   - id: "yeda"
     word: "еда"
@@ -850,6 +926,8 @@ nouns:
     notes: "Е at start of word = 'ye'. Stress on last syllable."
     examples:
       - { ru: "Где еда́?", en: "Where is food?" }
+      - { ru: "Я хочу́ еду́.", en: "I want food." }
+      - { ru: "Тут есть еда́?", en: "Is there food here?" }
 
   - id: "drug"
     word: "друг"
@@ -866,6 +944,8 @@ nouns:
     notes: "⚠️ PRONOUNCED 'ДРУК' - final Г→К! This rule applies to all words ending in Г: враг→врак, снег→снек. Female friend is подру́га (Г stays voiced before vowel)."
     examples:
       - { ru: "Э́то мой друг.", en: "This is my friend." }
+      - { ru: "Кто э́то? Э́то мой друг.", en: "Who is this? This is my friend." }
+      - { ru: "У меня́ есть друг.", en: "I have a friend." }
 
   - id: "brat"
     word: "брат"
@@ -881,6 +961,8 @@ nouns:
     notes: "Б sounds like 'b'."
     examples:
       - { ru: "Э́то мой брат.", en: "This is my brother." }
+      - { ru: "У меня́ есть брат.", en: "I have a brother." }
+      - { ru: "Где твой брат?", en: "Where is your brother?" }
 
   - id: "sestra"
     word: "сестра"
@@ -896,6 +978,8 @@ nouns:
     notes: "Stress on last syllable."
     examples:
       - { ru: "Э́то моя́ сестра́.", en: "This is my sister." }
+      - { ru: "У меня́ есть сестра́.", en: "I have a sister." }
+      - { ru: "Моя́ сестра́ до́ма.", en: "My sister is at home." }
 
   - id: "sobaka"
     word: "собака"
@@ -911,6 +995,8 @@ nouns:
     notes: "Stress on second syllable."
     examples:
       - { ru: "Э́то соба́ка.", en: "This is a dog." }
+      - { ru: "У меня́ есть соба́ка.", en: "I have a dog." }
+      - { ru: "Где соба́ка? Она́ там.", en: "Where is the dog? It's there." }
 
   - id: "mashina"
     word: "машина"
@@ -927,6 +1013,8 @@ nouns:
     notes: "Ш sounds like 'sh' (tongue further back than English). ⚠️ ШИ is written with И but pronounced like Ы! Also means 'machine'. Stress on second syllable."
     examples:
       - { ru: "Э́то моя́ маши́на.", en: "This is my car." }
+      - { ru: "У меня́ есть маши́на.", en: "I have a car." }
+      - { ru: "Где маши́на?", en: "Where is the car?" }
 
   - id: "ulitsa"
     word: "улица"
@@ -942,6 +1030,8 @@ nouns:
     notes: "Ц sounds like 'ts'. Stress on first syllable."
     examples:
       - { ru: "Где у́лица Пу́шкина?", en: "Where is Pushkin Street?" }
+      - { ru: "Э́то моя́ у́лица.", en: "This is my street." }
+      - { ru: "Больша́я у́лица.", en: "A big street." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 8: POSSESSION CONSTRUCTION
@@ -990,6 +1080,8 @@ possession:
     notes: "For masculine nouns. Й sounds like 'y' in 'boy'."
     examples:
       - { ru: "Э́то мой дом.", en: "This is my house." }
+      - { ru: "Э́то мой кот.", en: "This is my cat." }
+      - { ru: "Где мой телефо́н?", en: "Where is my phone?" }
 
   - id: "moya"
     word: "моя"
@@ -1004,6 +1096,8 @@ possession:
     notes: "For feminine nouns. Stress on last syllable."
     examples:
       - { ru: "Э́то моя́ кни́га.", en: "This is my book." }
+      - { ru: "Моя́ соба́ка тут.", en: "My dog is here." }
+      - { ru: "Где моя́ маши́на?", en: "Where is my car?" }
 
   - id: "moyo"
     word: "моё"
@@ -1018,6 +1112,8 @@ possession:
     notes: "For neuter nouns. Ё always stressed, sounds like 'yo'."
     examples:
       - { ru: "Э́то моё окно́.", en: "This is my window." }
+      - { ru: "Где моё ра́дио?", en: "Where is my radio?" }
+      - { ru: "Моё метро́ тут.", en: "My metro is here." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 9: USEFUL ADJECTIVES & ADVERBS
@@ -1052,6 +1148,8 @@ descriptors:
     notes: "Stress on first syllable."
     examples:
       - { ru: "Э́то пло́хо.", en: "That's bad." }
+      - { ru: "Он говори́т пло́хо.", en: "He speaks badly." }
+      - { ru: "Не пло́хо!", en: "Not bad!" }
 
   - id: "ochen"
     word: "очень"
@@ -1080,6 +1178,8 @@ descriptors:
     notes: "Masculine form. Changes for gender: больша́я (f), большо́е (n). Stress on last syllable."
     examples:
       - { ru: "Э́то большо́й дом.", en: "This is a big house." }
+      - { ru: "У меня́ больша́я соба́ка.", en: "I have a big dog." }
+      - { ru: "Большо́е окно́.", en: "A big window." }
 
   - id: "malenkiy"
     word: "маленький"
@@ -1094,6 +1194,8 @@ descriptors:
     notes: "Masculine form. ма́ленькая (f), ма́ленькое (n). Stress on first syllable."
     examples:
       - { ru: "Э́то ма́ленький кот.", en: "This is a small cat." }
+      - { ru: "Ма́ленькая кни́га.", en: "A small book." }
+      - { ru: "У меня́ ма́ленький дом.", en: "I have a small house." }
 
   - id: "noviy"
     word: "новый"
@@ -1108,6 +1210,8 @@ descriptors:
     notes: "Stress on first syllable."
     examples:
       - { ru: "Э́то но́вый телефо́н.", en: "This is a new phone." }
+      - { ru: "У меня́ но́вая маши́на.", en: "I have a new car." }
+      - { ru: "Но́вый дом.", en: "A new house." }
 
   - id: "stariy"
     word: "старый"
@@ -1122,6 +1226,8 @@ descriptors:
     notes: "Stress on first syllable."
     examples:
       - { ru: "Э́то ста́рый дом.", en: "This is an old house." }
+      - { ru: "Ста́рая кни́га.", en: "An old book." }
+      - { ru: "У меня́ ста́рый телефо́н.", en: "I have an old phone." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 10: VERBS
@@ -1346,6 +1452,8 @@ numbers:
     notes: "Sounds like 'tree'. Followed by genitive singular."
     examples:
       - { ru: "три до́ма", en: "three houses" }
+      - { ru: "три кота́", en: "three cats" }
+      - { ru: "У меня́ три бра́та.", en: "I have three brothers." }
 
   - id: "chetyre"
     word: "четыре"
@@ -1359,6 +1467,8 @@ numbers:
     notes: "Followed by genitive singular. Stress on second syllable."
     examples:
       - { ru: "четы́ре окна́", en: "four windows" }
+      - { ru: "четы́ре кни́ги", en: "four books" }
+      - { ru: "У меня́ четы́ре друга́.", en: "I have four friends." }
 
   - id: "pyat"
     word: "пять"
@@ -1372,6 +1482,8 @@ numbers:
     notes: "Followed by genitive plural (5+ uses genitive plural)."
     examples:
       - { ru: "пять кото́в", en: "five cats" }
+      - { ru: "пять книг", en: "five books" }
+      - { ru: "У меня́ пять рубле́й.", en: "I have five rubles." }
 
   - id: "shest"
     word: "шесть"
@@ -1384,6 +1496,8 @@ numbers:
     audio: "shest.mp3"
     examples:
       - { ru: "шесть книг", en: "six books" }
+      - { ru: "шесть домо́в", en: "six houses" }
+      - { ru: "У меня́ шесть друзе́й.", en: "I have six friends." }
 
   - id: "sem"
     word: "семь"
@@ -1397,6 +1511,8 @@ numbers:
     notes: "Cognate with English 'seven', Latin 'septem'."
     examples:
       - { ru: "семь дней", en: "seven days" }
+      - { ru: "семь часо́в", en: "seven hours" }
+      - { ru: "У меня́ семь книг.", en: "I have seven books." }
 
   - id: "vosem"
     word: "восемь"
@@ -1410,6 +1526,8 @@ numbers:
     notes: "Stress on first syllable."
     examples:
       - { ru: "во́семь челове́к", en: "eight people" }
+      - { ru: "во́семь часо́в", en: "eight o'clock" }
+      - { ru: "У меня́ во́семь яи́ц.", en: "I have eight eggs." }
 
   - id: "devyat"
     word: "девять"
@@ -1423,6 +1541,8 @@ numbers:
     notes: "Stress on first syllable."
     examples:
       - { ru: "де́вять рубле́й", en: "nine rubles" }
+      - { ru: "де́вять часо́в", en: "nine o'clock" }
+      - { ru: "У меня́ де́вять книг.", en: "I have nine books." }
 
   - id: "desyat"
     word: "десять"
@@ -1436,6 +1556,8 @@ numbers:
     notes: "Base for teens and tens (11 = оди́н-на-дцать). Stress on first syllable."
     examples:
       - { ru: "де́сять мину́т", en: "ten minutes" }
+      - { ru: "де́сять рубле́й", en: "ten rubles" }
+      - { ru: "У меня́ де́сять друзе́й.", en: "I have ten friends." }
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTION 12: LANGUAGE ADVERBS

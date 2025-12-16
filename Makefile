@@ -1,4 +1,4 @@
-.PHONY: install-all backend frontend kill-all dev build db db-up db-down db-logs migrate
+.PHONY: install-all backend frontend kill-all dev build db db-up db-down db-logs migrate lesson-update
 
 build:
 	bldr build
@@ -16,6 +16,9 @@ db: db-up
 
 migrate:
 	cd backend && $(MAKE) migrate
+
+lesson-update:
+	cd backend && . venv/bin/activate && PYTHONPATH=. python3 scripts/ingest_lessons.py
 
 install-all:
 	cd backend && $(MAKE) install

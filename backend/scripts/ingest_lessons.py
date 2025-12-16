@@ -3,19 +3,20 @@ import logging
 import argparse
 import yaml
 import asyncio
-from uuid import UUID
+import re
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.database import get_db_session, engine, Base
+from core.database import get_db_session
 from models.curriculum import CurriculumSection, CurriculumUnit, CurriculumNode
-from models.srs import Sentence, SyntacticPattern
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
+
+LANGUAGE_NAMES = {"ru": "Russian", "es": "Spanish", "fr": "French", "de": "German"}
 
 
 def get_lessons_dirs(language: str) -> list[Path]:
@@ -26,135 +27,105 @@ def get_lessons_dirs(language: str) -> list[Path]:
     return sorted([d / "lessons" for d in lang_dir.iterdir() if d.is_dir() and (d / "lessons").exists()])
 
 
-async def get_or_create_section(session: AsyncSession, data: dict, language: str) -> CurriculumSection:
-    """Get or create a curriculum section."""
-    stmt = select(CurriculumSection).where(CurriculumSection.title == data["title"], CurriculumSection.language == language)
+def unit_name_from_dir(dir_name: str) -> str:
+    """Convert directory name to display name: unit_one -> Unit 1."""
+    numbers = {"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10"}
+    parts = dir_name.split("_")
+    if len(parts) == 2 and parts[0].lower() == "unit":
+        num = numbers.get(parts[1].lower(), parts[1].capitalize())
+        return f"Unit {num}"
+    return dir_name.replace("_", " ").title()
+
+
+async def get_or_create_section(session: AsyncSession, language: str) -> CurriculumSection:
+    """Get or create a curriculum section for the language."""
+    title = LANGUAGE_NAMES.get(language, language.upper())
+    stmt = select(CurriculumSection).where(CurriculumSection.title == title, CurriculumSection.language == language)
     result = await session.execute(stmt)
     section = result.scalar_one_or_none()
 
     if not section:
-        section = CurriculumSection(title=data["title"], description=data.get("description"), order_index=data.get("order", 0), language=language)
+        section = CurriculumSection(title=title, description=f"{title} language curriculum", order_index=0, language=language)
         session.add(section)
         await session.flush()
         logger.info(f"Created Section: {section.title}")
-    else:
-        section.description = data.get("description", section.description)
-        section.order_index = data.get("order", section.order_index)
-        logger.info(f"Updated Section: {section.title}")
 
     return section
 
 
-async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, data: dict) -> CurriculumUnit:
+async def get_or_create_unit(session: AsyncSession, section: CurriculumSection, unit_dir_name: str, order: int) -> CurriculumUnit:
     """Get or create a curriculum unit."""
-    stmt = select(CurriculumUnit).where(CurriculumUnit.section_id == section.id, CurriculumUnit.title == data["title"])
+    title = unit_name_from_dir(unit_dir_name)
+    stmt = select(CurriculumUnit).where(CurriculumUnit.section_id == section.id, CurriculumUnit.title == title)
     result = await session.execute(stmt)
     unit = result.scalar_one_or_none()
 
     if not unit:
-        unit = CurriculumUnit(
-            section_id=section.id,
-            title=data["title"],
-            description=data.get("description"),
-            order_index=data.get("order", 0),
-            prerequisite_units=[],
-            target_patterns=[],
-        )
+        unit = CurriculumUnit(section_id=section.id, title=title, order_index=order, prerequisite_units=[], target_patterns=[])
         session.add(unit)
         await session.flush()
         logger.info(f"Created Unit: {unit.title}")
-    else:
-        unit.description = data.get("description", unit.description)
-        unit.order_index = data.get("order", unit.order_index)
-        logger.info(f"Updated Unit: {unit.title}")
 
     return unit
 
 
-async def get_or_create_pattern(session: AsyncSession, pattern_id: str) -> UUID | None:
-    """Get pattern ID by name."""
-    stmt = select(SyntacticPattern).where(SyntacticPattern.pattern_type == pattern_id)
-    result = await session.execute(stmt)
-    pattern = result.scalar_one_or_none()
-
-    if pattern:
-        return pattern.id
-    logger.warning(f"Pattern not found: {pattern_id}")
-    return None
+def extract_order_from_filename(filename: str) -> int:
+    """Extract lesson order from filename: 00_stress.yaml -> 0."""
+    match = re.match(r"(\d+)", filename)
+    return int(match.group(1)) if match else 0
 
 
-async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, data: dict, language: str):
-    """Ingest a single lesson (node)."""
-    stmt = select(CurriculumNode).where(CurriculumNode.unit_id == unit.id, CurriculumNode.title == data["title"])
+async def ingest_lesson(session: AsyncSession, unit: CurriculumUnit, file_path: Path):
+    """Ingest a single lesson file."""
+    with open(file_path) as f:
+        data = yaml.safe_load(f)
+
+    if not data or "lesson" not in data:
+        logger.warning(f"Skipping {file_path.name}: no lesson data")
+        return
+
+    lesson = data["lesson"]
+    title = lesson.get("title", file_path.stem)
+    order = extract_order_from_filename(file_path.name)
+
+    stmt = select(CurriculumNode).where(CurriculumNode.unit_id == unit.id, CurriculumNode.title == title)
     result = await session.execute(stmt)
     node = result.scalar_one_or_none()
 
-    pattern_ids = []
-    if "patterns" in data:
-        for p_name in data["patterns"]:
-            p_id = await get_or_create_pattern(session, p_name)
-            if p_id:
-                pattern_ids.append(p_id)
+    extra_data = {
+        "lesson_id": lesson.get("id"),
+        "subtitle": lesson.get("subtitle"),
+        "icon": lesson.get("icon"),
+        "duration": lesson.get("duration"),
+        "lesson_type": lesson.get("type"),
+        "modules": data.get("modules", []),
+        "vocab_filter": data.get("vocab_filter", {}),
+        "metadata": data.get("metadata", {}),
+    }
 
-    featured_sentence_ids = []
-    if "sentences" in data:
-        for s_data in data["sentences"]:
-            stmt = select(Sentence).where(Sentence.text == s_data["text"])
-            result = await session.execute(stmt)
-            sentence = result.scalars().first()
-
-            if not sentence:
-                sentence = Sentence(
-                    text=s_data["text"],
-                    translation=s_data.get("translation"),
-                    complexity_score=s_data.get("complexity", 1),
-                    language=language,
-                    extra_data={"audio": s_data.get("audio")},
-                )
-                session.add(sentence)
-                await session.flush()
-                logger.info(f"Created Sentence: {sentence.text[:20]}...")
-
-            featured_sentence_ids.append(str(sentence.id))
-
-    vocabulary = data.get("vocabulary", [])
-    extra_data = {"featured_sentences": featured_sentence_ids, "vocabulary": vocabulary, "content": data.get("content", {})}
+    level_type = lesson.get("type", "medium")
+    if level_type == "foundational":
+        level_type = "intro"
 
     if not node:
         node = CurriculumNode(
             unit_id=unit.id,
-            title=data["title"],
-            description=data.get("description"),
-            order_index=data.get("order", 0),
-            node_type=data.get("type", "practice"),
-            target_patterns=pattern_ids,
+            title=title,
+            description=lesson.get("subtitle"),
+            order_index=order,
+            level=order + 1,
+            level_type=level_type,
+            estimated_duration_min=int(lesson.get("duration", "5").split()[0]) if lesson.get("duration") else 5,
             extra_data=extra_data,
-            estimated_duration_min=5,
         )
         session.add(node)
         logger.info(f"Created Lesson: {node.title}")
     else:
-        node.description = data.get("description", node.description)
-        node.order_index = data.get("order", node.order_index)
+        node.description = lesson.get("subtitle", node.description)
+        node.order_index = order
+        node.level_type = level_type
         node.extra_data = extra_data
-        node.target_patterns = pattern_ids
         logger.info(f"Updated Lesson: {node.title}")
-
-
-async def process_file(session: AsyncSession, file_path: Path, language: str):
-    """Process a single YAML file."""
-    logger.info(f"Processing {file_path.name}...")
-    with open(file_path) as f:
-        data = yaml.safe_load(f)
-
-    if not data:
-        return
-
-    section = await get_or_create_section(session, data["section"], language)
-    unit = await get_or_create_unit(session, section, data["unit"])
-
-    for lesson_data in data.get("lessons", []):
-        await ingest_lesson(session, unit, lesson_data, language)
 
 
 async def main(language: str = "ru"):
@@ -165,11 +136,16 @@ async def main(language: str = "ru"):
         return
 
     async with get_db_session() as session:
-        for lessons_dir in lessons_dirs:
-            logger.info(f"Processing unit: {lessons_dir.parent.name}")
-            files = sorted(lessons_dir.glob("*.yaml"))
-            for file_path in files:
-                await process_file(session, file_path, language)
+        section = await get_or_create_section(session, language)
+
+        for unit_order, lessons_dir in enumerate(lessons_dirs):
+            unit_name = lessons_dir.parent.name
+            logger.info(f"Processing unit: {unit_name}")
+
+            unit = await get_or_create_unit(session, section, unit_name, unit_order)
+
+            for file_path in sorted(lessons_dir.glob("*.yaml")):
+                await ingest_lesson(session, unit, file_path)
 
         await session.commit()
         logger.info(f"Ingestion complete for language: {language}")

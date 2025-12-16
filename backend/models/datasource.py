@@ -5,10 +5,9 @@ individual records for deduplication and updates.
 """
 from datetime import datetime
 from uuid import uuid4
-from sqlalchemy import Column, String, DateTime, Text, Integer, Boolean, Index
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy import Column, String, DateTime, Text, ForeignKey, Integer, Boolean, Index, JSON
 
-from core.database import Base
+from core.database import Base, GUID
 
 
 class DataSource(Base):
@@ -18,7 +17,7 @@ class DataSource(Base):
         Index("ix_data_sources_name_lang", "name", "language"),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    id = Column(GUID, primary_key=True, default=uuid4)
     name = Column(String(100), nullable=False)  # universal_dependencies, wiktionary, tatoeba, openrussian
     language = Column(String(10), nullable=False, default="ru")
     version = Column(String(50))  # e.g., "2.14" for UD, date for wiktionary dump
@@ -29,8 +28,8 @@ class DataSource(Base):
     next_sync = Column(DateTime)
     sync_frequency_days = Column(Integer, default=90)
     is_active = Column(Boolean, default=True)
-    config = Column(JSONB, default=dict)  # Source-specific configuration
-    stats = Column(JSONB, default=dict)  # Import statistics
+    config = Column(JSON, default=dict)  # Source-specific configuration
+    stats = Column(JSON, default=dict)  # Import statistics
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -42,7 +41,7 @@ class IngestionRecord(Base):
         Index("ix_ingestion_records_source_status", "source_name", "status"),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    id = Column(GUID, primary_key=True, default=uuid4)
     source_name = Column(String(100), nullable=False)
     language = Column(String(10), nullable=False, default="ru")
     file_path = Column(String(500))  # Original file processed
@@ -54,9 +53,9 @@ class IngestionRecord(Base):
     records_updated = Column(Integer, default=0)
     records_skipped = Column(Integer, default=0)
     records_failed = Column(Integer, default=0)
-    error_log = Column(JSONB, default=list)  # List of error messages
-    config = Column(JSONB, default=dict)  # Run configuration
-    stats = Column(JSONB, default=dict)  # Additional statistics
+    error_log = Column(JSON, default=list)  # List of error messages
+    config = Column(JSON, default=dict)  # Run configuration
+    stats = Column(JSON, default=dict)  # Additional statistics
     created_at = Column(DateTime, default=datetime.utcnow)
 
 
@@ -67,11 +66,11 @@ class ExternalIdMapping(Base):
         Index("ix_external_id_unique", "source_name", "external_id", "entity_type", unique=True),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    id = Column(GUID, primary_key=True, default=uuid4)
     source_name = Column(String(100), nullable=False)
     external_id = Column(String(255), nullable=False)  # ID in external system
     entity_type = Column(String(50), nullable=False)  # sentence, lemma, pattern, etc.
-    internal_id = Column(UUID(as_uuid=True), nullable=False)  # Our UUID
+    internal_id = Column(GUID, nullable=False)  # Our UUID
     version = Column(String(50))  # Version when imported
     checksum = Column(String(64))  # For detecting changes
     created_at = Column(DateTime, default=datetime.utcnow)

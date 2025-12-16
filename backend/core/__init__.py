@@ -1,6 +1,6 @@
 # Core module exports
 from core.config import settings, get_settings
-from core.database import engine, Base, AsyncSessionLocal, get_db
+from core.database import engine, Base, AsyncSessionLocal, get_db, GUID
 from core.logging import (
     configure_logging,
     get_logger,
@@ -14,6 +14,9 @@ from core.logging import (
     auth_logger,
     srs_logger,
 )
+
+
+
 
 
 

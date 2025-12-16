@@ -5,12 +5,14 @@ with Result-based error propagation.
 """
 from contextlib import asynccontextmanager
 from typing import AsyncIterator, TypeVar
-from uuid import UUID
+from uuid import UUID as PyUUID
 
-from sqlalchemy import select
+from sqlalchemy import select, String
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.types import TypeDecorator, CHAR
+from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 
 from core.config import settings
 from core.errors import (
@@ -25,6 +27,36 @@ from core.errors import (
 )
 
 T = TypeVar("T")
+
+
+class GUID(TypeDecorator):
+    """Platform-agnostic GUID type.
+    
+    Uses PostgreSQL's UUID type when available, otherwise stores as CHAR(32).
+    """
+    impl = CHAR
+    cache_ok = True
+
+    def load_dialect_impl(self, dialect):
+        if dialect.name == "postgresql":
+            return dialect.type_descriptor(PG_UUID(as_uuid=True))
+        return dialect.type_descriptor(CHAR(32))
+
+    def process_bind_param(self, value, dialect):
+        if value is None:
+            return value
+        if dialect.name == "postgresql":
+            return value
+        if isinstance(value, PyUUID):
+            return value.hex
+        return PyUUID(value).hex
+
+    def process_result_value(self, value, dialect):
+        if value is None:
+            return value
+        if isinstance(value, PyUUID):
+            return value
+        return PyUUID(value)
 
 engine = create_async_engine(
     settings.DATABASE_URL,
@@ -70,7 +102,7 @@ async def get_db_session() -> AsyncIterator[AsyncSession]:
 async def fetch_one(
     session: AsyncSession,
     model: type[T],
-    id: UUID,
+    id: PyUUID,
     entity_name: str | None = None,
 ) -> Result[T, AppError]:
     """Fetch single entity by ID.

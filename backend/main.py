@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import morphology, etymology, phonetics, srs, glossing, production, auth, curriculum, ingest
+from api import morphology, etymology, phonetics, srs, glossing, production, curriculum, ingest
 from core.config import settings
 from core.database import engine, Base
 from core.logging import configure_logging, get_logger
@@ -65,7 +65,7 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
+
 app.include_router(morphology.router, prefix="/api/morphology", tags=["morphology"])
 app.include_router(etymology.router, prefix="/api/etymology", tags=["etymology"])
 app.include_router(phonetics.router, prefix="/api/phonetics", tags=["phonetics"])

@@ -13,6 +13,7 @@ from collections import defaultdict
 
 from sqlalchemy import select, func, and_, or_
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
 from models.curriculum import (
@@ -80,9 +81,12 @@ class CurriculumEngine:
         user_id: UUID,
     ) -> list[dict]:
         """Get the full learning path with user progress."""
-        # Get all sections with units and nodes
+        # Get all sections with units and nodes (eager load to avoid lazy loading issues)
         result = await session.execute(
             select(CurriculumSection)
+            .options(
+                selectinload(CurriculumSection.units).selectinload(CurriculumUnit.nodes)
+            )
             .where(
                 CurriculumSection.language == self.language,
                 CurriculumSection.is_active == True,
@@ -118,34 +122,60 @@ class CurriculumEngine:
                     continue
 
                 u_progress = unit_progress.get(unit.id)
+                
+                # Build nodes first to infer unit status
+                nodes_data = []
+                completed_count = 0
+                has_available = False
+                has_in_progress = False
+                
+                for node in unit.nodes:
+                    if not node.is_active:
+                        continue
+                    n_progress = node_progress.get(node.id)
+                    status = n_progress.status if n_progress else "locked"
+                    
+                    if status == "completed":
+                        completed_count += 1
+                    elif status == "available":
+                        has_available = True
+                    elif status == "in_progress":
+                        has_in_progress = True
+                    
+                    nodes_data.append({
+                        "id": str(node.id),
+                        "title": node.title,
+                        "node_type": node.node_type,
+                        "status": status,
+                        "level": n_progress.level if n_progress else 0,
+                        "total_reviews": n_progress.total_reviews if n_progress else 0,
+                        "estimated_duration_min": node.estimated_duration_min,
+                    })
+                
+                # Infer unit status from nodes if no explicit progress
+                if u_progress:
+                    unit_status = u_progress.status
+                elif has_in_progress:
+                    unit_status = "in_progress"
+                elif has_available:
+                    unit_status = "available"
+                elif completed_count > 0:
+                    unit_status = "completed" if completed_count == len(nodes_data) else "in_progress"
+                else:
+                    unit_status = "locked"
+                
                 unit_data = {
                     "id": str(unit.id),
                     "title": unit.title,
                     "description": unit.description,
                     "icon": unit.icon,
                     "is_checkpoint": unit.is_checkpoint,
-                    "status": u_progress.status if u_progress else "locked",
+                    "status": unit_status,
                     "is_crowned": u_progress.is_crowned if u_progress else False,
-                    "completed_nodes": u_progress.completed_nodes if u_progress else 0,
-                    "total_nodes": len(unit.nodes),
-                    "nodes": [],
+                    "completed_nodes": u_progress.completed_nodes if u_progress else completed_count,
+                    "total_nodes": len(nodes_data),
+                    "nodes": nodes_data,
                 }
-
-                for node in unit.nodes:
-                    if not node.is_active:
-                        continue
-
-                    n_progress = node_progress.get(node.id)
-                    node_data = {
-                        "id": str(node.id),
-                        "title": node.title,
-                        "node_type": node.node_type,
-                        "status": n_progress.status if n_progress else "locked",
-                        "level": n_progress.level if n_progress else 0,
-                        "total_reviews": n_progress.total_reviews if n_progress else 0,
-                        "estimated_duration_min": node.estimated_duration_min,
-                    }
-                    unit_data["nodes"].append(node_data)
 
                 section_data["units"].append(unit_data)
 
@@ -221,16 +251,16 @@ class CurriculumEngine:
             if p in mastery_map and mastery_map[p].next_review and mastery_map[p].next_review <= datetime.utcnow()
         ]
 
-        # Get candidate sentences
-        sentences = await self._get_candidate_sentences(
+        # Get candidate sentences (returns list of (Sentence, patterns) tuples)
+        sentences_with_patterns = await self._get_candidate_sentences(
             session, target_patterns, node.complexity_min, node.complexity_max
         )
 
         # Score and select sentences
         scored_sentences = []
-        for sent in sentences:
-            score = self._calculate_teaching_value(sent, mastery_map, new_patterns, review_patterns)
-            scored_sentences.append((score, sent))
+        for sent, patterns in sentences_with_patterns:
+            score = self._calculate_teaching_value(patterns, mastery_map, new_patterns, review_patterns)
+            scored_sentences.append((score, sent, patterns))
 
         # Sort by teaching value and diversify
         scored_sentences.sort(key=lambda x: -x[0])
@@ -238,14 +268,14 @@ class CurriculumEngine:
 
         lesson_sentences = [
             LessonSentence(
-                sentence_id=s.id,
-                text=s.text,
-                translation=s.translation,
-                complexity=s.complexity_score,
-                patterns=[sp.pattern_id for sp in s.patterns],
+                sentence_id=sent.id,
+                text=sent.text,
+                translation=sent.translation,
+                complexity=sent.complexity_score,
+                patterns=[sp.pattern_id for sp in patterns],
                 teaching_value=score,
             )
-            for score, s in selected
+            for score, sent, patterns in selected
         ]
 
         return Lesson(
@@ -266,67 +296,79 @@ class CurriculumEngine:
         complexity_min: int,
         complexity_max: int,
         limit: int = 100,
-    ) -> list[Sentence]:
+    ) -> list[tuple[Sentence, list[SentencePattern]]]:
         """Get candidate sentences for lesson generation."""
-        if not pattern_ids:
-            return []
-
-        result = await session.execute(
-            select(Sentence)
-            .join(SentencePattern)
-            .where(
-                SentencePattern.pattern_id.in_(pattern_ids),
-                Sentence.complexity_score >= complexity_min,
-                Sentence.complexity_score <= complexity_max,
-                Sentence.language == self.language,
+        sentences: list[Sentence] = []
+        
+        # Try pattern-matched sentences first
+        if pattern_ids:
+            result = await session.execute(
+                select(Sentence)
+                .join(SentencePattern)
+                .where(
+                    SentencePattern.pattern_id.in_(pattern_ids),
+                    Sentence.complexity_score >= complexity_min,
+                    Sentence.complexity_score <= complexity_max,
+                    Sentence.language == self.language,
+                )
+                .distinct()
+                .limit(limit)
             )
-            .distinct()
-            .limit(limit)
-        )
-        sentences = result.scalars().all()
+            sentences = list(result.scalars().all())
 
-        # Eager load patterns for each sentence
+        # Fallback: get any sentences in complexity range if no pattern matches
+        if not sentences:
+            result = await session.execute(
+                select(Sentence)
+                .where(
+                    Sentence.complexity_score >= complexity_min,
+                    Sentence.complexity_score <= complexity_max,
+                    Sentence.language == self.language,
+                )
+                .limit(limit)
+            )
+            sentences = list(result.scalars().all())
+
+        # Load patterns separately for each sentence (avoid lazy loading)
+        sentences_with_patterns: list[tuple[Sentence, list[SentencePattern]]] = []
         for sent in sentences:
             pattern_result = await session.execute(
                 select(SentencePattern).where(SentencePattern.sentence_id == sent.id)
             )
-            sent.patterns = pattern_result.scalars().all()
+            patterns = list(pattern_result.scalars().all())
+            sentences_with_patterns.append((sent, patterns))
 
-        return sentences
+        return sentences_with_patterns
 
     def _calculate_teaching_value(
         self,
-        sentence: Sentence,
+        patterns: list[SentencePattern],
         mastery_map: dict[UUID, UserPatternMastery],
         new_patterns: list[UUID],
         review_patterns: list[UUID],
     ) -> float:
         """Calculate how valuable a sentence is for teaching."""
-        score = 0.0
-        sentence_patterns = [sp.pattern_id for sp in sentence.patterns]
+        score = 1.0  # Base score
+        pattern_ids = [sp.pattern_id for sp in patterns]
 
         # Bonus for containing new patterns
-        new_count = sum(1 for p in sentence_patterns if p in new_patterns)
+        new_count = sum(1 for p in pattern_ids if p in new_patterns)
         score += new_count * 3.0
 
         # Bonus for containing due review patterns
-        review_count = sum(1 for p in sentence_patterns if p in review_patterns)
+        review_count = sum(1 for p in pattern_ids if p in review_patterns)
         score += review_count * 2.0
 
         # Bonus for weak patterns (low ease factor)
-        for p in sentence_patterns:
+        for p in pattern_ids:
             if p in mastery_map:
                 mastery = mastery_map[p]
                 if mastery.ease_factor < 2.0:
                     score += (2.5 - mastery.ease_factor) * 1.5
 
         # Penalty for too many patterns (cognitive load)
-        if len(sentence_patterns) > 3:
-            score -= (len(sentence_patterns) - 3) * 0.5
-
-        # Bonus for having translation
-        if sentence.translation:
-            score += 0.5
+        if len(pattern_ids) > 3:
+            score -= (len(pattern_ids) - 3) * 0.5
 
         # Slight randomization for variety
         import random
@@ -336,26 +378,25 @@ class CurriculumEngine:
 
     def _diversify_selection(
         self,
-        scored_sentences: list[tuple[float, Sentence]],
+        scored_sentences: list[tuple[float, Sentence, list[SentencePattern]]],
         max_count: int,
-    ) -> list[tuple[float, Sentence]]:
+    ) -> list[tuple[float, Sentence, list[SentencePattern]]]:
         """Select diverse sentences (avoid same patterns/vocabulary)."""
-        selected = []
+        selected: list[tuple[float, Sentence, list[SentencePattern]]] = []
         seen_patterns: set[UUID] = set()
-        seen_lemmas: set[str] = set()
 
-        for score, sent in scored_sentences:
+        for score, sent, patterns in scored_sentences:
             if len(selected) >= max_count:
                 break
 
-            sentence_patterns = {sp.pattern_id for sp in sent.patterns}
+            sentence_patterns = {sp.pattern_id for sp in patterns}
 
             # Check for too much overlap
             pattern_overlap = len(sentence_patterns & seen_patterns) / max(len(sentence_patterns), 1)
             if pattern_overlap > 0.8 and len(selected) >= 3:
                 continue  # Too similar
 
-            selected.append((score, sent))
+            selected.append((score, sent, patterns))
             seen_patterns.update(sentence_patterns)
 
         return selected

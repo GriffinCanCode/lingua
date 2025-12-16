@@ -1,0 +1,51 @@
+section:
+  id: "foundations"
+  title: "Foundations"
+  description: "Core concepts and basic vocabulary."
+  order: 1
+
+unit:
+  id: "greetings"
+  title: "Greetings & Basics"
+  description: "Learn to say hello, goodbye, and introduce yourself."
+  order: 1
+  prerequisites: []
+
+lessons:
+  - title: "Hello & Goodbye"
+    type: "introduction"
+    order: 1
+    description: "The very first words you need."
+    content:
+      introduction: |
+        In Russian, there are formal and informal ways to say hello.
+        "Привет" is informal, like "Hi".
+        "Здравствуйте" is formal, used with strangers or elders.
+    vocabulary:
+      - word: "Привет"
+        translation: "Hi (informal)"
+        audio: "privet.mp3"
+      - word: "Пока"
+        translation: "Bye (informal)"
+        audio: "poka.mp3"
+    sentences:
+      - text: "Привет, Анна!"
+        translation: "Hi, Anna!"
+        complexity: 1
+      - text: "Пока, Иван."
+        translation: "Bye, Ivan."
+        complexity: 1
+
+  - title: "Formal Greetings"
+    type: "practice"
+    order: 2
+    description: "Polite greetings for formal situations."
+    vocabulary:
+      - word: "Здравствуйте"
+        translation: "Hello (formal)"
+      - word: "До свидания"
+        translation: "Goodbye (formal)"
+    sentences:
+      - text: "Здравствуйте, доктор."
+        translation: "Hello, doctor."
+        complexity: 2

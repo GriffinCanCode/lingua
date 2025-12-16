@@ -67,6 +67,16 @@ export interface Lesson {
   estimated_duration_min: number;
   new_patterns: string[];
   review_patterns: string[];
+  extra_data?: {
+    content?: {
+      introduction?: string;
+    };
+    vocabulary?: Array<{
+      word: string;
+      translation: string;
+      audio?: string;
+    }>;
+  };
 }
 
 export interface LessonProgress {

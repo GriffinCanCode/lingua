@@ -1,0 +1,38 @@
+section:
+  title: "Foundations"
+
+unit:
+  title: "The Alphabet"
+
+lessons:
+  - title: "Is this a...?"
+    type: "practice"
+    order: 2
+    description: "Asking and answering simple questions."
+    content:
+      introduction: |
+        # Asking Questions
+        In Russian, you don't need special words like "is" or "are" to ask a question.
+        You just change your intonation!
+        
+        - **Это кот.** (Statement: This is a cat.)
+        - **Это кот?** (Question: Is this a cat?)
+    vocabulary:
+      - word: "Дом"
+        translation: "House"
+      - word: "Радио"
+        translation: "Radio"
+      - word: "Да"
+        translation: "Yes"
+      - word: "Нет"
+        translation: "No"
+    sentences:
+      - text: "Это дом?"
+        translation: "Is this a house?"
+        complexity: 1
+      - text: "Да, это дом."
+        translation: "Yes, this is a house."
+        complexity: 1
+      - text: "Нет, это не радио."
+        translation: "No, this is not a radio."
+        complexity: 2

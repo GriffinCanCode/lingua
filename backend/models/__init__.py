@@ -1,4 +1,4 @@
-from models.user import User
+
 from models.morphology import Lemma, MorphologicalRule, Inflection
 from models.etymology import EtymologyNode, EtymologyRelation
 from models.srs import Sentence, SyntacticPattern, SentencePattern, UserPatternMastery
@@ -11,7 +11,7 @@ from models.curriculum import (
 from models.datasource import DataSource, IngestionRecord, ExternalIdMapping
 
 __all__ = [
-    "User",
+
     "Lemma", "MorphologicalRule", "Inflection",
     "EtymologyNode", "EtymologyRelation",
     "Sentence", "SyntacticPattern", "SentencePattern", "UserPatternMastery",

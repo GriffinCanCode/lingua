@@ -19,4 +19,14 @@ api.interceptors.request.use((config) => {
 // Setup HTTP logging interceptors
 setupHttpLogging(api, loggers.api);
 
+export const handleApiError = (error: any) => {
+  if (axios.isAxiosError(error)) {
+    const message = error.response?.data?.detail || error.message;
+    loggers.api.error('API Request Failed', { error: message, status: error.response?.status });
+    throw new Error(message);
+  }
+  throw error;
+};
+
+export { api };
 export default api;

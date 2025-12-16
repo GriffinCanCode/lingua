@@ -23,6 +23,7 @@ env/
 
 # Build
 dist/
+frontend/dist-electron/
 build/
 *.egg-info/
 .next/

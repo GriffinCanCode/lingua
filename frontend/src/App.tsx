@@ -6,6 +6,7 @@ import { SRSReview } from './components/SRSReview';
 import { GlossReader } from './components/GlossReader';
 import { ProductionPractice } from './components/ProductionPractice';
 import { LearnPath } from './components/LearnPath';
+import { LessonSession } from './components/LearnPath/LessonSession';
 import { useNavigationLogger, useGlobalErrorLogger } from './lib/logger';
 import { Layout } from './components/Layout';
 import { ToolsDashboard } from './components/ToolsDashboard';
@@ -19,18 +20,19 @@ const AppContent = () => {
       <Route element={<Layout />}>
         {/* Main Learning Flow */}
         <Route path="/" element={<LearnPath />} />
+        <Route path="/lesson/:nodeId" element={<LessonSession />} />
         <Route path="/review" element={<SRSReview />} />
-        
+
         {/* Core Activities */}
         <Route path="/practice" element={<ProductionPractice />} />
         <Route path="/reader" element={<GlossReader />} />
-        
+
         {/* Tools Section */}
         <Route path="/tools" element={<ToolsDashboard />} />
         <Route path="/tools/morphology" element={<MorphologyViewer />} />
         <Route path="/tools/etymology" element={<EtymologyGraph />} />
         <Route path="/tools/phonetics" element={<PhoneticsTrainer />} />
-        
+
         {/* Redirect Legacy Routes */}
         <Route path="/morphology" element={<Navigate to="/tools/morphology" replace />} />
         <Route path="/etymology" element={<Navigate to="/tools/etymology" replace />} />

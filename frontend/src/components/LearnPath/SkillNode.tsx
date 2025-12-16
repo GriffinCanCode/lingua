@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Star, Crown, AlertCircle, Check, RefreshCw } from 'lucide-react';
+import { Lock, Star, Crown, AlertCircle, Check } from 'lucide-react';
 import clsx from 'clsx';
 import { SkillRingWithContent } from './SkillRing';
 

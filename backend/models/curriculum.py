@@ -5,11 +5,10 @@ with pattern prerequisites and progression tracking.
 """
 from datetime import datetime
 from uuid import uuid4
-from sqlalchemy import Column, String, DateTime, Text, ForeignKey, Integer, Boolean, Index
-from sqlalchemy.dialects.postgresql import UUID, JSONB, ARRAY
+from sqlalchemy import Column, String, DateTime, Text, ForeignKey, Integer, Boolean, Index, JSON
 from sqlalchemy.orm import relationship
 
-from core.database import Base
+from core.database import Base, GUID
 
 
 class CurriculumSection(Base):
@@ -19,7 +18,7 @@ class CurriculumSection(Base):
         Index("ix_curriculum_sections_language_order", "language", "order_index"),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    id = Column(GUID, primary_key=True, default=uuid4)
     language = Column(String(10), nullable=False, default="ru")
     title = Column(String(255), nullable=False)
     description = Column(Text)
@@ -40,18 +39,18 @@ class CurriculumUnit(Base):
         Index("ix_curriculum_units_section_order", "section_id", "order_index"),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    section_id = Column(UUID(as_uuid=True), ForeignKey("curriculum_sections.id", ondelete="CASCADE"), nullable=False)
+    id = Column(GUID, primary_key=True, default=uuid4)
+    section_id = Column(GUID, ForeignKey("curriculum_sections.id", ondelete="CASCADE"), nullable=False)
     title = Column(String(255), nullable=False)
     description = Column(Text)
     order_index = Column(Integer, nullable=False, default=0)
     icon = Column(String(50))
-    prerequisite_units = Column(ARRAY(UUID(as_uuid=True)), default=list)  # Unit IDs that must be completed first
-    target_patterns = Column(ARRAY(UUID(as_uuid=True)), default=list)  # Pattern IDs covered by this unit
+    prerequisite_units = Column(JSON, default=list)  # Unit IDs that must be completed first
+    target_patterns = Column(JSON, default=list)  # Pattern IDs covered by this unit
     estimated_duration_min = Column(Integer, default=30)
     is_checkpoint = Column(Boolean, default=False)  # Review unit for entire section
     is_active = Column(Boolean, default=True)
-    extra_data = Column(JSONB, default=dict)
+    extra_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -66,19 +65,19 @@ class CurriculumNode(Base):
         Index("ix_curriculum_nodes_unit_order", "unit_id", "order_index"),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    unit_id = Column(UUID(as_uuid=True), ForeignKey("curriculum_units.id", ondelete="CASCADE"), nullable=False)
+    id = Column(GUID, primary_key=True, default=uuid4)
+    unit_id = Column(GUID, ForeignKey("curriculum_units.id", ondelete="CASCADE"), nullable=False)
     title = Column(String(255), nullable=False)
     description = Column(Text)
     order_index = Column(Integer, nullable=False, default=0)
     node_type = Column(String(50), nullable=False, default="practice")  # introduction, practice, mixed, checkpoint
-    target_patterns = Column(ARRAY(UUID(as_uuid=True)), default=list)  # Specific patterns for this node
+    target_patterns = Column(JSON, default=list)  # Specific patterns for this node
     complexity_min = Column(Integer, default=1)
     complexity_max = Column(Integer, default=10)
     min_reviews_to_complete = Column(Integer, default=5)
     sentence_pool_size = Column(Integer, default=0)  # Computed: how many sentences available
     estimated_duration_min = Column(Integer, default=5)
-    extra_data = Column(JSONB, default=dict)  # Additional config (e.g., exercise types)
+    extra_data = Column(JSON, default=dict)  # Additional config (e.g., exercise types)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -93,9 +92,9 @@ class UserNodeProgress(Base):
         Index("ix_user_node_progress_user_node", "user_id", "node_id", unique=True),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    node_id = Column(UUID(as_uuid=True), ForeignKey("curriculum_nodes.id", ondelete="CASCADE"), nullable=False)
+    id = Column(GUID, primary_key=True, default=uuid4)
+    user_id = Column(GUID, nullable=False)
+    node_id = Column(GUID, ForeignKey("curriculum_nodes.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False, default="locked")  # locked, available, in_progress, completed, needs_practice
     level = Column(Integer, default=0)  # 0-5 mastery level (crowns)
     total_reviews = Column(Integer, default=0)
@@ -103,7 +102,7 @@ class UserNodeProgress(Base):
     started_at = Column(DateTime)
     completed_at = Column(DateTime)
     last_practiced_at = Column(DateTime)
-    extra_data = Column(JSONB, default=dict)
+    extra_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -115,9 +114,9 @@ class UserUnitProgress(Base):
         Index("ix_user_unit_progress_user_unit", "user_id", "unit_id", unique=True),
     )
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    unit_id = Column(UUID(as_uuid=True), ForeignKey("curriculum_units.id", ondelete="CASCADE"), nullable=False)
+    id = Column(GUID, primary_key=True, default=uuid4)
+    user_id = Column(GUID, nullable=False)
+    unit_id = Column(GUID, ForeignKey("curriculum_units.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False, default="locked")
     is_crowned = Column(Boolean, default=False)  # All nodes at level 5
     completed_nodes = Column(Integer, default=0)
@@ -125,7 +124,7 @@ class UserUnitProgress(Base):
     started_at = Column(DateTime)
     completed_at = Column(DateTime)
     crowned_at = Column(DateTime)
-    extra_data = Column(JSONB, default=dict)
+    extra_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

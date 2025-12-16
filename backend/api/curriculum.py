@@ -8,6 +8,7 @@ from fastapi import APIRouter, Depends, Query, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from core.database import get_db, fetch_one
 from core.security import get_current_user_id
@@ -280,6 +281,7 @@ async def list_sections(
     """List all curriculum sections (admin/preview)."""
     result = await db.execute(
         select(CurriculumSection)
+        .options(selectinload(CurriculumSection.units).selectinload(CurriculumUnit.nodes))
         .where(CurriculumSection.language == language)
         .order_by(CurriculumSection.order_index)
     )

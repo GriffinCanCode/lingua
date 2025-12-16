@@ -1,0 +1,43 @@
+section:
+  title: "Foundations"
+
+unit:
+  title: "Basic Questions"
+  description: "Where, Who, and What."
+  order: 4
+
+lessons:
+  - title: "Where is it?"
+    type: "practice"
+    order: 1
+    description: "Navigating the world."
+    content:
+      introduction: |
+        # Question Words
+        - **Где** (Gde) = Where
+        - **Кто** (Kto) = Who
+        - **Что** (Chto) = What
+    vocabulary:
+      - word: "Где"
+        translation: "Where"
+      - word: "Кто"
+        translation: "Who"
+      - word: "Что"
+        translation: "What"
+      - word: "Там"
+        translation: "There"
+      - word: "Тут"
+        translation: "Here"
+    sentences:
+      - text: "Где метро?"
+        translation: "Where is the metro?"
+        complexity: 1
+      - text: "Кто это?"
+        translation: "Who is this?"
+        complexity: 1
+      - text: "Что это?"
+        translation: "What is this?"
+        complexity: 1
+      - text: "Метро там."
+        translation: "The metro is there."
+        complexity: 1

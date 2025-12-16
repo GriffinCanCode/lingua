@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, HelpCircle, ThumbsUp, RefreshCw, ChevronRight, Info } from 'lucide-react';
+import { Check, X, HelpCircle, ThumbsUp, RefreshCw, Info } from 'lucide-react';
 import { srsService, ReviewItem, ReviewResult } from '../../services/srs';
 import { useComponentLogger, useActionLogger, useTracedAsync } from '../../lib/logger';
 import clsx from 'clsx';
@@ -39,14 +39,14 @@ export const SRSReview: React.FC = () => {
   const handleRating = (quality: number) => {
     const currentItem = reviews[currentIndex];
     logAction('review_rated', { quality, sentenceId: currentItem.sentence.id });
-    
+
     const newResults = currentItem.patterns.map(p => ({
       pattern_id: p.id,
       quality,
     }));
-    
+
     setResults(prev => [...prev, ...newResults]);
-    
+
     if (currentIndex < reviews.length - 1) {
       setCurrentIndex(prev => prev + 1);
       setShowAnswer(false);
@@ -83,7 +83,7 @@ export const SRSReview: React.FC = () => {
 
   if (completed) {
     return (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md mx-auto mt-12 text-center"
@@ -133,7 +133,7 @@ export const SRSReview: React.FC = () => {
       {/* Progress Header */}
       <div className="flex items-center gap-4 mb-8">
         <div className="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
-          <motion.div 
+          <motion.div
             className="h-full bg-green-500 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -180,47 +180,47 @@ export const SRSReview: React.FC = () => {
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
                   <div className="mb-8 text-center">
                     <p className="text-xl text-gray-700 font-medium mb-4">{currentItem.sentence.translation}</p>
-                    
+
                     {currentItem.patterns.length > 0 && (
                       <div className="inline-flex flex-wrap justify-center gap-2">
                         {currentItem.patterns.map(p => (
-                           <span key={p.id} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
-                             <Info size={12} className="mr-1" />
-                             {p.description || p.pattern_type}
-                           </span>
+                          <span key={p.id} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
+                            <Info size={12} className="mr-1" />
+                            {p.description || p.pattern_type}
+                          </span>
                         ))}
                       </div>
                     )}
                   </div>
 
                   <div className="grid grid-cols-4 gap-3">
-                    <RatingButton 
-                      label="Again" 
-                      subLabel="< 1m" 
-                      color="red" 
-                      icon={X} 
-                      onClick={() => handleRating(0)} 
+                    <RatingButton
+                      label="Again"
+                      subLabel="< 1m"
+                      color="red"
+                      icon={X}
+                      onClick={() => handleRating(0)}
                     />
-                    <RatingButton 
-                      label="Hard" 
-                      subLabel="2d" 
-                      color="orange" 
-                      icon={HelpCircle} 
-                      onClick={() => handleRating(3)} 
+                    <RatingButton
+                      label="Hard"
+                      subLabel="2d"
+                      color="orange"
+                      icon={HelpCircle}
+                      onClick={() => handleRating(3)}
                     />
-                    <RatingButton 
-                      label="Good" 
-                      subLabel="5d" 
-                      color="blue" 
-                      icon={ThumbsUp} 
-                      onClick={() => handleRating(4)} 
+                    <RatingButton
+                      label="Good"
+                      subLabel="5d"
+                      color="blue"
+                      icon={ThumbsUp}
+                      onClick={() => handleRating(4)}
                     />
-                    <RatingButton 
-                      label="Easy" 
-                      subLabel="10d" 
-                      color="green" 
-                      icon={Check} 
-                      onClick={() => handleRating(5)} 
+                    <RatingButton
+                      label="Easy"
+                      subLabel="10d"
+                      color="green"
+                      icon={Check}
+                      onClick={() => handleRating(5)}
                     />
                   </div>
                 </div>

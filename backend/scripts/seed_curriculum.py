@@ -361,7 +361,7 @@ async def create_curriculum(session, pattern_map: dict[str, "SyntacticPattern"])
                     icon=unit_data.get("icon"),
                     is_checkpoint=unit_data.get("is_checkpoint", False),
                     target_patterns=[
-                        pattern_map[p].id
+                        str(pattern_map[p].id)
                         for node in unit_data["nodes"]
                         for p in node["patterns"]
                         if p in pattern_map
@@ -391,7 +391,7 @@ async def create_curriculum(session, pattern_map: dict[str, "SyntacticPattern"])
                         order_index=node_idx,
                         node_type=node_data["type"],
                         target_patterns=[
-                            pattern_map[p].id
+                            str(pattern_map[p].id)
                             for p in node_data["patterns"]
                             if p in pattern_map
                         ],

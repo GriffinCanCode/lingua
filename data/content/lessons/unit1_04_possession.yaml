@@ -1,0 +1,37 @@
+section:
+  title: "Foundations"
+
+unit:
+  title: "Possession"
+  description: "Saying 'I have' using the Genitive case."
+  order: 3
+
+lessons:
+  - title: "I have..."
+    type: "introduction"
+    order: 1
+    description: "The most useful phrase in Russian."
+    content:
+      introduction: |
+        # I Have...
+        Russian doesn't say "I have a cat".
+        It says: **"By me is a cat"**.
+        
+        **У меня есть...** (Oo men-ya yest...)
+    vocabulary:
+      - word: "У меня есть"
+        translation: "I have"
+      - word: "Брат"
+        translation: "Brother"
+      - word: "Сестра"
+        translation: "Sister"
+    sentences:
+      - text: "У меня есть кот."
+        translation: "I have a cat."
+        complexity: 2
+      - text: "У меня есть сестра."
+        translation: "I have a sister."
+        complexity: 2
+      - text: "У меня есть брат?"
+        translation: "Do I have a brother?"
+        complexity: 2

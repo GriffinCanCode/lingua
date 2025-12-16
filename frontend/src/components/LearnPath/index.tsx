@@ -11,6 +11,7 @@ import { useComponentLogger } from '../../lib/logger';
 import {
   getLearningPath,
   initializeProgress,
+  findNextNode,
   CurriculumSection,
   CurriculumNode,
 } from '../../services/curriculum';
@@ -116,8 +117,8 @@ export const LearnPath: React.FC = () => {
       // Try to get learning path
       let apiSections = await getLearningPath('ru');
       
-      // If no sections, initialize progress first
-      if (apiSections.length === 0) {
+      // Initialize progress if no sections or all nodes are locked
+      if (apiSections.length === 0 || !findNextNode(apiSections)) {
         await initializeProgress('ru');
         apiSections = await getLearningPath('ru');
       }
@@ -162,10 +163,7 @@ export const LearnPath: React.FC = () => {
 
   const handleNodeClick = useCallback((node: SkillNodeData) => {
     logger.info('Node clicked', { nodeId: node.id, state: node.state });
-    
-    // Navigate to review session with this node's patterns
-    // For now, just navigate to the SRS review (which is the root)
-    navigate('/', { state: { nodeId: node.id } });
+    navigate(`/lesson/${node.id}`);
   }, [logger, navigate]);
 
   const getUnitStats = (unit: Unit) => {

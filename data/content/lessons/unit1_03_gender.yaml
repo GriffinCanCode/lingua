@@ -1,0 +1,39 @@
+section:
+  title: "Foundations"
+
+unit:
+  title: "Gender Basics"
+  description: "Understanding He, She, and It."
+  order: 2
+
+lessons:
+  - title: "He & She"
+    type: "introduction"
+    order: 1
+    description: "Russian words have gender. Let's learn the basics."
+    content:
+      introduction: |
+        # He, She, or It?
+        In Russian, every noun has a gender. You can usually tell by the last letter!
+        
+        - **Consonant** (d, k, t...) → **He** (Masculine)
+        - **-A / -Я** → **She** (Feminine)
+        - **-O / -Е** → **It** (Neuter)
+    vocabulary:
+      - word: "Он"
+        translation: "He"
+      - word: "Она"
+        translation: "She"
+      - word: "Оно"
+        translation: "It"
+      - word: "Парк"
+        translation: "Park (masc)"
+      - word: "Пицца"
+        translation: "Pizza (fem)"
+    sentences:
+      - text: "Где парк? Он там."
+        translation: "Where is the park? It (he) is there."
+        complexity: 2
+      - text: "Где пицца? Она тут."
+        translation: "Where is the pizza? It (she) is here."
+        complexity: 2

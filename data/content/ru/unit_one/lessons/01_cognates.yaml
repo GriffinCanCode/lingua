@@ -100,9 +100,23 @@ modules:
         insight: |
           тут (here) and там (there) form a pair, like English here/there.
           Notice how they both start with Т - this isn't coincidence!
+      
+      - type: "word_intro"
+        words:
+          - word: "здесь"
+            translation: "here"
+            note: "Synonym for тут - slightly more formal. Ь makes the С soft."
+      
+      - type: "tip"
+        content: |
+          **тут vs здесь**: Both mean "here"!
+          - тут = casual, conversational
+          - здесь = slightly more formal or emphatic
+          
+          Use either - Russians mix them freely!
     
     vocab_pool:
-      introduce: [tut, tam, vot]
+      introduce: [tut, tam, zdes, vot]
       practice: [mama, kot, taksi, metro]
       review: []
     exercises:
@@ -132,20 +146,20 @@ modules:
         title: "You learned:"
         points:
           - "5 cognate letters: А, К, М, О, Т"
-          - "6 words: ма́ма, кот, такси́, метро́, тут, там"
-          - "The location pattern: Noun + тут/там"
+          - "7 words: ма́ма, кот, такси́, метро́, тут, там, здесь"
+          - "The location pattern: Noun + тут/там/здесь"
           - "Russian drops 'is' - simpler than English!"
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, taksi, metro, tut, tam, vot, eto]
+      review: [mama, kot, taksi, metro, tut, tam, zdes, vot, eto]
     exercises:
       count: 12
       difficulty: "hard"
 
 # Vocabulary references for this lesson
 vocab_filter:
-  primary: [mama, kot, taksi, metro, tut, tam, vot, eto]
+  primary: [mama, kot, taksi, metro, tut, tam, zdes, vot, eto]
   review_from: []
 
 # Templates for exercise generation

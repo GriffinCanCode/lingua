@@ -76,6 +76,46 @@ modules:
     exercises:
       count: 7
 
+  - id: "mod_2b"
+    title: "Magic Words"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Please & Thank You"
+        content: |
+          These two words will make you instantly liked by Russians!
+          Use them constantly - politeness goes a long way.
+      
+      - type: "word_intro"
+        words:
+          - word: "спаси́бо"
+            translation: "thank you"
+            note: "Stress on second syllable: spa-SI-ba. The О reduces to 'a'."
+          - word: "пожа́луйста"
+            translation: "please / you're welcome"
+            note: "Stress on second syllable. Used both to ask AND to respond to thanks!"
+      
+      - type: "etymology"
+        title: "Hidden Meaning"
+        word: "спаси́бо"
+        connections:
+          - { word: "спаси́ Бог", lang: "Russian", relation: "ancestor" }
+        insight: "Спаси́бо comes from 'спаси́ Бог' (God save you) - an old blessing!"
+      
+      - type: "tip"
+        content: |
+          Пожа́луйста is a Swiss Army knife:
+          - "Please" when asking: Ко́фе, пожа́луйста. (Coffee, please.)
+          - "You're welcome" when thanked: Спаси́бо! — Пожа́луйста!
+    
+    vocab_pool:
+      introduce: [spasibo, pozhaluysta]
+      practice: [privet, poka, zdravstvuyte]
+      review: []
+    exercises:
+      count: 6
+
   - id: "mod_3"
     title: "Zero Copula"
     type: "pattern"
@@ -100,6 +140,56 @@ modules:
     exercises:
       count: 8
 
+  - id: "mod_3b"
+    title: "🇷🇺 Russian Names"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Culture: Russian Naming"
+        content: |
+          Russian names have THREE parts:
+          
+          1. **First name** (и́мя): Ива́н, Мари́я
+          2. **Patronymic** (о́тчество): Based on father's name
+          3. **Last name** (фами́лия): Family name
+          
+          Example: Ива́н Петро́вич Сидо́ров
+          (Ivan, son of Pyotr, of the Sidorov family)
+      
+      - type: "pattern_table"
+        title: "Patronymics"
+        columns: ["Father's Name", "Son's Patronymic", "Daughter's Patronymic"]
+        rows:
+          - ["Ива́н", "Ива́нович", "Ива́новна"]
+          - ["Пётр", "Петро́вич", "Петро́вна"]
+          - ["Алекса́ндр", "Алекса́ндрович", "Алекса́ндровна"]
+      
+      - type: "tip"
+        content: |
+          **When to use what:**
+          - Friends: First name only (Ива́н, Ма́ша)
+          - Formal/respect: First name + patronymic (Ива́н Петро́вич)
+          - Very formal: All three parts
+          
+          Using first name + patronymic shows respect to elders,
+          teachers, bosses, etc. It's similar to using "Mr./Mrs." + name.
+      
+      - type: "warning"
+        content: |
+          **Ты vs Вы:**
+          - ты = informal "you" (friends, family, kids)
+          - вы = formal "you" (strangers, elders, professional)
+          
+          When in doubt, use вы! It's better to be too polite.
+    
+    vocab_pool:
+      introduce: []
+      practice: [ty, vy]
+      review: [zdravstvuyte, privet]
+    exercises:
+      count: 4
+
   - id: "mod_4"
     title: "Practice"
     type: "practice"
@@ -122,18 +212,19 @@ modules:
         points:
           - "Informal: приве́т (hi), пока́ (bye)"
           - "Formal: здра́вствуйте (hello), до свида́ния (goodbye)"
+          - "Magic words: спаси́бо (thank you), пожа́луйста (please/you're welcome)"
           - "Russian drops 'is/am/are' - simpler sentences!"
           - "Use formal with strangers and elders"
     vocab_pool:
       introduce: []
       practice: []
-      review: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+      review: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, student, doktor]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [privet, poka, zdravstvuyte, do_svidaniya, ya, student, doktor]
+  primary: [privet, poka, zdravstvuyte, do_svidaniya, spasibo, pozhaluysta, ya, ty, vy, student, doktor]
   review_from: [01_cognates]
 
 templates:

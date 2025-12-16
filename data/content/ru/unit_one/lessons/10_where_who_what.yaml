@@ -94,6 +94,42 @@ modules:
       count: 7
 
   - id: "mod_3"
+    title: "Как - How"
+    type: "pattern"
+    
+    teaching:
+      - type: "word_intro"
+        words:
+          - word: "как"
+            translation: "how"
+            note: "One of the most useful question words!"
+      
+      - type: "morphology_pattern"
+        title: "How Questions"
+        formula: "Как + {verb/phrase}?"
+        examples:
+          - { ru: "Как дела́?", en: "How are things? / How are you?" }
+          - { ru: "Как тебя́ зову́т?", en: "What's your name? (lit: How do they call you?)" }
+          - { ru: "Как э́то по-ру́сски?", en: "How is this in Russian?" }
+        rule: "Как is incredibly versatile - used for 'how', 'what' (in set phrases), and comparisons!"
+      
+      - type: "tip"
+        content: |
+          **Essential phrase**: Как дела́? (How are things?)
+          
+          Responses:
+          - Хорошо́! (Good!)
+          - Норма́льно. (Fine/Normal.)
+          - Так себе́. (So-so.)
+    
+    vocab_pool:
+      introduce: [kak]
+      practice: [gde, kto, chto]
+      review: [khorosho, da]
+    exercises:
+      count: 6
+
+  - id: "mod_3b"
     title: "Animate vs Inanimate"
     type: "pattern"
     
@@ -125,12 +161,12 @@ modules:
     
     vocab_pool:
       introduce: [doktor, drug]
-      practice: [gde, kto, chto, eto]
+      practice: [gde, kto, chto, kak, eto]
       review: [mama, kot, sobaka]
     exercises:
-      count: 8
+      count: 6
 
-  - id: "mod_3b"
+  - id: "mod_3c"
     title: "Pronunciation Reminder"
     type: "pattern"
     
@@ -168,18 +204,19 @@ modules:
           - "Где = where (Где метро́?)"
           - "Кто = who (for people AND animals)"
           - "Что = what (pronounced 'shto')"
+          - "Как = how (Как дела́?)"
           - "Что э́то? = What is this?"
           - "Кто э́то? = Who is this?"
     vocab_pool:
       introduce: []
       practice: []
-      review: [gde, kto, chto, vot, doktor, student, drug, restoran]
+      review: [gde, kto, chto, kak, vot, doktor, student, drug, restoran]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [gde, kto, chto, vot, doktor, drug]
+  primary: [gde, kto, chto, kak, vot, doktor, drug]
   review_from: [01_cognates, 05_questions, 09_type2_verbs]
 
 templates:
@@ -202,5 +239,15 @@ templates:
 
   - pattern: "Что э́то?"
     translation: "What is this?"
+    slots: {}
+    weight: 2
+
+  - pattern: "Как дела́?"
+    translation: "How are things?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Как э́то по-ру́сски?"
+    translation: "How is this in Russian?"
     slots: {}
     weight: 2

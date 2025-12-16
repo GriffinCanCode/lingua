@@ -46,7 +46,7 @@ modules:
       - type: "summary"
         title: "Verb Conjugation"
         points:
-          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, рабо́тать)"
+          - "Type 1: -ю, -ешь, -ет, -ем, -ете, -ют (знать, понима́ть, чита́ть, рабо́тать)"
           - "Type 2: -ю, -ишь, -ит, -им, -ите, -ят (говори́ть)"
           - "Irregular: хоте́ть (mixed pattern), жить (consonant change)"
       
@@ -55,6 +55,7 @@ modules:
         columns: ["Verb", "Я", "Ты", "Он/Она́"]
         rows:
           - ["знать", "зна́ю", "зна́ешь", "зна́ет"]
+          - ["чита́ть", "чита́ю", "чита́ешь", "чита́ет"]
           - ["говори́ть", "говорю́", "говори́шь", "говори́т"]
           - ["хоте́ть", "хочу́", "хо́чешь", "хо́чет"]
           - ["жить", "живу́", "живёшь", "живёт"]
@@ -62,7 +63,7 @@ modules:
     vocab_pool:
       introduce: []
       practice: []
-      review: [znat, ponimat, govorit, khotet, zhit, rabotat]
+      review: [znat, ponimat, chitat, govorit, khotet, zhit, rabotat]
     exercises:
       count: 8
 
@@ -112,12 +113,13 @@ modules:
           - Basic vocabulary
           - Gender agreement
           - Verb conjugation
-          - Question/answer patterns
+          - Question/answer patterns (где, кто, что, как)
           - Possessives
+          - Conjunctions (и, и́ли, но)
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, da, nyet, privet, u_menya, znat, govorit, khotet]
+      review: [mama, kot, dom, kniga, okno, on, ona, gde, kto, chto, kak, da, nyet, i, ili, no, privet, spasibo, pozhaluysta, u_menya, znat, chitat, govorit, khotet]
     exercises:
       count: 15
       difficulty: "hard"
@@ -133,24 +135,25 @@ modules:
           
           You can now:
           - Read Russian using Cyrillic letters
-          - Introduce yourself and greet people
-          - Ask and answer basic questions
+          - Introduce yourself and greet people (спаси́бо, пожа́луйста!)
+          - Ask and answer basic questions (где, кто, что, как)
           - Talk about what you have
           - Describe things using adjectives
           - Count to 10
-          - Conjugate verbs in present tense!
+          - Conjugate 7 verbs in present tense!
       
       - type: "summary"
         title: "Your Achievements"
         points:
-          - "~95 vocabulary words learned"
-          - "7 verbs conjugated"
+          - "~100 vocabulary words learned"
+          - "7 verbs conjugated (знать, понима́ть, чита́ть, говори́ть, хоте́ть, жить, рабо́тать)"
           - "6 core grammar patterns mastered"
+          - "Culture: patronymics, ты vs вы"
           - "Ready for Unit 2: Everyday Life!"
     vocab_pool:
       introduce: []
       practice: []
-      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, da, nyet, gde, kto, chto, u_menya, moy, bolshoy, znat, ponimat, govorit, khotet, zhit, rabotat]
+      review: [mama, kot, dom, taksi, metro, privet, zdravstvuyte, spasibo, pozhaluysta, da, nyet, i, ili, no, gde, kto, chto, kak, zdes, u_menya, moy, bolshoy, znat, ponimat, chitat, govorit, khotet, zhit, rabotat]
     exercises:
       count: 15
       difficulty: "hard"

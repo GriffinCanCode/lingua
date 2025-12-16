@@ -96,7 +96,7 @@ modules:
       count: 8
 
   - id: "mod_3"
-    title: "Понима́ть"
+    title: "Понима́ть & Чита́ть"
     type: "pattern"
     
     teaching:
@@ -111,13 +111,30 @@ modules:
           - ["вы", "понима́ете", "you understand (formal)"]
           - ["они́", "понима́ют", "they understand"]
       
+      - type: "word_intro"
+        words:
+          - word: "чита́ть"
+            translation: "to read"
+            note: "Type 1 verb - same pattern as знать! Stress on second syllable."
+      
+      - type: "pattern_table"
+        title: "чита́ть - to read"
+        columns: ["Person", "Russian", "English"]
+        rows:
+          - ["я", "чита́ю", "I read"]
+          - ["ты", "чита́ешь", "you read"]
+          - ["он/она́", "чита́ет", "he/she reads"]
+          - ["мы", "чита́ем", "we read"]
+          - ["вы", "чита́ете", "you read (formal)"]
+          - ["они́", "чита́ют", "they read"]
+      
       - type: "morphology_pattern"
         title: "Survival Phrases"
         formula: "Я (не) понима́ю = I (don't) understand"
         examples:
           - { ru: "Я понима́ю.", en: "I understand." }
           - { ru: "Я не понима́ю.", en: "I don't understand." }
-          - { ru: "Вы понима́ете?", en: "Do you understand?" }
+          - { ru: "Я чита́ю кни́гу.", en: "I read a book." }
         rule: "Add не before the verb to negate it."
       
       - type: "etymology"
@@ -129,9 +146,9 @@ modules:
         insight: "По-ним-а́ть contains the root 'ним' (take/grasp) - to understand is to 'grasp' an idea!"
     
     vocab_pool:
-      introduce: []
+      introduce: [chitat]
       practice: [znat, ponimat]
-      review: [ya, ty, nye]
+      review: [ya, ty, nye, kniga]
     exercises:
       count: 8
 

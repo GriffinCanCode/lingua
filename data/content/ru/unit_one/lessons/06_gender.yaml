@@ -1,5 +1,5 @@
-# Unit 1, Lesson 5: He, She, It
-# 5 modules with teaching content
+# Unit 1, Lesson 6: He, She, It
+# 6 modules with teaching content (including gender exceptions)
 
 lesson:
   id: "06_gender"
@@ -121,19 +121,70 @@ modules:
       count: 8
 
   - id: "mod_4"
+    title: "⚠️ Gender Exceptions"
+    type: "pattern"
+    
+    teaching:
+      - type: "warning"
+        title: "⚠️ When the Rules Don't Apply"
+        content: |
+          The gender rules work 95% of the time. But watch out for these tricky words!
+          
+          **Meaning beats ending** for people:
+          Words for male relatives end in -а but are MASCULINE.
+      
+      - type: "pattern_table"
+        title: "Male Words Ending in -а"
+        columns: ["Word", "Translation", "Gender", "Why?"]
+        rows:
+          - ["па́па", "dad", "masculine (он)", "refers to a male"]
+          - ["де́душка", "grandpa", "masculine (он)", "refers to a male"]
+          - ["дя́дя", "uncle", "masculine (он)", "refers to a male"]
+          - ["мужчи́на", "man", "masculine (он)", "refers to a male"]
+      
+      - type: "explanation"
+        title: "Borrowed Word Exceptions"
+        content: |
+          Some borrowed words keep unexpected genders:
+          
+          **ко́фе** (coffee) = MASCULINE, not neuter!
+          Even though it ends in -е, you say: Где ко́фе? **Он** тут.
+      
+      - type: "pattern_table"
+        title: "Exception Cheat Sheet"
+        columns: ["Word", "Looks Like", "Actually Is", "Pronoun"]
+        rows:
+          - ["па́па", "feminine (-а)", "masculine", "он"]
+          - ["ко́фе", "neuter (-е)", "masculine", "он"]
+      
+      - type: "tip"
+        content: |
+          🧠 **Memory trick:** Words for MALE PEOPLE always use ОН, 
+          regardless of ending. Biology wins over grammar!
+          
+          For ко́фе, just memorize it - blame the Italians! ☕
+    
+    vocab_pool:
+      introduce: [papa, kofe]
+      practice: [on, ona, ono, dom, kniga, okno]
+      review: [mama, metro]
+    exercises:
+      count: 8
+
+  - id: "mod_5"
     title: "Practice"
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Look at the ending! Consonant = он, -а = она́, -о = оно́. Trust the pattern!"
+        content: "Look at the ending! Consonant = он, -а = она́, -о = оно́. But remember: папа & кофе use он!"
     vocab_pool:
       introduce: []
-      practice: [on, ona, ono, dom, kniga, okno, park, sobaka]
+      practice: [on, ona, ono, dom, kniga, okno, park, sobaka, papa, kofe]
       review: [kot, mama, metro, taksi]
     exercises:
       count: 10
 
-  - id: "mod_5"
+  - id: "mod_6"
     title: "Master"
     type: "master"
     teaching:
@@ -143,17 +194,18 @@ modules:
           - "Masculine (он): ends in consonant"
           - "Feminine (она́): ends in -а or -я"
           - "Neuter (оно́): ends in -о or -е"
-          - "Pronouns match noun gender, not biological gender"
+          - "⚠️ EXCEPTION: Male family words (папа, дедушка, дядя) use он despite -а ending"
+          - "⚠️ EXCEPTION: кофе is masculine (он) despite -е ending"
     vocab_pool:
       introduce: []
       practice: []
-      review: [on, ona, ono, dom, kniga, okno, park, sobaka]
+      review: [on, ona, ono, dom, kniga, okno, park, sobaka, papa, kofe]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [on, ona, ono, dom, kniga, okno, park, sobaka, radio]
+  primary: [on, ona, ono, dom, kniga, okno, park, sobaka, radio, papa, kofe]
   review_from: [01_cognates, 02_hello, 03_false_friends]
 
 templates:
@@ -179,3 +231,12 @@ templates:
       PRONOUN: { pos: [pronoun] }
       LOCATION: { pos: [adverb], semantic: [location] }
     weight: 3
+
+  # Gender exception templates - higher weight for drilling
+  - pattern: "Где {EXCEPTION}? Он {LOCATION}."
+    translation: "Where is {EXCEPTION.translation}? It is {LOCATION.translation}."
+    slots:
+      EXCEPTION: { ids: [papa, kofe] }
+      LOCATION: { pos: [adverb], semantic: [location] }
+    weight: 5
+    notes: "Drills gender exceptions - папа and кофе use он!"

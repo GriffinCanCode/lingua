@@ -582,11 +582,12 @@ cognates:
     translation: "dad"
     pos: "noun"
     gender: "m"
+    gender_exception: true
     semantic: [person, family]
     frequency: 1
     difficulty: 1
     audio: "papa.mp3"
-    notes: "Ends in -а but refers to a male, so uses он. Stress on first syllable."
+    notes: "⚠️ EXCEPTION: Ends in -а but masculine because it refers to a male person. Uses он, not она́!"
     examples:
       - { ru: "Па́па до́ма.", en: "Dad is at home." }
 
@@ -657,11 +658,12 @@ cognates:
     translation: "coffee"
     pos: "noun"
     gender: "m"
+    gender_exception: true
     semantic: [food, drink]
     frequency: 1
     difficulty: 1
     audio: "kofe.mp3"
-    notes: "Exception: ends in -е but masculine! Indeclinable. Stress on first syllable."
+    notes: "⚠️ EXCEPTION: Ends in -е but masculine! Borrowed word, indeclinable. Uses он: Где ко́фе? Он тут."
     examples:
       - { ru: "Ко́фе, пожа́луйста.", en: "Coffee, please." }
 
@@ -1554,7 +1556,7 @@ lessons:
 
   lesson_06_gender:
     title: "He, She, It"
-    focus: "Grammatical gender, pronouns"
+    focus: "Grammatical gender, pronouns, gender exceptions (папа, кофе)"
     primary_vocab:
       - on
       - ona
@@ -1563,6 +1565,7 @@ lessons:
       - okno
       - papa
       - kniga
+      - kofe
     review_vocab:
       - eto
       - gde

@@ -53,6 +53,9 @@ modules:
           - word: "нет"
             translation: "no"
             note: "Н sounds like 'n'. Also means 'there isn't any'"
+          - word: "ко́фе"
+            translation: "coffee"
+            note: "Cognate! ⚠️ Tricky gender - you'll learn why in next lesson!"
       
       - type: "etymology"
         title: "Universal Words"
@@ -64,7 +67,7 @@ modules:
         insight: "Да is shared across all Slavic languages - instant communication with millions!"
     
     vocab_pool:
-      introduce: [da, nyet]
+      introduce: [da, nyet, kofe]
       practice: [eto, kot, taksi]
       review: []
     exercises:
@@ -108,10 +111,10 @@ modules:
     type: "practice"
     teaching:
       - type: "tip"
-        content: "Practice asking questions, then answering them yourself. Да, э́то кот. Нет, э́то не кот."
+        content: "Practice asking questions, then answering them yourself. Да, э́то кот. Нет, э́то не ко́фе."
     vocab_pool:
       introduce: []
-      practice: [da, nyet, nye, eto, kot, taksi]
+      practice: [da, nyet, nye, eto, kot, taksi, kofe]
       review: [mama, metro, tut, tam]
     exercises:
       count: 10
@@ -130,13 +133,13 @@ modules:
     vocab_pool:
       introduce: []
       practice: []
-      review: [da, nyet, nye, eto, kot, taksi, student]
+      review: [da, nyet, nye, eto, kot, taksi, student, kofe]
     exercises:
       count: 12
       difficulty: "hard"
 
 vocab_filter:
-  primary: [da, nyet, nye, eto, kot, taksi, student]
+  primary: [da, nyet, nye, eto, kot, taksi, student, kofe]
   review_from: [01_cognates, 02_hello, 03_false_friends]
 
 templates:

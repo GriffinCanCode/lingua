@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Lock, Check, Crown } from 'lucide-react';
+import { ChevronDown, ChevronUp, Lock, Check } from 'lucide-react';
 import clsx from 'clsx';
+import { Crown } from '../Celebrations';
 
 export interface LevelNode {
   id: string;
@@ -173,7 +174,7 @@ const LessonNode: React.FC<{
             <Lock size={24} />
           ) : isCompleted ? (
             modulesCompleted >= modulesTotal ? (
-              <Crown size={24} className="text-yellow-300" />
+              <Crown size={24} color="#fde047" />
             ) : (
               <Check size={24} strokeWidth={3} />
             )
@@ -264,7 +265,7 @@ export const UnitCard: React.FC<UnitCardProps> = ({
           isLocked ? "bg-gray-200 text-gray-400" :
           "bg-primary-100 text-primary-600"
         )}>
-          {isComplete ? <Crown size={28} /> : unitNumber}
+          {isComplete ? <Crown size={28} color="#ffffff" /> : unitNumber}
         </div>
 
         {/* Title & Description */}

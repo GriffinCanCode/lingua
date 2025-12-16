@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Flame, Target, Award, RefreshCw } from 'lucide-react';
+import { Target, Award, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { StreakFlame, Mascot } from '../Celebrations';
 import { SectionHeader } from './SectionHeader';
 import { UnitCard, LevelNode } from './UnitCard';
 import { MilestoneModal } from './MilestoneModal';
@@ -145,12 +146,10 @@ export const LearnPath: React.FC = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-        <div className="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mb-6">
-          <span className="text-4xl">😵</span>
-        </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Something went wrong</h2>
+        <Mascot mood="thinking" size={100} />
+        <h2 className="text-xl font-bold text-gray-900 mt-4 mb-2">Something went wrong</h2>
         <p className="text-gray-500 mb-6 max-w-sm">{error}</p>
-        <button onClick={loadData} className="flex items-center gap-2 bg-primary-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-primary-700">
+        <button onClick={loadData} className="flex items-center gap-2 bg-[#58cc02] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#4db302] border-b-4 border-[#4db302] active:border-b-2 active:translate-y-[2px]">
           <RefreshCw size={18} /> Try Again
         </button>
       </div>
@@ -160,12 +159,12 @@ export const LearnPath: React.FC = () => {
   if (sections.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center mb-6 shadow-xl">
-          <span className="text-5xl">🚀</span>
+        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+          <Mascot mood="celebrating" size={120} />
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Lingua!</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mt-4 mb-2">Welcome to Lingua!</h2>
         <p className="text-gray-500 mb-8 max-w-sm">Your personalized language learning path is being prepared.</p>
-        <button onClick={() => navigate('/practice')} className="bg-green-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-600">
+        <button onClick={() => navigate('/practice')} className="bg-[#58cc02] text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-[#4db302] border-b-4 border-[#4db302] active:border-b-2 active:translate-y-[2px]">
           Start Your Journey
         </button>
       </div>
@@ -187,7 +186,7 @@ export const LearnPath: React.FC = () => {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className={clsx("w-10 h-10 rounded-xl flex items-center justify-center", progress.streak > 0 ? "bg-orange-100" : "bg-gray-100")}>
-                <Flame size={20} className={progress.streak > 0 ? "text-orange-500" : "text-gray-400"} />
+                <StreakFlame days={progress.streak} />
               </div>
               <div>
                 <p className="font-black text-gray-900">{progress.streak}</p>

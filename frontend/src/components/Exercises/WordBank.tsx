@@ -2,21 +2,15 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2 } from 'lucide-react';
 import clsx from 'clsx';
+import { microcopy } from '../../lib/microcopy';
+import { Mascot } from '../Celebrations';
 import type { WordBankExercise, ExerciseComponentProps } from '../../types/exercises';
 
 interface WordChip {
   id: string;
   word: string;
   selected: boolean;
-  isDistractor?: boolean;
 }
-
-// Simple character avatar (Duolingo-style)
-const Avatar: React.FC<{ className?: string }> = ({ className }) => (
-  <div className={clsx("w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg", className)}>
-    <span className="text-2xl">🦉</span>
-  </div>
-);
 
 export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
   exercise,
@@ -28,6 +22,8 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
     exercise.wordBank.map((word, i) => ({ id: `${i}-${word}`, word, selected: false }))
   );
   const [shake, setShake] = useState(false);
+
+  const prompt = useMemo(() => microcopy.exercisePrompt('word_bank'), []);
 
   const handleWordSelect = useCallback((chip: WordChip) => {
     if (disabled || chip.selected) return;
@@ -62,24 +58,24 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
     setAvailableWords(prev => prev.map(w => ({ ...w, selected: false })));
   }, []);
 
-  // Direction label
   const directionLabel = exercise.targetLanguage === 'ru' 
     ? 'Translate to Russian' 
     : 'Translate to English';
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header - Duolingo style */}
+      {/* Header */}
       <div className="mb-6">
-        <p className="text-gray-500 font-bold text-sm mb-4">
+        <p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-4">
           {directionLabel}
         </p>
         
-        {/* Source sentence with avatar */}
+        {/* Source sentence with mascot */}
         <div className="flex items-start gap-4">
-          <Avatar />
-          <div className="flex-1 bg-white rounded-2xl border-2 border-gray-200 p-4 relative">
-            {/* Speech bubble pointer */}
+          <div className="shrink-0">
+            <Mascot mood="happy" size={64} />
+          </div>
+          <div className="flex-1 bg-white rounded-2xl border-2 border-gray-200 p-4 relative shadow-sm">
             <div className="absolute left-[-8px] top-6 w-4 h-4 bg-white border-l-2 border-b-2 border-gray-200 transform rotate-45" />
             <p className="text-xl font-medium text-gray-900">
               {exercise.translation}
@@ -89,26 +85,29 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
             )}
           </div>
           <button 
-            className="p-3 bg-blue-100 hover:bg-blue-200 rounded-full text-blue-600 transition-colors"
-            onClick={() => {/* TODO: Play audio */}}
+            className="p-3 bg-blue-100 hover:bg-blue-200 rounded-full text-blue-600 transition-colors shrink-0"
+            onClick={() => {/* Audio */}}
           >
             <Volume2 size={20} />
           </button>
         </div>
       </div>
 
-      {/* Answer Area - Selected words (green like Duolingo) */}
+      {/* Prompt */}
+      <p className="text-sm text-gray-400 font-medium mb-2 text-center">{prompt}</p>
+
+      {/* Answer Area */}
       <motion.div
         animate={shake ? { x: [-10, 10, -10, 10, 0] } : {}}
         transition={{ duration: 0.4 }}
         className={clsx(
-          "min-h-[70px] p-3 mb-4 rounded-xl border-2 transition-colors",
+          "min-h-[80px] p-4 mb-4 rounded-xl border-2 transition-colors",
           selectedWords.length > 0 
             ? "border-green-400 bg-green-50" 
             : "border-gray-200 bg-gray-50 border-dashed"
         )}
       >
-        <div className="flex flex-wrap gap-2 min-h-[40px]">
+        <div className="flex flex-wrap gap-2 min-h-[44px]">
           <AnimatePresence mode="popLayout">
             {selectedWords.map((chip) => (
               <motion.button
@@ -122,8 +121,8 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
                 disabled={disabled}
                 className={clsx(
                   "px-4 py-2 rounded-xl font-medium text-base transition-all",
-                  "bg-green-500 text-white border-2 border-green-600 border-b-4",
-                  "hover:bg-green-400 active:border-b-2 active:mt-[2px]",
+                  "bg-[#58cc02] text-white border-2 border-[#4db302] border-b-4",
+                  "hover:bg-[#4db302] active:border-b-2 active:translate-y-[2px]",
                   disabled && "opacity-50 cursor-not-allowed"
                 )}
               >
@@ -131,10 +130,13 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
               </motion.button>
             ))}
           </AnimatePresence>
+          {selectedWords.length === 0 && (
+            <span className="text-gray-400 italic">Tap words below...</span>
+          )}
         </div>
       </motion.div>
 
-      {/* Word Bank - Available words (gray unselected) */}
+      {/* Word Bank */}
       <div className="flex-1">
         <div className="flex flex-wrap gap-2 justify-center">
           {availableWords.map((chip) => (
@@ -149,7 +151,7 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
                 "border-2 border-b-4",
                 chip.selected
                   ? "bg-gray-100 border-gray-100 text-transparent cursor-default"
-                  : "bg-white border-gray-300 text-gray-800 hover:border-gray-400 shadow-sm active:border-b-2 active:mt-[2px]",
+                  : "bg-white border-gray-300 text-gray-800 hover:border-gray-400 shadow-sm active:border-b-2 active:translate-y-[2px]",
                 disabled && "opacity-50 cursor-not-allowed"
               )}
             >
@@ -159,7 +161,7 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
         </div>
       </div>
 
-      {/* Check Button */}
+      {/* Actions */}
       <div className="mt-6 flex gap-3">
         {selectedWords.length > 0 && (
           <button
@@ -174,9 +176,9 @@ export const WordBank: React.FC<ExerciseComponentProps<WordBankExercise>> = ({
           onClick={handleSubmit}
           disabled={disabled || selectedWords.length === 0}
           className={clsx(
-            "flex-1 py-4 rounded-xl font-bold text-lg transition-all border-b-4",
+            "flex-1 py-4 rounded-xl font-bold text-lg transition-all border-b-4 active:border-b-2 active:translate-y-[2px]",
             selectedWords.length > 0
-              ? "bg-green-500 text-white hover:bg-green-400 border-green-600 active:border-b-2 active:mt-[2px]"
+              ? "bg-[#58cc02] text-white hover:bg-[#4db302] border-[#4db302] shadow-lg shadow-green-200"
               : "bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300"
           )}
         >

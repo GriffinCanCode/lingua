@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import { Volume2 } from 'lucide-react';
+import { microcopy } from '../../lib/microcopy';
 import type { MultipleChoiceExercise, ExerciseComponentProps } from '../../types/exercises';
 
 export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExercise>> = ({
@@ -11,8 +12,9 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
 }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  
+  const prompt = useMemo(() => microcopy.exercisePrompt('multiple_choice'), []);
 
-  // Shuffle options on mount
   const shuffledOptions = useMemo(() =>
     [...exercise.options].sort(() => Math.random() - 0.5),
     [exercise.options]
@@ -26,14 +28,13 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
   const handleSubmit = useCallback(() => {
     if (!selected) return;
     setSubmitted(true);
-    // Brief delay to show feedback before moving on
     setTimeout(() => onSubmit(selected), 300);
   }, [selected, onSubmit]);
 
   const playAudio = useCallback(() => {
     if (exercise.audioUrl) {
       const audio = new Audio(exercise.audioUrl);
-      audio.play().catch(() => {}); // Ignore autoplay errors
+      audio.play().catch(() => {});
     }
   }, [exercise.audioUrl]);
 
@@ -43,8 +44,6 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
         ? "bg-primary-100 border-primary-400 text-primary-700"
         : "bg-white border-gray-200 text-gray-800 hover:border-primary-300 hover:bg-primary-50";
     }
-
-    // After submission, show correct/incorrect
     if (option === exercise.correctAnswer) {
       return "bg-green-100 border-green-400 text-green-700";
     }
@@ -59,10 +58,9 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
       {/* Prompt */}
       <div className="text-center mb-8">
         <p className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-4">
-          Choose the correct answer
+          {prompt}
         </p>
 
-        {/* Audio button if available */}
         {exercise.audioUrl && (
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -89,20 +87,20 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
             key={option}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.08 }}
             onClick={() => handleSelect(option)}
             disabled={disabled || submitted}
             className={clsx(
               "py-4 px-6 rounded-xl font-medium text-lg text-left transition-all",
-              "border-2 border-b-4",
+              "border-2 border-b-4 active:border-b-2 active:translate-y-[2px]",
               getOptionStyle(option),
               disabled && "opacity-50 cursor-not-allowed"
             )}
           >
             <span className="inline-flex items-center gap-3">
               <span className={clsx(
-                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
-                selected === option ? "bg-primary-200 text-primary-700" : "bg-gray-100 text-gray-500"
+                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors",
+                selected === option ? "bg-primary-500 text-white" : "bg-gray-100 text-gray-500"
               )}>
                 {index + 1}
               </span>
@@ -117,13 +115,13 @@ export const MultipleChoice: React.FC<ExerciseComponentProps<MultipleChoiceExerc
         onClick={handleSubmit}
         disabled={disabled || !selected || submitted}
         className={clsx(
-          "mt-8 w-full py-4 rounded-xl font-bold text-lg transition-all",
+          "mt-8 w-full py-4 rounded-xl font-bold text-lg transition-all border-b-4 active:border-b-2 active:translate-y-[2px]",
           selected && !submitted
-            ? "bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-200"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+            ? "bg-[#58cc02] text-white hover:bg-[#4db302] border-[#4db302] shadow-lg shadow-green-200"
+            : "bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300"
         )}
       >
-        {submitted ? (selected === exercise.correctAnswer ? 'Correct!' : 'Incorrect') : 'Check'}
+        Check
       </button>
     </div>
   );

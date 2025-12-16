@@ -1,31 +1,15 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
+import { microcopy } from '../../lib/microcopy';
 import type { TypingExercise, ExerciseComponentProps } from '../../types/exercises';
 
-// Cyrillic keyboard layout hints
 const CYRILLIC_HINTS: Record<string, string> = {
   'а': 'f', 'б': ',', 'в': 'd', 'г': 'u', 'д': 'l', 'е': 't', 'ё': '`',
   'ж': ';', 'з': 'p', 'и': 'b', 'й': 'q', 'к': 'r', 'л': 'k', 'м': 'v',
   'н': 'y', 'о': 'j', 'п': 'g', 'р': 'h', 'с': 'c', 'т': 'n', 'у': 'e',
   'ф': 'a', 'х': '[', 'ц': 'w', 'ч': 'x', 'ш': 'i', 'щ': 'o', 'ъ': ']',
   'ы': 's', 'ь': 'm', 'э': "'", 'ю': '.', 'я': 'z',
-};
-
-// Levenshtein distance for typo detection
-const levenshtein = (a: string, b: string): number => {
-  const matrix: number[][] = [];
-  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-
-  for (let i = 1; i <= b.length; i++) {
-    for (let j = 1; j <= a.length; j++) {
-      matrix[i][j] = b[i - 1] === a[j - 1]
-        ? matrix[i - 1][j - 1]
-        : Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
-    }
-  }
-  return matrix[b.length][a.length];
 };
 
 export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
@@ -38,39 +22,25 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
   const [showKeyboardHint, setShowKeyboardHint] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
-  const normalizeText = (text: string): string =>
-    text.toLowerCase().trim().replace(/\s+/g, ' ').replace(/[.,!?;:]/g, '');
-
-  const isCloseEnough = (userInput: string, target: string): boolean => {
-    const normalizedInput = normalizeText(userInput);
-    const normalizedTarget = normalizeText(target);
-
-    if (normalizedInput === normalizedTarget) return true;
-
-    // Check acceptable answers
-    for (const acceptable of exercise.acceptableAnswers) {
-      if (normalizeText(acceptable) === normalizedInput) return true;
-    }
-
-    // Allow minor typos (1 char for short, 2 for longer)
-    const maxDistance = normalizedTarget.length > 10 ? 2 : 1;
-    return levenshtein(normalizedInput, normalizedTarget) <= maxDistance;
-  };
+  const prompt = React.useMemo(() => microcopy.exercisePrompt('typing'), []);
 
   const handleSubmit = useCallback(() => {
     if (!input.trim()) return;
+    const normalize = (s: string) => s.toLowerCase().trim().replace(/\s+/g, ' ').replace(/[.,!?;:]/g, '');
+    const normalizedInput = normalize(input);
+    const normalizedTarget = normalize(exercise.targetText);
 
-    if (!isCloseEnough(input, exercise.targetText)) {
+    const isMatch = normalizedInput === normalizedTarget || 
+      exercise.acceptableAnswers.some(acc => normalize(acc) === normalizedInput);
+
+    if (!isMatch) {
       setShake(true);
       setTimeout(() => setShake(false), 500);
     }
-
     onSubmit(input.trim());
-  }, [input, exercise.targetText, onSubmit]);
+  }, [input, exercise.targetText, exercise.acceptableAnswers, onSubmit]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -84,7 +54,7 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
       {/* Prompt */}
       <div className="text-center mb-8">
         <p className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-4">
-          {exercise.targetLanguage === 'ru' ? 'Type in Russian' : 'Type in English'}
+          {exercise.targetLanguage === 'ru' ? 'Write in Russian' : 'Write in English'}
         </p>
         <p className="text-2xl md:text-3xl font-medium text-gray-800">
           {exercise.sourceText}
@@ -94,12 +64,13 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
         )}
       </div>
 
-      {/* Input Area */}
+      {/* Input */}
       <motion.div
         animate={shake ? { x: [-10, 10, -10, 10, 0] } : {}}
         transition={{ duration: 0.4 }}
         className="flex-1"
       >
+        <p className="text-sm text-gray-400 font-medium mb-2">{prompt}</p>
         <textarea
           ref={inputRef}
           value={input}
@@ -108,35 +79,35 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
           disabled={disabled}
           placeholder={exercise.targetLanguage === 'ru' ? 'Введите ответ...' : 'Type your answer...'}
           className={clsx(
-            "w-full h-32 p-4 text-xl text-gray-800 rounded-xl border-2 resize-none transition-colors",
+            "w-full h-32 p-4 text-xl text-gray-800 rounded-xl border-2 resize-none transition-all",
             "focus:outline-none focus:ring-2 focus:ring-primary-200",
-            input ? "border-primary-300 bg-primary-50" : "border-gray-200 bg-white",
+            input ? "border-primary-400 bg-primary-50" : "border-gray-200 bg-white",
             disabled && "opacity-50 cursor-not-allowed bg-gray-100"
           )}
         />
 
-        {/* Keyboard hint toggle for Russian */}
+        {/* Keyboard hints for Russian */}
         {exercise.targetLanguage === 'ru' && (
           <div className="mt-4">
             <button
               onClick={() => setShowKeyboardHint(!showKeyboardHint)}
               className="text-sm text-primary-500 hover:text-primary-600 font-medium"
             >
-              {showKeyboardHint ? 'Hide' : 'Show'} keyboard hints
+              {showKeyboardHint ? 'Hide' : 'Show'} keyboard layout
             </button>
 
             {showKeyboardHint && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
-                className="mt-3 p-4 bg-gray-50 rounded-xl"
+                className="mt-3 p-4 bg-gray-50 rounded-xl border border-gray-200"
               >
-                <p className="text-xs text-gray-500 mb-2">Russian keyboard (phonetic layout):</p>
+                <p className="text-xs text-gray-500 mb-3 font-medium">Russian ЙЦУКЕН layout:</p>
                 <div className="grid grid-cols-11 gap-1 text-xs">
                   {Object.entries(CYRILLIC_HINTS).slice(0, 33).map(([cyr, lat]) => (
-                    <div key={cyr} className="flex flex-col items-center p-1 bg-white rounded border">
+                    <div key={cyr} className="flex flex-col items-center p-1.5 bg-white rounded-lg border border-gray-200 shadow-sm">
                       <span className="font-bold text-gray-800">{cyr.toUpperCase()}</span>
-                      <span className="text-gray-400">{lat}</span>
+                      <span className="text-gray-400 text-[10px]">{lat}</span>
                     </div>
                   ))}
                 </div>
@@ -146,15 +117,15 @@ export const Typing: React.FC<ExerciseComponentProps<TypingExercise>> = ({
         )}
       </motion.div>
 
-      {/* Submit Button */}
+      {/* Submit */}
       <button
         onClick={handleSubmit}
         disabled={disabled || !input.trim()}
         className={clsx(
-          "mt-8 w-full py-4 rounded-xl font-bold text-lg transition-all",
+          "mt-8 w-full py-4 rounded-xl font-bold text-lg transition-all border-b-4 active:border-b-2 active:translate-y-[2px]",
           input.trim()
-            ? "bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-200"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
+            ? "bg-[#58cc02] text-white hover:bg-[#4db302] border-[#4db302] shadow-lg shadow-green-200"
+            : "bg-gray-200 text-gray-400 cursor-not-allowed border-gray-300"
         )}
       >
         Check

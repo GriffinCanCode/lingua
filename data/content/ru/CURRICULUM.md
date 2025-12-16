@@ -87,6 +87,7 @@
 - Essential nouns (дом, книга, вода, etc.)
 - Family basics (мама, папа, брат, сестра)
 - First verbs (7 total with full conjugations)
+- Time expressions (сейча́с, сего́дня, за́втра, вчера́)
 
 #### Culture
 - Russian names (formal vs. first name usage)
@@ -123,7 +124,7 @@
 
 #### Vocabulary Themes
 - Action verbs (делать, слушать, читать, смотреть, видеть, любить, писать)
-- Time expressions (today, tomorrow, yesterday, morning, evening)
+- New time expressions not from Unit 1 (сейча́с, сего́дня, за́втра, вчера́)
 - Frequency adverbs (always, never, sometimes, often)
 - Media (телевизор, фильм, газета, журнал)
 - Meals (завтрак, обед, ужин)

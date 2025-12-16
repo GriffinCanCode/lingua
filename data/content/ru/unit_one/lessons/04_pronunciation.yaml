@@ -120,6 +120,18 @@ modules:
           - Pronouns: его́, неё, чего́
           - Adjective endings: но́вого, ста́рого
           - The word сего́дня (literally "of this day")
+      
+      - type: "warning"
+        title: "Ё = ALWAYS STRESSED"
+        content: |
+          If you see Ё, that's where the stress falls. Always!
+          
+          живёт (not жи́вет)
+          моё (not мо́е)
+          ещё (not е́ще)
+          
+          Unfortunately, many Russian texts print Е instead of Ё,
+          which is why learners get confused!
 
   - id: "mod_4"
     title: "Final Consonant Devoicing"
@@ -175,6 +187,7 @@ modules:
           - "**Щ** = soft 'shch' sound"
           - "**Х** = like German 'ch' in Bach"
           - "**Ы** = deep 'i' sound (tongue back)"
+          - "**Ё = always stressed** (живёт, моё, ещё)"
           - "**ЧТО → ШТО** (что, чтобы, ничто́)"
           - "**-ЕГО/-ОГО → -ЕВО/-ОВО** (его́, сего́дня, большо́го)"
           - "**Final Г → К** (друг → друк, снег → снек)"

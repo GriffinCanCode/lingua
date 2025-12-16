@@ -58,12 +58,20 @@ class GUID(TypeDecorator):
             return value
         return PyUUID(value)
 
+engine_kwargs = {
+    "echo": settings.LOG_SQL,
+}
+
+if "sqlite" not in settings.DATABASE_URL:
+    engine_kwargs.update({
+        "pool_pre_ping": True,
+        "pool_size": 5,
+        "max_overflow": 10,
+    })
+
 engine = create_async_engine(
     settings.DATABASE_URL,
-    echo=settings.LOG_SQL,
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
+    **engine_kwargs
 )
 
 AsyncSessionLocal = async_sessionmaker(

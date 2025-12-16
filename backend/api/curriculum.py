@@ -29,14 +29,14 @@ from ingest.vocabulary import get_vocabulary_loader
 log = api_logger()
 
 
-def _load_vocab_for_lesson(lesson_data: dict, language: str) -> tuple[list[dict], list[dict]]:
+def _load_vocab_for_lesson(lesson_data: dict, unit_id: str, language: str) -> tuple[list[dict], list[dict]]:
     """Load vocabulary based on lesson's vocab_filter."""
     loader = get_vocabulary_loader(language)
     vocab_filter = lesson_data.get("vocab_filter", {})
     
     # Load primary vocabulary
     primary_ids = vocab_filter.get("primary", {}).get("ids", [])
-    unit = loader.load_unit("unit1")  # TODO: Make unit dynamic
+    unit = loader.load_unit(unit_id)
     
     if not unit:
         return [], []
@@ -390,10 +390,16 @@ async def get_lesson_exercises(
     """Generate Duolingo-style exercises for a lesson node."""
     log.debug("get_lesson_exercises", node_id=str(node_id), user_id=user_id, num_exercises=num_exercises, language=language)
 
-    result = await db.execute(select(CurriculumNode).where(CurriculumNode.id == node_id))
-    node = result.scalar_one_or_none()
-    if not node:
+    result = await db.execute(
+        select(CurriculumNode, CurriculumUnit)
+        .join(CurriculumUnit, CurriculumNode.unit_id == CurriculumUnit.id)
+        .where(CurriculumNode.id == node_id)
+    )
+    row = result.one_or_none()
+    if not row:
         raise_error(not_found("Node", node_id, origin="api.curriculum").error)
+    
+    node, unit = row
 
     progress_result = await db.execute(
         select(UserNodeProgress).where(UserNodeProgress.user_id == UUID(user_id), UserNodeProgress.node_id == node_id)
@@ -413,6 +419,16 @@ async def get_lesson_exercises(
         vocabulary = lesson_data.get("vocabulary", [])
         sentences = lesson_data.get("sentences", [])
         content = lesson_data.get("content") or lesson_data.get("lesson", {}).get("content")
+
+        # Handle dynamic content generation
+        if not vocabulary and "vocab_filter" in lesson_data:
+            vocab_unit_id = unit.extra_data.get("original_id", "unit1") if unit.extra_data else "unit1"
+            primary, review = _load_vocab_for_lesson(lesson_data, vocab_unit_id, language)
+            vocabulary = primary
+            review_vocabulary = review
+        
+        if not sentences and "templates" in lesson_data and vocabulary:
+            sentences = _generate_sentences_from_templates(lesson_data, vocabulary, num_exercises)
     else:
         extra = node.extra_data or {}
         vocab_unit = extra.get("vocab_unit")

@@ -1,224 +1,158 @@
 #!/usr/bin/env python3
-"""Seed the curriculum with Duolingo-style Russian learning path.
+"""Seed the curriculum from the file system.
 
-Each Unit contains multiple Levels (lessons):
-- Level 1: Word Introduction (teaches vocabulary)
-- Level 2+: Practice levels (easy → hard → review)
+This script reads the lesson files from data/content/ru and populates the database
+with the corresponding Sections, Units, and Nodes (Lessons).
 
 Run with: python3 -m scripts.seed_curriculum
 """
 import asyncio
-from uuid import uuid4
+from pathlib import Path
+from uuid import uuid4, UUID
+import yaml
 
 from sqlalchemy import delete
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.database import get_db_session, engine, Base
 from models.curriculum import CurriculumSection, CurriculumUnit, CurriculumNode
-from ingest.vocabulary import get_vocabulary_loader
 
 
-# Level type definitions with exercise distributions
-LEVEL_TYPES = {
-    "intro": {"name": "New Words", "duration": 3, "exercises": None},
-    "easy": {"name": "Practice 1", "duration": 5, "exercises": {"multiple_choice": 8, "matching": 2}},
-    "medium": {"name": "Practice 2", "duration": 5, "exercises": {"word_bank": 6, "multiple_choice": 4}},
-    "hard": {"name": "Practice 3", "duration": 5, "exercises": {"typing": 5, "word_bank": 5}},
-    "review": {"name": "Review", "duration": 7, "exercises": {"typing": 3, "word_bank": 4, "multiple_choice": 2, "matching": 1}},
-}
+CONTENT_DIR = Path(__file__).parent.parent.parent / "data" / "content"
 
+# Map folder names to Section titles (or create sections dynamically)
+SECTIONS = [
+    {
+        "id": "section1",
+        "title": "Russian Path",
+        "description": "Your journey to learning Russian",
+        "color": "#58CC02",
+        "icon": "home",
+        "units": ["unit_one", "unit_two"]  # Order of units
+    }
+]
 
-def generate_unit_levels(unit_title: str, vocab_count: int) -> list[dict]:
-    """Generate 3-7 lesson levels based on vocabulary count."""
-    num_levels = min(7, max(3, vocab_count // 3))
-
-    levels = [{"level": 1, "type": "intro", "title": f"{unit_title} - New Words"}]
-
-    if num_levels >= 2:
-        levels.append({"level": 2, "type": "easy", "title": f"{unit_title} - Practice 1"})
-    if num_levels >= 3:
-        levels.append({"level": 3, "type": "medium", "title": f"{unit_title} - Practice 2"})
-    if num_levels >= 4:
-        levels.append({"level": 4, "type": "hard", "title": f"{unit_title} - Practice 3"})
-    if num_levels >= 5:
-        levels.append({"level": 5, "type": "review", "title": f"{unit_title} - Review"})
-    if num_levels >= 6:
-        levels.append({"level": 6, "type": "hard", "title": f"{unit_title} - Challenge"})
-    if num_levels >= 7:
-        levels.append({"level": 7, "type": "review", "title": f"{unit_title} - Mastery"})
-
-    return levels
-
-
-# Curriculum structure - Units reference vocabulary sheets
-CURRICULUM = {
-    "sections": [
-        {
-            "id": "foundations",
-            "title": "Foundations",
-            "description": "Learn to read Cyrillic and speak your first words",
-            "icon": "home",
-            "color": "#58CC02",
-            "units": [
-                {
-                    "id": "alphabet",
-                    "title": "The Alphabet",
-                    "description": "Read Russian through words you already know",
-                    "icon": "book",
-                    "vocab_unit": "unit1",
-                    "vocab_lessons": ["lesson_1_cognates"],
-                },
-                {
-                    "id": "basics1",
-                    "title": "Basics 1",
-                    "description": "This is, yes/no, basic questions",
-                    "icon": "star",
-                    "vocab_unit": "unit1",
-                    "vocab_lessons": ["lesson_2_identification", "lesson_3_gender"],
-                },
-                {
-                    "id": "basics2",
-                    "title": "Basics 2",
-                    "description": "Possession and question words",
-                    "icon": "zap",
-                    "vocab_unit": "unit1",
-                    "vocab_lessons": ["lesson_4_possession", "lesson_5_questions"],
-                },
-            ],
-        },
-        {
-            "id": "essentials",
-            "title": "Essentials",
-            "description": "Numbers, colors, food, and your first verbs",
-            "icon": "layers",
-            "color": "#1CB0F6",
-            "units": [
-                {
-                    "id": "numbers",
-                    "title": "Numbers",
-                    "description": "Count from 1 to 10",
-                    "icon": "hash",
-                    "vocab_unit": "unit2",
-                    "vocab_lessons": ["lesson_1_numbers"],
-                },
-                {
-                    "id": "colors",
-                    "title": "Colors",
-                    "description": "Describe with colors",
-                    "icon": "palette",
-                    "vocab_unit": "unit2",
-                    "vocab_lessons": ["lesson_2_colors"],
-                },
-                {
-                    "id": "verbs1",
-                    "title": "Verbs 1",
-                    "description": "I want, I know, I love",
-                    "icon": "activity",
-                    "vocab_unit": "unit2",
-                    "vocab_lessons": ["lesson_3_verbs"],
-                },
-                {
-                    "id": "food",
-                    "title": "Food",
-                    "description": "Order at restaurants",
-                    "icon": "coffee",
-                    "vocab_unit": "unit2",
-                    "vocab_lessons": ["lesson_4_food"],
-                },
-                {
-                    "id": "time",
-                    "title": "Time",
-                    "description": "When things happen",
-                    "icon": "clock",
-                    "vocab_unit": "unit2",
-                    "vocab_lessons": ["lesson_5_time"],
-                },
-            ],
-        },
-    ],
-}
-
-
-async def clear_curriculum(session):
+async def clear_curriculum(session: AsyncSession):
     """Clear existing curriculum data."""
     await session.execute(delete(CurriculumNode))
     await session.execute(delete(CurriculumUnit))
     await session.execute(delete(CurriculumSection))
-    await session.commit()
+    await session.flush()
     print("Cleared existing curriculum")
 
 
-async def create_curriculum(session):
-    """Create the full curriculum structure with dynamic levels."""
-    loader = get_vocabulary_loader()
+def load_yaml(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    with open(path) as f:
+        return yaml.safe_load(f)
 
-    for section_idx, section_data in enumerate(CURRICULUM["sections"]):
+
+async def create_curriculum(session: AsyncSession, language: str = "ru"):
+    """Create curriculum from file system."""
+    lang_dir = CONTENT_DIR / language
+    if not lang_dir.exists():
+        print(f"No content found for language: {language}")
+        return
+
+    # Process defined sections
+    for section_idx, section_def in enumerate(SECTIONS):
         section = CurriculumSection(
             id=uuid4(),
-            language="ru",
-            title=section_data["title"],
-            description=section_data["description"],
+            language=language,
+            title=section_def["title"],
+            description=section_def["description"],
             order_index=section_idx,
-            icon=section_data.get("icon"),
-            color=section_data.get("color"),
+            icon=section_def.get("icon"),
+            color=section_def.get("color"),
         )
         session.add(section)
         await session.flush()
         print(f"Section: {section.title}")
 
-        for unit_idx, unit_data in enumerate(section_data["units"]):
-            # Count vocabulary for this unit
-            vocab_count = 0
-            vocab_unit_id = unit_data.get("vocab_unit")
-            vocab_lessons = unit_data.get("vocab_lessons", [])
+        # Process units in this section
+        for unit_idx, unit_folder_name in enumerate(section_def["units"]):
+            unit_dir = lang_dir / unit_folder_name
+            if not unit_dir.exists():
+                print(f"  Warning: Unit folder {unit_folder_name} not found")
+                continue
 
-            if vocab_unit_id:
-                unit_vocab = loader.load_unit(vocab_unit_id)
-                if unit_vocab:
-                    for lesson_key in vocab_lessons:
-                        lesson = unit_vocab.by_lesson.get(lesson_key)
-                        if lesson:
-                            vocab_count += len(lesson.primary) + len(lesson.secondary)
-
-            # Default vocab count if none found
-            vocab_count = vocab_count or 8
+            # Load Unit Metadata from vocab file
+            # Assuming there's one main vocab file or we pick the first one
+            vocab_dir = unit_dir / "vocab"
+            unit_data = {}
+            if vocab_dir.exists():
+                vocab_files = list(vocab_dir.glob("*.yaml"))
+                if vocab_files:
+                    # Look for one that defines the unit metadata
+                    for v_file in vocab_files:
+                        data = load_yaml(v_file)
+                        if "unit" in data:
+                            unit_data = data["unit"]
+                            break
+            
+            if not unit_data:
+                # Fallback if no metadata found
+                unit_data = {
+                    "title": unit_folder_name.replace("_", " ").title(),
+                    "description": "",
+                    "id": unit_folder_name
+                }
 
             unit = CurriculumUnit(
                 id=uuid4(),
                 section_id=section.id,
-                title=unit_data["title"],
-                description=unit_data["description"],
+                title=unit_data.get("title", unit_folder_name),
+                description=unit_data.get("description"),
                 order_index=unit_idx,
-                icon=unit_data.get("icon"),
-                extra_data={
-                    "vocab_unit": vocab_unit_id,
-                    "vocab_lessons": vocab_lessons,
-                },
+                extra_data={"folder": unit_folder_name, "original_id": unit_data.get("id")},
             )
             session.add(unit)
             await session.flush()
+            print(f"  Unit: {unit.title}")
 
-            # Generate levels for this unit
-            levels = generate_unit_levels(unit_data["title"], vocab_count)
-            print(f"  Unit: {unit.title} ({len(levels)} levels, {vocab_count} words)")
+            # Process Lessons
+            lessons_dir = unit_dir / "lessons"
+            if not lessons_dir.exists():
+                print(f"    No lessons folder in {unit_folder_name}")
+                continue
 
-            for level_data in levels:
-                level_info = LEVEL_TYPES[level_data["type"]]
+            lesson_files = sorted(lessons_dir.glob("*.yaml"))
+            for lesson_idx, lesson_file in enumerate(lesson_files):
+                data = load_yaml(lesson_file)
+                if not data or "lesson" not in data:
+                    continue
+                
+                lesson_info = data["lesson"]
+                
+                # Determine level type (default to medium/practice)
+                # Could be inferred from file name or content
+                level_type = "practice"
+                if "intro" in lesson_file.name:
+                    level_type = "intro"
+                elif "review" in lesson_file.name:
+                    level_type = "review"
+                
+                # Check for modules to count duration or complexity?
+                # modules = data.get("modules", [])
+
                 node = CurriculumNode(
                     id=uuid4(),
                     unit_id=unit.id,
-                    title=level_data["title"],
-                    order_index=level_data["level"] - 1,
-                    level=level_data["level"],
-                    level_type=level_data["type"],
-                    estimated_duration_min=level_info["duration"],
+                    title=lesson_info.get("title", lesson_file.stem),
+                    description=lesson_info.get("subtitle"),
+                    order_index=lesson_idx,
+                    level=lesson_idx + 1, # Simple progression
+                    level_type=level_type, # TODO: Map from lesson type
+                    estimated_duration_min=5, # Default
                     extra_data={
-                        "vocab_unit": vocab_unit_id,
-                        "vocab_lessons": vocab_lessons,
-                        "exercises": level_info["exercises"],
-                    },
+                        "filename": lesson_file.name,
+                        "original_id": lesson_info.get("id"),
+                        "icon": lesson_info.get("icon")
+                    }
                 )
                 session.add(node)
-                print(f"    Level {level_data['level']}: {level_data['type']}")
+                print(f"    Lesson: {node.title}")
 
 
 async def main():
@@ -227,7 +161,7 @@ async def main():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    print("\nSeeding curriculum with dynamic levels...")
+    print("\nSeeding curriculum from file system...")
     async with get_db_session() as session:
         await clear_curriculum(session)
         await create_curriculum(session)

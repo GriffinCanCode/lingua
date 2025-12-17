@@ -1,9 +1,9 @@
-# Unit 1, Lesson 10: The Russian Alphabet - Part 2
+# Unit 1, Lesson 11: The Russian Alphabet - Part 2
 # Remaining consonants: new shapes + unique Russian sounds
 # Builds on letters from lessons 1 and 5
 
 lesson:
-  id: "10_alphabet_consonants"
+  id: "11_alphabet_consonants"
   title: "More Russian Letters"
   subtitle: "Consonants with new shapes and unique sounds"
   icon: "alphabet"
@@ -256,7 +256,7 @@ exercises:
 
 vocab_filter:
   primary: [chay, shkola, tsentr, zhurnal, god, zima]
-  review_from: ["05_false_friends", "09_type1_verbs"]
+  review_from: ["05_false_friends", "10_type1_verbs"]
 
 metadata:
   prerequisite: "09_type1_verbs"

@@ -1,9 +1,9 @@
-# Unit 1, Lesson 14: The Russian Alphabet - Complete
+# Unit 1, Lesson 17: The Russian Alphabet - Complete
 # Unique vowels + special letters + full alphabet reference
 # Final alphabet lesson - completes all 33 letters
 
 lesson:
-  id: "16_alphabet_complete"
+  id: "17_alphabet_complete"
   title: "Completing the Alphabet"
   subtitle: "Unique vowels, special letters & the full 33"
   icon: "alphabet"
@@ -267,7 +267,7 @@ exercises:
 
 vocab_filter:
   primary: [ya, ty, my, vy, yazyk, yumor]
-  review_from: ["10_alphabet_consonants", "14_time_words"]
+  review_from: ["11_alphabet_consonants", "15_time_words"]
 
 metadata:
   prerequisite: "14_time_words"

@@ -1,8 +1,8 @@
-# Unit 1, Lesson 20: Adjectives
+# Unit 1, Lesson 21: Adjectives
 # 6 modules - Describing things + Russian directness culture
 
 lesson:
-  id: "20_adjectives"
+  id: "21_adjectives"
   title: "Adjectives"
   subtitle: "Describe people, places, and things"
   icon: "palette"
@@ -204,6 +204,26 @@ modules:
           - "Neuter: -ое (большо́е)"
           - "Size and descriptive words"
           - "💬 Russians are direct — честность (honesty) is valued!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Мой но́вый дом (My New House)"
+        level: "advanced"
+        paragraphs:
+          - ru: "Приве́т! Меня́ зову́т Ма́ша. У меня́ есть но́вый дом."
+            en: "Hi! My name is Masha. I have a new house."
+          - ru: "Дом большо́й и краси́вый. Там большо́е окно́."
+            en: "The house is big and beautiful. There is a big window there."
+          - ru: "У меня́ есть ма́ленькая соба́ка. Её зову́т Шарик."
+            en: "I have a small dog. His name is Sharik."
+          - ru: "Шарик хоро́ший пёс! Он живёт со мной."
+            en: "Sharik is a good dog! He lives with me."
+          - ru: "Мой брат говори́т: «Твой дом ста́рый!»"
+            en: "My brother says: 'Your house is old!'"
+          - ru: "Нет! Он но́вый. Но моя́ маши́на — да, она́ ста́рая."
+            en: "No! It's new. But my car — yes, it's old."
+          - ru: "Ста́рая, но хоро́шая! Я её люблю́."
+            en: "Old, but good! I love it."
+        comprehension_tip: "A full descriptive story! Notice adjective endings matching each noun's gender."
     vocab_pool:
       introduce: []
       practice: []
@@ -219,7 +239,7 @@ modules:
 
 vocab_filter:
   primary: [bolshoy, malenkiy, noviy, stariy, khorosho, plokho]
-  review_from: [08_gender, 11_possession, 18_possessives]
+  review_from: [08_gender, 12_possession, 19_possessives]
 
 templates:
   - pattern: "Э́то {ADJ} {NOUN}."

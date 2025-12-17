@@ -1,8 +1,8 @@
-# Unit 1, Lesson 12: I Speak Russian
+# Unit 1, Lesson 13: I Speak Russian
 # 5 modules - Type 2 (Second Conjugation) Verbs
 
 lesson:
-  id: "12_type2_verbs"
+  id: "13_type2_verbs"
   title: "I Speak Russian"
   subtitle: "Type 2 conjugation and language skills"
   icon: "message-circle"
@@ -190,6 +190,24 @@ modules:
           - "ви́деть (to see) - Я ви́жу, Ты ви́дишь... (note: д→ж in я form!)"
           - "по-ру́сски (in Russian), по-англи́йски (in English)"
           - "Type 1 uses -е-, Type 2 uses -и-"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Тури́ст (The Tourist)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "Я тури́ст. Я не говорю́ по-ру́сски хорошо́."
+            en: "I am a tourist. I don't speak Russian well."
+          - ru: "— Извини́те! Вы говори́те по-англи́йски?"
+            en: "— Excuse me! Do you speak English?"
+          - ru: "— Нет, я не говорю́ по-англи́йски. То́лько по-ру́сски."
+            en: "— No, I don't speak English. Only Russian."
+          - ru: "— Ла́дно. Я понима́ю! Где метро́?"
+            en: "— OK. I understand! Where is the metro?"
+          - ru: "— Ви́дишь дом? Метро́ там."
+            en: "— Do you see the house? The metro is there."
+          - ru: "— Да, я ви́жу! Спаси́бо!"
+            en: "— Yes, I see! Thank you!"
+        comprehension_tip: "Notice both Type 1 (понима́ю) and Type 2 (говорю́, ви́жу) verbs!"
     vocab_pool:
       introduce: []
       practice: []
@@ -205,7 +223,7 @@ modules:
 
 vocab_filter:
   primary: [govorit, videt, po_russki, po_angliyski, ladno]
-  review_from: [09_type1_verbs]
+  review_from: [10_type1_verbs]
 
 templates:
   - pattern: "Я говорю́ {LANGUAGE}."

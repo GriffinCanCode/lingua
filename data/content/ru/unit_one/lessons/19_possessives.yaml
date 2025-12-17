@@ -1,8 +1,8 @@
-# Unit 1, Lesson 17: My, Your, Our
+# Unit 1, Lesson 19: My, Your, Our
 # 5 modules - Possessive pronouns
 
 lesson:
-  id: "18_possessives"
+  id: "19_possessives"
   title: "My, Your, Our"
   subtitle: "Talk about what belongs to whom"
   icon: "heart"
@@ -174,6 +174,27 @@ modules:
           - "наш/на́ша/на́ше = our"
           - "Possessive matches the possessed noun's gender"
       
+      - type: "reading_passage"
+        title: "📖 Read: Чей э́то? (Whose Is This?)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "— Э́то твоя́ кни́га?"
+            en: "— Is this your book?"
+          - ru: "— Нет, э́то не моя́ кни́га. Моя́ там."
+            en: "— No, this is not my book. Mine is there."
+          - ru: "— А чья э́то маши́на?"
+            en: "— And whose car is this?"
+          - ru: "— Э́то на́ша маши́на! Она́ но́вая."
+            en: "— This is our car! It is new."
+          - ru: "— Краси́вая! А где твой дом?"
+            en: "— Beautiful! And where is your house?"
+          - ru: "— Мой дом там. Он большо́й."
+            en: "— My house is there. It is big."
+          - ru: "— А э́то твоя́ соба́ка?"
+            en: "— And is this your dog?"
+          - ru: "— Да, э́то моя́ соба́ка. Её зову́т Шарик!"
+            en: "— Yes, this is my dog. Her name is Sharik!"
+
       - type: "tip"
         content: "Challenge mode! These exercises combine multiple grammar points."
     vocab_pool:
@@ -193,7 +214,7 @@ modules:
 
 vocab_filter:
   primary: [moy, moya, moyo]
-  review_from: [08_gender, 11_possession, 17_irregular_verbs]
+  review_from: [08_gender, 12_possession, 18_irregular_verbs]
 
 templates:
   - pattern: "Э́то {POSS} {NOUN}."

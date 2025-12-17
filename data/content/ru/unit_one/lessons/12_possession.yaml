@@ -1,8 +1,8 @@
-# Unit 1, Lesson 11: I have...
+# Unit 1, Lesson 12: I have...
 # 6 modules - Possession + Russian hospitality culture
 
 lesson:
-  id: "11_possession"
+  id: "12_possession"
   title: "I have..."
   subtitle: "Express what you have with У меня́ есть"
   icon: "package"
@@ -200,6 +200,22 @@ modules:
           - "Family: брат (brother), сестра́ (sister)"
           - "Things: маши́на (car), соба́ка (dog)"
           - "🏠 Russian hospitality: guests are treated like royalty!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Моя́ семья́ (My Family)"
+        level: "beginner"
+        paragraphs:
+          - ru: "Приве́т! У меня́ есть брат. Его́ зову́т Ива́н."
+            en: "Hi! I have a brother. His name is Ivan."
+          - ru: "У меня́ есть сестра́. Её зову́т А́нна."
+            en: "I have a sister. Her name is Anna."
+          - ru: "У нас есть соба́ка. Она́ до́ма."
+            en: "We have a dog. It is at home."
+          - ru: "У меня́ есть маши́на? Нет! У меня́ нет маши́ны."
+            en: "Do I have a car? No! I don't have a car."
+          - ru: "Но у па́пы есть маши́на. Она́ там, в па́рке."
+            en: "But dad has a car. It is there, in the park."
+        comprehension_tip: "You're reading about a family! Notice 'У меня́ есть' vs 'У меня́ нет'."
     vocab_pool:
       introduce: []
       practice: []
@@ -215,7 +231,7 @@ modules:
 
 vocab_filter:
   primary: [u_menya, yest, mashina, sobaka, zdorovo]
-  review_from: [05_false_friends, 08_gender, 09_type1_verbs]
+  review_from: [05_false_friends, 08_gender, 09_prepositional_case, 10_type1_verbs]
 
 templates:
   - pattern: "У меня́ есть {NOUN}."

@@ -1,8 +1,8 @@
-# Unit 1, Lesson 20: Review & Checkpoint
+# Unit 1, Lesson 22: Review & Checkpoint
 # 6 modules - Comprehensive review with stories, scenarios, and conversations
 
 lesson:
-  id: "21_review"
+  id: "22_review"
   title: "Review & Checkpoint"
   subtitle: "Master everything from Unit 1"
   icon: "trophy"
@@ -379,7 +379,7 @@ modules:
 
 vocab_filter:
   primary: []
-  review_from: [03_cognates, 04_hello, 05_false_friends, 06_pronunciation, 07_questions, 08_gender, 09_type1_verbs, 10_alphabet_consonants, 11_possession, 12_type2_verbs, 13_question_words, 14_time_words, 15_numbers_basic, 16_alphabet_complete, 17_irregular_verbs, 18_possessives, 19_numbers, 20_adjectives]
+  review_from: [03_cognates, 04_hello, 05_false_friends, 06_pronunciation, 07_questions, 08_gender, 09_prepositional_case, 10_type1_verbs, 11_alphabet_consonants, 12_possession, 13_type2_verbs, 14_question_words, 15_time_words, 16_numbers_basic, 17_alphabet_complete, 18_irregular_verbs, 19_possessives, 20_numbers, 21_adjectives]
 
 templates:
   - pattern: "Э́то {NOUN}."

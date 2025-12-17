@@ -1,0 +1,429 @@
+# Unit 1, Lesson 9: Where Things Are
+# 6 modules - Prepositional Case Introduction
+
+lesson:
+  id: "09_prepositional_case"
+  title: "Where Things Are"
+  subtitle: "Learn to say where things and people are located"
+  icon: "map-pin"
+
+modules:
+  - id: "mod_1"
+    title: "Location Basics"
+    type: "intro"
+    
+    teaching:
+      - type: "explanation"
+        title: "Your First Russian Case!"
+        content: |
+          Russian nouns CHANGE their endings based on their role in a sentence.
+          These changes are called "cases" — and they're key to Russian!
+          
+          Good news: the PREPOSITIONAL case (for locations) is the easiest one.
+          It answers: ГДЕ? (Where?)
+      
+      - type: "word_intro"
+        words:
+          - word: "в"
+            translation: "in / at"
+            note: "Used with enclosed spaces: buildings, cities, countries"
+            mnemonic: "Think 'v' for 'venue' — inside a place"
+          - word: "на"
+            translation: "on / at"
+            note: "Used with surfaces, events, and some locations"
+            mnemonic: "Think 'on' — на столе́ (on the table)"
+      
+      - type: "tip"
+        content: |
+          The prepositional case ONLY appears after certain prepositions:
+          в (in), на (on), о (about)
+          
+          That's why it's called the "prepositional" case!
+    
+    vocab_pool:
+      introduce: [v, na]
+      practice: []
+      review: [gde, dom, park]
+    exercises:
+      count: 6
+      types:
+        - { type: "translation_ru_en", count: 2 }   # Understand в/на
+        - { type: "multiple_choice", count: 2 }     # в vs на choice
+        - { type: "audio_recognition", count: 2 }   # Hear prepositions
+
+  - id: "mod_2"
+    title: "The -е Ending"
+    type: "learn"
+    
+    teaching:
+      - type: "explanation"
+        title: "Masculine & Neuter → -е"
+        content: |
+          For masculine and neuter nouns, add -е to show location:
+          
+          дом → в до́ме (in the house)
+          банк → в ба́нке (in the bank)
+          окно́ → на окне́ (on the window)
+      
+      - type: "morphology_pattern"
+        title: "Location Formula"
+        formula: "в/на + noun + -е (masc/neuter)"
+        examples:
+          - { ru: "Я в до́ме.", en: "I'm in the house." }
+          - { ru: "Кот в па́рке.", en: "The cat is in the park." }
+          - { ru: "Кни́га на столе́.", en: "The book is on the table." }
+          - { ru: "Он в ба́нке.", en: "He's at the bank." }
+        rule: "Remove final consonant sound's ь if present, then add -е"
+      
+      - type: "pattern_table"
+        title: "Masculine Examples"
+        columns: ["Base Form", "In/At...", "Translation"]
+        rows:
+          - ["дом", "в до́ме", "in the house"]
+          - ["банк", "в ба́нке", "in the bank"]
+          - ["парк", "в па́рке", "in the park"]
+          - ["рестора́н", "в рестора́не", "in the restaurant"]
+          - ["магази́н", "в магази́не", "in the store"]
+      
+      - type: "word_intro"
+        words:
+          - word: "стол"
+            translation: "table"
+            note: "Masculine noun. В столе́ (in the table) / на столе́ (on the table)"
+          - word: "магази́н"
+            translation: "store / shop"
+            note: "Masculine. В магази́не = at the store"
+      
+      - type: "english_comparison"
+        comparison_type: "different"
+        title: "Endings Change, Not Word Order"
+        content: |
+          English uses prepositions alone: "in the house"
+          Russian changes the noun itself: дом → в до́ме
+          
+          The -е ending SHOWS it's a location!
+        examples:
+          - { ru: "Э́то дом.", en: "This is a house.", note: "Basic form" }
+          - { ru: "Я в до́ме.", en: "I'm in the house.", note: "Location form: -е" }
+    
+    vocab_pool:
+      introduce: [stol, magazin]
+      practice: [v, na, dom, park, bank]
+      review: [gde, on, ona, kot]
+    exercises:
+      count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Add -е endings
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "translation_en_ru", count: 2 }   # Production
+        - { type: "multiple_choice", count: 1 }     # Choose correct form
+
+  - id: "mod_3"
+    title: "The -и Ending"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Feminine → -е or -и"
+        content: |
+          Feminine nouns work slightly differently:
+          
+          -а → -е: кни́га → в кни́ге (in the book)
+          -я → -е: неде́ля → на неде́ле (in/during the week)
+          -ия → -ии: Росси́я → в Росси́и (in Russia)
+          -ь → -и: дверь → на двери́ (on the door)
+      
+      - type: "pattern_table"
+        title: "Feminine Endings"
+        columns: ["Ending", "Base Form", "Prepositional", "Translation"]
+        rows:
+          - ["-а", "Москва́", "в Москве́", "in Moscow"]
+          - ["-а", "кни́га", "в кни́ге", "in the book"]
+          - ["-а", "рабо́та", "на рабо́те", "at work"]
+          - ["-ия", "Росси́я", "в Росси́и", "in Russia"]
+          - ["-ия", "ста́нция", "на ста́нции", "at the station"]
+      
+      - type: "morphology_pattern"
+        title: "Special: -ия → -ии"
+        formula: "-ия words take -ии (not -ие!)"
+        examples:
+          - { ru: "Я в Росси́и.", en: "I'm in Russia." }
+          - { ru: "Он на ста́нции.", en: "He's at the station." }
+          - { ru: "Она́ в А́нглии.", en: "She's in England." }
+        rule: "Words ending in -ия (like Росси́я, ста́нция) use -ии in prepositional"
+      
+      - type: "word_intro"
+        words:
+          - word: "рабо́та"
+            translation: "work / job"
+            note: "Feminine. На рабо́те = at work (not в!)"
+          - word: "ста́нция"
+            translation: "station"
+            note: "Feminine -ия word. На ста́нции = at the station"
+      
+      - type: "tip"
+        content: |
+          **в vs на for places:**
+          - в = enclosed (в до́ме, в магази́не, в Росси́и)
+          - на = surface/event (на столе́, на рабо́те, на ста́нции)
+          
+          Some are just memorized: на рабо́те (at work), на у́лице (on the street)
+    
+    vocab_pool:
+      introduce: [rabota, stantsiya]
+      practice: [v, na, kniga, moskva, rossiya]
+      review: [gde, ona, mama]
+    exercises:
+      count: 8
+      types:
+        - { type: "fill_in_blank", count: 3 }       # Feminine endings
+        - { type: "translation_en_ru", count: 2 }   # Produce locations
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "multiple_choice", count: 1 }     # -е vs -и choice
+
+  - id: "mod_4"
+    title: "Cities & Countries"
+    type: "pattern"
+    
+    teaching:
+      - type: "explanation"
+        title: "Talking About Places"
+        content: |
+          Now you can say where you live, work, or travel!
+          
+          Я живу́ в Москве́. (I live in Moscow.)
+          Он рабо́тает в Росси́и. (He works in Russia.)
+          Она́ в Петербу́рге. (She's in Petersburg.)
+      
+      - type: "pattern_table"
+        title: "Cities & Countries"
+        columns: ["Place", "Prepositional", "Example"]
+        rows:
+          - ["Москва́", "в Москве́", "Я в Москве́."]
+          - ["Росси́я", "в Росси́и", "Он в Росси́и."]
+          - ["Петербу́рг", "в Петербу́рге", "Она́ в Петербу́рге."]
+          - ["Аме́рика", "в Аме́рике", "Мы в Аме́рике."]
+          - ["А́нглия", "в А́нглии", "Ты в А́нглии?"]
+      
+      - type: "word_intro"
+        words:
+          - word: "Петербу́рг"
+            translation: "Petersburg (St. Petersburg)"
+            note: "Full name: Санкт-Петербу́рг. Often shortened."
+          - word: "Аме́рика"
+            translation: "America"
+            note: "В Аме́рике = in America. Often means USA."
+      
+      - type: "culture_note"
+        title: "City Names 🏙️"
+        emoji: "🏙️"
+        content: |
+          Russians often use just "Петербу́рг" for St. Petersburg.
+          Locals call it "Пи́тер" (Piter) informally!
+          
+          Москва́ is always feminine, Петербу́рг is masculine.
+          This affects endings: в Москве́ vs в Петербу́рге
+        funFact: "Russia's two capitals have a friendly rivalry — like NYC and LA!"
+    
+    vocab_pool:
+      introduce: [peterburg, amerika]
+      practice: [v, moskva, rossiya]
+      review: [gde, zhit, rabotat]
+    exercises:
+      count: 8
+      types:
+        - { type: "translation_en_ru", count: 3 }   # Where do you live/work?
+        - { type: "translation_ru_en", count: 2 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # City/country endings
+        - { type: "multiple_choice", count: 1 }     # Place recognition
+
+  - id: "mod_5"
+    title: "Practice"
+    type: "practice"
+    teaching:
+      - type: "tip"
+        content: |
+          Remember the pattern:
+          • Masculine/Neuter → -е (в до́ме, в па́рке, на столе́)
+          • Feminine -а → -е (в Москве́, на рабо́те)
+          • Feminine -ия → -ии (в Росси́и, на ста́нции)
+    vocab_pool:
+      introduce: []
+      practice: [v, na, dom, park, bank, stol, magazin, rabota, stantsiya, moskva, rossiya, peterburg]
+      review: [gde, on, ona, kot, kniga, metro]
+    exercises:
+      count: 10
+      types:
+        - { type: "translation_en_ru", count: 3 }   # Production practice
+        - { type: "translation_ru_en", count: 3 }   # Comprehension
+        - { type: "fill_in_blank", count: 2 }       # Complete sentences
+        - { type: "multiple_choice", count: 2 }     # в vs на, -е vs -и
+
+  - id: "mod_6"
+    title: "Master"
+    type: "master"
+    teaching:
+      - type: "summary"
+        title: "You learned:"
+        points:
+          - "Prepositional case answers ГДЕ? (Where?)"
+          - "в = in/at (enclosed), на = on/at (surface/events)"
+          - "Masculine/Neuter: add -е (дом → в до́ме)"
+          - "Feminine -а: change to -е (Москва́ → в Москве́)"
+          - "Feminine -ия: change to -ии (Росси́я → в Росси́и)"
+          - "Cities & countries follow these same patterns!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Где все́? (Where Is Everyone?)"
+        level: "beginner"
+        paragraphs:
+          - ru: "Где ма́ма? Она́ на рабо́те."
+            en: "Where is mom? She's at work."
+          - ru: "Где па́па? Он в магази́не."
+            en: "Where is dad? He's at the store."
+          - ru: "Где кот? Он в до́ме, на столе́!"
+            en: "Where is the cat? He's in the house, on the table!"
+          - ru: "А я? Я в Москве́, в па́рке."
+            en: "And me? I'm in Moscow, in the park."
+          - ru: "Мой брат в Росси́и? Нет, он в Аме́рике."
+            en: "Is my brother in Russia? No, he's in America."
+          - ru: "А сестра́? Она́ в Петербу́рге."
+            en: "And sister? She's in Petersburg."
+        comprehension_tip: "Notice how each noun changes to show WHERE it is!"
+    vocab_pool:
+      introduce: []
+      practice: []
+      review: [v, na, dom, park, bank, stol, magazin, rabota, stantsiya, moskva, rossiya, peterburg, amerika, gde, on, ona]
+    exercises:
+      count: 12
+      difficulty: "hard"
+      types:
+        - { type: "translation_en_ru", count: 4 }   # Production mastery
+        - { type: "translation_ru_en", count: 3 }   # Comprehension check
+        - { type: "fill_in_blank", count: 3 }       # Case ending mastery
+        - { type: "multiple_choice", count: 2 }     # Quick recognition
+
+vocab_filter:
+  primary: [v, na, stol, magazin, rabota, stantsiya, peterburg, amerika]
+  review_from: [03_cognates, 07_questions, 08_gender]
+
+templates:
+  - pattern: "Где {NOUN}? {PRONOUN} в {NOUN_PREP}."
+    translation: "Where is {NOUN.the}? {PRONOUN.translation} is in {NOUN_PREP.the}."
+    slots:
+      NOUN: { preset: standard_noun }
+      PRONOUN: { preset: pronoun }
+      NOUN_PREP: { preset: location_noun }
+    weight: 4
+
+  - pattern: "Я в {CITY_PREP}."
+    translation: "I'm in {CITY.translation}."
+    slots:
+      CITY_PREP: { ids: [moskva_prep, peterburg_prep, rossiya_prep, amerika_prep] }
+    weight: 4
+
+  - pattern: "{NOUN} на столе́."
+    translation: "{NOUN.the} is on the table."
+    slots:
+      NOUN: { preset: standard_noun }
+    weight: 3
+
+  - pattern: "Кот в до́ме."
+    translation: "The cat is in the house."
+    slots: {}
+    weight: 3
+
+  - pattern: "Она́ на рабо́те."
+    translation: "She's at work."
+    slots: {}
+    weight: 4
+
+  - pattern: "Он в магази́не."
+    translation: "He's at the store."
+    slots: {}
+    weight: 3
+
+  - pattern: "Ты в Росси́и?"
+    translation: "Are you in Russia?"
+    slots: {}
+    weight: 3
+
+  - pattern: "Я живу́ в {CITY_PREP}."
+    translation: "I live in {CITY.translation}."
+    slots:
+      CITY_PREP: { ids: [moskva_prep, peterburg_prep] }
+    weight: 4
+
+  - pattern: "Где ты? — Я в {LOCATION_PREP}."
+    translation: "Where are you? — I'm at {LOCATION.translation}."
+    slots:
+      LOCATION_PREP: { preset: location_noun }
+    weight: 3
+
+error_corrections:
+  - incorrect: "Я в Москва."
+    correct: "Я в Москве́."
+    error_type: "prepositional_case"
+    explanation: "After в, use prepositional: Москва́ → Москве́"
+
+  - incorrect: "Он в дом."
+    correct: "Он в до́ме."
+    error_type: "prepositional_case"
+    explanation: "After в, masculine nouns add -е: дом → до́ме"
+
+  - incorrect: "Она в Россие."
+    correct: "Она́ в Росси́и."
+    error_type: "prepositional_case"
+    explanation: "Nouns ending in -ия use -ии: Росси́я → Росси́и"
+
+  - incorrect: "Кот в парк."
+    correct: "Кот в па́рке."
+    error_type: "prepositional_case"
+    explanation: "Location requires prepositional: парк → в па́рке"
+
+  - incorrect: "Она́ в работе."
+    correct: "Она́ на рабо́те."
+    error_type: "preposition_choice"
+    explanation: "Work uses 'на': на рабо́те (at work)"
+
+dialogues:
+  - id: "where_are_you"
+    context: "Asking where someone is"
+    lines:
+      - { speaker: "A", ru: "Где ты?", en: "Where are you?" }
+      - { speaker: "B", ru: "Я в до́ме.", en: "I'm at home." }
+      - { speaker: "A", ru: "А ма́ма?", en: "And mom?" }
+      - { speaker: "B", ru: "Она́ на рабо́те.", en: "She's at work." }
+
+  - id: "where_do_you_live"
+    context: "Talking about where you live"
+    lines:
+      - { speaker: "A", ru: "Где ты живёшь?", en: "Where do you live?" }
+      - { speaker: "B", ru: "Я живу́ в Москве́. А ты?", en: "I live in Moscow. And you?" }
+      - { speaker: "A", ru: "Я живу́ в Петербу́рге.", en: "I live in Petersburg." }
+      - { speaker: "B", ru: "Краси́вый го́род!", en: "Beautiful city!" }
+
+  - id: "cat_location"
+    context: "Looking for the cat"
+    lines:
+      - { speaker: "A", ru: "Где кот?", en: "Where's the cat?" }
+      - { speaker: "B", ru: "Он в до́ме.", en: "He's in the house." }
+      - { speaker: "A", ru: "Где в до́ме?", en: "Where in the house?" }
+      - { speaker: "B", ru: "На столе́!", en: "On the table!" }
+      - { speaker: "A", ru: "Опя́ть на столе́?!", en: "On the table again?!" }
+
+  - id: "at_work"
+    context: "Asking about work"
+    lines:
+      - { speaker: "A", ru: "Ты сейча́с на рабо́те?", en: "Are you at work now?" }
+      - { speaker: "B", ru: "Нет, я в магази́не.", en: "No, I'm at the store." }
+      - { speaker: "A", ru: "А когда́ на рабо́те?", en: "And when at work?" }
+      - { speaker: "B", ru: "За́втра.", en: "Tomorrow." }
+
+  - id: "in_russia"
+    context: "Discussing someone in Russia"
+    lines:
+      - { speaker: "A", ru: "Твой брат в Росси́и?", en: "Is your brother in Russia?" }
+      - { speaker: "B", ru: "Да, он в Москве́.", en: "Yes, he's in Moscow." }
+      - { speaker: "A", ru: "А сестра́?", en: "And sister?" }
+      - { speaker: "B", ru: "Она́ в Аме́рике.", en: "She's in America." }

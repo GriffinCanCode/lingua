@@ -1,8 +1,8 @@
-# Unit 1, Lesson 13: Question Words
+# Unit 1, Lesson 14: Question Words
 # 6 modules - Где, Кто, Что, Как
 
 lesson:
-  id: "13_question_words"
+  id: "14_question_words"
   title: "Где, Кто, Что, Как"
   subtitle: "Essential question words"
   icon: "search"
@@ -219,6 +219,26 @@ modules:
           - "Кто = who (for people AND animals)"
           - "Что = what (pronounced 'ШТО'!)"
           - "Как = how (Как дела́?)"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Мно́го вопро́сов (Many Questions)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "— Приве́т! Как тебя́ зову́т?"
+            en: "— Hi! What is your name?"
+          - ru: "— Меня́ зову́т Са́ша. А тебя́?"
+            en: "— My name is Sasha. And yours?"
+          - ru: "— Я Ма́ша. Кто э́то там?"
+            en: "— I'm Masha. Who is that over there?"
+          - ru: "— Э́то мой друг. Он до́ктор."
+            en: "— That is my friend. He is a doctor."
+          - ru: "— А что он де́лает?"
+            en: "— And what is he doing?"
+          - ru: "— Я не зна́ю. Где рестора́н?"
+            en: "— I don't know. Where is the restaurant?"
+          - ru: "— Вот он! Там."
+            en: "— There it is! Over there."
+        comprehension_tip: "All four question words in one conversation: Как, Кто, Что, Где!"
     vocab_pool:
       introduce: []
       practice: []
@@ -233,7 +253,7 @@ modules:
 
 vocab_filter:
   primary: [gde, kto, chto, kak, vot, doktor, drug]
-  review_from: [03_cognates, 07_questions, 12_type2_verbs]
+  review_from: [03_cognates, 07_questions, 13_type2_verbs]
 
 templates:
   - pattern: "Где {NOUN}?"

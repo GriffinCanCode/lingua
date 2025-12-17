@@ -1,8 +1,8 @@
-# Unit 1, Lesson 17: I Want, I Live, I Eat
+# Unit 1, Lesson 18: I Want, I Live, I Eat
 # 7 modules - Irregular verbs + Russian food/tea culture
 
 lesson:
-  id: "17_irregular_verbs"
+  id: "18_irregular_verbs"
   title: "I Want, I Live, I Eat"
   subtitle: "Essential irregular verbs for daily life"
   icon: "star"
@@ -306,6 +306,26 @@ modules:
           - "пить (drink) - soft stem: пью, пьёшь, пьёт..."
           - "☕ Tea is central to Russian culture — always accept!"
           - "🍽️ Soup is essential — no soup = no meal!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Э́то Ива́н (This Is Ivan)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "Э́то Ива́н. Он живёт в Москве́. Он рабо́тает в ба́нке."
+            en: "This is Ivan. He lives in Moscow. He works at a bank."
+          - ru: "Сего́дня он не рабо́тает. Он до́ма."
+            en: "Today he doesn't work. He is at home."
+          - ru: "Он хо́чет ко́фе. Он пьёт ко́фе."
+            en: "He wants coffee. He drinks coffee."
+          - ru: "— Ива́н, ты хо́чешь есть?"
+            en: "— Ivan, do you want to eat?"
+          - ru: "— Да, я хочу́ есть! Что у нас есть?"
+            en: "— Yes, I want to eat! What do we have?"
+          - ru: "— Суп. Ты ешь суп?"
+            en: "— Soup. Do you eat soup?"
+          - ru: "— Да, я ем суп. Я люблю́ суп!"
+            en: "— Yes, I eat soup. I love soup!"
+        comprehension_tip: "A full story! жить, работать, хотеть, есть, пить — all your new verbs."
     vocab_pool:
       introduce: []
       practice: []
@@ -321,7 +341,7 @@ modules:
 
 vocab_filter:
   primary: [khotet, zhit, rabotat, yest_eat, pit]
-  review_from: [09_type1_verbs, 12_type2_verbs, 13_question_words, 14_time_words]
+  review_from: [10_type1_verbs, 13_type2_verbs, 14_question_words, 15_time_words]
 
 templates:
   - pattern: "Я хочу́ {NOUN}."

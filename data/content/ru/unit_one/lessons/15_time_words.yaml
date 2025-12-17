@@ -1,8 +1,8 @@
-# Unit 1, Lesson 14: When & Time Words
+# Unit 1, Lesson 15: When & Time Words
 # 6 modules - Когда́ + time words + 24h clock culture
 
 lesson:
-  id: "14_time_words"
+  id: "15_time_words"
   title: "Когда́ + Time Words"
   subtitle: "Ask about time and talk about when"
   icon: "clock"
@@ -202,6 +202,26 @@ modules:
           - "вчера́ = yesterday"
           - "⏰ Russia uses 24-hour clock officially!"
           - "🌍 Russia spans 11 time zones!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Мой день (My Day)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "Сейча́с у́тро. Я до́ма."
+            en: "It's morning now. I am at home."
+          - ru: "Что я де́лаю сего́дня? Сего́дня я рабо́таю."
+            en: "What am I doing today? Today I work."
+          - ru: "А за́втра? За́втра я не рабо́таю. Я до́ма."
+            en: "And tomorrow? Tomorrow I don't work. I'm at home."
+          - ru: "— Когда́ ты до́ма?"
+            en: "— When are you home?"
+          - ru: "— Сейча́с я тут! А вчера́ я там."
+            en: "— I'm here now! And yesterday I was there."
+          - ru: "— Хорошо́. До за́втра!"
+            en: "— Good. See you tomorrow!"
+          - ru: "— До за́втра!"
+            en: "— See you tomorrow!"
+        comprehension_tip: "Time words (сейча́с, сего́дня, за́втра, вчера́) set the scene!"
     vocab_pool:
       introduce: []
       practice: []
@@ -216,7 +236,7 @@ modules:
 
 vocab_filter:
   primary: [kogda, segodnya, zavtra, vchera]
-  review_from: [07_questions, 12_type2_verbs, 13_question_words]
+  review_from: [07_questions, 13_type2_verbs, 14_question_words]
 
 templates:
   - pattern: "Когда́?"

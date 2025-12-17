@@ -1,8 +1,8 @@
-# Unit 1, Lesson 19: Numbers 6-10 + Culture
+# Unit 1, Lesson 20: Numbers 6-10 + Culture
 # 5 modules - Complete counting + Russian number culture
 
 lesson:
-  id: "19_numbers"
+  id: "20_numbers"
   title: "Numbers 6-10 & Culture"
   subtitle: "Complete your counting + dates, phones, and time!"
   icon: "hash"
@@ -164,6 +164,27 @@ modules:
           - "Full count 1-10 in Russian"
           - "🇷🇺 Russian date format: DD.MM.YYYY"
           - "📱 Russian phone numbers: +7 (XXX) XXX-XX-XX"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Моя́ семья́ (My Family)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "У меня́ больша́я семья́!"
+            en: "I have a big family!"
+          - ru: "Нас де́сять челове́к. Оди́н па́па, одна́ ма́ма."
+            en: "There are ten of us. One dad, one mom."
+          - ru: "У меня́ три бра́та и четы́ре сестры́."
+            en: "I have three brothers and four sisters."
+          - ru: "А ещё у нас есть соба́ка и два кота́."
+            en: "And we also have a dog and two cats."
+          - ru: "— Ско́лько у вас живо́тных?"
+            en: "— How many animals do you have?"
+          - ru: "— Три. Одна́ соба́ка и два кота́."
+            en: "— Three. One dog and two cats."
+          - ru: "— Большо́й дом?"
+            en: "— A big house?"
+          - ru: "— Да, о́чень большо́й! Де́вять ко́мнат."
+            en: "— Yes, very big! Nine rooms."
     vocab_pool:
       introduce: []
       practice: []
@@ -179,7 +200,7 @@ modules:
 
 vocab_filter:
   primary: [shest, sem, vosem, devyat, desyat, molodets]
-  review_from: [08_gender, 15_numbers_basic, 18_possessives]
+  review_from: [08_gender, 16_numbers_basic, 19_possessives]
 
 templates:
   - pattern: "{NUMBER} {NOUN}"

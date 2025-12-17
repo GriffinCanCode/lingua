@@ -1,8 +1,8 @@
-# Unit 1, Lesson 15: Numbers 1-5
+# Unit 1, Lesson 16: Numbers 1-5
 # 4 modules - First steps in counting
 
 lesson:
-  id: "15_numbers_basic"
+  id: "16_numbers_basic"
   title: "Numbers 1-5"
   subtitle: "Start counting in Russian!"
   icon: "hash"
@@ -111,7 +111,7 @@ modules:
   - id: "mod_4"
     title: "Master"
     type: "master"
-    
+
     teaching:
       - type: "summary"
         title: "You learned:"
@@ -120,6 +120,23 @@ modules:
           - "оди́н, два, три, четы́ре, пять"
           - "два vs две (masculine vs feminine 'two')"
           - "Три sounds like 'tree'!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Ско́лько? (How Many?)"
+        level: "intermediate"
+        paragraphs:
+          - ru: "У меня́ есть кот. Оди́н кот."
+            en: "I have a cat. One cat."
+          - ru: "У меня́ есть соба́ка. Одна́ соба́ка."
+            en: "I have a dog. One dog."
+          - ru: "— Ско́лько у тебя́ книг?"
+            en: "— How many books do you have?"
+          - ru: "— Три. Три кни́ги."
+            en: "— Three. Three books."
+          - ru: "— А дома́?"
+            en: "— And houses?"
+          - ru: "— Оди́н дом. Но большо́й!"
+            en: "— One house. But big!"
     
     vocab_pool:
       introduce: []
@@ -135,7 +152,7 @@ modules:
 
 vocab_filter:
   primary: [odin, dva, tri, chetyre, pyat]
-  review_from: [08_gender, 14_time_words]
+  review_from: [08_gender, 15_time_words]
 
 templates:
   - pattern: "Оди́н, два, три."

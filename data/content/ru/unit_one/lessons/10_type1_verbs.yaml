@@ -1,8 +1,8 @@
-# Unit 1, Lesson 9: I Know, I Understand
+# Unit 1, Lesson 10: I Know, I Understand
 # 5 modules - Type 1 (First Conjugation) Verbs
 
 lesson:
-  id: "09_type1_verbs"
+  id: "10_type1_verbs"
   title: "I Know, I Understand"
   subtitle: "Your first Russian verbs - Type 1 conjugation"
   icon: "brain"
@@ -242,6 +242,24 @@ modules:
           - "понима́ть (to understand) - Я понима́ю, Ты понима́ешь..."
           - "де́лать (to do/make) - Я де́лаю, Ты де́лаешь..."
           - "Negation: Я не зна́ю, Я не понима́ю"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Я понима́ю! (I Understand!)"
+        level: "beginner"
+        paragraphs:
+          - ru: "— Ты понима́ешь по-ру́сски?"
+            en: "— Do you understand Russian?"
+          - ru: "— Да, я понима́ю! Я зна́ю ру́сский."
+            en: "— Yes, I understand! I know Russian."
+          - ru: "— Отли́чно! Что ты де́лаешь?"
+            en: "— Excellent! What are you doing?"
+          - ru: "— Я чита́ю кни́гу."
+            en: "— I am reading a book."
+          - ru: "— Ты зна́ешь, где ма́ма?"
+            en: "— Do you know where mom is?"
+          - ru: "— Нет, я не зна́ю. Извини́те!"
+            en: "— No, I don't know. Sorry!"
+        comprehension_tip: "Your first story with verbs! Watch how each verb matches its subject."
     vocab_pool:
       introduce: []
       practice: []
@@ -257,7 +275,7 @@ modules:
 
 vocab_filter:
   primary: [znat, ponimat, delat, otlichno]
-  review_from: [03_cognates, 04_hello, 08_gender]
+  review_from: [03_cognates, 04_hello, 08_gender, 09_prepositional_case]
 
 templates:
   - pattern: "Я {VERB_1SG}."

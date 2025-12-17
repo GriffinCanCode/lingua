@@ -16,7 +16,8 @@ export type TeachingContentType =
   | 'word_intro'
   | 'summary'
   | 'culture_note'
-  | 'english_comparison';
+  | 'english_comparison'
+  | 'reading_passage';
 
 // Pattern table for grammar explanations
 export interface PatternTableContent {
@@ -110,6 +111,17 @@ export interface EnglishComparisonContent {
   examples?: { ru: string; en: string; note?: string }[];
 }
 
+// Reading passage for comprehension practice
+export type ReadingLevel = 'beginner' | 'intermediate' | 'advanced';
+
+export interface ReadingPassageContent {
+  type: 'reading_passage';
+  title: string;
+  level?: ReadingLevel;
+  paragraphs: { ru: string; en: string }[];
+  comprehension_tip?: string;
+}
+
 // Union of all teaching content types
 export type TeachingContent =
   | PatternTableContent
@@ -120,7 +132,8 @@ export type TeachingContent =
   | WordIntroContent
   | SummaryContent
   | CultureNoteContent
-  | EnglishComparisonContent;
+  | EnglishComparisonContent
+  | ReadingPassageContent;
 
 // Exercise config within a module
 export interface ModuleExerciseConfig {

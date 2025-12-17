@@ -5,6 +5,7 @@ import type { TeachingContent, WordIntroContent, SummaryContent, ExplanationCont
 import { PatternTable } from './PatternTable';
 import { EtymologyCard } from './EtymologyCard';
 import { MorphologyPattern } from './MorphologyPattern';
+import { ReadingPassageCard } from './ReadingPassageCard';
 
 interface TeachingCardProps {
   content: TeachingContent;
@@ -249,6 +250,8 @@ export const TeachingCard: React.FC<TeachingCardProps> = ({ content, onPlayAudio
       return <CultureCard content={content} />;
     case 'english_comparison':
       return <EnglishComparisonCard content={content} />;
+    case 'reading_passage':
+      return <ReadingPassageCard content={content} />;
     default:
       return null;
   }

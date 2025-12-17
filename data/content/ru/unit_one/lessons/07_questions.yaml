@@ -189,6 +189,24 @@ modules:
           - "не = not (put it before what you negate)"
           - "и = and, и́ли = or, но = but"
           - "Question and answer patterns"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Да и́ли нет? (Yes or No?)"
+        level: "beginner"
+        paragraphs:
+          - ru: "— Э́то такси́?"
+            en: "— Is this a taxi?"
+          - ru: "— Да, э́то такси́."
+            en: "— Yes, this is a taxi."
+          - ru: "— А э́то метро́?"
+            en: "— And is this a metro?"
+          - ru: "— Нет, э́то не метро́. Э́то банк."
+            en: "— No, this is not a metro. This is a bank."
+          - ru: "— Банк и́ли рестора́н?"
+            en: "— A bank or a restaurant?"
+          - ru: "— Банк. Но рестора́н там!"
+            en: "— A bank. But a restaurant is there!"
+        comprehension_tip: "Questions just use rising intonation! Notice да, нет, не, и́ли, но."
     vocab_pool:
       introduce: []
       practice: []

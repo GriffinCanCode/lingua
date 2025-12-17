@@ -281,6 +281,24 @@ modules:
           - "⚠️ EXCEPTION: Male family words (папа, дедушка, дядя) use он despite -а ending"
           - "⚠️ EXCEPTION: кофе is masculine (он) despite -е ending"
           - "🎭 Gender affects adjectives, verbs, and numbers too!"
+      
+      - type: "reading_passage"
+        title: "📖 Read: Где всё? (Where Is Everything?)"
+        level: "beginner"
+        paragraphs:
+          - ru: "Где кот? Он тут."
+            en: "Where is the cat? It is here."
+          - ru: "Где соба́ка? Она́ там."
+            en: "Where is the dog? It is there."
+          - ru: "Где окно́? Оно́ тут."
+            en: "Where is the window? It is here."
+          - ru: "А где ма́ма? Она́ до́ма."
+            en: "And where is mom? She is at home."
+          - ru: "А па́па? Он там, в па́рке."
+            en: "And dad? He is there, in the park."
+          - ru: "А ко́фе? Он тут!"
+            en: "And coffee? It is here!"
+        comprehension_tip: "Notice how он/она́/оно́ match the noun's gender, not the meaning!"
     vocab_pool:
       introduce: []
       practice: []

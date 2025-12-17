@@ -362,6 +362,24 @@ modules:
           - "Useful: помоги́те (help), повтори́те (repeat), я не понима́ю (I don't understand)"
           - "Russian drops 'is/am/are' - simpler sentences!"
           - "Use formal with strangers and elders"
+      
+      - type: "reading_passage"
+        title: "📖 Read: На у́лице (On the Street)"
+        level: "beginner"
+        paragraphs:
+          - ru: "— Здра́вствуйте!"
+            en: "— Hello!"
+          - ru: "— Здра́вствуйте! Я до́ктор."
+            en: "— Hello! I am a doctor."
+          - ru: "— А я студе́нт."
+            en: "— And I am a student."
+          - ru: "— О́чень прия́тно!"
+            en: "— Nice to meet you!"
+          - ru: "— Спаси́бо! До свида́ния!"
+            en: "— Thank you! Goodbye!"
+          - ru: "— Пока́!"
+            en: "— Bye!"
+        comprehension_tip: "You just read your first Russian conversation! Notice: no 'am/is' needed."
     vocab_pool:
       introduce: []
       practice: []

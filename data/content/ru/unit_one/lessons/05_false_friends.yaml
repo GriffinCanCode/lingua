@@ -177,6 +177,22 @@ modules:
           - "Н = N, not H"
           - "В = V, not B"
           - "Many international words are just respelled"
+      
+      - type: "reading_passage"
+        title: "📖 Read: В рестора́не (At the Restaurant)"
+        level: "beginner"
+        paragraphs:
+          - ru: "Э́то рестора́н."
+            en: "This is a restaurant."
+          - ru: "Там вода́. Тут ко́фе."
+            en: "There is water. Here is coffee."
+          - ru: "Ма́ма там. Па́па тут."
+            en: "Mom is there. Dad is here."
+          - ru: "А где брат? Брат там."
+            en: "And where is brother? Brother is there."
+          - ru: "А сестра́? Сестра́ до́ма."
+            en: "And sister? Sister is at home."
+        comprehension_tip: "Notice how Р, С, Н, В look different but the words are recognizable!"
     vocab_pool:
       introduce: []
       practice: []
